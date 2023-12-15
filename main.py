@@ -12,27 +12,26 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
+
 @app.route("/", methods=['POST', 'GET'])
 def hi():
-    effect = random.choice(['particle', 'ripple', 'glitch'])
+
     if request.method == 'POST':
         data = request.form.to_dict()
         msg = Message(
-            'Hello',
+            'New Message From Site',
             sender='ip@vladivostok.com',
             recipients=['ivan-a-popov@ya.ru']
         )
-        msg.body = f"""Hello Flask message sent from Flask-Mail! Here's your data:
+        msg.body = f"""You've got message from ivanpopov.pro! Here's your data:
                     Name: {data['ajax_name']}
                     E-mail: {data['ajax_email']}
                     Message: {data['ajax_message']}
-                    Effect: {effect}
                     """
 
         mail.send(msg)
-        print("sent")
         return ""
-    return render_template("index.html", effect=effect)
+    return render_template("index.html", effect=random.choice(['particle', 'ripple', 'glitch']))
 
 
 if __name__ == "__main__":
