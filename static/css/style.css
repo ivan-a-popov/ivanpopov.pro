@@ -729,6 +729,15 @@ h6 { font-size: 16px; }
 	transform: translateY(-50%);
 	margin-left: 30px;
 }
+.cavani_tm_title .subtitle{
+	font-size: 16px;
+	color: #7d7789;
+	font-family: "Open Sans";
+	font-weight: 400;
+	font-style: italic;
+	margin-top: 8px;
+	opacity: 0.8;
+}
 .cavani_tm_about .biography .wrapper{
 	width: 100%;
 	height: auto;
@@ -2432,4 +2441,304 @@ h6 { font-size: 16px; }
 	.cavani_tm_news .news_list > ul > li .list_inner .details:before{display: none;}
 	.cavani_tm_news .news_list > ul > li .list_inner .details{margin: 0px;padding: 0px;max-width: 100% !important;}
 	.cavani_tm_news .news_list > ul > li{padding: 20px 0px;}
+}
+
+/*---------------------------------------------------*/
+/*	TELEGRAM SECTION
+/*---------------------------------------------------*/
+
+.telegram_section {
+    padding: 60px 0;
+}
+
+.telegram_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.telegram_icon_wrapper {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.telegram_icon {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.telegram_icon:hover {
+    transform: scale(1.1);
+}
+
+.telegram_icon svg {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 10px 30px rgba(0, 136, 204, 0.3));
+}
+
+.telegram_text h3 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: "Onest";
+}
+
+.telegram_text p {
+    font-size: 18px;
+    color: #7d7789;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.telegram_button_wrapper {
+    margin-bottom: 20px;
+}
+
+.telegram_button {
+    display: inline-block;
+    background: linear-gradient(135deg, #0088cc, #00a8e8);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 136, 204, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.telegram_button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.telegram_button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 136, 204, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.telegram_button:hover:before {
+    left: 100%;
+}
+
+.telegram_subtitle {
+    font-size: 16px;
+    color: #aaa6b2;
+}
+
+.telegram_subtitle a {
+    color: #0088cc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.telegram_subtitle a:hover {
+    color: #00a8e8;
+}
+
+/* Telegram icon escape animation styles */
+.telegram_icon.escaping {
+    animation: bounce 0.3s ease-out;
+}
+
+@keyframes bounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.8); }
+    100% { transform: scale(1); }
+}
+
+/* Pulse animation for attention */
+.telegram_icon {
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.telegram_icon:hover {
+    animation: none;
+}
+
+/* Responsive styles for Telegram section */
+@media (max-width: 1600px) {
+    .telegram_section {
+        padding: 50px 0;
+    }
+    
+    .telegram_icon svg {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .telegram_text h3 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 1040px) {
+    .telegram_section {
+        padding: 40px 0;
+    }
+    
+    .telegram_content {
+        max-width: 90%;
+    }
+    
+    .telegram_icon svg {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .telegram_text h3 {
+        font-size: 26px;
+    }
+    
+    .telegram_text p {
+        font-size: 16px;
+    }
+    
+    .telegram_button {
+        padding: 12px 35px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .telegram_section {
+        padding: 30px 0;
+    }
+    
+    .telegram_icon_wrapper {
+        margin-bottom: 30px;
+    }
+    
+    .telegram_icon svg {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .telegram_text h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    
+    .telegram_text p {
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .telegram_button {
+        padding: 10px 30px;
+        font-size: 15px;
+    }
+    
+    .telegram_subtitle {
+        font-size: 14px;
+    }
+}
+
+/*---------------------------------------------------*/
+/*	12) TELEGRAM BOT SECTION
+/*---------------------------------------------------*/
+
+.telegram_bot_section {
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-top: 60px;
+	position: relative;
+	min-height: 400px;
+	overflow: hidden;
+}
+
+.telegram_bot_content {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.telegram_icon_large {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: none; /* Remove transition for smooth animation */
+}
+
+.telegram_icon_large a {
+	display: block;
+	transition: transform 0.2s ease;
+}
+
+.telegram_icon_large a:hover {
+	transform: scale(1.2);
+}
+
+.telegram_icon_large svg {
+	width: 120px;
+	height: 120px;
+	opacity: 0.9;
+	transition: opacity 0.2s ease;
+	filter: drop-shadow(0 10px 30px rgba(0, 136, 204, 0.3));
+	cursor: pointer;
+}
+
+.telegram_icon_large a:hover svg {
+	opacity: 1;
+}
+
+/* Responsive styles for Telegram bot section */
+@media (max-width: 1600px) {
+    .telegram_bot_section {
+        min-height: 350px;
+    }
+
+    .telegram_icon_large svg {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 1040px) {
+    .telegram_bot_section {
+        margin-top: 40px;
+        min-height: 200px;
+    }
+
+    .telegram_icon_large svg {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .telegram_bot_section {
+        min-height: 150px;
+    }
+
+    .telegram_icon_large svg {
+        width: 70px;
+        height: 70px;
+    }
 }
