@@ -1,27 +1,5 @@
 @charset "utf-8";
 
-/*
-/*	Copyright (c) 2022 Marketify
-/*	Author: Marketify
-/*	This file is made for CURRENT TEMPLATE
-
-
-01)	CAVANI BASE
-02)	CAVANI HEADER
-03) CAVANI MOBILE MENU
-04) CAVANI MAINPART
-05) CAVANI HOME
-06) CAVANI ABOUT
-07) CAVANI PORTFOLIO
-08) CAVANI SERVICES
-09) CAVANI NEWS
-10) CAVANI CONTACT
-11) CAVANI FOOTER
-12) CAVANI MAGIC CURSOR
-13) CAVANI GLITCH EFFECT
-14) CAVANI PARTICLE EFFECT
-15) CAVANI RIPPLE EFFECT
-16) CAVANI MEDIA QUERIES (FOR SMALL DEVIVES)
 
 
 /*---------------------------------------------------*/
@@ -2441,7 +2419,48 @@ h6 { font-size: 16px; }
 	.ivan_popov_news .news_list > ul > li .list_inner .details:before{display: none;}
 	.ivan_popov_news .news_list > ul > li .list_inner .details{margin: 0px;padding: 0px;max-width: 100% !important;}
 	.ivan_popov_news .news_list > ul > li{padding: 20px 0px;}
+	.advantages_list ul li .bullet{margin-right: 8px;}
 }
+
+/*---------------------------------------------------*/
+/*	ADVANTAGES LIST STYLING
+/*---------------------------------------------------*/
+
+.advantages_list {
+	margin: 15px 0 25px 0;
+}
+
+.advantages_list ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.advantages_list ul li {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 12px;
+	position: relative;
+}
+
+.advantages_list ul li:last-child {
+	margin-bottom: 0;
+}
+
+.advantages_list ul li .bullet {
+	color: #7d7789;
+	font-weight: bold;
+	font-size: 16px;
+	margin-right: 10px;
+	line-height: 1.7;
+	flex-shrink: 0;
+}
+
+.advantages_list ul li .text {
+	line-height: 1.7;
+	flex: 1;
+}
+
 
 /*---------------------------------------------------*/
 /*	TELEGRAM SECTION
