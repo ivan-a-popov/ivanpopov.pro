@@ -127,15 +127,15 @@ h3 { font-size: 30px; }
 h4 { font-size: 24px; }
 h5 { font-size: 20px; }
 h6 { font-size: 16px; }
-.cavani_tm_all_wrap{
+.ivan_popov_all_wrap{
 	width: 100%;
 	min-height: 100vh;
 	clear: both;
 	float: left;
 	position: relative;
 }
-.cavani_tm_all_wrap,
-.cavani_tm_all_wrap *{
+.ivan_popov_all_wrap,
+.ivan_popov_all_wrap *{
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	   -moz-box-sizing: border-box; /* Firefox, other Gecko */
 			box-sizing: border-box; /* Opera/IE 8+ */
@@ -262,7 +262,7 @@ h6 { font-size: 16px; }
 /*	02) CAVANI HEADER
 /*---------------------------------------------------*/
 
-.cavani_tm_header{
+.ivan_popov_header{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -276,19 +276,19 @@ h6 { font-size: 16px; }
 	justify-content: space-between;
 	padding: 0px 70px;
 }
-.cavani_tm_header .logo[data-type="image"] .image{
+.ivan_popov_header .logo[data-type="image"] .image{
 	display: inline-block;
 }
-.cavani_tm_header .logo[data-type="image"] .text{
+.ivan_popov_header .logo[data-type="image"] .text{
 	display: none;
 }
-.cavani_tm_header .logo[data-type="text"] .image{
+.ivan_popov_header .logo[data-type="text"] .image{
 	display: none;
 }
-.cavani_tm_header .logo[data-type="text"] .text{
+.ivan_popov_header .logo[data-type="text"] .text{
 	display: inline-block;
 }
-.cavani_tm_header .logo .text{
+.ivan_popov_header .logo .text{
 	text-decoration: none;
 	color: #000;
 	text-transform: uppercase;
@@ -298,26 +298,26 @@ h6 { font-size: 16px; }
 	letter-spacing: 2px;
 	line-height: 70px;
 }
-.cavani_tm_header .logo .text span{
+.ivan_popov_header .logo .text span{
 	position: relative;
 	top: 2px;
 }
-.cavani_tm_header .logo img{
+.ivan_popov_header .logo img{
 	max-width: 110px;
 	max-height: 65px;
 }
-.cavani_tm_header .menu{
+.ivan_popov_header .menu{
 	position: relative;
 }
-.cavani_tm_header .menu ul{
+.ivan_popov_header .menu ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_header .menu ul li{
+.ivan_popov_header .menu ul li{
 	margin: 0px;
 	float: left;
 }
-.cavani_tm_header .menu ul li a{
+.ivan_popov_header .menu ul li a{
 	text-decoration: none;
 	color: #333;
 	font-family: "Onest";
@@ -331,7 +331,7 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_header .menu .ccc{
+.ivan_popov_header .menu .ccc{
 	position: absolute;
 	width: 30px;
 	display: block;
@@ -346,13 +346,13 @@ h6 { font-size: 16px; }
 	     -o-transition: all .5s ease;
 	        transition: all .5s ease;
 }
-.cavani_tm_header .menu ul li.mleave.active a{
+.ivan_popov_header .menu ul li.mleave.active a{
 	color: #333;
 }
-.cavani_tm_header .menu ul li.active a{
+.ivan_popov_header .menu ul li.active a{
 	color: #fff;
 }
-.cavani_tm_header .menu ul li a:hover{
+.ivan_popov_header .menu ul li a:hover{
 	color: #fff;
 }
 
@@ -360,7 +360,7 @@ h6 { font-size: 16px; }
 /*	03) CAVANI MOBILE MENU
 /*---------------------------------------------------*/
 
-.cavani_tm_topbar{
+.ivan_popov_topbar{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -370,7 +370,7 @@ h6 { font-size: 16px; }
 	z-index: 15;
 	display: none;
 }
-.cavani_tm_topbar .topbar_inner{
+.ivan_popov_topbar .topbar_inner{
 	width: 100%;
 	height: 100%;
 	clear: both;
@@ -379,23 +379,23 @@ h6 { font-size: 16px; }
 	justify-content: space-between;
 	padding: 0px 20px;
 }
-.cavani_tm_topbar .logo img{
+.ivan_popov_topbar .logo img{
 	max-width: 100px;
 	max-height: 40px;
 }
-.cavani_tm_topbar .logo[data-type="image"] .image{
+.ivan_popov_topbar .logo[data-type="image"] .image{
 	display: inline-block;
 }
-.cavani_tm_topbar .logo[data-type="image"] .text{
+.ivan_popov_topbar .logo[data-type="image"] .text{
 	display: none;
 }
-.cavani_tm_topbar .logo[data-type="text"] .image{
+.ivan_popov_topbar .logo[data-type="text"] .image{
 	display: none;
 }
-.cavani_tm_topbar .logo[data-type="text"] .text{
+.ivan_popov_topbar .logo[data-type="text"] .text{
 	display: inline-block;
 }
-.cavani_tm_topbar .logo .text{
+.ivan_popov_topbar .logo .text{
 	text-decoration: none;
 	color: #000;
 	text-transform: uppercase;
@@ -405,23 +405,23 @@ h6 { font-size: 16px; }
 	letter-spacing: 2px;
 	line-height: 50px;
 }
-.cavani_tm_topbar .hamburger{
+.ivan_popov_topbar .hamburger{
 	padding: 0px;
 }
-.cavani_tm_topbar .hamburger-inner, 
-.cavani_tm_topbar .hamburger-inner:after, 
-.cavani_tm_topbar .hamburger-inner:before{
+.ivan_popov_topbar .hamburger-inner, 
+.ivan_popov_topbar .hamburger-inner:after, 
+.ivan_popov_topbar .hamburger-inner:before{
 	width: 30px;
 	height: 2px;
 }
-.cavani_tm_topbar .trigger{
+.ivan_popov_topbar .trigger{
 	position: relative;
 	top: 5px;
 }
-.cavani_tm_topbar .hamburger-box{
+.ivan_popov_topbar .hamburger-box{
 	width: 30px;
 }
-.cavani_tm_mobile_menu{
+.ivan_popov_mobile_menu{
 	position: fixed;
 	top: 50px;
 	right: -200px;
@@ -436,24 +436,24 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_mobile_menu.opened{
+.ivan_popov_mobile_menu.opened{
 	right: 0px;
 }
-.cavani_tm_mobile_menu .inner{
+.ivan_popov_mobile_menu .inner{
 	position: relative;
 	width: 100%;
 	height: 100%;
 	text-align: right;
 	padding: 70px 20px 20px 20px;
 }
-.cavani_tm_mobile_menu .avatar{
+.ivan_popov_mobile_menu .avatar{
 	width: 70px;
 	height: 70px;
 	position: relative;
 	float: right;
 	margin-bottom: 60px;
 }
-.cavani_tm_mobile_menu .avatar .image{
+.ivan_popov_mobile_menu .avatar .image{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -463,50 +463,50 @@ h6 { font-size: 16px; }
 	background-size: cover;
 	background-position: center;
 }
-.cavani_tm_mobile_menu .menu_list{
+.ivan_popov_mobile_menu .menu_list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 50px;
 }
-.cavani_tm_mobile_menu .menu_list ul{
+.ivan_popov_mobile_menu .menu_list ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_mobile_menu .menu_list ul li{
+.ivan_popov_mobile_menu .menu_list ul li{
 	margin: 0px 0px 7px 0px;
 }
-.cavani_tm_mobile_menu .menu_list ul li a{
+.ivan_popov_mobile_menu .menu_list ul li a{
 	text-decoration: none;
 	color: #333;
 	font-family: "Onest";
 }
-.cavani_tm_mobile_menu .social{
+.ivan_popov_mobile_menu .social{
 	width: 100%;
 	float: left;
 	margin-bottom: 5px;
 }
-.cavani_tm_mobile_menu .social ul{
+.ivan_popov_mobile_menu .social ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_mobile_menu .social ul li{
+.ivan_popov_mobile_menu .social ul li{
 	margin: 0px 8px 0px 0px;
 	display: inline-block;
 }
-.cavani_tm_mobile_menu .social ul li:last-child{
+.ivan_popov_mobile_menu .social ul li:last-child{
 	margin-right: 0px;
 }
-.cavani_tm_mobile_menu .social ul li a{
+.ivan_popov_mobile_menu .social ul li a{
 	text-decoration: none;
 	color: #333;
 }
-.cavani_tm_mobile_menu .copyright{
+.ivan_popov_mobile_menu .copyright{
 	width: 100%;
 	float: left;
 }
-.cavani_tm_mobile_menu .copyright p{
+.ivan_popov_mobile_menu .copyright p{
 	color: #333;
 	font-family: "Onest";
 }
@@ -515,7 +515,7 @@ h6 { font-size: 16px; }
 /*	04) CAVANI MAINPART
 /*---------------------------------------------------*/
 
-.cavani_tm_mainpart{
+.ivan_popov_mainpart{
 	position: absolute;
 	top: 70px;
 	bottom: 70px;
@@ -523,7 +523,7 @@ h6 { font-size: 16px; }
 	right: 70px;
 	overflow: hidden;
 }
-.cavani_tm_mainpart .author_image{
+.ivan_popov_mainpart .author_image{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -531,7 +531,7 @@ h6 { font-size: 16px; }
 	width: 40%;
 	z-index: 15;
 }
-.cavani_tm_mainpart .author_image .main{
+.ivan_popov_mainpart .author_image .main{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -541,21 +541,21 @@ h6 { font-size: 16px; }
 	background-size: cover;
 	background-position: center;
 }
-.cavani_tm_mainpart .main_content{
+.ivan_popov_mainpart .main_content{
 	position: absolute;
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
 	width: 60%;
 }
-.cavani_tm_section{
+.ivan_popov_section{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
 }
-.cavani_tm_section{
+.ivan_popov_section{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -572,25 +572,25 @@ h6 { font-size: 16px; }
 	-webkit-transition: visibility1s linear, opacity 0s linear;
 	-o-transition: visibility 1s linear, opacity 0s linear;
 }
-.cavani_tm_section.animated {
+.ivan_popov_section.animated {
 	opacity: 1;
 	visibility: visible;
 	z-index: 9;
 }
-.cavani_tm_section.active {
+.ivan_popov_section.active {
 	opacity: 1;
 	visibility: visible;
 	z-index: 10;
 }
-.cavani_tm_section.hidden {
+.ivan_popov_section.hidden {
 	opacity: 0;
 	visibility: hidden;
 	z-index: 9;
 }
-.cavani_tm_section::-webkit-scrollbar{
+.ivan_popov_section::-webkit-scrollbar{
   width: 0px;
 }
-.cavani_tm_section .section_inner{
+.ivan_popov_section .section_inner{
 	width: 100%;
 	height: auto;
 	clear: both;
@@ -598,7 +598,7 @@ h6 { font-size: 16px; }
 	position: relative;
 	padding: 92px 100px 0px 100px;
 }
-.cavani_tm_section .section_inner:before{
+.ivan_popov_section .section_inner:before{
 	position: absolute;
 	content: "";
 	top: 0px;
@@ -612,48 +612,48 @@ h6 { font-size: 16px; }
 /*	05) CAVANI HOME
 /*---------------------------------------------------*/
 
-.cavani_tm_home{
+.ivan_popov_home{
 	position: relative;
 	width: 100%;
 	height: 100%;
 	display: flex;
 	align-items: center;
 }
-.cavani_tm_home .content{
+.ivan_popov_home .content{
 	padding-left: 100px;
 }
-.cavani_tm_home .name{
+.ivan_popov_home .name{
 	font-size: 72px;
 	font-weight: 700;
 	text-transform: uppercase;
 	margin-bottom: 30px;
 }
-.cavani_tm_home .line{
+.ivan_popov_home .line{
 	display: inline-block;
 	width: 70px;
 	height: 5px;
 	background-color: #333;
 	margin-bottom: 30px;
 }
-.cavani_tm_home .job{
+.ivan_popov_home .job{
 	font-size: 25px;
 	margin-bottom: 35px;
 	font-weight: 300;
 }
-.cavani_tm_home .job span{
+.ivan_popov_home .job span{
 	color: #7d7789;
 }
-.cavani_tm_home .job b{
+.ivan_popov_home .job b{
 	font-weight:600;
 	color: #333;
 }
-.cavani_tm_button{
+.ivan_popov_button{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_button a{
+.ivan_popov_button a{
 	text-decoration: none;
 	color: #fff;
 	display: inline-block;
@@ -669,7 +669,7 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_button a:hover{
+.ivan_popov_button a:hover{
 	background-color: transparent;
 	color: #333;
 }
@@ -689,27 +689,27 @@ h6 { font-size: 16px; }
 /*	06) CAVANI ABOUT
 /*---------------------------------------------------*/
 
-.cavani_tm_about{
+.ivan_popov_about{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_about .biography{
+.ivan_popov_about .biography{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 87px;
 }
-.cavani_tm_title{
+.ivan_popov_title{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	overflow: hidden;
 }
-.cavani_tm_title span{
+.ivan_popov_title span{
 	display: inline-block;
 	position: relative;
 	font-family: "Onest";
@@ -718,7 +718,7 @@ h6 { font-size: 16px; }
 	font-weight: 700;
 	letter-spacing: 8px;
 }
-.cavani_tm_title span:after{
+.ivan_popov_title span:after{
 	position: absolute;
 	content: "";
 	width: 5000px;
@@ -729,7 +729,7 @@ h6 { font-size: 16px; }
 	transform: translateY(-50%);
 	margin-left: 30px;
 }
-.cavani_tm_title .subtitle{
+.ivan_popov_title .subtitle{
 	font-size: 16px;
 	color: #7d7789;
 	font-family: "Open Sans";
@@ -738,7 +738,7 @@ h6 { font-size: 16px; }
 	margin-top: 8px;
 	opacity: 0.8;
 }
-.cavani_tm_about .biography .wrapper{
+.ivan_popov_about .biography .wrapper{
 	width: 100%;
 	height: auto;
 	clear: both;
@@ -747,42 +747,42 @@ h6 { font-size: 16px; }
 	justify-content: space-between;
 	margin-top: 55px;
 }
-.cavani_tm_about .biography .left{
+.ivan_popov_about .biography .left{
 	width: 45%;
 }
-.cavani_tm_about .biography .left p{
+.ivan_popov_about .biography .left p{
 	margin-bottom: 15px;
 }
-.cavani_tm_about .biography .left p:last-child{
+.ivan_popov_about .biography .left p:last-child{
 	margin-bottom: 0px;
 }
-.cavani_tm_about .biography .right{
+.ivan_popov_about .biography .right{
 	width: 45%;
 }
 
-.cavani_tm_about .biography .right p{
+.ivan_popov_about .biography .right p{
 	margin-bottom: 15px;
 }
-.cavani_tm_about .biography .right ul{
+.ivan_popov_about .biography .right ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_about .biography .right ul li{
+.ivan_popov_about .biography .right ul li{
 	margin: 0px 0px 8px 0px;
 	width: 100%;
 	float: left;
 }
-.cavani_tm_about .biography .right ul li:last-child{
+.ivan_popov_about .biography .right ul li:last-child{
 	margin-bottom: 0px;
 }
-.cavani_tm_about .biography .right ul li span{
+.ivan_popov_about .biography .right ul li span{
 	display: inline-block;
 }
-.cavani_tm_about .biography .right ul li .first{
+.ivan_popov_about .biography .right ul li .first{
 	min-width: 100px;
 	font-weight: 700;
 }
-.cavani_tm_about .biography .right ul li a{
+.ivan_popov_about .biography .right ul li a{
 	text-decoration: none;
 	color: #7d7789;
 	
@@ -792,51 +792,51 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_about .biography .right ul li a:hover{
+.ivan_popov_about .biography .right ul li a:hover{
 	color: #333;
 }
-.cavani_tm_about .services{
+.ivan_popov_about .services{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 87px;
 }
-.cavani_tm_about .services .wrapper{
+.ivan_popov_about .services .wrapper{
 	width: 100%;
 	height: auto;
 	clear: both;
 	display: flex;
 	justify-content: space-between;
 }
-.cavani_tm_about .services .list{
+.ivan_popov_about .services .list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-top: 55px;
 }
-.cavani_tm_about .services .service_list{
+.ivan_popov_about .services .service_list{
 	width: 40%;
 }
-.cavani_tm_about .services .service_list:nth-child(2){
+.ivan_popov_about .services .service_list:nth-child(2){
 	width: 50%;
 }
-.cavani_tm_about .services .service_list ul{
+.ivan_popov_about .services .service_list ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_about .services .service_list ul li{
+.ivan_popov_about .services .service_list ul li{
 	margin: 0px 0px 8px 0px;
 	width: 100%;
 	float: left;
 	position: relative;
 	padding-left: 25px;
 }
-.cavani_tm_about .services .service_list ul li:last-child{
+.ivan_popov_about .services .service_list ul li:last-child{
 	margin-bottom: 0px;
 }
-.cavani_tm_about .services .service_list ul li:before{
+.ivan_popov_about .services .service_list ul li:before{
 	position: absolute;
 	content: "";
     display: inline-block;
@@ -848,24 +848,24 @@ h6 { font-size: 16px; }
 	left: 0px;
 	top: 7px;
 }
-.cavani_tm_about .skills{
+.ivan_popov_about .skills{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 65px;
 }
-.cavani_tm_about .skills .wrapper{
+.ivan_popov_about .skills .wrapper{
 	width: 100%;
 	height: auto;
 	clear: both;
 	display: flex;
 	justify-content: space-between;
 }
-.cavani_tm_about .skills .programming{
+.ivan_popov_about .skills .programming{
 	width: 40%;
 }
-.cavani_tm_about .skills .language{
+.ivan_popov_about .skills .language{
 	width: 50%;
 }
 .cavani_progress{
@@ -969,47 +969,47 @@ h6 { font-size: 16px; }
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
-.cavani_tm_about .resume{
+.ivan_popov_about .resume{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 75px;
 }
-.cavani_tm_about .resume .wrapper{
+.ivan_popov_about .resume .wrapper{
 	width: 100%;
 	height: auto;
 	clear: both;
 	display: flex;
 	justify-content: space-between;
 }
-.cavani_tm_about .resume .list{
+.ivan_popov_about .resume .list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_about .resume .education{
+.ivan_popov_about .resume .education{
 	width: 40%;
 }
-.cavani_tm_about .resume .experience{
+.ivan_popov_about .resume .experience{
 	width: 50%;
 }
-.cavani_tm_about .univ{
+.ivan_popov_about .univ{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-top: 55px;
 }
-.cavani_tm_about .univ ul{
+.ivan_popov_about .univ ul{
 	margin: 0px;
 	list-style-type: none;
 	position: relative;
 	display: inline-block;
 	padding-top: 10px;
 }
-.cavani_tm_about .univ ul:before{
+.ivan_popov_about .univ ul:before{
 	content: "";
     position: absolute;
     width: 1px;
@@ -1018,7 +1018,7 @@ h6 { font-size: 16px; }
     left: 0;
     background-color: rgba(0,0,0,.07);
 }
-.cavani_tm_about .univ ul li{
+.ivan_popov_about .univ ul li{
 	margin: 0px;
 	width: 100%;
 	float: left;
@@ -1026,8 +1026,8 @@ h6 { font-size: 16px; }
 	padding-left: 20px;
 	padding-bottom: 45px;
 }
-.cavani_tm_about .univ ul li:last-child{padding-bottom: 0px;}
-.cavani_tm_about .univ ul li:before{
+.ivan_popov_about .univ ul li:last-child{padding-bottom: 0px;}
+.ivan_popov_about .univ ul li:before{
 	content: "";
     position: absolute;
     height: 18px;
@@ -1038,18 +1038,18 @@ h6 { font-size: 16px; }
     left: -9px;
     top: 8px;
 }
-.cavani_tm_about .univ ul li .list_inner{
+.ivan_popov_about .univ ul li .list_inner{
 	width: 100%;
 	height: auto;
 	clear: both;
 	display: flex;
 	position: relative;
 }
-.cavani_tm_about .univ ul li .time{
+.ivan_popov_about .univ ul li .time{
 	width: 20%;
 	padding-right: 20px;
 }
-.cavani_tm_about .univ ul li .time span{
+.ivan_popov_about .univ ul li .time span{
 	display: inline-block;
 	padding: 5px 25px;
 	background-color: rgba(0,0,0,.05);
@@ -1057,26 +1057,26 @@ h6 { font-size: 16px; }
 	font-size: 14px;
 	white-space: nowrap;
 }
-.cavani_tm_about .univ ul li .place{
+.ivan_popov_about .univ ul li .place{
 	width: 60%;
 	padding-left: 20px;
 }
-.cavani_tm_about .univ ul li .place h3{
+.ivan_popov_about .univ ul li .place h3{
 	font-size: 16px;
     margin-bottom: 2px;
     font-weight: 600;
 }
-.cavani_tm_about .univ ul li .place span{
+.ivan_popov_about .univ ul li .place span{
 	font-size: 14px;
 }
-.cavani_tm_about .partners{
+.ivan_popov_about .partners{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 92px;
 }
-.cavani_tm_about .partners .list{
+.ivan_popov_about .partners .list{
 	width: 100%;
     float: left;
     clear: both;
@@ -1084,7 +1084,7 @@ h6 { font-size: 16px; }
     border: 2px solid #E5EDF4;
 	margin-top: 62px;
 }
-.cavani_tm_about .partners .list ul{
+.ivan_popov_about .partners .list ul{
 	margin: -2px -10px -2px -2px;
     list-style-type: none;
     padding-top: 2px;
@@ -1092,7 +1092,7 @@ h6 { font-size: 16px; }
     padding-left: 2px;
     min-width: calc(100% + 12px);
 } 
-.cavani_tm_about .partners .list ul li{
+.ivan_popov_about .partners .list ul li{
 	margin: 0px;
     float: left;
     width: 25%;
@@ -1105,11 +1105,11 @@ h6 { font-size: 16px; }
     margin-left: -2px;
     overflow: hidden;
 } 
-.cavani_tm_about .partners .list ul li img{
+.ivan_popov_about .partners .list ul li img{
 	max-width: 65%;
     max-height: 65px;
 } 
-.cavani_tm_about .partners .list ul li .list_inner{
+.ivan_popov_about .partners .list ul li .list_inner{
 	width: 100%;
 	height: auto;
 	clear: both;
@@ -1122,10 +1122,10 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_about .partners .list ul li .list_inner:hover{
+.ivan_popov_about .partners .list ul li .list_inner:hover{
 	opacity: 1;
 }
-.cavani_tm_full_link{
+.ivan_popov_full_link{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -1133,36 +1133,36 @@ h6 { font-size: 16px; }
 	right: 0px;
 	z-index: 5;
 }
-.cavani_tm_about .testimonials{
+.ivan_popov_about .testimonials{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 90px;
 }
-.cavani_tm_about .testimonials .list{
+.ivan_popov_about .testimonials .list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-top: 75px;
 }
-.cavani_tm_about .testimonials .list ul{
+.ivan_popov_about .testimonials .list ul{
 	margin: 0px;
 	list-style-type: none;
 	cursor: e-resize;
 }
-.cavani_tm_about .testimonials .list ul li{
+.ivan_popov_about .testimonials .list ul li{
 	margin: 0px;
 }
-.cavani_tm_about .testimonials .list ul li .list_inner{
+.ivan_popov_about .testimonials .list ul li .list_inner{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	position: relative;
 }
-.cavani_tm_about .testimonials .list ul li .text{
+.ivan_popov_about .testimonials .list ul li .text{
 	width: 100%;
 	height: auto;
 	clear: both;
@@ -1172,7 +1172,7 @@ h6 { font-size: 16px; }
 	padding: 40px;
 	margin-bottom: 30px;
 }
-.cavani_tm_about .testimonials .list ul li .text:before{
+.ivan_popov_about .testimonials .list ul li .text:before{
 	position: absolute;
 	content: "";
 	height: 0px;
@@ -1183,7 +1183,7 @@ h6 { font-size: 16px; }
     border-top-color: #E5EDF4;
     border-width: 18px 18px 0px 0px;
 }
-.cavani_tm_about .testimonials .list ul li .text:after{
+.ivan_popov_about .testimonials .list ul li .text:after{
 	position: absolute;
 	content: "";
 	top: 100%;
@@ -1195,14 +1195,14 @@ h6 { font-size: 16px; }
     border-width: 14px 13px 0px 0px;
     margin-left: 2px;
 }
-.cavani_tm_about .testimonials .list ul li .text i{
+.ivan_popov_about .testimonials .list ul li .text i{
 	position: absolute;
 	z-index: 1;
 	font-size: 30px;
 	top: -29px;
 	left: 50px;
 }
-.cavani_tm_about .testimonials .details{
+.ivan_popov_about .testimonials .details{
 	width: 100%;
 	height: auto;
 	clear: both;
@@ -1211,12 +1211,12 @@ h6 { font-size: 16px; }
 	align-items: center;
 	padding-left: 20px;
 }
-.cavani_tm_about .testimonials .details .image{
+.ivan_popov_about .testimonials .details .image{
 	position: relative;
 	width: 60px;
 	height: 60px;
 }
-.cavani_tm_about .testimonials .details .image .main{
+.ivan_popov_about .testimonials .details .image .main{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -1227,27 +1227,27 @@ h6 { font-size: 16px; }
 	background-position: center;
 	border-radius: 100%;
 }
-.cavani_tm_about .testimonials .details .info{
+.ivan_popov_about .testimonials .details .info{
 	padding-left: 20px;
 }
-.cavani_tm_about .testimonials .details .info h3{
+.ivan_popov_about .testimonials .details .info h3{
 	font-size: 16px;
     margin-bottom: 2px;
     font-weight: 600;
 }
-.cavani_tm_about .testimonials .details .info span{
+.ivan_popov_about .testimonials .details .info span{
 	font-size: 14px;
 }
-.cavani_tm_about .testimonials .owl-carousel .owl-stage-outer{
+.ivan_popov_about .testimonials .owl-carousel .owl-stage-outer{
 	overflow: hidden;
 }
-.cavani_tm_about .testimonials .owl-carousel .owl-stage-outer{
+.ivan_popov_about .testimonials .owl-carousel .owl-stage-outer{
 	overflow: visible;
 }
-.cavani_tm_about .testimonials .owl-item.active{
+.ivan_popov_about .testimonials .owl-item.active{
 	opacity: 1;
 }
-.cavani_tm_about .testimonials .owl-item{
+.ivan_popov_about .testimonials .owl-item{
 	opacity: 0;
 }
 
@@ -1255,14 +1255,14 @@ h6 { font-size: 16px; }
 /*	07) CAVANI PORTFOLIO
 /*---------------------------------------------------*/
 
-.cavani_tm_portfolio{
+.ivan_popov_portfolio{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 70px;
 }
-.cavani_tm_portfolio .portfolio_filter{
+.ivan_popov_portfolio .portfolio_filter{
 	width: 100%;
 	height: auto;
 	clear: both;
@@ -1271,18 +1271,18 @@ h6 { font-size: 16px; }
 	position: relative;
 	padding: 55px 0px 42px 0px;
 }
-.cavani_tm_portfolio .portfolio_filter ul{
+.ivan_popov_portfolio .portfolio_filter ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_portfolio .portfolio_filter ul li{
+.ivan_popov_portfolio .portfolio_filter ul li{
 	margin: 0px 40px 0px 0px;
 	display: inline-block;
 }
-.cavani_tm_portfolio .portfolio_filter ul li:last-child{
+.ivan_popov_portfolio .portfolio_filter ul li:last-child{
 	margin-right: 0px;
 }
-.cavani_tm_portfolio .portfolio_filter ul li a{
+.ivan_popov_portfolio .portfolio_filter ul li a{
 	text-decoration: none;
     color: #333;
     font-family: "Onest";
@@ -1294,23 +1294,23 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_portfolio .portfolio_list{
+.ivan_popov_portfolio .portfolio_list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_portfolio .portfolio_list ul{
+.ivan_popov_portfolio .portfolio_list ul{
 	margin: 0px 0px 0px -50px;
 	list-style-type: none;
 }
-.cavani_tm_portfolio .portfolio_list ul li{
+.ivan_popov_portfolio .portfolio_list ul li{
 	margin: 0px 0px 50px 0px;
 	width: 50%;
 	float: left;
 	padding-left: 50px;
 }
-.cavani_tm_portfolio .portfolio_list ul li .list_inner{
+.ivan_popov_portfolio .portfolio_list ul li .list_inner{
 	width: 100%;
 	height: auto;
 	clear: both;
@@ -1318,15 +1318,15 @@ h6 { font-size: 16px; }
 	position: relative;
 	overflow: hidden;
 }
-.cavani_tm_portfolio .portfolio_list ul li .image{
+.ivan_popov_portfolio .portfolio_list ul li .image{
 	position: relative;
 }
-.cavani_tm_portfolio .portfolio_list ul li .image img{
+.ivan_popov_portfolio .portfolio_list ul li .image img{
 	position: relative;
 	opacity: 0;
 	min-width: 100%;
 }
-.cavani_tm_portfolio .portfolio_list ul li .image .main{
+.ivan_popov_portfolio .portfolio_list ul li .image .main{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -1336,7 +1336,7 @@ h6 { font-size: 16px; }
 	background-size: cover;
 	background-position: center;
 }
-.cavani_tm_portfolio .portfolio_list ul li .details{
+.ivan_popov_portfolio .portfolio_list ul li .details{
 	position: absolute;
 	left: 20px;
 	right: 20px;
@@ -1353,19 +1353,19 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_portfolio .portfolio_list ul li .list_inner:hover .details{
+.ivan_popov_portfolio .portfolio_list ul li .list_inner:hover .details{
 	transform: translateY(0);
 	bottom: 20px;
 }
-.cavani_tm_portfolio .portfolio_list ul li .details h3{
+.ivan_popov_portfolio .portfolio_list ul li .details h3{
 	font-size: 16px;
     margin-bottom: 2px;
     font-weight: 600;
 }
-.cavani_tm_portfolio .portfolio_list ul li .details span{
+.ivan_popov_portfolio .portfolio_list ul li .details span{
 	font-size: 14px;
 }
-.cavani_tm_modalbox{
+.ivan_popov_modalbox{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -1382,11 +1382,11 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_modalbox.opened{
+.ivan_popov_modalbox.opened{
 	opacity: 1;
 	visibility: visible;
 }
-.cavani_tm_modalbox .box_inner{
+.ivan_popov_modalbox .box_inner{
 	position: absolute;
 	top: 70px;
 	bottom: 70px;
@@ -1406,19 +1406,19 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_modalbox.opened .box_inner{
+.ivan_popov_modalbox.opened .box_inner{
 	opacity: 1;
 	visibility: visible;
 	margin-top: 0px;
 }
-.cavani_tm_modalbox .close{
+.ivan_popov_modalbox .close{
 	position: fixed;
 	left: 100%;
 	top: 0px;
 	margin-left: 30px;
 	z-index: 10;
 }
-.cavani_tm_modalbox .close a{
+.ivan_popov_modalbox .close a{
 	display: block;
 	width: 40px;
 	height: 40px;
@@ -1434,16 +1434,16 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_modalbox .close a:hover{
+.ivan_popov_modalbox .close a:hover{
 	border-radius: 100%;
 }
-.cavani_tm_modalbox .close a i{
+.ivan_popov_modalbox .close a i{
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
-.cavani_tm_modalbox .description_wrap{
+.ivan_popov_modalbox .description_wrap{
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -1452,45 +1452,45 @@ h6 { font-size: 16px; }
 	padding: 50px;
 	overflow-y: scroll;
 }
-.cavani_tm_modalbox .description_wrap::-webkit-scrollbar{
+.ivan_popov_modalbox .description_wrap::-webkit-scrollbar{
   width: 11px;
 }
 .aali_tm_modalbox .description_wrap{
   scrollbar-width: thin;
   scrollbar-color: #bbb #fff;
 }
-.cavani_tm_modalbox .description_wrap:-webkit-scrollbar-track{
+.ivan_popov_modalbox .description_wrap:-webkit-scrollbar-track{
   background: #fff;
 }
-.cavani_tm_modalbox .description_wrap::-webkit-scrollbar-thumb{
+.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-thumb{
   background-color: #bbb;
   border-radius: 10px;
   border: 3px solid #fff;
 }
-.cavani_tm_portfolio .hidden_content{
+.ivan_popov_portfolio .hidden_content{
 	display: none;
 	opacity: 0;
 	visibility: hidden;
 	position: absolute;
 	z-index: -11;
 }
-.cavani_tm_modalbox .popup_details{
+.ivan_popov_modalbox .popup_details{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_modalbox .popup_details .top_image{
+.ivan_popov_modalbox .popup_details .top_image{
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 37px;
 }
-.cavani_tm_modalbox .popup_details .top_image img{
+.ivan_popov_modalbox .popup_details .top_image img{
 	position: relative;
 	min-width: 100%;
 	opacity: 0;
 }
-.cavani_tm_modalbox .popup_details .top_image .main{
+.ivan_popov_modalbox .popup_details .top_image .main{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1500,111 +1500,111 @@ h6 { font-size: 16px; }
 	background-position: center center;
 	background-repeat: no-repeat;
 }
-.cavani_tm_modalbox .portfolio_main_title{
+.ivan_popov_modalbox .portfolio_main_title{
 	width: 100%;
 	float: left;
 	margin-bottom: 20px;
 }
-.cavani_tm_modalbox .portfolio_main_title span{
+.ivan_popov_modalbox .portfolio_main_title span{
 	display: inline-block;
 }
-.cavani_tm_modalbox .portfolio_main_title h3{
+.ivan_popov_modalbox .portfolio_main_title h3{
 	font-weight: 700;
     font-size: 22px;
 	margin-bottom: 5px;
 }
-.cavani_tm_modalbox .main_details{
+.ivan_popov_modalbox .main_details{
 	width: 100%;
 	height: auto;
 	clear: both;
 	display: flex;
 	margin-bottom: 60px;
 }
-.cavani_tm_modalbox .main_details .textbox{
+.ivan_popov_modalbox .main_details .textbox{
 	width: 70%;
 	padding-right: 40px;
 }
-.cavani_tm_modalbox .main_details .textbox p{
+.ivan_popov_modalbox .main_details .textbox p{
 	margin-bottom: 15px;
 }
-.cavani_tm_modalbox .main_details .textbox p:last-child{
+.ivan_popov_modalbox .main_details .textbox p:last-child{
 	margin-bottom: 0px;
 }
-.cavani_tm_modalbox .main_details .detailbox{
+.ivan_popov_modalbox .main_details .detailbox{
 	width: 30%;
 	padding-left: 40px;
 }
-.cavani_tm_modalbox .main_details .detailbox > ul{
+.ivan_popov_modalbox .main_details .detailbox > ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_modalbox .main_details .detailbox > ul > li{
+.ivan_popov_modalbox .main_details .detailbox > ul > li{
 	margin: 0px 0px 10px 0px;
 	width: 100%;
 	float: left;
 }
-.cavani_tm_modalbox .main_details .detailbox > ul > li:last-child{
+.ivan_popov_modalbox .main_details .detailbox > ul > li:last-child{
 	margin-bottom: 0px;
 }
-.cavani_tm_modalbox .main_details .detailbox .first{
+.ivan_popov_modalbox .main_details .detailbox .first{
     font-weight: 700;
 	display: block;
 }
-.cavani_tm_modalbox .main_details .detailbox span a{
+.ivan_popov_modalbox .main_details .detailbox span a{
 	text-decoration: none;
 	color: #7d7789;
 }
-.cavani_tm_modalbox .main_details .detailbox .share{
+.ivan_popov_modalbox .main_details .detailbox .share{
 	margin: 0px;
 	list-style-type: none;
 	position: relative;
 	top: 7px;
 }
-.cavani_tm_modalbox .main_details .detailbox .share li{
+.ivan_popov_modalbox .main_details .detailbox .share li{
 	margin: 0px 13px 0px 0px;
 	display: inline-block;
 }
-.cavani_tm_modalbox .main_details .detailbox .share li:last-child{
+.ivan_popov_modalbox .main_details .detailbox .share li:last-child{
 	margin-right: 0px;
 }
-.cavani_tm_modalbox .main_details .detailbox .share li a{
+.ivan_popov_modalbox .main_details .detailbox .share li a{
 	text-decoration: none;
 	color: #7d7789;
 }
-.cavani_tm_modalbox .additional_images{
+.ivan_popov_modalbox .additional_images{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_modalbox .additional_images ul{
+.ivan_popov_modalbox .additional_images ul{
 	margin: 0px 0px 0px -30px;
 	list-style-type: none;
 }
-.cavani_tm_modalbox .additional_images ul li{
+.ivan_popov_modalbox .additional_images ul li{
 	margin: 0px 0px 30px 0px;
 	float: left;
 	width: 50%;
 	padding-left: 30px;
 }
-.cavani_tm_modalbox .additional_images ul li:nth-child(3n-2){
+.ivan_popov_modalbox .additional_images ul li:nth-child(3n-2){
 	width: 100%;
 }
-.cavani_tm_modalbox .additional_images ul li .list_inner{
+.ivan_popov_modalbox .additional_images ul li .list_inner{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	position: relative;
 }
-.cavani_tm_modalbox .additional_images ul li .my_image{
+.ivan_popov_modalbox .additional_images ul li .my_image{
 	position: relative;
 }
-.cavani_tm_modalbox .additional_images ul li .my_image img{
+.ivan_popov_modalbox .additional_images ul li .my_image img{
 	opacity: 0;
 	min-width: 100%;
 }
-.cavani_tm_modalbox .additional_images ul li .my_image .main{
+.ivan_popov_modalbox .additional_images ul li .my_image .main{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -1619,32 +1619,32 @@ h6 { font-size: 16px; }
 /*	08) CAVANI SERVICES
 /*---------------------------------------------------*/
 
-.cavani_tm_service{
+.ivan_popov_service{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 70px;
 }
-.cavani_tm_service .service_list{
+.ivan_popov_service .service_list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-top: 60px;
 }
-.cavani_tm_service .service_list ul{
+.ivan_popov_service .service_list ul{
 	margin: 0px 0px 0px -50px;
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
 }
-.cavani_tm_service .service_list ul li{
+.ivan_popov_service .service_list ul li{
 	margin: 0px 0px 50px 0px;
 	width: 50%;
 	padding-left: 50px;
 }
-.cavani_tm_service .service_list ul li .list_inner{
+.ivan_popov_service .service_list ul li .list_inner{
 	width: 100%;
 	height: 100%;
 	clear: both;
@@ -1660,10 +1660,10 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_service .service_list ul li .list_inner:hover{
+.ivan_popov_service .service_list ul li .list_inner:hover{
 	background-color: #333;
 }
-.cavani_tm_service .service_list ul li .svg{
+.ivan_popov_service .service_list ul li .svg{
 	width: 60px;
     height: 60px;
     color: #333;
@@ -1675,10 +1675,10 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_service .service_list ul li .list_inner:hover .svg{
+.ivan_popov_service .service_list ul li .list_inner:hover .svg{
 	color: #fff;
 }
-.cavani_tm_service .service_list ul li .title{
+.ivan_popov_service .service_list ul li .title{
 	font-weight: 500;
 	font-size: 24px;
 	color: #333;
@@ -1690,51 +1690,51 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_service .service_list ul li .list_inner:hover .title{
+.ivan_popov_service .service_list ul li .list_inner:hover .title{
 	color: #fff;
 }
-.cavani_tm_service .service_list ul li .list_inner .text{
+.ivan_popov_service .service_list ul li .list_inner .text{
 	-webkit-transition: all .3s ease;
 	   -moz-transition: all .3s ease;
 	    -ms-transition: all .3s ease;
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_service .service_list ul li .list_inner:hover .text{
+.ivan_popov_service .service_list ul li .list_inner:hover .text{
 	color: #aaa;
 }
-.cavani_tm_service .popup_service_image{
+.ivan_popov_service .popup_service_image{
 	opacity: 0;
 	visibility: hidden;
 	display: none;
 	position: absolute;
 	z-index: -111;
 }
-.cavani_tm_service .service_hidden_details{
+.ivan_popov_service .service_hidden_details{
 	opacity: 0;
 	visibility: hidden;
 	display: none;
 	position: absolute;
 	z-index: -111;
 }
-.cavani_tm_modalbox .service_popup_informations{
+.ivan_popov_modalbox .service_popup_informations{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_modalbox .service_popup_informations .image{
+.ivan_popov_modalbox .service_popup_informations .image{
 	width: 100%;
 	float: left;
 	position: relative;
 	margin-bottom: 37px;
 }
-.cavani_tm_modalbox .service_popup_informations .image img{
+.ivan_popov_modalbox .service_popup_informations .image img{
 	position: relative;
 	min-width: 100%;
 	opacity: 0;
 }
-.cavani_tm_modalbox .service_popup_informations .image .main{
+.ivan_popov_modalbox .service_popup_informations .image .main{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -1744,22 +1744,22 @@ h6 { font-size: 16px; }
 	background-size: cover;
 	background-position: center;
 }
-.cavani_tm_modalbox .service_popup_informations .main_title{
+.ivan_popov_modalbox .service_popup_informations .main_title{
 	width: 100%;
 	float: left;
 	margin-bottom: 23px;
 }
-.cavani_tm_modalbox .service_popup_informations .main_title h3{
+.ivan_popov_modalbox .service_popup_informations .main_title h3{
 	font-size: 22px;
 }
-.cavani_tm_modalbox .service_popup_informations .descriptions{
+.ivan_popov_modalbox .service_popup_informations .descriptions{
 	width: 100%;
 	float: left;
 }
-.cavani_tm_modalbox .service_popup_informations .descriptions p{
+.ivan_popov_modalbox .service_popup_informations .descriptions p{
 	margin-bottom: 15px;
 }
-.cavani_tm_modalbox .service_popup_informations .descriptions p:last-child{
+.ivan_popov_modalbox .service_popup_informations .descriptions p:last-child{
 	margin-bottom: 0px;
 }
 
@@ -1767,33 +1767,33 @@ h6 { font-size: 16px; }
 /*	09) CAVANI NEWS
 /*---------------------------------------------------*/
 
-.cavani_tm_news{
+.ivan_popov_news{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 70px;
 }
-.cavani_tm_news .news_list{
+.ivan_popov_news .news_list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-top: 60px;
 }
-.cavani_tm_news .news_list > ul{
+.ivan_popov_news .news_list > ul{
 	margin: 0;
     padding: 0;
     list-style-type: none;
     position: relative;
     z-index: 2;
 }
-.cavani_tm_news .news_list > ul > li{
+.ivan_popov_news .news_list > ul > li{
 	width: 100%;
     margin: 0;
     padding: 29px 0;
 }
-.cavani_tm_news .news_list > ul > li .list_inner{
+.ivan_popov_news .news_list > ul > li .list_inner{
 	width: 100%;
     height: auto;
     clear: both;
@@ -1806,7 +1806,7 @@ h6 { font-size: 16px; }
     -ms-align-items: center;
     align-items: center;
 }
-.cavani_tm_news .news_list > ul > li .list_inner .number{
+.ivan_popov_news .news_list > ul > li .list_inner .number{
 	width: 50px;
     min-width: 50px;
     height: 50px;
@@ -1820,13 +1820,13 @@ h6 { font-size: 16px; }
     font-weight: 600;
     font-family: "Onest";
 }
-.cavani_tm_news .news_list > ul > li .list_inner .details{
+.ivan_popov_news .news_list > ul > li .list_inner .details{
 	position: relative;
     padding-left: 30px;
     margin-left: 29px;
     max-width: calc(100% - 80px);
 }
-.cavani_tm_news .news_list > ul > li .list_inner .details:before{
+.ivan_popov_news .news_list > ul > li .list_inner .details:before{
 	position: absolute;
     content: "";
     top: -17px;
@@ -1836,7 +1836,7 @@ h6 { font-size: 16px; }
     width: 2px;
     transform: rotate(8deg);
 }
-.cavani_tm_news .news_list > ul > li .extra_metas ul{
+.ivan_popov_news .news_list > ul > li .extra_metas ul{
 	margin: 0px;
     list-style: none;
     display: -webkit-flex;
@@ -1849,25 +1849,25 @@ h6 { font-size: 16px; }
     flex-wrap: wrap;
     margin-bottom: 2px;
 }
-.cavani_tm_news .news_list > ul > li .extra_metas ul li{
+.ivan_popov_news .news_list > ul > li .extra_metas ul li{
 	margin: 0px;
     position: relative;
     margin-right: 10px;
 }
-.cavani_tm_news .news_list > ul > li .extra_metas ul li:before{
+.ivan_popov_news .news_list > ul > li .extra_metas ul li:before{
 	position: relative;
     content: "/";
     font-size: 18px;
 }
-.cavani_tm_news .news_list > ul > li .extra_metas ul li:first-child:before{
+.ivan_popov_news .news_list > ul > li .extra_metas ul li:first-child:before{
 	display: none;
 }
-.cavani_tm_news .news_list > ul > li .extra_metas ul li span{
+.ivan_popov_news .news_list > ul > li .extra_metas ul li span{
 	font-size: 15px;
     color: #777;
     padding-left: 10px;
 }
-.cavani_tm_news .news_list > ul > li .extra_metas ul li span a{
+.ivan_popov_news .news_list > ul > li .extra_metas ul li span a{
 	text-decoration: none;
 	color: #777;
 	
@@ -1877,19 +1877,19 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_news .news_list > ul > li .extra_metas ul li span a:hover{
+.ivan_popov_news .news_list > ul > li .extra_metas ul li span a:hover{
 	color: #000;
 }
-.cavani_tm_news .news_list > ul > li .extra_metas ul li:first-child span{
+.ivan_popov_news .news_list > ul > li .extra_metas ul li:first-child span{
     padding-left: 0px;
 }
-.cavani_tm_news .news_list > ul > li .post_title h3{
+.ivan_popov_news .news_list > ul > li .post_title h3{
     margin: 0;
     padding: 0;
     line-height: 1;
     font-weight: 600;
 }
-.cavani_tm_news .news_list > ul > li .post_title h3 a{
+.ivan_popov_news .news_list > ul > li .post_title h3 a{
 	text-decoration: none;
 	color: #333;
 	font-size: 24px;
@@ -1899,7 +1899,7 @@ h6 { font-size: 16px; }
     background-size: 0% 2px;
     transition: background-size .5s;
 }
-.cavani_tm_news .news_list > ul > li .post_title h3 a:hover{
+.ivan_popov_news .news_list > ul > li .post_title h3 a:hover{
 	background-size: 100% 2px;
 }
 .cavani_fn_moving_box{
@@ -1929,29 +1929,29 @@ h6 { font-size: 16px; }
 	visibility: visible;
 	transform: scale(1);
 }
-.cavani_tm_news .news_hidden_details{
+.ivan_popov_news .news_hidden_details{
 	display: none;
 	opacity: 0;
 	visibility: hidden;
 	position: absolute;
 	z-index: -11;
 }
-.cavani_tm_modalbox .news_popup_informations{
+.ivan_popov_modalbox .news_popup_informations{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_modalbox .news_popup_informations .image{
+.ivan_popov_modalbox .news_popup_informations .image{
 	position: relative;
 	margin-bottom: 30px;
 }
-.cavani_tm_modalbox .news_popup_informations .image img{
+.ivan_popov_modalbox .news_popup_informations .image img{
 	position: relative;
 	opacity: 0;
 	min-width: 100%;
 }
-.cavani_tm_modalbox .news_popup_informations .image .main{
+.ivan_popov_modalbox .news_popup_informations .image .main{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -1961,22 +1961,22 @@ h6 { font-size: 16px; }
 	background-size: cover;
 	background-position: center;
 }
-.cavani_tm_modalbox .news_popup_informations .text{
+.ivan_popov_modalbox .news_popup_informations .text{
 	width: 100%;
 	float: left;
 }
-.cavani_tm_modalbox .news_popup_informations .text p{
+.ivan_popov_modalbox .news_popup_informations .text p{
 	margin-bottom: 15px;
 }
-.cavani_tm_modalbox .news_popup_informations .text p:last-child{
+.ivan_popov_modalbox .news_popup_informations .text p:last-child{
 	margin-bottom: 0px;
 }
-.cavani_tm_modalbox .meta{
+.ivan_popov_modalbox .meta{
 	width: 100%;
 	float: left;
 	margin-bottom: 5px;
 }
-.cavani_tm_modalbox .meta ul{
+.ivan_popov_modalbox .meta ul{
 	margin: 0px;
     list-style: none;
     display: -webkit-flex;
@@ -1989,25 +1989,25 @@ h6 { font-size: 16px; }
     flex-wrap: wrap;
     margin-bottom: 2px;
 }
-.cavani_tm_modalbox .meta ul li{
+.ivan_popov_modalbox .meta ul li{
 	margin: 0px;
     position: relative;
     margin-right: 10px;
 }
-.cavani_tm_modalbox .meta ul li:before{
+.ivan_popov_modalbox .meta ul li:before{
 	position: relative;
     content: "/";
     font-size: 18px;
 }
-.cavani_tm_modalbox .meta ul li:first-child:before{
+.ivan_popov_modalbox .meta ul li:first-child:before{
 	display: none;
 }
-.cavani_tm_modalbox .meta ul li span{
+.ivan_popov_modalbox .meta ul li span{
 	font-size: 15px;
     color: #777;
     padding-left: 10px;
 }
-.cavani_tm_modalbox .meta ul li span a{
+.ivan_popov_modalbox .meta ul li span a{
 	text-decoration: none;
 	color: #777;
 	
@@ -2017,18 +2017,18 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_modalbox .meta ul li span a:hover{
+.ivan_popov_modalbox .meta ul li span a:hover{
 	color: #000;
 }
-.cavani_tm_modalbox .meta ul li:first-child span{
+.ivan_popov_modalbox .meta ul li:first-child span{
     padding-left: 0px;
 }
-.cavani_tm_modalbox .news_popup_informations .title{
+.ivan_popov_modalbox .news_popup_informations .title{
 	width: 100%;
 	float: left;
 	margin-bottom: 25px;
 }
-.cavani_tm_modalbox .news_popup_informations .title h3{
+.ivan_popov_modalbox .news_popup_informations .title h3{
 	font-size: 22px;
 }
 
@@ -2036,32 +2036,32 @@ h6 { font-size: 16px; }
 /*	10) CAVANI CONTACT
 /*---------------------------------------------------*/
 
-.cavani_tm_contact{
+.ivan_popov_contact{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 100px;
 }
-.cavani_tm_contact .short_info{
+.ivan_popov_contact .short_info{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-top: 62px;
 }
-.cavani_tm_contact .short_info ul{
+.ivan_popov_contact .short_info ul{
 	margin: 0px 0px 0px -30px;
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
 }
-.cavani_tm_contact .short_info ul li{
+.ivan_popov_contact .short_info ul li{
 	margin: 0px 0px 30px 0px;
 	width: 33.3333%;
 	padding-left: 30px;
 }
-.cavani_tm_contact .short_info ul li .list_inner{
+.ivan_popov_contact .short_info ul li .list_inner{
 	width: 100%;
 	height: 100%;
 	clear: both;
@@ -2071,15 +2071,15 @@ h6 { font-size: 16px; }
 	text-align: center;
 	padding: 32px 25px;
 }
-.cavani_tm_contact .short_info ul li .list_inner span{
+.ivan_popov_contact .short_info ul li .list_inner span{
 	display: block;
 }
-.cavani_tm_contact .short_info ul li .list_inner .svg{
+.ivan_popov_contact .short_info ul li .list_inner .svg{
 	width: 18px;
 	height: 18px;
 	margin-bottom: 5px;
 }
-.cavani_tm_contact .short_info ul li .list_inner a{
+.ivan_popov_contact .short_info ul li .list_inner a{
 	text-decoration: none;
 	color: #7d7789;
 	
@@ -2089,48 +2089,48 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_tm_contact .short_info ul li .list_inner a:hover{
+.ivan_popov_contact .short_info ul li .list_inner a:hover{
 	color: #333;
 }
-.cavani_tm_contact .form{
+.ivan_popov_contact .form{
 	width: 100%;
 	height: auto;
 	clear: both;
 	display: flex;
 }
-.cavani_tm_contact .form .left{
+.ivan_popov_contact .form .left{
 	width: 50%;
 	padding-right: 15px;
 }
-.cavani_tm_contact .form .fields{
+.ivan_popov_contact .form .fields{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 }
-.cavani_tm_contact .form .fields .first{
+.ivan_popov_contact .form .fields .first{
 	width: 100%;
 	float: left;
 }
-.cavani_tm_contact .form .fields ul{
+.ivan_popov_contact .form .fields ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_contact .form .fields ul li{
+.ivan_popov_contact .form .fields ul li{
 	width: 100%;
 	margin: 0px 0px 30px 0px;
 	float: left;
 }
-.cavani_tm_contact .form .fields ul li input{
+.ivan_popov_contact .form .fields ul li input{
 	width: 100%;
 	border: 1px solid rgba(0,0,0,.07);
 	background-color: transparent;
 }
-.cavani_tm_contact .form .fields ul li input:focus{
+.ivan_popov_contact .form .fields ul li input:focus{
 	outline: none;
 	border: 1px solid rgba(0,0,0,.2);
 }
-.cavani_tm_contact .form .fields .last textarea{
+.ivan_popov_contact .form .fields .last textarea{
 	width: 100%;
 	border: 1px solid rgba(0,0,0,.07);
 	height: 120px;
@@ -2138,28 +2138,28 @@ h6 { font-size: 16px; }
 	margin-bottom: 20px;
 	background-color: transparent;
 }
-.cavani_tm_contact .form .fields .last textarea:focus{
+.ivan_popov_contact .form .fields .last textarea:focus{
 	outline: none;
 	border: 1px solid rgba(0,0,0,.2);
 } 
-.cavani_tm_contact .form .empty_notice{
+.ivan_popov_contact .form .empty_notice{
 	color: #F52225;
 	margin-bottom: 7px;
 	display: none;
 	text-align: left;
 	font-weight: 500;
 }
-.cavani_tm_contact .form .contact_error{
+.ivan_popov_contact .form .contact_error{
 	color: #F52225;
 	text-align: left;
 	font-weight: 500;
 }
-.cavani_tm_contact .form .returnmessage{
+.ivan_popov_contact .form .returnmessage{
 	color:#3A00FF;
 	text-align: left;
 	font-weight: 500;
 }
-.cavani_tm_contact .form .right{
+.ivan_popov_contact .form .right{
 	width: 50%;
 	padding-left: 15px;
 	position: relative;
@@ -2169,7 +2169,7 @@ h6 { font-size: 16px; }
 /*	11) CAVANI FOOTER
 /*---------------------------------------------------*/
 
-.cavani_tm_footer{
+.ivan_popov_footer{
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
@@ -2183,26 +2183,26 @@ h6 { font-size: 16px; }
 	justify-content: space-between;
 	padding: 0px 70px;
 }
-.cavani_tm_footer .copyright p{
+.ivan_popov_footer .copyright p{
 	color: #333;
 	font-family: "Onest";
 }
-.cavani_tm_footer .social ul{
+.ivan_popov_footer .social ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.cavani_tm_footer .social ul li{
+.ivan_popov_footer .social ul li{
 	margin: 0px 15px 0px 0px;
 	display: inline-block;
 }
-.cavani_tm_footer .social ul li:last-child{
+.ivan_popov_footer .social ul li:last-child{
 	margin-right: 0px;
 }
-.cavani_tm_footer .social ul li a{
+.ivan_popov_footer .social ul li a{
 	text-decoration: none;
 	color: #333;
 }
-.cavani_tm_left_border{
+.ivan_popov_left_border{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -2211,7 +2211,7 @@ h6 { font-size: 16px; }
 	background-color: #fff;
 	z-index: 10;
 }
-.cavani_tm_right_border{
+.ivan_popov_right_border{
 	position: fixed;
 	top: 0px;
 	right: 0px;
@@ -2269,7 +2269,7 @@ h6 { font-size: 16px; }
 .cursor-outer.cursor-hover{
   opacity: 0;
 }
-.cavani_tm_all_wrap[data-magic-cursor="hide"] .mouse-cursor{
+.ivan_popov_all_wrap[data-magic-cursor="hide"] .mouse-cursor{
 	display: none;
 	opacity: 0;
 	visibility: hidden;
@@ -2281,7 +2281,7 @@ h6 { font-size: 16px; }
 /*	13) CAVANI GLITCH EFFECT
 /*---------------------------------------------------*/
 
-.cavani_tm_mainpart .author_image .glitch_wrap{
+.ivan_popov_mainpart .author_image .glitch_wrap{
 	position: relative;
 	width: 100%;
 	height:100%;
@@ -2307,7 +2307,7 @@ h6 { font-size: 16px; }
 /*	14) CAVANI PARTICLE EFFECT
 /*---------------------------------------------------*/
 
-.cavani_tm_mainpart .author_image .particle_wrapper{
+.ivan_popov_mainpart .author_image .particle_wrapper{
 	position: relative;
 	float: left;
 	width: 100%;
@@ -2324,7 +2324,7 @@ h6 { font-size: 16px; }
 /*	15) CAVANI RIPPLE EFFECT
 /*---------------------------------------------------*/
 
-.cavani_tm_mainpart .author_image .ripple{
+.ivan_popov_mainpart .author_image .ripple{
 	width: 100%;
 	height: 100%;
 	position: relative;
@@ -2340,107 +2340,107 @@ h6 { font-size: 16px; }
 
 @media (max-width: 1600px) {
 	body{font-size: 15px;}
-	.cavani_tm_header .logo .text{line-height: 60px;}
-	.cavani_tm_header .logo img{max-width: 95px;}
-	.cavani_tm_mainpart .author_image{width: 35%;}
-	.cavani_tm_mainpart .main_content{width: 65%;}
-	.cavani_tm_section .section_inner:before{width: 50px;}
-	.cavani_tm_title span{letter-spacing: 7px;}
-	.cavani_tm_title span:after{margin-left: 25px;}
-	.cavani_tm_header{height: 60px;line-height: 60px;padding: 0px 60px;}
-	.cavani_tm_footer{height: 60px;line-height: 60px;padding: 0px 60px;}
-	.cavani_tm_left_border{width: 60px;}
-	.cavani_tm_right_border{width: 60px;}
-	.cavani_tm_mainpart{top: 60px;left: 60px;right: 60px;bottom: 60px;}
-	.cavani_tm_footer .social ul li{margin-right: 10px;}
-	.cavani_tm_header .menu ul li a{padding: 0px 22px;}
-	.cavani_tm_home .content{padding-left: 50px;}
-	.cavani_tm_home .name{font-size: 55px;margin-bottom: 25px;}
-	.cavani_tm_home .line{width: 60px;height: 4px;margin-bottom: 25px;}
-	.cavani_tm_home .job{font-size: 23px;margin-bottom: 30px;}
-	.cavani_tm_button a{padding: 13px 32px;}
-	.cavani_tm_section .section_inner{padding: 95px 50px 0px 50px;}
+	.ivan_popov_header .logo .text{line-height: 60px;}
+	.ivan_popov_header .logo img{max-width: 95px;}
+	.ivan_popov_mainpart .author_image{width: 35%;}
+	.ivan_popov_mainpart .main_content{width: 65%;}
+	.ivan_popov_section .section_inner:before{width: 50px;}
+	.ivan_popov_title span{letter-spacing: 7px;}
+	.ivan_popov_title span:after{margin-left: 25px;}
+	.ivan_popov_header{height: 60px;line-height: 60px;padding: 0px 60px;}
+	.ivan_popov_footer{height: 60px;line-height: 60px;padding: 0px 60px;}
+	.ivan_popov_left_border{width: 60px;}
+	.ivan_popov_right_border{width: 60px;}
+	.ivan_popov_mainpart{top: 60px;left: 60px;right: 60px;bottom: 60px;}
+	.ivan_popov_footer .social ul li{margin-right: 10px;}
+	.ivan_popov_header .menu ul li a{padding: 0px 22px;}
+	.ivan_popov_home .content{padding-left: 50px;}
+	.ivan_popov_home .name{font-size: 55px;margin-bottom: 25px;}
+	.ivan_popov_home .line{width: 60px;height: 4px;margin-bottom: 25px;}
+	.ivan_popov_home .job{font-size: 23px;margin-bottom: 30px;}
+	.ivan_popov_button a{padding: 13px 32px;}
+	.ivan_popov_section .section_inner{padding: 95px 50px 0px 50px;}
 	.circular_progress_bar .list_inner:after{width: 100px;height: 100px;}
 	.circular_progress_bar .title{max-width: 100px;}
 	.progress_inner{margin-bottom: 18px;}
-	.cavani_tm_about .univ ul li .time span{padding: 3px 12px;}
-	.cavani_tm_about .univ ul li .place{padding-left: 0px;}
-	.cavani_tm_portfolio .portfolio_filter ul li{margin-right: 30px;}
-	.cavani_tm_about .testimonials .list ul li .text{padding: 30px;}
-	.cavani_tm_contact .short_info ul li .list_inner{padding: 20px 10px;}
-	.cavani_tm_modalbox .box_inner{width: 750px;top: 45px;bottom: 45px;}
-	.cavani_tm_modalbox .description_wrap{padding: 30px;}
+	.ivan_popov_about .univ ul li .time span{padding: 3px 12px;}
+	.ivan_popov_about .univ ul li .place{padding-left: 0px;}
+	.ivan_popov_portfolio .portfolio_filter ul li{margin-right: 30px;}
+	.ivan_popov_about .testimonials .list ul li .text{padding: 30px;}
+	.ivan_popov_contact .short_info ul li .list_inner{padding: 20px 10px;}
+	.ivan_popov_modalbox .box_inner{width: 750px;top: 45px;bottom: 45px;}
+	.ivan_popov_modalbox .description_wrap{padding: 30px;}
 }
 @media (max-width: 1040px) {
 	.mouse-cursor{display: none;}
 	#preloader{display: none;}
-	.cavani_tm_topbar{display: block;}
-	.cavani_tm_header{display: none;}
-	.cavani_tm_footer{display: none;}
-	.cavani_tm_left_border{display: none;}
-	.cavani_tm_right_border{display: none;}
-	.cavani_tm_section .section_inner:before{width: 20px;}
-	.cavani_tm_mainpart .author_image{display: none;}
-	.cavani_tm_mainpart{top: 55px;left: 0px;right: 0px;bottom: 0px;}
-	.cavani_tm_mainpart .main_content{width: 100%;}
-	.cavani_tm_home .content{padding: 0px 20px;}
-	.cavani_tm_home .name{font-size: 60px;}
-	.cavani_tm_home .job{font-size: 22px;}
-	.cavani_tm_about .biography .wrapper{flex-direction: column;align-items: baseline;}
-	.cavani_tm_about .biography .left{width: 100%;margin-bottom: 55px;}
-	.cavani_tm_about .biography .right{width: 100%;}
-	.cavani_tm_about .services .wrapper{flex-direction: column;align-items: baseline;}
-	.cavani_tm_about .services .service_list{width: 100%;margin-bottom: 55px;}
-	.cavani_tm_about .services .service_list:nth-child(2){width: 100%;}
-	.cavani_tm_about .services .interests{width: 100%;}
-	.cavani_tm_section .section_inner{padding: 57px 20px 0px 20px;}
-	.cavani_tm_about .skills .wrapper{flex-direction: column;align-items: baseline;}
-	.cavani_tm_about .skills .programming{width: 100%;margin-bottom: 60px;}
-	.cavani_tm_about .skills .language{width: 100%;}
+	.ivan_popov_topbar{display: block;}
+	.ivan_popov_header{display: none;}
+	.ivan_popov_footer{display: none;}
+	.ivan_popov_left_border{display: none;}
+	.ivan_popov_right_border{display: none;}
+	.ivan_popov_section .section_inner:before{width: 20px;}
+	.ivan_popov_mainpart .author_image{display: none;}
+	.ivan_popov_mainpart{top: 55px;left: 0px;right: 0px;bottom: 0px;}
+	.ivan_popov_mainpart .main_content{width: 100%;}
+	.ivan_popov_home .content{padding: 0px 20px;}
+	.ivan_popov_home .name{font-size: 60px;}
+	.ivan_popov_home .job{font-size: 22px;}
+	.ivan_popov_about .biography .wrapper{flex-direction: column;align-items: baseline;}
+	.ivan_popov_about .biography .left{width: 100%;margin-bottom: 55px;}
+	.ivan_popov_about .biography .right{width: 100%;}
+	.ivan_popov_about .services .wrapper{flex-direction: column;align-items: baseline;}
+	.ivan_popov_about .services .service_list{width: 100%;margin-bottom: 55px;}
+	.ivan_popov_about .services .service_list:nth-child(2){width: 100%;}
+	.ivan_popov_about .services .interests{width: 100%;}
+	.ivan_popov_section .section_inner{padding: 57px 20px 0px 20px;}
+	.ivan_popov_about .skills .wrapper{flex-direction: column;align-items: baseline;}
+	.ivan_popov_about .skills .programming{width: 100%;margin-bottom: 60px;}
+	.ivan_popov_about .skills .language{width: 100%;}
 	.circular_progress_bar .title{float: none;}
-	.cavani_tm_about .resume .wrapper{flex-direction: column;align-items: baseline;}
-	.cavani_tm_about .resume .education{width: 100%;margin-bottom: 60px;}
-	.cavani_tm_about .resume .experience{width: 100%;}
-	.cavani_tm_portfolio .portfolio_list ul li{width: 50%;}
-	.cavani_tm_contact .short_info ul{margin: 0px;}
-	.cavani_tm_contact .short_info ul li{width: 100%;padding-left: 0px;}
-	.cavani_tm_contact .form{flex-direction: column;align-items: baseline;}
-	.cavani_tm_contact .form .left{width: 100%;padding: 0px;margin-bottom: 30px;}
-	.cavani_tm_contact .form .right{width: 100%;padding: 0px;}
-	.cavani_tm_modalbox .box_inner{width: 550px;}
-	.cavani_tm_modalbox .description_wrap{padding: 20px;}
-	.cavani_tm_modalbox .main_details{flex-direction: column;align-items: baseline;}
-	.cavani_tm_modalbox .main_details .textbox{width: 100%;padding: 0px;margin-bottom: 30px;}
-	.cavani_tm_modalbox .main_details .detailbox{width: 100%;padding: 0px;}
-	.cavani_tm_modalbox .additional_images ul{margin: 0px;}
-	.cavani_tm_modalbox .additional_images ul li{width: 100%;padding-left: 0px;}
-	.cavani_tm_modalbox .portfolio_main_title h3{font-size: 20px;}
-	.cavani_tm_modalbox .news_popup_informations .title h3{font-size: 20px;}
-	.cavani_tm_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
+	.ivan_popov_about .resume .wrapper{flex-direction: column;align-items: baseline;}
+	.ivan_popov_about .resume .education{width: 100%;margin-bottom: 60px;}
+	.ivan_popov_about .resume .experience{width: 100%;}
+	.ivan_popov_portfolio .portfolio_list ul li{width: 50%;}
+	.ivan_popov_contact .short_info ul{margin: 0px;}
+	.ivan_popov_contact .short_info ul li{width: 100%;padding-left: 0px;}
+	.ivan_popov_contact .form{flex-direction: column;align-items: baseline;}
+	.ivan_popov_contact .form .left{width: 100%;padding: 0px;margin-bottom: 30px;}
+	.ivan_popov_contact .form .right{width: 100%;padding: 0px;}
+	.ivan_popov_modalbox .box_inner{width: 550px;}
+	.ivan_popov_modalbox .description_wrap{padding: 20px;}
+	.ivan_popov_modalbox .main_details{flex-direction: column;align-items: baseline;}
+	.ivan_popov_modalbox .main_details .textbox{width: 100%;padding: 0px;margin-bottom: 30px;}
+	.ivan_popov_modalbox .main_details .detailbox{width: 100%;padding: 0px;}
+	.ivan_popov_modalbox .additional_images ul{margin: 0px;}
+	.ivan_popov_modalbox .additional_images ul li{width: 100%;padding-left: 0px;}
+	.ivan_popov_modalbox .portfolio_main_title h3{font-size: 20px;}
+	.ivan_popov_modalbox .news_popup_informations .title h3{font-size: 20px;}
+	.ivan_popov_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
 }
 @media (max-width: 768px) {
-	.cavani_tm_home .name{font-size: 40px;}
-	.cavani_tm_home .job{font-size: 20px;}
-	.cavani_tm_home .line{height: 3px;width: 40px;}
-	.cavani_tm_button a{padding: 10px 28px;}
+	.ivan_popov_home .name{font-size: 40px;}
+	.ivan_popov_home .job{font-size: 20px;}
+	.ivan_popov_home .line{height: 3px;width: 40px;}
+	.ivan_popov_button a{padding: 10px 28px;}
 	.circular_progress_bar .list_inner:after{width: 80px;height: 80px;}
 	.circular_progress_bar .title{max-width: 80px;}
-	.cavani_tm_about .partners .list ul li{width: 50%;}
-	.cavani_tm_portfolio .portfolio_list ul{margin: 0px;}
-	.cavani_tm_portfolio .portfolio_list ul li{width: 100%;padding-left: 0px;}
-	.cavani_tm_title span{letter-spacing: 4px;}
-	.cavani_tm_title span:after{margin-left: 15px;}
-	.cavani_tm_modalbox .box_inner{width: 300px;top: 60px;bottom: 40px;}
-	.cavani_tm_modalbox .close{margin-left: -25px;top: -37px;}
-	.cavani_tm_modalbox .close a{width: 28px;height: 28px;}
-	.cavani_tm_service .service_list ul{margin: 0px;}
-	.cavani_tm_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
-	.cavani_tm_service .service_list ul li .title{font-size: 20px;}
-	.cavani_tm_news .news_list > ul > li .post_title h3 a{font-size: 20px;}
-	.cavani_tm_news .news_list > ul > li .list_inner .number{display: none;}
-	.cavani_tm_news .news_list > ul > li .list_inner .details:before{display: none;}
-	.cavani_tm_news .news_list > ul > li .list_inner .details{margin: 0px;padding: 0px;max-width: 100% !important;}
-	.cavani_tm_news .news_list > ul > li{padding: 20px 0px;}
+	.ivan_popov_about .partners .list ul li{width: 50%;}
+	.ivan_popov_portfolio .portfolio_list ul{margin: 0px;}
+	.ivan_popov_portfolio .portfolio_list ul li{width: 100%;padding-left: 0px;}
+	.ivan_popov_title span{letter-spacing: 4px;}
+	.ivan_popov_title span:after{margin-left: 15px;}
+	.ivan_popov_modalbox .box_inner{width: 300px;top: 60px;bottom: 40px;}
+	.ivan_popov_modalbox .close{margin-left: -25px;top: -37px;}
+	.ivan_popov_modalbox .close a{width: 28px;height: 28px;}
+	.ivan_popov_service .service_list ul{margin: 0px;}
+	.ivan_popov_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
+	.ivan_popov_service .service_list ul li .title{font-size: 20px;}
+	.ivan_popov_news .news_list > ul > li .post_title h3 a{font-size: 20px;}
+	.ivan_popov_news .news_list > ul > li .list_inner .number{display: none;}
+	.ivan_popov_news .news_list > ul > li .list_inner .details:before{display: none;}
+	.ivan_popov_news .news_list > ul > li .list_inner .details{margin: 0px;padding: 0px;max-width: 100% !important;}
+	.ivan_popov_news .news_list > ul > li{padding: 20px 0px;}
 }
 
 /*---------------------------------------------------*/

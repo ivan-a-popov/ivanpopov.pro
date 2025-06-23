@@ -12,27 +12,27 @@ jQuery(document).ready(function(){
 	
 	// here all ready functions
 	
-	cavani_tm_modalbox();
-	cavani_tm_page_transition();
-	cavani_tm_trigger_menu();
-	cavani_tm_my_progress();
-	cavani_tm_circular_progress();
-	cavani_tm_portfolio_popup();
-	cavani_tm_news_popup();
-	cavani_tm_service_popup();
-	cavani_tm_cursor();
-	cavani_tm_imgtosvg();
-	cavani_tm_popup();
-	cavani_tm_portfolio();
-	cavani_tm_data_images();
-	// cavani_tm_contact_form(); // Removed - using pure HTML+JS now
-	cavani_tm_mycarousel();
+	ivan_popov_modalbox();
+	ivan_popov_page_transition();
+	ivan_popov_trigger_menu();
+	ivan_popov_my_progress();
+	ivan_popov_circular_progress();
+	ivan_popov_portfolio_popup();
+	ivan_popov_news_popup();
+	ivan_popov_service_popup();
+	ivan_popov_cursor();
+	ivan_popov_imgtosvg();
+	ivan_popov_popup();
+	ivan_popov_portfolio();
+	ivan_popov_data_images();
+	// ivan_popov_contact_form(); // Removed - using pure HTML+JS now
+	ivan_popov_mycarousel();
 	hashtag();
-	cavani_tm_ripple();
-	cavani_tm_moving_box();
+	ivan_popov_ripple();
+	ivan_popov_moving_box();
 	
 	jQuery(window).load('body', function(){
-		cavani_tm_my_load();
+		ivan_popov_my_load();
 	});
 	
 });
@@ -45,32 +45,32 @@ jQuery(document).ready(function(){
 // --------------------   MODALBOX    ------------------
 // -----------------------------------------------------
 
-function cavani_tm_modalbox(){
+function ivan_popov_modalbox(){
 	
 	"use strict";
 	
-	jQuery('.cavani_tm_all_wrap').prepend('<div class="cavani_tm_modalbox"><div class="box_inner"><div class="close"><a href="#"><i class="icon-cancel"></i></a></div><div class="description_wrap"></div></div></div>');
+	jQuery('.ivan_popov_all_wrap').prepend('<div class="ivan_popov_modalbox"><div class="box_inner"><div class="close"><a href="#"><i class="icon-cancel"></i></a></div><div class="description_wrap"></div></div></div>');
 }
 
 // -----------------------------------------------------
 // -------------   PAGE TRANSITION    ------------------
 // -----------------------------------------------------
 
-function cavani_tm_page_transition(){
+function ivan_popov_page_transition(){
 	
 	"use strict";
 	
-	var section 		= jQuery('.cavani_tm_section');
+	var section 		= jQuery('.ivan_popov_section');
 	var allLi 			= jQuery('.transition_link li');
 	var button			= jQuery('.transition_link a');
-	var wrapper 		= jQuery('.cavani_tm_all_wrap');
+	var wrapper 		= jQuery('.ivan_popov_all_wrap');
 	var enter	 		= wrapper.data('enter');
 	var exit		 	= wrapper.data('exit');
 	
 	button.on('click',function(){
 		var element 	= jQuery(this);
 		var href		= element.attr('href');
-		if(element.parent().hasClass('cavani_tm_button')){
+		if(element.parent().hasClass('ivan_popov_button')){
 			jQuery('.menu .transition_link a[href="'+href+'"]').trigger('click');
 			hashtag();
 			return false;
@@ -97,13 +97,13 @@ function cavani_tm_page_transition(){
 // ---------------   TRIGGER MENU    -------------------
 // -----------------------------------------------------
 
-function cavani_tm_trigger_menu(){
+function ivan_popov_trigger_menu(){
 	
 	"use strict";
 
-	var hamburger 		= jQuery('.cavani_tm_topbar .trigger .hamburger');
-	var mobileMenu		= jQuery('.cavani_tm_mobile_menu');
-	var mobileMenuList	= jQuery('.cavani_tm_mobile_menu ul li a');
+	var hamburger 		= jQuery('.ivan_popov_topbar .trigger .hamburger');
+	var mobileMenu		= jQuery('.ivan_popov_mobile_menu');
+	var mobileMenuList	= jQuery('.ivan_popov_mobile_menu ul li a');
 
 	hamburger.on('click',function(){
 		var element 	= jQuery(this);
@@ -119,7 +119,7 @@ function cavani_tm_trigger_menu(){
 	});
 	
 	mobileMenuList.on('click',function(){
-		jQuery('.cavani_tm_topbar .trigger .hamburger').removeClass('is-active');
+		jQuery('.ivan_popov_topbar .trigger .hamburger').removeClass('is-active');
 		mobileMenu.removeClass('opened');
 		return false;
 	});
@@ -129,7 +129,7 @@ function cavani_tm_trigger_menu(){
 // -------------  PROGRESS BAR  --------------------
 // -------------------------------------------------
 
-function cavani_tm_my_progress(){
+function ivan_popov_my_progress(){
 	
 	"use strict";
 	
@@ -148,7 +148,7 @@ function cavani_tm_my_progress(){
 // ---------------   CIRCULAR PROGRESS   ---------------
 // -----------------------------------------------------
 
-function cavani_tm_circular_progress(){
+function ivan_popov_circular_progress(){
 	
 	"use strict";
 	
@@ -189,12 +189,12 @@ function cavani_tm_circular_progress(){
 // -----------  PORTFOLIO POPUP  -------------------
 // -------------------------------------------------
 
-function cavani_tm_portfolio_popup(){
+function ivan_popov_portfolio_popup(){
 	
 	"use strict";
 	
-	var modalBox		= jQuery('.cavani_tm_modalbox');
-	var button			= jQuery('.cavani_tm_portfolio .portfolio_popup');
+	var modalBox		= jQuery('.ivan_popov_modalbox');
+	var button			= jQuery('.ivan_popov_portfolio .portfolio_popup');
 	var closePopup		= modalBox.find('.close');
 	
 	button.off().on('click',function(){
@@ -207,7 +207,7 @@ function cavani_tm_portfolio_popup(){
 		modalBox.find('.description_wrap').html(content);
 		modalBox.find('.popup_details').prepend('<div class="top_image"><img src="img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+image+'"></div></div>');
 		modalBox.find('.popup_details .top_image').after('<div class="portfolio_main_title">'+details+'<div>');
-		cavani_tm_data_images();
+		ivan_popov_data_images();
 		return false;
 	});
 	closePopup.on('click',function(){
@@ -221,12 +221,12 @@ function cavani_tm_portfolio_popup(){
 // ----------------  NEWS POPUP  -------------------
 // -------------------------------------------------
 
-function cavani_tm_news_popup(){
+function ivan_popov_news_popup(){
 	
 	"use strict";
 	
-	var modalBox		= jQuery('.cavani_tm_modalbox');
-	var button			= jQuery('.cavani_tm_news .news_list > ul > li .post_title h3 a');
+	var modalBox		= jQuery('.ivan_popov_modalbox');
+	var button			= jQuery('.ivan_popov_news .news_list > ul > li .post_title h3 a');
 	var closePopup		= modalBox.find('.close');
 	
 	button.on('click',function(){
@@ -240,7 +240,7 @@ function cavani_tm_news_popup(){
 		modalBox.find('.description_wrap').html(content);
 		modalBox.find('.news_popup_informations').prepend('<div class="image"><img src="img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+image+'"></div></div>');
 		modalBox.find('.news_popup_informations .image').after('<div class="details"><div class="meta">'+category+'</div><div class="title"><h3>'+title+'</h3></div><div>');
-		cavani_tm_data_images();
+		ivan_popov_data_images();
 		return false;
 	});
 	closePopup.on('click',function(){
@@ -254,12 +254,12 @@ function cavani_tm_news_popup(){
 // -------------  SERVICE POPUP  -------------------
 // -------------------------------------------------
 
-function cavani_tm_service_popup(){
+function ivan_popov_service_popup(){
 	
 	"use strict";
 	
-	var modalBox		= jQuery('.cavani_tm_modalbox');
-	var button			= jQuery('.cavani_tm_service .service_list ul li .cavani_tm_full_link');
+	var modalBox		= jQuery('.ivan_popov_modalbox');
+	var button			= jQuery('.ivan_popov_service .service_list ul li .ivan_popov_full_link');
 	var closePopup		= modalBox.find('.close');
 	
 	button.on('click',function(){
@@ -271,7 +271,7 @@ function cavani_tm_service_popup(){
 		modalBox.addClass('opened');
 		modalBox.find('.description_wrap').html(content);
 		modalBox.find('.service_popup_informations').prepend('<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"></div></div>');
-		cavani_tm_data_images();
+		ivan_popov_data_images();
 		modalBox.find('.service_popup_informations .image').after('<div class="main_title"><h3>'+title+'</h3></div>');
 		return false;
 	});
@@ -286,7 +286,7 @@ function cavani_tm_service_popup(){
 // ---------------   PRELOADER   -----------------------
 // -----------------------------------------------------
 
-function cavani_tm_preloader(){
+function ivan_popov_preloader(){
 	
 	"use strict";
 	
@@ -310,19 +310,19 @@ function cavani_tm_preloader(){
 // -----------------   MY LOAD    ----------------------
 // -----------------------------------------------------
 
-function cavani_tm_my_load(){
+function ivan_popov_my_load(){
 	
 	"use strict";
 	
 	var speed	= 500;
-	setTimeout(function(){cavani_tm_preloader();},speed);
+	setTimeout(function(){ivan_popov_preloader();},speed);
 }
 
 // -----------------------------------------------------
 // ------------------   CURSOR    ----------------------
 // -----------------------------------------------------
 
-function cavani_tm_cursor(){
+function ivan_popov_cursor(){
 	
     "use strict";
 	
@@ -336,9 +336,9 @@ function cavani_tm_cursor(){
             o = !1;
         window.onmousemove = function (s) {
             o || (t.style.transform = "translate(" + s.clientX + "px, " + s.clientY + "px)"), e.style.transform = "translate(" + s.clientX + "px, " + s.clientY + "px)", n = s.clientY, i = s.clientX
-        }, $("body").on("mouseenter", "a,.cavani_tm_topbar .trigger, .cursor-pointer", function () {
+        }, $("body").on("mouseenter", "a,.ivan_popov_topbar .trigger, .cursor-pointer", function () {
             e.classList.add("cursor-hover"), t.classList.add("cursor-hover")
-        }), $("body").on("mouseleave", "a,.cavani_tm_topbar .trigger, .cursor-pointer", function () {
+        }), $("body").on("mouseleave", "a,.ivan_popov_topbar .trigger, .cursor-pointer", function () {
             $(this).is("a") && $(this).closest(".cursor-pointer").length || (e.classList.remove("cursor-hover"), t.classList.remove("cursor-hover"))
         }), e.style.visibility = "visible", t.style.visibility = "visible"
     }
@@ -349,7 +349,7 @@ function cavani_tm_cursor(){
 // ---------------    IMAGE TO SVG    ------------------
 // -----------------------------------------------------
 
-function cavani_tm_imgtosvg(){
+function ivan_popov_imgtosvg(){
 	
 	"use strict";
 	
@@ -383,7 +383,7 @@ function cavani_tm_imgtosvg(){
 // --------------------   POPUP    ---------------------
 // -----------------------------------------------------
 
-function cavani_tm_popup(){
+function ivan_popov_popup(){
 	
 	"use strict";
 
@@ -422,21 +422,21 @@ function cavani_tm_popup(){
 // -----------------    PORTFOLIO    ---------------
 // -------------------------------------------------
 
-function cavani_tm_portfolio(){
+function ivan_popov_portfolio(){
 
 	"use strict";
 	
 	if(jQuery().isotope) {
 
 		// Needed variables
-		var filter		 = jQuery('.cavani_tm_portfolio .portfolio_filter ul');
+		var filter		 = jQuery('.ivan_popov_portfolio .portfolio_filter ul');
 
 		if(filter.length){
 			// Isotope Filter 
 			filter.find('a').on('click', function(){
 				var element		= jQuery(this);
 				var selector 	= element.attr('data-filter');
-				var list		= element.closest('.cavani_tm_portfolio').find('.portfolio_list').children('ul');
+				var list		= element.closest('.ivan_popov_portfolio').find('.portfolio_list').children('ul');
 				list.isotope({ 
 					filter				: selector,
 					animationOptions	: {
@@ -458,7 +458,7 @@ function cavani_tm_portfolio(){
 // ---------------   DATA IMAGES    --------------------
 // -----------------------------------------------------
 
-function cavani_tm_data_images(){
+function ivan_popov_data_images(){
 	
 	"use strict";
 	
@@ -475,11 +475,11 @@ function cavani_tm_data_images(){
 // --------------    OWL CAROUSEL    -------------------
 // -----------------------------------------------------
 
- function cavani_tm_mycarousel(){
+ function ivan_popov_mycarousel(){
 	 
 	 "use strict";
 	 
-	var carousel			= jQuery('.cavani_tm_about .testimonials .owl-carousel');
+	var carousel			= jQuery('.ivan_popov_about .testimonials .owl-carousel');
 	
 	carousel.owlCarousel({
 		loop: true,
@@ -509,14 +509,14 @@ function cavani_tm_data_images(){
 
 function hashtag(){
 	"use strict";
-	var ccc 			= $('.cavani_tm_header .menu .ccc');
-	var element 		= $('.cavani_tm_header .menu .active a');
-	$('.cavani_tm_header .menu a').on('mouseenter',function(){
+	var ccc 			= $('.ivan_popov_header .menu .ccc');
+	var element 		= $('.ivan_popov_header .menu .active a');
+	$('.ivan_popov_header .menu a').on('mouseenter',function(){
 		var e 			= $(this);
 		currentLink(ccc,e);
 	});
-	$('.cavani_tm_header .menu').on('mouseleave',function(){
-		element 		= $('.cavani_tm_header .menu .active a');
+	$('.ivan_popov_header .menu').on('mouseleave',function(){
+		element 		= $('.ivan_popov_header .menu .active a');
 		currentLink(ccc,element);
 		element.parent().siblings().removeClass('mleave');
 	});
@@ -529,7 +529,7 @@ function currentLink(ccc,e){
 	if(!e.length){return false;}
 	var left 		= e.offset().left;
 	var width		= e.outerWidth();
-	var menuleft 	= $('.cavani_tm_header .menu').offset().left;
+	var menuleft 	= $('.ivan_popov_header .menu').offset().left;
 	e.parent().removeClass('mleave');
 	e.parent().siblings().addClass('mleave');
 	ccc.css({left: (left-menuleft) + 'px',width: width + 'px'});
@@ -556,7 +556,7 @@ $(".glitch").mgGlitch({
 // -------------  RIPPLE  --------------------------
 // -------------------------------------------------
 
-function cavani_tm_ripple(){
+function ivan_popov_ripple(){
 	
 	"use strict";
 
@@ -571,11 +571,11 @@ function cavani_tm_ripple(){
 // -------------  MOVING BOX  ----------------------
 // -------------------------------------------------
 
-function cavani_tm_moving_box(){
+function ivan_popov_moving_box(){
 	
 	"use strict";
 	
-	var wrapper	= $('.cavani_tm_news');
+	var wrapper	= $('.ivan_popov_news');
 	var list	= wrapper.find('.news_list > ul > li');
 	if(!$('.cavani_fn_moving_box').length){
 		$('body').append('<div class="cavani_fn_moving_box"></div>');
