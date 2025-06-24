@@ -3,7 +3,7 @@
 
 
 /*---------------------------------------------------*/
-/*	01) CAVANI BASE
+/*	01) IVAN POPOV BASE
 /*---------------------------------------------------*/
 
 html {
@@ -237,7 +237,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	02) CAVANI HEADER
+/*	02) IVAN POPOV HEADER
 /*---------------------------------------------------*/
 
 .ivan_popov_header{
@@ -335,7 +335,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	03) CAVANI MOBILE MENU
+/*	03) IVAN POPOV MOBILE MENU
 /*---------------------------------------------------*/
 
 .ivan_popov_topbar{
@@ -490,7 +490,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	04) CAVANI MAINPART
+/*	04) IVAN POPOV MAINPART
 /*---------------------------------------------------*/
 
 .ivan_popov_mainpart{
@@ -587,7 +587,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	05) CAVANI HOME
+/*	05) IVAN POPOV HOME
 /*---------------------------------------------------*/
 
 .ivan_popov_home{
@@ -664,7 +664,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	06) CAVANI ABOUT
+/*	06) IVAN POPOV ABOUT
 /*---------------------------------------------------*/
 
 .ivan_popov_about{
@@ -846,7 +846,7 @@ h6 { font-size: 16px; }
 .ivan_popov_about .skills .language{
 	width: 50%;
 }
-.cavani_progress{
+.ivan_popov_progress{
 	width: 100%;
 	height: auto;
 	clear: both;
@@ -1230,7 +1230,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	07) CAVANI PORTFOLIO
+/*	07) IVAN POPOV PORTFOLIO
 /*---------------------------------------------------*/
 
 .ivan_popov_portfolio{
@@ -1594,7 +1594,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	08) CAVANI SERVICES
+/*	08) IVAN POPOV SERVICES
 /*---------------------------------------------------*/
 
 .ivan_popov_service{
@@ -1742,7 +1742,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	09) CAVANI NEWS
+/*	09) IVAN POPOV NEWS
 /*---------------------------------------------------*/
 
 .ivan_popov_news{
@@ -1880,7 +1880,7 @@ h6 { font-size: 16px; }
 .ivan_popov_news .news_list > ul > li .post_title h3 a:hover{
 	background-size: 100% 2px;
 }
-.cavani_fn_moving_box{
+.ivan_popov_fn_moving_box{
 	width: 265px;
     height: 198px;
     border: 1px solid #fff;
@@ -1902,7 +1902,7 @@ h6 { font-size: 16px; }
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.cavani_fn_moving_box.opened{
+.ivan_popov_fn_moving_box.opened{
 	opacity: 1;
 	visibility: visible;
 	transform: scale(1);
@@ -2011,7 +2011,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	10) CAVANI CONTACT
+/*	10) IVAN POPOV CONTACT
 /*---------------------------------------------------*/
 
 .ivan_popov_contact{
@@ -2144,7 +2144,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	11) CAVANI FOOTER
+/*	11) IVAN POPOV FOOTER
 /*---------------------------------------------------*/
 
 .ivan_popov_footer{
@@ -2200,7 +2200,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	12) CAVANI MAGIC CURSOR
+/*	12) IVAN POPOV MAGIC CURSOR
 /*---------------------------------------------------*/
 
 .mouse-cursor{
@@ -2256,7 +2256,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	13) CAVANI GLITCH EFFECT
+/*	13) IVAN POPOV GLITCH EFFECT
 /*---------------------------------------------------*/
 
 .ivan_popov_mainpart .author_image .glitch_wrap{
@@ -2282,7 +2282,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	14) CAVANI PARTICLE EFFECT
+/*	14) IVAN POPOV PARTICLE EFFECT
 /*---------------------------------------------------*/
 
 .ivan_popov_mainpart .author_image .particle_wrapper{
@@ -2299,7 +2299,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	15) CAVANI RIPPLE EFFECT
+/*	15) IVAN POPOV RIPPLE EFFECT
 /*---------------------------------------------------*/
 
 .ivan_popov_mainpart .author_image .ripple{
@@ -2313,7 +2313,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	16) CAVANI MEDIA QUERIES (FOR SMALL DEVICES)
+/*	16) IVAN POPOV MEDIA QUERIES (FOR SMALL DEVICES)
 /*---------------------------------------------------*/
 
 @media (max-width: 1600px) {

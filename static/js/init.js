@@ -577,10 +577,10 @@ function ivan_popov_moving_box(){
 	
 	var wrapper	= $('.ivan_popov_news');
 	var list	= wrapper.find('.news_list > ul > li');
-	if(!$('.cavani_fn_moving_box').length){
-		$('body').append('<div class="cavani_fn_moving_box"></div>');
+	if(!$('.ivan_popov_fn_moving_box').length){
+		$('body').append('<div class="ivan_popov_fn_moving_box"></div>');
 	}
-	var box		= $('.cavani_fn_moving_box');
+	var box		= $('.ivan_popov_fn_moving_box');
 
 	list.on('mouseenter',function(){
 		var element 	= $(this);
