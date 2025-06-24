@@ -31,7 +31,7 @@ jQuery(document).ready(function(){
 	ivan_popov_ripple();
 	ivan_popov_moving_box();
 	
-	jQuery(window).load('body', function(){
+	jQuery(window).on('load', function(){
 		ivan_popov_my_load();
 	});
 	
