@@ -856,6 +856,49 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<!-- PRIZE PHOTO SWAP ON TELEGRAM CLICK -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	// Preload colored image for instant swap
+	var preloader = new Image();
+	preloader.src = 'static/img/prize.jpg';
+
+	var iconContainer = document.querySelector('.telegram_icon_large');
+	if (!iconContainer) return;
+
+	function setPrizePhoto() {
+		var authorImageDiv = document.getElementById('author_image');
+		if (!authorImageDiv) return;
+
+		// Ripple effect target
+		var ripple = authorImageDiv.querySelector('#ripple');
+		if (ripple) {
+			ripple.style.backgroundImage = 'url(static/img/prize.jpg)';
+		}
+
+		// Particle effect target (or generic .main background)
+		var main = authorImageDiv.querySelector('.main');
+		if (main) {
+			main.style.backgroundImage = 'url(static/img/prize.jpg)';
+			main.removeAttribute('data-img-url');
+		}
+
+		// Glitch effect target
+		var glitch = authorImageDiv.querySelector('.glitch');
+		if (glitch) {
+			glitch.style.backgroundImage = 'url(static/img/prize.jpg)';
+		}
+	}
+
+	var link = iconContainer.querySelector('a');
+	[iconContainer, link].forEach(function(el) {
+		if (!el) return;
+		el.addEventListener('click', setPrizePhoto, { passive: true });
+		el.addEventListener('touchstart', setPrizePhoto, { passive: true });
+	});
+});
+</script>
+
 <!-- /SCRIPTS -->
 
 </body>
