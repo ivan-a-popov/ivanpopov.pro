@@ -629,7 +629,7 @@ h6 { font-size: 16px; }
 /* Compact roles column next to the name */
 .name_roles_wrap{
 	display: flex;
-	align-items: baseline;
+	align-items: flex-start;
 	gap: 12px;
 	margin-bottom: 6px;
 }
