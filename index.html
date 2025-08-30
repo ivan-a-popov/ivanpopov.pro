@@ -723,7 +723,7 @@ document.addEventListener('DOMContentLoaded', function() {
         authorImageDiv.innerHTML = '<div class="main ripple" id="ripple"></div>';
         // Initialize ripple effect after DOM is ready
         setTimeout(function() {
-            if (typeof jQuery !== 'undefined' && jQuery('#ripple').length) {
+            if (typeof jQuery !== 'undefined' && jQuery.fn && jQuery.fn.ripples && jQuery('#ripple').length) {
                 jQuery('#ripple').ripples({
                     resolution: 500,
                     dropRadius: 20,

@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
 	// ivan_popov_contact_form(); // Removed - using pure HTML+JS now
 	ivan_popov_mycarousel();
 	hashtag();
-	ivan_popov_ripple();
+	if (jQuery.fn && jQuery.fn.ripples && jQuery('#ripple').length) { ivan_popov_ripple(); }
 	ivan_popov_moving_box();
 	
 	jQuery(window).on('load', function(){
