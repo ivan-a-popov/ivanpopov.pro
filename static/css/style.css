@@ -625,6 +625,27 @@ h6 { font-size: 16px; }
 	font-weight:600;
 	color: #333;
 }
+
+/* Compact roles column next to the name */
+.name_roles_wrap{
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 12px;
+	margin-bottom: 6px;
+}
+.name_roles_wrap .name{
+	margin: 0;
+}
+.roles_right_compact{
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	font-size: 10px;
+	line-height: 1.1;
+	color: #b3b3b3;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+}
 .ivan_popov_button{
 	width: 100%;
 	height: auto;
