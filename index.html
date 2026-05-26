@@ -150,7 +150,7 @@
 		<!-- MAINPART -->
 		<div class="ivan_popov_mainpart">
 			<div class="author_image" id="author_image">
-				<!-- Effects will be dynamically loaded here by JavaScript -->
+				<!-- Portrait only -->
 			</div>
 			<div class="main_content">
 			
@@ -168,16 +168,14 @@
 							</div>
 							<span class="line"></span>
 							<h3 class="job">
-								<span class="cd-headline clip"> <!-- ANIMATE TEXT VALUES: zoom, rotate-1, letters type, letters rotate-2, loading-bar, slide, clip, letters rotate-3, letters scale, push,  -->
-									
+								<span class="cd-headline clip">
 									<span class="cd-words-wrapper">
 									  <b class="is-visible">Системная аналитика</b>
 									  <b>Архитектура</b>
-									  <b>Разработка</b> 
+									  <b>Разработка</b>
 									  <b>Управление проектами</b>
 									  <b>AI-трансформация</b>
 									</span>
-									<p>
 									<span class="blc">с человеческим лицом</span>
 								</span>
 							</h3>
@@ -717,72 +715,16 @@
 <script src="static/js/plugins.js"></script>
 <script src="static/js/init.js"></script>
 
-<!-- RANDOM EFFECT SCRIPT -->
+<!-- Portrait + data-images (no headline effects) -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Random effect selection
-    const effects = ['particle', 'ripple', 'glitch'];
-    const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-    const authorImageDiv = document.getElementById('author_image');
-    
-    // Apply the selected effect
-    if (randomEffect === 'ripple') {
-        authorImageDiv.innerHTML = '<div class="main ripple" id="ripple"></div>';
-        // Initialize ripple effect after DOM is ready
-        setTimeout(function() {
-            if (typeof jQuery !== 'undefined' && jQuery.fn && jQuery.fn.ripples && jQuery('#ripple').length) {
-                jQuery('#ripple').ripples({
-                    resolution: 500,
-                    dropRadius: 20,
-                    perturbance: 0.04
-                });
-            }
-        }, 100);
-    } else if (randomEffect === 'particle') {
-        authorImageDiv.innerHTML = '<div class="main" data-img-url="static/img/about/2.jpg"></div><div class="particle_wrapper"><div id="particles-js"></div></div>';
-        // Initialize particles effect
-        setTimeout(function() {
-            if (typeof particlesJS !== 'undefined') {
-                particlesJS('particles-js', {
-                    "particles": {
-                        "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
-                        "color": {"value": "#ffffff"},
-                        "shape": {"type": "circle"},
-                        "opacity": {"value": 0.5, "random": false},
-                        "size": {"value": 3, "random": true},
-                        "line_linked": {"enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1},
-                        "move": {"enable": true, "speed": 6, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false}
-                    },
-                    "interactivity": {
-                        "detect_on": "canvas",
-                        "events": {"onhover": {"enable": true, "mode": "repulse"}, "onclick": {"enable": true, "mode": "push"}, "resize": true},
-                        "modes": {"grab": {"distance": 400, "line_linked": {"opacity": 1}}, "bubble": {"distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3}, "repulse": {"distance": 200, "duration": 0.4}, "push": {"particles_nb": 4}, "remove": {"particles_nb": 2}}
-                    },
-                    "retina_detect": true
-                });
-            }
-        }, 100);
-    } else if (randomEffect === 'glitch') {
-        authorImageDiv.innerHTML = '<div class="glitch_wrap"><div class="glitch"></div></div>';
-        // Initialize glitch effect
-        setTimeout(function() {
-            if (typeof jQuery !== 'undefined' && jQuery.fn.mgGlitch) {
-                jQuery(".glitch").mgGlitch({
-                    destroy: false,
-                    glitch: true,
-                    scale: true,
-                    blend: true,
-                    blendModeType: "hue",
-                    glitch1TimeMin: 200,
-                    glitch1TimeMax: 400,
-                    glitch2TimeMin: 10,
-                    glitch2TimeMax: 100
-                });
-            }
-        }, 100);
+    var authorImageDiv = document.getElementById('author_image');
+    if (authorImageDiv) {
+        authorImageDiv.innerHTML =
+            '<div class="author_image_inner">' +
+            '<img class="author_photo" id="author_photo_img" src="static/img/about/2.jpg" alt="" width="960" height="1280">' +
+            '</div>';
     }
-    
-    // Apply data-img-url background images
     setTimeout(function() {
         var dataImages = document.querySelectorAll('[data-img-url]');
         dataImages.forEach(function(element) {
@@ -877,23 +819,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		var authorImageDiv = document.getElementById('author_image');
 		if (!authorImageDiv) return;
 
-		// Ripple effect target
-		var ripple = authorImageDiv.querySelector('#ripple');
-		if (ripple) {
-			ripple.style.backgroundImage = 'url(static/img/prize.jpg)';
-		}
-
-		// Particle effect target (or generic .main background)
-		var main = authorImageDiv.querySelector('.main');
-		if (main) {
-			main.style.backgroundImage = 'url(static/img/prize.jpg)';
-			main.removeAttribute('data-img-url');
-		}
-
-		// Glitch effect target
-		var glitch = authorImageDiv.querySelector('.glitch');
-		if (glitch) {
-			glitch.style.backgroundImage = 'url(static/img/prize.jpg)';
+		var photoImg = authorImageDiv.querySelector('#author_photo_img, .author_photo');
+		if (photoImg) {
+			photoImg.src = 'static/img/prize.jpg';
 		}
 	}
 

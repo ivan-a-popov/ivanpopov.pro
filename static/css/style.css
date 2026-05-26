@@ -509,15 +509,29 @@ h6 { font-size: 16px; }
 	width: 40%;
 	z-index: 15;
 }
-.ivan_popov_mainpart .author_image .main{
+.ivan_popov_mainpart .author_image .author_image_inner{
 	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+/* Portrait column */
+.ivan_popov_mainpart .author_image .author_image_inner .author_photo{
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	object-fit: cover;
+	object-position: center center;
+	pointer-events: none;
+	user-select: none;
 }
 .ivan_popov_mainpart .main_content{
 	position: absolute;
@@ -617,6 +631,10 @@ h6 { font-size: 16px; }
 	font-size: 25px;
 	margin-bottom: 35px;
 	font-weight: 300;
+}
+.ivan_popov_home .job .blc{
+	display: block;
+	margin-top: 8px;
 }
 .ivan_popov_home .job span{
 	color: #7d7789;
@@ -2274,63 +2292,6 @@ h6 { font-size: 16px; }
 	visibility: hidden;
 	position: absolute;
 	z-index: -1111;
-}
-
-/*---------------------------------------------------*/
-/*	13) IVAN POPOV GLITCH EFFECT
-/*---------------------------------------------------*/
-
-.ivan_popov_mainpart .author_image .glitch_wrap{
-	position: relative;
-	width: 100%;
-	height:100%;
-	float: left;
-	overflow: hidden;
-}
-.glitch{
-	position: absolute;
- 	width: 100%;
- 	height: 100%;
-	top: 0;
- 	left: 0;
-	background-image: url("..//img/about/2.jpg");
-	background-size: cover;
-	-webkit-background-size: cover;
-	background-position: center;
-	z-index: -1 !important;
-	opacity: 1;
-	transform: scale(1);
-}
-
-/*---------------------------------------------------*/
-/*	14) IVAN POPOV PARTICLE EFFECT
-/*---------------------------------------------------*/
-
-.ivan_popov_mainpart .author_image .particle_wrapper{
-	position: relative;
-	float: left;
-	width: 100%;
-	height: 100%;
-}
-#particles-js {
-	width: 100%;
-	height: 100%;
-  	position: relative;
-  	z-index: 2;
-}
-
-/*---------------------------------------------------*/
-/*	15) IVAN POPOV RIPPLE EFFECT
-/*---------------------------------------------------*/
-
-.ivan_popov_mainpart .author_image .ripple{
-	width: 100%;
-	height: 100%;
-	position: relative;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	background-image: url("..//img/about/2.jpg");
 }
 
 /*---------------------------------------------------*/
