@@ -744,7 +744,7 @@ h6 { font-size: 16px; }
 	color: #333;
 	text-transform: uppercase;
 	font-weight: 700;
-	letter-spacing: 8px;
+	letter-spacing: 4px;
 }
 .ivan_popov_title > span:after{
 	position: absolute;
@@ -766,15 +766,32 @@ h6 { font-size: 16px; }
 	margin-top: 8px;
 	opacity: 0.8;
 }
-#contact .ivan_popov_title .subtitle{
-	font-style: normal;
-	opacity: 1;
-	line-height: 1;
+#contact .ivan_popov_contact_title{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px 14px;
+}
+#contact .ivan_popov_contact_title > span:after{
+	display: none;
 }
 #contact .ivan_popov_glitch_switch_row{
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	position: relative;
+	flex: 0 0 auto;
+}
+#contact .ivan_popov_glitch_switch_row:after{
+	position: absolute;
+	content: "";
+	width: 5000px;
+	height: 1px;
+	background-color: #7d7789;
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 30px;
 }
 .ivan_popov_glitch_switch_label{
 	font-family: "Open Sans", sans-serif;
@@ -2387,8 +2404,9 @@ h6 { font-size: 16px; }
 	.ivan_popov_mainpart .author_image{width: 35%;}
 	.ivan_popov_mainpart .main_content{width: 65%;}
 	.ivan_popov_section .section_inner:before{width: 50px;}
-	.ivan_popov_title > span{letter-spacing: 7px;}
+	.ivan_popov_title > span{letter-spacing: 3px;}
 	.ivan_popov_title > span:after{margin-left: 25px;}
+	#contact .ivan_popov_glitch_switch_row:after{margin-left: 25px;}
 	.ivan_popov_header{height: 60px;line-height: 60px;padding: 0px 60px;}
 	.ivan_popov_footer{height: 60px;line-height: 60px;padding: 0px 60px;}
 	.ivan_popov_left_border{width: 60px;}
@@ -2473,8 +2491,9 @@ h6 { font-size: 16px; }
 	.ivan_popov_about .partners .list ul li{width: 50%;}
 	.ivan_popov_portfolio .portfolio_list ul{margin: 0px;}
 	.ivan_popov_portfolio .portfolio_list ul li{width: 100%;padding-left: 0px;}
-	.ivan_popov_title > span{letter-spacing: 4px;}
+	.ivan_popov_title > span{letter-spacing: 2px;}
 	.ivan_popov_title > span:after{margin-left: 15px;}
+	#contact .ivan_popov_glitch_switch_row:after{margin-left: 15px;}
 	.ivan_popov_modalbox .box_inner{width: 300px;top: 60px;bottom: 40px;}
 	.ivan_popov_modalbox .close{margin-left: -25px;top: -37px;}
 	.ivan_popov_modalbox .close a{width: 28px;height: 28px;}
