@@ -669,8 +669,19 @@
 					<div class="section_inner">
 						<div class="ivan_popov_contact">
 							<div class="ivan_popov_title">
-								<span>Свяжись со мной</span>
-								<div class="subtitle">если сможешь :)</div>
+								<span>Как связаться</span>
+								<div class="subtitle ivan_popov_glitch_switch_row">
+									<span class="ivan_popov_glitch_switch_label">Telegram</span>
+									<label class="ivan_popov_glitch_switch" for="ivan_popov_glitch_toggle">
+										<input
+											type="checkbox"
+											id="ivan_popov_glitch_toggle"
+											aria-label="Glitch-эффект на фото"
+										>
+										<span class="ivan_popov_glitch_slider"></span>
+									</label>
+									<span class="ivan_popov_glitch_switch_label">MAX</span>
+								</div>
 							</div>
 							<div class="ivan_popov_contact_playfield" aria-label="Связь в Telegram">
 								<div class="ivan_popov_contact_fx_layer" id="ivan_popov_contact_fx_layer" aria-hidden="true"></div>
@@ -716,7 +727,7 @@
 <script src="static/js/plugins.js"></script>
 <script src="static/js/init.js"></script>
 
-<!-- Portrait, contact-area particles (always), glitch + color portrait only on #contact -->
+<!-- Portrait, contact-area particles (always), color portrait on #contact, glitch via toggle -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	var AUTHOR_SRC_BW = 'static/img/about/2.jpg';
@@ -805,6 +816,53 @@ document.addEventListener('DOMContentLoaded', function() {
 		return true;
 	}
 
+	function getPortraitGlitchHost() {
+		return jQuery('.author_photo_glitch_host').not('.back').first();
+	}
+
+	function portraitGlitchActive($host) {
+		var $inner = $host.closest('.author_image_inner');
+		return !!(
+			$host.data('glitchLive') ||
+			$host.hasClass('glitch') ||
+			$host.hasClass('front-1') ||
+			($inner.length && $inner.children('.back, .front-2, .front-3').length)
+		);
+	}
+
+	function destroyPortraitGlitch($host) {
+		if (!$host || !$host.length || !portraitGlitchActive($host)) return;
+
+		var $img = $host.find('.author_photo').first();
+		var src = $img.attr('src') || '';
+		var bw = $img.attr('data-src-bw') || AUTHOR_SRC_BW;
+		var colorSrc = $img.attr('data-src-color') || AUTHOR_SRC_COLOR;
+		var override = $img.attr('data-photo-override');
+		var $inner = $host.closest('.author_image_inner');
+
+		if ($inner.length) {
+			$inner.children('.back, .front-2, .front-3').remove();
+		}
+
+		var newHost = document.createElement('div');
+		newHost.className = 'author_photo_glitch_host';
+		newHost.id = 'author_photo_glitch_host';
+
+		var img = document.createElement('img');
+		img.className = 'author_photo';
+		img.id = 'author_photo_img';
+		img.width = 960;
+		img.height = 1280;
+		img.src = src;
+		img.alt = '';
+		img.setAttribute('data-src-bw', bw);
+		img.setAttribute('data-src-color', colorSrc);
+		if (override) img.setAttribute('data-photo-override', override);
+		newHost.appendChild(img);
+
+		$host.replaceWith(newHost);
+	}
+
 	function syncContactPortraitState() {
 		if (
 			typeof jQuery === 'undefined' ||
@@ -813,13 +871,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		)
 			return;
 
-		var $host = jQuery('#author_photo_glitch_host');
-		var $img = jQuery('#author_photo_img');
+		var $host = getPortraitGlitchHost();
+		var $img = $host.find('.author_photo').first();
 		var contactEl = document.getElementById('contact');
+		var glitchToggle = document.getElementById('ivan_popov_glitch_toggle');
 		if (!contactEl || !$host.length || !$img.length) return;
 
 		var bw = $img.attr('data-src-bw') || AUTHOR_SRC_BW;
 		var colorSrc = $img.attr('data-src-color') || AUTHOR_SRC_COLOR;
+		var glitchEnabled = !!(glitchToggle && glitchToggle.checked);
 
 		var portraitColumn = document.getElementById('author_image');
 		var portraitHidden = false;
@@ -834,12 +894,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		var onContact = contactEl.classList.contains('active');
 
 		if (!onContact) {
-			if ($host.data('glitchLive')) {
-				try {
-					$host.mgGlitch({ destroy: true });
-				} catch (e2) {}
-				$host.removeClass('glitch').removeData('glitchLive');
-			}
+			destroyPortraitGlitch($host);
+			$img = $host.find('.author_photo').first();
 			$img.removeAttr('data-photo-override');
 			$img.attr('src', bw);
 			return;
@@ -849,6 +905,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		if ($img.attr('data-photo-override') !== 'prize') {
 			$img.attr('src', colorSrc);
+		}
+
+		if (!glitchEnabled) {
+			destroyPortraitGlitch($host);
+			return;
 		}
 
 		if (!$host.data('glitchLive')) {
@@ -890,6 +951,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	syncContactPortraitState();
 
+	var glitchToggleEl = document.getElementById('ivan_popov_glitch_toggle');
+	if (glitchToggleEl) {
+		glitchToggleEl.addEventListener('change', syncContactPortraitState);
+	}
+
 	if (typeof MutationObserver !== 'undefined') {
 		var contactObserve = document.getElementById('contact');
 		if (contactObserve) {
@@ -923,7 +989,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		var authorImageDiv = document.getElementById('author_image');
 		if (!authorImageDiv) return;
 
-		var photoImg = authorImageDiv.querySelector('#author_photo_img, .author_photo');
+		var photoImg = authorImageDiv.querySelector(
+			'.author_photo_glitch_host:not(.back) .author_photo'
+		);
 		if (photoImg) {
 			photoImg.setAttribute('data-photo-override', 'prize');
 			photoImg.src = 'static/img/prize.jpg';

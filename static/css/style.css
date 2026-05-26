@@ -517,7 +517,7 @@ h6 { font-size: 16px; }
 	height: 100%;
 	overflow: hidden;
 }
-/* Optional mgGlitch host (effect enabled only on #contact tab) */
+/* Optional mgGlitch host (effect enabled on #contact when toggle is on) */
 .ivan_popov_mainpart .author_image .author_photo_glitch_host{
 	position: absolute;
 	top: 0;
@@ -737,7 +737,7 @@ h6 { font-size: 16px; }
 	float: left;
 	overflow: hidden;
 }
-.ivan_popov_title span{
+.ivan_popov_title > span{
 	display: inline-block;
 	position: relative;
 	font-family: "Onest";
@@ -746,7 +746,7 @@ h6 { font-size: 16px; }
 	font-weight: 700;
 	letter-spacing: 8px;
 }
-.ivan_popov_title span:after{
+.ivan_popov_title > span:after{
 	position: absolute;
 	content: "";
 	width: 5000px;
@@ -765,6 +765,69 @@ h6 { font-size: 16px; }
 	font-style: italic;
 	margin-top: 8px;
 	opacity: 0.8;
+}
+#contact .ivan_popov_title .subtitle{
+	font-style: normal;
+	opacity: 1;
+	line-height: 1;
+}
+#contact .ivan_popov_glitch_switch_row{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.ivan_popov_glitch_switch_label{
+	font-family: "Open Sans", sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+	letter-spacing: 0;
+	text-transform: none;
+}
+.ivan_popov_glitch_switch{
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+	vertical-align: middle;
+}
+.ivan_popov_glitch_switch input{
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+.ivan_popov_glitch_slider{
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #fff;
+	border: 2px solid #000;
+	box-sizing: border-box;
+	transition: background-color 0.2s ease;
+}
+.ivan_popov_glitch_slider:before{
+	position: absolute;
+	content: "";
+	height: 16px;
+	width: 16px;
+	left: 2px;
+	bottom: 2px;
+	background-color: #000;
+	transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.ivan_popov_glitch_switch input:checked + .ivan_popov_glitch_slider{
+	background-color: #000;
+}
+.ivan_popov_glitch_switch input:checked + .ivan_popov_glitch_slider:before{
+	transform: translateX(20px);
+	background-color: #fff;
+}
+.ivan_popov_glitch_switch input:focus-visible + .ivan_popov_glitch_slider{
+	outline: 2px solid #000;
+	outline-offset: 2px;
 }
 .ivan_popov_about .biography .wrapper{
 	width: 100%;
@@ -2324,8 +2387,8 @@ h6 { font-size: 16px; }
 	.ivan_popov_mainpart .author_image{width: 35%;}
 	.ivan_popov_mainpart .main_content{width: 65%;}
 	.ivan_popov_section .section_inner:before{width: 50px;}
-	.ivan_popov_title span{letter-spacing: 7px;}
-	.ivan_popov_title span:after{margin-left: 25px;}
+	.ivan_popov_title > span{letter-spacing: 7px;}
+	.ivan_popov_title > span:after{margin-left: 25px;}
 	.ivan_popov_header{height: 60px;line-height: 60px;padding: 0px 60px;}
 	.ivan_popov_footer{height: 60px;line-height: 60px;padding: 0px 60px;}
 	.ivan_popov_left_border{width: 60px;}
@@ -2410,8 +2473,8 @@ h6 { font-size: 16px; }
 	.ivan_popov_about .partners .list ul li{width: 50%;}
 	.ivan_popov_portfolio .portfolio_list ul{margin: 0px;}
 	.ivan_popov_portfolio .portfolio_list ul li{width: 100%;padding-left: 0px;}
-	.ivan_popov_title span{letter-spacing: 4px;}
-	.ivan_popov_title span:after{margin-left: 15px;}
+	.ivan_popov_title > span{letter-spacing: 4px;}
+	.ivan_popov_title > span:after{margin-left: 15px;}
 	.ivan_popov_modalbox .box_inner{width: 300px;top: 60px;bottom: 40px;}
 	.ivan_popov_modalbox .close{margin-left: -25px;top: -37px;}
 	.ivan_popov_modalbox .close a{width: 28px;height: 28px;}
