@@ -672,10 +672,11 @@
 								<span>Свяжись со мной</span>
 								<div class="subtitle">если сможешь :)</div>
 							</div>
-							<div class="telegram_bot_section">
-								<div class="telegram_bot_content">
+							<div class="ivan_popov_contact_playfield" aria-label="Связь в Telegram">
+								<div class="ivan_popov_contact_fx_layer" id="ivan_popov_contact_fx_layer" aria-hidden="true"></div>
+								<div class="ivan_popov_contact_icon_anchor">
 									<div class="telegram_icon_large">
-										<a href="https://t.me/ivan_a_popov" target="_blank">
+										<a href="https://t.me/ivan_a_popov" target="_blank" rel="noopener noreferrer">
 											<svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM16.64 8.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.57-1.38-.93-2.23-1.49-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.40-1.08.39-.36-.01-1.04-.20-1.55-.37-.63-.21-1.14-.32-1.09-.68.02-.19.27-.38.73-.59 2.87-1.24 4.78-2.05 5.74-2.43 2.73-1.14 3.3-1.34 3.67-1.35.08 0 .27.02.39.12.10.08.13.19.14.27-.01.06.01.24 0 .38z" fill="#0088cc"/>
 											</svg>
@@ -715,102 +716,205 @@
 <script src="static/js/plugins.js"></script>
 <script src="static/js/init.js"></script>
 
-<!-- Portrait + data-images (no headline effects) -->
+<!-- Portrait, contact-area particles (always), glitch + color portrait only on #contact -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var authorImageDiv = document.getElementById('author_image');
-    if (authorImageDiv) {
-        authorImageDiv.innerHTML =
-            '<div class="author_image_inner">' +
-            '<img class="author_photo" id="author_photo_img" src="static/img/about/2.jpg" alt="" width="960" height="1280">' +
-            '</div>';
-    }
-    setTimeout(function() {
-        var dataImages = document.querySelectorAll('[data-img-url]');
-        dataImages.forEach(function(element) {
-            var url = element.getAttribute('data-img-url');
-            element.style.backgroundImage = 'url(' + url + ')';
-        });
-    }, 200);
+	var AUTHOR_SRC_BW = 'static/img/about/2.jpg';
+	var AUTHOR_SRC_COLOR = 'static/img/about/2-color.jpg';
+
+	var authorImageDiv = document.getElementById('author_image');
+	if (authorImageDiv) {
+		authorImageDiv.innerHTML =
+			'<div class="author_image_inner">' +
+			'<div class="author_photo_glitch_host" id="author_photo_glitch_host">' +
+			'<img class="author_photo" id="author_photo_img" src="' +
+			AUTHOR_SRC_BW +
+			'" alt="" width="960" height="1280" data-src-bw="' +
+			AUTHOR_SRC_BW +
+			'" data-src-color="' +
+			AUTHOR_SRC_COLOR +
+			'">' +
+			'</div></div>';
+	}
+	setTimeout(function() {
+		var dataImages = document.querySelectorAll('[data-img-url]');
+		dataImages.forEach(function(element) {
+			var url = element.getAttribute('data-img-url');
+			element.style.backgroundImage = 'url(' + url + ')';
+		});
+	}, 200);
+
+	function initContactParticles() {
+		var fxLayer = document.getElementById('ivan_popov_contact_fx_layer');
+		if (!fxLayer || fxLayer.dataset.particlesInitialized === '1') return false;
+		var bounds = fxLayer.getBoundingClientRect();
+		if (bounds.width < 48 || bounds.height < 48) return false;
+		if (typeof particlesJS === 'undefined') return false;
+
+		fxLayer.dataset.particlesInitialized = '1';
+		fxLayer.innerHTML =
+			'<div id="ivan_popov_contact_particles" class="ivan_popov_contact_particles_root"></div>';
+
+		try {
+			particlesJS('ivan_popov_contact_particles', {
+				particles: {
+					number: {
+						value: 52,
+						density: { enable: true, value_area: 480 }
+					},
+					color: { value: '#2a83b6' },
+					shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+					opacity: { value: 0.4, random: false },
+					size: { value: 2.4, random: true },
+					line_linked: {
+						enable: true,
+						distance: 118,
+						color: '#5599bb',
+						opacity: 0.22,
+						width: 1
+					},
+					move: {
+						enable: true,
+						speed: 0.75,
+						direction: 'none',
+						random: false,
+						straight: false,
+						out_mode: 'bounce',
+						attract: { enable: false }
+					}
+				},
+				interactivity: {
+					detect_on: 'canvas',
+					events: {
+						onhover: { enable: true, mode: 'grab' },
+						onclick: { enable: false },
+						resize: true
+					},
+					modes: {
+						grab: { distance: 120, line_linked: { opacity: 0.35 } }
+					}
+				},
+				retina_detect: true
+			});
+		} catch (e) {
+			delete fxLayer.dataset.particlesInitialized;
+			fxLayer.innerHTML = '';
+			return false;
+		}
+
+		return true;
+	}
+
+	function syncContactPortraitState() {
+		if (
+			typeof jQuery === 'undefined' ||
+			!jQuery.fn ||
+			!jQuery.fn.mgGlitch
+		)
+			return;
+
+		var $host = jQuery('#author_photo_glitch_host');
+		var $img = jQuery('#author_photo_img');
+		var contactEl = document.getElementById('contact');
+		if (!contactEl || !$host.length || !$img.length) return;
+
+		var bw = $img.attr('data-src-bw') || AUTHOR_SRC_BW;
+		var colorSrc = $img.attr('data-src-color') || AUTHOR_SRC_COLOR;
+
+		var portraitColumn = document.getElementById('author_image');
+		var portraitHidden = false;
+		try {
+			if (
+				portraitColumn &&
+				window.getComputedStyle(portraitColumn).display === 'none'
+			)
+				portraitHidden = true;
+		} catch (err) {}
+
+		var onContact = contactEl.classList.contains('active');
+
+		if (!onContact) {
+			if ($host.data('glitchLive')) {
+				try {
+					$host.mgGlitch({ destroy: true });
+				} catch (e2) {}
+				$host.removeClass('glitch').removeData('glitchLive');
+			}
+			$img.removeAttr('data-photo-override');
+			$img.attr('src', bw);
+			return;
+		}
+
+		if (portraitHidden) return;
+
+		if ($img.attr('data-photo-override') !== 'prize') {
+			$img.attr('src', colorSrc);
+		}
+
+		if (!$host.data('glitchLive')) {
+			$host.addClass('glitch');
+			try {
+				$host.mgGlitch({
+					destroy: false,
+					glitch: true,
+					scale: true,
+					blend: true,
+					blendModeType: 'hue',
+					glitch1TimeMin: 200,
+					glitch1TimeMax: 400,
+					glitch2TimeMin: 10,
+					glitch2TimeMax: 100
+				});
+				$host.data('glitchLive', 1);
+			} catch (e3) {
+				$host.removeClass('glitch');
+				$host.removeData('glitchLive');
+			}
+		}
+	}
+
+	var pollAttempts = 0;
+	var particlePollId = window.setInterval(function() {
+		pollAttempts += 1;
+		initContactParticles();
+		var el = document.getElementById('ivan_popov_contact_fx_layer');
+		if (
+			el &&
+			el.dataset &&
+			el.dataset.particlesInitialized === '1'
+		) {
+			window.clearInterval(particlePollId);
+		}
+		if (pollAttempts > 42) window.clearInterval(particlePollId);
+	}, 180);
+
+	syncContactPortraitState();
+
+	if (typeof MutationObserver !== 'undefined') {
+		var contactObserve = document.getElementById('contact');
+		if (contactObserve) {
+			new MutationObserver(function() {
+				syncContactPortraitState();
+			}).observe(contactObserve, {
+				attributes: true,
+				attributeFilter: ['class']
+			});
+		}
+	}
+
+	window.addEventListener('load', function() {
+		initContactParticles();
+		setTimeout(initContactParticles, 420);
+	});
 });
 </script>
-
-<!-- BOUNCING TELEGRAM ICON SCRIPT -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const icon = document.querySelector('.telegram_icon_large');
-    if (!icon) return;
-    
-    const container = document.querySelector('.telegram_bot_section');
-    if (!container) return;
-    
-    // Animation variables
-    let x = 50; // Start position X
-    let y = 50; // Start position Y
-    let vx = 2 + Math.random() * 3; // Velocity X (2-5px per frame)
-    let vy = 2 + Math.random() * 3; // Velocity Y (2-5px per frame)
-    
-    // Get icon size
-    function getIconSize() {
-        const svg = icon.querySelector('svg');
-        return {
-            width: svg ? parseInt(getComputedStyle(svg).width) : 120,
-            height: svg ? parseInt(getComputedStyle(svg).height) : 120
-        };
-    }
-    
-    // Animation function
-    function animate() {
-        const containerRect = container.getBoundingClientRect();
-        const iconSize = getIconSize();
-        
-        // Update position
-        x += vx;
-        y += vy;
-        
-        // Check boundaries and bounce
-        if (x <= 0 || x >= containerRect.width - iconSize.width) {
-            vx = -vx;
-            x = Math.max(0, Math.min(containerRect.width - iconSize.width, x));
-        }
-        
-        if (y <= 0 || y >= containerRect.height - iconSize.height) {
-            vy = -vy;
-            y = Math.max(0, Math.min(containerRect.height - iconSize.height, y));
-        }
-        
-        // Apply position
-        icon.style.left = x + 'px';
-        icon.style.top = y + 'px';
-        
-        // Continue animation
-        requestAnimationFrame(animate);
-    }
-    
-    // Add some randomness to direction changes
-    setInterval(() => {
-        // Randomly change direction slightly
-        if (Math.random() < 0.1) { // 10% chance every interval
-            vx += (Math.random() - 0.5) * 2;
-            vy += (Math.random() - 0.5) * 2;
-            
-            // Keep velocity within reasonable bounds
-            vx = Math.max(-5, Math.min(5, vx));
-            vy = Math.max(-5, Math.min(5, vy));
-        }
-    }, 1000);
-    
-    // Start animation
-    animate();
-});
-</script>
-
 <!-- PRIZE PHOTO SWAP ON TELEGRAM CLICK -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-	// Preload colored image for instant swap
 	var preloader = new Image();
 	preloader.src = 'static/img/prize.jpg';
+	var colorPreload = new Image();
+	colorPreload.src = 'static/img/about/2-color.jpg';
 
 	var iconContainer = document.querySelector('.telegram_icon_large');
 	if (!iconContainer) return;
@@ -821,6 +925,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		var photoImg = authorImageDiv.querySelector('#author_photo_img, .author_photo');
 		if (photoImg) {
+			photoImg.setAttribute('data-photo-override', 'prize');
 			photoImg.src = 'static/img/prize.jpg';
 		}
 	}

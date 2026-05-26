@@ -517,8 +517,19 @@ h6 { font-size: 16px; }
 	height: 100%;
 	overflow: hidden;
 }
+/* Optional mgGlitch host (effect enabled only on #contact tab) */
+.ivan_popov_mainpart .author_image .author_photo_glitch_host{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
 /* Portrait column */
-.ivan_popov_mainpart .author_image .author_image_inner .author_photo{
+.ivan_popov_mainpart .author_image .author_image_inner .author_photo_glitch_host .author_photo{
 	position: absolute;
 	z-index: 2;
 	top: 0;
@@ -2060,6 +2071,14 @@ h6 { font-size: 16px; }
 	float: left;
 	margin-bottom: 100px;
 }
+#contact .section_inner{
+	padding-top: 46px;
+}
+#contact .ivan_popov_contact{
+	display: flex;
+	flex-direction: column;
+	min-height: calc(100vh - 172px);
+}
 .ivan_popov_contact .short_info{
 	width: 100%;
 	height: auto;
@@ -2320,6 +2339,7 @@ h6 { font-size: 16px; }
 	.ivan_popov_home .job{font-size: 23px;margin-bottom: 30px;}
 	.ivan_popov_button a{padding: 13px 32px;}
 	.ivan_popov_section .section_inner{padding: 95px 50px 0px 50px;}
+	#contact .section_inner{padding-top: 40px;}
 	.circular_progress_bar .list_inner:after{width: 100px;height: 100px;}
 	.circular_progress_bar .title{max-width: 100px;}
 	.progress_inner{margin-bottom: 18px;}
@@ -2354,6 +2374,8 @@ h6 { font-size: 16px; }
 	.ivan_popov_about .services .service_list:nth-child(2){width: 100%;}
 	.ivan_popov_about .services .interests{width: 100%;}
 	.ivan_popov_section .section_inner{padding: 57px 20px 0px 20px;}
+	#contact .section_inner{padding-top: 34px;}
+	#contact .ivan_popov_contact{min-height: calc(100vh - 90px);}
 	.ivan_popov_about .skills .wrapper{flex-direction: column;align-items: baseline;}
 	.ivan_popov_about .skills .programming{width: 100%;margin-bottom: 60px;}
 	.ivan_popov_about .skills .language{width: 100%;}
@@ -2659,87 +2681,108 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	12) TELEGRAM BOT SECTION
+/*	12) CONTACT PLAYFIELD — Telegram centered + backdrop FX
 /*---------------------------------------------------*/
 
-.telegram_bot_section {
+.ivan_popov_contact_playfield{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
-	margin-top: 60px;
 	position: relative;
-	min-height: 400px;
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 22px;
+	min-height: min(58vh, 520px);
+	box-sizing: border-box;
 	overflow: hidden;
+	isolation: isolate;
+	border-radius: 10px;
 }
-
-.telegram_bot_content {
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-.telegram_icon_large {
+#contact .ivan_popov_contact_fx_layer{
 	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	overflow: hidden;
+	pointer-events: auto;
+	box-sizing: border-box;
+	border: 1px solid rgba(0, 0, 0, 0.085);
+	border-radius: 10px;
+	background:
+		linear-gradient(165deg,
+			rgba(255, 255, 255, 0.55) 0%,
+			rgba(239, 245, 252, 0.95) 48%,
+			rgba(228, 236, 248, 0.98) 100%);
+}
+#contact .ivan_popov_contact_particles_root{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.ivan_popov_contact_icon_anchor{
+	position: relative;
+	z-index: 2;
+	flex: 0 0 auto;
+	pointer-events: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: none; /* Remove transition for smooth animation */
 }
-
-.telegram_icon_large a {
+#contact .telegram_icon_large{
+	position: relative !important;
+	left: auto !important;
+	top: auto !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#contact .telegram_icon_large a {
 	display: block;
 	transition: transform 0.2s ease;
 }
-
-.telegram_icon_large a:hover {
-	transform: scale(1.2);
+#contact .telegram_icon_large a:hover {
+	transform: scale(1.12);
 }
-
-.telegram_icon_large svg {
+#contact .telegram_icon_large svg {
 	width: 120px;
 	height: 120px;
-	opacity: 0.9;
+	opacity: 0.92;
 	transition: opacity 0.2s ease;
 	filter: drop-shadow(0 10px 30px rgba(0, 136, 204, 0.3));
 	cursor: pointer;
 }
-
-.telegram_icon_large a:hover svg {
+#contact .telegram_icon_large a:hover svg {
 	opacity: 1;
 }
-
-/* Responsive styles for Telegram bot section */
-@media (max-width: 1600px) {
-    .telegram_bot_section {
-        min-height: 350px;
-    }
-
-    .telegram_icon_large svg {
-        width: 100px;
-        height: 100px;
-    }
+@media (max-width: 1600px){
+	.ivan_popov_contact_playfield{
+		min-height: min(56vh, 460px);
+	}
+	#contact .telegram_icon_large svg{
+		width: 100px;
+		height: 100px;
+	}
 }
-
-@media (max-width: 1040px) {
-    .telegram_bot_section {
-        margin-top: 40px;
-        min-height: 200px;
-    }
-
-    .telegram_icon_large svg {
-        width: 80px;
-        height: 80px;
-    }
+@media (max-width: 1040px){
+	.ivan_popov_contact_playfield{
+		margin-top: 18px;
+		min-height: min(52vh, 320px);
+	}
+	#contact .telegram_icon_large svg{
+		width: 80px;
+		height: 80px;
+	}
 }
-
-@media (max-width: 768px) {
-    .telegram_bot_section {
-        min-height: 150px;
-    }
-
-    .telegram_icon_large svg {
-        width: 70px;
-        height: 70px;
-    }
+@media (max-width: 768px){
+	.ivan_popov_contact_playfield{
+		min-height: min(46vh, 260px);
+	}
+	#contact .telegram_icon_large svg{
+		width: 72px;
+		height: 72px;
+	}
 }
