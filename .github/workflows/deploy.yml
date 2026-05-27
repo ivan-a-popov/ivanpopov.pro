@@ -16,4 +16,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: /home/ipopov/deploy.sh
+          script: /home/ipopov/sites/deploy.sh
