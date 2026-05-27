@@ -269,8 +269,7 @@ h6 { font-size: 16px; }
 .ivan_popov_header .logo .text{
 	text-decoration: none;
 	color: #000;
-	text-transform: uppercase;
-	font-family: "Onest";
+	font-family: "Consolas";
 	font-size: 25px;
 	font-weight: 800;
 	letter-spacing: 2px;
