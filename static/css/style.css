@@ -275,9 +275,26 @@ h6 { font-size: 16px; }
 	letter-spacing: 2px;
 	line-height: 70px;
 }
-.ivan_popov_header .logo .text span{
+.ivan_popov_header .logo .text .logo-label{
 	position: relative;
 	top: 2px;
+}
+.ivan_popov_header .logo .text .logo-cursor,
+.ivan_popov_topbar .logo .text .logo-cursor{
+	display: inline-block;
+	margin-left: 1px;
+	font-weight: 400;
+	animation: logo-cursor-blink 1s step-end infinite;
+}
+@keyframes logo-cursor-blink{
+	0%, 100%{ opacity: 1; }
+	50%{ opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce){
+	.ivan_popov_header .logo .text .logo-cursor,
+	.ivan_popov_topbar .logo .text .logo-cursor{
+		animation: none;
+	}
 }
 .ivan_popov_header .logo img{
 	max-width: 110px;
