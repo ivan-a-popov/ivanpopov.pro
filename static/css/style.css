@@ -523,14 +523,14 @@ h6 { font-size: 16px; }
 .ivan_popov_mainpart .author_image{
 	position: absolute;
 	top: 0px;
-	bottom: 0px;
 	left: 0px;
 	width: 40%;
+	height: 100%;
 	z-index: 15;
 	overflow: hidden;
 	opacity: 1;
 	visibility: visible;
-	transition: width 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
+	transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
 .ivan_popov_mainpart .author_image .author_image_inner{
 	position: absolute;
@@ -539,6 +539,7 @@ h6 { font-size: 16px; }
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	transition: height 0.25s ease, opacity 0.25s ease;
 }
 /* Optional mgGlitch host (effect enabled on #contact when toggle is on) */
 .ivan_popov_mainpart .author_image .author_photo_glitch_host{
@@ -550,6 +551,7 @@ h6 { font-size: 16px; }
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	transition: height 0.25s ease, opacity 0.25s ease;
 }
 /* Portrait column */
 .ivan_popov_mainpart .author_image .author_image_inner .author_photo_glitch_host .author_photo{
@@ -566,6 +568,7 @@ h6 { font-size: 16px; }
 	object-position: center center;
 	pointer-events: none;
 	user-select: none;
+	transition: height 0.25s ease, opacity 0.25s ease;
 }
 .ivan_popov_mainpart .main_content{
 	position: absolute;
@@ -2473,9 +2476,16 @@ h6 { font-size: 16px; }
 	.ivan_popov_section .section_inner:before{width: 20px;}
 	.ivan_popov_mainpart .author_image{
 		width: 0;
+		height: 0;
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: none;
+	}
+	.ivan_popov_mainpart .author_image .author_image_inner,
+	.ivan_popov_mainpart .author_image .author_photo_glitch_host,
+	.ivan_popov_mainpart .author_image .author_photo{
+		height: 0;
+		opacity: 0;
 	}
 	.ivan_popov_mainpart{top: 50px;left: 0px;right: 0px;bottom: 0px;}
 	.ivan_popov_mainpart .main_content{width: 100%;}
