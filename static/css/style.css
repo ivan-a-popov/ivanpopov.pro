@@ -9,7 +9,8 @@
 html {
 	overflow-x: hidden;
 	padding: 0px;
-	margin: 0px
+	margin: 0px;
+	scrollbar-gutter: stable;
 }
 body{
 	overflow-x: hidden;
@@ -266,18 +267,29 @@ h6 { font-size: 16px; }
 .ivan_popov_header .logo[data-type="text"] .text{
 	display: inline-block;
 }
-.ivan_popov_header .logo .text{
+.ivan_popov_header .logo .text,
+.ivan_popov_topbar .logo .text{
 	text-decoration: none;
 	color: #000;
-	font-family: "Consolas";
+	font-family: "Consolas", monospace;
+	text-transform: none;
+	letter-spacing: 2px;
+}
+.ivan_popov_header .logo .text{
 	font-size: 25px;
 	font-weight: 800;
-	letter-spacing: 2px;
 	line-height: 70px;
 }
-.ivan_popov_header .logo .text .logo-label{
+.ivan_popov_topbar .logo .text{
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 50px;
+}
+.ivan_popov_header .logo .text .logo-label,
+.ivan_popov_topbar .logo .text .logo-label{
 	position: relative;
 	top: 2px;
+	text-transform: none;
 }
 .ivan_popov_header .logo .text .logo-cursor,
 .ivan_popov_topbar .logo .text .logo-cursor{
@@ -388,16 +400,6 @@ h6 { font-size: 16px; }
 }
 .ivan_popov_topbar .logo[data-type="text"] .text{
 	display: inline-block;
-}
-.ivan_popov_topbar .logo .text{
-	text-decoration: none;
-	color: #000;
-	text-transform: uppercase;
-	font-family: "Onest";
-	font-size: 22px;
-	font-weight: 800;
-	letter-spacing: 2px;
-	line-height: 50px;
 }
 .ivan_popov_topbar .hamburger{
 	padding: 0px;
@@ -516,6 +518,7 @@ h6 { font-size: 16px; }
 	left: 70px;
 	right: 70px;
 	overflow: hidden;
+	transition: top 0.25s ease, bottom 0.25s ease, left 0.25s ease, right 0.25s ease;
 }
 .ivan_popov_mainpart .author_image{
 	position: absolute;
@@ -524,6 +527,10 @@ h6 { font-size: 16px; }
 	left: 0px;
 	width: 40%;
 	z-index: 15;
+	overflow: hidden;
+	opacity: 1;
+	visibility: visible;
+	transition: width 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
 .ivan_popov_mainpart .author_image .author_image_inner{
 	position: absolute;
@@ -566,6 +573,7 @@ h6 { font-size: 16px; }
 	right: 0px;
 	bottom: 0px;
 	width: 60%;
+	transition: width 0.25s ease;
 }
 .ivan_popov_section{
 	position: absolute;
@@ -2342,6 +2350,7 @@ h6 { font-size: 16px; }
 	width: 70px;
 	background-color: #fff;
 	z-index: 10;
+	transition: width 0.25s ease;
 }
 .ivan_popov_right_border{
 	position: fixed;
@@ -2351,6 +2360,7 @@ h6 { font-size: 16px; }
 	width: 70px;
 	background-color: #fff;
 	z-index: 10;
+	transition: width 0.25s ease;
 }
 
 /*---------------------------------------------------*/
@@ -2454,11 +2464,20 @@ h6 { font-size: 16px; }
 	.ivan_popov_topbar{display: block;}
 	.ivan_popov_header{display: none;}
 	.ivan_popov_footer{display: none;}
-	.ivan_popov_left_border{display: none;}
-	.ivan_popov_right_border{display: none;}
+	.ivan_popov_left_border,
+	.ivan_popov_right_border{
+		width: 0;
+		overflow: hidden;
+		pointer-events: none;
+	}
 	.ivan_popov_section .section_inner:before{width: 20px;}
-	.ivan_popov_mainpart .author_image{display: none;}
-	.ivan_popov_mainpart{top: 55px;left: 0px;right: 0px;bottom: 0px;}
+	.ivan_popov_mainpart .author_image{
+		width: 0;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+	.ivan_popov_mainpart{top: 50px;left: 0px;right: 0px;bottom: 0px;}
 	.ivan_popov_mainpart .main_content{width: 100%;}
 	.ivan_popov_home .content{padding: 0px 20px;}
 	.ivan_popov_home .name{font-size: 60px;}
