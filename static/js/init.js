@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2022 Marketify
+ * Author: Marketify
  * This file is made for CURRENT TEMPLATE
 */
 
