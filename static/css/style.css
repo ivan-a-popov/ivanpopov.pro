@@ -637,7 +637,7 @@ h6 { font-size: 16px; }
 	clear: both;
 	float: left;
 	position: relative;
-	padding: 30px 100px 0px 100px;
+	padding: 20px 100px 0px 100px;
 }
 .ivan_popov_section .section_inner:before{
 	position: absolute;
@@ -665,7 +665,7 @@ h6 { font-size: 16px; }
 }
 .ivan_popov_home .name{
 	font-size: 72px;
-	font-weight: 500;
+	font-weight: 600;
 	text-transform: uppercase;
 	margin-bottom: 30px;
 }
@@ -879,12 +879,8 @@ h6 { font-size: 16px; }
 	background-color: #000;
 	transition: transform 0.2s ease, background-color 0.2s ease;
 }
-.ivan_popov_glitch_switch input:checked + .ivan_popov_glitch_slider{
-	background-color: #000;
-}
 .ivan_popov_glitch_switch input:checked + .ivan_popov_glitch_slider:before{
 	transform: translateX(20px);
-	background-color: #fff;
 }
 .ivan_popov_glitch_switch input:focus-visible + .ivan_popov_glitch_slider{
 	outline: 2px solid #000;
@@ -2196,7 +2192,7 @@ h6 { font-size: 16px; }
 	margin-bottom: 100px;
 }
 #contact .section_inner{
-	padding-top: 46px;
+	padding-top: 30px;
 }
 #contact .ivan_popov_contact{
 	display: flex;
@@ -2465,8 +2461,8 @@ h6 { font-size: 16px; }
 	.ivan_popov_home .line{width: 60px;height: 4px;margin-bottom: 25px;}
 	.ivan_popov_home .job{font-size: 23px;margin-bottom: 30px;}
 	.ivan_popov_button a{padding: 13px 32px;}
-	.ivan_popov_section .section_inner{padding: 40px 50px 0px 50px;}
-	#contact .section_inner{padding-top: 40px;}
+	.ivan_popov_section .section_inner{padding: 30px 50px 0px 50px;}
+	#contact .section_inner{padding-top: 30px;}
 	.circular_progress_bar .list_inner:after{width: 100px;height: 100px;}
 	.circular_progress_bar .title{max-width: 100px;}
 	.progress_inner{margin-bottom: 18px;}
