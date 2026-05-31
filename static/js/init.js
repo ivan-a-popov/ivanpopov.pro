@@ -102,7 +102,7 @@ function ivan_popov_trigger_menu(){
 
 	var hamburger 		= jQuery('.ivan_popov_topbar .trigger .hamburger');
 	var mobileMenu		= jQuery('.ivan_popov_mobile_menu');
-	var mobileMenuList	= jQuery('.ivan_popov_mobile_menu ul li a');
+	var mobileMenuList	= jQuery('.ivan_popov_mobile_menu .menu_list ul li a');
 
 	hamburger.on('click',function(){
 		var element 	= jQuery(this);
