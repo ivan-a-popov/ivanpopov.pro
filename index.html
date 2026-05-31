@@ -83,12 +83,18 @@
 					</div>
 					<div class="social">
 						<ul>
-							<li><a href="https://t.me/ivan_a_popov"><img class="svg" src="static/img/svg/social/telegram.svg" alt="" /></a></li>
+							<li><a href="https://t.me/ivan_a_popov" target="_blank" rel="noopener">
+								<svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM16.64 8.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.57-1.38-.93-2.23-1.49-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.40-1.08.39-.36-.01-1.04-.20-1.55-.37-.63-.21-1.14-.32-1.09-.68.02-.19.27-.38.73-.59 2.87-1.24 4.78-2.05 5.74-2.43 2.73-1.14 3.3-1.34 3.67-1.35.08 0 .27.02.39.12.10.08.13.19.14.27-.01.06.01.24 0 .38z"
+										fill="#0088cc" />
+								</svg>
+							</a></li>
 							<li><a href="https://vk.com/ivan_a_popov"><img class="svg" src="static/img/svg/social/vk.svg" alt="vk" /></a></li>
 						</ul>
 					</div>
 					<div class="copyright">
-						<p>Иван Попов &copy; 2022-2026</p>
+						<p>&copy; 2022-2026</p>
 					</div>
 				</div>
 			</div>
@@ -129,8 +135,7 @@
 					<div class="ivan_popov_home">
 						<div class="content">
 							<div class="name_roles_wrap">
-								<h3 class="name">Иван Попов</h3>
-								<span class="roles_right_compact" aria-label="Pro" title="Pro">PRO</span>
+								<h3 class="name">Иван <span class="name_last">Попов<span class="roles_right_compact" aria-label="Pro" title="Pro">PRO</span></span></h3>
 							</div>
 							<span class="line"></span>
 							<h3 class="job">
@@ -649,7 +654,7 @@
 								<div class="ivan_popov_contact_fx_layer" id="ivan_popov_contact_fx_layer" aria-hidden="true"></div>
 								<div class="ivan_popov_contact_icon_anchor">
 									<div class="telegram_icon_large">
-										<a href="https://t.me/ivan_a_popov" target="_blank" rel="noopener noreferrer">
+										<a href="https://t.me/ivan_a_popov" target="_blank" rel="noopener">
 											<svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM16.64 8.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.57-1.38-.93-2.23-1.49-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.40-1.08.39-.36-.01-1.04-.20-1.55-.37-.63-.21-1.14-.32-1.09-.68.02-.19.27-.38.73-.59 2.87-1.24 4.78-2.05 5.74-2.43 2.73-1.14 3.3-1.34 3.67-1.35.08 0 .27.02.39.12.10.08.13.19.14.27-.01.06.01.24 0 .38z" fill="#0088cc"/>
 											</svg>
@@ -936,11 +941,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 </script>
+
 <!-- PRIZE PHOTO SWAP ON TELEGRAM CLICK -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	var preloader = new Image();
-	preloader.src = 'static/img/prize.jpg';
+	preloader.src = 'static/img/about/2-color.jpg';
 	var colorPreload = new Image();
 	colorPreload.src = 'static/img/about/2-color.jpg';
 
@@ -956,7 +962,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		);
 		if (photoImg) {
 			photoImg.setAttribute('data-photo-override', 'prize');
-			photoImg.src = 'static/img/prize.jpg';
+			photoImg.src = 'static/img/about/2-color.jpg';
 		}
 	}
 

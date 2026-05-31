@@ -424,7 +424,7 @@ h6 { font-size: 16px; }
 	height: 100vh;
 	width: 200px;
 	z-index: 15;
-	background-color: #fff;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
 	
 	-webkit-transition: all .3s ease;
 	   -moz-transition: all .3s ease;
@@ -664,7 +664,10 @@ h6 { font-size: 16px; }
 	padding-left: 100px;
 }
 .ivan_popov_home .name{
-	font-size: 72px;
+	/* Fluid size: keeps the original 72px on large screens but scales down
+	   smoothly instead of jumping abruptly from 72px to 55px at the 1600px
+	   breakpoint. Floors at 36px for the narrowest two-column widths. */
+	font-size: clamp(36px, calc(25px + 2.44vw), 72px);
 	font-weight: 600;
 	text-transform: uppercase;
 	margin-bottom: 30px;
@@ -695,13 +698,16 @@ h6 { font-size: 16px; }
 
 /* Compact roles column next to the name */
 .name_roles_wrap{
-	display: flex;
-	align-items: flex-start;
-	gap: 5px;
+	display: block;
 	margin-bottom: 5px;
 }
 .name_roles_wrap .name{
 	margin: 0;
+}
+/* Keep the last name word and the PRO badge on the same line so the badge
+   always follows the final letter and never drops to a line of its own. */
+.name_last{
+	white-space: nowrap;
 }
 .roles_right_compact{
 	display: inline-flex;
@@ -710,7 +716,8 @@ h6 { font-size: 16px; }
 	box-sizing: border-box;
 	width: 21px;
 	height: 13px;
-	margin-top: 5px;
+	margin-left: 6px;
+	vertical-align: top;
 	border: 1px solid #9a9a9a;
 	border-radius: 999px;
 	color: #9a9a9a;
@@ -864,7 +871,7 @@ h6 { font-size: 16px; }
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: #fff;
+	background-color: #f6fbff;
 	border: 2px solid #000;
 	box-sizing: border-box;
 	transition: background-color 0.2s ease;
@@ -2538,6 +2545,25 @@ h6 { font-size: 16px; }
 	.ivan_popov_modalbox .portfolio_main_title h3{font-size: 20px;}
 	.ivan_popov_modalbox .news_popup_informations .title h3{font-size: 20px;}
 	.ivan_popov_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
+}
+/* Large tablets: keep the portrait two-column layout (the mobile topbar/hamburger
+   and stacked sections still apply); only collapse to single column below 768px. */
+@media (min-width: 768px) and (max-width: 1040px) {
+	.ivan_popov_mainpart .author_image{
+		width: 36%;
+		height: 100%;
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+	.ivan_popov_mainpart .author_image .author_image_inner,
+	.ivan_popov_mainpart .author_image .author_photo_glitch_host,
+	.ivan_popov_mainpart .author_image .author_photo{
+		height: 100%;
+		opacity: 1;
+	}
+	.ivan_popov_mainpart .main_content{width: 64%;}
+	.ivan_popov_home .content{padding: 0px 20px 0px 40px;}
 }
 @media (max-width: 768px) {
 	.ivan_popov_home .name{font-size: 40px;}
