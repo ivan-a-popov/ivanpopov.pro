@@ -570,6 +570,18 @@ h6 { font-size: 16px; }
 	user-select: none;
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
+/* On short viewports the wide/short crop window would otherwise cut the head.
+   Anchor the crop higher so it trims from the bottom and keeps the face framed. */
+@media (min-width: 1041px) and (max-height: 640px) {
+	.ivan_popov_mainpart .author_image .author_image_inner .author_photo_glitch_host .author_photo{
+		object-position: center 28%;
+	}
+}
+@media (min-width: 1041px) and (max-height: 480px) {
+	.ivan_popov_mainpart .author_image .author_image_inner .author_photo_glitch_host .author_photo{
+		object-position: center 20%;
+	}
+}
 .ivan_popov_mainpart .main_content{
 	position: absolute;
 	top: 0px;
@@ -626,7 +638,7 @@ h6 { font-size: 16px; }
 	clear: both;
 	float: left;
 	position: relative;
-	padding: 92px 100px 0px 100px;
+	padding: 30px 100px 0px 100px;
 }
 .ivan_popov_section .section_inner:before{
 	position: absolute;
@@ -686,21 +698,27 @@ h6 { font-size: 16px; }
 .name_roles_wrap{
 	display: flex;
 	align-items: flex-start;
-	gap: 12px;
-	margin-bottom: 6px;
+	gap: 5px;
+	margin-bottom: 5px;
 }
 .name_roles_wrap .name{
 	margin: 0;
 }
 .roles_right_compact{
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-	font-size: 10px;
-	line-height: 1.1;
-	color: #b3b3b3;
-	font-weight: 400;
-	letter-spacing: 0.01em;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	width: 21px;
+	height: 13px;
+	margin-top: 5px;
+	border: 1px solid #9a9a9a;
+	border-radius: 999px;
+	color: #9a9a9a;
+	font-size: 8px;
+	font-weight: 500;
+	line-height: 1;
+	letter-spacing: 0;
 }
 .ivan_popov_button{
 	width: 100%;
@@ -2448,7 +2466,7 @@ h6 { font-size: 16px; }
 	.ivan_popov_home .line{width: 60px;height: 4px;margin-bottom: 25px;}
 	.ivan_popov_home .job{font-size: 23px;margin-bottom: 30px;}
 	.ivan_popov_button a{padding: 13px 32px;}
-	.ivan_popov_section .section_inner{padding: 95px 50px 0px 50px;}
+	.ivan_popov_section .section_inner{padding: 40px 50px 0px 50px;}
 	#contact .section_inner{padding-top: 40px;}
 	.circular_progress_bar .list_inner:after{width: 100px;height: 100px;}
 	.circular_progress_bar .title{max-width: 100px;}
@@ -2499,8 +2517,8 @@ h6 { font-size: 16px; }
 	.ivan_popov_about .services .service_list{width: 100%;margin-bottom: 55px;}
 	.ivan_popov_about .services .service_list:nth-child(2){width: 100%;}
 	.ivan_popov_about .services .interests{width: 100%;}
-	.ivan_popov_section .section_inner{padding: 57px 20px 0px 20px;}
-	#contact .section_inner{padding-top: 34px;}
+	.ivan_popov_section .section_inner{padding: 30px 20px 0px 20px;}
+	#contact .section_inner{padding-top: 30px;}
 	#contact .ivan_popov_contact{min-height: calc(100vh - 90px);}
 	.ivan_popov_about .skills .wrapper{flex-direction: column;align-items: baseline;}
 	.ivan_popov_about .skills .programming{width: 100%;margin-bottom: 60px;}
