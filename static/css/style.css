@@ -2862,7 +2862,7 @@ h6 { font-size: 16px; }
 	box-sizing: border-box;
 	overflow: hidden;
 	isolation: isolate;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 #contact .ivan_popov_contact_fx_layer{
 	position: absolute;
@@ -2875,7 +2875,7 @@ h6 { font-size: 16px; }
 	pointer-events: auto;
 	box-sizing: border-box;
 	border: 1px solid rgba(0, 0, 0, 0.085);
-	border-radius: 10px;
+	border-radius: 5px;
 	background:
 		linear-gradient(165deg,
 			rgba(255, 255, 255, 0.55) 0%,
