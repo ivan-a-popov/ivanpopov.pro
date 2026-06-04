@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2022 Marketify
- * Author: Marketify
- * This file is made for CURRENT TEMPLATE
-*/
-
-
 /*------------------------------------------------------------------*/
 /*	01) ISOTOPE
 /*------------------------------------------------------------------*/
@@ -186,7 +179,6 @@ return jQueryBridget;
   }
 
 }( typeof window != 'undefined' ? window : this, function() {
-
 
 
 function EvEmitter() {}
@@ -3723,9 +3715,9 @@ e(this):c.doc,k=new N(c,e(this)),e(this).data("__nicescroll",k));h.push(k)});ret
 
 jQuery(document).ready(function($){
 	//set animation timing
-	var animationDelay = 2500,
+	var animationDelay = 1200,
 		//loading bar effect
-		barAnimationDelay = 3800,
+		barAnimationDelay = 2300,
 		barWaiting = barAnimationDelay - 3000, //3000 is the duration of the transition on the loading bar - set in the scss/css file
 		//letters effect
 		lettersDelay = 50,
@@ -3734,8 +3726,8 @@ jQuery(document).ready(function($){
 		selectionDuration = 500,
 		typeAnimationDelay = selectionDuration + 800,
 		//clip effect 
-		revealDuration = 600,
-		revealAnimationDelay = 1500;
+		revealDuration = 500,
+		revealAnimationDelay = 800;
 	
 	initHeadline();
 	

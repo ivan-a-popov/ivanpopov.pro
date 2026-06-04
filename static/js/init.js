@@ -29,10 +29,7 @@ jQuery(document).ready(function(){
 	hashtag();
 	if (jQuery.fn && jQuery.fn.ripples && jQuery('#ripple').length) { ivan_popov_ripple(); }
 	ivan_popov_moving_box();
-	
-	jQuery(window).on('load', function(){
-		ivan_popov_my_load();
-	});
+	ivan_popov_my_load();
 	
 });
 
@@ -292,13 +289,17 @@ function ivan_popov_preloader(){
 	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
 	var preloader = $('#preloader');
 	
+	if (!preloader.length) {
+		return;
+	}
+
 	if (!isMobile) {
 		setTimeout(function() {
 			preloader.addClass('preloaded');
-		}, 800);
+		}, 180);
 		setTimeout(function() {
 			preloader.remove();
-		}, 2000);
+		}, 850);
 
 	} else {
 		preloader.remove();
@@ -313,8 +314,7 @@ function ivan_popov_my_load(){
 	
 	"use strict";
 	
-	var speed	= 500;
-	setTimeout(function(){ivan_popov_preloader();},speed);
+	ivan_popov_preloader();
 }
 
 // -----------------------------------------------------

@@ -152,9 +152,9 @@ h6 { font-size: 16px; }
     height: 250px;
     position: relative;
     overflow: hidden;
-    -webkit-transition: all 0.8s ease 0s;
-    -o-transition: all 0.8s ease 0s;
-    transition: all 0.8s ease 0s;
+    -webkit-transition: all 0.35s ease 0s;
+    -o-transition: all 0.35s ease 0s;
+    transition: all 0.35s ease 0s;
 }
 .loader_line:before{
     content: '';
@@ -168,9 +168,9 @@ h6 { font-size: 16px; }
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
     background-color: #fff;
-    -webkit-animation: lineheight 1000ms ease-in-out 0s forwards;
-    -o-animation: lineheight 1000ms ease-in-out 0s forwards;
-    animation: lineheight 1000ms ease-in-out 0s forwards;
+    -webkit-animation: lineheight 500ms ease-in-out 0s forwards;
+    -o-animation: lineheight 500ms ease-in-out 0s forwards;
+    animation: lineheight 500ms ease-in-out 0s forwards;
 }
 .loader_line:after{
     content: '';
@@ -184,10 +184,10 @@ h6 { font-size: 16px; }
     -ms-transform: translateY(-100%);
     -o-transform: translateY(-100%);
     transform: translateY(-100%);
-    -webkit-animation: lineround 1200ms linear 0s infinite;
-    -o-animation: lineround 1200ms linear 0s infinite;
-    animation: lineround 1200ms linear 0s infinite;
-    animation-delay: 2000ms;
+    -webkit-animation: lineround 900ms linear 0s infinite;
+    -o-animation: lineround 900ms linear 0s infinite;
+    animation: lineround 900ms linear 0s infinite;
+    animation-delay: 120ms;
 }
 
 @keyframes lineheight{
@@ -224,9 +224,9 @@ h6 { font-size: 16px; }
 }
 .preloaded:before,
 .preloaded:after{
-    -webkit-animation: preloadedzero 300ms ease-in-out 500ms forwards;
-    -o-animation: preloadedzero 300ms ease-in-out 500ms forwards;
-    animation: preloadedzero 300ms ease-in-out 500ms forwards;
+    -webkit-animation: preloadedzero 280ms ease-in-out 120ms forwards;
+    -o-animation: preloadedzero 280ms ease-in-out 120ms forwards;
+    animation: preloadedzero 280ms ease-in-out 120ms forwards;
 }
 @keyframes preloadedzero{
     0%{
