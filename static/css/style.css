@@ -507,6 +507,27 @@ h6 { font-size: 16px; }
 	font-family: "Onest";
 }
 
+.ivan_popov_left_border{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	width: 70px;
+	background-color: #fff;
+	z-index: 10;
+	transition: width 0.25s ease;
+}
+.ivan_popov_right_border{
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 70px;
+	background-color: #fff;
+	z-index: 10;
+	transition: width 0.25s ease;
+}
+
 /*---------------------------------------------------*/
 /*	04) IVAN POPOV MAINPART
 /*---------------------------------------------------*/

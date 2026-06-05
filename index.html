@@ -31,13 +31,16 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&display=swap"></noscript>
 
 <link rel="stylesheet" type="text/css" href="static/css/plugins.css" />
-<link rel="stylesheet" type="text/css" href="static/css/style.css" />
+<!-- Deferred CSS is listed BEFORE style.css so that the critical responsive @media
+     rules in style.css win cascade ties over the base rules in the deferred files
+     (loading stays async via preload/onload; only DOM/cascade order matters here). -->
 <link rel="preload" as="style" href="static/css/plugins-deferred.css" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="style" href="static/css/style-deferred.css" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
 <link rel="stylesheet" href="static/css/plugins-deferred.css" />
 <link rel="stylesheet" href="static/css/style-deferred.css" />
 </noscript>
+<link rel="stylesheet" type="text/css" href="static/css/style.css" />
 <!-- /STYLES -->
 
 </head>
