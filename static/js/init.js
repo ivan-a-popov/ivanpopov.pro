@@ -12,23 +12,17 @@ jQuery(document).ready(function(){
 	// here all ready functions
 	
 	ivan_popov_modalbox();
+	ivan_popov_nicescroll();
 	ivan_popov_page_transition();
 	ivan_popov_trigger_menu();
 	ivan_popov_my_progress();
 	ivan_popov_circular_progress();
-	ivan_popov_portfolio_popup();
-	ivan_popov_news_popup();
 	ivan_popov_service_popup();
 	ivan_popov_cursor();
 	ivan_popov_imgtosvg();
-	ivan_popov_popup();
-	ivan_popov_portfolio();
 	ivan_popov_data_images();
-	// ivan_popov_contact_form(); // Removed - using pure HTML+JS now
 	ivan_popov_mycarousel();
 	hashtag();
-	if (jQuery.fn && jQuery.fn.ripples && jQuery('#ripple').length) { ivan_popov_ripple(); }
-	ivan_popov_moving_box();
 	ivan_popov_my_load();
 	
 });
@@ -46,6 +40,171 @@ function ivan_popov_modalbox(){
 	"use strict";
 	
 	jQuery('.ivan_popov_all_wrap').prepend('<div class="ivan_popov_modalbox"><div class="box_inner"><div class="close"><a href="#"><i class="icon-cancel"></i></a></div><div class="description_wrap"></div></div></div>');
+}
+
+// -----------------------------------------------------
+// -----------------   NICESCROLL   --------------------
+// -----------------------------------------------------
+
+var ivan_popov_nicescroll_section = null;
+var ivan_popov_nicescroll_section_el = null;
+var ivan_popov_nicescroll_modal = null;
+var ivan_popov_nicescroll_modal_el = null;
+
+function ivan_popov_nicescroll_options(){
+	return {
+		cursorcolor: '#999',
+		cursorwidth: '5px',
+		cursorborder: '0',
+		cursorborderradius: '4px',
+		scrollspeed: 60,
+		mousescrollstep: 40,
+		autohidemode: true,
+		horizrailenabled: false,
+		hwacceleration: false,
+		preservenativescrolling: false,
+		nativeparentscrolling: false
+	};
+}
+
+function ivan_popov_nicescroll_is_mobile(){
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+}
+
+function ivan_popov_nicescroll_visible_section(){
+	var $active = jQuery('.ivan_popov_section.active');
+	if ($active.length) {
+		return $active;
+	}
+	return jQuery('.ivan_popov_section.animated').not('.hidden').first();
+}
+
+function ivan_popov_nicescroll_get_instance($element){
+	var ns = $element.data('__nicescroll');
+	if (!ns) {
+		return null;
+	}
+	if (ns.name === 'nicescrollarray' && ns.length) {
+		return ns[0];
+	}
+	return ns.rail ? ns : null;
+}
+
+function ivan_popov_nicescroll_sync_rail($element){
+	var ns = ivan_popov_nicescroll_get_instance($element);
+	if (!ns || !ns.rail) {
+		return;
+	}
+
+	ns.resize();
+
+	if (ns.rail.parent()[0] !== document.body) {
+		jQuery(document.body).append(ns.rail);
+	}
+
+	var offset = $element.offset();
+	ns.rail.css({
+		top: offset.top,
+		left: offset.left + $element.outerWidth() - ns.rail.outerWidth(),
+		height: $element.innerHeight()
+	});
+
+	if (ns.noticeCursor) {
+		ns.noticeCursor();
+	}
+}
+
+function ivan_popov_nicescroll_bind_scroll($element){
+	$element.off('scroll.nicescroll').on('scroll.nicescroll', function(){
+		var ns = ivan_popov_nicescroll_get_instance($element);
+		if (ns && ns.onscroll) {
+			ns.onscroll();
+		}
+	});
+}
+
+function ivan_popov_nicescroll_remove_instance(instance, $element){
+	if ($element) {
+		$element.off('scroll.nicescroll');
+	}
+	if (instance && instance.remove) {
+		instance.remove();
+	}
+}
+
+function ivan_popov_nicescroll_bind_section($section){
+	if (!$section || !$section.length || !jQuery.fn.niceScroll || ivan_popov_nicescroll_is_mobile()) {
+		return;
+	}
+
+	if ($section.is('#contact')) {
+		ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_section, ivan_popov_nicescroll_section_el);
+		ivan_popov_nicescroll_section = null;
+		ivan_popov_nicescroll_section_el = null;
+		return;
+	}
+
+	ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_section, ivan_popov_nicescroll_section_el);
+	ivan_popov_nicescroll_section = null;
+	ivan_popov_nicescroll_section_el = null;
+
+	ivan_popov_nicescroll_section = $section.niceScroll(ivan_popov_nicescroll_options());
+	ivan_popov_nicescroll_section_el = $section;
+	ivan_popov_nicescroll_bind_scroll($section);
+	ivan_popov_nicescroll_sync_rail($section);
+}
+
+function ivan_popov_nicescroll_bind_modal($wrap){
+	if (!$wrap || !$wrap.length || !jQuery.fn.niceScroll || ivan_popov_nicescroll_is_mobile()) {
+		return;
+	}
+
+	ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_modal, ivan_popov_nicescroll_modal_el);
+	ivan_popov_nicescroll_modal = null;
+	ivan_popov_nicescroll_modal_el = null;
+
+	ivan_popov_nicescroll_modal = $wrap.niceScroll(ivan_popov_nicescroll_options());
+	ivan_popov_nicescroll_modal_el = $wrap;
+	ivan_popov_nicescroll_bind_scroll($wrap);
+	ivan_popov_nicescroll_sync_rail($wrap);
+}
+
+function ivan_popov_nicescroll(){
+	
+	"use strict";
+
+	if (!jQuery.fn.niceScroll || ivan_popov_nicescroll_is_mobile()) {
+		return;
+	}
+
+	ivan_popov_nicescroll_bind_section(ivan_popov_nicescroll_visible_section());
+
+	jQuery(window).off('resize.nicescroll').on('resize.nicescroll', function(){
+		var $section = ivan_popov_nicescroll_visible_section();
+		if ($section.length) {
+			ivan_popov_nicescroll_sync_rail($section);
+		}
+	});
+}
+
+function ivan_popov_nicescroll_resize($elements){
+	
+	"use strict";
+
+	if (!jQuery.fn.getNiceScroll) {
+		return;
+	}
+
+	$elements.each(function(){
+		var $element = jQuery(this);
+		if ($element.hasClass('ivan_popov_section')) {
+			ivan_popov_nicescroll_bind_section($element);
+			return;
+		}
+		if ($element.hasClass('description_wrap')) {
+			ivan_popov_nicescroll_bind_modal($element);
+		}
+	});
 }
 
 // -----------------------------------------------------
@@ -84,6 +243,9 @@ function ivan_popov_page_transition(){
 				wrapper.find(sectionID).removeClass('animated '+exit).addClass('animated '+enter);
 				jQuery(section).addClass('hidden');
 				jQuery(sectionID).removeClass('hidden').addClass('active');
+				setTimeout(function(){
+					ivan_popov_nicescroll_bind_section(sectionID);
+				}, 1050);
 			}
 		return false;
 	});
@@ -182,71 +344,6 @@ function ivan_popov_circular_progress(){
 }
 
 // -------------------------------------------------
-// -----------  PORTFOLIO POPUP  -------------------
-// -------------------------------------------------
-
-function ivan_popov_portfolio_popup(){
-	
-	"use strict";
-	
-	var modalBox		= jQuery('.ivan_popov_modalbox');
-	var button			= jQuery('.ivan_popov_portfolio .portfolio_popup');
-	var closePopup		= modalBox.find('.close');
-	
-	button.off().on('click',function(){
-		var element = jQuery(this);
-		var parent 	= element.closest('.list_inner');
-		var content = parent.find('.hidden_content').html();
-		var image	= parent.find('.image .main').data('img-url');
-		var details = parent.find('.details').html();
-		modalBox.addClass('opened');
-		modalBox.find('.description_wrap').html(content);
-		modalBox.find('.popup_details').prepend('<div class="top_image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+image+'"></div></div>');
-		modalBox.find('.popup_details .top_image').after('<div class="portfolio_main_title">'+details+'<div>');
-		ivan_popov_data_images();
-		return false;
-	});
-	closePopup.on('click',function(){
-		modalBox.removeClass('opened');
-		modalBox.find('.description_wrap').html('');
-		return false;
-	});
-}
-
-// -------------------------------------------------
-// ----------------  NEWS POPUP  -------------------
-// -------------------------------------------------
-
-function ivan_popov_news_popup(){
-	
-	"use strict";
-	
-	var modalBox		= jQuery('.ivan_popov_modalbox');
-	var button			= jQuery('.ivan_popov_news .news_list > ul > li .post_title h3 a');
-	var closePopup		= modalBox.find('.close');
-	
-	button.on('click',function(){
-		var element 	= jQuery(this);
-		var parent 		= element.closest('li');
-		var content 	= parent.find('.news_hidden_details').html();
-		var image		= parent.data('img');
-		var category 	= parent.find('.extra_metas').html();
-		var title	 	= parent.find('.post_title a').text();
-		modalBox.addClass('opened');
-		modalBox.find('.description_wrap').html(content);
-		modalBox.find('.news_popup_informations').prepend('<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+image+'"></div></div>');
-		modalBox.find('.news_popup_informations .image').after('<div class="details"><div class="meta">'+category+'</div><div class="title"><h3>'+title+'</h3></div><div>');
-		ivan_popov_data_images();
-		return false;
-	});
-	closePopup.on('click',function(){
-		modalBox.removeClass('opened');
-		modalBox.find('.description_wrap').html('');
-		return false;
-	});
-}
-
-// -------------------------------------------------
 // -------------  SERVICE POPUP  -------------------
 // -------------------------------------------------
 
@@ -269,11 +366,15 @@ function ivan_popov_service_popup(){
 		modalBox.find('.service_popup_informations').prepend('<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"></div></div>');
 		ivan_popov_data_images();
 		modalBox.find('.service_popup_informations .image').after('<div class="main_title"><h3>'+title+'</h3></div>');
+		ivan_popov_nicescroll_resize(modalBox.find('.description_wrap'));
 		return false;
 	});
 	closePopup.on('click',function(){
 		modalBox.removeClass('opened');
 		modalBox.find('.description_wrap').html('');
+		ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_modal, ivan_popov_nicescroll_modal_el);
+		ivan_popov_nicescroll_modal = null;
+		ivan_popov_nicescroll_modal_el = null;
 		return false;
 	});
 }
@@ -379,81 +480,6 @@ function ivan_popov_imgtosvg(){
 }
 
 // -----------------------------------------------------
-// --------------------   POPUP    ---------------------
-// -----------------------------------------------------
-
-function ivan_popov_popup(){
-	
-	"use strict";
-
-	jQuery('.gallery_zoom').each(function() { // the containers for all your galleries
-		jQuery(this).magnificPopup({
-			delegate: 'a.zoom', // the selector for gallery item
-			type: 'image',
-			gallery: {
-			  enabled:true
-			},
-			removalDelay: 300,
-			mainClass: 'mfp-fade'
-		});
-
-	});
-	jQuery('.popup-youtube, .popup-vimeo').each(function() { // the containers for all your galleries
-		jQuery(this).magnificPopup({
-			disableOn: 700,
-			type: 'iframe',
-			mainClass: 'mfp-fade',
-			removalDelay: 160,
-			preloader: false,
-			fixedContentPos: false
-		});
-	});
-	
-	jQuery('.soundcloude_link').magnificPopup({
-	  type : 'image',
-	   gallery: {
-		   enabled: true, 
-	   },
-	});
-}
-
-// -------------------------------------------------
-// -----------------    PORTFOLIO    ---------------
-// -------------------------------------------------
-
-function ivan_popov_portfolio(){
-
-	"use strict";
-	
-	if(jQuery().isotope) {
-
-		// Needed variables
-		var filter		 = jQuery('.ivan_popov_portfolio .portfolio_filter ul');
-
-		if(filter.length){
-			// Isotope Filter 
-			filter.find('a').on('click', function(){
-				var element		= jQuery(this);
-				var selector 	= element.attr('data-filter');
-				var list		= element.closest('.ivan_popov_portfolio').find('.portfolio_list').children('ul');
-				list.isotope({ 
-					filter				: selector,
-					animationOptions	: {
-						duration			: 750,
-						easing				: 'linear',
-						queue				: false
-					}
-				});
-				
-				filter.find('a').removeClass('current');
-				element.addClass('current');
-				return false;
-			});	
-		}
-	}
-}
-
-// -----------------------------------------------------
 // ---------------   DATA IMAGES    --------------------
 // -----------------------------------------------------
 
@@ -535,50 +561,3 @@ function currentLink(ccc,e){
 	
 }
 
-// -------------------------------------------------
-// -------------  RIPPLE  --------------------------
-// -------------------------------------------------
-
-function ivan_popov_ripple(){
-	
-	"use strict";
-
-	jQuery('#ripple').ripples({
-		resolution: 500,
-		dropRadius: 20,
-		perturbance: 0.04
-	});
-}
-
-// -------------------------------------------------
-// -------------  MOVING BOX  ----------------------
-// -------------------------------------------------
-
-function ivan_popov_moving_box(){
-	
-	"use strict";
-	
-	var wrapper	= $('.ivan_popov_news');
-	var list	= wrapper.find('.news_list > ul > li');
-	if(!$('.ivan_popov_fn_moving_box').length){
-		$('body').append('<div class="ivan_popov_fn_moving_box"></div>');
-	}
-	var box		= $('.ivan_popov_fn_moving_box');
-
-	list.on('mouseenter',function(){
-		var element 	= $(this);
-		var image		= element.data('img');
-		var ellOffset	= element.offset().top;
-
-		if(image === ''){
-			box.removeClass('opened');
-			return false;
-		}
-
-		box.addClass('opened');
-		box.css({backgroundImage:'url('+image+')',top:ellOffset+'px'});
-
-	}).on('mouseleave',function(){
-		box.removeClass('opened');
-	});	
-}

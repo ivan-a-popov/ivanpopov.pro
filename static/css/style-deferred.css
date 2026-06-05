@@ -1438,13 +1438,29 @@
 	float: left;
 	margin-bottom: 100px;
 }
-#contact .section_inner{
-	padding-top: 30px;
-}
-#contact .ivan_popov_contact{
+#contact.ivan_popov_section{
+	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
-	min-height: calc(100vh - 172px);
+}
+#contact .section_inner{
+	float: none;
+	flex: 1;
+	min-height: 0;
+	box-sizing: border-box;
+	padding-top: 30px;
+	padding-bottom: 0;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+#contact .ivan_popov_contact{
+	float: none;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-height: 0;
+	margin-bottom: 0;
 }
 .ivan_popov_contact .short_info{
 	width: 100%;
@@ -1915,11 +1931,11 @@
 	width: 100%;
 	position: relative;
 	flex: 1 1 auto;
+	min-height: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin-top: 22px;
-	min-height: min(58vh, 520px);
 	box-sizing: border-box;
 	overflow: hidden;
 	isolation: isolate;
@@ -1986,9 +2002,6 @@
 	opacity: 1;
 }
 @media (max-width: 1600px){
-	.ivan_popov_contact_playfield{
-		min-height: min(56vh, 460px);
-	}
 	#contact .telegram_icon_large svg{
 		width: 100px;
 		height: 100px;
@@ -1997,7 +2010,6 @@
 @media (max-width: 1040px){
 	.ivan_popov_contact_playfield{
 		margin-top: 18px;
-		min-height: min(52vh, 320px);
 	}
 	#contact .telegram_icon_large svg{
 		width: 80px;
@@ -2005,9 +2017,6 @@
 	}
 }
 @media (max-width: 768px){
-	.ivan_popov_contact_playfield{
-		min-height: min(46vh, 260px);
-	}
 	#contact .telegram_icon_large svg{
 		width: 72px;
 		height: 72px;

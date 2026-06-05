@@ -660,6 +660,34 @@ h6 { font-size: 16px; }
 	position: relative;
 	padding: 20px 100px 0px 100px;
 }
+#contact.ivan_popov_section{
+	overflow-y: hidden;
+	display: flex;
+	flex-direction: column;
+}
+#contact .section_inner{
+	float: none;
+	flex: 1;
+	min-height: 0;
+	box-sizing: border-box;
+	padding-top: 30px;
+	padding-bottom: 0;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+#contact .ivan_popov_contact{
+	float: none;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-height: 0;
+	margin-bottom: 0;
+}
+#contact .ivan_popov_contact_playfield{
+	flex: 1 1 auto;
+	min-height: 0;
+}
 .ivan_popov_section .section_inner:before{
 	position: absolute;
 	content: "";
@@ -859,7 +887,6 @@ h6 { font-size: 16px; }
 	.ivan_popov_about .services .interests{width: 100%;}
 	.ivan_popov_section .section_inner{padding: 30px 20px 0px 20px;}
 	#contact .section_inner{padding-top: 30px;}
-	#contact .ivan_popov_contact{min-height: calc(100vh - 90px);}
 	.ivan_popov_about .skills .wrapper{flex-direction: column;align-items: baseline;}
 	.ivan_popov_about .skills .programming{width: 100%;margin-bottom: 60px;}
 	.ivan_popov_about .skills .language{width: 100%;}

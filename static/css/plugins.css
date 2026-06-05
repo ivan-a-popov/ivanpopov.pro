@@ -1,13 +1,9 @@
 /*
-This file is made by Marketify (2022)
-
 01) BASE
-02) FORM ELEMENTS
-03) FONTELLO
-04) SKELETON OR GRID
-05) ANIMATION
-
-
+02) FONTELLO
+03) ANIMATION (rollIn / rollOut)
+04) HAMBURGER
+05) ANIMATED HEADLINE (clip)
 */
 
 /*------------------------------------------------------------------*/ 
@@ -57,131 +53,9 @@ a, i{
 }
 a:hover{text-decoration:none;}
 
-/*------------------------------------------------------------------*/ 
-/*	FORM ELEMENTS
-/*------------------------------------------------------------------*/
-
-textarea{
-	border-radius:0;
-	font-size:13px;
-	resize:vertical;
-	font-family:"Onest";
-	letter-spacing: 1.2px !important;
-	
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	-ms-box-sizing: border-box;     /* IE 10 + */
-	box-sizing: border-box;         /* Opera/IE 8+ */
-	
-	line-height:1.4;
-	padding:10px!important;
-	width:100%;
-	border:1px solid #eee;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
-}
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-.uneditable-input {
-	border-radius:0;
-	font-size:13px;
-	min-width:auto;
-	letter-spacing:1.4px;
-	
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	-ms-box-sizing: border-box;     /* IE 10 + */
-	box-sizing: border-box;         /* Opera/IE 8+ */
-	
-	font-family:"Onest";
-	
-	line-height:1.6;
-	padding:10px!important;
-	height:44px;
-	vertical-align:middle;
-	border:1px solid #eee;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
-}
-
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {
-	border-color:#ccc;
-	background:#eee;
-}
-
-input[type="submit"]{
-	padding: 13px 15px;
-	height: 40px;
-	line-height: 1;
-	text-transform: uppercase;
-	font-size: 13px;
-	font-weight: 600;
-	text-decoration: none;
-	letter-spacing: 0.5px;
-	border:none;
-	cursor:pointer;
-	color: #FFF;
-	background:#777;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
-}
-input[type="submit"]:hover{
-	background:#444;
-}
-select{
-	padding:8px;
-	border:2px solid #eee;
-}
-input[type="button"]{
-	cursor:pointer;
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
-}
 
 /*------------------------------------------------------------------*/ 
-/*	03) FONTELLO
+/*	FONTELLO
 /*------------------------------------------------------------------*/
 
 
@@ -241,14 +115,7 @@ input[type="button"]{
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-cancel:before { content: '\e800'; } /* '' */
-.icon-cancel-1:before { content: '\e801'; } /* '' */
-.icon-cancel-2:before { content: '\e802'; } /* '' */
-.icon-cancel-3:before { content: '\e803'; } /* '' */
-.icon-cancel-4:before { content: '\e804'; } /* '' */
-.icon-cancel-5:before { content: '\e805'; } /* '' */
-.icon-cancel-6:before { content: '\e806'; } /* '' */
-.icon-cancel-7:before { content: '\e807'; } /* '' */
+.icon-cancel:before { content: '\e800'; }
 
 /*------------------------------------------------------------------*/ 
 /*	ANIMATION (rollIn / rollOut only)
@@ -296,7 +163,7 @@ input[type="button"]{
 
 
 /* -------------------------------- 
-   Animated headline (clip effect)
+|* Animated headline (clip effect)
 -------------------------------- */
 .cd-words-wrapper {
   display: inline-block;
