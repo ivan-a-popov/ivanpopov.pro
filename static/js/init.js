@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 	ivan_popov_data_images();
 	ivan_popov_mycarousel();
 	hashtag();
-	ivan_popov_my_load();
+	ivan_popov_preloader();
 	
 });
 
@@ -405,17 +405,6 @@ function ivan_popov_preloader(){
 	} else {
 		preloader.remove();
 	}
-}
-
-// -----------------------------------------------------
-// -----------------   MY LOAD    ----------------------
-// -----------------------------------------------------
-
-function ivan_popov_my_load(){
-	
-	"use strict";
-	
-	ivan_popov_preloader();
 }
 
 // -----------------------------------------------------
