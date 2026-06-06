@@ -831,7 +831,6 @@ h6 { font-size: 16px; }
 }
 @media (max-width: 1040px) {
 	.mouse-cursor{display: none;}
-	#preloader{display: none;}
 	.ivan_popov_topbar{display: block;}
 	.ivan_popov_header{display: none;}
 	.ivan_popov_footer{display: none;}

@@ -387,7 +387,6 @@ function ivan_popov_preloader(){
 	
 	"use strict";
 	
-	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 	var preloader = jQuery('#preloader');
 	
 	if (!preloader.length) {
@@ -395,16 +394,12 @@ function ivan_popov_preloader(){
 	}
 
 	var run = function(){
-		if (!isMobile) {
-			setTimeout(function() {
-				preloader.addClass('preloaded');
-			}, 180);
-			setTimeout(function() {
-				preloader.remove();
-			}, 850);
-		} else {
+		setTimeout(function() {
+			preloader.addClass('preloaded');
+		}, 180);
+		setTimeout(function() {
 			preloader.remove();
-		}
+		}, 850);
 	};
 
 	var start = function(){
