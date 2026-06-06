@@ -387,23 +387,37 @@ function ivan_popov_preloader(){
 	
 	"use strict";
 	
-	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
-	var preloader = $('#preloader');
+	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+	var preloader = jQuery('#preloader');
 	
 	if (!preloader.length) {
 		return;
 	}
 
-	if (!isMobile) {
-		setTimeout(function() {
-			preloader.addClass('preloaded');
-		}, 180);
-		setTimeout(function() {
+	var run = function(){
+		if (!isMobile) {
+			setTimeout(function() {
+				preloader.addClass('preloaded');
+			}, 180);
+			setTimeout(function() {
+				preloader.remove();
+			}, 850);
+		} else {
 			preloader.remove();
-		}, 850);
+		}
+	};
 
+	var start = function(){
+		setTimeout(run, 1000);
+	};
+
+	if (document.readyState === 'complete') {
+		start();
 	} else {
-		preloader.remove();
+		jQuery(window).on('load.ivan_popov_preloader', function(){
+			jQuery(window).off('load.ivan_popov_preloader');
+			start();
+		});
 	}
 }
 

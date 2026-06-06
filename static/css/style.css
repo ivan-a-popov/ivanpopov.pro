@@ -3,7 +3,7 @@
 
 
 /*---------------------------------------------------*/
-/*	01) IVAN POPOV BASE
+/*	 BASE
 /*---------------------------------------------------*/
 
 html {
@@ -76,31 +76,13 @@ body.dark::placeholder { /* Most modern browsers support this now. */
    color: #9e9ba3;
 }
 
-body::-webkit-scrollbar {
-  width: 11px;
-}
-body{
-  scrollbar-width: thin;
-  scrollbar-color: #999 #fff;
-}
-body:-webkit-scrollbar-track {
-  background: #fff;
-}
-body::-webkit-scrollbar-thumb {
-  background-color: #999;
-  border-radius: 6px;
-  border: 3px solid #fff;
-}
-body.dark::-webkit-scrollbar {
-  width: 11px;
-}
 h1, h2, h3, h4, h5, h6{
 	font-weight:700;
 	line-height: 1.2;
 	font-family: "Onest";
 	color: #333;
 }
-h1 { font-size: 45px; }
+h1 { font-size: 42px; }
 h2 { font-size: 36px; }
 h3 { font-size: 30px; }
 h4 { font-size: 24px; }
@@ -152,11 +134,11 @@ h6 { font-size: 16px; }
     height: 250px;
     position: relative;
     overflow: hidden;
-    -webkit-transition: all 0.35s ease 0s;
-    -o-transition: all 0.35s ease 0s;
-    transition: all 0.35s ease 0s;
+    -webkit-transition: all 0.8s ease 0s;
+    -o-transition: all 0.8s ease 0s;
+    transition: all 0.8s ease 0s;
 }
-.loader_line:before{
+#preloader .loader_line:before{
     content: '';
     position: absolute;
     left: 0;
@@ -168,11 +150,11 @@ h6 { font-size: 16px; }
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
     background-color: #fff;
-    -webkit-animation: lineheight 500ms ease-in-out 0s forwards;
-    -o-animation: lineheight 500ms ease-in-out 0s forwards;
-    animation: lineheight 500ms ease-in-out 0s forwards;
+    -webkit-animation: lineheight 1000ms ease-in-out 0s forwards;
+    -o-animation: lineheight 1000ms ease-in-out 0s forwards;
+    animation: lineheight 1000ms ease-in-out 0s forwards;
 }
-.loader_line:after{
+#preloader .loader_line:after{
     content: '';
     position: absolute;
     left: 0;
@@ -184,10 +166,10 @@ h6 { font-size: 16px; }
     -ms-transform: translateY(-100%);
     -o-transform: translateY(-100%);
     transform: translateY(-100%);
-    -webkit-animation: lineround 900ms linear 0s infinite;
-    -o-animation: lineround 900ms linear 0s infinite;
-    animation: lineround 900ms linear 0s infinite;
-    animation-delay: 120ms;
+    -webkit-animation: lineround 1200ms linear 0s infinite;
+    -o-animation: lineround 1200ms linear 0s infinite;
+    animation: lineround 1200ms linear 0s infinite;
+    animation-delay: 2000ms;
 }
 
 @keyframes lineheight{
@@ -215,18 +197,18 @@ h6 { font-size: 16px; }
 }
 
 /*hiding all*/
-.preloaded .loader_line:after{
+#preloader.preloaded .loader_line:after{
     opacity: 0;
 }
-.preloaded  .loader_line{
+#preloader.preloaded .loader_line{
     opacity: 0;
     height: 100%!important;
 }
-.preloaded:before,
-.preloaded:after{
-    -webkit-animation: preloadedzero 280ms ease-in-out 120ms forwards;
-    -o-animation: preloadedzero 280ms ease-in-out 120ms forwards;
-    animation: preloadedzero 280ms ease-in-out 120ms forwards;
+#preloader.preloaded:before,
+#preloader.preloaded:after{
+    -webkit-animation: preloadedzero 300ms ease-in-out 500ms forwards;
+    -o-animation: preloadedzero 300ms ease-in-out 500ms forwards;
+    animation: preloadedzero 300ms ease-in-out 500ms forwards;
 }
 @keyframes preloadedzero{
     0%{
@@ -238,7 +220,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	02) IVAN POPOV HEADER
+/*	 HEADER
 /*---------------------------------------------------*/
 
 .ivan_popov_header{
@@ -363,7 +345,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	03) IVAN POPOV MOBILE MENU
+/*	 MOBILE MENU
 /*---------------------------------------------------*/
 
 .ivan_popov_topbar{
@@ -529,7 +511,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	04) IVAN POPOV MAINPART
+/*	 MAINPART
 /*---------------------------------------------------*/
 
 .ivan_popov_mainpart{
@@ -699,7 +681,7 @@ h6 { font-size: 16px; }
 }
 
 /*---------------------------------------------------*/
-/*	05) IVAN POPOV HOME
+/*	 HOME
 /*---------------------------------------------------*/
 
 .ivan_popov_home{
@@ -809,7 +791,7 @@ h6 { font-size: 16px; }
 	background-color: #999;
 }
 /*---------------------------------------------------*/
-/*	16) IVAN POPOV MEDIA QUERIES (FOR SMALL DEVICES)
+/*	 MEDIA QUERIES (FOR SMALL DEVICES)
 /*---------------------------------------------------*/
 
 @media (max-width: 1600px) {
@@ -961,6 +943,6 @@ h6 { font-size: 16px; }
 /*	ADVANTAGES LIST STYLING
 /*---------------------------------------------------*/
 
-.advantages_list {
+/* .advantages_list {
 	margin: 15px 0;
-}
+} */
