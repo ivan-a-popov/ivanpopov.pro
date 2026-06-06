@@ -613,7 +613,7 @@ h6 { font-size: 16px; }
 	z-index: 8;
 	transition: visibility 1s linear, opacity 0s linear;
 	-moz-transition: visibility 1s linear, opacity 0s linear;
-	-webkit-transition: visibility1s linear, opacity 0s linear;
+	-webkit-transition: visibility 1s linear, opacity 0s linear;
 	-o-transition: visibility 1s linear, opacity 0s linear;
 }
 .ivan_popov_section.animated {
