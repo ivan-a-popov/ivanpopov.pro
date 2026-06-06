@@ -24,8 +24,8 @@
 <meta itemprop="description" content="IT-эксперт">
 <meta itemprop="name" content="Иван Попов">
 </div>
-	<!-- CRITICAL PRELOADER CSS (inlined so the loader paints on first render,
-	     before any external stylesheet has downloaded — kills the white gap) -->
+<!-- CRITICAL PRELOADER CSS (inlined so the loader paints on first render,
+before any external stylesheet has downloaded — kills the FCP gap) -->
 <style>
 html{overflow-x:hidden;margin:0;padding:0}
 body{margin:0;background-color:#f6fbff}
@@ -56,15 +56,15 @@ body{margin:0;background-color:#f6fbff}
      only after window 'load', by which point these sheets are applied.
      style.css stays LAST in DOM order so its critical @media rules still win
      cascade ties over the deferred base files. -->
-<link rel="preload" as="style" href="static/css/plugins.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/plugins-deferred.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style-deferred.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/plugins.css?v=dd3f5c0a" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/plugins-deferred.css?v=5700315d" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style-deferred.css?v=ccbda9cc" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=4b39e944" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/plugins.css" />
-<link rel="stylesheet" href="static/css/plugins-deferred.css" />
-<link rel="stylesheet" href="static/css/style-deferred.css" />
-<link rel="stylesheet" href="static/css/style.css" />
+<link rel="stylesheet" href="static/css/plugins.css?v=dd3f5c0a" />
+<link rel="stylesheet" href="static/css/plugins-deferred.css?v=5700315d" />
+<link rel="stylesheet" href="static/css/style-deferred.css?v=ccbda9cc" />
+<link rel="stylesheet" href="static/css/style.css?v=4b39e944" />
 </noscript>
 <!-- /STYLES -->
 
@@ -718,9 +718,9 @@ body{margin:0;background-color:#f6fbff}
 	<!-- / WRAPPER ALL -->
 	
 <!-- SCRIPTS -->
-<script src="static/js/jquery.js"></script>
-<script src="static/js/plugins.js"></script>
-<script src="static/js/init.js"></script>
+<script src="static/js/jquery.js?v=3e4bb227"></script>
+<script src="static/js/plugins.js?v=e4851c85"></script>
+<script src="static/js/init.js?v=659880f4"></script>
 
 <!-- Portrait, contact-area particles (always), color portrait on #contact, glitch via toggle -->
 <script>
