@@ -24,23 +24,48 @@
 <meta itemprop="description" content="IT-эксперт">
 <meta itemprop="name" content="Иван Попов">
 </div>
+	<!-- CRITICAL PRELOADER CSS (inlined so the loader paints on first render,
+	     before any external stylesheet has downloaded — kills the white gap) -->
+<style>
+html{overflow-x:hidden;margin:0;padding:0}
+body{margin:0;background-color:#f6fbff}
+#preloader{position:fixed;left:0;top:0;height:100vh;width:100%;z-index:99999;display:flex}
+#preloader:before,#preloader:after{content:'';position:absolute;left:0;top:0;width:50%;height:100%;z-index:-1;background-color:#000;transition:all .3s ease 0s}
+#preloader:after{left:auto;right:0}
+#preloader .loader_line{margin:auto;width:1px;height:250px;position:relative;overflow:hidden;transition:all .8s ease 0s}
+#preloader .loader_line:before{content:'';position:absolute;left:0;top:50%;width:1px;height:0;transform:translateY(-50%);background-color:#fff;animation:lineheight 1000ms ease-in-out 0s forwards}
+#preloader .loader_line:after{content:'';position:absolute;left:0;top:0;width:1px;height:100%;background-color:#777;transform:translateY(-100%);animation:lineround 1200ms linear 0s infinite;animation-delay:2000ms}
+@keyframes lineheight{0%{height:0}100%{height:100%}}
+@keyframes lineround{0%{transform:translateY(-100%)}100%{transform:translateY(200%)}}
+#preloader.preloaded .loader_line:after{opacity:0}
+#preloader.preloaded .loader_line{opacity:0;height:100%!important}
+#preloader.preloaded:before,#preloader.preloaded:after{animation:preloadedzero 300ms ease-in-out 500ms forwards}
+@keyframes preloadedzero{0%{width:50%}100%{width:0}}
+</style>
+<!-- If JS is disabled the loader is never dismissed, so hide it in that case. -->
+<noscript><style>#preloader{display:none!important}</style></noscript>
+
 	<!-- STYLES -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&display=swap"></noscript>
 
-<link rel="stylesheet" type="text/css" href="static/css/plugins.css" />
-<!-- Deferred CSS is listed BEFORE style.css so that the critical responsive @media
-     rules in style.css win cascade ties over the base rules in the deferred files
-     (loading stays async via preload/onload; only DOM/cascade order matters here). -->
+<!-- All app CSS loads async (preload + onload swap) so it no longer blocks the
+     preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
+     only after window 'load', by which point these sheets are applied.
+     style.css stays LAST in DOM order so its critical @media rules still win
+     cascade ties over the deferred base files. -->
+<link rel="preload" as="style" href="static/css/plugins.css" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="style" href="static/css/plugins-deferred.css" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="style" href="static/css/style-deferred.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
+<link rel="stylesheet" href="static/css/plugins.css" />
 <link rel="stylesheet" href="static/css/plugins-deferred.css" />
 <link rel="stylesheet" href="static/css/style-deferred.css" />
+<link rel="stylesheet" href="static/css/style.css" />
 </noscript>
-<link rel="stylesheet" type="text/css" href="static/css/style.css" />
 <!-- /STYLES -->
 
 </head>

@@ -402,16 +402,12 @@ function ivan_popov_preloader(){
 		}, 850);
 	};
 
-	var start = function(){
-		setTimeout(run, 1000);
-	};
-
 	if (document.readyState === 'complete') {
-		start();
+		run();
 	} else {
 		jQuery(window).on('load.ivan_popov_preloader', function(){
 			jQuery(window).off('load.ivan_popov_preloader');
-			start();
+			run();
 		});
 	}
 }
