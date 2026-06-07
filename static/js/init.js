@@ -277,6 +277,11 @@ function ivan_popov_goto(href){
 		ivan_popov_nicescroll_bind_section($target);
 	}, 1050);
 
+	// Testimonials become a vertical list on mobile: hint that it scrolls.
+	if(href === '#how'){
+		ivan_popov_flash_hint('.ivan_popov_scroll_hint', 'ivan_popov_scroll_hint');
+	}
+
 	return true;
 }
 
@@ -333,6 +338,41 @@ function ivan_popov_trigger_menu(){
 // -----------   SWIPE NAVIGATION (MOBILE)   -----------
 // -----------------------------------------------------
 
+// Mirrors the CSS 1040px breakpoint where the mobile layout (topbar, swipe
+// nav, stacked testimonials) takes over from the desktop layout.
+function ivan_popov_is_mobile_layout(){
+
+	"use strict";
+
+	if(window.matchMedia){
+		return window.matchMedia('(max-width: 1040px)').matches;
+	}
+	return jQuery(window).width() <= 1040;
+}
+
+// Briefly reveal a one-time-per-session hint element, then fade it out.
+function ivan_popov_flash_hint(selector, storageKey){
+
+	"use strict";
+
+	try {
+		var hasTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+		if(!hasTouch || !ivan_popov_is_mobile_layout()){
+			return;
+		}
+		if(window.sessionStorage.getItem(storageKey)){
+			return;
+		}
+		var hint = document.querySelector(selector);
+		if(!hint){
+			return;
+		}
+		window.sessionStorage.setItem(storageKey, '1');
+		window.setTimeout(function(){ hint.classList.add('show'); }, 700);
+		window.setTimeout(function(){ hint.classList.remove('show'); }, 3200);
+	} catch(err) {}
+}
+
 // Build the bottom dots indicator (mobile only, hidden by CSS on desktop).
 // The dots mirror the mobile menu order and reuse the .transition_link class
 // so the standard click handler navigates and ivan_popov_goto keeps them active.
@@ -366,6 +406,10 @@ function ivan_popov_build_swipe_nav(){
 		+ '<div class="ivan_popov_swipe_hint" aria-hidden="true">'
 		+ '<span class="ar left">&#8249;</span>'
 		+ '<span class="ar right">&#8250;</span>'
+		+ '</div>'
+		+ '<div class="ivan_popov_scroll_hint" aria-hidden="true">'
+		+ '<span class="ar up">&#8249;</span>'
+		+ '<span class="ar down">&#8250;</span>'
 		+ '</div>';
 
 	jQuery('.ivan_popov_all_wrap').append(html);
@@ -414,8 +458,9 @@ function ivan_popov_swipe_navigation(){
 			tracking = false;
 			return;
 		}
-		// Let the testimonials carousel handle its own horizontal swipes.
-		if(e.target.closest && e.target.closest('.owl-carousel')){
+		// Only defer to the carousel when it is actually initialized (desktop).
+		// On mobile it is disabled, so swipes there navigate between sections.
+		if(e.target.closest && e.target.closest('.owl-carousel.owl-loaded')){
 			tracking = false;
 			return;
 		}
@@ -454,17 +499,8 @@ function ivan_popov_swipe_navigation(){
 		ivan_popov_goto(order[nextIndex]);
 	}, { passive: true });
 
-	// One-time per-session hint so users discover the gesture.
-	try {
-		if(('ontouchstart' in window) && !window.sessionStorage.getItem('ivan_popov_swipe_hint')){
-			var hint = document.querySelector('.ivan_popov_swipe_hint');
-			if(hint){
-				window.setTimeout(function(){ hint.classList.add('show'); }, 900);
-				window.setTimeout(function(){ hint.classList.remove('show'); }, 4200);
-			}
-			window.sessionStorage.setItem('ivan_popov_swipe_hint', '1');
-		}
-	} catch(err) {}
+	// One-time per-session hint so users discover the horizontal swipe.
+	ivan_popov_flash_hint('.ivan_popov_swipe_hint', 'ivan_popov_swipe_hint');
 }
 
 // -------------------------------------------------
@@ -682,6 +718,12 @@ function ivan_popov_data_images(){
 	 
 	 "use strict";
 	 
+	// On mobile the horizontal slider fights with the section swipe gesture, so
+	// the testimonials are shown as a plain vertical list instead (see CSS).
+	if(ivan_popov_is_mobile_layout()){
+		return;
+	}
+
 	var carousel			= jQuery('.ivan_popov_about .testimonials .owl-carousel');
 	
 	carousel.owlCarousel({
