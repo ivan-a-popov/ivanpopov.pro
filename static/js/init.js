@@ -1,17 +1,12 @@
-/*
- * Copyright (c) 2022 Marketify
- * Author: Marketify
- * This file is made for CURRENT TEMPLATE
-*/
-
-// Регистрируем touch-обработчики jQuery как непассивные, чтобы preventDefault()
-// в Owl Carousel (touchmove на document) работал и Chrome не сыпал
-// "Unable to preventDefault inside passive event listener" при свайпах.
+// Register jQuery touch listeners as non-passive so plugins (e.g. Owl Carousel)
+// can call preventDefault() during horizontal swipes without Chrome firing the
+// "Unable to preventDefault inside passive event listener" intervention.
 (function(jq){
 	"use strict";
 	if (!jq || !jq.event || !jq.event.special) {
 		return;
 	}
+	// Feature-detect the passive option; bail out on legacy browsers.
 	var supportsPassive = false;
 	try {
 		var opts = Object.defineProperty({}, 'passive', {
@@ -31,24 +26,6 @@
 		};
 	});
 })(window.jQuery);
-
-// Register jQuery touch listeners as non-passive so plugins (e.g. Owl Carousel)
-// can call preventDefault() during horizontal swipes without Chrome firing the
-// "Unable to preventDefault inside passive event listener" intervention.
-(function(){
-	"use strict";
-	if (!window.jQuery || !jQuery.event || !jQuery.event.special) {
-		return;
-	}
-	jQuery.each(['touchstart', 'touchmove', 'touchend', 'touchcancel'], function(_, type){
-		jQuery.event.special[type] = {
-			setup: function(_data, ns, handle){
-				this.addEventListener(type, handle, { passive: false });
-				return true;
-			}
-		};
-	});
-})();
 
 jQuery(document).ready(function(){
 
