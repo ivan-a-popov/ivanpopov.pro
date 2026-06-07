@@ -117,6 +117,21 @@ a:hover{text-decoration:none;}
 
 .icon-cancel:before { content: '\e800'; }
 
+/* Restored quote icons. The project's generated fontello set dropped these
+   glyphs, so they are painted from an inline SVG mask and inherit currentColor.
+   The closing quote (icon-quote-right) is the opening glyph rotated 180deg. */
+.icon-quote-left:before,
+.icon-quote-right:before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  vertical-align: -0.125em;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M0 216C0 149.7 53.7 96 120 96l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64zm256 0c0-66.3 53.7-120 120-120l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64z'/%3E%3C/svg%3E") no-repeat center / contain;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M0 216C0 149.7 53.7 96 120 96l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64zm256 0c0-66.3 53.7-120 120-120l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.icon-quote-right:before { transform: rotate(180deg); }
+
 /*------------------------------------------------------------------*/ 
 /*	ANIMATION (rollIn / rollOut only)
 /*------------------------------------------------------------------*/

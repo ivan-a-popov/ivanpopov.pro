@@ -596,6 +596,13 @@
 	font-size: 30px;
 	top: -29px;
 	left: 50px;
+	color: #E5EDF4;
+}
+.ivan_popov_about .testimonials .list ul li .text i.icon-quote-right{
+	top: auto;
+	left: auto;
+	right: 50px;
+	bottom: -29px;
 }
 .ivan_popov_about .testimonials .details{
 	width: 100%;
