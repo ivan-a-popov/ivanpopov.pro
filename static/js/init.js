@@ -365,7 +365,6 @@ function ivan_popov_build_swipe_nav(){
 		+ '</div>'
 		+ '<div class="ivan_popov_swipe_hint" aria-hidden="true">'
 		+ '<span class="ar left">&#8249;</span>'
-		+ '<span class="txt">свайп</span>'
 		+ '<span class="ar right">&#8250;</span>'
 		+ '</div>';
 
