@@ -554,4 +554,3 @@ function currentLink(ccc,e){
 	ccc.css({left: (left-menuleft) + 'px',width: width + 'px'});
 	
 }
-
