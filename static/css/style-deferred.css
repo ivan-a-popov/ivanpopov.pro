@@ -140,7 +140,7 @@
 	float: left;
 	display: flex;
 	justify-content: space-between;
-	margin-top: 55px;
+	margin-top: 30px;
 }
 .ivan_popov_about .biography .left{
 	width: 45%;
@@ -1034,7 +1034,7 @@
 	height: auto;
 	clear: both;
 	float: left;
-	margin-top: 60px;
+	margin-top: 30px;
 }
 .ivan_popov_service .service_list ul{
 	margin: 0px 0px 0px -50px;
