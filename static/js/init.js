@@ -35,8 +35,10 @@ jQuery(document).ready(function(){
 	
 	ivan_popov_modalbox();
 	ivan_popov_nicescroll();
+	ivan_popov_build_swipe_nav();
 	ivan_popov_page_transition();
 	ivan_popov_trigger_menu();
+	ivan_popov_swipe_navigation();
 	ivan_popov_my_progress();
 	ivan_popov_circular_progress();
 	ivan_popov_service_popup();
@@ -233,42 +235,64 @@ function ivan_popov_nicescroll_resize($elements){
 // -------------   PAGE TRANSITION    ------------------
 // -----------------------------------------------------
 
+// Shared navigation: switch to a section by its href (e.g. "#about").
+// Used by the header/mobile menus, the swipe dots and the touch swipe handler,
+// so every entry point keeps the section state and all menus in sync.
+function ivan_popov_goto(href){
+
+	"use strict";
+
+	if(!href){
+		return false;
+	}
+
+	var $target		= jQuery(href);
+	if(!$target.length){
+		return false;
+	}
+
+	var section		= jQuery('.ivan_popov_section');
+	var allLi		= jQuery('.transition_link li');
+	var wrapper		= jQuery('.ivan_popov_all_wrap');
+	var enter		= wrapper.data('enter');
+	var exit		= wrapper.data('exit');
+	// Every link (header, mobile menu, swipe dots) that points to this section.
+	var parents		= jQuery('.transition_link a[href="'+href+'"]').closest('li');
+
+	if(parents.filter('.active').length){
+		return false;
+	}
+
+	allLi.removeClass('active');
+	wrapper.find(section).removeClass('animated '+enter);
+	if(wrapper.hasClass('opened')){
+		wrapper.find(section).addClass('animated '+exit);
+	}
+	parents.addClass('active');
+	wrapper.addClass('opened');
+	wrapper.find($target).removeClass('animated '+exit).addClass('animated '+enter);
+	section.addClass('hidden');
+	$target.removeClass('hidden').addClass('active');
+	setTimeout(function(){
+		ivan_popov_nicescroll_bind_section($target);
+	}, 1050);
+
+	return true;
+}
+
 function ivan_popov_page_transition(){
 	
 	"use strict";
 	
-	var section 		= jQuery('.ivan_popov_section');
-	var allLi 			= jQuery('.transition_link li');
 	var button			= jQuery('.transition_link a');
-	var wrapper 		= jQuery('.ivan_popov_all_wrap');
-	var enter	 		= wrapper.data('enter');
-	var exit		 	= wrapper.data('exit');
 	
 	button.on('click',function(){
 		var element 	= jQuery(this);
 		var href		= element.attr('href');
+		ivan_popov_goto(href);
 		if(element.parent().hasClass('ivan_popov_button')){
-			jQuery('.menu .transition_link a[href="'+href+'"]').trigger('click');
 			hashtag();
-			return false;
 		}
-		var sectionID 	= jQuery(href);
-		var parent	 	= element.closest('li');
-			if(!parent.hasClass('active')) {
-				allLi.removeClass('active');
-				wrapper.find(section).removeClass('animated '+enter);
-				if(wrapper.hasClass('opened')) {
-					wrapper.find(section).addClass('animated '+exit);
-				}
-				parent.addClass('active');
-				wrapper.addClass('opened');
-				wrapper.find(sectionID).removeClass('animated '+exit).addClass('animated '+enter);
-				jQuery(section).addClass('hidden');
-				jQuery(sectionID).removeClass('hidden').addClass('active');
-				setTimeout(function(){
-					ivan_popov_nicescroll_bind_section(sectionID);
-				}, 1050);
-			}
 		return false;
 	});
 }
@@ -303,6 +327,145 @@ function ivan_popov_trigger_menu(){
 		mobileMenu.removeClass('opened');
 		return false;
 	});
+}
+
+// -----------------------------------------------------
+// -----------   SWIPE NAVIGATION (MOBILE)   -----------
+// -----------------------------------------------------
+
+// Build the bottom dots indicator (mobile only, hidden by CSS on desktop).
+// The dots mirror the mobile menu order and reuse the .transition_link class
+// so the standard click handler navigates and ivan_popov_goto keeps them active.
+function ivan_popov_build_swipe_nav(){
+
+	"use strict";
+
+	if(jQuery('.ivan_popov_swipe_nav').length){
+		return;
+	}
+
+	var links = jQuery('.ivan_popov_mobile_menu .menu_list .transition_link a');
+	if(!links.length){
+		return;
+	}
+
+	var dots = '';
+	links.each(function(i){
+		var $a		= jQuery(this);
+		var href	= $a.attr('href');
+		var label	= jQuery.trim($a.text());
+		var active	= jQuery(href).hasClass('active') || (i === 0 && !jQuery('.ivan_popov_section.active').length);
+		dots += '<li class="'+(active ? 'active' : '')+'">'
+			+ '<a href="'+href+'" aria-label="'+label+'"><span class="dot"></span></a>'
+			+ '</li>';
+	});
+
+	var html = '<div class="ivan_popov_swipe_nav" aria-label="Навигация по разделам">'
+		+ '<ul class="transition_link">'+dots+'</ul>'
+		+ '</div>'
+		+ '<div class="ivan_popov_swipe_hint" aria-hidden="true">'
+		+ '<span class="ar left">&#8249;</span>'
+		+ '<span class="txt">свайп</span>'
+		+ '<span class="ar right">&#8250;</span>'
+		+ '</div>';
+
+	jQuery('.ivan_popov_all_wrap').append(html);
+}
+
+function ivan_popov_swipe_navigation(){
+
+	"use strict";
+
+	var mainpart = document.querySelector('.ivan_popov_mainpart');
+	if(!mainpart){
+		return;
+	}
+
+	var startX = 0, startY = 0, startTime = 0, tracking = false;
+
+	function sectionOrder(){
+		return jQuery('.ivan_popov_swipe_nav .transition_link a').map(function(){
+			return jQuery(this).attr('href');
+		}).get();
+	}
+
+	function currentHref(){
+		// The active dot is the reliable source of truth: ivan_popov_goto keeps
+		// exactly one .transition_link item active. Sections cannot be used here
+		// because the legacy transition only adds .hidden to the previous section
+		// without clearing its .active class, so several stay "active" at once.
+		var $dot = jQuery('.ivan_popov_swipe_nav li.active a');
+		if($dot.length){
+			return $dot.attr('href');
+		}
+		var $visible = jQuery('.ivan_popov_section.active').not('.hidden').last();
+		if(!$visible.length){
+			$visible = jQuery('.ivan_popov_section.animated').not('.hidden').last();
+		}
+		return $visible.length ? ('#' + $visible.attr('id')) : null;
+	}
+
+	function navigationBlocked(){
+		return jQuery('.ivan_popov_modalbox').hasClass('opened')
+			|| jQuery('.ivan_popov_mobile_menu').hasClass('opened');
+	}
+
+	mainpart.addEventListener('touchstart', function(e){
+		if(e.touches.length !== 1 || navigationBlocked()){
+			tracking = false;
+			return;
+		}
+		// Let the testimonials carousel handle its own horizontal swipes.
+		if(e.target.closest && e.target.closest('.owl-carousel')){
+			tracking = false;
+			return;
+		}
+		var t = e.touches[0];
+		startX = t.clientX;
+		startY = t.clientY;
+		startTime = Date.now();
+		tracking = true;
+	}, { passive: true });
+
+	mainpart.addEventListener('touchend', function(e){
+		if(!tracking){
+			return;
+		}
+		tracking = false;
+
+		var t	= e.changedTouches[0];
+		var dx	= t.clientX - startX;
+		var dy	= t.clientY - startY;
+
+		// Only treat quick, mostly-horizontal gestures as section swipes so
+		// vertical scrolling inside a section stays untouched.
+		if(Date.now() - startTime > 900){ return; }
+		if(Math.abs(dx) < 60){ return; }
+		if(Math.abs(dx) < Math.abs(dy) * 1.4){ return; }
+
+		var order = sectionOrder();
+		if(!order.length){ return; }
+
+		var index = order.indexOf(currentHref());
+		if(index < 0){ index = 0; }
+
+		var nextIndex = dx < 0 ? index + 1 : index - 1;
+		if(nextIndex < 0 || nextIndex >= order.length){ return; }
+
+		ivan_popov_goto(order[nextIndex]);
+	}, { passive: true });
+
+	// One-time per-session hint so users discover the gesture.
+	try {
+		if(('ontouchstart' in window) && !window.sessionStorage.getItem('ivan_popov_swipe_hint')){
+			var hint = document.querySelector('.ivan_popov_swipe_hint');
+			if(hint){
+				window.setTimeout(function(){ hint.classList.add('show'); }, 900);
+				window.setTimeout(function(){ hint.classList.remove('show'); }, 4200);
+			}
+			window.sessionStorage.setItem('ivan_popov_swipe_hint', '1');
+		}
+	} catch(err) {}
 }
 
 // -------------------------------------------------
