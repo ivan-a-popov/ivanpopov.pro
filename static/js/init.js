@@ -706,7 +706,15 @@ function ivan_popov_data_images(){
 	data.each(function(){
 		var element			= jQuery(this);
 		var url				= element.data('img-url');
-		element.css({backgroundImage: 'url('+url+')'});
+		var webp			= element.data('img-url-webp');
+		if (webp) {
+			element.css({
+				backgroundImage:
+					'image-set(url("' + webp + '") type("image/webp"), url("' + url + '") type("image/jpeg"))'
+			});
+		} else {
+			element.css({backgroundImage: 'url('+url+')'});
+		}
 	});
 }
 
