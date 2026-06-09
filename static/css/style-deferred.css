@@ -51,7 +51,6 @@
 .ivan_popov_title .subtitle{
 	font-size: 16px;
 	color: #7d7789;
-	font-family: "Open Sans";
 	font-weight: 400;
 	font-style: italic;
 	margin-top: 8px;
@@ -85,7 +84,6 @@
 	margin-left: 30px;
 }
 .ivan_popov_glitch_switch_label{
-	font-family: "Open Sans", sans-serif;
 	font-size: 14px;
 	font-weight: 600;
 	color: #333;
