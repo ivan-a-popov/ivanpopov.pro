@@ -578,12 +578,15 @@ function ivan_popov_service_popup(){
 	button.on('click',function(){
 		var element = jQuery(this);
 		var parent	= element.closest('.list_inner');
-		var elImage	= parent.find('.popup_service_image').attr('src');
+		var popupImg = parent.find('.popup_service_image');
+		var elImage	= popupImg.data('popup-jpg') || popupImg.attr('src');
+		var elWebp	= popupImg.data('popup-webp');
 		var title	= parent.find('.title').html();
 		var content = parent.find('.service_hidden_details').html();
+		var webpAttr = elWebp ? ' data-img-url-webp="'+elWebp+'"' : '';
 		modalBox.addClass('opened');
 		modalBox.find('.description_wrap').html(content);
-		modalBox.find('.service_popup_informations').prepend('<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"></div></div>');
+		modalBox.find('.service_popup_informations').prepend('<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"'+webpAttr+'></div></div>');
 		ivan_popov_data_images();
 		modalBox.find('.service_popup_informations .image').after('<div class="main_title"><h3>'+title+'</h3></div>');
 		ivan_popov_nicescroll_resize(modalBox.find('.description_wrap'));
@@ -706,7 +709,15 @@ function ivan_popov_data_images(){
 	data.each(function(){
 		var element			= jQuery(this);
 		var url				= element.data('img-url');
-		element.css({backgroundImage: 'url('+url+')'});
+		var webp			= element.data('img-url-webp');
+		if (webp) {
+			element.css({
+				backgroundImage:
+					'image-set(url("' + webp + '") type("image/webp"), url("' + url + '") type("image/jpeg"))'
+			});
+		} else {
+			element.css({backgroundImage: 'url('+url+')'});
+		}
 	});
 }
 
