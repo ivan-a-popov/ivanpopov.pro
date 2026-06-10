@@ -237,18 +237,6 @@ h6 { font-size: 16px; }
 	justify-content: space-between;
 	padding: 0px 70px;
 }
-.ivan_popov_header .logo[data-type="image"] .image{
-	display: inline-block;
-}
-.ivan_popov_header .logo[data-type="image"] .text{
-	display: none;
-}
-.ivan_popov_header .logo[data-type="text"] .image{
-	display: none;
-}
-.ivan_popov_header .logo[data-type="text"] .text{
-	display: inline-block;
-}
 .ivan_popov_header .logo .text,
 .ivan_popov_topbar .logo .text{
 	text-decoration: none;
@@ -289,10 +277,6 @@ h6 { font-size: 16px; }
 	.ivan_popov_topbar .logo .text .logo-cursor{
 		animation: none;
 	}
-}
-.ivan_popov_header .logo img{
-	max-width: 110px;
-	max-height: 65px;
 }
 .ivan_popov_header .menu{
 	position: relative;
@@ -366,22 +350,6 @@ h6 { font-size: 16px; }
 	align-items: center;
 	justify-content: space-between;
 	padding: 0px 20px;
-}
-.ivan_popov_topbar .logo img{
-	max-width: 100px;
-	max-height: 40px;
-}
-.ivan_popov_topbar .logo[data-type="image"] .image{
-	display: inline-block;
-}
-.ivan_popov_topbar .logo[data-type="image"] .text{
-	display: none;
-}
-.ivan_popov_topbar .logo[data-type="text"] .image{
-	display: none;
-}
-.ivan_popov_topbar .logo[data-type="text"] .text{
-	display: inline-block;
 }
 .ivan_popov_topbar .hamburger{
 	padding: 0px;
@@ -797,7 +765,6 @@ h6 { font-size: 16px; }
 @media (max-width: 1600px) {
 	body{font-size: 15px;}
 	.ivan_popov_header .logo .text{line-height: 60px;}
-	.ivan_popov_header .logo img{max-width: 95px;}
 	.ivan_popov_mainpart .author_image{width: 35%;}
 	.ivan_popov_mainpart .main_content{width: 65%;}
 	.ivan_popov_section .section_inner:before{width: 50px;}
