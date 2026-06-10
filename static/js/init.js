@@ -675,6 +675,8 @@ function ivan_popov_imgtosvg(){
 		var jQueryimg 		= jQuery(this);
 		var imgClass		= jQueryimg.attr('class');
 		var imgURL			= jQueryimg.attr('src');
+		var imgWidth		= jQueryimg.attr('width');
+		var imgHeight		= jQueryimg.attr('height');
 
 		jQuery.get(imgURL, function(data) {
 			// Get the SVG tag, ignore the rest
@@ -683,6 +685,12 @@ function ivan_popov_imgtosvg(){
 			// Add replaced image's classes to the new SVG
 			if(typeof imgClass !== 'undefined') {
 				jQuerysvg = jQuerysvg.attr('class', imgClass+' replaced-svg');
+			}
+			if (imgWidth) {
+				jQuerysvg = jQuerysvg.attr('width', imgWidth);
+			}
+			if (imgHeight) {
+				jQuerysvg = jQuerysvg.attr('height', imgHeight);
 			}
 
 			// Remove any invalid XML tags as per http://validator.w3.org
