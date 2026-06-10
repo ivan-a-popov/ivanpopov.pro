@@ -58,12 +58,12 @@ body{margin:0;background-color:#f6fbff}
      cascade ties over the deferred base files. -->
 <link rel="preload" as="style" href="static/css/plugins.css?v=d0153f6b" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="style" href="static/css/plugins-deferred.css?v=5700315d" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style-deferred.css?v=9d4144ac" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style-deferred.css?v=b77fe6b9" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="style" href="static/css/style.css?v=7a96672c" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
 <link rel="stylesheet" href="static/css/plugins.css?v=d0153f6b" />
 <link rel="stylesheet" href="static/css/plugins-deferred.css?v=5700315d" />
-<link rel="stylesheet" href="static/css/style-deferred.css?v=9d4144ac" />
+<link rel="stylesheet" href="static/css/style-deferred.css?v=b77fe6b9" />
 <link rel="stylesheet" href="static/css/style.css?v=7a96672c" />
 </noscript>
 <!-- /STYLES -->
@@ -756,9 +756,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		img.id = 'author_photo_img';
 		img.width = 640;
 		img.height = 960;
-		img.loading = 'lazy';
 		img.decoding = 'async';
-		img.fetchPriority = 'low';
+		img.fetchPriority = 'high';
 		img.src = src;
 		img.alt = '';
 		img.setAttribute('data-src-bw', bw);
