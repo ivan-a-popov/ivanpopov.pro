@@ -1677,21 +1677,21 @@
   opacity: 0;
 }
 /* Dark surfaces (service card hover + modal overlay/hero): invert magic cursor */
-body.ivan_popov_light_cursor .mouse-cursor .cursor-inner{
+body.ivan_popov_light_cursor .mouse-cursor.cursor-inner{
   background-color: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
 }
-body.ivan_popov_light_cursor .mouse-cursor .cursor-outer{
+body.ivan_popov_light_cursor .mouse-cursor.cursor-outer{
   border-color: #fff;
   opacity: 0.9;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
 }
-body.ivan_popov_light_cursor .mouse-cursor .cursor-inner.cursor-hover{
+body.ivan_popov_light_cursor .mouse-cursor.cursor-inner.cursor-hover{
   background-color: #fff;
   opacity: 0.55;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
 }
-body.ivan_popov_light_cursor .mouse-cursor .cursor-outer.cursor-hover{
+body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
   opacity: 0.75;
   border-color: #fff;
 }
