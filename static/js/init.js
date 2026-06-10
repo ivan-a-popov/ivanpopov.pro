@@ -60,10 +60,7 @@ jQuery(document).ready(function(){
 // -----------------------------------------------------
 
 function ivan_popov_modalbox(){
-	
 	"use strict";
-	
-	jQuery('.ivan_popov_all_wrap').prepend('<div class="ivan_popov_modalbox"><div class="box_inner"><div class="close"><a href="#"><i class="icon-cancel"></i></a></div><div class="description_wrap"></div></div></div>');
 }
 
 // -----------------------------------------------------
@@ -574,7 +571,20 @@ function ivan_popov_service_popup(){
 	var modalBox		= jQuery('.ivan_popov_modalbox');
 	var button			= jQuery('.ivan_popov_service .service_list ul li .ivan_popov_full_link');
 	var closePopup		= modalBox.find('.close');
-	
+	var serviceCards	= jQuery('.ivan_popov_service .service_list ul li .list_inner');
+
+	function setLightCursor(on){
+		jQuery('body').toggleClass('ivan_popov_light_cursor', !!on);
+	}
+
+	serviceCards.on('mouseenter', function(){
+		setLightCursor(true);
+	}).on('mouseleave', function(){
+		if (!modalBox.hasClass('opened')) {
+			setLightCursor(false);
+		}
+	});
+
 	button.on('click',function(){
 		var element = jQuery(this);
 		var parent	= element.closest('.list_inner');
@@ -585,6 +595,7 @@ function ivan_popov_service_popup(){
 		var content = parent.find('.service_hidden_details').html();
 		var webpAttr = elWebp ? ' data-img-url-webp="'+elWebp+'"' : '';
 		modalBox.addClass('opened');
+		setLightCursor(true);
 		modalBox.find('.description_wrap').html(content);
 		modalBox.find('.service_popup_informations').prepend('<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"'+webpAttr+'></div></div>');
 		ivan_popov_data_images();
@@ -594,6 +605,7 @@ function ivan_popov_service_popup(){
 	});
 	closePopup.on('click',function(){
 		modalBox.removeClass('opened');
+		setLightCursor(false);
 		modalBox.find('.description_wrap').html('');
 		ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_modal, ivan_popov_nicescroll_modal_el);
 		ivan_popov_nicescroll_modal = null;

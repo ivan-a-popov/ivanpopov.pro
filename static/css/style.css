@@ -101,6 +101,16 @@ h6 { font-size: 16px; }
 	   -moz-box-sizing: border-box; /* Firefox, other Gecko */
 			box-sizing: border-box; /* Opera/IE 8+ */
 }
+@media (min-width: 1041px){
+	.ivan_popov_all_wrap[data-magic-cursor="show"],
+	.ivan_popov_all_wrap[data-magic-cursor="show"] *{
+		cursor: none !important;
+	}
+	.ivan_popov_all_wrap[data-magic-cursor="show"] input,
+	.ivan_popov_all_wrap[data-magic-cursor="show"] textarea{
+		cursor: text !important;
+	}
+}
 #preloader{
     position: fixed;
     left: 0;
