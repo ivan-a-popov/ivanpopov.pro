@@ -153,7 +153,20 @@ body{margin:0;background-color:#f6fbff}
 		<!-- MAINPART -->
 		<div class="ivan_popov_mainpart">
 			<div class="author_image" id="author_image">
-				<!-- Portrait only -->
+				<div class="author_image_inner">
+					<div class="author_photo_glitch_host" id="author_photo_glitch_host">
+						<img class="author_photo" id="author_photo_img"
+							src="static/img/about/2.jpg"
+							alt=""
+							width="640"
+							height="960"
+							loading="lazy"
+							decoding="async"
+							fetchpriority="low"
+							data-src-bw="static/img/about/2.jpg"
+							data-src-color="static/img/about/2-color.jpg">
+					</div>
+				</div>
 			</div>
 			<div class="main_content">
 			
@@ -507,7 +520,7 @@ body{margin:0;background-color:#f6fbff}
 												</div>
 												<div class="details">
 													<div class="image">
-														<div class="main" data-img-url="static/img/testimonials/ipoint.jpg" data-img-url-webp="static/img/testimonials/ipoint.webp"></div>
+														<div class="main" data-img-url="static/img/testimonials/ipoint.jpg"></div>
 													</div>
 													<div class="info">
 														<h3>Попов Александр</h3>
@@ -630,73 +643,20 @@ body{margin:0;background-color:#f6fbff}
 <!-- SCRIPTS -->
 <script src="static/js/jquery.js?v=3e4bb227"></script>
 <script src="static/js/plugins.js?v=91445b8a"></script>
-<script src="static/js/init.js?v=3ef68b8b"></script>
+<script src="static/js/init.js?v=04567925"></script>
 
 <!-- Portrait, contact-area particles (always), color portrait on #contact, glitch via toggle -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	var AUTHOR_SRC_BW = 'static/img/about/2.jpg';
 	var AUTHOR_SRC_COLOR = 'static/img/about/2-color.jpg';
-	var AUTHOR_SRCSET_BW =
-		'static/img/about/2.jpg 640w, static/img/about/2-960w.jpg 960w';
-	var AUTHOR_SRCSET_COLOR =
-		'static/img/about/2-color.jpg 640w, static/img/about/2-color-960w.jpg 960w';
-	var AUTHOR_SIZES =
-		'(max-width: 767px) 0px, (min-width: 768px) and (max-width: 1040px) 36vw, (max-width: 1600px) 35vw, 40vw';
 
-	function applyDataImgBackground(element) {
-		var url = element.getAttribute('data-img-url');
-		var webp = element.getAttribute('data-img-url-webp');
-		if (webp) {
-			element.style.backgroundImage =
-				'image-set(url("' +
-				webp +
-				'") type("image/webp"), url("' +
-				url +
-				'") type("image/jpeg"))';
-		} else {
-			element.style.backgroundImage = 'url(' + url + ')';
-		}
-	}
-
-	function applyAuthorPortraitSrc($img, useColor) {
-		if (!$img || !$img.length) return;
-		$img.attr(
-			'src',
-			useColor ? AUTHOR_SRC_COLOR : AUTHOR_SRC_BW
-		);
-		$img.attr(
-			'srcset',
-			useColor ? AUTHOR_SRCSET_COLOR : AUTHOR_SRCSET_BW
-		);
-		$img.attr('sizes', AUTHOR_SIZES);
-	}
-
-	var authorImageDiv = document.getElementById('author_image');
-	if (authorImageDiv) {
-		authorImageDiv.innerHTML =
-			'<div class="author_image_inner">' +
-			'<div class="author_photo_glitch_host" id="author_photo_glitch_host">' +
-			'<img class="author_photo" id="author_photo_img" src="' +
-			AUTHOR_SRC_BW +
-			'" alt="" width="640" height="960" srcset="' +
-			AUTHOR_SRCSET_BW +
-			'" sizes="' +
-			AUTHOR_SIZES +
-			'" data-src-bw="' +
-			AUTHOR_SRC_BW +
-			'" data-src-color="' +
-			AUTHOR_SRC_COLOR +
-			'" data-srcset-bw="' +
-			AUTHOR_SRCSET_BW +
-			'" data-srcset-color="' +
-			AUTHOR_SRCSET_COLOR +
-			'">' +
-			'</div></div>';
-	}
 	setTimeout(function() {
 		var dataImages = document.querySelectorAll('[data-img-url]');
-		dataImages.forEach(applyDataImgBackground);
+		dataImages.forEach(function(element) {
+			var url = element.getAttribute('data-img-url');
+			element.style.backgroundImage = 'url(' + url + ')';
+		});
 	}, 200);
 
 	function initContactParticles() {
@@ -781,8 +741,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		var src = $img.attr('src') || '';
 		var bw = $img.attr('data-src-bw') || AUTHOR_SRC_BW;
 		var colorSrc = $img.attr('data-src-color') || AUTHOR_SRC_COLOR;
-		var bwSrcset = $img.attr('data-srcset-bw') || AUTHOR_SRCSET_BW;
-		var colorSrcset = $img.attr('data-srcset-color') || AUTHOR_SRCSET_COLOR;
 		var override = $img.attr('data-photo-override');
 		var $inner = $host.closest('.author_image_inner');
 
@@ -799,14 +757,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		img.id = 'author_photo_img';
 		img.width = 640;
 		img.height = 960;
+		img.loading = 'lazy';
+		img.decoding = 'async';
+		img.fetchPriority = 'low';
 		img.src = src;
 		img.alt = '';
-		img.setAttribute('srcset', src === colorSrc ? colorSrcset : bwSrcset);
-		img.setAttribute('sizes', AUTHOR_SIZES);
 		img.setAttribute('data-src-bw', bw);
 		img.setAttribute('data-src-color', colorSrc);
-		img.setAttribute('data-srcset-bw', bwSrcset);
-		img.setAttribute('data-srcset-color', colorSrcset);
 		if (override) img.setAttribute('data-photo-override', override);
 		newHost.appendChild(img);
 
@@ -847,14 +804,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			destroyPortraitGlitch($host);
 			$img = $host.find('.author_photo').first();
 			$img.removeAttr('data-photo-override');
-			applyAuthorPortraitSrc($img, false);
+			$img.attr('src', bw);
 			return;
 		}
 
 		if (portraitHidden) return;
 
-		if ($img.attr('data-photo-override') !== 'prize') {
-			applyAuthorPortraitSrc($img, true);
+		if ($img.attr('data-photo-override') !== 'prize' && $img.attr('src') !== colorSrc) {
+			$img.attr('src', colorSrc);
 		}
 
 		if (!glitchEnabled) {
@@ -929,18 +886,20 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	var PRIZE_SRC = 'static/img/about/2-color.jpg';
-	var PRIZE_SRCSET =
-		'static/img/about/2-color.jpg 640w, static/img/about/2-color-960w.jpg 960w';
+	var colorPreloaded = false;
 
-	var preloader = new Image();
-	preloader.src = PRIZE_SRC;
-	var colorPreload = new Image();
-	colorPreload.src = PRIZE_SRC;
+	function preloadColorPortrait() {
+		if (colorPreloaded) return;
+		colorPreloaded = true;
+		var img = new Image();
+		img.src = PRIZE_SRC;
+	}
 
 	var iconContainer = document.querySelector('.telegram_icon_large');
 	if (!iconContainer) return;
 
 	function setPrizePhoto() {
+		preloadColorPortrait();
 		var authorImageDiv = document.getElementById('author_image');
 		if (!authorImageDiv) return;
 
@@ -950,7 +909,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (photoImg) {
 			photoImg.setAttribute('data-photo-override', 'prize');
 			photoImg.src = PRIZE_SRC;
-			photoImg.srcset = PRIZE_SRCSET;
 		}
 	}
 
