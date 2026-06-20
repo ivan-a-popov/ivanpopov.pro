@@ -39,6 +39,7 @@ jQuery(document).ready(function(){
 	ivan_popov_page_transition();
 	ivan_popov_trigger_menu();
 	ivan_popov_swipe_navigation();
+	ivan_popov_keyboard_navigation();
 	ivan_popov_my_progress();
 	ivan_popov_circular_progress();
 	ivan_popov_service_popup();
@@ -500,6 +501,131 @@ function ivan_popov_swipe_navigation(){
 	ivan_popov_flash_hint('.ivan_popov_swipe_hint', 'ivan_popov_swipe_hint');
 }
 
+// -----------------------------------------------------
+// ------------   KEYBOARD NAVIGATION    ---------------
+// -----------------------------------------------------
+
+// Arrow Left/Right step through the menu sections (Up/Down stay free for
+// scrolling section content). Escape closes the service popup or mobile menu.
+function ivan_popov_keyboard_navigation(){
+
+	"use strict";
+
+	var modalBox	= jQuery('.ivan_popov_modalbox');
+	var mobileMenu	= jQuery('.ivan_popov_mobile_menu');
+
+	// Section order follows the menu order; the header is the source of truth,
+	// with the mobile menu as a fallback when the header is not rendered.
+	function sectionOrder(){
+		var order = jQuery('.ivan_popov_header .menu .transition_link a').map(function(){
+			return jQuery(this).attr('href');
+		}).get();
+		if(!order.length){
+			order = jQuery('.ivan_popov_mobile_menu .menu_list .transition_link a').map(function(){
+				return jQuery(this).attr('href');
+			}).get();
+		}
+		return order;
+	}
+
+	function currentHref(){
+		var $active = jQuery('.transition_link li.active a').first();
+		if($active.length){
+			return $active.attr('href');
+		}
+		var $visible = jQuery('.ivan_popov_section.active').not('.hidden').last();
+		return $visible.length ? ('#' + $visible.attr('id')) : null;
+	}
+
+	// Keep the sliding header highlight aligned with the new active item, since
+	// keyboard navigation fires no mouse events to reposition it.
+	function refreshHeaderHighlight(){
+		if(typeof currentLink !== 'function'){
+			return;
+		}
+		var header = jQuery('.ivan_popov_header');
+		if(!header.is(':visible')){
+			return;
+		}
+		var ccc = header.find('.menu .ccc');
+		var el	= header.find('.menu .active a');
+		if(ccc.length && el.length){
+			currentLink(ccc, el);
+		}
+	}
+
+	function navigateBy(step){
+		var order = sectionOrder();
+		if(!order.length){
+			return false;
+		}
+		var index = order.indexOf(currentHref());
+		if(index < 0){
+			index = 0;
+		}
+		var nextIndex = index + step;
+		if(nextIndex < 0 || nextIndex >= order.length){
+			return false;
+		}
+		ivan_popov_goto(order[nextIndex]);
+		refreshHeaderHighlight();
+		return true;
+	}
+
+	function closeModal(){
+		if(!modalBox.hasClass('opened')){
+			return false;
+		}
+		// Reuse the existing close handler so nicescroll/cursor state is reset.
+		modalBox.find('.close').first().trigger('click');
+		return true;
+	}
+
+	function closeMobileMenu(){
+		if(!mobileMenu.hasClass('opened')){
+			return false;
+		}
+		jQuery('.ivan_popov_topbar .trigger .hamburger').removeClass('is-active');
+		mobileMenu.removeClass('opened');
+		return true;
+	}
+
+	function isTypingTarget(el){
+		if(!el){
+			return false;
+		}
+		var tag = (el.tagName || '').toLowerCase();
+		return tag === 'input' || tag === 'textarea' || tag === 'select' || el.isContentEditable;
+	}
+
+	jQuery(document).on('keydown.ivan_popov_kbd', function(e){
+		var key = e.key;
+
+		if(key === 'Escape' || key === 'Esc'){
+			if(closeModal() || closeMobileMenu()){
+				e.preventDefault();
+			}
+			return;
+		}
+
+		// Leave typing and modified shortcuts (Ctrl/Cmd/Alt) untouched.
+		if(isTypingTarget(e.target) || e.ctrlKey || e.metaKey || e.altKey){
+			return;
+		}
+
+		// Section navigation is suspended while a popup or the mobile menu is open.
+		if(modalBox.hasClass('opened') || mobileMenu.hasClass('opened')){
+			return;
+		}
+
+		if(key === 'ArrowRight'){
+			if(navigateBy(1)){ e.preventDefault(); }
+		}else if(key === 'ArrowLeft'){
+			if(navigateBy(-1)){ e.preventDefault(); }
+		}
+	});
+}
+
 // -------------------------------------------------
 // -------------  PROGRESS BAR  --------------------
 // -------------------------------------------------
@@ -797,7 +923,36 @@ function hashtag(){
 		element.parent().siblings().removeClass('mleave');
 	});
 	currentLink(ccc,element);
-	
+
+	function repositionActive(){
+		var active = $('.ivan_popov_header .menu .active a');
+		if(active.length){
+			currentLink(ccc, active);
+		}
+	}
+	if(document.fonts && document.fonts.ready && document.fonts.ready.then){
+		document.fonts.ready.then(repositionActive);
+	}
+	$(window).on('load.ivan_popov_ccc', repositionActive);
+	$(window).on('resize.ivan_popov_ccc', repositionActive);
+
+	// style.css and the "Onest" font load asynchronously (the stylesheet is
+	// swapped in via a preload/onload trick), so at this point the menu is often
+	// still unstyled and the active link measures far too narrow. document.fonts
+	// .ready and window "load" can both fire BEFORE that async CSS actually
+	// applies, latching the wrong width and never firing again — which left the
+	// highlight stuck short until a later hover/resize. A ResizeObserver on the
+	// menu re-measures whenever the real layout finally lands (font swap, async
+	// CSS apply, breakpoint change), which is the only reliable trigger here.
+	if(window.ResizeObserver){
+		var menuList = document.querySelector('.ivan_popov_header .menu ul');
+		if(menuList){
+			new ResizeObserver(function(){
+				repositionActive();
+			}).observe(menuList);
+		}
+	}
+
 }
 
 function currentLink(ccc,e){
