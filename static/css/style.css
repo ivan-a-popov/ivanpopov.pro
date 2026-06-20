@@ -833,7 +833,7 @@ h6 { font-size: 16px; }
 	.ivan_popov_portfolio .portfolio_filter ul li{margin-right: 30px;}
 	.ivan_popov_about .testimonials .list ul li .text{padding: 30px;}
 	.ivan_popov_contact .short_info ul li .list_inner{padding: 20px 10px;}
-	.ivan_popov_modalbox .box_inner{width: 750px;top: 45px;bottom: 45px;}
+	.ivan_popov_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
 	.ivan_popov_modalbox .description_wrap{padding: 30px;}
 }
 @media (max-width: 1040px) {
@@ -888,7 +888,7 @@ h6 { font-size: 16px; }
 	.ivan_popov_contact .form{flex-direction: column;align-items: baseline;}
 	.ivan_popov_contact .form .left{width: 100%;padding: 0px;margin-bottom: 30px;}
 	.ivan_popov_contact .form .right{width: 100%;padding: 0px;}
-	.ivan_popov_modalbox .box_inner{width: 550px;}
+	.ivan_popov_modalbox .box_inner{width: 480px;}
 	.ivan_popov_modalbox .description_wrap{padding: 20px;}
 	.ivan_popov_modalbox .main_details{flex-direction: column;align-items: baseline;}
 	.ivan_popov_modalbox .main_details .textbox{width: 100%;padding: 0px;margin-bottom: 30px;}
