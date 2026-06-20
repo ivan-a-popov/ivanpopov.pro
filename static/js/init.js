@@ -48,6 +48,7 @@ jQuery(document).ready(function(){
 	ivan_popov_data_images();
 	ivan_popov_mycarousel();
 	hashtag();
+	ivan_popov_bind_nav_mode();
 	ivan_popov_preloader();
 	
 });
@@ -333,11 +334,107 @@ function ivan_popov_trigger_menu(){
 }
 
 // -----------------------------------------------------
+// -----------   NAV MODE (HEADER VS COMPACT)   --------
+// -----------------------------------------------------
+
+var ivan_popov_nav_mode_timer = null;
+
+// True when the header menu no longer fits and the hamburger layout is active.
+function ivan_popov_is_nav_compact(){
+
+	"use strict";
+
+	return jQuery('.ivan_popov_all_wrap').hasClass('nav-compact');
+}
+
+// Measure whether every header item fits beside the logo; toggle .nav-compact.
+function ivan_popov_update_nav_mode(){
+
+	"use strict";
+
+	var wrap = document.querySelector('.ivan_popov_all_wrap');
+	var header = document.querySelector('.ivan_popov_header');
+	if(!wrap || !header){
+		return;
+	}
+
+	var menu = header.querySelector('.menu');
+	var logo = header.querySelector('.logo');
+	var menuList = menu ? menu.querySelector('ul') : null;
+	if(!menu || !logo || !menuList){
+		return;
+	}
+
+	var wasCompact = wrap.classList.contains('nav-compact');
+
+	wrap.classList.add('nav-measuring');
+	wrap.classList.remove('nav-compact');
+
+	var requiredWidth = menuList.scrollWidth;
+	var available = menu.clientWidth;
+	var fits = requiredWidth <= available;
+
+	wrap.classList.remove('nav-measuring');
+	wrap.classList.toggle('nav-compact', !fits);
+
+	if(wasCompact && fits){
+		jQuery('.ivan_popov_topbar .trigger .hamburger').removeClass('is-active');
+		jQuery('.ivan_popov_mobile_menu').removeClass('opened');
+	}
+
+	if(fits){
+		var ccc = jQuery(header).find('.menu .ccc');
+		var el = jQuery(header).find('.menu .active a');
+		if(ccc.length && el.length && typeof currentLink === 'function'){
+			currentLink(ccc, el);
+		}
+	}
+}
+
+function ivan_popov_schedule_nav_mode(){
+
+	"use strict";
+
+	window.clearTimeout(ivan_popov_nav_mode_timer);
+	ivan_popov_nav_mode_timer = window.setTimeout(ivan_popov_update_nav_mode, 0);
+}
+
+function ivan_popov_bind_nav_mode(){
+
+	"use strict";
+
+	jQuery(window).on('resize', function(){
+		window.clearTimeout(ivan_popov_nav_mode_timer);
+		ivan_popov_nav_mode_timer = window.setTimeout(ivan_popov_update_nav_mode, 120);
+	});
+
+	jQuery(window).on('load', ivan_popov_schedule_nav_mode);
+
+	if(document.readyState === 'complete'){
+		ivan_popov_schedule_nav_mode();
+	}
+
+	if(document.fonts && document.fonts.ready){
+		document.fonts.ready.then(ivan_popov_schedule_nav_mode);
+	}
+
+	var header = document.querySelector('.ivan_popov_header');
+	if(header && window.ResizeObserver){
+		var observer = new ResizeObserver(function(){
+			ivan_popov_schedule_nav_mode();
+		});
+		observer.observe(header);
+	}
+
+	ivan_popov_schedule_nav_mode();
+}
+
+// -----------------------------------------------------
 // -----------   SWIPE NAVIGATION (MOBILE)   -----------
 // -----------------------------------------------------
 
-// Mirrors the CSS 1040px breakpoint where the mobile layout (topbar, swipe
-// nav, stacked testimonials) takes over from the desktop layout.
+// Mirrors the CSS 1040px breakpoint where stacked/mobile content layout
+// takes over from the desktop two-column layout.
 function ivan_popov_is_mobile_layout(){
 
 	"use strict";
@@ -355,7 +452,7 @@ function ivan_popov_flash_hint(selector, storageKey){
 
 	try {
 		var hasTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-		if(!hasTouch || !ivan_popov_is_mobile_layout()){
+		if(!hasTouch || !ivan_popov_is_nav_compact()){
 			return;
 		}
 		if(window.sessionStorage.getItem(storageKey)){
@@ -452,6 +549,10 @@ function ivan_popov_swipe_navigation(){
 	}
 
 	mainpart.addEventListener('touchstart', function(e){
+		if(!ivan_popov_is_nav_compact()){
+			tracking = false;
+			return;
+		}
 		if(e.touches.length !== 1 || navigationBlocked()){
 			tracking = false;
 			return;

@@ -288,16 +288,28 @@ h6 { font-size: 16px; }
 		animation: none;
 	}
 }
+.ivan_popov_header .logo{
+	flex: 0 0 auto;
+}
 .ivan_popov_header .menu{
 	position: relative;
+	flex: 1 1 auto;
+	min-width: 0;
+	display: flex;
+	justify-content: flex-end;
 }
 .ivan_popov_header .menu ul{
 	margin: 0px;
 	list-style-type: none;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: flex-end;
 }
 .ivan_popov_header .menu ul li{
 	margin: 0px;
-	float: left;
+	float: none;
+	flex: 0 0 auto;
 }
 .ivan_popov_header .menu ul li a{
 	text-decoration: none;
@@ -381,6 +393,22 @@ h6 { font-size: 16px; }
 	background-color: #fff;
 	z-index: 15;
 	display: none;
+}
+/* Compact nav: hamburger + swipe dots when the header menu no longer fits. */
+.ivan_popov_all_wrap.nav-compact .ivan_popov_topbar{
+	display: block;
+}
+.ivan_popov_all_wrap.nav-compact .ivan_popov_header{
+	display: none;
+}
+/* Measure menu overflow with the desktop header laid out but invisible. */
+.ivan_popov_all_wrap.nav-measuring .ivan_popov_header{
+	display: flex !important;
+	visibility: hidden;
+	pointer-events: none;
+}
+.ivan_popov_all_wrap.nav-measuring .ivan_popov_header .menu ul{
+	flex-wrap: nowrap;
 }
 .ivan_popov_topbar .topbar_inner{
 	width: 100%;
@@ -838,8 +866,6 @@ h6 { font-size: 16px; }
 }
 @media (max-width: 1040px) {
 	.mouse-cursor{display: none;}
-	.ivan_popov_topbar{display: block;}
-	.ivan_popov_header{display: none;}
 	.ivan_popov_footer{display: none;}
 	.ivan_popov_left_border,
 	.ivan_popov_right_border{
@@ -862,6 +888,7 @@ h6 { font-size: 16px; }
 		opacity: 0;
 	}
 	.ivan_popov_mainpart{top: 50px;left: 0px;right: 0px;bottom: 0px;}
+	.ivan_popov_all_wrap:not(.nav-compact) .ivan_popov_mainpart{top: 60px;}
 	.ivan_popov_mainpart .main_content{width: 100%;}
 	.ivan_popov_home .content{padding: 0px 20px;}
 	.ivan_popov_home .name{font-size: 60px;}
@@ -899,8 +926,8 @@ h6 { font-size: 16px; }
 	.ivan_popov_modalbox .news_popup_informations .title h3{font-size: 20px;}
 	.ivan_popov_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
 }
-/* Large tablets: keep the portrait two-column layout (the mobile topbar/hamburger
-   and stacked sections still apply); only collapse to single column below 768px. */
+/* Large tablets: keep the portrait two-column layout (compact nav may still show
+   the desktop header when it fits); only collapse to single column below 768px. */
 @media (min-width: 768px) and (max-width: 1040px) {
 	.ivan_popov_mainpart .author_image{
 		width: 36%;
@@ -957,64 +984,62 @@ h6 { font-size: 16px; }
 /*	SWIPE NAVIGATION (MOBILE)
 /*---------------------------------------------------*/
 
-/* Hidden on desktop: the fixed header menu is used there instead. */
+/* Hidden until compact nav is active (header menu no longer fits). */
 .ivan_popov_swipe_nav
 {
 	display: none;
 }
 
+.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav{
+	display: block;
+	position: fixed;
+	left: 50%;
+	bottom: 14px;
+	transform: translateX(-50%);
+	z-index: 14;
+	padding: 8px 14px;
+	border-radius: 999px;
+	background: transparent;
+}
+.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	align-items: center;
+}
+.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul li{
+	margin: 0;
+	float: none;
+}
+.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul li a{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 7px;
+	text-decoration: none;
+}
+.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul li a .dot{
+	display: block;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.55);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+	transition: width .3s ease, height .3s ease, background-color .3s ease;
+}
+.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul li.active a .dot{
+	width: 9px;
+	height: 9px;
+	background: #fff;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+/* Keep the last bit of scrollable content clear of the floating pill. */
+.ivan_popov_all_wrap.nav-compact .ivan_popov_section .section_inner{
+	padding-bottom: 64px;
+}
+
 @media (max-width: 1040px) {
-	.ivan_popov_swipe_nav{
-		display: block;
-		position: fixed;
-		left: 50%;
-		bottom: 14px;
-		transform: translateX(-50%);
-		z-index: 14;
-		padding: 8px 14px;
-		border-radius: 999px;
-		background: transparent;
-	}
-	.ivan_popov_swipe_nav ul{
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		display: flex;
-		align-items: center;
-	}
-	.ivan_popov_swipe_nav ul li{
-		margin: 0;
-		float: none;
-	}
-	.ivan_popov_swipe_nav ul li a{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 7px;
-		text-decoration: none;
-	}
-	.ivan_popov_swipe_nav ul li a .dot{
-		display: block;
-		width: 7px;
-		height: 7px;
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.55);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-		transition: width .3s ease, height .3s ease, background-color .3s ease;
-	}
-	.ivan_popov_swipe_nav ul li.active a .dot{
-		width: 9px;
-		height: 9px;
-		background: #fff;
-		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-	}
-
-	/* Keep the last bit of scrollable content clear of the floating pill. */
-	.ivan_popov_section .section_inner{
-		padding-bottom: 64px;
-	}
-
-
 	/* Testimonials: carousel is disabled on mobile (JS), so show every entry
 	   as a simple vertically-scrolled list instead of a horizontal slider.
 	   The markup relies on float:left + clear:both (which only stacks correctly
