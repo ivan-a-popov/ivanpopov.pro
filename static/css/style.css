@@ -306,12 +306,40 @@ h6 { font-size: 16px; }
 	font-weight: 500;
 	padding: 0px 30px;
 	display: inline-block;
+	position: relative;
 	
 	-webkit-transition: all .3s ease;
 	   -moz-transition: all .3s ease;
 	    -ms-transition: all .3s ease;
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
+}
+.ivan_popov_header .menu ul li a b{
+	display: inline-block;
+	transition: transform .3s ease;
+}
+.ivan_popov_header .menu ul li .ivp_menu_sub{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 50%;
+	margin-top: 3px;
+	text-align: center;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.5px;
+	text-transform: lowercase;
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity .3s ease;
+}
+.ivan_popov_header .menu ul li.active a b{
+	transform: translateY(-8px);
+}
+.ivan_popov_header .menu ul li.active .ivp_menu_sub{
+	opacity: 1;
 }
 .ivan_popov_header .menu .ccc{
 	position: absolute;
