@@ -1984,6 +1984,10 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 			rgba(255, 255, 255, 0.55) 0%,
 			rgba(239, 245, 252, 0.95) 48%,
 			rgba(228, 236, 248, 0.98) 100%);
+	/* Scale the ripple texture to cover the layer instead of tiling it
+	   (the 512x512 power-of-two texture would otherwise REPEAT and seam). */
+	background-size: cover;
+	background-position: center;
 }
 #contact .ivan_popov_contact_particles_root{
 	position: absolute;
