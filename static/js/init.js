@@ -923,6 +923,9 @@ function ivan_popov_testimonials_snap(){
 	var paused = false;
 	var timer = null;
 	var scrollEndTimer = null;
+	var dragging = false;
+	var dragStartX = 0;
+	var dragScrollLeft = 0;
 
 	function scrollToIndex(i){
 		// Scroll the horizontal track only — scrollIntoView() also moves ancestor
@@ -954,13 +957,62 @@ function ivan_popov_testimonials_snap(){
 		paused = true;
 	});
 	list.addEventListener('mouseleave', function(){
-		paused = false;
+		if(!dragging){
+			paused = false;
+		}
 	});
 	list.addEventListener('touchstart', function(){
 		paused = true;
 	}, { passive: true });
 	list.addEventListener('touchend', function(){
 		paused = false;
+	}, { passive: true });
+
+	// Click-drag and trackpad horizontal scroll: NiceScroll on the section
+	// captures pointer/wheel events unless we stop propagation on the track.
+	function onDragMove(e){
+		if(!dragging){
+			return;
+		}
+		e.preventDefault();
+		e.stopPropagation();
+		list.scrollLeft = dragScrollLeft - (e.clientX - dragStartX);
+	}
+
+	function endDrag(){
+		if(!dragging){
+			return;
+		}
+		dragging = false;
+		list.classList.remove('is-dragging');
+		paused = false;
+		window.removeEventListener('mousemove', onDragMove);
+		window.removeEventListener('mouseup', endDrag);
+	}
+
+	list.addEventListener('mousedown', function(e){
+		if(e.button !== 0){
+			return;
+		}
+		dragging = true;
+		paused = true;
+		dragStartX = e.clientX;
+		dragScrollLeft = list.scrollLeft;
+		list.classList.add('is-dragging');
+		e.preventDefault();
+		e.stopPropagation();
+		window.addEventListener('mousemove', onDragMove);
+		window.addEventListener('mouseup', endDrag);
+	});
+
+	list.addEventListener('wheel', function(e){
+		if(Math.abs(e.deltaX) > Math.abs(e.deltaY)){
+			e.stopPropagation();
+		}
+	}, { passive: true });
+
+	list.addEventListener('touchmove', function(e){
+		e.stopPropagation();
 	}, { passive: true });
 
 	list.addEventListener('scroll', function(){
