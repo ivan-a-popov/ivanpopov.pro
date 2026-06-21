@@ -40,22 +40,16 @@ jQuery(document).ready(function(){
 	ivan_popov_trigger_menu();
 	ivan_popov_swipe_navigation();
 	ivan_popov_keyboard_navigation();
-	ivan_popov_my_progress();
-	ivan_popov_circular_progress();
 	ivan_popov_service_popup();
 	ivan_popov_cursor();
 	ivan_popov_imgtosvg();
 	ivan_popov_data_images();
-	ivan_popov_mycarousel();
+	ivan_popov_testimonials_snap();
 	hashtag();
 	ivan_popov_bind_nav_mode();
 	ivan_popov_preloader();
 	
 });
-
-// -----------------------------------------------------
-// ---------------   FUNCTIONS    ----------------------
-// -----------------------------------------------------
 
 // -----------------------------------------------------
 // --------------------   MODALBOX    ------------------
@@ -557,12 +551,6 @@ function ivan_popov_swipe_navigation(){
 			tracking = false;
 			return;
 		}
-		// Only defer to the carousel when it is actually initialized (desktop).
-		// On mobile it is disabled, so swipes there navigate between sections.
-		if(e.target.closest && e.target.closest('.owl-carousel.owl-loaded')){
-			tracking = false;
-			return;
-		}
 		var t = e.touches[0];
 		startX = t.clientX;
 		startY = t.clientY;
@@ -724,66 +712,6 @@ function ivan_popov_keyboard_navigation(){
 		}else if(key === 'ArrowLeft'){
 			if(navigateBy(-1)){ e.preventDefault(); }
 		}
-	});
-}
-
-// -------------------------------------------------
-// -------------  PROGRESS BAR  --------------------
-// -------------------------------------------------
-
-function ivan_popov_my_progress(){
-	
-	"use strict";
-	
-	jQuery('.progress_inner').each(function() {
-		var progress 		= jQuery(this);
-		var pValue 			= parseInt(progress.data('value'), 10);
-		var pColor			= progress.data('color');
-		var pBarWrap 		= progress.find('.bar');
-		var pBar 			= progress.find('.bar_in');
-		pBar.css({width:pValue+'%', backgroundColor:pColor});
-		setTimeout(function(){pBarWrap.addClass('open');});
-	});
-}
-
-// -----------------------------------------------------
-// ---------------   CIRCULAR PROGRESS   ---------------
-// -----------------------------------------------------
-
-function ivan_popov_circular_progress(){
-	
-	"use strict";
-	
-	var ww		= jQuery(window).width();
-	var circVal;
-	
-	if(ww > 1400){
-		circVal = 120;
-	}
-	else if(ww >= 768){
-		circVal = 100;
-	}
-	else{
-		circVal = 80;
-	}
-	
-	jQuery('.circular_progress_bar .myCircle').each(function(){
-		var element	= jQuery(this);
-		element.append('<span class="number"></span>');
-		var value	= element.data('value');
-		element.circleProgress({
-			size: circVal,
-			value: 0,
-			animation: {duration: 1400},
-			thickness: 3,
-			fill: "#7d7789",
-			emptyFill: 'rgba(0,0,0,0)',
-			startAngle: -Math.PI/2
-		  }).on('circle-animation-progress', function(event, progress, stepValue) {
-				element.find('.number').text(parseInt(stepValue.toFixed(2)*100) + '%');
-		  });
-		  element.circleProgress('value', 1.0);
-		  setTimeout(function() { element.circleProgress('value', value); }, 1400);
 	});
 }
 
@@ -969,42 +897,94 @@ function ivan_popov_data_images(){
 }
 
 // -----------------------------------------------------
-// --------------    OWL CAROUSEL    -------------------
+// ------------   TESTIMONIALS SCROLL-SNAP   -----------
 // -----------------------------------------------------
 
- function ivan_popov_mycarousel(){
-	 
-	 "use strict";
-	 
-	// On mobile the horizontal slider fights with the section swipe gesture, so
-	// the testimonials are shown as a plain vertical list instead (see CSS).
+function ivan_popov_testimonials_snap(){
+
+	"use strict";
+
+	// Horizontal snap + autoplay are desktop-only; mobile uses a vertical list (CSS).
 	if(ivan_popov_is_mobile_layout()){
 		return;
 	}
 
-	var carousel			= jQuery('.ivan_popov_about .testimonials .owl-carousel');
-	
-	carousel.owlCarousel({
-		loop: true,
-		items: 2,
-		lazyLoad: false,
-		margin: 30,
-		autoplay: true,
-		autoplayTimeout: 7000,
-		dots: false,
-		nav: false,
-		navSpeed: false,
-		responsive : {
-			0 : {
-				items: 1
-			},
-			768 : {
-				items: 2
-			}
+	var list = document.querySelector('.ivan_popov_about .testimonials .testimonials-snap');
+	if(!list){
+		return;
+	}
+
+	var items = list.querySelectorAll(':scope > li');
+	if(items.length < 2){
+		return;
+	}
+
+	var index = 0;
+	var paused = false;
+	var timer = null;
+	var scrollEndTimer = null;
+
+	function scrollToIndex(i){
+		// Scroll the horizontal track only — scrollIntoView() also moves ancestor
+		// .ivan_popov_section (overflow-y: scroll) and breaks every section layout.
+		var item = items[i];
+		var left = item.getBoundingClientRect().left - list.getBoundingClientRect().left + list.scrollLeft;
+		list.scrollTo({ left: left, behavior: 'smooth' });
+	}
+
+	function isHowActive(){
+		var how = document.getElementById('how');
+		return how && how.classList.contains('active');
+	}
+
+	function scheduleAutoplay(){
+		if(timer){
+			clearInterval(timer);
 		}
+		timer = setInterval(function(){
+			if(paused || !isHowActive()){
+				return;
+			}
+			index = (index + 1) % items.length;
+			scrollToIndex(index);
+		}, 7000);
+	}
+
+	list.addEventListener('mouseenter', function(){
+		paused = true;
 	});
-	 
- }
+	list.addEventListener('mouseleave', function(){
+		paused = false;
+	});
+	list.addEventListener('touchstart', function(){
+		paused = true;
+	}, { passive: true });
+	list.addEventListener('touchend', function(){
+		paused = false;
+	}, { passive: true });
+
+	list.addEventListener('scroll', function(){
+		if(scrollEndTimer){
+			clearTimeout(scrollEndTimer);
+		}
+		scrollEndTimer = setTimeout(function(){
+			var scrollLeft = list.scrollLeft;
+			var bestIndex = 0;
+			var bestDistance = Infinity;
+			for(var i = 0; i < items.length; i++){
+				var itemLeft = items[i].offsetLeft;
+				var distance = Math.abs(itemLeft - scrollLeft);
+				if(distance < bestDistance){
+					bestDistance = distance;
+					bestIndex = i;
+				}
+			}
+			index = bestIndex;
+		}, 120);
+	}, { passive: true });
+
+	scheduleAutoplay();
+}
 
 // -----------------------------------------------------
 // -------------------    HASHTAG    -------------------

@@ -53,21 +53,14 @@ body{margin:0;background-color:#f6fbff}
 
 <!-- All app CSS loads async (preload + onload swap) so it no longer blocks the
      preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
-     only after window 'load', by which point these sheets are applied.
-     style.css stays LAST in DOM order so its critical @media rules still win
-     cascade ties over the deferred base files. -->
+     only after window 'load', by which point these sheets are applied. -->
 <link rel="preload" as="style" href="static/css/plugins.css?v=bb2c0e8c" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/plugins-deferred.css?v=5700315d" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style-deferred.css?v=5389c8c5" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css?v=9a7156fb" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=1103e300" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
 <link rel="stylesheet" href="static/css/plugins.css?v=bb2c0e8c" />
-<link rel="stylesheet" href="static/css/plugins-deferred.css?v=5700315d" />
-<link rel="stylesheet" href="static/css/style-deferred.css?v=5389c8c5" />
-<link rel="stylesheet" href="static/css/style.css?v=9a7156fb" />
+<link rel="stylesheet" href="static/css/style.css?v=1103e300" />
 </noscript>
 <!-- /STYLES -->
-
 </head>
 
 <body> 
@@ -188,10 +181,12 @@ body{margin:0;background-color:#f6fbff}
 							<h3 class="job">
 								<span class="cd-headline clip">
 									<span class="cd-words-wrapper">
-									  <b class="is-visible">Системный дизайн</b>
+									  <b class="is-visible">Сложная разработка</b>
+									  <b>Системный дизайн</b>
 									  <b>Бизнес-аналитика</b>
-									  <b>Сквозная интеграция</b>
-									  <b>Разработка и поддержка</b>
+									  <b>Интеграция систем</b>
+									  <b>Внедрение ИИ</b>
+									  <b>Техническая поддержка</b>
 									</span>
 									<span class="blc">с человеческим лицом</span>
 								</span>
@@ -215,62 +210,28 @@ body{margin:0;background-color:#f6fbff}
 								<div class="wrapper">
 									<div class="left">
 										<p>Помогаю бизнесу разумно выбирать, грамотно внедрять и эффективно использовать самые современные IT- и AI-решения.</p>
-										<p>Сопровождаю на всём пути: от идеи и прототипа до воплощения в коде, интеграции в рабочий контур и поддержки работающего проекта.</p>
+										<p>Могу включиться на любой стадии: от обсуждения идеи до её воплощения в коде, интеграции в рабочий контур и поддержки работающего проекта.</p>
 									</div>
 									<div class="right">
-										<p>Стараюсь фокусироваться на измеримой бизнес-ценности и ROI: очередность разработки фич определяется их вкладом в результат.</p>
-										<p>Не привязан к конкретным технологиям — выбираю инструменты исходя из задач проекта и долгосрочных перспектив бизнеса.</p>
+										<p>Решаю не только технические вопросы — прежде всего фокусируюсь на бизнес-смыслах, ценности и ROI. Любая технология должна работать на общий результат.</p>
+										<p>Если что-то (технология, сервис, бизнес-процесс) не приносит денег или другой понятной пользы, нужно пересмотреть подходы, а то и вовсе от этого отказаться.</p>
 									</div>
 								</div>
-							</div>
-							
-							<div class="skills">
+								
 								<div class="ivan_popov_title">
 									<span>В ЧАСТНОМ</span>
 								</div>
 								<div class="wrapper">
-									<div class="programming">
-										<div class="ivan_popov_progress">
-											<div class="progress_inner" data-value="95">
-												<span><span class="label">Backend: ASP.NET Core, C#, PHP, Python</span><span class="number">95%</span></span>
-												<div class="background"><div class="bar"><div class="bar_in"></div></div></div>
-											</div>
-											<div class="progress_inner" data-value="80" >
-												<span><span class="label">Fontend: HTML+CSS, TS, JS</span><span class="number">80%</span></span>
-												<div class="background"><div class="bar"><div class="bar_in"></div></div></div>
-											</div>
-											<div class="progress_inner" data-value="90">
-												<span><span class="label">DevOps: Bash, Git, Docker</span><span class="number">90%</span></span>
-												<div class="background"><div class="bar"><div class="bar_in"></div></div></div>
-											</div>
-										</div>
+									<div class="left">
+										<p>Помогаю бизнесу разумно выбирать, грамотно внедрять и эффективно использовать самые современные IT- и AI-решения.</p>
+										<p>Могу включиться на любой стадии: от обсуждения идеи до её воплощения в коде, интеграции в рабочий контур и поддержки работающего проекта.</p>
 									</div>
-									<div class="language">
-										<div class="circular_progress_bar">
-											<ul>
-												<li>
-													<div class="list_inner">
-														<div class="myCircle" data-value="0.95"></div>
-														<div class="title"><span>Web</span></div>
-													</div>
-												</li>
-												<li>
-													<div class="list_inner">
-														<div class="myCircle" data-value="0.8"></div>
-														<div class="title"><span>Desktop</span></div>
-													</div>
-												</li>
-												<li>
-													<div class="list_inner">
-														<div class="myCircle" data-value="0.69"></div>
-														<div class="title"><span>Mobile</span></div>
-													</div>
-												</li>
-											</ul>
-										</div>
+									<div class="right">
+										<p>Решаю не только технические вопросы — прежде всего фокусируюсь на бизнес-смыслах, ценности и ROI. Любая технология должна работать на общий результат.</p>
+										<p>Если что-то (технология, сервис, бизнес-процесс) не приносит денег или другой понятной пользы, нужно пересмотреть подходы, а то и вовсе от этого отказаться.</p>
 									</div>
-								</div>
-							</div>
+								</div>				
+					        </div>
 						</div>
 					</div>
 				</div>
@@ -443,7 +404,6 @@ body{margin:0;background-color:#f6fbff}
 									</li>
 								</ul>
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -455,7 +415,7 @@ body{margin:0;background-color:#f6fbff}
 						<div class="ivan_popov_about">
 							<div class="testimonials">
 								<div class="list">
-									<ul class="owl-carousel">
+									<ul class="testimonials-snap">
 										<li>
 											<div class="list_inner">
 												<div class="text">
@@ -523,7 +483,6 @@ body{margin:0;background-color:#f6fbff}
 													</div>
 												</div>
 											</div>
-										</li>
 										</li>
 										<li>
 											<div class="list_inner">
@@ -658,8 +617,8 @@ body{margin:0;background-color:#f6fbff}
 	
 <!-- SCRIPTS -->
 <script src="static/js/jquery.js?v=3e4bb227"></script>
-<script src="static/js/plugins.js?v=a88bd405"></script>
-<script src="static/js/init.js?v=39e45f7f"></script>
+<script src="static/js/plugins.js?v=8b0a044c"></script>
+<script src="static/js/init.js?v=b21071cc"></script>
 
 <!-- Portrait + contact-area ripple FX, color portrait on #contact, glitch + VK switch via toggle -->
 <script>

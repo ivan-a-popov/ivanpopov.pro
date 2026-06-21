@@ -634,13 +634,6 @@ h6 { font-size: 16px; }
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-}
-.ivan_popov_section{
-	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
 	overflow: hidden;
 	overflow-y: scroll;
 	
@@ -701,10 +694,6 @@ h6 { font-size: 16px; }
 	flex: 1;
 	min-height: 0;
 	margin-bottom: 0;
-}
-#contact .ivan_popov_contact_playfield{
-	flex: 1 1 auto;
-	min-height: 0;
 }
 .ivan_popov_section .section_inner:before{
 	position: absolute;
@@ -826,6 +815,812 @@ h6 { font-size: 16px; }
 	transform: translateY(-50%);
 	background-color: #999;
 }
+
+/*---------------------------------------------------*/
+/*	 ABOUT
+/*---------------------------------------------------*/
+
+.ivan_popov_about{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.ivan_popov_about .biography{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 87px;
+}
+.ivan_popov_title{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	overflow: hidden;
+}
+.ivan_popov_title > span{
+	display: inline-block;
+	position: relative;
+	font-family: "Onest";
+	color: #333;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 4px;
+}
+.ivan_popov_title > span:after{
+	position: absolute;
+	content: "";
+	width: 5000px;
+	height: 1px;
+	background-color: #7d7789;
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 30px;
+}
+.ivan_popov_title .subtitle{
+	font-size: 16px;
+	color: #7d7789;
+	font-weight: 400;
+	font-style: italic;
+	margin-top: 8px;
+	opacity: 0.8;
+}
+#contact .ivan_popov_contact_title{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px 14px;
+}
+#contact .ivan_popov_contact_title > span:after{
+	display: none;
+}
+#contact .ivan_popov_glitch_switch_row{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	position: relative;
+	flex: 0 0 auto;
+}
+#contact .ivan_popov_glitch_switch_row:after{
+	position: absolute;
+	content: "";
+	width: 5000px;
+	height: 1px;
+	background-color: #7d7789;
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 30px;
+}
+.ivan_popov_glitch_switch_label{
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+	letter-spacing: 0;
+	text-transform: none;
+}
+.ivan_popov_glitch_switch{
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+	vertical-align: middle;
+}
+.ivan_popov_glitch_switch input{
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+.ivan_popov_glitch_slider{
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #f6fbff;
+	border: 2px solid #000;
+	box-sizing: border-box;
+	transition: background-color 0.2s ease;
+}
+.ivan_popov_glitch_slider:before{
+	position: absolute;
+	content: "";
+	height: 16px;
+	width: 16px;
+	left: 2px;
+	bottom: 2px;
+	background-color: #000;
+	transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.ivan_popov_glitch_switch input:checked + .ivan_popov_glitch_slider:before{
+	transform: translateX(20px);
+}
+.ivan_popov_glitch_switch input:focus-visible + .ivan_popov_glitch_slider{
+	outline: 2px solid #000;
+	outline-offset: 2px;
+}
+.ivan_popov_about .biography .wrapper{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+}
+.ivan_popov_about .biography .left{
+	width: 45%;
+}
+.ivan_popov_about .biography .left p{
+	margin-bottom: 15px;
+}
+.ivan_popov_about .biography .left p:last-child{
+	margin-bottom: 15px;
+}
+.ivan_popov_about .biography .right{
+	width: 45%;
+}
+.ivan_popov_about .biography .right p{
+	margin-bottom: 20px;
+}
+@-webkit-keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
+@-moz-keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
+@keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
+.ivan_popov_full_link{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 5;
+}
+.ivan_popov_about .testimonials{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 90px;
+}
+.ivan_popov_about .testimonials .list{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-top: 20px;
+}
+.ivan_popov_about .testimonials .list ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.ivan_popov_about .testimonials .list ul li{
+	margin: 0px;
+}
+.ivan_popov_about .testimonials .list ul li .list_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+}
+.ivan_popov_about .testimonials .list ul li .text{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+	border: 2px solid #E5EDF4;
+	padding: 20px;
+	margin-bottom: 30px;
+}
+.ivan_popov_about .testimonials .list ul li .text:before{
+	position: absolute;
+	content: "";
+	height: 0px;
+    width: 0px;
+	top: 100%;
+    left: 50px;
+    border: solid transparent;
+    border-top-color: #E5EDF4;
+    border-width: 18px 18px 0px 0px;
+}
+.ivan_popov_about .testimonials .list ul li .text:after{
+	position: absolute;
+	content: "";
+	top: 100%;
+    left: 50px;
+	height: 0px;
+    width: 0px;
+    border: solid transparent;
+    border-top-color: #f6fbff;
+    border-width: 14px 13px 0px 0px;
+    margin-left: 2px;
+}
+.ivan_popov_about .testimonials .list ul li .text i{
+	position: absolute;
+	z-index: 1;
+	font-size: 30px;
+	top: -29px;
+	left: 50px;
+	color: #E5EDF4;
+}
+.ivan_popov_about .testimonials .list ul li .text i.icon-quote-right{
+	top: auto;
+	left: auto;
+	right: 50px;
+	bottom: -29px;
+}
+.ivan_popov_about .testimonials .details{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+	align-items: center;
+	padding-left: 20px;
+}
+.ivan_popov_about .testimonials .details .image{
+	position: relative;
+	width: 60px;
+	height: 60px;
+	flex: 0 0 60px;
+}
+.ivan_popov_about .testimonials .details .image .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	border-radius: 100%;
+}
+.ivan_popov_about .testimonials .details .info{
+	padding-left: 20px;
+}
+.ivan_popov_about .testimonials .details .info h3{
+	font-size: 16px;
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+.ivan_popov_about .testimonials .details .info span{
+	font-size: 14px;
+}
+@media (min-width: 1041px) {
+	.ivan_popov_about .testimonials .list ul.testimonials-snap{
+		display: flex;
+		flex-direction: row;
+		align-items: stretch;
+		gap: 30px;
+		width: 100%;
+		max-width: 100%;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+		overscroll-behavior-x: contain;
+		cursor: grab;
+		scrollbar-width: none;
+	}
+	.ivan_popov_about .testimonials .list ul.testimonials-snap::-webkit-scrollbar{
+		display: none;
+	}
+	.ivan_popov_about .testimonials .list ul.testimonials-snap:active{
+		cursor: grabbing;
+	}
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li{
+		flex: 0 0 calc((100% - 30px) / 2);
+		min-width: 0;
+		scroll-snap-align: start;
+		scroll-snap-stop: always;
+	}
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .list_inner{
+		float: none;
+		clear: none;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		padding-top: 30px;
+		padding-bottom: 30px;
+		box-sizing: border-box;
+	}
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .text{
+		overflow: visible;
+	}
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .text i{
+		z-index: 2;
+	}
+}
+
+/*---------------------------------------------------*/
+/*	 MODALBOX
+/*---------------------------------------------------*/
+
+.ivan_popov_modalbox{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100vh;
+	z-index: 20;
+	background-color: rgba(0,0,0,.8);
+	opacity: 0;
+	visibility: hidden;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.ivan_popov_modalbox.opened{
+	opacity: 1;
+	visibility: visible;
+}
+.ivan_popov_modalbox .box_inner{
+	position: absolute;
+	top: 70px;
+	bottom: 70px;
+	width: 720px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #fff;
+	z-index: 1;
+	opacity: 0;
+	visibility: hidden;
+	margin-top: -20px;
+	transition-delay: .3s;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.ivan_popov_modalbox.opened .box_inner{
+	opacity: 1;
+	visibility: visible;
+	margin-top: 0px;
+}
+.ivan_popov_modalbox .close{
+	position: fixed;
+	left: 100%;
+	top: 0px;
+	margin-left: 30px;
+	z-index: 10;
+}
+.ivan_popov_modalbox .close a{
+	display: block;
+	width: 40px;
+	height: 40px;
+	text-decoration: none;
+	color: #fff;
+	border:2px solid #fff;
+	border-radius: 10px;
+	position: relative;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.ivan_popov_modalbox .close a:hover{
+	border-radius: 100%;
+}
+.ivan_popov_modalbox .close a i{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+.ivan_popov_modalbox .description_wrap{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	float: left;
+	overflow: hidden;
+	padding: 50px;
+	overflow-y: scroll;
+}
+.ivan_popov_modalbox .description_wrap::-webkit-scrollbar{
+  width: 11px;
+}
+.aali_tm_modalbox .description_wrap{
+  scrollbar-width: thin;
+  scrollbar-color: #bbb #fff;
+}
+.ivan_popov_modalbox .description_wrap:-webkit-scrollbar-track{
+  background: #fff;
+}
+.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-thumb{
+  background-color: #bbb;
+  border-radius: 10px;
+  border: 3px solid #fff;
+}
+
+/*---------------------------------------------------*/
+/*	 SERVICES
+/*---------------------------------------------------*/
+
+.ivan_popov_service{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 70px;
+}
+.ivan_popov_service .service_list{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-top: 15px;
+}
+.ivan_popov_service .service_list ul{
+	margin: 0px 0px 0px -50px;
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+}
+.ivan_popov_service .service_list ul li{
+	margin: 0px 0px 50px 0px;
+	width: 50%;
+	padding-left: 50px;
+}
+.ivan_popov_service .service_list ul li .list_inner{
+	width: 100%;
+	height: 100%;
+	clear: both;
+	float: left;
+	position: relative;
+	border: 1px solid #b9b8c3;
+	padding: 70px 40px 63px;
+	text-align: center;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.ivan_popov_service .service_list ul li .list_inner:hover{
+	background-color: #333;
+}
+.ivan_popov_service .service_list ul li .svg{
+	width: 60px;
+    height: 60px;
+    color: #333;
+	margin-bottom: 27px;
+	
+    -webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.ivan_popov_service .service_list ul li .list_inner:hover .svg{
+	color: #fff;
+}
+.ivan_popov_service .service_list ul li .title{
+	font-weight: 500;
+	font-size: 24px;
+	color: #333;
+	margin-bottom: 15px;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.ivan_popov_service .service_list ul li .list_inner:hover .title{
+	color: #fff;
+}
+.ivan_popov_service .service_list ul li .list_inner .text{
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.ivan_popov_service .service_list ul li .list_inner:hover .text{
+	color: #aaa;
+}
+.ivan_popov_service .popup_service_image{
+	opacity: 0;
+	visibility: hidden;
+	display: none;
+	position: absolute;
+	z-index: -111;
+}
+.ivan_popov_service .service_hidden_details{
+	opacity: 0;
+	visibility: hidden;
+	display: none;
+	position: absolute;
+	z-index: -111;
+}
+.ivan_popov_modalbox .service_popup_informations{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.ivan_popov_modalbox .service_popup_informations .image{
+	width: 100%;
+	float: left;
+	position: relative;
+	margin-bottom: 37px;
+}
+.ivan_popov_modalbox .service_popup_informations .image img{
+	position: relative;
+	min-width: 100%;
+	opacity: 0;
+}
+.ivan_popov_modalbox .service_popup_informations .image .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.ivan_popov_modalbox .service_popup_informations .main_title{
+	width: 100%;
+	float: left;
+	margin-bottom: 23px;
+}
+.ivan_popov_modalbox .service_popup_informations .main_title h3{
+	font-size: 22px;
+}
+.ivan_popov_modalbox .service_popup_informations .descriptions{
+	width: 100%;
+	float: left;
+}
+.ivan_popov_modalbox .service_popup_informations .descriptions p{
+	margin-bottom: 15px;
+}
+.ivan_popov_modalbox .service_popup_informations .descriptions p:last-child{
+	margin-bottom: 0px;
+}
+
+/*---------------------------------------------------*/
+/*	 CONTACT
+/*---------------------------------------------------*/
+
+.ivan_popov_contact{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 100px;
+}
+
+/*---------------------------------------------------*/
+/*	 FOOTER
+/*---------------------------------------------------*/
+
+.ivan_popov_footer{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 70px;
+	background-color: #fff;
+	z-index: 10;
+	line-height: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0px 70px;
+}
+.ivan_popov_footer .copyright p{
+	color: #333;
+	font-family: "Onest";
+}
+.ivan_popov_footer .social ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.ivan_popov_footer .social ul li{
+	margin: 0px 15px 0px 0px;
+	display: inline-block;
+}
+.ivan_popov_footer .social ul li:last-child{
+	margin-right: 0px;
+}
+.ivan_popov_footer .social ul li a{
+	text-decoration: none;
+	color: #333;
+}
+
+/*---------------------------------------------------*/
+/*	 MAGIC CURSOR
+/*---------------------------------------------------*/
+
+.mouse-cursor{
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  visibility: hidden;
+  z-index: 99990;
+}
+.cursor-inner {
+  margin-left: -3px;
+  margin-top: -3px;
+  width: 6px;
+  height: 6px;
+  z-index: 100;
+  background-color: #333;
+  -webkit-transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
+  transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
+}
+.cursor-inner.cursor-hover {
+  margin-left: -40px;
+  margin-top: -40px;
+  width: 80px;
+  height: 80px;
+  background-color: #333;
+  opacity: .3;
+}
+.cursor-outer {
+  margin-left: -15px;
+  margin-top: -15px;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #333;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  z-index: 100;
+  opacity: .5;
+  -webkit-transition: all .08s ease-out;
+  transition: all .08s ease-out;
+}
+.cursor-outer.cursor-hover{
+  opacity: 0;
+}
+body.ivan_popov_light_cursor .mouse-cursor.cursor-inner{
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
+}
+body.ivan_popov_light_cursor .mouse-cursor.cursor-outer{
+  border-color: #fff;
+  opacity: 0.9;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+body.ivan_popov_light_cursor .mouse-cursor.cursor-inner.cursor-hover{
+  background-color: #fff;
+  opacity: 0.55;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
+}
+body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
+  opacity: 0.75;
+  border-color: #fff;
+}
+.ivan_popov_all_wrap[data-magic-cursor="hide"] .mouse-cursor{
+	display: none;
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	z-index: -1111;
+}
+
+/*---------------------------------------------------*/
+/*	 CONTACT PLAYFIELD
+/*---------------------------------------------------*/
+
+.ivan_popov_contact_playfield{
+	width: 100%;
+	position: relative;
+	flex: 1 1 auto;
+	min-height: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 22px;
+	box-sizing: border-box;
+	overflow: hidden;
+	isolation: isolate;
+	border-radius: 5px;
+}
+#contact .ivan_popov_contact_fx_layer{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	overflow: hidden;
+	pointer-events: auto;
+	box-sizing: border-box;
+	border: 1px solid rgba(0, 0, 0, 0.085);
+	border-radius: 5px;
+	background:
+		linear-gradient(165deg,
+			rgba(255, 255, 255, 0.55) 0%,
+			rgba(239, 245, 252, 0.95) 48%,
+			rgba(228, 236, 248, 0.98) 100%);
+	background-size: cover;
+	background-position: center;
+}
+#contact .ivan_popov_contact_particles_root{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.ivan_popov_contact_icon_anchor{
+	position: relative;
+	z-index: 2;
+	flex: 0 0 auto;
+	pointer-events: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#contact .contact_social_icon{
+	position: relative !important;
+	left: auto !important;
+	top: auto !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#contact .contact_social_icon a {
+	display: block;
+	transition: transform 0.2s ease;
+}
+#contact .contact_social_icon a:hover {
+	transform: scale(1.12);
+}
+#contact .contact_social_icon svg {
+	width: 120px;
+	height: 120px;
+	opacity: 0.92;
+	transition: opacity 0.2s ease;
+	cursor: pointer;
+}
+#contact .telegram_icon_large svg {
+	filter: drop-shadow(0 10px 30px rgba(0, 136, 204, 0.3));
+}
+#contact .vk_icon_large svg {
+	filter: drop-shadow(0 10px 30px rgba(0, 119, 255, 0.35));
+}
+#contact .contact_social_icon a:hover svg {
+	opacity: 1;
+}
+@keyframes ivp_contact_flash {
+	0%   { filter: none;                       transform: translate3d(0, 0, 0); }
+	8%   { filter: brightness(1.9) saturate(1.7) contrast(1.1); transform: translate3d(-7px, 1px, 0); }
+	16%  { filter: brightness(0.55) saturate(1.3); transform: translate3d(7px, -2px, 0); }
+	26%  { filter: brightness(1.6) saturate(1.6); transform: translate3d(-5px, 2px, 0); }
+	38%  { filter: brightness(0.85); transform: translate3d(5px, -1px, 0); }
+	52%  { filter: brightness(1.25); transform: translate3d(-3px, 1px, 0); }
+	70%  { filter: none; transform: translate3d(2px, 0, 0); }
+	100% { filter: none; transform: translate3d(0, 0, 0); }
+}
+.ivan_popov_contact_playfield.ivp_contact_flash{
+	animation: ivp_contact_flash 640ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+	will-change: filter, transform;
+}
+@media (prefers-reduced-motion: reduce){
+	.ivan_popov_contact_playfield.ivp_contact_flash{
+		animation: none;
+	}
+}
+
 /*---------------------------------------------------*/
 /*	 MEDIA QUERIES (FOR SMALL DEVICES)
 /*---------------------------------------------------*/
@@ -853,16 +1648,10 @@ h6 { font-size: 16px; }
 	.ivan_popov_button a{padding: 13px 32px;}
 	.ivan_popov_section .section_inner{padding: 20px 50px 0px 50px;}
 	#contact .section_inner{padding-top: 30px;}
-	.circular_progress_bar .list_inner:after{width: 100px;height: 100px;}
-	.circular_progress_bar .title{max-width: 100px;}
-	.progress_inner{margin-bottom: 18px;}
-	.ivan_popov_about .univ ul li .time span{padding: 3px 12px;}
-	.ivan_popov_about .univ ul li .place{padding-left: 0px;}
-	.ivan_popov_portfolio .portfolio_filter ul li{margin-right: 30px;}
 	.ivan_popov_about .testimonials .list ul li .text{padding: 30px;}
-	.ivan_popov_contact .short_info ul li .list_inner{padding: 20px 10px;}
 	.ivan_popov_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
 	.ivan_popov_modalbox .description_wrap{padding: 30px;}
+	#contact .contact_social_icon svg{width: 100px;height: 100px;}
 }
 @media (max-width: 1040px) {
 	.mouse-cursor{display: none;}
@@ -894,37 +1683,15 @@ h6 { font-size: 16px; }
 	.ivan_popov_home .name{font-size: 60px;}
 	.ivan_popov_home .job{font-size: 22px;}
 	.ivan_popov_about .biography .wrapper{flex-direction: column;align-items: baseline;}
-	.ivan_popov_about .biography .left{width: 100%;margin-bottom: 55px;}
-	.ivan_popov_about .biography .right{width: 100%;}
-	.ivan_popov_about .services .wrapper{flex-direction: column;align-items: baseline;}
-	.ivan_popov_about .services .service_list{width: 100%;margin-bottom: 55px;}
-	.ivan_popov_about .services .service_list:nth-child(2){width: 100%;}
-	.ivan_popov_about .services .interests{width: 100%;}
+	.ivan_popov_about .biography .left{width: 100%;}
+	.ivan_popov_about .biography .right{width: 100%;margin-bottom: 55px;}
 	.ivan_popov_section .section_inner{padding: 30px 20px 0px 20px;}
 	#contact .section_inner{padding-top: 30px;}
-	.ivan_popov_about .skills .wrapper{flex-direction: column;align-items: baseline;}
-	.ivan_popov_about .skills .programming{width: 100%;margin-bottom: 60px;}
-	.ivan_popov_about .skills .language{width: 100%;}
-	.circular_progress_bar .title{float: none;}
-	.ivan_popov_about .resume .wrapper{flex-direction: column;align-items: baseline;}
-	.ivan_popov_about .resume .education{width: 100%;margin-bottom: 60px;}
-	.ivan_popov_about .resume .experience{width: 100%;}
-	.ivan_popov_portfolio .portfolio_list ul li{width: 50%;}
-	.ivan_popov_contact .short_info ul{margin: 0px;}
-	.ivan_popov_contact .short_info ul li{width: 100%;padding-left: 0px;}
-	.ivan_popov_contact .form{flex-direction: column;align-items: baseline;}
-	.ivan_popov_contact .form .left{width: 100%;padding: 0px;margin-bottom: 30px;}
-	.ivan_popov_contact .form .right{width: 100%;padding: 0px;}
 	.ivan_popov_modalbox .box_inner{width: 480px;}
 	.ivan_popov_modalbox .description_wrap{padding: 20px;}
-	.ivan_popov_modalbox .main_details{flex-direction: column;align-items: baseline;}
-	.ivan_popov_modalbox .main_details .textbox{width: 100%;padding: 0px;margin-bottom: 30px;}
-	.ivan_popov_modalbox .main_details .detailbox{width: 100%;padding: 0px;}
-	.ivan_popov_modalbox .additional_images ul{margin: 0px;}
-	.ivan_popov_modalbox .additional_images ul li{width: 100%;padding-left: 0px;}
-	.ivan_popov_modalbox .portfolio_main_title h3{font-size: 20px;}
-	.ivan_popov_modalbox .news_popup_informations .title h3{font-size: 20px;}
 	.ivan_popov_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
+	.ivan_popov_contact_playfield{margin-top: 18px;}
+	#contact .contact_social_icon svg{width: 80px;height: 80px;}
 }
 /* Large tablets: keep the portrait two-column layout (compact nav may still show
    the desktop header when it fits); only collapse to single column below 768px. */
@@ -950,11 +1717,6 @@ h6 { font-size: 16px; }
 	.ivan_popov_home .job{font-size: 20px;}
 	.ivan_popov_home .line{height: 3px;width: 40px;}
 	.ivan_popov_button a{padding: 10px 28px;}
-	.circular_progress_bar .list_inner:after{width: 80px;height: 80px;}
-	.circular_progress_bar .title{max-width: 80px;}
-	.ivan_popov_about .partners .list ul li{width: 50%;}
-	.ivan_popov_portfolio .portfolio_list ul{margin: 0px;}
-	.ivan_popov_portfolio .portfolio_list ul li{width: 100%;padding-left: 0px;}
 	.ivan_popov_title > span{letter-spacing: 2px;}
 	.ivan_popov_title > span:after{margin-left: 15px;}
 	#contact .ivan_popov_glitch_switch_row:after{margin-left: 15px;}
@@ -964,20 +1726,7 @@ h6 { font-size: 16px; }
 	.ivan_popov_service .service_list ul{margin: 0px;}
 	.ivan_popov_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
 	.ivan_popov_service .service_list ul li .title{font-size: 20px;}
-	.ivan_popov_news .news_list > ul > li .post_title h3 a{font-size: 20px;}
-	.ivan_popov_news .news_list > ul > li .list_inner .number{display: none;}
-	.ivan_popov_news .news_list > ul > li .list_inner .details:before{display: none;}
-	.ivan_popov_news .news_list > ul > li .list_inner .details{margin: 0px;padding: 0px;max-width: 100% !important;}
-	.ivan_popov_news .news_list > ul > li{padding: 20px 0px;}
-	.advantages_list ul li .bullet{margin-right: 8px;}
-}
-
-/*---------------------------------------------------*/
-/*	ADVANTAGES LIST STYLING
-/*---------------------------------------------------*/
-
-.advantages_list {
-	margin: 15px 0;
+	#contact .contact_social_icon svg{width: 72px;height: 72px;}
 }
 
 /*---------------------------------------------------*/
@@ -1040,30 +1789,28 @@ h6 { font-size: 16px; }
 }
 
 @media (max-width: 1040px) {
-	/* Testimonials: carousel is disabled on mobile (JS), so show every entry
-	   as a simple vertically-scrolled list instead of a horizontal slider.
-	   The markup relies on float:left + clear:both (which only stacks correctly
-	   inside Owl's horizontal track); without the carousel that collapses the
-	   <li> heights and eats the gaps, so we unfloat the whole subtree here. */
+	/* Testimonials: horizontal scroll-snap is desktop-only; on mobile show
+	   every entry as a vertical list. Unfloat the subtree so stacked cards
+	   keep their height and spacing without a horizontal track. */
 	.ivan_popov_about .testimonials .list{
 		margin-top: 20px;
 	}
-	.ivan_popov_about .testimonials .list ul.owl-carousel{
+	.ivan_popov_about .testimonials .list ul.testimonials-snap{
 		display: block;
-		cursor: default;
+		overflow: visible;
 	}
-	.ivan_popov_about .testimonials .list ul.owl-carousel > li,
-	.ivan_popov_about .testimonials .list ul.owl-carousel > li .list_inner,
-	.ivan_popov_about .testimonials .list ul.owl-carousel > li .text,
-	.ivan_popov_about .testimonials .list ul.owl-carousel > li .details{
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li,
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .list_inner,
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .text,
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .details{
 		float: none;
 		clear: none;
 		width: 100%;
 	}
-	.ivan_popov_about .testimonials .list ul.owl-carousel > li{
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li{
 		margin-bottom: 75px;
 	}
-	.ivan_popov_about .testimonials .list ul.owl-carousel > li:last-child{
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li:last-child{
 		margin-bottom: 0;
 	}
 }
