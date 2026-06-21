@@ -207,7 +207,7 @@
 	height: auto;
 	clear: both;
 	float: left;
-	margin-top: 55px;
+	margin-top: 45px;
 }
 .ivan_popov_about .services .service_list{
 	width: 40%;
@@ -538,7 +538,7 @@
 	height: auto;
 	clear: both;
 	float: left;
-	margin-top: 55px;
+	margin-top: 20px;
 }
 .ivan_popov_about .testimonials .list ul{
 	margin: 0px;
@@ -562,7 +562,7 @@
 	float: left;
 	position: relative;
 	border: 2px solid #E5EDF4;
-	padding: 40px;
+	padding: 30px;
 	margin-bottom: 30px;
 }
 .ivan_popov_about .testimonials .list ul li .text:before{
@@ -1032,7 +1032,7 @@
 	height: auto;
 	clear: both;
 	float: left;
-	margin-top: 30px;
+	margin-top: 15px;
 }
 .ivan_popov_service .service_list ul{
 	margin: 0px 0px 0px -50px;

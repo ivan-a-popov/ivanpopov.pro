@@ -851,7 +851,7 @@ h6 { font-size: 16px; }
 	.ivan_popov_home .line{width: 60px;height: 4px;margin-bottom: 25px;}
 	.ivan_popov_home .job{font-size: 23px;margin-bottom: 30px;}
 	.ivan_popov_button a{padding: 13px 32px;}
-	.ivan_popov_section .section_inner{padding: 30px 50px 0px 50px;}
+	.ivan_popov_section .section_inner{padding: 20px 50px 0px 50px;}
 	#contact .section_inner{padding-top: 30px;}
 	.circular_progress_bar .list_inner:after{width: 100px;height: 100px;}
 	.circular_progress_bar .title{max-width: 100px;}
@@ -1046,7 +1046,7 @@ h6 { font-size: 16px; }
 	   inside Owl's horizontal track); without the carousel that collapses the
 	   <li> heights and eats the gaps, so we unfloat the whole subtree here. */
 	.ivan_popov_about .testimonials .list{
-		margin-top: 45px;
+		margin-top: 20px;
 	}
 	.ivan_popov_about .testimonials .list ul.owl-carousel{
 		display: block;
