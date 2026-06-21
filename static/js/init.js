@@ -947,7 +947,7 @@ function ivan_popov_testimonials_snap(){
 			}
 			index = (index + 1) % items.length;
 			scrollToIndex(index);
-		}, 7000);
+		}, 5000);
 	}
 
 	list.addEventListener('mouseenter', function(){
