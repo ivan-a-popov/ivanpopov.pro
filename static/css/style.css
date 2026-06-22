@@ -1854,4 +1854,8 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_about .testimonials .list ul.testimonials-snap > li:last-child{
 		margin-bottom: 0;
 	}
+	/* Loop clones are desktop-only; never show the triplicated cards stacked. */
+	.ivan_popov_about .testimonials .list ul.testimonials-snap > li.is-clone{
+		display: none;
+	}
 }

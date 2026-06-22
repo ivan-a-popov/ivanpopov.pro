@@ -1,4 +1,4 @@
-// Register jQuery touch listeners as non-passive so plugins like TESTIMONIALS SCROLL-SNAP
+// Register jQuery touch listeners as non-passive so plugins like NiceScroll
 // can call preventDefault() during horizontal swipes without Chrome firing the
 // "Unable to preventDefault inside passive event listener" intervention.
 (function(jq){
@@ -919,7 +919,31 @@ function ivan_popov_testimonials_snap(){
 		return;
 	}
 
-	var index = 0;
+	var realItems = Array.prototype.slice.call(items);
+	var realCount = realItems.length;
+
+	// Build an infinite track: a full copy of every card on each side of the
+	// originals. The three copies are identical, so re-centering into the middle
+	// (real) copy is an invisible instant jump — autoplay and manual scroll then
+	// loop seamlessly in both directions without Owl-style cloned-slide bookkeeping.
+	var leadFrag = document.createDocumentFragment();
+	var trailFrag = document.createDocumentFragment();
+	realItems.forEach(function(li){
+		var before = li.cloneNode(true);
+		var after = li.cloneNode(true);
+		before.classList.add('is-clone');
+		after.classList.add('is-clone');
+		before.setAttribute('aria-hidden', 'true');
+		after.setAttribute('aria-hidden', 'true');
+		leadFrag.appendChild(before);
+		trailFrag.appendChild(after);
+	});
+	list.insertBefore(leadFrag, realItems[0]);
+	list.appendChild(trailFrag);
+
+	var slides = Array.prototype.slice.call(list.querySelectorAll(':scope > li'));
+	var firstRealDom = realCount;          // real cards occupy [realCount .. 2*realCount-1]
+	var currentDom = firstRealDom;
 	var paused = false;
 	var timer = null;
 	var scrollEndTimer = null;
@@ -927,12 +951,20 @@ function ivan_popov_testimonials_snap(){
 	var dragStartX = 0;
 	var dragScrollLeft = 0;
 
-	function scrollToIndex(i){
-		// Scroll the horizontal track only — scrollIntoView() also moves ancestor
-		// .ivan_popov_section (overflow-y: scroll) and breaks every section layout.
-		var item = items[i];
-		var left = item.getBoundingClientRect().left - list.getBoundingClientRect().left + list.scrollLeft;
-		list.scrollTo({ left: left, behavior: 'smooth' });
+	function jumpTo(domIndex){
+		// Instant reposition: bypass CSS scroll-behavior:smooth so the loop wrap
+		// is invisible. Scroll the track only — scrollIntoView() would also move
+		// the ancestor .ivan_popov_section (overflow-y: scroll) and break layout.
+		var prev = list.style.scrollBehavior;
+		list.style.scrollBehavior = 'auto';
+		list.scrollLeft = slides[domIndex].offsetLeft;
+		void list.offsetWidth;
+		list.style.scrollBehavior = prev;
+		currentDom = domIndex;
+	}
+
+	function scrollToDom(domIndex){
+		list.scrollTo({ left: slides[domIndex].offsetLeft, behavior: 'smooth' });
 	}
 
 	function isHowActive(){
@@ -948,9 +980,14 @@ function ivan_popov_testimonials_snap(){
 			if(paused || !isHowActive()){
 				return;
 			}
-			index = (index + 1) % items.length;
-			scrollToIndex(index);
+			currentDom += 1;
+			scrollToDom(currentDom);
 		}, 5000);
+	}
+
+	jumpTo(firstRealDom);
+	if(window.requestAnimationFrame){
+		requestAnimationFrame(function(){ jumpTo(firstRealDom); });
 	}
 
 	list.addEventListener('mouseenter', function(){
@@ -1021,18 +1058,23 @@ function ivan_popov_testimonials_snap(){
 		}
 		scrollEndTimer = setTimeout(function(){
 			var scrollLeft = list.scrollLeft;
-			var bestIndex = 0;
+			var nearest = 0;
 			var bestDistance = Infinity;
-			for(var i = 0; i < items.length; i++){
-				var itemLeft = items[i].offsetLeft;
-				var distance = Math.abs(itemLeft - scrollLeft);
+			for(var i = 0; i < slides.length; i++){
+				var distance = Math.abs(slides[i].offsetLeft - scrollLeft);
 				if(distance < bestDistance){
 					bestDistance = distance;
-					bestIndex = i;
+					nearest = i;
 				}
 			}
-			index = bestIndex;
-		}, 120);
+			currentDom = nearest;
+			// Settled on a clone copy → re-center into the identical real card.
+			if(currentDom < firstRealDom){
+				jumpTo(currentDom + realCount);
+			} else if(currentDom >= firstRealDom + realCount){
+				jumpTo(currentDom - realCount);
+			}
+		}, 140);
 	}, { passive: true });
 
 	scheduleAutoplay();
