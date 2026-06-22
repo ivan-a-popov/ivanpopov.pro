@@ -50,11 +50,11 @@ body{margin:0;background-color:#f6fbff}
 <!-- All app CSS loads async (preload + onload swap) so it not blockning the
     preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
     only after window 'load', by which point these sheets are applied. -->
-<link rel="preload" as="style" href="static/css/plugins.css?v=bb2c0e8c" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css?v=50318518" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/plugins.css?v=24a192bd" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=1874b23b" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/plugins.css?v=bb2c0e8c" />
-<link rel="stylesheet" href="static/css/style.css?v=50318518" />
+<link rel="stylesheet" href="static/css/plugins.css?v=24a192bd" />
+<link rel="stylesheet" href="static/css/style.css?v=1874b23b" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -300,9 +300,10 @@ body{margin:0;background-color:#f6fbff}
 											<div class="service_hidden_details">
 												<div class="service_popup_informations">
 													<div class="descriptions">
-														<p>Сколько стоит сделать сайт? Навскидку — от 5 тысяч до 5 миллионов рублей. И это не шутка, это реальный разброс цен в зависимости от конкретных требований к дизайну и функционалу, планируемой нагрузки, используемых инструментов и технологий.</p>
-														<p>Одно из моих преимуществ в том, что я не привязан к какой-то конкретной CMS или фреймворку, есть опыт реализации проектов на различных платформах. Я никогда не навязываю вам своё "любимое" решение — вместо этого объясняю плюсы и минусы каждого из вариантов и помогаю выбрать оптимальный.</p>
-														<p>Если нужно доработать готовый сайт, добавить функционал, изменить дизайн, сделать интеграцию с каким-то внешним сервисом, — я и моя команда также сможем помочь.</p>
+														<p>Сколько стоит сделать сайт? Навскидку — от 5 тысяч до 5 миллионов рублей. И это не шутка, это реальный разброс цен в зависимости от конкретных функциональных и нефункциональных требований, дизайна, планируемой нагрузки, используемых инструментов и технологий.</p>
+														<p>Одно из преимуществ зрелого специалиста в том, что он спокойно работает с такими неопределенностями, в ходе анализа приводя их к понятной системе.</p>
+														<p>Он не привязан к какой-то конкретной CMS, фреймворку или даже технологии. С горечью порой наблюдаешь, как "узкоспециалисты" всеми правдами и неправдами навязывают потенциальному клиенту свою "любимое" (по факту — часто единственное) решение.</p>
+														<p>Профи знает, что в первую очередь необходимо выслушать бизнес, изучить его задачи, понять проблемы, и только после вдумчивого анализа предлагать решения. (Да-да, у настоящего профессионала их должно быть как минимум два, с указанием на плюсы и минусы каждого из вариантов!)</p>
 													</div>
 												</div>
 											</div>
@@ -515,7 +516,7 @@ body{margin:0;background-color:#f6fbff}
 													</div>
 													<div class="info">
 														<h3>Екатерина Шрайбер</h3>
-														<span>https://gm-light.ru/</span>
+														<span>«Город Мастеров»</span>
 													</div>
 												</div>
 											</div>
@@ -560,7 +561,7 @@ body{margin:0;background-color:#f6fbff}
 										<input
 											type="checkbox"
 											id="ivan_popov_glitch_toggle"
-											aria-label="Glitch-эффект на фото"
+											aria-label="Выбрать мессенджер: TG или VK"
 										>
 										<span class="ivan_popov_glitch_slider"></span>
 									</label>
@@ -612,9 +613,8 @@ body{margin:0;background-color:#f6fbff}
 	<!-- /ALL WRAPPER -->
 	
 <!-- SCRIPTS -->
-<script src="static/js/jquery.js?v=3e4bb227"></script>
-<script src="static/js/plugins.js?v=8b0a044c"></script>
-<script src="static/js/init.js?v=c1d09ad7"></script>
+<script src="static/js/particles.js?v=83495a1d"></script>
+<script src="static/js/init.js?v=b8eb6a8c"></script>
 
 <!-- Portrait + contact-area ripple FX, color portrait on #contact, glitch + VK switch via toggle -->
 <script>
@@ -630,41 +630,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}, 200);
 
-	// Saturated gradient texture the VK ripple effect refracts. A raster (canvas)
-	// data-URI is used rather than a CSS gradient because jquery.ripples only
-	// reads url()-based backgrounds into its WebGL texture.
-	var contactBgCache = {};
-	function makeContactBackground(key, stops, glow) {
-		if (contactBgCache[key]) return contactBgCache[key];
-		var size = 512;
-		var c = document.createElement('canvas');
-		c.width = size;
-		c.height = size;
-		var ctx = c.getContext('2d');
-		var g = ctx.createLinearGradient(0, 0, size, size);
-		stops.forEach(function(s) { g.addColorStop(s[0], s[1]); });
-		ctx.fillStyle = g;
-		ctx.fillRect(0, 0, size, size);
-		var r = ctx.createRadialGradient(size * 0.5, size * 0.42, size * 0.06, size * 0.5, size * 0.5, size * 0.72);
-		r.addColorStop(0, glow);
-		r.addColorStop(1, 'rgba(255,255,255,0)');
-		ctx.fillStyle = r;
-		ctx.fillRect(0, 0, size, size);
-		contactBgCache[key] = c.toDataURL('image/png');
-		return contactBgCache[key];
-	}
-
-	var CONTACT_BG_VK = makeContactBackground('vk', [
-		[0, '#3f74c4'],
-		[0.5, '#2a5bb0'],
-		[1, '#143a86']
-	], 'rgba(150,200,255,0.6)');
-
-	// Contact playfield carries two different backdrops:
-	//   TG (default) -> particles.js  |  VK -> jquery.ripples (WebGL)
-	var contactFxMode = null;            // 'particles' | 'ripples'
+	// Contact playfield backdrop: TG (default) -> particles.js, VK -> none.
+	var contactFxMode = null;            // 'particles' | 'none'
 	var contactParticlesInstance = null;
-	var contactRipplesUnsupported = false;
 
 	function contactFxLayerReady() {
 		var fxLayer = document.getElementById('ivan_popov_contact_fx_layer');
@@ -747,69 +715,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		return true;
 	}
 
-	function teardownContactRipples(fxLayer) {
-		if (contactRipplesUnsupported) {
-			fxLayer.style.backgroundImage = '';
-			fxLayer.style.backgroundSize = '';
-			fxLayer.style.backgroundPosition = '';
-			contactRipplesUnsupported = false;
-			return;
-		}
-		try { jQuery(fxLayer).ripples('destroy'); } catch (e) {}
-	}
-
-	function startContactRipples(fxLayer) {
-		if (typeof jQuery === 'undefined' || !jQuery.fn || !jQuery.fn.ripples) return false;
-		try {
-			jQuery(fxLayer).ripples({
-				imageUrl: CONTACT_BG_VK,
-				resolution: 256,
-				dropRadius: 26,
-				perturbance: 0.045,
-				interactive: true
-			});
-		} catch (e) {
-			// No WebGL / OES_texture_float — static saturated backdrop fallback.
-			fxLayer.style.backgroundImage = 'url(' + CONTACT_BG_VK + ')';
-			fxLayer.style.backgroundSize = 'cover';
-			fxLayer.style.backgroundPosition = 'center';
-			contactRipplesUnsupported = true;
-		}
-		return true;
-	}
-
 	function setContactEffect(isVK) {
 		var fxLayer = contactFxLayerReady();
 		if (!fxLayer) return false;
 
-		var target = isVK ? 'ripples' : 'particles';
+		var target = isVK ? 'none' : 'particles';
 		if (contactFxMode === target) return true;
 
 		if (contactFxMode === 'particles') teardownContactParticles();
-		else if (contactFxMode === 'ripples') teardownContactRipples(fxLayer);
 
-		var ok = target === 'ripples'
-			? startContactRipples(fxLayer)
-			: startContactParticles(fxLayer);
+		var ok = target === 'particles' ? startContactParticles(fxLayer) : true;
 
 		if (ok) contactFxMode = target;
 		return ok;
-	}
-
-	function rippleBurst() {
-		if (contactFxMode !== 'ripples' || contactRipplesUnsupported) return;
-		var fxLayer = document.getElementById('ivan_popov_contact_fx_layer');
-		if (!fxLayer) return;
-		var w = fxLayer.clientWidth;
-		var h = fxLayer.clientHeight;
-		if (!w || !h) return;
-		var $fx = jQuery(fxLayer);
-		try {
-			$fx.ripples('drop', w / 2, h / 2, 80, 0.18);
-			for (var i = 0; i < 7; i++) {
-				$fx.ripples('drop', Math.random() * w, Math.random() * h, 30, 0.09);
-			}
-		} catch (e) {}
 	}
 
 	function flashContactPlayfield() {
@@ -832,72 +750,28 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
-	function getPortraitGlitchHost() {
-		return jQuery('.author_photo_glitch_host').not('.back').first();
-	}
-
-	function portraitGlitchActive($host) {
-		var $inner = $host.closest('.author_image_inner');
-		return !!(
-			$host.data('glitchLive') ||
-			$host.hasClass('glitch') ||
-			$host.hasClass('front-1') ||
-			($inner.length && $inner.children('.back, .front-2, .front-3').length)
-		);
-	}
-
-	function destroyPortraitGlitch($host) {
-		if (!$host || !$host.length || !portraitGlitchActive($host)) return;
-
-		var $img = $host.find('.author_photo').first();
-		var src = $img.attr('src') || '';
-		var bw = $img.attr('data-src-bw') || AUTHOR_SRC_BW;
-		var colorSrc = $img.attr('data-src-color') || AUTHOR_SRC_COLOR;
-		var override = $img.attr('data-photo-override');
-		var $inner = $host.closest('.author_image_inner');
-
-		if ($inner.length) {
-			$inner.children('.back, .front-2, .front-3').remove();
-		}
-
-		var newHost = document.createElement('div');
-		newHost.className = 'author_photo_glitch_host';
-		newHost.id = 'author_photo_glitch_host';
-
-		var img = document.createElement('img');
-		img.className = 'author_photo';
-		img.id = 'author_photo_img';
-		img.width = 640;
-		img.height = 960;
-		img.decoding = 'async';
-		img.fetchPriority = 'high';
-		img.src = src;
-		img.alt = '';
-		img.setAttribute('data-src-bw', bw);
-		img.setAttribute('data-src-color', colorSrc);
-		if (override) img.setAttribute('data-photo-override', override);
-		newHost.appendChild(img);
-
-		$host.replaceWith(newHost);
+	function getPortraitHost() {
+		return document.getElementById('author_photo_glitch_host')
+			|| document.querySelector('.author_photo_glitch_host');
 	}
 
 	function syncContactPortraitState() {
-		if (
-			typeof jQuery === 'undefined' ||
-			!jQuery.fn ||
-			!jQuery.fn.mgGlitch
-		)
-			return;
-
-		var $host = getPortraitGlitchHost();
-		var $img = $host.find('.author_photo').first();
+		var host = getPortraitHost();
+		var img = host ? host.querySelector('.author_photo') : null;
 		var contactEl = document.getElementById('contact');
-		var glitchToggle = document.getElementById('ivan_popov_glitch_toggle');
-		if (!contactEl || !$host.length || !$img.length) return;
+		var toggle = document.getElementById('ivan_popov_glitch_toggle');
+		if (!contactEl || !host || !img) return;
 
-		var bw = $img.attr('data-src-bw') || AUTHOR_SRC_BW;
-		var colorSrc = $img.attr('data-src-color') || AUTHOR_SRC_COLOR;
-		var glitchEnabled = !!(glitchToggle && glitchToggle.checked);
+		var bw = img.getAttribute('data-src-bw') || AUTHOR_SRC_BW;
+		var colorSrc = img.getAttribute('data-src-color') || AUTHOR_SRC_COLOR;
+		var isVK = !!(toggle && toggle.checked);
+		var onContact = contactEl.classList.contains('active');
+
+		if (!onContact) {
+			img.removeAttribute('data-photo-override');
+			img.setAttribute('src', bw);
+			return;
+		}
 
 		var portraitColumn = document.getElementById('author_image');
 		var portraitHidden = false;
@@ -908,47 +782,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			)
 				portraitHidden = true;
 		} catch (err) {}
-
-		var onContact = contactEl.classList.contains('active');
-
-		if (!onContact) {
-			destroyPortraitGlitch($host);
-			$img = $host.find('.author_photo').first();
-			$img.removeAttr('data-photo-override');
-			$img.attr('src', bw);
-			return;
-		}
-
 		if (portraitHidden) return;
 
-		if ($img.attr('data-photo-override') !== 'prize' && $img.attr('src') !== colorSrc) {
-			$img.attr('src', colorSrc);
-		}
-
-		if (!glitchEnabled) {
-			destroyPortraitGlitch($host);
-			return;
-		}
-
-		if (!$host.data('glitchLive')) {
-			$host.addClass('glitch');
-			try {
-				$host.mgGlitch({
-					destroy: false,
-					glitch: true,
-					scale: true,
-					blend: true,
-					blendModeType: 'hue',
-					glitch1TimeMin: 200,
-					glitch1TimeMax: 400,
-					glitch2TimeMin: 10,
-					glitch2TimeMax: 100
-				});
-				$host.data('glitchLive', 1);
-			} catch (e3) {
-				$host.removeClass('glitch');
-				$host.removeData('glitchLive');
-			}
+		// TG -> color portrait, VK -> black & white portrait.
+		var desiredSrc = isVK ? bw : colorSrc;
+		if (img.getAttribute('data-photo-override') !== 'prize' &&
+			img.getAttribute('src') !== desiredSrc) {
+			img.setAttribute('src', desiredSrc);
 		}
 	}
 
@@ -977,7 +817,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			setActiveContactNetwork(isVK);
 			setContactEffect(isVK);
 			flashContactPlayfield();
-			if (isVK) rippleBurst();
 		});
 	}
 

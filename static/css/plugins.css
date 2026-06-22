@@ -139,25 +139,32 @@ a:hover{text-decoration:none;}
 /* -------------------------------- 
 |* Animated headline (clip effect)
 -------------------------------- */
+/* Word rotation is a vanilla-JS re-implementation of the CodyHouse "clip"
+   headline (ivan_popov_animated_headline in init.js). The active word carries
+   .is-visible and stays in flow to size the line; the others are .is-hidden and
+   absolutely stacked. JS animates the wrapper width to type/erase each phrase,
+   clipped by overflow:hidden with the trailing cursor bar (::after). */
 .cd-words-wrapper {
   display: inline-block;
   position: relative;
   text-align: left;
+  vertical-align: top;
 }
 .cd-words-wrapper b {
   display: inline-block;
   position: absolute;
-  white-space: nowrap;
   left: 0;
   top: 0;
+  white-space: nowrap;
+  opacity: 0;
 }
 .cd-words-wrapper b.is-visible {
   position: relative;
+  opacity: 1;
 }
-.no-js .cd-words-wrapper b {
-  opacity: 0;
-}
-.no-js .cd-words-wrapper b.is-visible {
+/* No-JS / first paint fallback: show the first phrase in flow. */
+.no-js .cd-words-wrapper b:first-child {
+  position: relative;
   opacity: 1;
 }
 .cd-headline.clip span {
@@ -176,10 +183,4 @@ a:hover{text-decoration:none;}
   width: 2px;
   height: 100%;
   background-color: #aebcb9;
-}
-.cd-headline.clip b {
-  opacity: 0;
-}
-.cd-headline.clip b.is-visible {
-  opacity: 1;
 }

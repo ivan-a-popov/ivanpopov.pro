@@ -612,7 +612,7 @@ h6 { font-size: 16px; }
 	overflow: hidden;
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
-/* Optional mgGlitch host (effect enabled on #contact when toggle is on) */
+/* Portrait host (structural wrapper around the author photo) */
 .ivan_popov_mainpart .author_image .author_photo_glitch_host{
 	position: absolute;
 	top: 0;
@@ -694,6 +694,24 @@ h6 { font-size: 16px; }
 }
 .ivan_popov_section::-webkit-scrollbar{
   width: 0px;
+}
+/* Desktop: native styled scrollbar replaces the former NiceScroll overlay rail. */
+@media (min-width: 1041px){
+	.ivan_popov_section{
+		scrollbar-width: thin;
+		scrollbar-color: #999 transparent;
+		scroll-behavior: smooth;
+	}
+	.ivan_popov_section::-webkit-scrollbar{
+		width: 8px;
+	}
+	.ivan_popov_section::-webkit-scrollbar-thumb{
+		background-color: #999;
+		border-radius: 4px;
+	}
+	.ivan_popov_section::-webkit-scrollbar-track{
+		background: transparent;
+	}
 }
 .ivan_popov_section .section_inner{
 	width: 100%;
@@ -1271,11 +1289,11 @@ h6 { font-size: 16px; }
 .ivan_popov_modalbox .description_wrap::-webkit-scrollbar{
   width: 11px;
 }
-.aali_tm_modalbox .description_wrap{
+.ivan_popov_modalbox .description_wrap{
   scrollbar-width: thin;
   scrollbar-color: #bbb #fff;
 }
-.ivan_popov_modalbox .description_wrap:-webkit-scrollbar-track{
+.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-track{
   background: #fff;
 }
 .ivan_popov_modalbox .description_wrap::-webkit-scrollbar-thumb{
@@ -1637,7 +1655,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	filter: drop-shadow(0 10px 30px rgba(0, 136, 204, 0.3));
 }
 #contact .vk_icon_large svg {
-	filter: drop-shadow(0 10px 30px rgba(0, 119, 255, 0.35));
+	filter: grayscale(1) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.28));
 }
 #contact .contact_social_icon a:hover svg {
 	opacity: 1;

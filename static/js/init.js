@@ -1,40 +1,54 @@
-// Register jQuery touch listeners as non-passive so plugins like NiceScroll
-// can call preventDefault() during horizontal swipes without Chrome firing the
-// "Unable to preventDefault inside passive event listener" intervention.
-(function(jq){
+// Vanilla (no-jQuery) site behavior. Custom scrollbars are now pure CSS
+// (former NiceScroll), so no plugin-specific touch listener setup is needed.
+
+// ----------  SMALL DOM HELPERS  ----------
+
+function ip_ready(fn){
 	"use strict";
-	if (!jq || !jq.event || !jq.event.special) {
-		return;
+	if(document.readyState !== 'loading'){
+		fn();
+	}else{
+		document.addEventListener('DOMContentLoaded', fn);
 	}
-	// Feature-detect the passive option; bail out on legacy browsers.
-	var supportsPassive = false;
-	try {
-		var opts = Object.defineProperty({}, 'passive', {
-			get: function(){ supportsPassive = true; }
-		});
-		window.addEventListener('test-passive', null, opts);
-		window.removeEventListener('test-passive', null, opts);
-	} catch (e) {}
-	if (!supportsPassive) {
-		return;
-	}
-	jq.each(['touchstart', 'touchmove'], function(_, type){
-		jq.event.special[type] = {
-			setup: function(_data, _ns, handle){
-				this.addEventListener(type, handle, { passive: false });
-			}
-		};
+}
+
+function ip_all(selector, context){
+	"use strict";
+	return Array.prototype.slice.call((context || document).querySelectorAll(selector));
+}
+
+function ip_one(selector, context){
+	"use strict";
+	return (context || document).querySelector(selector);
+}
+
+function ip_add_classes(el, str){
+	"use strict";
+	if(!el || !str){ return; }
+	str.split(/\s+/).forEach(function(c){ if(c){ el.classList.add(c); } });
+}
+
+function ip_remove_classes(el, str){
+	"use strict";
+	if(!el || !str){ return; }
+	str.split(/\s+/).forEach(function(c){ if(c){ el.classList.remove(c); } });
+}
+
+function ip_siblings(el){
+	"use strict";
+	if(!el || !el.parentNode){ return []; }
+	return Array.prototype.filter.call(el.parentNode.children, function(child){
+		return child !== el;
 	});
-})(window.jQuery);
+}
 
-jQuery(document).ready(function(){
+ip_ready(function(){
 
 	"use strict";
-	
+
 	// here all ready functions
-	
+
 	ivan_popov_modalbox();
-	ivan_popov_nicescroll();
 	ivan_popov_build_swipe_nav();
 	ivan_popov_page_transition();
 	ivan_popov_trigger_menu();
@@ -45,10 +59,11 @@ jQuery(document).ready(function(){
 	ivan_popov_imgtosvg();
 	ivan_popov_data_images();
 	ivan_popov_testimonials_snap();
+	ivan_popov_animated_headline();
 	hashtag();
 	ivan_popov_bind_nav_mode();
 	ivan_popov_preloader();
-	
+
 });
 
 // -----------------------------------------------------
@@ -57,171 +72,6 @@ jQuery(document).ready(function(){
 
 function ivan_popov_modalbox(){
 	"use strict";
-}
-
-// -----------------------------------------------------
-// -----------------   NICESCROLL   --------------------
-// -----------------------------------------------------
-
-var ivan_popov_nicescroll_section = null;
-var ivan_popov_nicescroll_section_el = null;
-var ivan_popov_nicescroll_modal = null;
-var ivan_popov_nicescroll_modal_el = null;
-
-function ivan_popov_nicescroll_options(){
-	return {
-		cursorcolor: '#999',
-		cursorwidth: '5px',
-		cursorborder: '0',
-		cursorborderradius: '4px',
-		scrollspeed: 60,
-		mousescrollstep: 40,
-		autohidemode: true,
-		horizrailenabled: false,
-		hwacceleration: false,
-		preservenativescrolling: false,
-		nativeparentscrolling: false
-	};
-}
-
-function ivan_popov_nicescroll_is_mobile(){
-	return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
-}
-
-function ivan_popov_nicescroll_visible_section(){
-	var $active = jQuery('.ivan_popov_section.active');
-	if ($active.length) {
-		return $active;
-	}
-	return jQuery('.ivan_popov_section.animated').not('.hidden').first();
-}
-
-function ivan_popov_nicescroll_get_instance($element){
-	var ns = $element.data('__nicescroll');
-	if (!ns) {
-		return null;
-	}
-	if (ns.name === 'nicescrollarray' && ns.length) {
-		return ns[0];
-	}
-	return ns.rail ? ns : null;
-}
-
-function ivan_popov_nicescroll_sync_rail($element){
-	var ns = ivan_popov_nicescroll_get_instance($element);
-	if (!ns || !ns.rail) {
-		return;
-	}
-
-	ns.resize();
-
-	if (ns.rail.parent()[0] !== document.body) {
-		jQuery(document.body).append(ns.rail);
-	}
-
-	var offset = $element.offset();
-	ns.rail.css({
-		top: offset.top,
-		left: offset.left + $element.outerWidth() - ns.rail.outerWidth(),
-		height: $element.innerHeight()
-	});
-
-	if (ns.noticeCursor) {
-		ns.noticeCursor();
-	}
-}
-
-function ivan_popov_nicescroll_bind_scroll($element){
-	$element.off('scroll.nicescroll').on('scroll.nicescroll', function(){
-		var ns = ivan_popov_nicescroll_get_instance($element);
-		if (ns && ns.onscroll) {
-			ns.onscroll();
-		}
-	});
-}
-
-function ivan_popov_nicescroll_remove_instance(instance, $element){
-	if ($element) {
-		$element.off('scroll.nicescroll');
-	}
-	if (instance && instance.remove) {
-		instance.remove();
-	}
-}
-
-function ivan_popov_nicescroll_bind_section($section){
-	if (!$section || !$section.length || !jQuery.fn.niceScroll || ivan_popov_nicescroll_is_mobile()) {
-		return;
-	}
-
-	if ($section.is('#contact')) {
-		ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_section, ivan_popov_nicescroll_section_el);
-		ivan_popov_nicescroll_section = null;
-		ivan_popov_nicescroll_section_el = null;
-		return;
-	}
-
-	ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_section, ivan_popov_nicescroll_section_el);
-	ivan_popov_nicescroll_section = null;
-	ivan_popov_nicescroll_section_el = null;
-
-	ivan_popov_nicescroll_section = $section.niceScroll(ivan_popov_nicescroll_options());
-	ivan_popov_nicescroll_section_el = $section;
-	ivan_popov_nicescroll_bind_scroll($section);
-	ivan_popov_nicescroll_sync_rail($section);
-}
-
-function ivan_popov_nicescroll_bind_modal($wrap){
-	if (!$wrap || !$wrap.length || !jQuery.fn.niceScroll || ivan_popov_nicescroll_is_mobile()) {
-		return;
-	}
-
-	ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_modal, ivan_popov_nicescroll_modal_el);
-	ivan_popov_nicescroll_modal = null;
-	ivan_popov_nicescroll_modal_el = null;
-
-	ivan_popov_nicescroll_modal = $wrap.niceScroll(ivan_popov_nicescroll_options());
-	ivan_popov_nicescroll_modal_el = $wrap;
-	ivan_popov_nicescroll_bind_scroll($wrap);
-	ivan_popov_nicescroll_sync_rail($wrap);
-}
-
-function ivan_popov_nicescroll(){
-	
-	"use strict";
-
-	if (!jQuery.fn.niceScroll || ivan_popov_nicescroll_is_mobile()) {
-		return;
-	}
-
-	ivan_popov_nicescroll_bind_section(ivan_popov_nicescroll_visible_section());
-
-	jQuery(window).off('resize.nicescroll').on('resize.nicescroll', function(){
-		var $section = ivan_popov_nicescroll_visible_section();
-		if ($section.length) {
-			ivan_popov_nicescroll_sync_rail($section);
-		}
-	});
-}
-
-function ivan_popov_nicescroll_resize($elements){
-	
-	"use strict";
-
-	if (!jQuery.fn.getNiceScroll) {
-		return;
-	}
-
-	$elements.each(function(){
-		var $element = jQuery(this);
-		if ($element.hasClass('ivan_popov_section')) {
-			ivan_popov_nicescroll_bind_section($element);
-			return;
-		}
-		if ($element.hasClass('description_wrap')) {
-			ivan_popov_nicescroll_bind_modal($element);
-		}
-	});
 }
 
 // -----------------------------------------------------
@@ -239,59 +89,80 @@ function ivan_popov_goto(href){
 		return false;
 	}
 
-	var $target		= jQuery(href);
-	if(!$target.length){
+	var target = ip_one(href);
+	if(!target){
 		return false;
 	}
 
-	var section		= jQuery('.ivan_popov_section');
-	var allLi		= jQuery('.transition_link li');
-	var wrapper		= jQuery('.ivan_popov_all_wrap');
-	var enter		= wrapper.data('enter');
-	var exit		= wrapper.data('exit');
+	var sections	= ip_all('.ivan_popov_section');
+	var allLi		= ip_all('.transition_link li');
+	var wrapper		= ip_one('.ivan_popov_all_wrap');
+	if(!wrapper){
+		return false;
+	}
+	var enter		= wrapper.getAttribute('data-enter');
+	var exit		= wrapper.getAttribute('data-exit');
 	// Every link (header, mobile menu, swipe dots) that points to this section.
-	var parents		= jQuery('.transition_link a[href="'+href+'"]').closest('li');
+	var parents		= ip_all('.transition_link a[href="'+href+'"]').map(function(a){
+		return a.closest('li');
+	}).filter(Boolean);
 
-	if(parents.filter('.active').length){
+	if(parents.some(function(li){ return li.classList.contains('active'); })){
 		return false;
 	}
 
-	allLi.removeClass('active');
-	wrapper.find(section).removeClass('animated '+enter);
-	if(wrapper.hasClass('opened')){
-		wrapper.find(section).addClass('animated '+exit);
+	allLi.forEach(function(li){ li.classList.remove('active'); });
+	sections.forEach(function(s){
+		s.classList.remove('animated');
+		ip_remove_classes(s, enter);
+	});
+	if(wrapper.classList.contains('opened')){
+		sections.forEach(function(s){
+			s.classList.add('animated');
+			ip_add_classes(s, exit);
+		});
 	}
-	parents.addClass('active');
-	wrapper.addClass('opened');
-	wrapper.find($target).removeClass('animated '+exit).addClass('animated '+enter);
-	section.addClass('hidden');
-	$target.removeClass('hidden').addClass('active');
-	setTimeout(function(){
-		ivan_popov_nicescroll_bind_section($target);
-	}, 1050);
+	parents.forEach(function(li){ li.classList.add('active'); });
+	wrapper.classList.add('opened');
+	target.classList.remove('animated');
+	ip_remove_classes(target, exit);
+	target.classList.add('animated');
+	ip_add_classes(target, enter);
+	sections.forEach(function(s){ s.classList.add('hidden'); });
+	target.classList.remove('hidden');
+	target.classList.add('active');
 
 	// Testimonials become a vertical list on mobile: hint that it scrolls.
 	if(href === '#how'){
 		ivan_popov_flash_hint('.ivan_popov_scroll_hint', 'ivan_popov_scroll_hint');
 	}
 
+	// Keep the sliding header marker aligned for every navigation path (header,
+	// mobile menu, swipe dots, keyboard, touch), not only those that fire a hover.
+	if(typeof currentLink === 'function'){
+		var headerCcc = ip_one('.ivan_popov_header .menu .ccc');
+		var headerActive = ip_one('.ivan_popov_header .menu .active a');
+		if(headerCcc && headerActive){
+			currentLink(headerCcc, headerActive);
+		}
+	}
+
 	return true;
 }
 
 function ivan_popov_page_transition(){
-	
+
 	"use strict";
-	
-	var button			= jQuery('.transition_link a');
-	
-	button.on('click',function(){
-		var element 	= jQuery(this);
-		var href		= element.attr('href');
-		ivan_popov_goto(href);
-		if(element.parent().hasClass('ivan_popov_button')){
-			hashtag();
-		}
-		return false;
+
+	ip_all('.transition_link a').forEach(function(link){
+		link.addEventListener('click', function(e){
+			e.preventDefault();
+			var href = link.getAttribute('href');
+			ivan_popov_goto(href);
+			if(link.parentNode && link.parentNode.classList.contains('ivan_popov_button')){
+				hashtag();
+			}
+		});
 	});
 }
 
@@ -300,30 +171,34 @@ function ivan_popov_page_transition(){
 // -----------------------------------------------------
 
 function ivan_popov_trigger_menu(){
-	
+
 	"use strict";
 
-	var hamburger 		= jQuery('.ivan_popov_topbar .trigger .hamburger');
-	var mobileMenu		= jQuery('.ivan_popov_mobile_menu');
-	var mobileMenuList	= jQuery('.ivan_popov_mobile_menu .menu_list ul li a');
+	var hamburgers		= ip_all('.ivan_popov_topbar .trigger .hamburger');
+	var mobileMenu		= ip_one('.ivan_popov_mobile_menu');
+	var mobileMenuList	= ip_all('.ivan_popov_mobile_menu .menu_list ul li a');
 
-	hamburger.on('click',function(){
-		var element 	= jQuery(this);
-
-		if(element.hasClass('is-active')){
-			element.removeClass('is-active');
-			mobileMenu.removeClass('opened');
-		}else{
-			element.addClass('is-active');
-			mobileMenu.addClass('opened');
-		}
-		return false;
+	hamburgers.forEach(function(hamburger){
+		hamburger.addEventListener('click', function(e){
+			e.preventDefault();
+			if(hamburger.classList.contains('is-active')){
+				hamburger.classList.remove('is-active');
+				if(mobileMenu){ mobileMenu.classList.remove('opened'); }
+			}else{
+				hamburger.classList.add('is-active');
+				if(mobileMenu){ mobileMenu.classList.add('opened'); }
+			}
+		});
 	});
-	
-	mobileMenuList.on('click',function(){
-		jQuery('.ivan_popov_topbar .trigger .hamburger').removeClass('is-active');
-		mobileMenu.removeClass('opened');
-		return false;
+
+	mobileMenuList.forEach(function(link){
+		link.addEventListener('click', function(e){
+			e.preventDefault();
+			ip_all('.ivan_popov_topbar .trigger .hamburger').forEach(function(h){
+				h.classList.remove('is-active');
+			});
+			if(mobileMenu){ mobileMenu.classList.remove('opened'); }
+		});
 	});
 }
 
@@ -338,7 +213,8 @@ function ivan_popov_is_nav_compact(){
 
 	"use strict";
 
-	return jQuery('.ivan_popov_all_wrap').hasClass('nav-compact');
+	var wrap = ip_one('.ivan_popov_all_wrap');
+	return !!wrap && wrap.classList.contains('nav-compact');
 }
 
 // Measure whether every header item fits beside the logo; toggle .nav-compact.
@@ -372,14 +248,17 @@ function ivan_popov_update_nav_mode(){
 	wrap.classList.toggle('nav-compact', !fits);
 
 	if(wasCompact && fits){
-		jQuery('.ivan_popov_topbar .trigger .hamburger').removeClass('is-active');
-		jQuery('.ivan_popov_mobile_menu').removeClass('opened');
+		ip_all('.ivan_popov_topbar .trigger .hamburger').forEach(function(h){
+			h.classList.remove('is-active');
+		});
+		var mm = ip_one('.ivan_popov_mobile_menu');
+		if(mm){ mm.classList.remove('opened'); }
 	}
 
 	if(fits){
-		var ccc = jQuery(header).find('.menu .ccc');
-		var el = jQuery(header).find('.menu .active a');
-		if(ccc.length && el.length && typeof currentLink === 'function'){
+		var ccc = header.querySelector('.menu .ccc');
+		var el = header.querySelector('.menu .active a');
+		if(ccc && el && typeof currentLink === 'function'){
 			currentLink(ccc, el);
 		}
 	}
@@ -397,12 +276,12 @@ function ivan_popov_bind_nav_mode(){
 
 	"use strict";
 
-	jQuery(window).on('resize', function(){
+	window.addEventListener('resize', function(){
 		window.clearTimeout(ivan_popov_nav_mode_timer);
 		ivan_popov_nav_mode_timer = window.setTimeout(ivan_popov_update_nav_mode, 120);
 	});
 
-	jQuery(window).on('load', ivan_popov_schedule_nav_mode);
+	window.addEventListener('load', ivan_popov_schedule_nav_mode);
 
 	if(document.readyState === 'complete'){
 		ivan_popov_schedule_nav_mode();
@@ -436,7 +315,7 @@ function ivan_popov_is_mobile_layout(){
 	if(window.matchMedia){
 		return window.matchMedia('(max-width: 1040px)').matches;
 	}
-	return jQuery(window).width() <= 1040;
+	return window.innerWidth <= 1040;
 }
 
 // Briefly reveal a one-time-per-session hint element, then fade it out.
@@ -469,21 +348,23 @@ function ivan_popov_build_swipe_nav(){
 
 	"use strict";
 
-	if(jQuery('.ivan_popov_swipe_nav').length){
+	if(ip_one('.ivan_popov_swipe_nav')){
 		return;
 	}
 
-	var links = jQuery('.ivan_popov_mobile_menu .menu_list .transition_link a');
+	var links = ip_all('.ivan_popov_mobile_menu .menu_list .transition_link a');
 	if(!links.length){
 		return;
 	}
 
+	var hasActiveSection = !!ip_one('.ivan_popov_section.active');
+
 	var dots = '';
-	links.each(function(i){
-		var $a		= jQuery(this);
-		var href	= $a.attr('href');
-		var label	= jQuery.trim($a.text());
-		var active	= jQuery(href).hasClass('active') || (i === 0 && !jQuery('.ivan_popov_section.active').length);
+	links.forEach(function(a, i){
+		var href	= a.getAttribute('href');
+		var label	= (a.textContent || '').replace(/^\s+|\s+$/g, '');
+		var targetEl = href ? ip_one(href) : null;
+		var active	= (targetEl && targetEl.classList.contains('active')) || (i === 0 && !hasActiveSection);
 		dots += '<li class="'+(active ? 'active' : '')+'">'
 			+ '<a href="'+href+'" aria-label="'+label+'"><span class="dot"></span></a>'
 			+ '</li>';
@@ -501,7 +382,10 @@ function ivan_popov_build_swipe_nav(){
 		+ '<span class="ar down">&#8250;</span>'
 		+ '</div>';
 
-	jQuery('.ivan_popov_all_wrap').append(html);
+	var wrap = ip_one('.ivan_popov_all_wrap');
+	if(wrap){
+		wrap.insertAdjacentHTML('beforeend', html);
+	}
 }
 
 function ivan_popov_swipe_navigation(){
@@ -516,9 +400,9 @@ function ivan_popov_swipe_navigation(){
 	var startX = 0, startY = 0, startTime = 0, tracking = false;
 
 	function sectionOrder(){
-		return jQuery('.ivan_popov_swipe_nav .transition_link a').map(function(){
-			return jQuery(this).attr('href');
-		}).get();
+		return ip_all('.ivan_popov_swipe_nav .transition_link a').map(function(a){
+			return a.getAttribute('href');
+		});
 	}
 
 	function currentHref(){
@@ -526,20 +410,27 @@ function ivan_popov_swipe_navigation(){
 		// exactly one .transition_link item active. Sections cannot be used here
 		// because the legacy transition only adds .hidden to the previous section
 		// without clearing its .active class, so several stay "active" at once.
-		var $dot = jQuery('.ivan_popov_swipe_nav li.active a');
-		if($dot.length){
-			return $dot.attr('href');
+		var dot = ip_one('.ivan_popov_swipe_nav li.active a');
+		if(dot){
+			return dot.getAttribute('href');
 		}
-		var $visible = jQuery('.ivan_popov_section.active').not('.hidden').last();
-		if(!$visible.length){
-			$visible = jQuery('.ivan_popov_section.animated').not('.hidden').last();
+		var visible = ip_all('.ivan_popov_section.active').filter(function(s){
+			return !s.classList.contains('hidden');
+		});
+		if(!visible.length){
+			visible = ip_all('.ivan_popov_section.animated').filter(function(s){
+				return !s.classList.contains('hidden');
+			});
 		}
-		return $visible.length ? ('#' + $visible.attr('id')) : null;
+		var last = visible[visible.length - 1];
+		return last ? ('#' + last.id) : null;
 	}
 
 	function navigationBlocked(){
-		return jQuery('.ivan_popov_modalbox').hasClass('opened')
-			|| jQuery('.ivan_popov_mobile_menu').hasClass('opened');
+		var modal = ip_one('.ivan_popov_modalbox');
+		var menu = ip_one('.ivan_popov_mobile_menu');
+		return (modal && modal.classList.contains('opened'))
+			|| (menu && menu.classList.contains('opened'));
 	}
 
 	mainpart.addEventListener('touchstart', function(e){
@@ -600,30 +491,33 @@ function ivan_popov_keyboard_navigation(){
 
 	"use strict";
 
-	var modalBox	= jQuery('.ivan_popov_modalbox');
-	var mobileMenu	= jQuery('.ivan_popov_mobile_menu');
+	var modalBox	= ip_one('.ivan_popov_modalbox');
+	var mobileMenu	= ip_one('.ivan_popov_mobile_menu');
 
 	// Section order follows the menu order; the header is the source of truth,
 	// with the mobile menu as a fallback when the header is not rendered.
 	function sectionOrder(){
-		var order = jQuery('.ivan_popov_header .menu .transition_link a').map(function(){
-			return jQuery(this).attr('href');
-		}).get();
+		var order = ip_all('.ivan_popov_header .menu .transition_link a').map(function(a){
+			return a.getAttribute('href');
+		});
 		if(!order.length){
-			order = jQuery('.ivan_popov_mobile_menu .menu_list .transition_link a').map(function(){
-				return jQuery(this).attr('href');
-			}).get();
+			order = ip_all('.ivan_popov_mobile_menu .menu_list .transition_link a').map(function(a){
+				return a.getAttribute('href');
+			});
 		}
 		return order;
 	}
 
 	function currentHref(){
-		var $active = jQuery('.transition_link li.active a').first();
-		if($active.length){
-			return $active.attr('href');
+		var active = ip_one('.transition_link li.active a');
+		if(active){
+			return active.getAttribute('href');
 		}
-		var $visible = jQuery('.ivan_popov_section.active').not('.hidden').last();
-		return $visible.length ? ('#' + $visible.attr('id')) : null;
+		var visible = ip_all('.ivan_popov_section.active').filter(function(s){
+			return !s.classList.contains('hidden');
+		});
+		var last = visible[visible.length - 1];
+		return last ? ('#' + last.id) : null;
 	}
 
 	// Keep the sliding header highlight aligned with the new active item, since
@@ -632,13 +526,13 @@ function ivan_popov_keyboard_navigation(){
 		if(typeof currentLink !== 'function'){
 			return;
 		}
-		var header = jQuery('.ivan_popov_header');
-		if(!header.is(':visible')){
+		var header = ip_one('.ivan_popov_header');
+		if(!header || header.offsetParent === null){
 			return;
 		}
-		var ccc = header.find('.menu .ccc');
-		var el	= header.find('.menu .active a');
-		if(ccc.length && el.length){
+		var ccc = header.querySelector('.menu .ccc');
+		var el	= header.querySelector('.menu .active a');
+		if(ccc && el){
 			currentLink(ccc, el);
 		}
 	}
@@ -662,20 +556,25 @@ function ivan_popov_keyboard_navigation(){
 	}
 
 	function closeModal(){
-		if(!modalBox.hasClass('opened')){
+		if(!modalBox || !modalBox.classList.contains('opened')){
 			return false;
 		}
-		// Reuse the existing close handler so nicescroll/cursor state is reset.
-		modalBox.find('.close').first().trigger('click');
+		// Reuse the existing close handler so cursor state is reset.
+		var close = modalBox.querySelector('.close');
+		if(close){
+			close.click();
+		}
 		return true;
 	}
 
 	function closeMobileMenu(){
-		if(!mobileMenu.hasClass('opened')){
+		if(!mobileMenu || !mobileMenu.classList.contains('opened')){
 			return false;
 		}
-		jQuery('.ivan_popov_topbar .trigger .hamburger').removeClass('is-active');
-		mobileMenu.removeClass('opened');
+		ip_all('.ivan_popov_topbar .trigger .hamburger').forEach(function(h){
+			h.classList.remove('is-active');
+		});
+		mobileMenu.classList.remove('opened');
 		return true;
 	}
 
@@ -687,7 +586,7 @@ function ivan_popov_keyboard_navigation(){
 		return tag === 'input' || tag === 'textarea' || tag === 'select' || el.isContentEditable;
 	}
 
-	jQuery(document).on('keydown.ivan_popov_kbd', function(e){
+	document.addEventListener('keydown', function(e){
 		var key = e.key;
 
 		if(key === 'Escape' || key === 'Esc'){
@@ -703,7 +602,7 @@ function ivan_popov_keyboard_navigation(){
 		}
 
 		// Section navigation is suspended while a popup or the mobile menu is open.
-		if(modalBox.hasClass('opened') || mobileMenu.hasClass('opened')){
+		if((modalBox && modalBox.classList.contains('opened')) || (mobileMenu && mobileMenu.classList.contains('opened'))){
 			return;
 		}
 
@@ -720,53 +619,76 @@ function ivan_popov_keyboard_navigation(){
 // -------------------------------------------------
 
 function ivan_popov_service_popup(){
-	
+
 	"use strict";
-	
-	var modalBox		= jQuery('.ivan_popov_modalbox');
-	var button			= jQuery('.ivan_popov_service .service_list ul li .ivan_popov_full_link');
-	var closePopup		= modalBox.find('.close');
-	var serviceCards	= jQuery('.ivan_popov_service .service_list ul li .list_inner');
+
+	var modalBox		= ip_one('.ivan_popov_modalbox');
+	if(!modalBox){
+		return;
+	}
+	var buttons			= ip_all('.ivan_popov_service .service_list ul li .ivan_popov_full_link');
+	var closePopup		= modalBox.querySelector('.close');
+	var serviceCards	= ip_all('.ivan_popov_service .service_list ul li .list_inner');
 
 	function setLightCursor(on){
-		jQuery('body').toggleClass('ivan_popov_light_cursor', !!on);
+		document.body.classList.toggle('ivan_popov_light_cursor', !!on);
 	}
 
-	serviceCards.on('mouseenter', function(){
-		setLightCursor(true);
-	}).on('mouseleave', function(){
-		if (!modalBox.hasClass('opened')) {
-			setLightCursor(false);
-		}
+	serviceCards.forEach(function(card){
+		card.addEventListener('mouseenter', function(){
+			setLightCursor(true);
+		});
+		card.addEventListener('mouseleave', function(){
+			if(!modalBox.classList.contains('opened')){
+				setLightCursor(false);
+			}
+		});
 	});
 
-	button.on('click',function(){
-		var element = jQuery(this);
-		var parent	= element.closest('.list_inner');
-		var popupImg = parent.find('.popup_service_image');
-		var elImage	= popupImg.data('popup-jpg') || popupImg.attr('src');
-		var elWebp	= popupImg.data('popup-webp');
-		var title	= parent.find('.title').html();
-		var content = parent.find('.service_hidden_details').html();
-		var webpAttr = elWebp ? ' data-img-url-webp="'+elWebp+'"' : '';
-		modalBox.addClass('opened');
-		setLightCursor(true);
-		modalBox.find('.description_wrap').html(content);
-		modalBox.find('.service_popup_informations').prepend('<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"'+webpAttr+'></div></div>');
-		ivan_popov_data_images();
-		modalBox.find('.service_popup_informations .image').after('<div class="main_title"><h3>'+title+'</h3></div>');
-		ivan_popov_nicescroll_resize(modalBox.find('.description_wrap'));
-		return false;
+	buttons.forEach(function(button){
+		button.addEventListener('click', function(e){
+			e.preventDefault();
+			var parent	= button.closest('.list_inner');
+			if(!parent){ return; }
+			var popupImg = parent.querySelector('.popup_service_image');
+			var elImage	= (popupImg && (popupImg.getAttribute('data-popup-jpg') || popupImg.getAttribute('src'))) || '';
+			var elWebp	= popupImg ? popupImg.getAttribute('data-popup-webp') : null;
+			var titleEl	= parent.querySelector('.title');
+			var title	= titleEl ? titleEl.innerHTML : '';
+			var detailsEl = parent.querySelector('.service_hidden_details');
+			var content = detailsEl ? detailsEl.innerHTML : '';
+			var webpAttr = elWebp ? ' data-img-url-webp="'+elWebp+'"' : '';
+
+			modalBox.classList.add('opened');
+			setLightCursor(true);
+
+			var descWrap = modalBox.querySelector('.description_wrap');
+			if(descWrap){
+				descWrap.innerHTML = content;
+			}
+			var infos = modalBox.querySelector('.service_popup_informations');
+			if(infos){
+				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"'+webpAttr+'></div></div>');
+				ivan_popov_data_images();
+				var image = infos.querySelector('.image');
+				if(image){
+					image.insertAdjacentHTML('afterend', '<div class="main_title"><h3>'+title+'</h3></div>');
+				}
+			}
+		});
 	});
-	closePopup.on('click',function(){
-		modalBox.removeClass('opened');
-		setLightCursor(false);
-		modalBox.find('.description_wrap').html('');
-		ivan_popov_nicescroll_remove_instance(ivan_popov_nicescroll_modal, ivan_popov_nicescroll_modal_el);
-		ivan_popov_nicescroll_modal = null;
-		ivan_popov_nicescroll_modal_el = null;
-		return false;
-	});
+
+	if(closePopup){
+		closePopup.addEventListener('click', function(e){
+			e.preventDefault();
+			modalBox.classList.remove('opened');
+			setLightCursor(false);
+			var descWrap = modalBox.querySelector('.description_wrap');
+			if(descWrap){
+				descWrap.innerHTML = '';
+			}
+		});
+	}
 }
 
 // -----------------------------------------------------
@@ -774,31 +696,30 @@ function ivan_popov_service_popup(){
 // -----------------------------------------------------
 
 function ivan_popov_preloader(){
-	
+
 	"use strict";
-	
-	var preloader = jQuery('#preloader');
-	
-	if (!preloader.length) {
+
+	var preloader = document.getElementById('preloader');
+
+	if(!preloader){
 		return;
 	}
 
 	var run = function(){
 		setTimeout(function() {
-			preloader.addClass('preloaded');
+			preloader.classList.add('preloaded');
 		}, 180);
 		setTimeout(function() {
-			preloader.remove();
+			if(preloader.parentNode){
+				preloader.parentNode.removeChild(preloader);
+			}
 		}, 850);
 	};
 
-	if (document.readyState === 'complete') {
+	if(document.readyState === 'complete'){
 		run();
-	} else {
-		jQuery(window).on('load.ivan_popov_preloader', function(){
-			jQuery(window).off('load.ivan_popov_preloader');
-			run();
-		});
+	}else{
+		window.addEventListener('load', run, { once: true });
 	}
 }
 
@@ -807,66 +728,100 @@ function ivan_popov_preloader(){
 // -----------------------------------------------------
 
 function ivan_popov_cursor(){
-	
-    "use strict";
-	
-	var myCursor	= jQuery('.mouse-cursor');
-	
-	if(myCursor.length){
-		if ($("body")) {
-        const e = document.querySelector(".cursor-inner"),
-            t = document.querySelector(".cursor-outer");
-        let n, i = 0,
-            o = !1;
-        window.onmousemove = function (s) {
-            o || (t.style.transform = "translate(" + s.clientX + "px, " + s.clientY + "px)"), e.style.transform = "translate(" + s.clientX + "px, " + s.clientY + "px)", n = s.clientY, i = s.clientX
-        }, $("body").on("mouseenter", "a,.ivan_popov_topbar .trigger, .cursor-pointer", function () {
-            e.classList.add("cursor-hover"), t.classList.add("cursor-hover")
-        }), $("body").on("mouseleave", "a,.ivan_popov_topbar .trigger, .cursor-pointer", function () {
-            $(this).is("a") && $(this).closest(".cursor-pointer").length || (e.classList.remove("cursor-hover"), t.classList.remove("cursor-hover"))
-        }), e.style.visibility = "visible", t.style.visibility = "visible"
-    }
+
+	"use strict";
+
+	var myCursor = ip_one('.mouse-cursor');
+	if(!myCursor){
+		return;
 	}
-};
+
+	var inner = document.querySelector('.cursor-inner');
+	var outer = document.querySelector('.cursor-outer');
+	if(!inner || !outer){
+		return;
+	}
+
+	var hoverSelector = 'a, .ivan_popov_topbar .trigger, .cursor-pointer';
+	var freeze = false;
+
+	window.addEventListener('mousemove', function(s){
+		if(!freeze){
+			outer.style.transform = 'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
+		}
+		inner.style.transform = 'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
+	});
+
+	document.body.addEventListener('mouseover', function(e){
+		if(e.target.closest && e.target.closest(hoverSelector)){
+			inner.classList.add('cursor-hover');
+			outer.classList.add('cursor-hover');
+		}
+	});
+
+	document.body.addEventListener('mouseout', function(e){
+		var matched = e.target.closest && e.target.closest(hoverSelector);
+		if(!matched){
+			return;
+		}
+		// Leaving an <a> that still sits inside a hovered .cursor-pointer must not
+		// drop the hover state (the wrapping pointer is still active).
+		if(matched.tagName && matched.tagName.toLowerCase() === 'a' && matched.closest('.cursor-pointer')){
+			return;
+		}
+		inner.classList.remove('cursor-hover');
+		outer.classList.remove('cursor-hover');
+	});
+
+	inner.style.visibility = 'visible';
+	outer.style.visibility = 'visible';
+}
 
 // -----------------------------------------------------
 // ---------------    IMAGE TO SVG    ------------------
 // -----------------------------------------------------
 
 function ivan_popov_imgtosvg(){
-	
+
 	"use strict";
-	
-	jQuery('img.svg').each(function(){
-		
-		var jQueryimg 		= jQuery(this);
-		var imgClass		= jQueryimg.attr('class');
-		var imgURL			= jQueryimg.attr('src');
-		var imgWidth		= jQueryimg.attr('width');
-		var imgHeight		= jQueryimg.attr('height');
 
-		jQuery.get(imgURL, function(data) {
-			// Get the SVG tag, ignore the rest
-			var jQuerysvg = jQuery(data).find('svg');
+	ip_all('img.svg').forEach(function(img){
 
-			// Add replaced image's classes to the new SVG
-			if(typeof imgClass !== 'undefined') {
-				jQuerysvg = jQuerysvg.attr('class', imgClass+' replaced-svg');
+		var imgClass	= img.getAttribute('class');
+		var imgURL		= img.getAttribute('src');
+		var imgWidth	= img.getAttribute('width');
+		var imgHeight	= img.getAttribute('height');
+
+		if(!imgURL){
+			return;
+		}
+
+		fetch(imgURL).then(function(response){
+			return response.text();
+		}).then(function(text){
+			var doc = new DOMParser().parseFromString(text, 'image/svg+xml');
+			var svg = doc.querySelector('svg');
+			if(!svg){
+				return;
 			}
-			if (imgWidth) {
-				jQuerysvg = jQuerysvg.attr('width', imgWidth);
+
+			if(imgClass !== null && typeof imgClass !== 'undefined'){
+				svg.setAttribute('class', imgClass + ' replaced-svg');
 			}
-			if (imgHeight) {
-				jQuerysvg = jQuerysvg.attr('height', imgHeight);
+			if(imgWidth){
+				svg.setAttribute('width', imgWidth);
+			}
+			if(imgHeight){
+				svg.setAttribute('height', imgHeight);
 			}
 
 			// Remove any invalid XML tags as per http://validator.w3.org
-			jQuerysvg = jQuerysvg.removeAttr('xmlns:a');
+			svg.removeAttribute('xmlns:a');
 
-			// Replace image with new SVG
-			jQueryimg.replaceWith(jQuerysvg);
-
-		}, 'xml');
+			if(img.parentNode){
+				img.parentNode.replaceChild(svg, img);
+			}
+		}).catch(function(){});
 
 	});
 }
@@ -876,22 +831,17 @@ function ivan_popov_imgtosvg(){
 // -----------------------------------------------------
 
 function ivan_popov_data_images(){
-	
+
 	"use strict";
-	
-	var data			= jQuery('*[data-img-url]');
-	
-	data.each(function(){
-		var element			= jQuery(this);
-		var url				= element.data('img-url');
-		var webp			= element.data('img-url-webp');
-		if (webp) {
-			element.css({
-				backgroundImage:
-					'image-set(url("' + webp + '") type("image/webp"), url("' + url + '") type("image/jpeg"))'
-			});
-		} else {
-			element.css({backgroundImage: 'url('+url+')'});
+
+	ip_all('*[data-img-url]').forEach(function(element){
+		var url		= element.getAttribute('data-img-url');
+		var webp	= element.getAttribute('data-img-url-webp');
+		if(webp){
+			element.style.backgroundImage =
+				'image-set(url("' + webp + '") type("image/webp"), url("' + url + '") type("image/jpeg"))';
+		}else{
+			element.style.backgroundImage = 'url(' + url + ')';
 		}
 	});
 }
@@ -1005,8 +955,8 @@ function ivan_popov_testimonials_snap(){
 		paused = false;
 	}, { passive: true });
 
-	// Click-drag and trackpad horizontal scroll: NiceScroll on the section
-	// captures pointer/wheel events unless we stop propagation on the track.
+	// Click-drag and trackpad horizontal scroll: stop propagation on the track so
+	// the section's own scroll container does not hijack the horizontal gesture.
 	function onDragMove(e){
 		if(!dragging){
 			return;
@@ -1081,41 +1031,140 @@ function ivan_popov_testimonials_snap(){
 }
 
 // -----------------------------------------------------
+// ---------------   ANIMATED HEADLINE   ---------------
+// -----------------------------------------------------
+
+// Vanilla re-implementation of the CodyHouse "clip" animated headline (formerly
+// driven by jQuery in plugins.js). Types the active phrase in, holds, erases it,
+// then switches to the next one by animating the wrapper width; overflow:hidden
+// plus the ::after bar give the typewriter/cursor look.
+function ivan_popov_animated_headline(){
+
+	"use strict";
+
+	var animationDelay = 1200;       // initial wait before the first erase
+	var revealDuration = 600;        // type / erase width animation duration
+	var revealAnimationDelay = 800;  // hold time while a phrase is fully shown
+	var reduce = !!(window.matchMedia &&
+		window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+	ip_all('.cd-headline.clip').forEach(function(headline){
+		var wrapper = headline.querySelector('.cd-words-wrapper');
+		if(!wrapper){ return; }
+		var words = Array.prototype.slice.call(wrapper.querySelectorAll('b'));
+		if(words.length < 2){ return; }
+
+		var visible = wrapper.querySelector('.is-visible') || words[0];
+		words.forEach(function(w){
+			w.classList.toggle('is-visible', w === visible);
+			w.classList.toggle('is-hidden', w !== visible);
+		});
+
+		function takeNext(word){
+			var i = words.indexOf(word);
+			return words[(i + 1) % words.length];
+		}
+
+		function switchWord(oldWord, newWord){
+			oldWord.classList.remove('is-visible');
+			oldWord.classList.add('is-hidden');
+			newWord.classList.remove('is-hidden');
+			newWord.classList.add('is-visible');
+		}
+
+		// Reduced motion: skip the width typing, just swap phrases on a timer.
+		if(reduce){
+			wrapper.style.width = 'auto';
+			var idx = words.indexOf(visible);
+			window.setInterval(function(){
+				var cur = words[idx];
+				idx = (idx + 1) % words.length;
+				switchWord(cur, words[idx]);
+			}, animationDelay + revealAnimationDelay + revealDuration);
+			return;
+		}
+
+		function animateWidth(px, done){
+			wrapper.style.transition = 'width ' + revealDuration + 'ms';
+			void wrapper.offsetWidth; // reflow so the transition runs from current width
+			wrapper.style.width = px + 'px';
+			var finished = false;
+			function onEnd(e){
+				if(e && e.propertyName && e.propertyName !== 'width'){ return; }
+				if(finished){ return; }
+				finished = true;
+				wrapper.removeEventListener('transitionend', onEnd);
+				done();
+			}
+			wrapper.addEventListener('transitionend', onEnd);
+			window.setTimeout(onEnd, revealDuration + 80); // fallback if no transitionend
+		}
+
+		function hideWord(word){
+			var nextWord = takeNext(word);
+			animateWidth(2, function(){
+				switchWord(word, nextWord);
+				showWord(nextWord);
+			});
+		}
+
+		function showWord(word){
+			animateWidth(word.offsetWidth + 10, function(){
+				window.setTimeout(function(){ hideWord(word); }, revealAnimationDelay);
+			});
+		}
+
+		wrapper.style.width = (visible.offsetWidth + 10) + 'px';
+		window.setTimeout(function(){ hideWord(visible); }, animationDelay);
+	});
+}
+
+// -----------------------------------------------------
 // -------------------    HASHTAG    -------------------
 // -----------------------------------------------------
 
 function hashtag(){
 	"use strict";
-	var ccc 			= $('.ivan_popov_header .menu .ccc');
-	var element 		= $('.ivan_popov_header .menu .active a');
-	$('.ivan_popov_header .menu a').on('mouseenter',function(){
-		var e 			= $(this);
-		currentLink(ccc,e);
+	var ccc		= ip_one('.ivan_popov_header .menu .ccc');
+	var element	= ip_one('.ivan_popov_header .menu .active a');
+
+	ip_all('.ivan_popov_header .menu a').forEach(function(a){
+		a.addEventListener('mouseenter', function(){
+			currentLink(ccc, a);
+		});
 	});
-	$('.ivan_popov_header .menu').on('mouseleave',function(){
-		element 		= $('.ivan_popov_header .menu .active a');
-		currentLink(ccc,element);
-		element.parent().siblings().removeClass('mleave');
-	});
-	currentLink(ccc,element);
+
+	var menu = ip_one('.ivan_popov_header .menu');
+	if(menu){
+		menu.addEventListener('mouseleave', function(){
+			element = ip_one('.ivan_popov_header .menu .active a');
+			currentLink(ccc, element);
+			if(element && element.parentNode){
+				ip_siblings(element.parentNode).forEach(function(sib){
+					sib.classList.remove('mleave');
+				});
+			}
+		});
+	}
+	currentLink(ccc, element);
 
 	function repositionActive(){
-		var active = $('.ivan_popov_header .menu .active a');
-		if(active.length){
+		var active = ip_one('.ivan_popov_header .menu .active a');
+		if(active){
 			currentLink(ccc, active);
 		}
 	}
 	if(document.fonts && document.fonts.ready && document.fonts.ready.then){
 		document.fonts.ready.then(repositionActive);
 	}
-	$(window).on('load.ivan_popov_ccc', repositionActive);
-	$(window).on('resize.ivan_popov_ccc', repositionActive);
+	window.addEventListener('load', repositionActive);
+	window.addEventListener('resize', repositionActive);
 
 	// style.css (with self-hosted Onest @font-face) loads asynchronously via
 	// preload/onload, so at this point the menu is often still unstyled.
 	// document.fonts.ready and window "load" can both fire BEFORE that async CSS actually
 	// applies. ResizeObserver on the menu re-measures whenever the real layout
-	// finally lands (font swap, async CSS apply, breakpoint change), which is the only 
+	// finally lands (font swap, async CSS apply, breakpoint change), which is the only
 	// reliable trigger here.
 	if(window.ResizeObserver){
 		var menuList = document.querySelector('.ivan_popov_header .menu ul');
@@ -1128,14 +1177,21 @@ function hashtag(){
 
 }
 
-function currentLink(ccc,e){
+function currentLink(ccc, e){
 	"use strict";
-	if(!e.length){return false;}
-	var left 		= e.offset().left;
-	var width		= e.outerWidth();
-	var menuleft 	= $('.ivan_popov_header .menu').offset().left;
-	e.parent().removeClass('mleave');
-	e.parent().siblings().addClass('mleave');
-	ccc.css({left: (left-menuleft) + 'px',width: width + 'px'});
-	
+	if(!ccc || !e){ return false; }
+	var menu = ip_one('.ivan_popov_header .menu');
+	if(!menu){ return false; }
+	var eRect		= e.getBoundingClientRect();
+	var menuRect	= menu.getBoundingClientRect();
+	var left		= eRect.left - menuRect.left;
+	var width		= e.offsetWidth;
+	if(e.parentNode){
+		e.parentNode.classList.remove('mleave');
+		ip_siblings(e.parentNode).forEach(function(sib){
+			sib.classList.add('mleave');
+		});
+	}
+	ccc.style.left = left + 'px';
+	ccc.style.width = width + 'px';
 }
