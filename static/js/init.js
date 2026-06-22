@@ -46,9 +46,10 @@ ip_ready(function(){
 
 	"use strict";
 
-	// here all ready functions
+	// all ready functions here
 
 	ivan_popov_modalbox();
+	ivan_popov_mark_touch_device();
 	ivan_popov_build_swipe_nav();
 	ivan_popov_page_transition();
 	ivan_popov_trigger_menu();
@@ -131,10 +132,11 @@ function ivan_popov_goto(href){
 	sections.forEach(function(s){ s.classList.add('hidden'); });
 	target.classList.remove('hidden');
 	target.classList.add('active');
+	target.scrollTop = 0;
 
 	// Testimonials become a vertical list on mobile: hint that it scrolls.
 	if(href === '#how'){
-		ivan_popov_flash_hint('.ivan_popov_scroll_hint', 'ivan_popov_scroll_hint');
+		ivan_popov_flash_hint('.ivan_popov_scroll_hint', 'ivan_popov_scroll_hint', { requireMobileLayout: true });
 	}
 
 	// Keep the sliding header marker aligned for every navigation path (header,
@@ -240,9 +242,17 @@ function ivan_popov_update_nav_mode(){
 	wrap.classList.add('nav-measuring');
 	wrap.classList.remove('nav-compact');
 
-	var requiredWidth = menuList.scrollWidth;
-	var available = menu.clientWidth;
-	var fits = requiredWidth <= available;
+	var headerStyle = window.getComputedStyle(header);
+	var headerPad = parseFloat(headerStyle.paddingLeft) + parseFloat(headerStyle.paddingRight);
+	var headerInner = header.clientWidth - headerPad;
+	var items = menuList.querySelectorAll(':scope > li');
+	var requiredWidth = logo.offsetWidth;
+	for(var i = 0; i < items.length; i++){
+		requiredWidth += items[i].offsetWidth;
+	}
+
+	wrap.classList.remove('nav-measuring');
+	var fits = requiredWidth <= headerInner - 4;
 
 	wrap.classList.remove('nav-measuring');
 	wrap.classList.toggle('nav-compact', !fits);
@@ -306,26 +316,60 @@ function ivan_popov_bind_nav_mode(){
 // -----------   SWIPE NAVIGATION (MOBILE)   -----------
 // -----------------------------------------------------
 
-// Mirrors the CSS 1040px breakpoint where stacked/mobile content layout
-// takes over from the desktop two-column layout.
+// Mirrors the CSS 1023px breakpoint where stacked/mobile content layout
+// takes over from the desktop two-column layout. Nav mode is independent and
+// chosen by measuring whether the header menu fits.
 function ivan_popov_is_mobile_layout(){
 
 	"use strict";
 
 	if(window.matchMedia){
-		return window.matchMedia('(max-width: 1040px)').matches;
+		return window.matchMedia('(max-width: 1023px)').matches;
 	}
-	return window.innerWidth <= 1040;
+	return window.innerWidth <= 1023;
 }
 
-// Briefly reveal a one-time-per-session hint element, then fade it out.
-function ivan_popov_flash_hint(selector, storageKey){
+function ivan_popov_is_touch_device(){
 
 	"use strict";
 
+	if(window.matchMedia){
+		return window.matchMedia('(hover: none), (pointer: coarse)').matches;
+	}
+	return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+}
+
+function ivan_popov_mark_touch_device(){
+
+	"use strict";
+
+	var wrap = ip_one('.ivan_popov_all_wrap');
+	if(wrap && ivan_popov_is_touch_device()){
+		wrap.classList.add('has-touch');
+	}
+}
+
+// Briefly reveal a one-time-per-session hint element, then fade it out.
+function ivan_popov_flash_hint(selector, storageKey, options){
+
+	"use strict";
+
+	options = options || {};
+
 	try {
 		var hasTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-		if(!hasTouch || !ivan_popov_is_nav_compact()){
+		if(!hasTouch){
+			return;
+		}
+		if(options.requireMobileLayout){
+			if(!ivan_popov_is_mobile_layout()){
+				return;
+			}
+		} else if(options.requireTouch){
+			if(!ivan_popov_is_touch_device()){
+				return;
+			}
+		} else if(!ivan_popov_is_nav_compact()){
 			return;
 		}
 		if(window.sessionStorage.getItem(storageKey)){
@@ -434,7 +478,7 @@ function ivan_popov_swipe_navigation(){
 	}
 
 	mainpart.addEventListener('touchstart', function(e){
-		if(!ivan_popov_is_nav_compact()){
+		if(!ivan_popov_is_touch_device()){
 			tracking = false;
 			return;
 		}
@@ -478,7 +522,7 @@ function ivan_popov_swipe_navigation(){
 	}, { passive: true });
 
 	// One-time per-session hint so users discover the horizontal swipe.
-	ivan_popov_flash_hint('.ivan_popov_swipe_hint', 'ivan_popov_swipe_hint');
+	ivan_popov_flash_hint('.ivan_popov_swipe_hint', 'ivan_popov_swipe_hint', { requireTouch: true });
 }
 
 // -----------------------------------------------------

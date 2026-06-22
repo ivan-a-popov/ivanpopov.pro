@@ -133,7 +133,7 @@ h6 { font-size: 16px; }
 	   -moz-box-sizing: border-box; /* Firefox, other Gecko */
 			box-sizing: border-box; /* Opera/IE 8+ */
 }
-@media (min-width: 1041px){
+@media (min-width: 1024px){
 	.ivan_popov_all_wrap[data-magic-cursor="show"],
 	.ivan_popov_all_wrap[data-magic-cursor="show"] *{
 		cursor: none !important;
@@ -696,7 +696,7 @@ h6 { font-size: 16px; }
   width: 0px;
 }
 /* Desktop: native styled scrollbar replaces the former NiceScroll overlay rail. */
-@media (min-width: 1041px){
+@media (min-width: 1024px){
 	.ivan_popov_section{
 		scrollbar-width: thin;
 		scrollbar-color: #999 transparent;
@@ -1038,12 +1038,17 @@ h6 { font-size: 16px; }
 	float: left;
 	margin-bottom: 90px;
 }
+@media (min-width: 1024px) {
+	#how .section_inner{
+		padding-top: 0;
+	}
+}
 .ivan_popov_about .testimonials .list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
-	margin-top: 20px;
+	margin-top: 0;
 }
 .ivan_popov_about .testimonials .list ul{
 	margin: 0px;
@@ -1143,7 +1148,7 @@ h6 { font-size: 16px; }
 .ivan_popov_about .testimonials .details .info span{
 	font-size: 14px;
 }
-@media (min-width: 1041px) {
+@media (min-width: 1024px) {
 	.ivan_popov_about .testimonials .list ul.testimonials-snap{
 		display: flex;
 		flex-direction: row;
@@ -1183,10 +1188,10 @@ h6 { font-size: 16px; }
 		width: 100%;
 		height: 100%;
 		overflow: visible;
-		padding-top: 30px;
+		padding-top: 10px;
 		padding-bottom: 30px;
 		box-sizing: border-box;
-	}
+	}	
 	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .text{
 		overflow: visible;
 	}
@@ -1712,7 +1717,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_modalbox .description_wrap{padding: 30px;}
 	#contact .contact_social_icon svg{width: 100px;height: 100px;}
 }
-@media (max-width: 1040px) {
+@media (max-width: 1023px) {
 	.mouse-cursor{display: none;}
 	.ivan_popov_footer{display: none;}
 	.ivan_popov_left_border,
@@ -1752,9 +1757,8 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_contact_playfield{margin-top: 18px;}
 	#contact .contact_social_icon svg{width: 80px;height: 80px;}
 }
-/* Large tablets: keep the portrait two-column layout (compact nav may still show
-   the desktop header when it fits); only collapse to single column below 768px. */
-@media (min-width: 768px) and (max-width: 1040px) {
+/* Large tablets: portrait two-column layout; nav stays full when it fits. */
+@media (min-width: 768px) and (max-width: 1023px) {
 	.ivan_popov_mainpart .author_image{
 		width: 36%;
 		height: 100%;
@@ -1792,14 +1796,61 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 /*	SWIPE NAVIGATION (MOBILE)
 /*---------------------------------------------------*/
 
-/* Hidden until compact nav is active (header menu no longer fits). */
-.ivan_popov_swipe_nav
-{
+.ivan_popov_swipe_hint,
+.ivan_popov_scroll_hint{
 	display: none;
+	position: fixed;
+	z-index: 13;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.35s ease;
+	align-items: center;
+	justify-content: center;
+	gap: 18px;
+	color: rgba(255, 255, 255, 0.85);
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+.ivan_popov_swipe_hint.show,
+.ivan_popov_scroll_hint.show{
+	opacity: 1;
+}
+.ivan_popov_swipe_hint .ar,
+.ivan_popov_scroll_hint .ar{
+	display: inline-block;
+	font-size: 28px;
+	line-height: 1;
+}
+.ivan_popov_swipe_hint .ar.left{
+	transform: rotate(0deg);
+}
+.ivan_popov_swipe_hint .ar.right{
+	transform: rotate(180deg);
+}
+.ivan_popov_scroll_hint .ar.up{
+	transform: rotate(90deg);
+}
+.ivan_popov_scroll_hint .ar.down{
+	transform: rotate(-90deg);
+}
+@media (max-width: 1023px) {
+	.ivan_popov_scroll_hint{
+		display: flex;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+.ivan_popov_all_wrap.has-touch .ivan_popov_swipe_hint,
+.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_hint{
+	display: flex;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
-.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav{
-	display: block;
+/* Bottom dots: compact nav, touch screens, or narrow layout. */
+.ivan_popov_swipe_nav{
+	display: none;
 	position: fixed;
 	left: 50%;
 	bottom: 14px;
@@ -1809,25 +1860,25 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	border-radius: 999px;
 	background: transparent;
 }
-.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul{
+.ivan_popov_swipe_nav ul{
 	margin: 0;
 	padding: 0;
 	list-style: none;
 	display: flex;
 	align-items: center;
 }
-.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul li{
+.ivan_popov_swipe_nav ul li{
 	margin: 0;
 	float: none;
 }
-.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul li a{
+.ivan_popov_swipe_nav ul li a{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 7px;
 	text-decoration: none;
 }
-.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul li a .dot{
+.ivan_popov_swipe_nav ul li a .dot{
 	display: block;
 	width: 7px;
 	height: 7px;
@@ -1836,23 +1887,61 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 	transition: width .3s ease, height .3s ease, background-color .3s ease;
 }
-.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav ul li.active a .dot{
+.ivan_popov_swipe_nav ul li.active a .dot{
 	width: 9px;
 	height: 9px;
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
-/* Keep the last bit of scrollable content clear of the floating pill. */
+.ivan_popov_all_wrap.has-touch .ivan_popov_swipe_nav,
+.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav{
+	display: block;
+}
+@media (max-width: 1023px) {
+	.ivan_popov_swipe_nav{
+		display: block;
+	}
+}
+.ivan_popov_all_wrap.has-touch .ivan_popov_section .section_inner,
 .ivan_popov_all_wrap.nav-compact .ivan_popov_section .section_inner{
 	padding-bottom: 64px;
 }
+@media (max-width: 1023px) {
+	.ivan_popov_section .section_inner{
+		padding-bottom: 64px;
+	}
+}
 
-@media (max-width: 1040px) {
+@media (max-width: 1023px) {
+	/* Touch sections: enable momentum scroll and a thin scrollbar affordance. */
+	.ivan_popov_section{
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		touch-action: pan-y;
+		overscroll-behavior-y: contain;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
+	}
+	.ivan_popov_section::-webkit-scrollbar{
+		width: 6px;
+	}
+	.ivan_popov_section::-webkit-scrollbar-thumb{
+		background-color: rgba(153, 153, 153, 0.65);
+		border-radius: 3px;
+	}
+	.ivan_popov_section::-webkit-scrollbar-track{
+		background: transparent;
+	}
+	.ivan_popov_section .section_inner{
+		float: none;
+	}
+
 	/* Testimonials: horizontal scroll-snap is desktop-only; on mobile show
 	   every entry as a vertical list. Unfloat the subtree so stacked cards
 	   keep their height and spacing without a horizontal track. */
 	.ivan_popov_about .testimonials .list{
-		margin-top: 20px;
+		margin-top: 0;
+		padding-top: 30px;
 	}
 	.ivan_popov_about .testimonials .list ul.testimonials-snap{
 		display: block;
