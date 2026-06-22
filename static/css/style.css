@@ -728,47 +728,6 @@ html::-webkit-scrollbar-track-piece,
 	-webkit-appearance: none;
 	appearance: none;
 }
-html::-webkit-scrollbar-button,
-html::-webkit-scrollbar-button:single-button,
-html::-webkit-scrollbar-button:vertical:start:decrement,
-html::-webkit-scrollbar-button:vertical:end:increment,
-html::-webkit-scrollbar-button:horizontal:start:decrement,
-html::-webkit-scrollbar-button:horizontal:end:increment,
-html::-webkit-scrollbar-button:double-button:vertical:start:decrement,
-html::-webkit-scrollbar-button:double-button:vertical:start:increment,
-html::-webkit-scrollbar-button:double-button:vertical:end:decrement,
-html::-webkit-scrollbar-button:double-button:vertical:end:increment,
-.ivan_popov_section::-webkit-scrollbar-button,
-.ivan_popov_section::-webkit-scrollbar-button:single-button,
-.ivan_popov_section::-webkit-scrollbar-button:vertical:start:decrement,
-.ivan_popov_section::-webkit-scrollbar-button:vertical:end:increment,
-.ivan_popov_section::-webkit-scrollbar-button:horizontal:start:decrement,
-.ivan_popov_section::-webkit-scrollbar-button:horizontal:end:increment,
-.ivan_popov_section::-webkit-scrollbar-button:double-button:vertical:start:decrement,
-.ivan_popov_section::-webkit-scrollbar-button:double-button:vertical:start:increment,
-.ivan_popov_section::-webkit-scrollbar-button:double-button:vertical:end:decrement,
-.ivan_popov_section::-webkit-scrollbar-button:double-button:vertical:end:increment,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:single-button,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:vertical:start:decrement,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:vertical:end:increment,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:horizontal:start:decrement,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:horizontal:end:increment,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:double-button:vertical:start:decrement,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:double-button:vertical:start:increment,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:double-button:vertical:end:decrement,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-button:double-button:vertical:end:increment{
-	width: 0;
-	height: 0;
-	background: transparent;
-	-webkit-appearance: none;
-	appearance: none;
-}
-html::-webkit-scrollbar-corner,
-.ivan_popov_section::-webkit-scrollbar-corner,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-corner{
-	background: transparent;
-}
 @media (min-width: 1024px){
 	.ivan_popov_section{
 		scroll-behavior: smooth;
@@ -1112,11 +1071,11 @@ html::-webkit-scrollbar-corner,
 	margin-top: 0;
 }
 .ivan_popov_about .testimonials .list ul{
-	margin: 0px;
+	margin: 10px;
 	list-style-type: none;
 }
 .ivan_popov_about .testimonials .list ul li{
-	margin: 0px;
+	margin: 10px;
 }
 .ivan_popov_about .testimonials .list ul li .list_inner{
 	width: 100%;
@@ -1315,7 +1274,7 @@ html::-webkit-scrollbar-corner,
 	position: fixed;
 	left: 100%;
 	top: 0px;
-	margin-left: 30px;
+	margin-left: 25px;
 	z-index: 10;
 }
 .ivan_popov_modalbox .close a{
