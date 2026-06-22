@@ -668,6 +668,8 @@ h6 { font-size: 16px; }
 	right: 0px;
 	overflow: hidden;
 	overflow-y: scroll;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
 	
 	opacity: 0;
 	visibility: hidden;
@@ -693,24 +695,27 @@ h6 { font-size: 16px; }
 	z-index: 9;
 }
 .ivan_popov_section::-webkit-scrollbar{
-  width: 0px;
+	width: 6px;
+	height: 6px;
 }
-/* Desktop: native styled scrollbar replaces the former NiceScroll overlay rail. */
+.ivan_popov_section::-webkit-scrollbar-button{
+	display: none;
+	width: 0;
+	height: 0;
+}
+.ivan_popov_section::-webkit-scrollbar-thumb{
+	background-color: rgba(153, 153, 153, 0.65);
+	border-radius: 3px;
+}
+.ivan_popov_section::-webkit-scrollbar-track{
+	background: transparent;
+}
+.ivan_popov_section::-webkit-scrollbar-corner{
+	background: transparent;
+}
 @media (min-width: 1024px){
 	.ivan_popov_section{
-		scrollbar-width: thin;
-		scrollbar-color: #999 transparent;
 		scroll-behavior: smooth;
-	}
-	.ivan_popov_section::-webkit-scrollbar{
-		width: 8px;
-	}
-	.ivan_popov_section::-webkit-scrollbar-thumb{
-		background-color: #999;
-		border-radius: 4px;
-	}
-	.ivan_popov_section::-webkit-scrollbar-track{
-		background: transparent;
 	}
 }
 .ivan_popov_section .section_inner{
@@ -1913,24 +1918,12 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 }
 
 @media (max-width: 1023px) {
-	/* Touch sections: enable momentum scroll and a thin scrollbar affordance. */
+	/* Touch sections: enable momentum scroll. */
 	.ivan_popov_section{
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
 		touch-action: pan-y;
 		overscroll-behavior-y: contain;
-		scrollbar-width: thin;
-		scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
-	}
-	.ivan_popov_section::-webkit-scrollbar{
-		width: 6px;
-	}
-	.ivan_popov_section::-webkit-scrollbar-thumb{
-		background-color: rgba(153, 153, 153, 0.65);
-		border-radius: 3px;
-	}
-	.ivan_popov_section::-webkit-scrollbar-track{
-		background: transparent;
 	}
 	.ivan_popov_section .section_inner{
 		float: none;
