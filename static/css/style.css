@@ -276,7 +276,7 @@ h6 { font-size: 16px; }
 	display: inline-block;
 	margin-left: 1px;
 	font-weight: 400;
-	animation: logo-cursor-blink 1s step-end infinite;
+	animation: logo-cursor-blink 1.3s step-end infinite;
 }
 @keyframes logo-cursor-blink{
 	0%, 100%{ opacity: 1; }
