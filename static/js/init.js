@@ -1,4 +1,4 @@
-// Register jQuery touch listeners as non-passive so plugins (e.g. Owl Carousel)
+// Register jQuery touch listeners as non-passive so plugins like TESTIMONIALS SCROLL-SNAP
 // can call preventDefault() during horizontal swipes without Chrome firing the
 // "Unable to preventDefault inside passive event listener" intervention.
 (function(jq){
@@ -1069,14 +1069,12 @@ function hashtag(){
 	$(window).on('load.ivan_popov_ccc', repositionActive);
 	$(window).on('resize.ivan_popov_ccc', repositionActive);
 
-	// style.css and the "Onest" font load asynchronously (the stylesheet is
-	// swapped in via a preload/onload trick), so at this point the menu is often
-	// still unstyled and the active link measures far too narrow. document.fonts
-	// .ready and window "load" can both fire BEFORE that async CSS actually
-	// applies, latching the wrong width and never firing again — which left the
-	// highlight stuck short until a later hover/resize. A ResizeObserver on the
-	// menu re-measures whenever the real layout finally lands (font swap, async
-	// CSS apply, breakpoint change), which is the only reliable trigger here.
+	// style.css (with self-hosted Onest @font-face) loads asynchronously via
+	// preload/onload, so at this point the menu is often still unstyled.
+	// document.fonts.ready and window "load" can both fire BEFORE that async CSS actually
+	// applies. ResizeObserver on the menu re-measures whenever the real layout
+	// finally lands (font swap, async CSS apply, breakpoint change), which is the only 
+	// reliable trigger here.
 	if(window.ResizeObserver){
 		var menuList = document.querySelector('.ivan_popov_header .menu ul');
 		if(menuList){

@@ -24,7 +24,7 @@
 <meta itemprop="description" content="IT-эксперт">
 <meta itemprop="name" content="Иван Попов">
 </div>
-<!-- CRITICAL PRELOADER CSS (inlined so the loader paints on first render,
+<!-- PRELOADER CSS (inlined so the loader paints on first render,
 before any external stylesheet has downloaded — kills the FCP gap) -->
 <style>
 html{overflow-x:hidden;margin:0;padding:0}
@@ -44,21 +44,17 @@ body{margin:0;background-color:#f6fbff}
 </style>
 <!-- If JS is disabled the loader is never dismissed, so hide it in that case. -->
 <noscript><style>#preloader{display:none!important}</style></noscript>
+<!-- /PRELOADER CSS  -->
 
-	<!-- STYLES -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap"></noscript>
-
-<!-- All app CSS loads async (preload + onload swap) so it no longer blocks the
-     preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
-     only after window 'load', by which point these sheets are applied. -->
+<!-- STYLES -->
+<!-- All app CSS loads async (preload + onload swap) so it not blockning the
+    preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
+    only after window 'load', by which point these sheets are applied. -->
 <link rel="preload" as="style" href="static/css/plugins.css?v=bb2c0e8c" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css?v=b5c69c04" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=ef6f5716" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
 <link rel="stylesheet" href="static/css/plugins.css?v=bb2c0e8c" />
-<link rel="stylesheet" href="static/css/style.css?v=b5c69c04" />
+<link rel="stylesheet" href="static/css/style.css?v=ef6f5716" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -71,7 +67,7 @@ body{margin:0;background-color:#f6fbff}
 	</div>
 	<!-- /PRELOADER -->
 	
-	<!-- WRAPPER ALL -->
+	<!--  ALL WRAPPER -->
 	<div class="ivan_popov_all_wrap" data-magic-cursor="show" data-enter="rollIn" data-exit="rollOut">
 
 		<!-- Service popup shell (content copied from .list_inner on open) -->
@@ -89,7 +85,7 @@ body{margin:0;background-color:#f6fbff}
 		<div class="ivan_popov_topbar">
 			<div class="topbar_inner">
 				<div class="logo">
-					<a class="text" href="/"><span class="logo-label">Ivan Popov. Pro</span><span class="logo-cursor" aria-hidden="true">▌</span></a>
+					<a class="text" href="/"><span class="logo-label">Ivan Popov. Pro</span><span class="logo-cursor" aria-hidden="true">_</span></a>
 				</div>
 				<div class="trigger">
 					<div class="hamburger hamburger--slider">
@@ -613,12 +609,12 @@ body{margin:0;background-color:#f6fbff}
 		<!-- /MAGIC CURSOR -->
 
 	</div>
-	<!-- / WRAPPER ALL -->
+	<!-- /ALL WRAPPER -->
 	
 <!-- SCRIPTS -->
 <script src="static/js/jquery.js?v=3e4bb227"></script>
 <script src="static/js/plugins.js?v=8b0a044c"></script>
-<script src="static/js/init.js?v=a1bde060"></script>
+<script src="static/js/init.js?v=3afe4026"></script>
 
 <!-- Portrait + contact-area ripple FX, color portrait on #contact, glitch + VK switch via toggle -->
 <script>
