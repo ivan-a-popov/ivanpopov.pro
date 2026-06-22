@@ -1308,7 +1308,7 @@ html::-webkit-scrollbar-track-piece,
 	height: 100%;
 	float: left;
 	overflow: hidden;
-	padding: 50px;
+	padding: 30px;
 	overflow-y: auto;
 }
 
