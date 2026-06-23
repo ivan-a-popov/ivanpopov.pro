@@ -936,19 +936,27 @@ function ivan_popov_testimonials_snap(){
 	var dragScrollLeft = 0;
 
 	function jumpTo(domIndex){
+		var slide = slides[domIndex];
+		if(!slide){
+			return;
+		}
 		// Instant reposition: bypass CSS scroll-behavior:smooth so the loop wrap
 		// is invisible. Scroll the track only — scrollIntoView() would also move
 		// the ancestor .ivan_popov_section (overflow-y: scroll) and break layout.
 		var prev = list.style.scrollBehavior;
 		list.style.scrollBehavior = 'auto';
-		list.scrollLeft = slides[domIndex].offsetLeft;
+		list.scrollLeft = slide.offsetLeft;
 		void list.offsetWidth;
 		list.style.scrollBehavior = prev;
 		currentDom = domIndex;
 	}
 
 	function scrollToDom(domIndex){
-		list.scrollTo({ left: slides[domIndex].offsetLeft, behavior: 'smooth' });
+		var slide = slides[domIndex];
+		if(!slide){
+			return;
+		}
+		list.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
 	}
 
 	function isHowActive(){
@@ -965,6 +973,10 @@ function ivan_popov_testimonials_snap(){
 				return;
 			}
 			currentDom += 1;
+			// Past the trail copy (e.g. section was hidden before scroll re-centered).
+			if(currentDom >= slides.length){
+				currentDom = firstRealDom + realCount;
+			}
 			scrollToDom(currentDom);
 		}, 5000);
 	}

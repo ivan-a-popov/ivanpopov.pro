@@ -1127,6 +1127,10 @@ html::-webkit-scrollbar-track-piece,
 	.ivan_popov_about .testimonials .list ul.testimonials-snap > li{
 		flex: 0 0 calc((100% - 30px) / 2);
 		min-width: 0;
+		/* The base rule sets a 10px margin on every li; in this flex track the
+		   gap handles spacing, and the extra margin pushes card 2's right
+		   border past the scrollport and clips it. */
+		margin: 0;
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
 	}
