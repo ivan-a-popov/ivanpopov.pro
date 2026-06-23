@@ -1,5 +1,5 @@
-// Vanilla (no-jQuery) site behavior. Custom scrollbars are now pure CSS
-// (former NiceScroll), so no plugin-specific touch listener setup is needed.
+// Vanilla (no-jQuery) site behavior. Custom scrollbars are now
+// pure CSS, so no plugin-specific touch listener setup is needed.
 
 // ----------  SMALL DOM HELPERS  ----------
 
@@ -48,7 +48,6 @@ ip_ready(function(){
 
 	// all ready functions here
 
-	ivan_popov_modalbox();
 	ivan_popov_mark_touch_device();
 	ivan_popov_build_swipe_nav();
 	ivan_popov_page_transition();
@@ -66,14 +65,6 @@ ip_ready(function(){
 	ivan_popov_preloader();
 
 });
-
-// -----------------------------------------------------
-// --------------------   MODALBOX    ------------------
-// -----------------------------------------------------
-
-function ivan_popov_modalbox(){
-	"use strict";
-}
 
 // -----------------------------------------------------
 // -------------   PAGE TRANSITION    ------------------
@@ -254,7 +245,6 @@ function ivan_popov_update_nav_mode(){
 	wrap.classList.remove('nav-measuring');
 	var fits = requiredWidth <= headerInner - 4;
 
-	wrap.classList.remove('nav-measuring');
 	wrap.classList.toggle('nav-compact', !fits);
 
 	if(wasCompact && fits){

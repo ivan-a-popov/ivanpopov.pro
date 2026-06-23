@@ -19,11 +19,18 @@
 
 <title>Иван Попов IT-эксперт</title>
 
-<div itemscope itemtype="https://schema.org/Person">
-<meta itemprop="image" content="https://ivanpopov.pro/static/img/about/og-image.jpg">
-<meta itemprop="description" content="IT-эксперт">
-<meta itemprop="name" content="Иван Попов">
-</div>
+<!-- Structured data: a <div itemscope> is not valid inside <head>, so the
+     Schema.org Person markup is expressed as JSON-LD instead. -->
+<script type="application/ld+json">
+{
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"name": "Иван Попов",
+	"description": "IT-эксперт",
+	"image": "https://ivanpopov.pro/static/img/about/og-image.jpg",
+	"url": "https://ivanpopov.pro"
+}
+</script>
 <!-- PRELOADER CSS (inlined so the loader paints on first render,
 before any external stylesheet has downloaded — kills the FCP gap) -->
 <style>
@@ -50,11 +57,11 @@ body{margin:0;background-color:#f6fbff}
 <!-- All app CSS loads async (preload + onload swap) so it not blockning the
     preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
     only after window 'load', by which point these sheets are applied. -->
-<link rel="preload" as="style" href="static/css/plugins.css?v=24a192bd" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css?v=75ee981d" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/plugins.css?v=11b2f88e" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=3c253b27" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/plugins.css?v=24a192bd" />
-<link rel="stylesheet" href="static/css/style.css?v=75ee981d" />
+<link rel="stylesheet" href="static/css/plugins.css?v=11b2f88e" />
+<link rel="stylesheet" href="static/css/style.css?v=3c253b27" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -364,10 +371,12 @@ body{margin:0;background-color:#f6fbff}
 														<p>Здесь должен быть текст от нашего дизайнера Адама.</p>
 														<p>Если текста до сих пор нет, то это скорее всего потому, что Адам гораздо лучше рисует, чем пишет. :)</p>
 														<p>Но дизайнер он точно хороший. Правда-правда. Через его заботливые руки прошли уже сотни проектов, и заказчик каждого из них остался доволен!</p>
-														<p> Основные направления:<br>
-															1. Фирменный стиль<br>
-															2. UI UX<br>
-															3. Веб-графика<br>
+														<p>Основные направления:</p>
+														<ol>
+															<li>Фирменный стиль</li>
+															<li>UI UX</li>
+															<li>Веб-графика</li>
+														</ol>
 													</div>
 												</div>
 											</div>
@@ -517,6 +526,7 @@ body{margin:0;background-color:#f6fbff}
 													</div>
 												</div>
 											</div>
+										</li>
 										<li>
 											<div class="list_inner">
 												<div class="text">
@@ -612,7 +622,7 @@ body{margin:0;background-color:#f6fbff}
 	
 <!-- SCRIPTS -->
 <script src="static/js/particles.js?v=83495a1d"></script>
-<script src="static/js/init.js?v=a35caaf2"></script>
+<script src="static/js/init.js?v=72b5024b"></script>
 
 <!-- Portrait + contact-area ripple FX, color portrait on #contact, glitch + VK switch via toggle -->
 <script>

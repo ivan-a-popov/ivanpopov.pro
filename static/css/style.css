@@ -67,48 +67,6 @@ img.svg{
 	width: 15px;
 	height: 15px;
 }
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: #aaa6b2;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #aaa6b2;
-   opacity:  1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: #aaa6b2;
-   opacity:  1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #aaa6b2;
-}
-::-ms-input-placeholder { /* Microsoft Edge */
-   color: #aaa6b2;
-}
-
-::placeholder { /* Most modern browsers support this now. */
-   color: #aaa6b2;
-}
-body.dark::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: #9e9ba3;
-}
-body.dark:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #9e9ba3;
-   opacity:  1;
-}
-body.dark::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: #9e9ba3;
-   opacity:  1;
-}
-body.dark:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #9e9ba3;
-}
-body.dark::-ms-input-placeholder { /* Microsoft Edge */
-   color: #9e9ba3;
-}
-
-body.dark::placeholder { /* Most modern browsers support this now. */
-   color: #9e9ba3;
-}
 
 h1, h2, h3, h4, h5, h6{
 	font-weight:700;
@@ -139,10 +97,6 @@ h6 { font-size: 16px; }
 	.ivan_popov_all_wrap[data-magic-cursor="show"],
 	.ivan_popov_all_wrap[data-magic-cursor="show"] *{
 		cursor: none !important;
-	}
-	.ivan_popov_all_wrap[data-magic-cursor="show"] input,
-	.ivan_popov_all_wrap[data-magic-cursor="show"] textarea{
-		cursor: text !important;
 	}
 }
 #preloader{
@@ -1017,9 +971,6 @@ html::-webkit-scrollbar-track-piece,
 .ivan_popov_about .biography .right p:last-child {
 	margin-bottom: 25px;
 }
-@-webkit-keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
-@-moz-keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
-@keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
 .ivan_popov_full_link{
 	position: absolute;
 	top: 0px;
@@ -1471,21 +1422,6 @@ html::-webkit-scrollbar-track-piece,
 	color: #333;
 	font-family: "Onest";
 }
-.ivan_popov_footer .social ul{
-	margin: 0px;
-	list-style-type: none;
-}
-.ivan_popov_footer .social ul li{
-	margin: 0px 15px 0px 0px;
-	display: inline-block;
-}
-.ivan_popov_footer .social ul li:last-child{
-	margin-right: 0px;
-}
-.ivan_popov_footer .social ul li a{
-	text-decoration: none;
-	color: #333;
-}
 
 /*---------------------------------------------------*/
 /*	 MAGIC CURSOR
@@ -1695,7 +1631,6 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_left_border{width: 60px;}
 	.ivan_popov_right_border{width: 60px;}
 	.ivan_popov_mainpart{top: 60px;left: 60px;right: 60px;bottom: 60px;}
-	.ivan_popov_footer .social ul li{margin-right: 10px;}
 	.ivan_popov_header .menu ul li a{padding: 0px 22px;}
 	.ivan_popov_home .content{padding-left: 50px;}
 	.ivan_popov_home .name{font-size: 55px;margin-bottom: 25px;}

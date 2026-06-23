@@ -162,11 +162,6 @@ a:hover{text-decoration:none;}
   position: relative;
   opacity: 1;
 }
-/* No-JS / first paint fallback: show the first phrase in flow. */
-.no-js .cd-words-wrapper b:first-child {
-  position: relative;
-  opacity: 1;
-}
 .cd-headline.clip span {
   display: inline-block;
   padding: .2em 0;
