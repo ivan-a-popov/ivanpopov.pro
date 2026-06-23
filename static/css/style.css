@@ -86,6 +86,8 @@ h6 { font-size: 16px; }
 	clear: both;
 	float: left;
 	position: relative;
+	--ivp-side-gutter: clamp(40px, 2.8vw, 52px);
+	--ivp-bar-height: 70px;
 }
 .ivan_popov_all_wrap,
 .ivan_popov_all_wrap *{
@@ -234,14 +236,14 @@ h6 { font-size: 16px; }
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	height: 70px;
-	line-height: 70px;
+	height: var(--ivp-bar-height);
+	line-height: var(--ivp-bar-height);
 	background-color: #fff;
 	z-index: 10;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0px 30px;
+	padding: 0px var(--ivp-side-gutter);
 }
 .ivan_popov_header .logo .text,
 .ivan_popov_topbar .logo .text{
@@ -524,7 +526,7 @@ h6 { font-size: 16px; }
 	top: 0px;
 	left: 0px;
 	bottom: 0px;
-	width: 70px;
+	width: var(--ivp-side-gutter);
 	background-color: #fff;
 	z-index: 10;
 	transition: width 0.25s ease;
@@ -534,7 +536,7 @@ h6 { font-size: 16px; }
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
-	width: 70px;
+	width: var(--ivp-side-gutter);
 	background-color: #fff;
 	z-index: 10;
 	transition: width 0.25s ease;
@@ -546,10 +548,10 @@ h6 { font-size: 16px; }
 
 .ivan_popov_mainpart{
 	position: absolute;
-	top: 70px;
-	bottom: 70px;
-	left: 70px;
-	right: 70px;
+	top: var(--ivp-bar-height);
+	bottom: var(--ivp-bar-height);
+	left: var(--ivp-side-gutter);
+	right: var(--ivp-side-gutter);
 	overflow: hidden;
 	transition: top 0.25s ease, bottom 0.25s ease, left 0.25s ease, right 0.25s ease;
 }
@@ -1177,8 +1179,8 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_modalbox .box_inner{
 	position: absolute;
-	top: 70px;
-	bottom: 70px;
+	top: var(--ivp-bar-height);
+	bottom: var(--ivp-bar-height);
 	width: 720px;
 	left: 50%;
 	transform: translateX(-50%);
@@ -1411,14 +1413,14 @@ html::-webkit-scrollbar-track-piece,
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-	height: 70px;
+	height: var(--ivp-bar-height);
 	background-color: #fff;
 	z-index: 10;
-	line-height: 70px;
+	line-height: var(--ivp-bar-height);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0px 70px;
+	padding: 0px var(--ivp-side-gutter);
 }
 .ivan_popov_footer .copyright p{
 	color: #333;
@@ -1621,18 +1623,17 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 
 @media (max-width: 1600px) {
 	body{font-size: 15px;}
-	.ivan_popov_header .logo .text{line-height: 70px;}
+	.ivan_popov_all_wrap{
+		--ivp-bar-height: 60px;
+	}
+	.ivan_popov_header .logo .text{line-height: 70px;padding-left: 30px;}
 	.ivan_popov_mainpart .author_image{width: 35%;}
 	.ivan_popov_mainpart .main_content{width: 65%;}
 	.ivan_popov_section .section_inner:before{width: 50px;}
 	.ivan_popov_title > span{letter-spacing: 3px;}
 	.ivan_popov_title > span:after{margin-left: 20px;}
 	#contact .ivan_popov_glitch_switch_row:after{margin-left: 25px;}
-	.ivan_popov_header{height: 60px;line-height: 70px;padding: 0px 20px;}
-	.ivan_popov_footer{height: 60px;line-height: 60px;padding: 0px 30px;}
-	.ivan_popov_left_border{width: 60px;}
-	.ivan_popov_right_border{width: 60px;}
-	.ivan_popov_mainpart{top: 60px;left: 60px;right: 60px;bottom: 60px;}
+	.ivan_popov_header{line-height: 70px;}
 	.ivan_popov_header .menu ul li a{padding: 0px 20px;}
 	.ivan_popov_home .content{padding-left: 50px;}
 	.ivan_popov_home .name{margin-bottom: 25px;}
@@ -1648,7 +1649,10 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 }
 @media (max-width: 1023px) {
 	.mouse-cursor{display: none;}
-	.ivan_popov_footer{display: none;}
+	.ivan_popov_all_wrap{
+		--ivp-side-gutter: 10px;
+		--ivp-bar-height: 50px;
+	}
 	.ivan_popov_left_border,
 	.ivan_popov_right_border{
 		width: 0;

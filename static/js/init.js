@@ -125,11 +125,6 @@ function ivan_popov_goto(href){
 	target.classList.add('active');
 	target.scrollTop = 0;
 
-	// Testimonials become a vertical list on mobile: hint that it scrolls.
-	if(href === '#how'){
-		ivan_popov_flash_hint('.ivan_popov_scroll_hint', 'ivan_popov_scroll_hint', { requireMobileLayout: true });
-	}
-
 	// Keep the sliding header marker aligned for every navigation path (header,
 	// mobile menu, swipe dots, keyboard, touch), not only those that fire a hover.
 	if(typeof currentLink === 'function'){
@@ -339,42 +334,6 @@ function ivan_popov_mark_touch_device(){
 	}
 }
 
-// Briefly reveal a one-time-per-session hint element, then fade it out.
-function ivan_popov_flash_hint(selector, storageKey, options){
-
-	"use strict";
-
-	options = options || {};
-
-	try {
-		var hasTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-		if(!hasTouch){
-			return;
-		}
-		if(options.requireMobileLayout){
-			if(!ivan_popov_is_mobile_layout()){
-				return;
-			}
-		} else if(options.requireTouch){
-			if(!ivan_popov_is_touch_device()){
-				return;
-			}
-		} else if(!ivan_popov_is_nav_compact()){
-			return;
-		}
-		if(window.sessionStorage.getItem(storageKey)){
-			return;
-		}
-		var hint = document.querySelector(selector);
-		if(!hint){
-			return;
-		}
-		window.sessionStorage.setItem(storageKey, '1');
-		window.setTimeout(function(){ hint.classList.add('show'); }, 700);
-		window.setTimeout(function(){ hint.classList.remove('show'); }, 3200);
-	} catch(err) {}
-}
-
 // Build the bottom dots indicator (mobile only, hidden by CSS on desktop).
 // The dots mirror the mobile menu order and reuse the .transition_link class
 // so the standard click handler navigates and ivan_popov_goto keeps them active.
@@ -407,15 +366,7 @@ function ivan_popov_build_swipe_nav(){
 	var html = '<div class="ivan_popov_swipe_nav" aria-label="Навигация по разделам">'
 		+ '<ul class="transition_link">'+dots+'</ul>'
 		+ '</div>'
-		+ '<div class="ivan_popov_swipe_hint" aria-hidden="true">'
-		+ '<span class="ar left">&#8249;</span>'
-		+ '<span class="ar right">&#8250;</span>'
-		+ '</div>'
-		+ '<div class="ivan_popov_scroll_hint" aria-hidden="true">'
-		+ '<span class="ar up">&#8249;</span>'
-		+ '<span class="ar down">&#8250;</span>'
-		+ '</div>';
-
+	
 	var wrap = ip_one('.ivan_popov_all_wrap');
 	if(wrap){
 		wrap.insertAdjacentHTML('beforeend', html);
@@ -510,9 +461,6 @@ function ivan_popov_swipe_navigation(){
 
 		ivan_popov_goto(order[nextIndex]);
 	}, { passive: true });
-
-	// One-time per-session hint so users discover the horizontal swipe.
-	ivan_popov_flash_hint('.ivan_popov_swipe_hint', 'ivan_popov_swipe_hint', { requireTouch: true });
 }
 
 // -----------------------------------------------------
