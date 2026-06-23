@@ -1077,7 +1077,7 @@ function ivan_popov_animated_headline(){
 	"use strict";
 
 	var animationDelay = 1200;       // initial wait before the first erase
-	var revealDuration = 600;        // type / erase width animation duration
+	var revealDuration = 800;        // type / erase width animation duration
 	var revealAnimationDelay = 800;  // hold time while a phrase is fully shown
 	var reduce = !!(window.matchMedia &&
 		window.matchMedia('(prefers-reduced-motion: reduce)').matches);
