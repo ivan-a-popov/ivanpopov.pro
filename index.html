@@ -157,17 +157,15 @@ body{margin:0;background-color:#f6fbff}
 		<div class="ivan_popov_mainpart">
 			<div class="author_image" id="author_image">
 				<div class="author_image_inner">
-					<div class="author_photo_glitch_host" id="author_photo_glitch_host">
-						<img class="author_photo" id="author_photo_img"
-							src="static/img/about/2.jpg"
-							alt=""
-							width="640"
-							height="960"
-							decoding="async"
-							fetchpriority="low"
-							data-src-bw="static/img/about/2.jpg"
-							data-src-color="static/img/about/2-color.jpg">
-					</div>
+					<img class="author_photo" id="author_photo_img"
+						src="static/img/about/2.jpg"
+						alt=""
+						width="640"
+						height="960"
+						decoding="async"
+						fetchpriority="low"
+						data-src-bw="static/img/about/2.jpg"
+						data-src-color="static/img/about/2-color.jpg">
 				</div>
 			</div>
 			<div class="main_content">
@@ -759,8 +757,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function getPortraitHost() {
-		return document.getElementById('author_photo_glitch_host')
-			|| document.querySelector('.author_photo_glitch_host');
+		return document.getElementById('author_image_inner')
+			|| document.querySelector('.author_image_inner');
 	}
 
 	function syncContactPortraitState() {
@@ -871,7 +869,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (!authorImageDiv) return;
 
 		var photoImg = authorImageDiv.querySelector(
-			'.author_photo_glitch_host:not(.back) .author_photo'
+			'.author_image_inner:not(.back) .author_photo'
 		);
 		if (photoImg) {
 			photoImg.setAttribute('data-photo-override', 'prize');

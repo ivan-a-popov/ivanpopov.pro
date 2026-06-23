@@ -577,7 +577,7 @@ h6 { font-size: 16px; }
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
 /* Portrait host (structural wrapper around the author photo) */
-.ivan_popov_mainpart .author_image .author_photo_glitch_host{
+.ivan_popov_mainpart .author_image .author_image_inner{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -592,7 +592,7 @@ h6 { font-size: 16px; }
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
 /* Portrait column */
-.ivan_popov_mainpart .author_image .author_image_inner .author_photo_glitch_host .author_photo{
+.ivan_popov_mainpart .author_image .author_image_inner .author_photo{
 	position: absolute;
 	z-index: 2;
 	top: 0;
@@ -1668,7 +1668,6 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		pointer-events: none;
 	}
 	.ivan_popov_mainpart .author_image .author_image_inner,
-	.ivan_popov_mainpart .author_image .author_photo_glitch_host,
 	.ivan_popov_mainpart .author_image .author_photo{
 		height: 0;
 		opacity: 0;
@@ -1699,7 +1698,6 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		pointer-events: auto;
 	}
 	.ivan_popov_mainpart .author_image .author_image_inner,
-	.ivan_popov_mainpart .author_image .author_photo_glitch_host,
 	.ivan_popov_mainpart .author_image .author_photo{
 		height: 100%;
 		opacity: 1;
