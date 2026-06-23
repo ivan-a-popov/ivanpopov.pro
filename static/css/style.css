@@ -821,37 +821,6 @@ html::-webkit-scrollbar-track-piece,
 	font-weight:600;
 	color: #333;
 }
-
-/* Compact roles column next to the name */
-.name_roles_wrap{
-	display: block;
-	margin-bottom: 5px;
-}
-.name_roles_wrap .name{
-	margin: 0;
-}
-/* Keep the last name word and the PRO badge on the same line so the badge
-   always follows the final letter and never drops to a line of its own. */
-.name_last{
-	white-space: nowrap;
-}
-.roles_right_compact{
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	width: 21px;
-	height: 13px;
-	margin-left: 6px;
-	vertical-align: top;
-	border: 1px solid #9a9a9a;
-	border-radius: 999px;
-	color: #9a9a9a;
-	font-size: 8px;
-	font-weight: 500;
-	line-height: 1;
-	letter-spacing: 0;
-}
 .ivan_popov_button{
 	width: 100%;
 	height: auto;
