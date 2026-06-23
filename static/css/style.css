@@ -79,8 +79,6 @@ h6 { font-size: 16px; }
 .ivan_popov_all_wrap{
 	width: 100%;
 	min-height: 100vh;
-	clear: both;
-	float: left;
 	position: relative;
 	--ivp-side-gutter: clamp(40px, 2.8vw, 52px);
 	--ivp-bar-height: 70px;
@@ -542,9 +540,7 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_section .section_inner{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	position: relative;
 	padding: 20px 100px 0px 100px;
 }
@@ -554,7 +550,6 @@ html::-webkit-scrollbar-track-piece,
 	flex-direction: column;
 }
 #contact .section_inner{
-	float: none;
 	flex: 1;
 	min-height: 0;
 	box-sizing: border-box;
@@ -565,7 +560,6 @@ html::-webkit-scrollbar-track-piece,
 	overflow: hidden;
 }
 #contact .ivan_popov_contact{
-	float: none;
 	display: flex;
 	flex-direction: column;
 	flex: 1;
@@ -630,9 +624,7 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_button{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 }
 .ivan_popov_button a{
 	text-decoration: none;
@@ -663,22 +655,15 @@ html::-webkit-scrollbar-track-piece,
 
 .ivan_popov_about{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 }
 .ivan_popov_about .biography{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	margin-bottom: 87px;
 }
 .ivan_popov_title{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
 	overflow: hidden;
 }
 .ivan_popov_title > span{
@@ -786,9 +771,6 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_about .biography .wrapper{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
@@ -821,9 +803,7 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_about .testimonials{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	margin-bottom: 90px;
 }
 @media (min-width: 1024px) {
@@ -833,9 +813,7 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_about .testimonials .list{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	margin-top: 0;
 }
 .ivan_popov_about .testimonials .list ul{
@@ -847,16 +825,12 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_about .testimonials .list ul li .list_inner{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	position: relative;
 }
 .ivan_popov_about .testimonials .list ul li .text{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	position: relative;
 	border: 2px solid #E5EDF4;
 	padding: 20px;
@@ -901,9 +875,6 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_about .testimonials .details{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
 	display: flex;
 	align-items: center;
 	padding-left: 20px;
@@ -975,8 +946,6 @@ html::-webkit-scrollbar-track-piece,
 		scroll-snap-stop: always;
 	}
 	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .list_inner{
-		float: none;
-		clear: none;
 		width: 100%;
 		height: 100%;
 		overflow: visible;
@@ -1063,7 +1032,6 @@ html::-webkit-scrollbar-track-piece,
 	position: relative;
 	width: 100%;
 	height: 100%;
-	float: left;
 	overflow: hidden;
 	padding: 30px;
 	overflow-y: auto;
@@ -1075,16 +1043,12 @@ html::-webkit-scrollbar-track-piece,
 
 .ivan_popov_service{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	margin-bottom: 70px;
 }
 .ivan_popov_service .service_list{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	margin-top: 15px;
 }
 .ivan_popov_service .service_list ul{
@@ -1101,8 +1065,7 @@ html::-webkit-scrollbar-track-piece,
 .ivan_popov_service .service_list ul li .list_inner{
 	width: 100%;
 	height: 100%;
-	clear: both;
-	float: left;
+	display: flow-root;
 	position: relative;
 	border: 1px solid #b9b8c3;
 	padding: 70px 40px 63px;
@@ -1154,13 +1117,10 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_modalbox .service_popup_informations{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 }
 .ivan_popov_modalbox .service_popup_informations .image{
 	width: 100%;
-	float: left;
 	position: relative;
 	margin-bottom: 37px;
 }
@@ -1181,7 +1141,6 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_modalbox .service_popup_informations .main_title{
 	width: 100%;
-	float: left;
 	margin-bottom: 23px;
 }
 .ivan_popov_modalbox .service_popup_informations .main_title h3{
@@ -1189,7 +1148,6 @@ html::-webkit-scrollbar-track-piece,
 }
 .ivan_popov_modalbox .service_popup_informations .descriptions{
 	width: 100%;
-	float: left;
 }
 .ivan_popov_modalbox .service_popup_informations .descriptions p{
 	margin-bottom: 15px;
@@ -1204,9 +1162,7 @@ html::-webkit-scrollbar-track-piece,
 
 .ivan_popov_contact{
 	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
+	display: flow-root;
 	margin-bottom: 100px;
 }
 
@@ -1591,7 +1547,6 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		overscroll-behavior-y: contain;
 	}
 	.ivan_popov_section .section_inner{
-		float: none;
 		padding-bottom: 64px;
 	}
 
@@ -1610,8 +1565,6 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .list_inner,
 	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .text,
 	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .details{
-		float: none;
-		clear: none;
 		width: 100%;
 	}
 	.ivan_popov_about .testimonials .list ul.testimonials-snap > li{
