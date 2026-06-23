@@ -164,6 +164,9 @@ h6 { font-size: 16px; }
     height: 100%;
     z-index: -1;
     background-color: #000;
+    -webkit-transform-origin: left center;
+    -ms-transform-origin: left center;
+    transform-origin: left center;
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
@@ -171,6 +174,9 @@ h6 { font-size: 16px; }
 #preloader:after{
     left: auto;
     right: 0;
+    -webkit-transform-origin: right center;
+    -ms-transform-origin: right center;
+    transform-origin: right center;
 }
 #preloader .loader_line{
     margin: auto;
@@ -256,10 +262,12 @@ h6 { font-size: 16px; }
 }
 @keyframes preloadedzero{
     0%{
-        width: 50%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
     }
     100%{
-        width: 0%;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
     }
 }
 
@@ -1495,21 +1503,30 @@ html::-webkit-scrollbar-track-piece,
   z-index: 99990;
 }
 .cursor-inner {
+  width: 0;
+  height: 0;
+  z-index: 100;
+}
+/* The dot is drawn by a pseudo-element so its hover-grow uses transform: scale
+   (GPU-composited). The element itself keeps the JS-set translate for tracking. */
+.cursor-inner::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
   margin-left: -3px;
   margin-top: -3px;
   width: 6px;
   height: 6px;
-  z-index: 100;
+  border-radius: 50%;
   background-color: #333;
-  -webkit-transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
-  transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
+  -webkit-transition: -webkit-transform .3s ease-in-out, opacity .3s ease-in-out;
+  transition: -webkit-transform .3s ease-in-out, opacity .3s ease-in-out;
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
 }
-.cursor-inner.cursor-hover {
-  margin-left: -40px;
-  margin-top: -40px;
-  width: 80px;
-  height: 80px;
-  background-color: #333;
+.cursor-inner.cursor-hover::before {
+  -webkit-transform: scale(13.333);
+  transform: scale(13.333);
   opacity: .3;
 }
 .cursor-outer {
@@ -1522,13 +1539,14 @@ html::-webkit-scrollbar-track-piece,
   box-sizing: border-box;
   z-index: 100;
   opacity: .5;
-  -webkit-transition: all .08s ease-out;
-  transition: all .08s ease-out;
+  -webkit-transition: -webkit-transform .08s ease-out, opacity .08s ease-out;
+  transition: -webkit-transform .08s ease-out, opacity .08s ease-out;
+  transition: transform .08s ease-out, opacity .08s ease-out;
 }
 .cursor-outer.cursor-hover{
   opacity: 0;
 }
-body.ivan_popov_light_cursor .mouse-cursor.cursor-inner{
+body.ivan_popov_light_cursor .mouse-cursor.cursor-inner::before{
   background-color: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
 }
@@ -1537,7 +1555,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer{
   opacity: 0.9;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
 }
-body.ivan_popov_light_cursor .mouse-cursor.cursor-inner.cursor-hover{
+body.ivan_popov_light_cursor .mouse-cursor.cursor-inner.cursor-hover::before{
   background-color: #fff;
   opacity: 0.55;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);

@@ -30,8 +30,8 @@ before any external stylesheet has downloaded — kills the FCP gap) -->
 html{overflow-x:hidden;margin:0;padding:0}
 body{margin:0;background-color:#f6fbff}
 #preloader{position:fixed;left:0;top:0;height:100vh;width:100%;z-index:99999;display:flex}
-#preloader:before,#preloader:after{content:'';position:absolute;left:0;top:0;width:50%;height:100%;z-index:-1;background-color:#000;transition:all .3s ease 0s}
-#preloader:after{left:auto;right:0}
+#preloader:before,#preloader:after{content:'';position:absolute;left:0;top:0;width:50%;height:100%;z-index:-1;background-color:#000;transform-origin:left center;transition:all .3s ease 0s}
+#preloader:after{left:auto;right:0;transform-origin:right center}
 #preloader .loader_line{margin:auto;width:1px;height:250px;position:relative;overflow:hidden;transition:all .8s ease 0s}
 #preloader .loader_line:before{content:'';position:absolute;left:0;top:50%;width:1px;height:0;transform:translateY(-50%);background-color:#fff;animation:lineheight 1000ms ease-in-out 0s forwards}
 #preloader .loader_line:after{content:'';position:absolute;left:0;top:0;width:1px;height:100%;background-color:#777;transform:translateY(-100%);animation:lineround 1200ms linear 0s infinite;animation-delay:2000ms}
@@ -40,7 +40,7 @@ body{margin:0;background-color:#f6fbff}
 #preloader.preloaded .loader_line:after{opacity:0}
 #preloader.preloaded .loader_line{opacity:0;height:100%!important}
 #preloader.preloaded:before,#preloader.preloaded:after{animation:preloadedzero 300ms ease-in-out 500ms forwards}
-@keyframes preloadedzero{0%{width:50%}100%{width:0}}
+@keyframes preloadedzero{0%{transform:scaleX(1)}100%{transform:scaleX(0)}}
 </style>
 <!-- If JS is disabled the loader is never dismissed, so hide it in that case. -->
 <noscript><style>#preloader{display:none!important}</style></noscript>
@@ -51,10 +51,10 @@ body{margin:0;background-color:#f6fbff}
     preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
     only after window 'load', by which point these sheets are applied. -->
 <link rel="preload" as="style" href="static/css/plugins.css?v=24a192bd" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css?v=f7d87436" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=75ee981d" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
 <link rel="stylesheet" href="static/css/plugins.css?v=24a192bd" />
-<link rel="stylesheet" href="static/css/style.css?v=f7d87436" />
+<link rel="stylesheet" href="static/css/style.css?v=75ee981d" />
 </noscript>
 <!-- /STYLES -->
 </head>
