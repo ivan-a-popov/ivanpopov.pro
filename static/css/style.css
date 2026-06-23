@@ -43,8 +43,6 @@ html {
 	padding: 0px;
 	margin: 0px;
 	scrollbar-gutter: stable;
-	scrollbar-width: thin;
-	scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
 }
 body{
 	overflow-x: hidden;
@@ -58,14 +56,12 @@ body{
 	background-color: #f6fbff;
 	color: #7d7789;
 }
-svg{
-	fill: currentcolor;
+svg, img.svg{
 	width: 15px;
 	height: 15px;
 }
-img.svg{
-	width: 15px;
-	height: 15px;
+svg{
+	fill: currentcolor;
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -91,9 +87,7 @@ h6 { font-size: 16px; }
 }
 .ivan_popov_all_wrap,
 .ivan_popov_all_wrap *{
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	   -moz-box-sizing: border-box; /* Firefox, other Gecko */
-			box-sizing: border-box; /* Opera/IE 8+ */
+	box-sizing: border-box;
 }
 @media (min-width: 1024px){
 	.ivan_popov_all_wrap[data-magic-cursor="show"],
@@ -101,131 +95,9 @@ h6 { font-size: 16px; }
 		cursor: none !important;
 	}
 }
-#preloader{
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    z-index: 99999;
-    display: flex;
-}
-#preloader:before,
-#preloader:after{
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    z-index: -1;
-    background-color: #000;
-    -webkit-transform-origin: left center;
-    -ms-transform-origin: left center;
-    transform-origin: left center;
-    -webkit-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-}
-#preloader:after{
-    left: auto;
-    right: 0;
-    -webkit-transform-origin: right center;
-    -ms-transform-origin: right center;
-    transform-origin: right center;
-}
-#preloader .loader_line{
-    margin: auto;
-    width: 1px;
-    height: 250px;
-    position: relative;
-    overflow: hidden;
-    -webkit-transition: all 0.8s ease 0s;
-    -o-transition: all 0.8s ease 0s;
-    transition: all 0.8s ease 0s;
-}
-#preloader .loader_line:before{
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 1px;
-    height: 0%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    background-color: #fff;
-    -webkit-animation: lineheight 1000ms ease-in-out 0s forwards;
-    -o-animation: lineheight 1000ms ease-in-out 0s forwards;
-    animation: lineheight 1000ms ease-in-out 0s forwards;
-}
-#preloader .loader_line:after{
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 1px;
-    height: 100%;
-    background-color: #777;
-    -webkit-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    -o-transform: translateY(-100%);
-    transform: translateY(-100%);
-    -webkit-animation: lineround 1200ms linear 0s infinite;
-    -o-animation: lineround 1200ms linear 0s infinite;
-    animation: lineround 1200ms linear 0s infinite;
-    animation-delay: 2000ms;
-}
 
-@keyframes lineheight{
-    0%{
-        height: 0%;
-    }
-    100%{
-        height: 100%;
-    }
-}
-
-@keyframes lineround{
-    0%{
-        -webkit-transform: translateY(-100%);
-        -ms-transform: translateY(-100%);
-        -o-transform: translateY(-100%);
-        transform: translateY(-100%);
-    }
-    100%{
-        -webkit-transform: translateY(200%);
-        -ms-transform: translateY(200%);
-        -o-transform: translateY(200%);
-        transform: translateY(200%);
-    }
-}
-
-/*hiding all*/
-#preloader.preloaded .loader_line:after{
-    opacity: 0;
-}
-#preloader.preloaded .loader_line{
-    opacity: 0;
-    height: 100%!important;
-}
-#preloader.preloaded:before,
-#preloader.preloaded:after{
-    -webkit-animation: preloadedzero 300ms ease-in-out 500ms forwards;
-    -o-animation: preloadedzero 300ms ease-in-out 500ms forwards;
-    animation: preloadedzero 300ms ease-in-out 500ms forwards;
-}
-@keyframes preloadedzero{
-    0%{
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
-    }
-    100%{
-        -webkit-transform: scaleX(0);
-        transform: scaleX(0);
-    }
-}
+/* The preloader is styled inline in index.html's <head> so it paints on the
+   first render, before this async stylesheet loads. Do not duplicate it here. */
 
 /*---------------------------------------------------*/
 /*	 HEADER
@@ -315,12 +187,7 @@ h6 { font-size: 16px; }
 	font-weight: 500;
 	padding: 0px 30px;
 	position: relative;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_header .menu ul li a b{
 	display: inline-block;
@@ -359,12 +226,7 @@ h6 { font-size: 16px; }
 	bottom: 15px;
 	background-color: #333;
 	z-index: -1;
-	
-	-webkit-transition: all .5s ease;
-	   -moz-transition: all .5s ease;
-	    -ms-transition: all .5s ease;
-	     -o-transition: all .5s ease;
-	        transition: all .5s ease;
+	transition: all .5s ease;
 }
 .ivan_popov_header .menu ul li.mleave.active a{
 	color: #333;
@@ -439,12 +301,7 @@ h6 { font-size: 16px; }
 	width: 200px;
 	z-index: 15;
 	background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_mobile_menu.opened{
 	right: 0px;
@@ -567,16 +424,9 @@ h6 { font-size: 16px; }
 	visibility: visible;
 	transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
-.ivan_popov_mainpart .author_image .author_image_inner{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	transition: height 0.25s ease, opacity 0.25s ease;
-}
-/* Portrait host (structural wrapper around the author photo) */
+/* Portrait host (structural wrapper around the author photo). Becomes a size
+   container so the portrait crop can react to THIS column's width/height
+   (cqw/cqh) instead of the whole viewport. */
 .ivan_popov_mainpart .author_image .author_image_inner{
 	position: absolute;
 	top: 0;
@@ -586,8 +436,6 @@ h6 { font-size: 16px; }
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	/* Become a size container so the portrait crop can react to THIS column's
-	   width/height (cqw/cqh) instead of the whole viewport. */
 	container-type: size;
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
@@ -637,9 +485,6 @@ h6 { font-size: 16px; }
 	visibility: hidden;
 	z-index: 8;
 	transition: visibility 1s linear, opacity 0s linear;
-	-moz-transition: visibility 1s linear, opacity 0s linear;
-	-webkit-transition: visibility 1s linear, opacity 0s linear;
-	-o-transition: visibility 1s linear, opacity 0s linear;
 }
 .ivan_popov_section.animated {
 	opacity: 1;
@@ -798,12 +643,7 @@ html::-webkit-scrollbar-track-piece,
 	border: 2px solid #333;
 	font-family: "Onest";
 	font-weight: 500;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_button a:hover{
 	background-color: transparent;
@@ -1166,12 +1006,7 @@ html::-webkit-scrollbar-track-piece,
 	background-color: rgba(0,0,0,.8);
 	opacity: 0;
 	visibility: hidden;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_modalbox.opened{
 	opacity: 1;
@@ -1189,13 +1024,8 @@ html::-webkit-scrollbar-track-piece,
 	opacity: 0;
 	visibility: hidden;
 	margin-top: -20px;
+	transition: all .3s ease;
 	transition-delay: .3s;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
 }
 .ivan_popov_modalbox.opened .box_inner{
 	opacity: 1;
@@ -1218,12 +1048,7 @@ html::-webkit-scrollbar-track-piece,
 	border:2px solid #fff;
 	border-radius: 10px;
 	position: relative;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_modalbox .close a:hover{
 	border-radius: 100%;
@@ -1282,12 +1107,7 @@ html::-webkit-scrollbar-track-piece,
 	border: 1px solid #b9b8c3;
 	padding: 70px 40px 63px;
 	text-align: center;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_service .service_list ul li .list_inner:hover{
 	background-color: #333;
@@ -1297,12 +1117,7 @@ html::-webkit-scrollbar-track-piece,
     height: 60px;
     color: #333;
 	margin-bottom: 27px;
-	
-    -webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_service .service_list ul li .list_inner:hover .svg{
 	color: #fff;
@@ -1312,22 +1127,13 @@ html::-webkit-scrollbar-track-piece,
 	font-size: 24px;
 	color: #333;
 	margin-bottom: 15px;
-	
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_service .service_list ul li .list_inner:hover .title{
 	color: #fff;
 }
 .ivan_popov_service .service_list ul li .list_inner .text{
-	-webkit-transition: all .3s ease;
-	   -moz-transition: all .3s ease;
-	    -ms-transition: all .3s ease;
-	     -o-transition: all .3s ease;
-	        transition: all .3s ease;
+	transition: all .3s ease;
 }
 .ivan_popov_service .service_list ul li .list_inner:hover .text{
 	color: #aaa;
@@ -1437,7 +1243,6 @@ html::-webkit-scrollbar-track-piece,
   top: 0;
   pointer-events: none;
   border-radius: 50%;
-  -webkit-transform: translateZ(0);
   transform: translateZ(0);
   visibility: hidden;
   z-index: 99990;
@@ -1460,12 +1265,9 @@ html::-webkit-scrollbar-track-piece,
   height: 6px;
   border-radius: 50%;
   background-color: #333;
-  -webkit-transition: -webkit-transform .3s ease-in-out, opacity .3s ease-in-out;
-  transition: -webkit-transform .3s ease-in-out, opacity .3s ease-in-out;
   transition: transform .3s ease-in-out, opacity .3s ease-in-out;
 }
 .cursor-inner.cursor-hover::before {
-  -webkit-transform: scale(13.333);
   transform: scale(13.333);
   opacity: .3;
 }
@@ -1475,12 +1277,9 @@ html::-webkit-scrollbar-track-piece,
   width: 30px;
   height: 30px;
   border: 2px solid #333;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   z-index: 100;
   opacity: .5;
-  -webkit-transition: -webkit-transform .08s ease-out, opacity .08s ease-out;
-  transition: -webkit-transform .08s ease-out, opacity .08s ease-out;
   transition: transform .08s ease-out, opacity .08s ease-out;
 }
 .cursor-outer.cursor-hover{
@@ -1770,26 +1569,20 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
+/* Show dots + add bottom padding on touch devices and compact nav (any width). */
 .ivan_popov_all_wrap.has-touch .ivan_popov_swipe_nav,
 .ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav{
 	display: block;
-}
-@media (max-width: 1023px) {
-	.ivan_popov_swipe_nav{
-		display: block;
-	}
 }
 .ivan_popov_all_wrap.has-touch .ivan_popov_section .section_inner,
 .ivan_popov_all_wrap.nav-compact .ivan_popov_section .section_inner{
 	padding-bottom: 64px;
 }
-@media (max-width: 1023px) {
-	.ivan_popov_section .section_inner{
-		padding-bottom: 64px;
-	}
-}
 
 @media (max-width: 1023px) {
+	.ivan_popov_swipe_nav{
+		display: block;
+	}
 	/* Touch sections: enable momentum scroll. */
 	.ivan_popov_section{
 		overflow-y: auto;
@@ -1799,6 +1592,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	}
 	.ivan_popov_section .section_inner{
 		float: none;
+		padding-bottom: 64px;
 	}
 
 	/* Testimonials: horizontal scroll-snap is desktop-only; on mobile show
