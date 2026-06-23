@@ -241,7 +241,7 @@ h6 { font-size: 16px; }
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0px 70px;
+	padding: 0px 30px;
 }
 .ivan_popov_header .logo .text,
 .ivan_popov_topbar .logo .text{
@@ -1630,8 +1630,8 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_title > span{letter-spacing: 3px;}
 	.ivan_popov_title > span:after{margin-left: 25px;}
 	#contact .ivan_popov_glitch_switch_row:after{margin-left: 25px;}
-	.ivan_popov_header{height: 60px;line-height: 60px;padding: 0px 60px;}
-	.ivan_popov_footer{height: 60px;line-height: 60px;padding: 0px 60px;}
+	.ivan_popov_header{height: 60px;line-height: 60px;padding: 0px 30px;}
+	.ivan_popov_footer{height: 60px;line-height: 60px;padding: 0px 30px;}
 	.ivan_popov_left_border{width: 60px;}
 	.ivan_popov_right_border{width: 60px;}
 	.ivan_popov_mainpart{top: 60px;left: 60px;right: 60px;bottom: 60px;}
