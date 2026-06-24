@@ -1373,7 +1373,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 }
 
 /*---------------------------------------------------*/
-/*	 MEDIA QUERIES (FOR SMALL DEVICES)
+/*	 MEDIA QUERIES
 /*---------------------------------------------------*/
 
 @media (max-width: 1600px) {
@@ -1381,6 +1381,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_all_wrap{
 		--ivp-bar-height: 60px;
 	}
+	.ivan_popov_footer {font-size: 10px;}
 	.ivan_popov_header .logo .text{line-height: 70px;padding-left: 30px;}
 	.ivan_popov_mainpart .author_image{width: 35%;}
 	.ivan_popov_mainpart .main_content{width: 65%;}
@@ -1456,11 +1457,13 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_mainpart .author_image .author_photo{
 		height: 100%;
 		opacity: 1;
+		padding-bottom: 50px;
 	}
 	.ivan_popov_mainpart .main_content{width: 64%;}
 	.ivan_popov_home .content{padding: 0px 20px 0px 40px;}
 }
 @media (max-width: 768px) {
+	.ivan_popov_footer{display: none;}
 	.ivan_popov_home .job{font-size: 20px;}
 	.ivan_popov_home .line{height: 3px;width: 40px;}
 	.ivan_popov_button a{padding: 10px 28px;}
