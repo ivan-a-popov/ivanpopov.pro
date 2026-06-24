@@ -1444,10 +1444,12 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_contact_playfield{margin-top: 18px;}
 	#contact .contact_social_icon svg{width: 80px;height: 80px;}
 }
-/* Large tablets: portrait two-column layout; nav stays full when it fits. */
-@media (min-width: 768px) and (max-width: 1023px) {
+/* Two-column portrait layout persists all the way down to ~320px phones.
+   The portrait tracks the viewport (36%) but is floored at 130px so it never
+   collapses into an unreadable sliver; the content column takes the remainder. */
+@media (min-width: 320px) and (max-width: 1023px) {
 	.ivan_popov_mainpart .author_image{
-		width: 36%;
+		width: max(130px, 36%);
 		height: 100%;
 		opacity: 1;
 		visibility: visible;
@@ -1459,7 +1461,11 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		opacity: 1;
 		padding-bottom: 50px;
 	}
-	.ivan_popov_mainpart .main_content{width: 64%;}
+	.ivan_popov_mainpart .main_content{
+		left: max(130px, 36%);
+		right: 0;
+		width: auto;
+	}
 	.ivan_popov_home .content{padding: 0px 20px 0px 40px;}
 }
 @media (max-width: 768px) {
@@ -1477,6 +1483,19 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
 	.ivan_popov_service .service_list ul li .title{font-size: 20px;}
 	#contact .contact_social_icon svg{width: 72px;height: 72px;}
+}
+/* Narrowest phones: the content column is slim next to the floored portrait,
+   so trim the home hero — the heavy name especially — instead of shrinking the
+   photo. The name scales fluidly and meets the default size at 540px. */
+@media (max-width: 540px) {
+	.ivan_popov_home .content{padding: 0px 16px 0px 22px;}
+	.ivan_popov_home .name{
+		font-size: clamp(20px, calc(-6px + 8.2vw), 38px);
+		margin-bottom: 18px;
+	}
+	.ivan_popov_home .line{width: 32px; height: 3px; margin-bottom: 18px;}
+	.ivan_popov_home .job{font-size: 16px; margin-bottom: 20px;}
+	.ivan_popov_button a{padding: 9px 18px;}
 }
 
 /*---------------------------------------------------*/
