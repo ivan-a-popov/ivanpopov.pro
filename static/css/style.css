@@ -1558,7 +1558,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	   keep their height and spacing without a horizontal track. */
 	.ivan_popov_about .testimonials .list{
 		margin-top: 0;
-		padding-top: 30px;
+		padding-top: 20px;
 	}
 	.ivan_popov_about .testimonials .list ul.testimonials-snap{
 		display: block;
