@@ -686,7 +686,7 @@ html::-webkit-scrollbar-track-piece,
 	width: 100%;
 	display: flow-root;
 }
-.ip_about .biography{
+.ip_about .bio{
 	width: 100%;
 	display: flow-root;
 	margin-bottom: 87px;
@@ -723,28 +723,28 @@ html::-webkit-scrollbar-track-piece,
 	margin-top: 8px;
 	opacity: 0.8;
 }
-.ip_about .biography .wrapper{
+.ip_about .bio .wrapper{
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
 }
-.ip_about .biography .left{
+.ip_about .bio .left{
 	width: 45%;
 }
-.ip_about .biography .left p{
+.ip_about .bio .left p{
 	margin-bottom: 15px;
 }
-.ip_about .biography .left p:last-child{
+.ip_about .bio .left p:last-child{
 	margin-bottom: 25px;
 }
-.ip_about .biography .right{
+.ip_about .bio .right{
 	width: 45%;
 }
-.ip_about .biography .right p{
+.ip_about .bio .right p{
 	margin-bottom: 15px;
 }
-.ip_about .biography .right p:last-child {
+.ip_about .bio .right p:last-child {
 	margin-bottom: 25px;
 }
 .ip_full_link{
@@ -761,7 +761,7 @@ html::-webkit-scrollbar-track-piece,
 	margin-bottom: 90px;
 }
 @media (min-width: 1024px) {
-	#how .section_inner{
+	#what .section_inner{
 		padding-top: 0;
 	}
 }
@@ -1275,9 +1275,9 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_mainpart .main_content{width: 100%;}
 	.ip_home .content{padding: 0px 20px;}
 	.ip_home .job{font-size: 22px;}
-	.ip_about .biography .wrapper{flex-direction: column;align-items: baseline;}
-	.ip_about .biography .left{width: 100%;}
-	.ip_about .biography .right{width: 100%;margin-bottom: 25px;}
+	.ip_about .bio .wrapper{flex-direction: column;align-items: baseline;}
+	.ip_about .bio .left{width: 100%;}
+	.ip_about .bio .right{width: 100%;margin-bottom: 25px;}
 	.ip_section .section_inner{padding: 10px 20px 0px 20px;}
 	.ip_modalbox .box_inner{width: 480px;}
 	.ip_modalbox .description_wrap{padding: 20px;}

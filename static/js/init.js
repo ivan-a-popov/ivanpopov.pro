@@ -698,9 +698,9 @@ function ip_testimonials_snap(){
 		list.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
 	}
 
-	function isHowActive(){
-		var how = document.getElementById('how');
-		return how && how.classList.contains('active');
+	function isLastActive(){
+		var last = document.getElementById('what');
+		return last && last.classList.contains('active');
 	}
 
 	function scheduleAutoplay(){
@@ -708,7 +708,7 @@ function ip_testimonials_snap(){
 			clearInterval(timer);
 		}
 		timer = setInterval(function(){
-			if(paused || !isHowActive()){
+			if(paused || !isLastActive()){
 				return;
 			}
 			currentDom += 1;
