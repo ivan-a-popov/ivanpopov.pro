@@ -1497,6 +1497,8 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_home_photo{
 		display: block;
 		width: 100%;
+		/* Match the content's horizontal inset so the photo aligns with the text. */
+		padding: 0 20px;
 		margin-bottom: 30px;
 	}
 	.ivan_popov_home_photo img{
