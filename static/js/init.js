@@ -46,7 +46,6 @@ ip_ready(function(){
 	ip_keyboard_navigation();
 	ip_service_popup();
 	ip_cursor();
-	ip_imgtosvg();
 	ip_data_images();
 	ip_testimonials_snap();
 	ip_animated_headline();
@@ -548,55 +547,6 @@ function ip_cursor(){
 
 	inner.style.visibility = 'visible';
 	outer.style.visibility = 'visible';
-}
-
-// -----------------------------------------------------
-// ---------------    IMAGE TO SVG    ------------------
-// -----------------------------------------------------
-
-function ip_imgtosvg(){
-
-	"use strict";
-
-	ip_all('img.svg').forEach(function(img){
-
-		var imgClass	= img.getAttribute('class');
-		var imgURL		= img.getAttribute('src');
-		var imgWidth	= img.getAttribute('width');
-		var imgHeight	= img.getAttribute('height');
-
-		if(!imgURL){
-			return;
-		}
-
-		fetch(imgURL).then(function(response){
-			return response.text();
-		}).then(function(text){
-			var doc = new DOMParser().parseFromString(text, 'image/svg+xml');
-			var svg = doc.querySelector('svg');
-			if(!svg){
-				return;
-			}
-
-			if(imgClass !== null && typeof imgClass !== 'undefined'){
-				svg.setAttribute('class', imgClass + ' replaced-svg');
-			}
-			if(imgWidth){
-				svg.setAttribute('width', imgWidth);
-			}
-			if(imgHeight){
-				svg.setAttribute('height', imgHeight);
-			}
-
-			// Remove any invalid XML tags as per http://validator.w3.org
-			svg.removeAttribute('xmlns:a');
-
-			if(img.parentNode){
-				img.parentNode.replaceChild(svg, img);
-			}
-		}).catch(function(){});
-
-	});
 }
 
 // -----------------------------------------------------
