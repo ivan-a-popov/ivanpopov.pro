@@ -35,7 +35,7 @@
 before any external stylesheet has downloaded — kills the FCP gap) -->
 <style>
 html{overflow-x:hidden;margin:0;padding:0}
-body{margin:0;background-color:#f6fbff}
+body{margin:0}
 #preloader{position:fixed;left:0;top:0;height:100vh;width:100%;z-index:99999;display:flex}
 #preloader:before,#preloader:after{content:'';position:absolute;left:0;top:0;width:50%;height:100%;z-index:-1;background-color:#000;transform-origin:left center;transition:all .3s ease 0s}
 #preloader:after{left:auto;right:0;transform-origin:right center}
@@ -58,10 +58,10 @@ body{margin:0;background-color:#f6fbff}
     preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
     only after window 'load', by which point these sheets are applied. -->
 <link rel="preload" as="style" href="static/css/plugins.css?v=d9ae2e76" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css?v=77463d79" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=45ae9087" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
 <link rel="stylesheet" href="static/css/plugins.css?v=d9ae2e76" />
-<link rel="stylesheet" href="static/css/style.css?v=77463d79" />
+<link rel="stylesheet" href="static/css/style.css?v=45ae9087" />
 </noscript>
 <!-- /STYLES -->
 </head>
