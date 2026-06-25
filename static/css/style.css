@@ -1407,6 +1407,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	#contact .contact_social_icon svg{width: 100px;height: 100px;}
 }
 @media (max-width: 1023px) {
+	.ivan_popov_header .logo .text {padding-left: 25px;font-size: 22px;}
 	.mouse-cursor{display: none;}
 	.ivan_popov_all_wrap{
 		--ivp-side-gutter: 10px;
@@ -1482,12 +1483,18 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
 	.ivan_popov_service .service_list ul li .title{font-size: 20px;}
 	#contact .contact_social_icon svg{width: 72px;height: 72px;}
+    .ivan_popov_header .logo .text{padding-left: 20px;font-size: 20px;}
+
 }
 /* Narrow phones: the full-height portrait column gets too thin, so hide the
    shared column (handled by the max-width:1023px rule) and let only the home
    section show the square 1.jpg stacked above its content. Other sections keep
    the photo hidden and use the full width. */
 @media (max-width: 668px) {
+	.ivan_popov_header .logo .text {
+			padding-left: 10px;
+			font-size: 15px;
+		}
 	#home .ivan_popov_home{
 		flex-direction: column;
 		align-items: stretch;
