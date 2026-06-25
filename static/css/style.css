@@ -1441,7 +1441,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ivan_popov_about .biography .wrapper{flex-direction: column;align-items: baseline;}
 	.ivan_popov_about .biography .left{width: 100%;}
 	.ivan_popov_about .biography .right{width: 100%;margin-bottom: 25px;}
-	.ivan_popov_section .section_inner{padding: 0px 20px 0px 20px;}
+	.ivan_popov_section .section_inner{padding: 10px 20px 0px 20px;}
 	#contact .section_inner{padding-top: 30px;}
 	.ivan_popov_modalbox .box_inner{width: 480px;}
 	.ivan_popov_modalbox .description_wrap{padding: 20px;}
