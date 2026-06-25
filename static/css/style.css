@@ -612,11 +612,12 @@ html::-webkit-scrollbar-track-piece,
 .ivan_popov_home .job{
 	font-size: 25px;
 	margin-bottom: 35px;
-	font-weight: 350;
+	font-weight: 300;
 }
 .ivan_popov_home .job .blc{
 	display: block;
 	margin-top: 8px;
+	font-weight: 400;
 }
 .ivan_popov_home .job span{
 	color: #7d7789;
