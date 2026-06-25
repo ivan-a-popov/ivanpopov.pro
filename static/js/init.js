@@ -423,13 +423,11 @@ function ip_service_popup(){
 			var parent	= button.closest('.list_inner');
 			if(!parent){ return; }
 			var popupImg = parent.querySelector('.popup_service_image');
-			var elImage	= (popupImg && (popupImg.getAttribute('data-popup-jpg') || popupImg.getAttribute('src'))) || '';
-			var elWebp	= popupImg ? popupImg.getAttribute('data-popup-webp') : null;
+			var elImage	= (popupImg && (popupImg.getAttribute('data-popup-img') || popupImg.getAttribute('src'))) || '';
 			var titleEl	= parent.querySelector('.title');
 			var title	= titleEl ? titleEl.innerHTML : '';
 			var detailsEl = parent.querySelector('.service_hidden_details');
 			var content = detailsEl ? detailsEl.innerHTML : '';
-			var webpAttr = elWebp ? ' data-img-url-webp="'+elWebp+'"' : '';
 
 			modalBox.classList.add('opened');
 			setLightCursor(true);
@@ -440,7 +438,7 @@ function ip_service_popup(){
 			}
 			var infos = modalBox.querySelector('.service_popup_informations');
 			if(infos){
-				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"'+webpAttr+'></div></div>');
+				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"></div></div>');
 				ip_data_images();
 				var image = infos.querySelector('.image');
 				if(image){
@@ -558,14 +556,8 @@ function ip_data_images(){
 	"use strict";
 
 	ip_all('*[data-img-url]').forEach(function(element){
-		var url		= element.getAttribute('data-img-url');
-		var webp	= element.getAttribute('data-img-url-webp');
-		if(webp){
-			element.style.backgroundImage =
-				'image-set(url("' + webp + '") type("image/webp"), url("' + url + '") type("image/jpeg"))';
-		}else{
-			element.style.backgroundImage = 'url(' + url + ')';
-		}
+		var url = element.getAttribute('data-img-url');
+		element.style.backgroundImage = 'url(' + url + ')';
 	});
 }
 
