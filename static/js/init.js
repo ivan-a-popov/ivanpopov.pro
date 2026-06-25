@@ -33,14 +33,6 @@ function ip_remove_classes(el, str){
 	str.split(/\s+/).forEach(function(c){ if(c){ el.classList.remove(c); } });
 }
 
-function ip_siblings(el){
-	"use strict";
-	if(!el || !el.parentNode){ return []; }
-	return Array.prototype.filter.call(el.parentNode.children, function(child){
-		return child !== el;
-	});
-}
-
 ip_ready(function(){
 
 	"use strict";
@@ -58,7 +50,6 @@ ip_ready(function(){
 	ip_data_images();
 	ip_testimonials_snap();
 	ip_animated_headline();
-	ip_hashtag();
 	ip_preloader();
 
 });
@@ -122,16 +113,6 @@ function ip_goto(href){
 	target.classList.add('active');
 	target.scrollTop = 0;
 
-	// Keep the sliding header marker aligned for every navigation path (header,
-	// swipe dots, keyboard, touch), not only those that fire a hover.
-	if(typeof currentLink === 'function'){
-		var headerCcc = ip_one('.ip_header .menu .ccc');
-		var headerActive = ip_one('.ip_header .menu .active a');
-		if(headerCcc && headerActive){
-			currentLink(headerCcc, headerActive);
-		}
-	}
-
 	return true;
 }
 
@@ -144,9 +125,6 @@ function ip_page_transition(){
 			e.preventDefault();
 			var href = link.getAttribute('href');
 			ip_goto(href);
-			if(link.parentNode && link.parentNode.classList.contains('ip_button')){
-				ip_hashtag();
-			}
 		});
 	});
 }
@@ -344,23 +322,6 @@ function ip_keyboard_navigation(){
 		return last ? ('#' + last.id) : null;
 	}
 
-	// Keep the sliding header highlight aligned with the new active item, since
-	// keyboard navigation fires no mouse events to reposition it.
-	function refreshHeaderHighlight(){
-		if(typeof currentLink !== 'function'){
-			return;
-		}
-		var header = ip_one('.ip_header');
-		if(!header || header.offsetParent === null){
-			return;
-		}
-		var ccc = header.querySelector('.menu .ccc');
-		var el	= header.querySelector('.menu .active a');
-		if(ccc && el){
-			currentLink(ccc, el);
-		}
-	}
-
 	function navigateBy(step){
 		var order = sectionOrder();
 		if(!order.length){
@@ -375,7 +336,6 @@ function ip_keyboard_navigation(){
 			return false;
 		}
 		ip_goto(order[nextIndex]);
-		refreshHeaderHighlight();
 		return true;
 	}
 
@@ -941,81 +901,4 @@ function ip_animated_headline(){
 		wrapper.style.width = (visible.offsetWidth + 10) + 'px';
 		window.setTimeout(function(){ hideWord(visible); }, animationDelay);
 	});
-}
-
-// -----------------------------------------------------
-// -------------------    HASHTAG    -------------------
-// -----------------------------------------------------
-
-function ip_hashtag(){
-	"use strict";
-	var ccc		= ip_one('.ip_header .menu .ccc');
-	var element	= ip_one('.ip_header .menu .active a');
-
-	ip_all('.ip_header .menu a').forEach(function(a){
-		a.addEventListener('mouseenter', function(){
-			currentLink(ccc, a);
-		});
-	});
-
-	var menu = ip_one('.ip_header .menu');
-	if(menu){
-		menu.addEventListener('mouseleave', function(){
-			element = ip_one('.ip_header .menu .active a');
-			currentLink(ccc, element);
-			if(element && element.parentNode){
-				ip_siblings(element.parentNode).forEach(function(sib){
-					sib.classList.remove('mleave');
-				});
-			}
-		});
-	}
-	currentLink(ccc, element);
-
-	function repositionActive(){
-		var active = ip_one('.ip_header .menu .active a');
-		if(active){
-			currentLink(ccc, active);
-		}
-	}
-	if(document.fonts && document.fonts.ready && document.fonts.ready.then){
-		document.fonts.ready.then(repositionActive);
-	}
-	window.addEventListener('load', repositionActive);
-	window.addEventListener('resize', repositionActive);
-
-	// style.css (with self-hosted Onest @font-face) loads asynchronously via
-	// preload/onload, so at this point the menu is often still unstyled.
-	// document.fonts.ready and window "load" can both fire BEFORE that async CSS actually
-	// applies. ResizeObserver on the menu re-measures whenever the real layout
-	// finally lands (font swap, async CSS apply, breakpoint change), which is the only
-	// reliable trigger here.
-	if(window.ResizeObserver){
-		var menuList = document.querySelector('.ip_header .menu ul');
-		if(menuList){
-			new ResizeObserver(function(){
-				repositionActive();
-			}).observe(menuList);
-		}
-	}
-
-}
-
-function currentLink(ccc, e){
-	"use strict";
-	if(!ccc || !e){ return false; }
-	var menu = ip_one('.ip_header .menu');
-	if(!menu){ return false; }
-	var eRect		= e.getBoundingClientRect();
-	var menuRect	= menu.getBoundingClientRect();
-	var left		= eRect.left - menuRect.left;
-	var width		= e.offsetWidth;
-	if(e.parentNode){
-		e.parentNode.classList.remove('mleave');
-		ip_siblings(e.parentNode).forEach(function(sib){
-			sib.classList.add('mleave');
-		});
-	}
-	ccc.style.left = left + 'px';
-	ccc.style.width = width + 'px';
 }

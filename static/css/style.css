@@ -34,6 +34,174 @@
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/*------------------------------------------------------------------*/
+/*	BASE (reset)
+/*------------------------------------------------------------------*/
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
+	{
+	background: transparent;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+	outline: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+    display: block;
+}
+
+blockquote {
+	quotes: none;
+}
+
+blockquote:before,blockquote:after {
+	content: '';
+	content: none;
+}
+ul, ol{
+	margin:0px;	
+}
+ul li, ol li{
+	margin:0px;
+}
+img{
+	vertical-align:middle;
+	max-width:100%;
+}
+iframe{
+	max-width:100%;
+}
+del {
+	text-decoration: line-through;
+}
+a, i{
+	border:none;
+}
+a:hover{text-decoration:none;}
+
+
+/*------------------------------------------------------------------*/
+/*	ICONS
+/*------------------------------------------------------------------*/
+/* The icons are painted from inline SVG masks and inherit currentColor like a font glyph.
+*/
+
+.icon-cancel:before,
+.icon-quote-left:before,
+.icon-quote-right:before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  vertical-align: -0.125em;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-size: contain;
+          mask-size: contain;
+}
+
+.icon-cancel:before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'/%3E%3C/svg%3E");
+}
+
+/* Closing quote (icon-quote-right) is the opening glyph rotated 180deg. */
+.icon-quote-left:before,
+.icon-quote-right:before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M0 216C0 149.7 53.7 96 120 96l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64zm256 0c0-66.3 53.7-120 120-120l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64z'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M0 216C0 149.7 53.7 96 120 96l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64zm256 0c0-66.3 53.7-120 120-120l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64z'/%3E%3C/svg%3E");
+}
+.icon-quote-right:before { transform: rotate(180deg); }
+
+
+/*------------------------------------------------------------------*/
+/*	ANIMATION (rollIn / rollOut)
+/*------------------------------------------------------------------*/
+
+.animated {
+  animation-duration: 1.2s;
+  animation-fill-mode: both;
+}
+
+@keyframes rollIn {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rollIn {
+  animation-name: rollIn;
+}
+
+@keyframes rollOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+  }
+}
+
+.rollOut {
+  animation-name: rollOut;
+}
+
+
+/* --------------------------------
+|* Animated headline (clip effect)
+-------------------------------- */
+/* Word rotation is a vanilla-JS re-implementation of the CodyHouse "clip"
+   headline (ip_animated_headline in init.js). The active word carries
+   .is-visible and stays in flow to size the line; the others are .is-hidden and
+   absolutely stacked. JS animates the wrapper width to type/erase each phrase,
+   clipped by overflow:hidden with the trailing cursor bar (::after). */
+.cd-words-wrapper {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  vertical-align: top;
+}
+.cd-words-wrapper b {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  opacity: 0;
+}
+.cd-words-wrapper b.is-visible {
+  position: relative;
+  opacity: 1;
+}
+.cd-headline.clip span {
+  display: inline-block;
+  padding: .2em 0;
+}
+.cd-headline.clip .cd-words-wrapper {
+  overflow: hidden;
+  vertical-align: top;
+}
+.cd-headline.clip .cd-words-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #aebcb9;
+}
+
 /*---------------------------------------------------*/
 /*	 BASE
 /*---------------------------------------------------*/
@@ -77,6 +245,8 @@ h6 { font-size: 16px; }
 	position: relative;
 	--ivp-side-gutter: clamp(40px, 2.8vw, 52px);
 	--ivp-bar-height: 70px;
+	--ivp-col-left: 40%;
+	--ivp-col-right: 60%;
 }
 .ip_all_wrap,
 .ip_all_wrap *{
@@ -86,6 +256,24 @@ h6 { font-size: 16px; }
 	.ip_all_wrap[data-magic-cursor="show"],
 	.ip_all_wrap[data-magic-cursor="show"] *{
 		cursor: none !important;
+	}
+	.ip_header{
+		display: grid;
+		grid-template-columns: var(--ivp-col-left) var(--ivp-col-right);
+	}
+	.ip_header .menu{
+		justify-content: stretch;
+	}
+	.ip_header .menu ul{
+		width: 100%;
+		justify-content: space-between;
+		padding-right: clamp(14px, 1.8vw, 28px);
+	}
+	.ip_header .menu ul li.active a b{
+		font-size: 1.5em;
+	}
+	.ip_header .menu ul li.active .ivp_menu_sub{
+		font-size: 13px;
 	}
 }
 
@@ -171,18 +359,21 @@ h6 { font-size: 16px; }
 	font-weight: 500;
 	padding: 0px 30px;
 	position: relative;
+	display: inline-grid;
+	justify-items: center;
 	transition: all .3s ease;
 }
 .ip_header .menu ul li a b{
 	display: inline-block;
-	transition: transform .3s ease;
+	transition: transform .3s ease, font-size .3s ease;
 }
 .ip_header .menu ul li .ivp_menu_sub{
 	position: absolute;
-	left: 0px;
-	right: 0px;
+	left: 50%;
+	right: auto;
 	top: 50%;
 	margin-top: 3px;
+	transform: translateX(-50%);
 	text-align: center;
 	font-size: 10px;
 	font-weight: 600;
@@ -192,34 +383,21 @@ h6 { font-size: 16px; }
 	white-space: nowrap;
 	opacity: 0;
 	pointer-events: none;
-	transition: opacity .3s ease;
+	transition: opacity .3s ease, font-size .3s ease;
 }
 .ip_header .menu ul li.active a b,
 .ip_header .menu ul li a:hover b{
 	transform: translateY(-8px);
 }
+.ip_header .menu ul li.active a b{
+	font-size: 1.25em;
+}
+.ip_header .menu ul li.active .ivp_menu_sub{
+	font-size: 12px;
+}
 .ip_header .menu ul li.active .ivp_menu_sub,
 .ip_header .menu ul li a:hover .ivp_menu_sub{
 	opacity: 1;
-}
-.ip_header .menu .ccc{
-	position: absolute;
-	width: 30px;
-	display: block;
-	top: 15px;
-	bottom: 15px;
-	background-color: #333;
-	z-index: -1;
-	transition: all .5s ease;
-}
-.ip_header .menu ul li.mleave.active a{
-	color: #333;
-}
-.ip_header .menu ul li.active a{
-	color: #fff;
-}
-.ip_header .menu ul li a:hover{
-	color: #fff;
 }
 
 .ip_left_border{
@@ -1039,6 +1217,10 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 
 @media (max-width: 1600px) and (min-width: 1024px){
 	body{font-size: 15px;}
+	.ip_all_wrap{
+		--ivp-col-left: 35%;
+		--ivp-col-right: 65%;
+	}
 	.ip_footer {font-size: 12px;}
 	.ip_header .logo .text{line-height: 70px;padding-left: 30px;}
 	.ip_mainpart .author_image{width: 35%;}
@@ -1059,10 +1241,12 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_modalbox .description_wrap{padding: 30px;}
 }
 @media (max-width: 1023px) {
-	.ip_header .logo{ display: none; }
-	.ip_header .menu{ justify-content: stretch; }
-	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
+	.ip_all_wrap{
+		--ivp-col-left: 36%;
+		--ivp-col-right: 64%;
+	}
 	.ip_header{ height: 60px; line-height: 60px; }
+	.ip_all_wrap{ --ivp-bar-height: 60px; }
 	.ip_footer {height: 40px;font-size: 10px;justify-content: center;}
 	.mouse-cursor{display: none;}
 	.ip_all_wrap{
@@ -1099,6 +1283,48 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_modalbox .description_wrap{padding: 20px;}
 	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
 }
+/* Compact header: keep logo and menu side by side down to ~690px. */
+@media (max-width: 1023px) and (min-width: 690px) {
+	.ip_header{
+		display: grid;
+		grid-template-columns: var(--ivp-col-left) var(--ivp-col-right);
+	}
+	.ip_header .menu{
+		justify-content: stretch;
+	}
+	.ip_header .menu ul{
+		width: 100%;
+		justify-content: space-between;
+		padding-right: clamp(10px, 1.5vw, 18px);
+	}
+	.ip_header .logo .text{
+		font-size: clamp(15px, 2.5vw, 20px);
+		line-height: 60px;
+		padding-left: clamp(6px, 1.2vw, 16px);
+		letter-spacing: clamp(0px, 0.3vw, 1px);
+	}
+	.ip_header .menu ul li a{
+		padding: 0 clamp(4px, 1.1vw, 14px);
+		font-size: clamp(11px, 1.5vw, 14px);
+	}
+	.ip_header .menu ul li .ivp_menu_sub{
+		font-size: 9px;
+		margin-top: 2px;
+	}
+	.ip_header .menu ul li.active a b,
+	.ip_header .menu ul li a:hover b{
+		transform: translateY(-6px);
+	}
+}
+@media (max-width: 689px) {
+	.ip_header{
+		display: flex;
+		justify-content: stretch;
+	}
+	.ip_header .logo{ display: none; }
+	.ip_header .menu{ justify-content: stretch; }
+	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
+}
 /* Tablets / large phones: keep the full-height portrait two-column layout. Below
    669px the column gets too narrow to look good, so the home portrait switches to
    the stacked square 1.jpg instead (see the max-width:668px block). */
@@ -1122,9 +1348,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 }
 @media (max-width: 768px) {
 	.ip_header .menu ul li a{ padding: 0 6px; }
-	.ip_header .menu .ccc{ display: none; }
-	.ip_header .menu ul li.active a{ color: #333; }
-	.ip_header .menu ul li.active a b{ font-size: 1.25em; }
 	.ip_home .job{font-size: 20px;}
 	.ip_home .line{height: 3px;width: 40px;}
 	.ip_button a{padding: 10px 28px;}
@@ -1137,7 +1360,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_service .service_list ul{margin: 0px;}
 	.ip_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
 	.ip_service .service_list ul li .title{font-size: 20px;}
-    .ip_header .logo .text{padding-left: 10px;font-size: 20px;}
 	.ip_footer {height: 30px;font-size: 8px;}
 }
 /* Narrow phones: the full-height portrait column gets too thin, so hide the
@@ -1145,10 +1367,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
    section show the square 1.jpg stacked above its content. Other sections keep
    the photo hidden and use the full width. */
 @media (max-width: 668px) {
-	.ip_header .logo .text {
-			padding-left: 10px;
-			font-size: 15px;
-		}
 	#home .ip_home{
 		flex-direction: column;
 		align-items: stretch;
