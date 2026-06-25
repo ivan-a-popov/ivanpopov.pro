@@ -222,146 +222,6 @@ h6 { font-size: 16px; }
 	color: #fff;
 }
 
-/*---------------------------------------------------*/
-/*	 MOBILE MENU
-/*---------------------------------------------------*/
-
-.ip_topbar{
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	height: 50px;
-	background-color: #fff;
-	z-index: 15;
-	display: none;
-}
-/* Compact nav: hamburger + swipe dots when the header menu no longer fits. */
-.ip_all_wrap.nav-compact .ip_topbar{
-	display: block;
-}
-.ip_all_wrap.nav-compact .ip_header{
-	display: none;
-}
-/* Measure menu overflow with the desktop header laid out but invisible. */
-.ip_all_wrap.nav-measuring .ip_header{
-	display: flex !important;
-	visibility: hidden;
-	pointer-events: none;
-}
-.ip_all_wrap.nav-measuring .ip_header .menu ul{
-	flex-wrap: nowrap;
-}
-.ip_topbar .topbar_inner{
-	width: 100%;
-	height: 100%;
-	clear: both;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0px 20px;
-}
-.ip_topbar .hamburger{
-	padding: 0px;
-}
-.ip_topbar .hamburger-inner, 
-.ip_topbar .hamburger-inner:after, 
-.ip_topbar .hamburger-inner:before{
-	width: 30px;
-	height: 2px;
-}
-.ip_topbar .trigger{
-	position: relative;
-	top: 5px;
-}
-.ip_topbar .hamburger-box{
-	width: 30px;
-}
-.ip_mobile_menu{
-	position: fixed;
-	top: 50px;
-	right: -200px;
-	height: 100vh;
-	width: 200px;
-	z-index: 15;
-	background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-	transition: all .3s ease;
-}
-.ip_mobile_menu.opened{
-	right: 0px;
-}
-.ip_mobile_menu .inner{
-	position: relative;
-	width: 100%;
-	height: 100%;
-	text-align: right;
-	padding: 70px 20px 20px 20px;
-}
-.ip_mobile_menu .avatar{
-	width: 70px;
-	height: 70px;
-	position: relative;
-	float: right;
-	margin-bottom: 60px;
-}
-.ip_mobile_menu .avatar .image{
-	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-}
-.ip_mobile_menu .menu_list{
-	width: 100%;
-	height: auto;
-	clear: both;
-	float: left;
-	margin-bottom: 50px;
-}
-.ip_mobile_menu .menu_list ul{
-	margin: 0px;
-	list-style-type: none;
-}
-.ip_mobile_menu .menu_list ul li{
-	margin: 0px 0px 7px 0px;
-}
-.ip_mobile_menu .menu_list ul li a{
-	text-decoration: none;
-	color: #333;
-	font-family: "Onest";
-}
-.ip_mobile_menu .social{
-	width: 100%;
-	float: left;
-	margin-bottom: 5px;
-}
-.ip_mobile_menu .social ul{
-	margin: 0px;
-	list-style-type: none;
-}
-.ip_mobile_menu .social ul li{
-	margin: 0px 8px 0px 0px;
-	display: inline-block;
-}
-.ip_mobile_menu .social ul li:last-child{
-	margin-right: 0px;
-}
-.ip_mobile_menu .social ul li a{
-	text-decoration: none;
-	color: #333;
-}
-.ip_mobile_menu .copyright{
-	width: 100%;
-	float: left;
-}
-.ip_mobile_menu .copyright p{
-	color: #333;
-	font-family: "Onest";
-}
-
 .ip_left_border{
 	position: fixed;
 	top: 0px;
@@ -1383,7 +1243,10 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	#contact .contact_social_icon svg{width: 100px;height: 100px;}
 }
 @media (max-width: 1023px) {
-	.ip_header .logo .text {padding-left: 20px;font-size: 20px;}
+	.ip_header .logo{ display: none; }
+	.ip_header .menu{ justify-content: stretch; }
+	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
+	.ip_header{ height: 60px; line-height: 60px; }
 	.ip_footer {height: 40px;font-size: 10px;}
 	.mouse-cursor{display: none;}
 	.ip_all_wrap{
@@ -1408,8 +1271,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		height: 0;
 		opacity: 0;
 	}
-	.ip_mainpart{top: 50px;left: 0px;right: 0px;bottom: 0px;}
-	.ip_all_wrap:not(.nav-compact) .ip_mainpart{top: 60px;}
+	.ip_mainpart{top: 60px;left: 0px;right: 0px;bottom: 0px;}
 	.ip_mainpart .main_content{width: 100%;}
 	.ip_home .content{padding: 0px 20px;}
 	.ip_home .job{font-size: 22px;}
@@ -1445,6 +1307,10 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_home .content{padding: 0px 20px 0px 40px;}
 }
 @media (max-width: 768px) {
+	.ip_header .menu ul li a{ padding: 0 6px; }
+	.ip_header .menu .ccc{ display: none; }
+	.ip_header .menu ul li.active a{ color: #333; }
+	.ip_header .menu ul li.active a b{ font-size: 1.25em; }
 	.ip_home .job{font-size: 20px;}
 	.ip_home .line{height: 3px;width: 40px;}
 	.ip_button a{padding: 10px 28px;}
@@ -1546,13 +1412,11 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
-/* Show dots + add bottom padding on touch devices and compact nav (any width). */
-.ip_all_wrap.has-touch .ip_swipe_nav,
-.ip_all_wrap.nav-compact .ip_swipe_nav{
+/* Show dots + add bottom padding on touch devices (any width). */
+.ip_all_wrap.has-touch .ip_swipe_nav{
 	display: block;
 }
-.ip_all_wrap.has-touch .ip_section .section_inner,
-.ip_all_wrap.nav-compact .ip_section .section_inner{
+.ip_all_wrap.has-touch .ip_section .section_inner{
 	padding-bottom: 64px;
 }
 

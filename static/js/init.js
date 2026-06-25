@@ -50,7 +50,6 @@ ip_ready(function(){
 	ip_mark_touch_device();
 	ip_build_swipe_nav();
 	ip_page_transition();
-	ip_trigger_menu();
 	ip_swipe_navigation();
 	ip_keyboard_navigation();
 	ip_service_popup();
@@ -60,7 +59,6 @@ ip_ready(function(){
 	ip_testimonials_snap();
 	ip_animated_headline();
 	ip_hashtag();
-	ip_bind_nav_mode();
 	ip_preloader();
 
 });
@@ -70,7 +68,7 @@ ip_ready(function(){
 // -----------------------------------------------------
 
 // Shared navigation: switch to a section by its href (e.g. "#about").
-// Used by the header/mobile menus, the swipe dots and the touch swipe handler,
+// Used by the header menu, the swipe dots and the touch swipe handler,
 // so every entry point keeps the section state and all menus in sync.
 function ip_goto(href){
 
@@ -93,7 +91,7 @@ function ip_goto(href){
 	}
 	var enter		= wrapper.getAttribute('data-enter');
 	var exit		= wrapper.getAttribute('data-exit');
-	// Every link (header, mobile menu, swipe dots) that points to this section.
+	// Every link (header, swipe dots) that points to this section.
 	var parents		= ip_all('.transition_link a[href="'+href+'"]').map(function(a){
 		return a.closest('li');
 	}).filter(Boolean);
@@ -125,7 +123,7 @@ function ip_goto(href){
 	target.scrollTop = 0;
 
 	// Keep the sliding header marker aligned for every navigation path (header,
-	// mobile menu, swipe dots, keyboard, touch), not only those that fire a hover.
+	// swipe dots, keyboard, touch), not only those that fire a hover.
 	if(typeof currentLink === 'function'){
 		var headerCcc = ip_one('.ip_header .menu .ccc');
 		var headerActive = ip_one('.ip_header .menu .active a');
@@ -154,155 +152,11 @@ function ip_page_transition(){
 }
 
 // -----------------------------------------------------
-// ---------------   TRIGGER MENU    -------------------
-// -----------------------------------------------------
-
-function ip_trigger_menu(){
-
-	"use strict";
-
-	var hamburgers		= ip_all('.ip_topbar .trigger .hamburger');
-	var mobileMenu		= ip_one('.ip_mobile_menu');
-	var mobileMenuList	= ip_all('.ip_mobile_menu .menu_list ul li a');
-
-	hamburgers.forEach(function(hamburger){
-		hamburger.addEventListener('click', function(e){
-			e.preventDefault();
-			if(hamburger.classList.contains('is-active')){
-				hamburger.classList.remove('is-active');
-				if(mobileMenu){ mobileMenu.classList.remove('opened'); }
-			}else{
-				hamburger.classList.add('is-active');
-				if(mobileMenu){ mobileMenu.classList.add('opened'); }
-			}
-		});
-	});
-
-	mobileMenuList.forEach(function(link){
-		link.addEventListener('click', function(e){
-			e.preventDefault();
-			ip_all('.ip_topbar .trigger .hamburger').forEach(function(h){
-				h.classList.remove('is-active');
-			});
-			if(mobileMenu){ mobileMenu.classList.remove('opened'); }
-		});
-	});
-}
-
-// -----------------------------------------------------
-// -----------   NAV MODE (HEADER VS COMPACT)   --------
-// -----------------------------------------------------
-
-var ip_nav_mode_timer = null;
-
-// True when the header menu no longer fits and the hamburger layout is active.
-function ip_is_nav_compact(){
-
-	"use strict";
-
-	var wrap = ip_one('.ip_all_wrap');
-	return !!wrap && wrap.classList.contains('nav-compact');
-}
-
-// Measure whether every header item fits beside the logo; toggle .nav-compact.
-function ip_update_nav_mode(){
-
-	"use strict";
-
-	var wrap = document.querySelector('.ip_all_wrap');
-	var header = document.querySelector('.ip_header');
-	if(!wrap || !header){
-		return;
-	}
-
-	var menu = header.querySelector('.menu');
-	var logo = header.querySelector('.logo');
-	var menuList = menu ? menu.querySelector('ul') : null;
-	if(!menu || !logo || !menuList){
-		return;
-	}
-
-	var wasCompact = wrap.classList.contains('nav-compact');
-
-	wrap.classList.add('nav-measuring');
-	wrap.classList.remove('nav-compact');
-
-	var headerStyle = window.getComputedStyle(header);
-	var headerPad = parseFloat(headerStyle.paddingLeft) + parseFloat(headerStyle.paddingRight);
-	var headerInner = header.clientWidth - headerPad;
-	var items = menuList.querySelectorAll(':scope > li');
-	var requiredWidth = logo.offsetWidth;
-	for(var i = 0; i < items.length; i++){
-		requiredWidth += items[i].offsetWidth;
-	}
-
-	wrap.classList.remove('nav-measuring');
-	var fits = requiredWidth <= headerInner - 4;
-
-	wrap.classList.toggle('nav-compact', !fits);
-
-	if(wasCompact && fits){
-		ip_all('.ip_topbar .trigger .hamburger').forEach(function(h){
-			h.classList.remove('is-active');
-		});
-		var mm = ip_one('.ip_mobile_menu');
-		if(mm){ mm.classList.remove('opened'); }
-	}
-
-	if(fits){
-		var ccc = header.querySelector('.menu .ccc');
-		var el = header.querySelector('.menu .active a');
-		if(ccc && el && typeof currentLink === 'function'){
-			currentLink(ccc, el);
-		}
-	}
-}
-
-function ip_schedule_nav_mode(){
-
-	"use strict";
-
-	window.clearTimeout(ip_nav_mode_timer);
-	ip_nav_mode_timer = window.setTimeout(ip_update_nav_mode, 0);
-}
-
-function ip_bind_nav_mode(){
-
-	"use strict";
-
-	window.addEventListener('resize', function(){
-		window.clearTimeout(ip_nav_mode_timer);
-		ip_nav_mode_timer = window.setTimeout(ip_update_nav_mode, 120);
-	});
-
-	window.addEventListener('load', ip_schedule_nav_mode);
-
-	if(document.readyState === 'complete'){
-		ip_schedule_nav_mode();
-	}
-
-	if(document.fonts && document.fonts.ready){
-		document.fonts.ready.then(ip_schedule_nav_mode);
-	}
-
-	var header = document.querySelector('.ip_header');
-	if(header && window.ResizeObserver){
-		var observer = new ResizeObserver(function(){
-			ip_schedule_nav_mode();
-		});
-		observer.observe(header);
-	}
-
-	ip_schedule_nav_mode();
-}
-
-// -----------------------------------------------------
 // -----------   SWIPE NAVIGATION (MOBILE)   -----------
 // -----------------------------------------------------
 
 // Mirrors the CSS 1023px breakpoint where stacked/mobile content layout
-// takes over from the desktop two-column layout. Nav mode is independent and
-// chosen by measuring whether the header menu fits.
+// takes over from the desktop two-column layout.
 function ip_is_mobile_layout(){
 
 	"use strict";
@@ -334,7 +188,7 @@ function ip_mark_touch_device(){
 }
 
 // Build the bottom dots indicator (mobile only, hidden by CSS on desktop).
-// The dots mirror the mobile menu order and reuse the .transition_link class
+// The dots mirror the header menu order and reuse the .transition_link class
 // so the standard click handler navigates and ip_goto keeps them active.
 function ip_build_swipe_nav(){
 
@@ -344,7 +198,7 @@ function ip_build_swipe_nav(){
 		return;
 	}
 
-	var links = ip_all('.ip_mobile_menu .menu_list .transition_link a');
+	var links = ip_all('.ip_header .menu .transition_link a');
 	if(!links.length){
 		return;
 	}
@@ -412,9 +266,7 @@ function ip_swipe_navigation(){
 
 	function navigationBlocked(){
 		var modal = ip_one('.ip_modalbox');
-		var menu = ip_one('.ip_mobile_menu');
-		return (modal && modal.classList.contains('opened'))
-			|| (menu && menu.classList.contains('opened'));
+		return modal && modal.classList.contains('opened');
 	}
 
 	mainpart.addEventListener('touchstart', function(e){
@@ -467,26 +319,17 @@ function ip_swipe_navigation(){
 // -----------------------------------------------------
 
 // Arrow Left/Right step through the menu sections (Up/Down stay free for
-// scrolling section content). Escape closes the service popup or mobile menu.
+// scrolling section content). Escape closes the service popup.
 function ip_keyboard_navigation(){
 
 	"use strict";
 
 	var modalBox	= ip_one('.ip_modalbox');
-	var mobileMenu	= ip_one('.ip_mobile_menu');
 
-	// Section order follows the menu order; the header is the source of truth,
-	// with the mobile menu as a fallback when the header is not rendered.
 	function sectionOrder(){
-		var order = ip_all('.ip_header .menu .transition_link a').map(function(a){
+		return ip_all('.ip_header .menu .transition_link a').map(function(a){
 			return a.getAttribute('href');
 		});
-		if(!order.length){
-			order = ip_all('.ip_mobile_menu .menu_list .transition_link a').map(function(a){
-				return a.getAttribute('href');
-			});
-		}
-		return order;
 	}
 
 	function currentHref(){
@@ -548,17 +391,6 @@ function ip_keyboard_navigation(){
 		return true;
 	}
 
-	function closeMobileMenu(){
-		if(!mobileMenu || !mobileMenu.classList.contains('opened')){
-			return false;
-		}
-		ip_all('.ip_topbar .trigger .hamburger').forEach(function(h){
-			h.classList.remove('is-active');
-		});
-		mobileMenu.classList.remove('opened');
-		return true;
-	}
-
 	function isTypingTarget(el){
 		if(!el){
 			return false;
@@ -571,7 +403,7 @@ function ip_keyboard_navigation(){
 		var key = e.key;
 
 		if(key === 'Escape' || key === 'Esc'){
-			if(closeModal() || closeMobileMenu()){
+			if(closeModal()){
 				e.preventDefault();
 			}
 			return;
@@ -582,8 +414,8 @@ function ip_keyboard_navigation(){
 			return;
 		}
 
-		// Section navigation is suspended while a popup or the mobile menu is open.
-		if((modalBox && modalBox.classList.contains('opened')) || (mobileMenu && mobileMenu.classList.contains('opened'))){
+		// Section navigation is suspended while a popup is open.
+		if(modalBox && modalBox.classList.contains('opened')){
 			return;
 		}
 
@@ -723,7 +555,7 @@ function ip_cursor(){
 		return;
 	}
 
-	var hoverSelector = 'a, .ip_topbar .trigger, .cursor-pointer';
+	var hoverSelector = 'a, .cursor-pointer';
 	var freeze = false;
 
 	window.addEventListener('mousemove', function(s){
