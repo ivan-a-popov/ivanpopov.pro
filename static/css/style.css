@@ -595,6 +595,13 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_home .content{
 	padding-left: 100px;
+	/* Fluid gaps around the name/line/job stack — scale with viewport instead of
+	   jumping at discrete breakpoints. */
+	--ip-home-name-gap: clamp(16px, calc(12px + 1.2vw), 30px);
+	--ip-home-line-gap: clamp(16px, calc(12px + 1.2vw), 30px);
+	--ip-home-line-width: clamp(40px, calc(25px + 2.5vw), 70px);
+	--ip-home-line-height: clamp(3px, calc(2px + 0.15vw), 5px);
+	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 }
 .ip_home .name{
 	/* Fluid size: keeps the original 72px on large screens but scales down
@@ -603,18 +610,18 @@ html::-webkit-scrollbar-track-piece,
 	font-size: clamp(24px, calc(25px + 2.44vw), 64px);
 	font-weight: 600;
 	text-transform: uppercase;
-	margin-bottom: 30px;
+	margin-bottom: var(--ip-home-name-gap);
 }
 .ip_home .line{
 	display: inline-block;
-	width: 70px;
-	height: 5px;
+	width: var(--ip-home-line-width);
+	height: var(--ip-home-line-height);
 	background-color: #333;
-	margin-bottom: 30px;
+	margin-bottom: var(--ip-home-line-gap);
 }
 .ip_home .job{
 	font-size: 25px;
-	margin-bottom: 35px;
+	margin-bottom: var(--ip-home-job-gap);
 	font-weight: 300;
 }
 .ip_home .job .blc{
@@ -1230,9 +1237,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_title > span:after{margin-left: 20px;}
 	.ip_header .menu ul li a{padding: 0px 20px;}
 	.ip_home .content{padding-left: 50px;}
-	.ip_home .name{margin-bottom: 25px;}
-	.ip_home .line{width: 60px;height: 4px;margin-bottom: 25px;}
-	.ip_home .job{font-size: 23px;margin-bottom: 30px;}
+	.ip_home .job{font-size: 23px;}
 	.ip_button a{padding: 13px 32px;}
 	.ip_home_social img{width: 36px;height: 36px;}
 	.ip_section .section_inner{padding: 20px 50px 0px 50px;}
@@ -1349,7 +1354,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 @media (max-width: 768px) {
 	.ip_header .menu ul li a{ padding: 0 6px; }
 	.ip_home .job{font-size: 20px;}
-	.ip_home .line{height: 3px;width: 40px;}
 	.ip_button a{padding: 10px 28px;}
 	.ip_home_social img{width: 32px;height: 32px;}
 	.ip_title > span{letter-spacing: 2px;}
