@@ -1247,7 +1247,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_header .menu{ justify-content: stretch; }
 	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
 	.ip_header{ height: 60px; line-height: 60px; }
-	.ip_footer {height: 40px;font-size: 10px;}
+	.ip_footer {height: 40px;font-size: 10px;justify-content: center;}
 	.mouse-cursor{display: none;}
 	.ip_all_wrap{
 		--ivp-side-gutter: 10px;
@@ -1290,6 +1290,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
    669px the column gets too narrow to look good, so the home portrait switches to
    the stacked square 1.jpg instead (see the max-width:668px block). */
 @media (min-width: 669px) and (max-width: 1023px) {
+	.ip_footer {justify-content: flex-start;}
 	.ip_mainpart .author_image{
 		width: 36%;
 		height: 100%;
