@@ -58,10 +58,10 @@ body{margin:0}
     preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
     only after window 'load', by which point these sheets are applied. -->
 <link rel="preload" as="style" href="static/css/plugins.css?v=d9ae2e76" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css?v=2a82f433" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=fd3b0c22" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
 <link rel="stylesheet" href="static/css/plugins.css?v=d9ae2e76" />
-<link rel="stylesheet" href="static/css/style.css?v=2a82f433" />
+<link rel="stylesheet" href="static/css/style.css?v=fd3b0c22" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -622,10 +622,9 @@ body{margin:0}
 	<!-- /ALL WRAPPER -->
 	
 <!-- SCRIPTS -->
-<script src="static/js/particles.js?v=83495a1d"></script>
 <script src="static/js/init.js?v=725cb6fc"></script>
 
-<!-- Portrait + contact-area ripple FX, color portrait on #contact, glitch + VK switch via toggle -->
+<!-- Portrait on #contact, color swap + TG/VK switch via toggle -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	var AUTHOR_SRC_BW = 'static/img/about/2.jpg';
@@ -638,106 +637,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			element.style.backgroundImage = 'url(' + url + ')';
 		});
 	}, 200);
-
-	// Contact playfield backdrop: VK (default) -> none, TG -> particles.js.
-	var contactFxMode = null;            // 'particles' | 'none'
-	var contactParticlesInstance = null;
-
-	function contactFxLayerReady() {
-		var fxLayer = document.getElementById('ivan_popov_contact_fx_layer');
-		if (!fxLayer) return null;
-		var bounds = fxLayer.getBoundingClientRect();
-		if (bounds.width < 48 || bounds.height < 48) return null;
-		return fxLayer;
-	}
-
-	function teardownContactParticles() {
-		try {
-			if (
-				contactParticlesInstance &&
-				contactParticlesInstance.pJS &&
-				contactParticlesInstance.pJS.fn &&
-				typeof window.cancelRequestAnimFrame === 'function'
-			) {
-				window.cancelRequestAnimFrame(contactParticlesInstance.pJS.fn.drawAnimFrame);
-			}
-		} catch (e) {}
-		contactParticlesInstance = null;
-		window.pJSDom = [];
-		var root = document.getElementById('ivan_popov_contact_particles');
-		if (root && root.parentNode) root.parentNode.removeChild(root);
-	}
-
-	function startContactParticles(fxLayer) {
-		if (typeof particlesJS === 'undefined') return false;
-		if (document.getElementById('ivan_popov_contact_particles')) return true;
-
-		var root = document.createElement('div');
-		root.id = 'ivan_popov_contact_particles';
-		root.className = 'ivan_popov_contact_particles_root';
-		fxLayer.appendChild(root);
-
-		try {
-			particlesJS('ivan_popov_contact_particles', {
-				particles: {
-					number: { value: 52, density: { enable: true, value_area: 480 } },
-					color: { value: '#2a83b6' },
-					shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
-					opacity: { value: 0.4, random: false },
-					size: { value: 2.4, random: true },
-					line_linked: {
-						enable: true,
-						distance: 118,
-						color: '#5599bb',
-						opacity: 0.22,
-						width: 1
-					},
-					move: {
-						enable: true,
-						speed: 0.75,
-						direction: 'none',
-						random: false,
-						straight: false,
-						out_mode: 'bounce',
-						attract: { enable: false }
-					}
-				},
-				interactivity: {
-					detect_on: 'canvas',
-					events: {
-						onhover: { enable: true, mode: 'grab' },
-						onclick: { enable: false },
-						resize: true
-					},
-					modes: {
-						grab: { distance: 120, line_linked: { opacity: 0.35 } }
-					}
-				},
-				retina_detect: true
-			});
-			contactParticlesInstance =
-				window.pJSDom[window.pJSDom.length - 1] || null;
-		} catch (e) {
-			if (root.parentNode) root.parentNode.removeChild(root);
-			return false;
-		}
-		return true;
-	}
-
-	function setContactEffect(isVK) {
-		var fxLayer = contactFxLayerReady();
-		if (!fxLayer) return false;
-
-		var target = isVK ? 'none' : 'particles';
-		if (contactFxMode === target) return true;
-
-		if (contactFxMode === 'particles') teardownContactParticles();
-
-		var ok = target === 'particles' ? startContactParticles(fxLayer) : true;
-
-		if (ok) contactFxMode = target;
-		return ok;
-	}
 
 	function flashContactPlayfield() {
 		var playfield = document.querySelector('.ivan_popov_contact_playfield');
@@ -801,20 +700,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 
-	function currentContactIsVK() {
-		var toggle = document.getElementById('ivan_popov_glitch_toggle');
-		return !!(toggle && toggle.checked);
-	}
-
-	var pollAttempts = 0;
-	var contactFxPollId = window.setInterval(function() {
-		pollAttempts += 1;
-		if (setContactEffect(currentContactIsVK())) {
-			window.clearInterval(contactFxPollId);
-		}
-		if (pollAttempts > 42) window.clearInterval(contactFxPollId);
-	}, 180);
-
 	syncContactPortraitState();
 
 	var glitchToggleEl = document.getElementById('ivan_popov_glitch_toggle');
@@ -822,9 +707,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		setActiveContactNetwork(!!glitchToggleEl.checked);
 		glitchToggleEl.addEventListener('change', function() {
 			var isVK = !!glitchToggleEl.checked;
+			var host = getPortraitHost();
+			var img = host ? host.querySelector('.author_photo') : null;
+			if (img) img.removeAttribute('data-photo-override');
 			syncContactPortraitState();
 			setActiveContactNetwork(isVK);
-			setContactEffect(isVK);
 			flashContactPlayfield();
 		});
 	}
@@ -840,54 +727,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		}
 	}
-
-	window.addEventListener('load', function() {
-		setContactEffect(currentContactIsVK());
-		setTimeout(function() {
-			setContactEffect(currentContactIsVK());
-		}, 420);
-	});
-});
-</script>
-
-<!-- Photo swap in contact section -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-	var PRIZE_SRC = 'static/img/about/2-color.jpg';
-	var colorPreloaded = false;
-
-	function preloadColorPortrait() {
-		if (colorPreloaded) return;
-		colorPreloaded = true;
-		var img = new Image();
-		img.src = PRIZE_SRC;
-	}
-
-	var iconContainers = document.querySelectorAll('.contact_social_icon');
-	if (!iconContainers.length) return;
-
-	function setPrizePhoto() {
-		preloadColorPortrait();
-		var authorImageDiv = document.getElementById('author_image');
-		if (!authorImageDiv) return;
-
-		var photoImg = authorImageDiv.querySelector(
-			'.author_image_inner:not(.back) .author_photo'
-		);
-		if (photoImg) {
-			photoImg.setAttribute('data-photo-override', 'prize');
-			photoImg.src = PRIZE_SRC;
-		}
-	}
-
-	iconContainers.forEach(function(iconContainer) {
-		var link = iconContainer.querySelector('a');
-		[iconContainer, link].forEach(function(el) {
-			if (!el) return;
-			el.addEventListener('click', setPrizePhoto, { passive: true });
-			el.addEventListener('touchstart', setPrizePhoto, { passive: true });
-		});
-	});
 });
 </script>
 <!-- /SCRIPTS -->
