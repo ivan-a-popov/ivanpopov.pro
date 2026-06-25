@@ -55,10 +55,6 @@ body{
 	font-weight: 400;
 	color: #7d7789;
 }
-svg, img.svg{
-	width: 15px;
-	height: 15px;
-}
 svg{
 	fill: currentcolor;
 }
@@ -75,20 +71,20 @@ h3 { font-size: 30px; }
 h4 { font-size: 24px; }
 h5 { font-size: 20px; }
 h6 { font-size: 16px; }
-.ivan_popov_all_wrap{
+.ip_all_wrap{
 	width: 100%;
 	min-height: 100vh;
 	position: relative;
 	--ivp-side-gutter: clamp(40px, 2.8vw, 52px);
 	--ivp-bar-height: 70px;
 }
-.ivan_popov_all_wrap,
-.ivan_popov_all_wrap *{
+.ip_all_wrap,
+.ip_all_wrap *{
 	box-sizing: border-box;
 }
 @media (min-width: 1024px){
-	.ivan_popov_all_wrap[data-magic-cursor="show"],
-	.ivan_popov_all_wrap[data-magic-cursor="show"] *{
+	.ip_all_wrap[data-magic-cursor="show"],
+	.ip_all_wrap[data-magic-cursor="show"] *{
 		cursor: none !important;
 	}
 }
@@ -100,7 +96,7 @@ h6 { font-size: 16px; }
 /*	 HEADER
 /*---------------------------------------------------*/
 
-.ivan_popov_header{
+.ip_header{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -114,24 +110,24 @@ h6 { font-size: 16px; }
 	justify-content: space-between;
 	padding: 0px var(--ivp-side-gutter);
 }
-.ivan_popov_header .logo .text{
+.ip_header .logo .text{
 	text-decoration: none;
 	color: #000;
 	font-family: "Consolas", monospace;
 	text-transform: none;
 	letter-spacing: 2px;
 }
-.ivan_popov_header .logo .text{
+.ip_header .logo .text{
 	font-size: 25px;
 	font-weight: 800;
 	line-height: 70px;
 }
-.ivan_popov_header .logo .text .logo-label{
+.ip_header .logo .text .logo-label{
 	position: relative;
 	top: 2px;
 	text-transform: none;
 }
-.ivan_popov_header .logo .text .logo-cursor{
+.ip_header .logo .text .logo-cursor{
 	margin-left: 1px;
 	font-weight: 400;
 	animation: logo-cursor-blink 1.2s step-end infinite;
@@ -141,21 +137,21 @@ h6 { font-size: 16px; }
 	50%{ opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce){
-	.ivan_popov_header .logo .text .logo-cursor{
+	.ip_header .logo .text .logo-cursor{
 		animation: none;
 	}
 }
-.ivan_popov_header .logo{
+.ip_header .logo{
 	flex: 0 0 auto;
 }
-.ivan_popov_header .menu{
+.ip_header .menu{
 	position: relative;
 	flex: 1 1 auto;
 	min-width: 0;
 	display: flex;
 	justify-content: flex-end;
 }
-.ivan_popov_header .menu ul{
+.ip_header .menu ul{
 	margin: 0px;
 	list-style-type: none;
 	display: flex;
@@ -163,12 +159,12 @@ h6 { font-size: 16px; }
 	align-items: center;
 	justify-content: flex-end;
 }
-.ivan_popov_header .menu ul li{
+.ip_header .menu ul li{
 	margin: 0px;
 	float: none;
 	flex: 0 0 auto;
 }
-.ivan_popov_header .menu ul li a{
+.ip_header .menu ul li a{
 	text-decoration: none;
 	color: #333;
 	font-family: "Onest";
@@ -177,11 +173,11 @@ h6 { font-size: 16px; }
 	position: relative;
 	transition: all .3s ease;
 }
-.ivan_popov_header .menu ul li a b{
+.ip_header .menu ul li a b{
 	display: inline-block;
 	transition: transform .3s ease;
 }
-.ivan_popov_header .menu ul li .ivp_menu_sub{
+.ip_header .menu ul li .ivp_menu_sub{
 	position: absolute;
 	left: 0px;
 	right: 0px;
@@ -198,15 +194,15 @@ h6 { font-size: 16px; }
 	pointer-events: none;
 	transition: opacity .3s ease;
 }
-.ivan_popov_header .menu ul li.active a b,
-.ivan_popov_header .menu ul li a:hover b{
+.ip_header .menu ul li.active a b,
+.ip_header .menu ul li a:hover b{
 	transform: translateY(-8px);
 }
-.ivan_popov_header .menu ul li.active .ivp_menu_sub,
-.ivan_popov_header .menu ul li a:hover .ivp_menu_sub{
+.ip_header .menu ul li.active .ivp_menu_sub,
+.ip_header .menu ul li a:hover .ivp_menu_sub{
 	opacity: 1;
 }
-.ivan_popov_header .menu .ccc{
+.ip_header .menu .ccc{
 	position: absolute;
 	width: 30px;
 	display: block;
@@ -216,13 +212,13 @@ h6 { font-size: 16px; }
 	z-index: -1;
 	transition: all .5s ease;
 }
-.ivan_popov_header .menu ul li.mleave.active a{
+.ip_header .menu ul li.mleave.active a{
 	color: #333;
 }
-.ivan_popov_header .menu ul li.active a{
+.ip_header .menu ul li.active a{
 	color: #fff;
 }
-.ivan_popov_header .menu ul li a:hover{
+.ip_header .menu ul li a:hover{
 	color: #fff;
 }
 
@@ -230,7 +226,7 @@ h6 { font-size: 16px; }
 /*	 MOBILE MENU
 /*---------------------------------------------------*/
 
-.ivan_popov_topbar{
+.ip_topbar{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -241,22 +237,22 @@ h6 { font-size: 16px; }
 	display: none;
 }
 /* Compact nav: hamburger + swipe dots when the header menu no longer fits. */
-.ivan_popov_all_wrap.nav-compact .ivan_popov_topbar{
+.ip_all_wrap.nav-compact .ip_topbar{
 	display: block;
 }
-.ivan_popov_all_wrap.nav-compact .ivan_popov_header{
+.ip_all_wrap.nav-compact .ip_header{
 	display: none;
 }
 /* Measure menu overflow with the desktop header laid out but invisible. */
-.ivan_popov_all_wrap.nav-measuring .ivan_popov_header{
+.ip_all_wrap.nav-measuring .ip_header{
 	display: flex !important;
 	visibility: hidden;
 	pointer-events: none;
 }
-.ivan_popov_all_wrap.nav-measuring .ivan_popov_header .menu ul{
+.ip_all_wrap.nav-measuring .ip_header .menu ul{
 	flex-wrap: nowrap;
 }
-.ivan_popov_topbar .topbar_inner{
+.ip_topbar .topbar_inner{
 	width: 100%;
 	height: 100%;
 	clear: both;
@@ -265,23 +261,23 @@ h6 { font-size: 16px; }
 	justify-content: space-between;
 	padding: 0px 20px;
 }
-.ivan_popov_topbar .hamburger{
+.ip_topbar .hamburger{
 	padding: 0px;
 }
-.ivan_popov_topbar .hamburger-inner, 
-.ivan_popov_topbar .hamburger-inner:after, 
-.ivan_popov_topbar .hamburger-inner:before{
+.ip_topbar .hamburger-inner, 
+.ip_topbar .hamburger-inner:after, 
+.ip_topbar .hamburger-inner:before{
 	width: 30px;
 	height: 2px;
 }
-.ivan_popov_topbar .trigger{
+.ip_topbar .trigger{
 	position: relative;
 	top: 5px;
 }
-.ivan_popov_topbar .hamburger-box{
+.ip_topbar .hamburger-box{
 	width: 30px;
 }
-.ivan_popov_mobile_menu{
+.ip_mobile_menu{
 	position: fixed;
 	top: 50px;
 	right: -200px;
@@ -291,24 +287,24 @@ h6 { font-size: 16px; }
 	background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
 	transition: all .3s ease;
 }
-.ivan_popov_mobile_menu.opened{
+.ip_mobile_menu.opened{
 	right: 0px;
 }
-.ivan_popov_mobile_menu .inner{
+.ip_mobile_menu .inner{
 	position: relative;
 	width: 100%;
 	height: 100%;
 	text-align: right;
 	padding: 70px 20px 20px 20px;
 }
-.ivan_popov_mobile_menu .avatar{
+.ip_mobile_menu .avatar{
 	width: 70px;
 	height: 70px;
 	position: relative;
 	float: right;
 	margin-bottom: 60px;
 }
-.ivan_popov_mobile_menu .avatar .image{
+.ip_mobile_menu .avatar .image{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -318,55 +314,55 @@ h6 { font-size: 16px; }
 	background-size: cover;
 	background-position: center;
 }
-.ivan_popov_mobile_menu .menu_list{
+.ip_mobile_menu .menu_list{
 	width: 100%;
 	height: auto;
 	clear: both;
 	float: left;
 	margin-bottom: 50px;
 }
-.ivan_popov_mobile_menu .menu_list ul{
+.ip_mobile_menu .menu_list ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.ivan_popov_mobile_menu .menu_list ul li{
+.ip_mobile_menu .menu_list ul li{
 	margin: 0px 0px 7px 0px;
 }
-.ivan_popov_mobile_menu .menu_list ul li a{
+.ip_mobile_menu .menu_list ul li a{
 	text-decoration: none;
 	color: #333;
 	font-family: "Onest";
 }
-.ivan_popov_mobile_menu .social{
+.ip_mobile_menu .social{
 	width: 100%;
 	float: left;
 	margin-bottom: 5px;
 }
-.ivan_popov_mobile_menu .social ul{
+.ip_mobile_menu .social ul{
 	margin: 0px;
 	list-style-type: none;
 }
-.ivan_popov_mobile_menu .social ul li{
+.ip_mobile_menu .social ul li{
 	margin: 0px 8px 0px 0px;
 	display: inline-block;
 }
-.ivan_popov_mobile_menu .social ul li:last-child{
+.ip_mobile_menu .social ul li:last-child{
 	margin-right: 0px;
 }
-.ivan_popov_mobile_menu .social ul li a{
+.ip_mobile_menu .social ul li a{
 	text-decoration: none;
 	color: #333;
 }
-.ivan_popov_mobile_menu .copyright{
+.ip_mobile_menu .copyright{
 	width: 100%;
 	float: left;
 }
-.ivan_popov_mobile_menu .copyright p{
+.ip_mobile_menu .copyright p{
 	color: #333;
 	font-family: "Onest";
 }
 
-.ivan_popov_left_border{
+.ip_left_border{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -376,7 +372,7 @@ h6 { font-size: 16px; }
 	z-index: 10;
 	transition: width 0.25s ease;
 }
-.ivan_popov_right_border{
+.ip_right_border{
 	position: fixed;
 	top: 0px;
 	right: 0px;
@@ -391,7 +387,7 @@ h6 { font-size: 16px; }
 /*	 MAINPART
 /*---------------------------------------------------*/
 
-.ivan_popov_mainpart{
+.ip_mainpart{
 	position: absolute;
 	top: var(--ivp-bar-height);
 	bottom: var(--ivp-bar-height);
@@ -400,7 +396,7 @@ h6 { font-size: 16px; }
 	overflow: hidden;
 	transition: top 0.25s ease, bottom 0.25s ease, left 0.25s ease, right 0.25s ease;
 }
-.ivan_popov_mainpart .author_image{
+.ip_mainpart .author_image{
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -415,7 +411,7 @@ h6 { font-size: 16px; }
 /* Portrait host (structural wrapper around the author photo). Becomes a size
    container so the portrait crop can react to THIS column's width/height
    (cqw/cqh) instead of the whole viewport. */
-.ivan_popov_mainpart .author_image .author_image_inner{
+.ip_mainpart .author_image .author_image_inner{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -428,7 +424,7 @@ h6 { font-size: 16px; }
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
 /* Portrait column */
-.ivan_popov_mainpart .author_image .author_image_inner .author_photo{
+.ip_mainpart .author_image .author_image_inner .author_photo{
 	position: absolute;
 	z-index: 2;
 	top: 0;
@@ -452,7 +448,7 @@ h6 { font-size: 16px; }
 	user-select: none;
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
-.ivan_popov_mainpart .main_content{
+.ip_mainpart .main_content{
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -460,7 +456,7 @@ h6 { font-size: 16px; }
 	width: 60%;
 	transition: width 0.25s ease;
 }
-.ivan_popov_section{
+.ip_section{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -474,39 +470,39 @@ h6 { font-size: 16px; }
 	z-index: 8;
 	transition: visibility 1s linear, opacity 0s linear;
 }
-.ivan_popov_section.animated {
+.ip_section.animated {
 	opacity: 1;
 	visibility: visible;
 	z-index: 9;
 }
-.ivan_popov_section.active {
+.ip_section.active {
 	opacity: 1;
 	visibility: visible;
 	z-index: 10;
 }
-.ivan_popov_section.hidden {
+.ip_section.hidden {
 	opacity: 0;
 	visibility: hidden;
 	z-index: 9;
 }
 /* Minimal scrollbars: thin thumb, no arrow buttons (incl. Windows Chromium). */
 html,
-.ivan_popov_section,
-.ivan_popov_modalbox .description_wrap{
+.ip_section,
+.ip_modalbox .description_wrap{
 	scrollbar-width: thin;
 	scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
 }
 html::-webkit-scrollbar,
-.ivan_popov_section::-webkit-scrollbar,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar{
+.ip_section::-webkit-scrollbar,
+.ip_modalbox .description_wrap::-webkit-scrollbar{
 	width: 6px;
 	height: 6px;
 	-webkit-appearance: none;
 	appearance: none;
 }
 html::-webkit-scrollbar-thumb,
-.ivan_popov_section::-webkit-scrollbar-thumb,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-thumb{
+.ip_section::-webkit-scrollbar-thumb,
+.ip_modalbox .description_wrap::-webkit-scrollbar-thumb{
 	background-color: rgba(153, 153, 153, 0.65);
 	border-radius: 3px;
 	border: none;
@@ -515,26 +511,26 @@ html::-webkit-scrollbar-thumb,
 }
 html::-webkit-scrollbar-track,
 html::-webkit-scrollbar-track-piece,
-.ivan_popov_section::-webkit-scrollbar-track,
-.ivan_popov_section::-webkit-scrollbar-track-piece,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-track,
-.ivan_popov_modalbox .description_wrap::-webkit-scrollbar-track-piece{
+.ip_section::-webkit-scrollbar-track,
+.ip_section::-webkit-scrollbar-track-piece,
+.ip_modalbox .description_wrap::-webkit-scrollbar-track,
+.ip_modalbox .description_wrap::-webkit-scrollbar-track-piece{
 	background: transparent;
 	-webkit-appearance: none;
 	appearance: none;
 }
 @media (min-width: 1024px){
-	.ivan_popov_section{
+	.ip_section{
 		scroll-behavior: smooth;
 	}
 }
-.ivan_popov_section .section_inner{
+.ip_section .section_inner{
 	width: 100%;
 	display: flow-root;
 	position: relative;
 	padding: 20px 100px 0px 100px;
 }
-#contact.ivan_popov_section{
+#contact.ip_section{
 	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
@@ -549,14 +545,14 @@ html::-webkit-scrollbar-track-piece,
 	flex-direction: column;
 	overflow: hidden;
 }
-#contact .ivan_popov_contact{
+#contact .ip_contact{
 	display: flex;
 	flex-direction: column;
 	flex: 1;
 	min-height: 0;
 	margin-bottom: 0;
 }
-.ivan_popov_section .section_inner:before{
+.ip_section .section_inner:before{
 	position: absolute;
 	content: "";
 	top: 0px;
@@ -569,7 +565,7 @@ html::-webkit-scrollbar-track-piece,
 /*	 HOME
 /*---------------------------------------------------*/
 
-.ivan_popov_home{
+.ip_home{
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -578,13 +574,13 @@ html::-webkit-scrollbar-track-piece,
 }
 /* Dedicated home-only portrait (square 1.jpg), shown only when the two-column
    layout collapses on narrow phones (see media queries). Hidden otherwise. */
-.ivan_popov_home_photo{
+.ip_home_photo{
 	display: none;
 }
-.ivan_popov_home .content{
+.ip_home .content{
 	padding-left: 100px;
 }
-.ivan_popov_home .name{
+.ip_home .name{
 	/* Fluid size: keeps the original 72px on large screens but scales down
 	   smoothly instead of jumping abruptly from 72px to 55px at the 1600px
 	   breakpoint. Floors at 36px for the narrowest two-column widths. */
@@ -593,35 +589,35 @@ html::-webkit-scrollbar-track-piece,
 	text-transform: uppercase;
 	margin-bottom: 30px;
 }
-.ivan_popov_home .line{
+.ip_home .line{
 	display: inline-block;
 	width: 70px;
 	height: 5px;
 	background-color: #333;
 	margin-bottom: 30px;
 }
-.ivan_popov_home .job{
+.ip_home .job{
 	font-size: 25px;
 	margin-bottom: 35px;
 	font-weight: 300;
 }
-.ivan_popov_home .job .blc{
+.ip_home .job .blc{
 	display: block;
 	margin-top: 8px;
 	font-weight: 400;
 }
-.ivan_popov_home .job span{
+.ip_home .job span{
 	color: #7d7789;
 }
-.ivan_popov_home .job b{
+.ip_home .job b{
 	font-weight:600;
 	color: #333;
 }
-.ivan_popov_button{
+.ip_button{
 	width: 100%;
 	display: flow-root;
 }
-.ivan_popov_button a{
+.ip_button a{
 	text-decoration: none;
 	color: #fff;
 	display: inline-block;
@@ -632,7 +628,7 @@ html::-webkit-scrollbar-track-piece,
 	font-weight: 500;
 	transition: all .3s ease;
 }
-.ivan_popov_button a:hover{
+.ip_button a:hover{
 	background-color: transparent;
 	color: #333;
 }
@@ -648,20 +644,20 @@ html::-webkit-scrollbar-track-piece,
 /*	 ABOUT
 /*---------------------------------------------------*/
 
-.ivan_popov_about{
+.ip_about{
 	width: 100%;
 	display: flow-root;
 }
-.ivan_popov_about .biography{
+.ip_about .biography{
 	width: 100%;
 	display: flow-root;
 	margin-bottom: 87px;
 }
-.ivan_popov_title{
+.ip_title{
 	width: 100%;
 	overflow: hidden;
 }
-.ivan_popov_title > span{
+.ip_title > span{
 	display: inline-block;
 	position: relative;
 	font-family: "Onest";
@@ -670,7 +666,7 @@ html::-webkit-scrollbar-track-piece,
 	font-weight: 700;
 	letter-spacing: 4px;
 }
-.ivan_popov_title > span:after{
+.ip_title > span:after{
 	position: absolute;
 	content: "";
 	width: 5000px;
@@ -681,7 +677,7 @@ html::-webkit-scrollbar-track-piece,
 	transform: translateY(-50%);
 	margin-left: 30px;
 }
-.ivan_popov_title .subtitle{
+.ip_title .subtitle{
 	font-size: 16px;
 	color: #7d7789;
 	font-weight: 400;
@@ -689,23 +685,23 @@ html::-webkit-scrollbar-track-piece,
 	margin-top: 8px;
 	opacity: 0.8;
 }
-#contact .ivan_popov_contact_title{
+#contact .ip_contact_title{
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 12px 14px;
 }
-#contact .ivan_popov_contact_title > span:after{
+#contact .ip_contact_title > span:after{
 	display: none;
 }
-#contact .ivan_popov_glitch_switch_row{
+#contact .ip_glitch_switch_row{
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	position: relative;
 	flex: 0 0 auto;
 }
-#contact .ivan_popov_glitch_switch_row:after{
+#contact .ip_glitch_switch_row:after{
 	position: absolute;
 	content: "";
 	width: 5000px;
@@ -716,26 +712,26 @@ html::-webkit-scrollbar-track-piece,
 	transform: translateY(-50%);
 	margin-left: 30px;
 }
-.ivan_popov_glitch_switch_label{
+.ip_glitch_switch_label{
 	font-size: 14px;
 	font-weight: 600;
 	color: #333;
 	letter-spacing: 0;
 	text-transform: none;
 }
-.ivan_popov_glitch_switch{
+.ip_glitch_switch{
 	position: relative;
 	display: inline-block;
 	width: 44px;
 	height: 24px;
 	vertical-align: middle;
 }
-.ivan_popov_glitch_switch input{
+.ip_glitch_switch input{
 	opacity: 0;
 	width: 0;
 	height: 0;
 }
-.ivan_popov_glitch_slider{
+.ip_glitch_slider{
 	position: absolute;
 	cursor: pointer;
 	top: 0;
@@ -746,7 +742,7 @@ html::-webkit-scrollbar-track-piece,
 	box-sizing: border-box;
 	transition: background-color 0.2s ease;
 }
-.ivan_popov_glitch_slider:before{
+.ip_glitch_slider:before{
 	position: absolute;
 	content: "";
 	height: 16px;
@@ -756,38 +752,38 @@ html::-webkit-scrollbar-track-piece,
 	background-color: #000;
 	transition: transform 0.2s ease, background-color 0.2s ease;
 }
-.ivan_popov_glitch_switch input:checked + .ivan_popov_glitch_slider:before{
+.ip_glitch_switch input:checked + .ip_glitch_slider:before{
 	transform: translateX(20px);
 }
-.ivan_popov_glitch_switch input:focus-visible + .ivan_popov_glitch_slider{
+.ip_glitch_switch input:focus-visible + .ip_glitch_slider{
 	outline: 2px solid #000;
 	outline-offset: 2px;
 }
-.ivan_popov_about .biography .wrapper{
+.ip_about .biography .wrapper{
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
 }
-.ivan_popov_about .biography .left{
+.ip_about .biography .left{
 	width: 45%;
 }
-.ivan_popov_about .biography .left p{
+.ip_about .biography .left p{
 	margin-bottom: 15px;
 }
-.ivan_popov_about .biography .left p:last-child{
+.ip_about .biography .left p:last-child{
 	margin-bottom: 25px;
 }
-.ivan_popov_about .biography .right{
+.ip_about .biography .right{
 	width: 45%;
 }
-.ivan_popov_about .biography .right p{
+.ip_about .biography .right p{
 	margin-bottom: 15px;
 }
-.ivan_popov_about .biography .right p:last-child {
+.ip_about .biography .right p:last-child {
 	margin-bottom: 25px;
 }
-.ivan_popov_full_link{
+.ip_full_link{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -795,7 +791,7 @@ html::-webkit-scrollbar-track-piece,
 	right: 0px;
 	z-index: 5;
 }
-.ivan_popov_about .testimonials{
+.ip_about .testimonials{
 	width: 100%;
 	display: flow-root;
 	margin-bottom: 90px;
@@ -805,24 +801,24 @@ html::-webkit-scrollbar-track-piece,
 		padding-top: 0;
 	}
 }
-.ivan_popov_about .testimonials .list{
+.ip_about .testimonials .list{
 	width: 100%;
 	display: flow-root;
 	margin-top: 0;
 }
-.ivan_popov_about .testimonials .list ul{
+.ip_about .testimonials .list ul{
 	margin: 10px;
 	list-style-type: none;
 }
-.ivan_popov_about .testimonials .list ul li{
+.ip_about .testimonials .list ul li{
 	margin: 10px;
 }
-.ivan_popov_about .testimonials .list ul li .list_inner{
+.ip_about .testimonials .list ul li .list_inner{
 	width: 100%;
 	display: flow-root;
 	position: relative;
 }
-.ivan_popov_about .testimonials .list ul li .text{
+.ip_about .testimonials .list ul li .text{
 	width: 100%;
 	display: flow-root;
 	position: relative;
@@ -830,7 +826,7 @@ html::-webkit-scrollbar-track-piece,
 	padding: 20px;
 	margin-bottom: 30px;
 }
-.ivan_popov_about .testimonials .list ul li .text:before{
+.ip_about .testimonials .list ul li .text:before{
 	position: absolute;
 	content: "";
 	height: 0px;
@@ -841,7 +837,7 @@ html::-webkit-scrollbar-track-piece,
     border-top-color: #E5EDF4;
     border-width: 18px 18px 0px 0px;
 }
-.ivan_popov_about .testimonials .list ul li .text:after{
+.ip_about .testimonials .list ul li .text:after{
 	position: absolute;
 	content: "";
 	top: 100%;
@@ -853,7 +849,7 @@ html::-webkit-scrollbar-track-piece,
     border-width: 14px 13px 0px 0px;
     margin-left: 2px;
 }
-.ivan_popov_about .testimonials .list ul li .text i{
+.ip_about .testimonials .list ul li .text i{
 	position: absolute;
 	z-index: 1;
 	font-size: 30px;
@@ -861,25 +857,25 @@ html::-webkit-scrollbar-track-piece,
 	left: 50px;
 	color: #E5EDF4;
 }
-.ivan_popov_about .testimonials .list ul li .text i.icon-quote-right{
+.ip_about .testimonials .list ul li .text i.icon-quote-right{
 	top: auto;
 	left: auto;
 	right: 50px;
 	bottom: -29px;
 }
-.ivan_popov_about .testimonials .details{
+.ip_about .testimonials .details{
 	width: 100%;
 	display: flex;
 	align-items: center;
 	padding-left: 20px;
 }
-.ivan_popov_about .testimonials .details .image{
+.ip_about .testimonials .details .image{
 	position: relative;
 	width: 60px;
 	height: 60px;
 	flex: 0 0 60px;
 }
-.ivan_popov_about .testimonials .details .image .main{
+.ip_about .testimonials .details .image .main{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -890,19 +886,19 @@ html::-webkit-scrollbar-track-piece,
 	background-position: center;
 	border-radius: 100%;
 }
-.ivan_popov_about .testimonials .details .info{
+.ip_about .testimonials .details .info{
 	padding-left: 20px;
 }
-.ivan_popov_about .testimonials .details .info h3{
+.ip_about .testimonials .details .info h3{
 	font-size: 16px;
     margin-bottom: 2px;
     font-weight: 600;
 }
-.ivan_popov_about .testimonials .details .info span{
+.ip_about .testimonials .details .info span{
 	font-size: 14px;
 }
 @media (min-width: 1024px) {
-	.ivan_popov_about .testimonials .list ul.testimonials-snap{
+	.ip_about .testimonials .list ul.testimonials-snap{
 		display: flex;
 		flex-direction: row;
 		align-items: stretch;
@@ -918,18 +914,18 @@ html::-webkit-scrollbar-track-piece,
 		cursor: grab;
 		scrollbar-width: none;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap::-webkit-scrollbar{
+	.ip_about .testimonials .list ul.testimonials-snap::-webkit-scrollbar{
 		display: none;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap.is-dragging{
+	.ip_about .testimonials .list ul.testimonials-snap.is-dragging{
 		cursor: grabbing;
 		scroll-snap-type: none;
 		user-select: none;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap:active{
+	.ip_about .testimonials .list ul.testimonials-snap:active{
 		cursor: grabbing;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li{
+	.ip_about .testimonials .list ul.testimonials-snap > li{
 		flex: 0 0 calc((100% - 30px) / 2);
 		min-width: 0;
 		/* The base rule sets a 10px margin on every li; in this flex track the
@@ -939,7 +935,7 @@ html::-webkit-scrollbar-track-piece,
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .list_inner{
+	.ip_about .testimonials .list ul.testimonials-snap > li .list_inner{
 		width: 100%;
 		height: 100%;
 		overflow: visible;
@@ -947,10 +943,10 @@ html::-webkit-scrollbar-track-piece,
 		padding-bottom: 30px;
 		box-sizing: border-box;
 	}	
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .text{
+	.ip_about .testimonials .list ul.testimonials-snap > li .text{
 		overflow: visible;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .text i{
+	.ip_about .testimonials .list ul.testimonials-snap > li .text i{
 		z-index: 2;
 	}
 }
@@ -959,7 +955,7 @@ html::-webkit-scrollbar-track-piece,
 /*	 MODALBOX
 /*---------------------------------------------------*/
 
-.ivan_popov_modalbox{
+.ip_modalbox{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -971,11 +967,11 @@ html::-webkit-scrollbar-track-piece,
 	visibility: hidden;
 	transition: all .3s ease;
 }
-.ivan_popov_modalbox.opened{
+.ip_modalbox.opened{
 	opacity: 1;
 	visibility: visible;
 }
-.ivan_popov_modalbox .box_inner{
+.ip_modalbox .box_inner{
 	position: absolute;
 	top: var(--ivp-bar-height);
 	bottom: var(--ivp-bar-height);
@@ -990,19 +986,19 @@ html::-webkit-scrollbar-track-piece,
 	transition: all .3s ease;
 	transition-delay: .3s;
 }
-.ivan_popov_modalbox.opened .box_inner{
+.ip_modalbox.opened .box_inner{
 	opacity: 1;
 	visibility: visible;
 	margin-top: 0px;
 }
-.ivan_popov_modalbox .close{
+.ip_modalbox .close{
 	position: fixed;
 	left: 100%;
 	top: 0px;
 	margin-left: 25px;
 	z-index: 10;
 }
-.ivan_popov_modalbox .close a{
+.ip_modalbox .close a{
 	display: block;
 	width: 40px;
 	height: 40px;
@@ -1013,16 +1009,16 @@ html::-webkit-scrollbar-track-piece,
 	position: relative;
 	transition: all .3s ease;
 }
-.ivan_popov_modalbox .close a:hover{
+.ip_modalbox .close a:hover{
 	border-radius: 100%;
 }
-.ivan_popov_modalbox .close a i{
+.ip_modalbox .close a i{
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
-.ivan_popov_modalbox .description_wrap{
+.ip_modalbox .description_wrap{
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -1035,28 +1031,28 @@ html::-webkit-scrollbar-track-piece,
 /*	 SERVICES
 /*---------------------------------------------------*/
 
-.ivan_popov_service{
+.ip_service{
 	width: 100%;
 	display: flow-root;
 	margin-bottom: 70px;
 }
-.ivan_popov_service .service_list{
+.ip_service .service_list{
 	width: 100%;
 	display: flow-root;
 	margin-top: 15px;
 }
-.ivan_popov_service .service_list ul{
+.ip_service .service_list ul{
 	margin: 0px 0px 0px -50px;
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
 }
-.ivan_popov_service .service_list ul li{
+.ip_service .service_list ul li{
 	margin: 0px 0px 50px 0px;
 	width: 50%;
 	padding-left: 50px;
 }
-.ivan_popov_service .service_list ul li .list_inner{
+.ip_service .service_list ul li .list_inner{
 	width: 100%;
 	height: 100%;
 	display: flow-root;
@@ -1066,64 +1062,64 @@ html::-webkit-scrollbar-track-piece,
 	text-align: center;
 	transition: all .3s ease;
 }
-.ivan_popov_service .service_list ul li .list_inner:hover{
+.ip_service .service_list ul li .list_inner:hover{
 	background-color: #333;
 }
-.ivan_popov_service .service_list ul li .svg{
+.ip_service .service_list ul li .svg{
 	width: 60px;
     height: 60px;
     color: #333;
 	margin-bottom: 27px;
 	transition: all .3s ease;
 }
-.ivan_popov_service .service_list ul li .list_inner:hover .svg{
+.ip_service .service_list ul li .list_inner:hover .svg{
 	color: #fff;
 }
-.ivan_popov_service .service_list ul li .title{
+.ip_service .service_list ul li .title{
 	font-weight: 500;
 	font-size: 24px;
 	color: #333;
 	margin-bottom: 15px;
 	transition: all .3s ease;
 }
-.ivan_popov_service .service_list ul li .list_inner:hover .title{
+.ip_service .service_list ul li .list_inner:hover .title{
 	color: #fff;
 }
-.ivan_popov_service .service_list ul li .list_inner .text{
+.ip_service .service_list ul li .list_inner .text{
 	transition: all .3s ease;
 }
-.ivan_popov_service .service_list ul li .list_inner:hover .text{
+.ip_service .service_list ul li .list_inner:hover .text{
 	color: #aaa;
 }
-.ivan_popov_service .popup_service_image{
+.ip_service .popup_service_image{
 	opacity: 0;
 	visibility: hidden;
 	display: none;
 	position: absolute;
 	z-index: -111;
 }
-.ivan_popov_service .service_hidden_details{
+.ip_service .service_hidden_details{
 	opacity: 0;
 	visibility: hidden;
 	display: none;
 	position: absolute;
 	z-index: -111;
 }
-.ivan_popov_modalbox .service_popup_informations{
+.ip_modalbox .service_popup_informations{
 	width: 100%;
 	display: flow-root;
 }
-.ivan_popov_modalbox .service_popup_informations .image{
+.ip_modalbox .service_popup_informations .image{
 	width: 100%;
 	position: relative;
 	margin-bottom: 37px;
 }
-.ivan_popov_modalbox .service_popup_informations .image img{
+.ip_modalbox .service_popup_informations .image img{
 	position: relative;
 	min-width: 100%;
 	opacity: 0;
 }
-.ivan_popov_modalbox .service_popup_informations .image .main{
+.ip_modalbox .service_popup_informations .image .main{
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -1133,20 +1129,20 @@ html::-webkit-scrollbar-track-piece,
 	background-size: cover;
 	background-position: center;
 }
-.ivan_popov_modalbox .service_popup_informations .main_title{
+.ip_modalbox .service_popup_informations .main_title{
 	width: 100%;
 	margin-bottom: 23px;
 }
-.ivan_popov_modalbox .service_popup_informations .main_title h3{
+.ip_modalbox .service_popup_informations .main_title h3{
 	font-size: 22px;
 }
-.ivan_popov_modalbox .service_popup_informations .descriptions{
+.ip_modalbox .service_popup_informations .descriptions{
 	width: 100%;
 }
-.ivan_popov_modalbox .service_popup_informations .descriptions p{
+.ip_modalbox .service_popup_informations .descriptions p{
 	margin-bottom: 15px;
 }
-.ivan_popov_modalbox .service_popup_informations .descriptions p:last-child{
+.ip_modalbox .service_popup_informations .descriptions p:last-child{
 	margin-bottom: 0px;
 }
 
@@ -1154,7 +1150,7 @@ html::-webkit-scrollbar-track-piece,
 /*	 CONTACT
 /*---------------------------------------------------*/
 
-.ivan_popov_contact{
+.ip_contact{
 	width: 100%;
 	display: flow-root;
 	margin-bottom: 100px;
@@ -1164,7 +1160,7 @@ html::-webkit-scrollbar-track-piece,
 /*	 FOOTER
 /*---------------------------------------------------*/
 
-.ivan_popov_footer{
+.ip_footer{
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
@@ -1178,7 +1174,7 @@ html::-webkit-scrollbar-track-piece,
 	justify-content: space-between;
 	padding: 0px var(--ivp-side-gutter);
 }
-.ivan_popov_footer .copyright p{
+.ip_footer .copyright p{
 	color: #333;
 	font-family: "Onest";
 }
@@ -1235,25 +1231,25 @@ html::-webkit-scrollbar-track-piece,
 .cursor-outer.cursor-hover{
   opacity: 0;
 }
-body.ivan_popov_light_cursor .mouse-cursor.cursor-inner::before{
+body.ip_light_cursor .mouse-cursor.cursor-inner::before{
   background-color: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
 }
-body.ivan_popov_light_cursor .mouse-cursor.cursor-outer{
+body.ip_light_cursor .mouse-cursor.cursor-outer{
   border-color: #fff;
   opacity: 0.9;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
 }
-body.ivan_popov_light_cursor .mouse-cursor.cursor-inner.cursor-hover::before{
+body.ip_light_cursor .mouse-cursor.cursor-inner.cursor-hover::before{
   background-color: #fff;
   opacity: 0.55;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
 }
-body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
+body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
   opacity: 0.75;
   border-color: #fff;
 }
-.ivan_popov_all_wrap[data-magic-cursor="hide"] .mouse-cursor{
+.ip_all_wrap[data-magic-cursor="hide"] .mouse-cursor{
 	display: none;
 	opacity: 0;
 	visibility: hidden;
@@ -1265,7 +1261,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 /*	 CONTACT PLAYFIELD
 /*---------------------------------------------------*/
 
-.ivan_popov_contact_playfield{
+.ip_contact_playfield{
 	width: 100%;
 	position: relative;
 	flex: 1 1 auto;
@@ -1279,7 +1275,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	isolation: isolate;
 	border-radius: 5px;
 }
-#contact .ivan_popov_contact_fx_layer{
+#contact .ip_contact_fx_layer{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1299,7 +1295,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	background-size: cover;
 	background-position: center;
 }
-.ivan_popov_contact_icon_anchor{
+.ip_contact_icon_anchor{
 	position: relative;
 	z-index: 2;
 	flex: 0 0 auto;
@@ -1349,12 +1345,12 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	70%  { filter: none; transform: translate3d(2px, 0, 0); }
 	100% { filter: none; transform: translate3d(0, 0, 0); }
 }
-.ivan_popov_contact_playfield.ivp_contact_flash{
+.ip_contact_playfield.ivp_contact_flash{
 	animation: ivp_contact_flash 640ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 	will-change: filter, transform;
 }
 @media (prefers-reduced-motion: reduce){
-	.ivan_popov_contact_playfield.ivp_contact_flash{
+	.ip_contact_playfield.ivp_contact_flash{
 		animation: none;
 	}
 }
@@ -1365,137 +1361,140 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 
 @media (max-width: 1600px) and (min-width: 1024px){
 	body{font-size: 15px;}
-	.ivan_popov_footer {font-size: 12px;}
-	.ivan_popov_header .logo .text{line-height: 70px;padding-left: 30px;}
-	.ivan_popov_mainpart .author_image{width: 35%;}
-	.ivan_popov_mainpart .main_content{width: 65%;}
-	.ivan_popov_section .section_inner:before{width: 50px;}
-	.ivan_popov_title > span{letter-spacing: 3px;}
-	.ivan_popov_title > span:after{margin-left: 20px;}
-	#contact .ivan_popov_glitch_switch_row:after{margin-left: 25px;}
-	.ivan_popov_header .menu ul li a{padding: 0px 20px;}
-	.ivan_popov_home .content{padding-left: 50px;}
-	.ivan_popov_home .name{margin-bottom: 25px;}
-	.ivan_popov_home .line{width: 60px;height: 4px;margin-bottom: 25px;}
-	.ivan_popov_home .job{font-size: 23px;margin-bottom: 30px;}
-	.ivan_popov_button a{padding: 13px 32px;}
-	.ivan_popov_section .section_inner{padding: 20px 50px 0px 50px;}
+	.ip_footer {font-size: 12px;}
+	.ip_header .logo .text{line-height: 70px;padding-left: 30px;}
+	.ip_mainpart .author_image{width: 35%;}
+	.ip_mainpart .main_content{width: 65%;}
+	.ip_section .section_inner:before{width: 50px;}
+	.ip_title > span{letter-spacing: 3px;}
+	.ip_title > span:after{margin-left: 20px;}
+	#contact .ip_glitch_switch_row:after{margin-left: 25px;}
+	.ip_header .menu ul li a{padding: 0px 20px;}
+	.ip_home .content{padding-left: 50px;}
+	.ip_home .name{margin-bottom: 25px;}
+	.ip_home .line{width: 60px;height: 4px;margin-bottom: 25px;}
+	.ip_home .job{font-size: 23px;margin-bottom: 30px;}
+	.ip_button a{padding: 13px 32px;}
+	.ip_section .section_inner{padding: 20px 50px 0px 50px;}
 	#contact .section_inner{padding-top: 30px;}
-	.ivan_popov_about .testimonials .list ul li .text{padding: 30px;}
-	.ivan_popov_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
-	.ivan_popov_modalbox .description_wrap{padding: 30px;}
+	.ip_about .testimonials .list ul li .text{padding: 30px;}
+	.ip_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
+	.ip_modalbox .description_wrap{padding: 30px;}
 	#contact .contact_social_icon svg{width: 100px;height: 100px;}
 }
 @media (max-width: 1023px) {
-	.ivan_popov_header .logo .text {padding-left: 20px;font-size: 20px;}
-	.ivan_popov_footer {font-size: 10px;}
+	.ip_header .logo .text {padding-left: 20px;font-size: 20px;}
+	.ip_footer {height: 40px;font-size: 10px;}
 	.mouse-cursor{display: none;}
-	.ivan_popov_all_wrap{
+	.ip_all_wrap{
 		--ivp-side-gutter: 10px;
 	}
-	.ivan_popov_left_border,
-	.ivan_popov_right_border{
+	.ip_left_border,
+	.ip_right_border{
 		width: 0;
 		overflow: hidden;
 		pointer-events: none;
 	}
-	.ivan_popov_section .section_inner:before{width: 20px;}
-	.ivan_popov_mainpart .author_image{
+	.ip_section .section_inner:before{width: 20px;}
+	.ip_mainpart .author_image{
 		width: 0;
 		height: 0;
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: none;
 	}
-	.ivan_popov_mainpart .author_image .author_image_inner,
-	.ivan_popov_mainpart .author_image .author_photo{
+	.ip_mainpart .author_image .author_image_inner,
+	.ip_mainpart .author_image .author_photo{
 		height: 0;
 		opacity: 0;
 	}
-	.ivan_popov_mainpart{top: 50px;left: 0px;right: 0px;bottom: 0px;}
-	.ivan_popov_all_wrap:not(.nav-compact) .ivan_popov_mainpart{top: 60px;}
-	.ivan_popov_mainpart .main_content{width: 100%;}
-	.ivan_popov_home .content{padding: 0px 20px;}
-	.ivan_popov_home .job{font-size: 22px;}
-	.ivan_popov_about .biography .wrapper{flex-direction: column;align-items: baseline;}
-	.ivan_popov_about .biography .left{width: 100%;}
-	.ivan_popov_about .biography .right{width: 100%;margin-bottom: 25px;}
-	.ivan_popov_section .section_inner{padding: 10px 20px 0px 20px;}
+	.ip_mainpart{top: 50px;left: 0px;right: 0px;bottom: 0px;}
+	.ip_all_wrap:not(.nav-compact) .ip_mainpart{top: 60px;}
+	.ip_mainpart .main_content{width: 100%;}
+	.ip_home .content{padding: 0px 20px;}
+	.ip_home .job{font-size: 22px;}
+	.ip_about .biography .wrapper{flex-direction: column;align-items: baseline;}
+	.ip_about .biography .left{width: 100%;}
+	.ip_about .biography .right{width: 100%;margin-bottom: 25px;}
+	.ip_section .section_inner{padding: 10px 20px 0px 20px;}
 	#contact .section_inner{padding-top: 30px;}
-	.ivan_popov_modalbox .box_inner{width: 480px;}
-	.ivan_popov_modalbox .description_wrap{padding: 20px;}
-	.ivan_popov_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
-	.ivan_popov_contact_playfield{margin-top: 18px;}
+	.ip_modalbox .box_inner{width: 480px;}
+	.ip_modalbox .description_wrap{padding: 20px;}
+	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
+	.ip_contact_playfield{margin-top: 18px;}
 	#contact .contact_social_icon svg{width: 80px;height: 80px;}
 }
 /* Tablets / large phones: keep the full-height portrait two-column layout. Below
    669px the column gets too narrow to look good, so the home portrait switches to
    the stacked square 1.jpg instead (see the max-width:668px block). */
 @media (min-width: 669px) and (max-width: 1023px) {
-	.ivan_popov_mainpart .author_image{
+	.ip_mainpart .author_image{
 		width: 36%;
 		height: 100%;
 		opacity: 1;
 		visibility: visible;
 		pointer-events: auto;
 	}
-	.ivan_popov_mainpart .author_image .author_image_inner,
-	.ivan_popov_mainpart .author_image .author_photo{
+	.ip_mainpart .author_image .author_image_inner,
+	.ip_mainpart .author_image .author_photo{
 		height: 100%;
 		opacity: 1;
 		padding-bottom: 50px;
 	}
-	.ivan_popov_mainpart .main_content{width: 64%;}
-	.ivan_popov_home .content{padding: 0px 20px 0px 40px;}
+	.ip_mainpart .main_content{width: 64%;}
+	.ip_home .content{padding: 0px 20px 0px 40px;}
 }
 @media (max-width: 768px) {
-	.ivan_popov_home .job{font-size: 20px;}
-	.ivan_popov_home .line{height: 3px;width: 40px;}
-	.ivan_popov_button a{padding: 10px 28px;}
-	.ivan_popov_title > span{letter-spacing: 2px;}
-	.ivan_popov_title > span:after{margin-left: 15px;}
-	#contact .ivan_popov_glitch_switch_row:after{margin-left: 15px;}
-	.ivan_popov_modalbox .box_inner{width: 300px;top: 60px;bottom: 40px;}
-	.ivan_popov_modalbox .close{margin-left: -25px;top: -37px;}
-	.ivan_popov_modalbox .close a{width: 28px;height: 28px;}
-	.ivan_popov_service .service_list ul{margin: 0px;}
-	.ivan_popov_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
-	.ivan_popov_service .service_list ul li .title{font-size: 20px;}
+	.ip_home .job{font-size: 20px;}
+	.ip_home .line{height: 3px;width: 40px;}
+	.ip_button a{padding: 10px 28px;}
+	.ip_title > span{letter-spacing: 2px;}
+	.ip_title > span:after{margin-left: 15px;}
+	#contact .ip_glitch_switch_row:after{margin-left: 15px;}
+	.ip_modalbox .box_inner{width: 300px;top: 60px;bottom: 40px;}
+	.ip_modalbox .close{margin-left: -25px;top: -37px;}
+	.ip_modalbox .close a{width: 28px;height: 28px;}
+	.ip_service .service_list ul{margin: 0px;}
+	.ip_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
+	.ip_service .service_list ul li .title{font-size: 20px;}
 	#contact .contact_social_icon svg{width: 72px;height: 72px;}
-    .ivan_popov_header .logo .text{padding-left: 10px;font-size: 20px;}
-
+    .ip_header .logo .text{padding-left: 10px;font-size: 20px;}
+	.ip_footer {height: 30px;font-size: 8px;}
 }
 /* Narrow phones: the full-height portrait column gets too thin, so hide the
    shared column (handled by the max-width:1023px rule) and let only the home
    section show the square 1.jpg stacked above its content. Other sections keep
    the photo hidden and use the full width. */
 @media (max-width: 668px) {
-	.ivan_popov_header .logo .text {
+	.ip_header .logo .text {
 			padding-left: 10px;
 			font-size: 15px;
 		}
-	#home .ivan_popov_home{
+	#home .ip_home{
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: flex-start;
 		height: auto;
 		min-height: 100%;
 	}
-	.ivan_popov_home_photo{
+	.ip_home_photo{
 		display: block;
 		width: 100%;
 		/* Match the content's horizontal inset so the photo aligns with the text. */
 		padding: 0 20px;
 		margin-bottom: 30px;
 	}
-	.ivan_popov_home_photo img{
+	.ip_home_photo img{
 		display: block;
 		width: 100%;
 		height: clamp(220px, 40vh, 360px);
 		object-fit: cover;
 		object-position: center 30%;
 	}
-	.ivan_popov_footer {font-size: 8px};
+		.ip_footer {
+			height: 20px;
+			font-size: 6px;
+		}
 }
 
 /*---------------------------------------------------*/
@@ -1503,7 +1502,7 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 /*---------------------------------------------------*/
 
 /* Bottom dots: compact nav, touch screens, or narrow layout. */
-.ivan_popov_swipe_nav{
+.ip_swipe_nav{
 	display: none;
 	position: fixed;
 	left: 50%;
@@ -1514,25 +1513,25 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	border-radius: 999px;
 	background: transparent;
 }
-.ivan_popov_swipe_nav ul{
+.ip_swipe_nav ul{
 	margin: 0;
 	padding: 0;
 	list-style: none;
 	display: flex;
 	align-items: center;
 }
-.ivan_popov_swipe_nav ul li{
+.ip_swipe_nav ul li{
 	margin: 0;
 	float: none;
 }
-.ivan_popov_swipe_nav ul li a{
+.ip_swipe_nav ul li a{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 7px;
 	text-decoration: none;
 }
-.ivan_popov_swipe_nav ul li a .dot{
+.ip_swipe_nav ul li a .dot{
 	display: block;
 	width: 7px;
 	height: 7px;
@@ -1541,62 +1540,62 @@ body.ivan_popov_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 	transition: width .3s ease, height .3s ease, background-color .3s ease;
 }
-.ivan_popov_swipe_nav ul li.active a .dot{
+.ip_swipe_nav ul li.active a .dot{
 	width: 9px;
 	height: 9px;
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 /* Show dots + add bottom padding on touch devices and compact nav (any width). */
-.ivan_popov_all_wrap.has-touch .ivan_popov_swipe_nav,
-.ivan_popov_all_wrap.nav-compact .ivan_popov_swipe_nav{
+.ip_all_wrap.has-touch .ip_swipe_nav,
+.ip_all_wrap.nav-compact .ip_swipe_nav{
 	display: block;
 }
-.ivan_popov_all_wrap.has-touch .ivan_popov_section .section_inner,
-.ivan_popov_all_wrap.nav-compact .ivan_popov_section .section_inner{
+.ip_all_wrap.has-touch .ip_section .section_inner,
+.ip_all_wrap.nav-compact .ip_section .section_inner{
 	padding-bottom: 64px;
 }
 
 @media (max-width: 1023px) {
-	.ivan_popov_swipe_nav{
+	.ip_swipe_nav{
 		display: block;
 	}
 	/* Touch sections: enable momentum scroll. */
-	.ivan_popov_section{
+	.ip_section{
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
 		touch-action: pan-y;
 		overscroll-behavior-y: contain;
 	}
-	.ivan_popov_section .section_inner{
+	.ip_section .section_inner{
 		padding-bottom: 64px;
 	}
 
 	/* Testimonials: horizontal scroll-snap is desktop-only; on mobile show
 	   every entry as a vertical list. Unfloat the subtree so stacked cards
 	   keep their height and spacing without a horizontal track. */
-	.ivan_popov_about .testimonials .list{
+	.ip_about .testimonials .list{
 		margin-top: 0;
 		padding-top: 10px;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap{
+	.ip_about .testimonials .list ul.testimonials-snap{
 		display: block;
 		overflow: visible;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li,
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .list_inner,
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .text,
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li .details{
+	.ip_about .testimonials .list ul.testimonials-snap > li,
+	.ip_about .testimonials .list ul.testimonials-snap > li .list_inner,
+	.ip_about .testimonials .list ul.testimonials-snap > li .text,
+	.ip_about .testimonials .list ul.testimonials-snap > li .details{
 		width: 100%;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li{
+	.ip_about .testimonials .list ul.testimonials-snap > li{
 		margin-bottom: 75px;
 	}
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li:last-child{
+	.ip_about .testimonials .list ul.testimonials-snap > li:last-child{
 		margin-bottom: 0;
 	}
 	/* Loop clones are desktop-only; never show the triplicated cards stacked. */
-	.ivan_popov_about .testimonials .list ul.testimonials-snap > li.is-clone{
+	.ip_about .testimonials .list ul.testimonials-snap > li.is-clone{
 		display: none;
 	}
 }

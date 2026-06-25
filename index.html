@@ -57,11 +57,11 @@ body{margin:0}
 <!-- All app CSS loads async (preload + onload swap) so it not blockning the
     preloader's first paint. The preloader masks any FOUC; it is dismissed by JS
     only after window 'load', by which point these sheets are applied. -->
-<link rel="preload" as="style" href="static/css/plugins.css?v=d9ae2e76" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="static/css/style.css?v=fd3b0c22" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/extra.css?v=d384db26" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=244e96aa" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/plugins.css?v=d9ae2e76" />
-<link rel="stylesheet" href="static/css/style.css?v=fd3b0c22" />
+<link rel="stylesheet" href="static/css/extra.css?v=d384db26" />
+<link rel="stylesheet" href="static/css/style.css?v=244e96aa" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -75,21 +75,21 @@ body{margin:0}
 	<!-- /PRELOADER -->
 	
 	<!--  ALL WRAPPER -->
-	<div class="ivan_popov_all_wrap" data-magic-cursor="show" data-enter="rollIn" data-exit="rollOut">
+	<div class="ip_all_wrap" data-magic-cursor="show" data-enter="rollIn" data-exit="rollOut">
 
 		<!-- Service popup shell (content copied from .list_inner on open) -->
-		<div class="ivan_popov_modalbox">
+		<div class="ip_modalbox">
 			<div class="box_inner">
 				<div class="close"><a href="#"><i class="icon-cancel"></i></a></div>
 				<div class="description_wrap"></div>
 			</div>
 		</div>
 	
-		<div class="ivan_popov_left_border"></div>
-		<div class="ivan_popov_right_border"></div>
+		<div class="ip_left_border"></div>
+		<div class="ip_right_border"></div>
 		
 		<!-- MOBILE MENU -->
-		<div class="ivan_popov_topbar">
+		<div class="ip_topbar">
 			<div class="topbar_inner">
 				<div class="logo">
 					<a class="text" href="/"><span class="logo-label">Ivan Popov. Pro</span><span class="logo-cursor" aria-hidden="true">_</span></a>
@@ -103,7 +103,7 @@ body{margin:0}
 				</div>
 			</div>
 		</div>
-		<div class="ivan_popov_mobile_menu">
+		<div class="ip_mobile_menu">
 			<div class="inner">
 				<div class="wrapper">
 					<div class="avatar">
@@ -135,7 +135,7 @@ body{margin:0}
 		<!-- /MOBILE MENU -->
 
 		<!-- HEADER -->
-		<div class="ivan_popov_header">
+		<div class="ip_header">
 			<div class="logo">
 				<a class="text" href="/"><span class="logo-label">Ivan Popov. Pro</span><span class="logo-cursor" aria-hidden="true">_</span></a>
 			</div>
@@ -154,7 +154,7 @@ body{margin:0}
 		<!-- /HEADER -->
 		
 		<!-- MAINPART -->
-		<div class="ivan_popov_mainpart">
+		<div class="ip_mainpart">
 			<div class="author_image" id="author_image">
 				<div class="author_image_inner">
 					<img class="author_photo" id="author_photo_img"
@@ -171,9 +171,9 @@ body{margin:0}
 			<div class="main_content">
 			
 				<!-- HOME -->
-				<div class="ivan_popov_section animated" id="home">
-					<div class="ivan_popov_home">
-						<div class="ivan_popov_home_photo" aria-hidden="true">
+				<div class="ip_section animated" id="home">
+					<div class="ip_home">
+						<div class="ip_home_photo" aria-hidden="true">
 							<img src="static/img/about/1.jpg" alt="" width="985" height="915" decoding="async" loading="lazy">
 						</div>
 						<div class="content">
@@ -192,7 +192,7 @@ body{margin:0}
 									<span class="blc">с человеческим лицом</span>
 								</span>
 							</h3>
-							<div class="ivan_popov_button transition_link">
+							<div class="ip_button transition_link">
 								<a href="#contact">Написать</a>
 							</div>
 						</div>
@@ -201,11 +201,11 @@ body{margin:0}
 				<!-- HOME -->
 				
 				<!-- ABOUT -->
-				<div class="ivan_popov_section" id="about">
+				<div class="ip_section" id="about">
 					<div class="section_inner">
-						<div class="ivan_popov_about">
+						<div class="ip_about">
 							<div class="biography">
-								<div class="ivan_popov_title">
+								<div class="ip_title">
 									<span>В ОБЩЕМ</span>
 								</div>
 								<div class="wrapper">
@@ -219,7 +219,7 @@ body{margin:0}
 									</div>
 								</div>
 								
-								<div class="ivan_popov_title">
+								<div class="ip_title">
 									<span>В ЧАСТНОМ</span>
 								</div>
 								<div class="wrapper">
@@ -239,11 +239,11 @@ body{margin:0}
 				<!-- /ABOUT -->
 				
 				<!-- WHY ME -->
-				<div class="ivan_popov_section" id="why">
+				<div class="ip_section" id="why">
 					<div class="section_inner">
-						<div class="ivan_popov_about">
+						<div class="ip_about">
 							<div class="biography">
-								<div class="ivan_popov_title">
+								<div class="ip_title">
 									<span>Говорим на одном языке</span>
 								</div>
 								<div class="wrapper">
@@ -267,9 +267,9 @@ body{margin:0}
 				<!-- /WHY ME -->
 				
 				<!-- SERVICE -->
-				<div class="ivan_popov_section" id="service">
+				<div class="ip_section" id="service">
 					<div class="section_inner">
-						<div class="ivan_popov_service">
+						<div class="ip_service">
 							<div class="service_list">
 								<ul>
 									<li>
@@ -277,7 +277,7 @@ body{margin:0}
 											<img class="svg" src="static/img/svg/grow.svg" alt="" width="60" height="60" />
 											<h3 class="title">E-commerce</h3>
 											<p class="text">CRM, складской учет, интеграция</p>
-											<a class="ivan_popov_full_link" href="#"></a>
+											<a class="ip_full_link" href="#"></a>
 											
 											<!-- Modalbox Info Start -->
 											<img class="popup_service_image" data-popup-jpg="static/img/service/support.webp" data-popup-webp="static/img/service/support.webp" alt="" width="960" height="548" />
@@ -298,7 +298,7 @@ body{margin:0}
 											<img class="svg" src="static/img/svg/character.svg" alt="" width="60" height="60" />
 											<h3 class="title">Разработка</h3>
 											<p class="text">Сайты, приложения, API</p>
-											<a class="ivan_popov_full_link" href="#"></a>
+											<a class="ip_full_link" href="#"></a>
 											
 											<!-- Modalbox Info Start -->
 											<img class="popup_service_image" data-popup-jpg="static/img/service/expert.jpg" data-popup-webp="static/img/service/expert.webp" alt="" width="960" height="548" />
@@ -320,7 +320,7 @@ body{margin:0}
 											<img class="svg" src="static/img/svg/contract.svg" alt="" width="60" height="60" />
 											<h3 class="title">Экспертиза</h3>
 											<p class="text">Аналитика, аудит, процессы</p>
-											<a class="ivan_popov_full_link" href="#"></a>
+											<a class="ip_full_link" href="#"></a>
 
 											<!-- Modalbox Info Start -->
 											<img class="popup_service_image" data-popup-jpg="static/img/service/web.jpg" data-popup-webp="static/img/service/web.webp" alt="" width="960" height="548" />
@@ -341,7 +341,7 @@ body{margin:0}
 											<img class="svg" src="static/img/svg/3d.svg" alt="" width="60" height="60" />
 											<h3 class="title">Инфраструктура</h3>
 											<p class="text">Серверы, DevOps, MLops</p>
-											<a class="ivan_popov_full_link" href="#"></a>
+											<a class="ip_full_link" href="#"></a>
 
 											<!-- Modalbox Info Start -->
 											<img class="popup_service_image" data-popup-jpg="static/img/service/server.jpg" data-popup-webp="static/img/service/server.webp" alt="" width="960" height="548" />
@@ -362,7 +362,7 @@ body{margin:0}
 											<img class="svg" src="static/img/svg/art.svg" alt="" width="60" height="60" />
 											<h3 class="title">Дизайн</h3>
 											<p class="text">Визуальный стиль, интерфейсы</p>
-											<a class="ivan_popov_full_link" href="#"></a>
+											<a class="ip_full_link" href="#"></a>
 											
 											<!-- Modalbox Info Start -->
 											<img class="popup_service_image" data-popup-jpg="static/img/service/design.jpg" data-popup-webp="static/img/service/design.webp" alt="" width="960" height="548" />
@@ -390,7 +390,7 @@ body{margin:0}
 											<img class="svg" src="static/img/svg/support.svg" alt="" width="60" height="60" />
 											<h3 class="title">Техподдержка </h3>
 											<p class="text">Договор обслуживания, IT-аутсорс</p>
-											<a class="ivan_popov_full_link" href="#"></a>
+											<a class="ip_full_link" href="#"></a>
 
 											<!-- Modalbox Info Start -->
 											<img class="popup_service_image" data-popup-jpg="static/img/service/sysadmin.jpg" data-popup-webp="static/img/service/sysadmin.webp" alt="" width="960" height="548" />
@@ -414,9 +414,9 @@ body{margin:0}
 				<!-- /SERVICE -->
 				
 				<!-- HOW -->
-				<div class="ivan_popov_section" id="how">
+				<div class="ip_section" id="how">
 					<div class="section_inner">
-						<div class="ivan_popov_about">
+						<div class="ip_about">
 							<div class="testimonials">
 								<div class="list">
 									<ul class="testimonials-snap">
@@ -559,27 +559,27 @@ body{margin:0}
 				<!-- /HOW -->
 				
 				<!-- CONTACT -->
-				<div class="ivan_popov_section" id="contact">
+				<div class="ip_section" id="contact">
 					<div class="section_inner">
-						<div class="ivan_popov_contact">
-							<div class="ivan_popov_title ivan_popov_contact_title">
-								<div class="ivan_popov_glitch_switch_row">
-									<span class="ivan_popov_glitch_switch_label">TG</span>
-									<label class="ivan_popov_glitch_switch" for="ivan_popov_glitch_toggle">
+						<div class="ip_contact">
+							<div class="ip_title ip_contact_title">
+								<div class="ip_glitch_switch_row">
+									<span class="ip_glitch_switch_label">TG</span>
+									<label class="ip_glitch_switch" for="ip_glitch_toggle">
 										<input
 											type="checkbox"
-											id="ivan_popov_glitch_toggle"
+											id="ip_glitch_toggle"
 											checked
 											aria-label="Выбрать мессенджер: TG или VK"
 										>
-										<span class="ivan_popov_glitch_slider"></span>
+										<span class="ip_glitch_slider"></span>
 									</label>
-									<span class="ivan_popov_glitch_switch_label">VK</span>
+									<span class="ip_glitch_switch_label">VK</span>
 								</div>
 							</div>
-							<div class="ivan_popov_contact_playfield" aria-label="Связь в TG или VK">
-								<div class="ivan_popov_contact_fx_layer" id="ivan_popov_contact_fx_layer" aria-hidden="true"></div>
-								<div class="ivan_popov_contact_icon_anchor">
+							<div class="ip_contact_playfield" aria-label="Связь в TG или VK">
+								<div class="ip_contact_fx_layer" id="ip_contact_fx_layer" aria-hidden="true"></div>
+								<div class="ip_contact_icon_anchor">
 									<div class="contact_social_icon telegram_icon_large" data-network="tg" style="display:none;">
 										<a href="https://t.me/ivan_a_popov" target="_blank" aria-label="Написать в Telegram">
 											<svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -606,7 +606,7 @@ body{margin:0}
 		<!-- /MAINPART -->
 		
 		<!-- FOOTER -->
-		<div class="ivan_popov_footer">
+		<div class="ip_footer">
 			<div class="copyright">
 				<p>&copy;rafted: ИП Попов Иван Анатольевич ИНН 250105290350</p>
 			</div>
@@ -622,7 +622,7 @@ body{margin:0}
 	<!-- /ALL WRAPPER -->
 	
 <!-- SCRIPTS -->
-<script src="static/js/init.js?v=725cb6fc"></script>
+<script src="static/js/init.js?v=189329c1"></script>
 
 <!-- Portrait on #contact, color swap + TG/VK switch via toggle -->
 <script>
@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	}, 200);
 
 	function flashContactPlayfield() {
-		var playfield = document.querySelector('.ivan_popov_contact_playfield');
+		var playfield = document.querySelector('.ip_contact_playfield');
 		if (!playfield) return;
 		playfield.classList.remove('ivp_contact_flash');
 		// Force reflow so the animation restarts on rapid toggles.
@@ -667,7 +667,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		var host = getPortraitHost();
 		var img = host ? host.querySelector('.author_photo') : null;
 		var contactEl = document.getElementById('contact');
-		var toggle = document.getElementById('ivan_popov_glitch_toggle');
+		var toggle = document.getElementById('ip_glitch_toggle');
 		if (!contactEl || !host || !img) return;
 
 		var bw = img.getAttribute('data-src-bw') || AUTHOR_SRC_BW;
@@ -702,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	syncContactPortraitState();
 
-	var glitchToggleEl = document.getElementById('ivan_popov_glitch_toggle');
+	var glitchToggleEl = document.getElementById('ip_glitch_toggle');
 	if (glitchToggleEl) {
 		setActiveContactNetwork(!!glitchToggleEl.checked);
 		glitchToggleEl.addEventListener('change', function() {

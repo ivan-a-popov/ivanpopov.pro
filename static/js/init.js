@@ -1,5 +1,4 @@
-// Vanilla (no-jQuery) site behavior. Custom scrollbars are now
-// pure CSS, so no plugin-specific touch listener setup is needed.
+// Vanilla (no-jQuery) site behavior. Custom scrollbars are now pure CSS.
 
 // ----------  SMALL DOM HELPERS  ----------
 
@@ -48,21 +47,21 @@ ip_ready(function(){
 
 	// all ready functions here
 
-	ivan_popov_mark_touch_device();
-	ivan_popov_build_swipe_nav();
-	ivan_popov_page_transition();
-	ivan_popov_trigger_menu();
-	ivan_popov_swipe_navigation();
-	ivan_popov_keyboard_navigation();
-	ivan_popov_service_popup();
-	ivan_popov_cursor();
-	ivan_popov_imgtosvg();
-	ivan_popov_data_images();
-	ivan_popov_testimonials_snap();
-	ivan_popov_animated_headline();
-	hashtag();
-	ivan_popov_bind_nav_mode();
-	ivan_popov_preloader();
+	ip_mark_touch_device();
+	ip_build_swipe_nav();
+	ip_page_transition();
+	ip_trigger_menu();
+	ip_swipe_navigation();
+	ip_keyboard_navigation();
+	ip_service_popup();
+	ip_cursor();
+	ip_imgtosvg();
+	ip_data_images();
+	ip_testimonials_snap();
+	ip_animated_headline();
+	ip_hashtag();
+	ip_bind_nav_mode();
+	ip_preloader();
 
 });
 
@@ -73,7 +72,7 @@ ip_ready(function(){
 // Shared navigation: switch to a section by its href (e.g. "#about").
 // Used by the header/mobile menus, the swipe dots and the touch swipe handler,
 // so every entry point keeps the section state and all menus in sync.
-function ivan_popov_goto(href){
+function ip_goto(href){
 
 	"use strict";
 
@@ -86,9 +85,9 @@ function ivan_popov_goto(href){
 		return false;
 	}
 
-	var sections	= ip_all('.ivan_popov_section');
+	var sections	= ip_all('.ip_section');
 	var allLi		= ip_all('.transition_link li');
-	var wrapper		= ip_one('.ivan_popov_all_wrap');
+	var wrapper		= ip_one('.ip_all_wrap');
 	if(!wrapper){
 		return false;
 	}
@@ -128,8 +127,8 @@ function ivan_popov_goto(href){
 	// Keep the sliding header marker aligned for every navigation path (header,
 	// mobile menu, swipe dots, keyboard, touch), not only those that fire a hover.
 	if(typeof currentLink === 'function'){
-		var headerCcc = ip_one('.ivan_popov_header .menu .ccc');
-		var headerActive = ip_one('.ivan_popov_header .menu .active a');
+		var headerCcc = ip_one('.ip_header .menu .ccc');
+		var headerActive = ip_one('.ip_header .menu .active a');
 		if(headerCcc && headerActive){
 			currentLink(headerCcc, headerActive);
 		}
@@ -138,7 +137,7 @@ function ivan_popov_goto(href){
 	return true;
 }
 
-function ivan_popov_page_transition(){
+function ip_page_transition(){
 
 	"use strict";
 
@@ -146,9 +145,9 @@ function ivan_popov_page_transition(){
 		link.addEventListener('click', function(e){
 			e.preventDefault();
 			var href = link.getAttribute('href');
-			ivan_popov_goto(href);
-			if(link.parentNode && link.parentNode.classList.contains('ivan_popov_button')){
-				hashtag();
+			ip_goto(href);
+			if(link.parentNode && link.parentNode.classList.contains('ip_button')){
+				ip_hashtag();
 			}
 		});
 	});
@@ -158,13 +157,13 @@ function ivan_popov_page_transition(){
 // ---------------   TRIGGER MENU    -------------------
 // -----------------------------------------------------
 
-function ivan_popov_trigger_menu(){
+function ip_trigger_menu(){
 
 	"use strict";
 
-	var hamburgers		= ip_all('.ivan_popov_topbar .trigger .hamburger');
-	var mobileMenu		= ip_one('.ivan_popov_mobile_menu');
-	var mobileMenuList	= ip_all('.ivan_popov_mobile_menu .menu_list ul li a');
+	var hamburgers		= ip_all('.ip_topbar .trigger .hamburger');
+	var mobileMenu		= ip_one('.ip_mobile_menu');
+	var mobileMenuList	= ip_all('.ip_mobile_menu .menu_list ul li a');
 
 	hamburgers.forEach(function(hamburger){
 		hamburger.addEventListener('click', function(e){
@@ -182,7 +181,7 @@ function ivan_popov_trigger_menu(){
 	mobileMenuList.forEach(function(link){
 		link.addEventListener('click', function(e){
 			e.preventDefault();
-			ip_all('.ivan_popov_topbar .trigger .hamburger').forEach(function(h){
+			ip_all('.ip_topbar .trigger .hamburger').forEach(function(h){
 				h.classList.remove('is-active');
 			});
 			if(mobileMenu){ mobileMenu.classList.remove('opened'); }
@@ -194,24 +193,24 @@ function ivan_popov_trigger_menu(){
 // -----------   NAV MODE (HEADER VS COMPACT)   --------
 // -----------------------------------------------------
 
-var ivan_popov_nav_mode_timer = null;
+var ip_nav_mode_timer = null;
 
 // True when the header menu no longer fits and the hamburger layout is active.
-function ivan_popov_is_nav_compact(){
+function ip_is_nav_compact(){
 
 	"use strict";
 
-	var wrap = ip_one('.ivan_popov_all_wrap');
+	var wrap = ip_one('.ip_all_wrap');
 	return !!wrap && wrap.classList.contains('nav-compact');
 }
 
 // Measure whether every header item fits beside the logo; toggle .nav-compact.
-function ivan_popov_update_nav_mode(){
+function ip_update_nav_mode(){
 
 	"use strict";
 
-	var wrap = document.querySelector('.ivan_popov_all_wrap');
-	var header = document.querySelector('.ivan_popov_header');
+	var wrap = document.querySelector('.ip_all_wrap');
+	var header = document.querySelector('.ip_header');
 	if(!wrap || !header){
 		return;
 	}
@@ -243,10 +242,10 @@ function ivan_popov_update_nav_mode(){
 	wrap.classList.toggle('nav-compact', !fits);
 
 	if(wasCompact && fits){
-		ip_all('.ivan_popov_topbar .trigger .hamburger').forEach(function(h){
+		ip_all('.ip_topbar .trigger .hamburger').forEach(function(h){
 			h.classList.remove('is-active');
 		});
-		var mm = ip_one('.ivan_popov_mobile_menu');
+		var mm = ip_one('.ip_mobile_menu');
 		if(mm){ mm.classList.remove('opened'); }
 	}
 
@@ -259,42 +258,42 @@ function ivan_popov_update_nav_mode(){
 	}
 }
 
-function ivan_popov_schedule_nav_mode(){
+function ip_schedule_nav_mode(){
 
 	"use strict";
 
-	window.clearTimeout(ivan_popov_nav_mode_timer);
-	ivan_popov_nav_mode_timer = window.setTimeout(ivan_popov_update_nav_mode, 0);
+	window.clearTimeout(ip_nav_mode_timer);
+	ip_nav_mode_timer = window.setTimeout(ip_update_nav_mode, 0);
 }
 
-function ivan_popov_bind_nav_mode(){
+function ip_bind_nav_mode(){
 
 	"use strict";
 
 	window.addEventListener('resize', function(){
-		window.clearTimeout(ivan_popov_nav_mode_timer);
-		ivan_popov_nav_mode_timer = window.setTimeout(ivan_popov_update_nav_mode, 120);
+		window.clearTimeout(ip_nav_mode_timer);
+		ip_nav_mode_timer = window.setTimeout(ip_update_nav_mode, 120);
 	});
 
-	window.addEventListener('load', ivan_popov_schedule_nav_mode);
+	window.addEventListener('load', ip_schedule_nav_mode);
 
 	if(document.readyState === 'complete'){
-		ivan_popov_schedule_nav_mode();
+		ip_schedule_nav_mode();
 	}
 
 	if(document.fonts && document.fonts.ready){
-		document.fonts.ready.then(ivan_popov_schedule_nav_mode);
+		document.fonts.ready.then(ip_schedule_nav_mode);
 	}
 
-	var header = document.querySelector('.ivan_popov_header');
+	var header = document.querySelector('.ip_header');
 	if(header && window.ResizeObserver){
 		var observer = new ResizeObserver(function(){
-			ivan_popov_schedule_nav_mode();
+			ip_schedule_nav_mode();
 		});
 		observer.observe(header);
 	}
 
-	ivan_popov_schedule_nav_mode();
+	ip_schedule_nav_mode();
 }
 
 // -----------------------------------------------------
@@ -304,7 +303,7 @@ function ivan_popov_bind_nav_mode(){
 // Mirrors the CSS 1023px breakpoint where stacked/mobile content layout
 // takes over from the desktop two-column layout. Nav mode is independent and
 // chosen by measuring whether the header menu fits.
-function ivan_popov_is_mobile_layout(){
+function ip_is_mobile_layout(){
 
 	"use strict";
 
@@ -314,7 +313,7 @@ function ivan_popov_is_mobile_layout(){
 	return window.innerWidth <= 1023;
 }
 
-function ivan_popov_is_touch_device(){
+function ip_is_touch_device(){
 
 	"use strict";
 
@@ -324,33 +323,33 @@ function ivan_popov_is_touch_device(){
 	return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 }
 
-function ivan_popov_mark_touch_device(){
+function ip_mark_touch_device(){
 
 	"use strict";
 
-	var wrap = ip_one('.ivan_popov_all_wrap');
-	if(wrap && ivan_popov_is_touch_device()){
+	var wrap = ip_one('.ip_all_wrap');
+	if(wrap && ip_is_touch_device()){
 		wrap.classList.add('has-touch');
 	}
 }
 
 // Build the bottom dots indicator (mobile only, hidden by CSS on desktop).
 // The dots mirror the mobile menu order and reuse the .transition_link class
-// so the standard click handler navigates and ivan_popov_goto keeps them active.
-function ivan_popov_build_swipe_nav(){
+// so the standard click handler navigates and ip_goto keeps them active.
+function ip_build_swipe_nav(){
 
 	"use strict";
 
-	if(ip_one('.ivan_popov_swipe_nav')){
+	if(ip_one('.ip_swipe_nav')){
 		return;
 	}
 
-	var links = ip_all('.ivan_popov_mobile_menu .menu_list .transition_link a');
+	var links = ip_all('.ip_mobile_menu .menu_list .transition_link a');
 	if(!links.length){
 		return;
 	}
 
-	var hasActiveSection = !!ip_one('.ivan_popov_section.active');
+	var hasActiveSection = !!ip_one('.ip_section.active');
 
 	var dots = '';
 	links.forEach(function(a, i){
@@ -363,21 +362,21 @@ function ivan_popov_build_swipe_nav(){
 			+ '</li>';
 	});
 
-	var html = '<div class="ivan_popov_swipe_nav" aria-label="Навигация по разделам">'
+	var html = '<div class="ip_swipe_nav" aria-label="Навигация по разделам">'
 		+ '<ul class="transition_link">'+dots+'</ul>'
 		+ '</div>'
 	
-	var wrap = ip_one('.ivan_popov_all_wrap');
+	var wrap = ip_one('.ip_all_wrap');
 	if(wrap){
 		wrap.insertAdjacentHTML('beforeend', html);
 	}
 }
 
-function ivan_popov_swipe_navigation(){
+function ip_swipe_navigation(){
 
 	"use strict";
 
-	var mainpart = document.querySelector('.ivan_popov_mainpart');
+	var mainpart = document.querySelector('.ip_mainpart');
 	if(!mainpart){
 		return;
 	}
@@ -385,25 +384,25 @@ function ivan_popov_swipe_navigation(){
 	var startX = 0, startY = 0, startTime = 0, tracking = false;
 
 	function sectionOrder(){
-		return ip_all('.ivan_popov_swipe_nav .transition_link a').map(function(a){
+		return ip_all('.ip_swipe_nav .transition_link a').map(function(a){
 			return a.getAttribute('href');
 		});
 	}
 
 	function currentHref(){
-		// The active dot is the reliable source of truth: ivan_popov_goto keeps
+		// The active dot is the reliable source of truth: ip_goto keeps
 		// exactly one .transition_link item active. Sections cannot be used here
 		// because the legacy transition only adds .hidden to the previous section
 		// without clearing its .active class, so several stay "active" at once.
-		var dot = ip_one('.ivan_popov_swipe_nav li.active a');
+		var dot = ip_one('.ip_swipe_nav li.active a');
 		if(dot){
 			return dot.getAttribute('href');
 		}
-		var visible = ip_all('.ivan_popov_section.active').filter(function(s){
+		var visible = ip_all('.ip_section.active').filter(function(s){
 			return !s.classList.contains('hidden');
 		});
 		if(!visible.length){
-			visible = ip_all('.ivan_popov_section.animated').filter(function(s){
+			visible = ip_all('.ip_section.animated').filter(function(s){
 				return !s.classList.contains('hidden');
 			});
 		}
@@ -412,14 +411,14 @@ function ivan_popov_swipe_navigation(){
 	}
 
 	function navigationBlocked(){
-		var modal = ip_one('.ivan_popov_modalbox');
-		var menu = ip_one('.ivan_popov_mobile_menu');
+		var modal = ip_one('.ip_modalbox');
+		var menu = ip_one('.ip_mobile_menu');
 		return (modal && modal.classList.contains('opened'))
 			|| (menu && menu.classList.contains('opened'));
 	}
 
 	mainpart.addEventListener('touchstart', function(e){
-		if(!ivan_popov_is_touch_device()){
+		if(!ip_is_touch_device()){
 			tracking = false;
 			return;
 		}
@@ -459,7 +458,7 @@ function ivan_popov_swipe_navigation(){
 		var nextIndex = dx < 0 ? index + 1 : index - 1;
 		if(nextIndex < 0 || nextIndex >= order.length){ return; }
 
-		ivan_popov_goto(order[nextIndex]);
+		ip_goto(order[nextIndex]);
 	}, { passive: true });
 }
 
@@ -469,21 +468,21 @@ function ivan_popov_swipe_navigation(){
 
 // Arrow Left/Right step through the menu sections (Up/Down stay free for
 // scrolling section content). Escape closes the service popup or mobile menu.
-function ivan_popov_keyboard_navigation(){
+function ip_keyboard_navigation(){
 
 	"use strict";
 
-	var modalBox	= ip_one('.ivan_popov_modalbox');
-	var mobileMenu	= ip_one('.ivan_popov_mobile_menu');
+	var modalBox	= ip_one('.ip_modalbox');
+	var mobileMenu	= ip_one('.ip_mobile_menu');
 
 	// Section order follows the menu order; the header is the source of truth,
 	// with the mobile menu as a fallback when the header is not rendered.
 	function sectionOrder(){
-		var order = ip_all('.ivan_popov_header .menu .transition_link a').map(function(a){
+		var order = ip_all('.ip_header .menu .transition_link a').map(function(a){
 			return a.getAttribute('href');
 		});
 		if(!order.length){
-			order = ip_all('.ivan_popov_mobile_menu .menu_list .transition_link a').map(function(a){
+			order = ip_all('.ip_mobile_menu .menu_list .transition_link a').map(function(a){
 				return a.getAttribute('href');
 			});
 		}
@@ -495,7 +494,7 @@ function ivan_popov_keyboard_navigation(){
 		if(active){
 			return active.getAttribute('href');
 		}
-		var visible = ip_all('.ivan_popov_section.active').filter(function(s){
+		var visible = ip_all('.ip_section.active').filter(function(s){
 			return !s.classList.contains('hidden');
 		});
 		var last = visible[visible.length - 1];
@@ -508,7 +507,7 @@ function ivan_popov_keyboard_navigation(){
 		if(typeof currentLink !== 'function'){
 			return;
 		}
-		var header = ip_one('.ivan_popov_header');
+		var header = ip_one('.ip_header');
 		if(!header || header.offsetParent === null){
 			return;
 		}
@@ -532,7 +531,7 @@ function ivan_popov_keyboard_navigation(){
 		if(nextIndex < 0 || nextIndex >= order.length){
 			return false;
 		}
-		ivan_popov_goto(order[nextIndex]);
+		ip_goto(order[nextIndex]);
 		refreshHeaderHighlight();
 		return true;
 	}
@@ -553,7 +552,7 @@ function ivan_popov_keyboard_navigation(){
 		if(!mobileMenu || !mobileMenu.classList.contains('opened')){
 			return false;
 		}
-		ip_all('.ivan_popov_topbar .trigger .hamburger').forEach(function(h){
+		ip_all('.ip_topbar .trigger .hamburger').forEach(function(h){
 			h.classList.remove('is-active');
 		});
 		mobileMenu.classList.remove('opened');
@@ -600,20 +599,20 @@ function ivan_popov_keyboard_navigation(){
 // -------------  SERVICE POPUP  -------------------
 // -------------------------------------------------
 
-function ivan_popov_service_popup(){
+function ip_service_popup(){
 
 	"use strict";
 
-	var modalBox		= ip_one('.ivan_popov_modalbox');
+	var modalBox		= ip_one('.ip_modalbox');
 	if(!modalBox){
 		return;
 	}
-	var buttons			= ip_all('.ivan_popov_service .service_list ul li .ivan_popov_full_link');
+	var buttons			= ip_all('.ip_service .service_list ul li .ip_full_link');
 	var closePopup		= modalBox.querySelector('.close');
-	var serviceCards	= ip_all('.ivan_popov_service .service_list ul li .list_inner');
+	var serviceCards	= ip_all('.ip_service .service_list ul li .list_inner');
 
 	function setLightCursor(on){
-		document.body.classList.toggle('ivan_popov_light_cursor', !!on);
+		document.body.classList.toggle('ip_light_cursor', !!on);
 	}
 
 	serviceCards.forEach(function(card){
@@ -651,7 +650,7 @@ function ivan_popov_service_popup(){
 			var infos = modalBox.querySelector('.service_popup_informations');
 			if(infos){
 				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"'+webpAttr+'></div></div>');
-				ivan_popov_data_images();
+				ip_data_images();
 				var image = infos.querySelector('.image');
 				if(image){
 					image.insertAdjacentHTML('afterend', '<div class="main_title"><h3>'+title+'</h3></div>');
@@ -677,7 +676,7 @@ function ivan_popov_service_popup(){
 // ---------------   PRELOADER   -----------------------
 // -----------------------------------------------------
 
-function ivan_popov_preloader(){
+function ip_preloader(){
 
 	"use strict";
 
@@ -709,7 +708,7 @@ function ivan_popov_preloader(){
 // ------------------   CURSOR    ----------------------
 // -----------------------------------------------------
 
-function ivan_popov_cursor(){
+function ip_cursor(){
 
 	"use strict";
 
@@ -724,7 +723,7 @@ function ivan_popov_cursor(){
 		return;
 	}
 
-	var hoverSelector = 'a, .ivan_popov_topbar .trigger, .cursor-pointer';
+	var hoverSelector = 'a, .ip_topbar .trigger, .cursor-pointer';
 	var freeze = false;
 
 	window.addEventListener('mousemove', function(s){
@@ -763,7 +762,7 @@ function ivan_popov_cursor(){
 // ---------------    IMAGE TO SVG    ------------------
 // -----------------------------------------------------
 
-function ivan_popov_imgtosvg(){
+function ip_imgtosvg(){
 
 	"use strict";
 
@@ -812,7 +811,7 @@ function ivan_popov_imgtosvg(){
 // ---------------   DATA IMAGES    --------------------
 // -----------------------------------------------------
 
-function ivan_popov_data_images(){
+function ip_data_images(){
 
 	"use strict";
 
@@ -832,16 +831,16 @@ function ivan_popov_data_images(){
 // ------------   TESTIMONIALS SCROLL-SNAP   -----------
 // -----------------------------------------------------
 
-function ivan_popov_testimonials_snap(){
+function ip_testimonials_snap(){
 
 	"use strict";
 
 	// Horizontal snap + autoplay are desktop-only; mobile uses a vertical list (CSS).
-	if(ivan_popov_is_mobile_layout()){
+	if(ip_is_mobile_layout()){
 		return;
 	}
 
-	var list = document.querySelector('.ivan_popov_about .testimonials .testimonials-snap');
+	var list = document.querySelector('.ip_about .testimonials .testimonials-snap');
 	if(!list){
 		return;
 	}
@@ -890,7 +889,7 @@ function ivan_popov_testimonials_snap(){
 		}
 		// Instant reposition: bypass CSS scroll-behavior:smooth so the loop wrap
 		// is invisible. Scroll the track only — scrollIntoView() would also move
-		// the ancestor .ivan_popov_section (overflow-y: scroll) and break layout.
+		// the ancestor .ip_section (overflow-y: scroll) and break layout.
 		var prev = list.style.scrollBehavior;
 		list.style.scrollBehavior = 'auto';
 		list.scrollLeft = slide.offsetLeft;
@@ -1028,11 +1027,10 @@ function ivan_popov_testimonials_snap(){
 // ---------------   ANIMATED HEADLINE   ---------------
 // -----------------------------------------------------
 
-// Vanilla re-implementation of the CodyHouse "clip" animated headline (formerly
-// driven by jQuery in plugins.js). Types the active phrase in, holds, erases it,
-// then switches to the next one by animating the wrapper width; overflow:hidden
+// Types the active phrase in, holds, erases it, then switches to
+// the next one by animating the wrapper width; overflow:hidden
 // plus the ::after bar give the typewriter/cursor look.
-function ivan_popov_animated_headline(){
+function ip_animated_headline(){
 
 	"use strict";
 
@@ -1117,21 +1115,21 @@ function ivan_popov_animated_headline(){
 // -------------------    HASHTAG    -------------------
 // -----------------------------------------------------
 
-function hashtag(){
+function ip_hashtag(){
 	"use strict";
-	var ccc		= ip_one('.ivan_popov_header .menu .ccc');
-	var element	= ip_one('.ivan_popov_header .menu .active a');
+	var ccc		= ip_one('.ip_header .menu .ccc');
+	var element	= ip_one('.ip_header .menu .active a');
 
-	ip_all('.ivan_popov_header .menu a').forEach(function(a){
+	ip_all('.ip_header .menu a').forEach(function(a){
 		a.addEventListener('mouseenter', function(){
 			currentLink(ccc, a);
 		});
 	});
 
-	var menu = ip_one('.ivan_popov_header .menu');
+	var menu = ip_one('.ip_header .menu');
 	if(menu){
 		menu.addEventListener('mouseleave', function(){
-			element = ip_one('.ivan_popov_header .menu .active a');
+			element = ip_one('.ip_header .menu .active a');
 			currentLink(ccc, element);
 			if(element && element.parentNode){
 				ip_siblings(element.parentNode).forEach(function(sib){
@@ -1143,7 +1141,7 @@ function hashtag(){
 	currentLink(ccc, element);
 
 	function repositionActive(){
-		var active = ip_one('.ivan_popov_header .menu .active a');
+		var active = ip_one('.ip_header .menu .active a');
 		if(active){
 			currentLink(ccc, active);
 		}
@@ -1161,7 +1159,7 @@ function hashtag(){
 	// finally lands (font swap, async CSS apply, breakpoint change), which is the only
 	// reliable trigger here.
 	if(window.ResizeObserver){
-		var menuList = document.querySelector('.ivan_popov_header .menu ul');
+		var menuList = document.querySelector('.ip_header .menu ul');
 		if(menuList){
 			new ResizeObserver(function(){
 				repositionActive();
@@ -1174,7 +1172,7 @@ function hashtag(){
 function currentLink(ccc, e){
 	"use strict";
 	if(!ccc || !e){ return false; }
-	var menu = ip_one('.ivan_popov_header .menu');
+	var menu = ip_one('.ip_header .menu');
 	if(!menu){ return false; }
 	var eRect		= e.getBoundingClientRect();
 	var menuRect	= menu.getBoundingClientRect();
