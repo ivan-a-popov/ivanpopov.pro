@@ -999,7 +999,7 @@ html::-webkit-scrollbar-track-piece,
 }
 
 /*---------------------------------------------------*/
-/*	 FOOTER (enhancements — layout in index.html)
+/*	 FOOTER (enhancements only — layout in index.html)
 /*---------------------------------------------------*/
 /* Tablet/mobile footer centering: see @media (max-width: 1023px) below. */
 
@@ -1146,26 +1146,13 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_modalbox .description_wrap{padding: 20px;}
 	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
 }
-/* Compact header: keep logo and menu side by side down to ~690px. */
-@media (max-width: 1023px) and (min-width: 690px) {
-	.ip_header{
-		display: grid;
-		grid-template-columns: var(--ivp-col-left) var(--ivp-col-right);
-	}
-	.ip_header .menu{
-		justify-content: stretch;
-	}
-	.ip_header .menu ul{
-		width: 100%;
-		justify-content: space-between;
-		padding-right: clamp(10px, 1.5vw, 18px);
-	}
+/* Compact header: logo + menu side by side with tighter typography (641px–767px). */
+@media (max-width: 767px) and (min-width: 590px) {
 	.ip_header .logo .text{
 		padding-left: clamp(6px, 1.2vw, 16px);
 		letter-spacing: clamp(0px, 0.3vw, 1px);
 	}
 	.ip_header .menu ul li a{
-		padding: 0 clamp(4px, 1.1vw, 14px);
 		font-size: clamp(11px, 1.5vw, 14px);
 	}
 	.ip_header .menu ul li .ivp_menu_sub{
@@ -1178,6 +1165,10 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	}
 }
 @media (max-width: 689px) {
+	.ip_all_wrap{
+		--ivp-menu-padding-left: 6px;
+		--ivp-menu-padding-right: 6px;
+	}
 	.ip_header{
 		display: flex;
 		justify-content: stretch;
@@ -1185,6 +1176,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_header .logo{ display: none; }
 	.ip_header .menu{ justify-content: stretch; }
 	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
+	.ip_header .menu ul li a{ padding: 0 6px; }
 }
 /* Tablets / large phones: keep the full-height portrait two-column layout. Below
    669px the column gets too narrow to look good, so the home portrait switches to
@@ -1208,7 +1200,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_home .content{padding: 0px 20px 0px 40px;}
 }
 @media (max-width: 768px) {
-	.ip_header .menu ul li a{ padding: 0 6px; }
 	.ip_home .job{font-size: 20px;}
 	.ip_button a{padding: 10px 28px;}
 	.ip_home_social img{width: 32px;height: 32px;}
