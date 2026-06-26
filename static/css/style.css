@@ -244,7 +244,12 @@ h6 { font-size: 16px; }
 	min-height: 100vh;
 	position: relative;
 	--ivp-side-gutter: clamp(40px, 2.8vw, 52px);
-	--ivp-bar-height: 70px;
+	--ivp-bar-height: clamp(60px, calc(52px + 1.1vw), 70px);
+	--ivp-footer-height: clamp(20px, calc(16px + 1.8vw), 50px);
+	--ivp-footer-font-size: clamp(6px, calc(4px + 0.5vw), 16px);
+	--ivp-logo-font-size: clamp(15px, calc(12px + 0.9vw), 25px);
+	--ivp-logo-padding-left: clamp(6px, calc(10px + 1.2vw), 30px);
+	--ivp-menu-padding-x: clamp(6px, calc(8px + 1.1vw), 30px);
 	--ivp-col-left: 40%;
 	--ivp-col-right: 60%;
 }
@@ -304,11 +309,10 @@ h6 { font-size: 16px; }
 	font-family: "Consolas", monospace;
 	text-transform: none;
 	letter-spacing: 2px;
-}
-.ip_header .logo .text{
-	font-size: 25px;
+	font-size: var(--ivp-logo-font-size);
 	font-weight: 800;
-	line-height: 70px;
+	line-height: var(--ivp-bar-height);
+	padding-left: var(--ivp-logo-padding-left);
 }
 .ip_header .logo .text .logo-label{
 	position: relative;
@@ -357,7 +361,7 @@ h6 { font-size: 16px; }
 	color: #333;
 	font-family: "Onest";
 	font-weight: 500;
-	padding: 0px 30px;
+	padding: 0 var(--ivp-menu-padding-x);
 	position: relative;
 	display: inline-grid;
 	justify-items: center;
@@ -1126,10 +1130,11 @@ html::-webkit-scrollbar-track-piece,
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-	height: 50px;
+	height: var(--ivp-footer-height);
 	background-color: #fff;
 	z-index: 10;
-	line-height: 50px;
+	line-height: var(--ivp-footer-height);
+	font-size: var(--ivp-footer-font-size);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -1228,14 +1233,11 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		--ivp-col-left: 35%;
 		--ivp-col-right: 65%;
 	}
-	.ip_footer {font-size: 12px;}
-	.ip_header .logo .text{line-height: 70px;padding-left: 30px;}
 	.ip_mainpart .author_image{width: 35%;}
 	.ip_mainpart .main_content{width: 65%;}
 	.ip_section .section_inner:before{width: 50px;}
 	.ip_title > span{letter-spacing: 3px;}
 	.ip_title > span:after{margin-left: 20px;}
-	.ip_header .menu ul li a{padding: 0px 20px;}
 	.ip_home .content{padding-left: 50px;}
 	.ip_home .job{font-size: 23px;}
 	.ip_button a{padding: 13px 32px;}
@@ -1250,9 +1252,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		--ivp-col-left: 36%;
 		--ivp-col-right: 64%;
 	}
-	.ip_header{ height: 60px; line-height: 60px; }
-	.ip_all_wrap{ --ivp-bar-height: 60px; }
-	.ip_footer {height: 40px;font-size: 10px;justify-content: center;}
+	.ip_footer {justify-content: center;}
 	.mouse-cursor{display: none;}
 	.ip_all_wrap{
 		--ivp-side-gutter: 10px;
@@ -1276,7 +1276,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		height: 0;
 		opacity: 0;
 	}
-	.ip_mainpart{top: 60px;left: 0px;right: 0px;bottom: 0px;}
+	.ip_mainpart{top: var(--ivp-bar-height);left: 0px;right: 0px;bottom: 0px;}
 	.ip_mainpart .main_content{width: 100%;}
 	.ip_home .content{padding: 0px 20px;}
 	.ip_home .job{font-size: 22px;}
@@ -1303,8 +1303,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		padding-right: clamp(10px, 1.5vw, 18px);
 	}
 	.ip_header .logo .text{
-		font-size: clamp(15px, 2.5vw, 20px);
-		line-height: 60px;
 		padding-left: clamp(6px, 1.2vw, 16px);
 		letter-spacing: clamp(0px, 0.3vw, 1px);
 	}
@@ -1364,7 +1362,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_service .service_list ul{margin: 0px;}
 	.ip_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
 	.ip_service .service_list ul li .title{font-size: 20px;}
-	.ip_footer {height: 30px;font-size: 8px;}
 }
 /* Narrow phones: the full-height portrait column gets too thin, so hide the
    shared column (handled by the max-width:1023px rule) and let only the home
@@ -1392,10 +1389,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		object-fit: cover;
 		object-position: center 30%;
 	}
-		.ip_footer {
-			height: 20px;
-			font-size: 6px;
-		}
 }
 
 /*---------------------------------------------------*/
