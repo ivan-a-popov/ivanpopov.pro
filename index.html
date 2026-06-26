@@ -56,7 +56,7 @@ body{margin:0}
 <!-- CRITICAL CHROME CSS (inlined so header/footer layout is stable before async
      style.css downloads — prevents CLS when the stylesheet arrives) -->
 <style>
-.ip_all_wrap{width:100%;min-height:100vh;position:relative;--ivp-side-gutter:clamp(40px,2.8vw,52px);--ivp-bar-height:clamp(60px,calc(52px + 1.1vw),70px);--ivp-footer-height:clamp(20px,calc(16px + 1.8vw),50px);--ivp-footer-font-size:clamp(6px,calc(4px + .5vw),16px);--ivp-logo-font-size:clamp(15px,calc(12px + .9vw),25px);--ivp-logo-padding-left:clamp(6px,calc(10px + 1.2vw),30px);--ivp-menu-padding-left:clamp(6px,calc(8px + 1.1vw),30px);--ivp-menu-padding-right:clamp(6px,calc(8px + 1.1vw),30px);--ivp-menu-gap:0px;--ivp-col-left:40%;--ivp-col-right:60%}
+.ip_all_wrap{width:100%;min-height:100vh;position:relative;--ivp-side-gutter:clamp(40px,2.8vw,52px);--ivp-bar-height:clamp(60px,calc(52px + 1.1vw),70px);--ivp-footer-height:clamp(20px,calc(16px + 1.8vw),50px);--ivp-footer-font-size:clamp(6px,calc(4px + .5vw),16px);--ivp-logo-font-size:clamp(15px,calc(12px + .9vw),25px);--ivp-logo-padding-left:clamp(6px,calc(10px + 1.2vw),30px);--ivp-menu-padding-left:clamp(6px,calc(8px + 1.1vw),30px);--ivp-menu-padding-right:clamp(6px,calc(8px + 1.1vw),30px);--ivp-menu-gap:0px;--ivp-menu-sub-gap:3px;--ivp-col-left:40%;--ivp-col-right:60%}
 .ip_all_wrap,.ip_all_wrap *{box-sizing:border-box}
 .ip_header{position:fixed;top:0;left:0;right:0;height:var(--ivp-bar-height);line-height:var(--ivp-bar-height);background:#fff;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 var(--ivp-side-gutter)}
 .ip_header .logo{flex:0 0 auto}
@@ -65,9 +65,9 @@ body{margin:0}
 .ip_header .menu{position:relative;flex:1 1 auto;min-width:0;display:flex;justify-content:flex-end}
 .ip_header .menu ul{margin:0;list-style:none;display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-end}
 .ip_header .menu ul li{margin:0;flex:0 0 auto}
-.ip_header .menu ul li a{text-decoration:none;color:#333;font-family:Onest,sans-serif;font-weight:500;padding:0 var(--ivp-menu-padding-right) 0 var(--ivp-menu-padding-left);position:relative;display:inline-grid;justify-items:center}
-.ip_header .menu ul li a b{position:relative;display:inline-block}
-.ip_header .menu ul li .ivp_menu_sub{position:absolute;left:50%;top:50%;margin-top:3px;transform:translateX(-50%);text-align:center;font-size:10px;font-weight:600;line-height:1;letter-spacing:.5px;text-transform:lowercase;white-space:nowrap;opacity:0;pointer-events:none}
+.ip_header .menu ul li a{text-decoration:none;color:#333;font-family:Onest,sans-serif;font-weight:500;line-height:1;padding:0 var(--ivp-menu-padding-right) 0 var(--ivp-menu-padding-left);position:relative;display:inline-grid;justify-items:center}
+.ip_header .menu ul li a b{position:relative;display:inline-block;line-height:1}
+.ip_header .menu ul li .ivp_menu_sub{position:absolute;left:50%;top:100%;margin-top:var(--ivp-menu-sub-gap);transform:translateX(-50%);text-align:center;font-size:10px;font-weight:600;line-height:1;letter-spacing:.5px;text-transform:lowercase;white-space:nowrap;opacity:0;pointer-events:none}
 .ip_header .menu ul li.active a b{transform:translateY(-8px);font-size:1.25em}
 .ip_header .menu ul li.active .ivp_menu_sub{font-size:12px;opacity:1}
 .ip_footer{position:fixed;bottom:0;left:0;right:0;height:var(--ivp-footer-height);background:#fff;z-index:10;line-height:var(--ivp-footer-height);font-size:var(--ivp-footer-font-size);display:flex;align-items:center;justify-content:space-between;padding:0 var(--ivp-side-gutter)}
@@ -87,9 +87,9 @@ body{margin:0}
 
 <!-- STYLES -->
 <!-- All app CSS loads async (preload + onload swap) so it not blocking the preloader's first paint.  -->
-<link rel="preload" as="style" href="static/css/style.css?v=77023cb6" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=b72bfb87" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/style.css?v=77023cb6" />
+<link rel="stylesheet" href="static/css/style.css?v=b72bfb87" />
 </noscript>
 <!-- /STYLES -->
 </head>
