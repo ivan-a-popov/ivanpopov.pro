@@ -1146,17 +1146,18 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_modalbox .description_wrap{padding: 20px;}
 	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
 }
-/* Compact header: logo + menu side by side with tighter typography (641px–767px). */
+/* Compact header: logo + menu side by side with tighter typography (590px–767px). */
 @media (max-width: 767px) and (min-width: 590px) {
+	.ip_all_wrap{
+		--ivp-menu-sub-font-size: 11px;
+		--ivp-menu-sub-font-size-active: 12px;
+	}
 	.ip_header .logo .text{
 		padding-left: clamp(6px, 1.2vw, 16px);
 		letter-spacing: clamp(0px, 0.3vw, 1px);
 	}
 	.ip_header .menu ul li a{
 		font-size: clamp(11px, 1.5vw, 14px);
-	}
-	.ip_header .menu ul li .ivp_menu_sub{
-		font-size: 9px;
 	}
 	.ip_header .menu ul li.active a b,
 	.ip_header .menu ul li a:hover b{
@@ -1167,6 +1168,8 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_all_wrap{
 		--ivp-menu-padding-left: 6px;
 		--ivp-menu-padding-right: 6px;
+		--ivp-menu-sub-font-size: 11px;
+		--ivp-menu-sub-font-size-active: 13px;
 	}
 	.ip_header{
 		display: flex;
