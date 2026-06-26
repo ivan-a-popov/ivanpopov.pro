@@ -239,86 +239,18 @@ h3 { font-size: 30px; }
 h4 { font-size: 24px; }
 h5 { font-size: 20px; }
 h6 { font-size: 16px; }
-.ip_all_wrap{
-	width: 100%;
-	min-height: 100vh;
-	position: relative;
-	--ivp-side-gutter: clamp(40px, 2.8vw, 52px);
-	--ivp-bar-height: clamp(60px, calc(52px + 1.1vw), 70px);
-	--ivp-footer-height: clamp(20px, calc(16px + 1.8vw), 50px);
-	--ivp-footer-font-size: clamp(6px, calc(4px + 0.5vw), 16px);
-	--ivp-logo-font-size: clamp(15px, calc(12px + 0.9vw), 25px);
-	--ivp-logo-padding-left: clamp(6px, calc(10px + 1.2vw), 30px);
-	--ivp-menu-padding-x: clamp(6px, calc(8px + 1.1vw), 30px);
-	--ivp-col-left: 40%;
-	--ivp-col-right: 60%;
-}
-.ip_all_wrap,
-.ip_all_wrap *{
-	box-sizing: border-box;
-}
+/* Header/footer layout and .ip_all_wrap tokens are inlined in index.html's <head>. */
 @media (min-width: 1024px){
 	.ip_all_wrap[data-magic-cursor="show"],
 	.ip_all_wrap[data-magic-cursor="show"] *{
 		cursor: none !important;
 	}
-	.ip_header{
-		display: grid;
-		grid-template-columns: var(--ivp-col-left) var(--ivp-col-right);
-	}
-	.ip_header .menu{
-		justify-content: stretch;
-	}
-	.ip_header .menu ul{
-		width: 100%;
-		justify-content: space-between;
-		padding-right: clamp(14px, 1.8vw, 28px);
-	}
-	.ip_header .menu ul li.active a b{
-		font-size: 1.5em;
-	}
-	.ip_header .menu ul li.active .ivp_menu_sub{
-		font-size: 13px;
-	}
 }
-
-/* The preloader is styled inline in index.html's <head> so it paints on the
-   first render, before this async stylesheet loads. Do not duplicate it here. */
 
 /*---------------------------------------------------*/
-/*	 HEADER
+/*	 HEADER (enhancements — layout in index.html)
 /*---------------------------------------------------*/
 
-.ip_header{
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	height: var(--ivp-bar-height);
-	line-height: var(--ivp-bar-height);
-	background-color: #fff;
-	z-index: 10;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0px var(--ivp-side-gutter);
-}
-.ip_header .logo .text{
-	text-decoration: none;
-	color: #000;
-	font-family: "Consolas", monospace;
-	text-transform: none;
-	letter-spacing: 2px;
-	font-size: var(--ivp-logo-font-size);
-	font-weight: 800;
-	line-height: var(--ivp-bar-height);
-	padding-left: var(--ivp-logo-padding-left);
-}
-.ip_header .logo .text .logo-label{
-	position: relative;
-	top: 2px;
-	text-transform: none;
-}
 .ip_header .logo .text .logo-cursor{
 	margin-left: 1px;
 	font-weight: 400;
@@ -333,73 +265,18 @@ h6 { font-size: 16px; }
 		animation: none;
 	}
 }
-.ip_header .logo{
-	flex: 0 0 auto;
-}
-.ip_header .menu{
-	position: relative;
-	flex: 1 1 auto;
-	min-width: 0;
-	display: flex;
-	justify-content: flex-end;
-}
-.ip_header .menu ul{
-	margin: 0px;
-	list-style-type: none;
-	display: flex;
-	flex-wrap: nowrap;
-	align-items: center;
-	justify-content: flex-end;
-}
-.ip_header .menu ul li{
-	margin: 0px;
-	float: none;
-	flex: 0 0 auto;
-}
 .ip_header .menu ul li a{
-	text-decoration: none;
-	color: #333;
-	font-family: "Onest";
-	font-weight: 500;
-	padding: 0 var(--ivp-menu-padding-x);
-	position: relative;
-	display: inline-grid;
-	justify-items: center;
 	transition: all .3s ease;
 }
 .ip_header .menu ul li a b{
-	display: inline-block;
 	transition: transform .3s ease, font-size .3s ease;
 }
 .ip_header .menu ul li .ivp_menu_sub{
-	position: absolute;
-	left: 50%;
-	right: auto;
-	top: 50%;
-	margin-top: 3px;
-	transform: translateX(-50%);
-	text-align: center;
-	font-size: 10px;
-	font-weight: 600;
-	line-height: 1;
-	letter-spacing: 0.5px;
-	text-transform: lowercase;
-	white-space: nowrap;
-	opacity: 0;
-	pointer-events: none;
 	transition: opacity .3s ease, font-size .3s ease;
 }
-.ip_header .menu ul li.active a b,
 .ip_header .menu ul li a:hover b{
 	transform: translateY(-8px);
 }
-.ip_header .menu ul li.active a b{
-	font-size: 1.25em;
-}
-.ip_header .menu ul li.active .ivp_menu_sub{
-	font-size: 12px;
-}
-.ip_header .menu ul li.active .ivp_menu_sub,
 .ip_header .menu ul li a:hover .ivp_menu_sub{
 	opacity: 1;
 }
@@ -1122,28 +999,9 @@ html::-webkit-scrollbar-track-piece,
 }
 
 /*---------------------------------------------------*/
-/*	 FOOTER
+/*	 FOOTER (enhancements — layout in index.html)
 /*---------------------------------------------------*/
-
-.ip_footer{
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	height: var(--ivp-footer-height);
-	background-color: #fff;
-	z-index: 10;
-	line-height: var(--ivp-footer-height);
-	font-size: var(--ivp-footer-font-size);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0px var(--ivp-side-gutter);
-}
-.ip_footer .copyright p{
-	color: #333;
-	font-family: "Onest";
-}
+/* Tablet/mobile footer centering: see @media (max-width: 1023px) below. */
 
 /*---------------------------------------------------*/
 /*	 MAGIC CURSOR
