@@ -1215,7 +1215,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 }
 /* Narrow phones: the full-height portrait column gets too thin, so hide the
    shared column (handled by the max-width:1023px rule) and let only the home
-   section show the square 1.jpg stacked above its content. Other sections keep
+   section show the square 1.webp stacked above its content. Other sections keep
    the photo hidden and use the full width. */
 @media (max-width: 590px) {
 	#home .ip_home{
