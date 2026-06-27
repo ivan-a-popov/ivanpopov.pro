@@ -1143,7 +1143,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_modalbox .description_wrap{padding: 20px;}
 	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
 }
-/* Compact header: logo + menu side by side with tighter typography (590px–767px). */
+/* Compact header: tighter typography (641px–767px uses grid; ≤640px uses flex below). */
 @media (max-width: 767px) {
 	.ip_all_wrap{
 		--ivp-menu-sub-font-size: 11px;
@@ -1161,6 +1161,16 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		transform: translateY(-6px);
 	}
 }
+/* ≤640px: flex header — grid 40/60 split is too tight for five menu items. */
+@media (max-width: 640px) {
+	.ip_header{
+		display: flex;
+		justify-content: stretch;
+	}
+	.ip_header .logo .text{ font-size: 14px; }
+	.ip_header .menu{ justify-content: flex-end; }
+	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
+}
 @media (max-width: 490px) {
 	.ip_all_wrap{
 		--ivp-menu-padding-left: 6px;
@@ -1168,13 +1178,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		--ivp-menu-sub-font-size: 11px;
 		--ivp-menu-sub-font-size-active: 13px;
 	}
-	.ip_header{
-		display: flex;
-		justify-content: stretch;
-	}
-	.ip_header .logo .text{ font-size: 14; }
-	.ip_header .menu{ justify-content: flex-end; }
-	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
 	.ip_header .menu ul li a{ padding: 0 6px; }
 }
 /* Tablets / large phones: keep the full-height portrait two-column layout.*/
@@ -1236,7 +1239,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		object-fit: cover;
 		object-position: center 30%;
 	}
-    .ip_header .logo{ display: none; }
 }
 
 /*---------------------------------------------------*/
