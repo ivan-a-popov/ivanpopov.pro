@@ -56,9 +56,9 @@ body{margin:0}
 <!-- CRITICAL CHROME CSS (inlined so header/footer layout is stable before async
      style.css downloads — prevents CLS when the stylesheet arrives) -->
 <style>
-.ip_all_wrap{width:100%;min-height:100vh;position:relative;--ivp-side-gutter:clamp(40px,2.8vw,52px);--ivp-bar-height:clamp(60px,calc(52px + 1.1vw),70px);--ivp-footer-height:clamp(20px,calc(16px + 1.8vw),50px);--ivp-footer-font-size:clamp(6px,calc(4px + .5vw),16px);--ivp-logo-font-size:clamp(15px,calc(12px + .9vw),25px);--ivp-logo-padding-left:clamp(6px,calc(10px + 1.2vw),30px);--ivp-menu-padding-left:clamp(6px,calc(8px + 1.1vw),30px);--ivp-menu-padding-right:clamp(6px,calc(8px + 1.1vw),30px);--ivp-menu-gap:0px;--ivp-menu-sub-gap:3px;--ivp-menu-sub-font-size:10px;--ivp-menu-sub-font-size-active:12px;--ivp-col-left:40%;--ivp-col-right:60%}
+.ip_all_wrap{width:100%;min-height:100vh;position:relative;--ivp-side-gutter:clamp(40px,2.8vw,52px);--ivp-bar-height:clamp(60px,calc(52px + 1.1vw),70px);--ivp-footer-height:clamp(20px,calc(16px + 1.8vw),50px);--ivp-footer-font-size:clamp(6px,calc(4px + .5vw),16px);--ivp-logo-font-size:clamp(15px,calc(14px + .9vw),25px);--ivp-logo-padding-left:clamp(6px,calc(10px + 1.2vw),30px);--ivp-menu-padding-left:clamp(6px,calc(8px + 1.1vw),30px);--ivp-menu-padding-right:clamp(6px,calc(8px + 1.1vw),30px);--ivp-menu-gap:0px;--ivp-menu-sub-gap:3px;--ivp-menu-sub-font-size:10px;--ivp-menu-sub-font-size-active:12px;--ivp-col-left:40%;--ivp-col-right:60%}
 .ip_all_wrap,.ip_all_wrap *{box-sizing:border-box}
-.ip_header{position:fixed;top:0;left:0;right:0;height:var(--ivp-bar-height);line-height:var(--ivp-bar-height);background:#fff;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 var(--ivp-side-gutter)}
+.ip_header{position:fixed;top:0;left:0;right:0;height:var(--ivp-bar-height);line-height:var(--ivp-bar-height);background:#fff;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 var(--ivp-side-gutter)+10px}
 .ip_header .logo{flex:0 0 auto}
 .ip_header .logo .text{text-decoration:none;color:#000;font-family:Consolas,monospace;letter-spacing:2px;font-size:var(--ivp-logo-font-size);font-weight:800;line-height:var(--ivp-bar-height);padding-left:var(--ivp-logo-padding-left)}
 .ip_header .logo .text .logo-label{position:relative;top:2px}
@@ -86,9 +86,9 @@ body{margin:0}
 
 <!-- STYLES -->
 <!-- All app CSS loads async (preload + onload swap) so it not blocking the preloader's first paint.  -->
-<link rel="preload" as="style" href="static/css/style.css?v=0da2b8b2" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=a097229b" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/style.css?v=0da2b8b2" />
+<link rel="stylesheet" href="static/css/style.css?v=a097229b" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -137,7 +137,7 @@ body{margin:0}
 			<div class="author_image" id="author_image">
 				<div class="author_image_inner">
 					<img class="author_photo" id="author_photo_img"
-						src="static/img/about/2.webp"
+					src="static/img/about/2.webp"
 						alt=""
 						width="1096"
 						height="1484"
@@ -214,7 +214,7 @@ body{margin:0}
 										<p>Работаю со всеми платформами, кроме Apple. Берусь за самые сложные случаи: "по сарафану" ко мне часто приходят после того, как все остальные уже отказались либо не справились.</p>
 									</div>
 									<div class="right">
-										<p>За 25+ лет в разработке довелось "пощупать" с десяток различных языков программирования и встретиться с самыми разнообразными задачами. Как итог — нет привязанности к какому-то конкретному фреймворку, технологии или вендору.</p>
+										<p>За 20+ лет в разработке довелось "пощупать" с десяток различных языков программирования и встретиться с самыми разнообразными задачами. Как итог — нет привязанности к какому-то конкретному фреймворку, технологии или вендору.</p>
 										<p>Решения и инструменты реализации должны подбираться под задачу, исходя из потребностей бизнеса и с учетом перспектив его развития и вопросов поддержки и доработки в дальнейшем.</p>
 									</div>
 								</div>				

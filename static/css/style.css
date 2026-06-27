@@ -484,9 +484,7 @@ html::-webkit-scrollbar-track-piece,
 	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 }
 .ip_home .name{
-	/* Fluid size: keeps the original 72px on large screens but scales down
-	   smoothly instead of jumping abruptly from 72px to 55px at the 1600px
-	   breakpoint. Floors at 36px for the narrowest two-column widths. */
+	/* Fluid size: keeps the original size on large screens, scales down smoothly*/
 	font-size: clamp(24px, calc(25px + 2.44vw), 64px);
 	font-weight: 600;
 	text-transform: uppercase;
@@ -1146,14 +1144,14 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
 }
 /* Compact header: logo + menu side by side with tighter typography (590px–767px). */
-@media (max-width: 767px) and (min-width: 590px) {
+@media (max-width: 767px) {
 	.ip_all_wrap{
 		--ivp-menu-sub-font-size: 11px;
 		--ivp-menu-sub-font-size-active: 12px;
 	}
 	.ip_header .logo .text{
-		padding-left: clamp(3px, 1.2vw, 16px);
-		letter-spacing: clamp(0px, 0.3vw, 1px);
+		padding-left: clamp(1px, 1.2vw, 18px);
+		letter-spacing: clamp(0px, 0.3vw, 0px);
 	}
 	.ip_header .menu ul li a{
 		font-size: clamp(11px, 1.5vw, 14px);
@@ -1163,7 +1161,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		transform: translateY(-6px);
 	}
 }
-@media (max-width: 589px) {
+@media (max-width: 490px) {
 	.ip_all_wrap{
 		--ivp-menu-padding-left: 6px;
 		--ivp-menu-padding-right: 6px;
@@ -1174,15 +1172,15 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		display: flex;
 		justify-content: stretch;
 	}
-	.ip_header .logo{ display: none; }
+	.ip_header .logo .text{ font-size: 14; }
 	.ip_header .menu{ justify-content: flex-end; }
 	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
 	.ip_header .menu ul li a{ padding: 0 6px; }
 }
 /* Tablets / large phones: keep the full-height portrait two-column layout. Below
-   590px the column gets too narrow to look good, so the home portrait switches to
-   the stacked square 1.jpg instead (see the max-width:589px block). */
-@media (min-width: 590px) and (max-width: 1023px) {
+   540px the column gets too narrow to look good, so the home portrait switches to
+   the stacked square 1.jpg instead (see the max-width: 589px block). */
+@media (min-width: 490px) {
 	.ip_footer {justify-content: flex-start;}
 	.ip_mainpart .author_image{
 		width: 36%;
@@ -1213,24 +1211,25 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_service .service_list ul li{width: 100%;padding-left: 0px;margin-bottom: 20px;}
 	.ip_service .service_list ul li .title{font-size: 20px;}
 }
-/* Narrow phones: the full-height portrait column gets too thin, so hide the
+/* Narrow phones: down below ~500px the full-height portrait column gets too thin, so hide the
    shared column (handled by the max-width:1023px rule) and let only the home
    section show the square 1.webp stacked above its content. Other sections keep
    the photo hidden and use the full width. */
-@media (max-width: 590px) {
+@media (max-width: 490px) {
 	#home .ip_home{
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: flex-start;
 		height: auto;
 		min-height: 100%;
+		font-size: 16px;
 	}
 	.ip_home_photo{
 		display: block;
 		width: 100%;
 		/* Match the content's horizontal inset so the photo aligns with the text. */
 		padding: 0 20px;
-		margin-bottom: 30px;
+		margin-bottom: 20px;
 	}
 	.ip_home_photo img{
 		display: block;
@@ -1239,6 +1238,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		object-fit: cover;
 		object-position: center 30%;
 	}
+    .ip_header .logo{ display: none; }
 }
 
 /*---------------------------------------------------*/
