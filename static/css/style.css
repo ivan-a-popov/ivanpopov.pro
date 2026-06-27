@@ -1178,6 +1178,9 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		--ivp-menu-sub-font-size: 11px;
 		--ivp-menu-sub-font-size-active: 13px;
 	}
+	.ip_header .logo{
+		display: none;
+	}
 	.ip_header .menu ul li a{ padding: 0 6px; }
 }
 /* Tablets / large phones: keep the full-height portrait two-column layout.*/
