@@ -354,14 +354,14 @@ h6 { font-size: 16px; }
 	box-sizing: border-box;
 	object-fit: cover;
 	/* Keep the head from being cut on wide/landscape columns.
-	   Image is 960x1440 (aspect 0.667) -> when cover crops vertically the scaled
-	   height is containerWidth/0.667 = 1.5*100cqw. The total vertical overflow is
-	   (150cqw - 100cqh); a centered crop removes half of it (75cqw - 50cqh) from the
-	   top. We cap the TOP crop at ~11.5% of the scaled height (17.3cqw), just above
-	   the crown (which sits at 16.3%), so once the head nears the top edge we stop
+	   Image is 1096x1484 (aspect 0.739) -> when cover crops vertically the scaled
+	   height is containerWidth/0.739 = 1.354*100cqw. The total vertical overflow is
+	   (135.4cqw - 100cqh); a centered crop removes half of it (67.7cqw - 50cqh) from the
+	   top. We cap the TOP crop at ~25.2% of the scaled height (34.1cqw), just above
+	   the crown (which sits at 30%), so once the head nears the top edge we stop
 	   trimming the top and trim the bottom instead. The crop stays centered on
 	   normal columns; max(0px, ...) disables it when the column crops sideways. */
-	object-position: center calc(-1 * max(0px, min(75cqw - 50cqh, 17.3cqw)));
+	object-position: center calc(-1 * max(0px, min(67.7cqw - 50cqh, 34.1cqw)));
 	pointer-events: none;
 	user-select: none;
 	transition: height 0.25s ease, opacity 0.25s ease;
