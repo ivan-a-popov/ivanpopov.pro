@@ -1153,7 +1153,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		--ivp-menu-sub-font-size-active: 12px;
 	}
 	.ip_header .logo .text{
-		padding-left: clamp(6px, 1.2vw, 16px);
+		padding-left: clamp(3px, 1.2vw, 16px);
 		letter-spacing: clamp(0px, 0.3vw, 1px);
 	}
 	.ip_header .menu ul li a{
@@ -1164,7 +1164,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		transform: translateY(-6px);
 	}
 }
-@media (max-width: 689px) {
+@media (max-width: 589px) {
 	.ip_all_wrap{
 		--ivp-menu-padding-left: 6px;
 		--ivp-menu-padding-right: 6px;
@@ -1176,7 +1176,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		justify-content: stretch;
 	}
 	.ip_header .logo{ display: none; }
-	.ip_header .menu{ justify-content: stretch; }
+	.ip_header .menu{ justify-content: flex-end; }
 	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
 	.ip_header .menu ul li a{ padding: 0 6px; }
 }
