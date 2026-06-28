@@ -122,12 +122,10 @@ a:hover{text-decoration:none;}
 /*------------------------------------------------------------------*/
 /*	ANIMATION (rollIn / rollOut)
 /*------------------------------------------------------------------*/
-
 .animated {
   animation-duration: 1.2s;
   animation-fill-mode: both;
 }
-
 @keyframes rollIn {
   from {
     opacity: 0;
@@ -138,11 +136,9 @@ a:hover{text-decoration:none;}
     transform: none;
   }
 }
-
 .rollIn {
   animation-name: rollIn;
 }
-
 @keyframes rollOut {
   from {
     opacity: 1;
@@ -152,7 +148,6 @@ a:hover{text-decoration:none;}
     transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
   }
 }
-
 .rollOut {
   animation-name: rollOut;
 }
@@ -403,6 +398,7 @@ h6 { font-size: 16px; }
 	visibility: hidden;
 	z-index: 9;
 }
+
 /* Minimal scrollbars: thin thumb, no arrow buttons (incl. Windows Chromium). */
 html,
 .ip_section,
@@ -460,7 +456,6 @@ html::-webkit-scrollbar-track-piece,
 /*---------------------------------------------------*/
 /*	 HOME
 /*---------------------------------------------------*/
-
 .ip_home{
 	position: relative;
 	width: 100%;
@@ -514,25 +509,6 @@ html::-webkit-scrollbar-track-piece,
 	font-weight:600;
 	color: #333;
 }
-.ip_button{
-	width: 100%;
-	display: flow-root;
-}
-.ip_button a{
-	text-decoration: none;
-	color: #fff;
-	display: inline-block;
-	background-color: #333;
-	padding: 13px 38px;
-	border: 2px solid #333;
-	font-family: "Onest";
-	font-weight: 500;
-	transition: all .3s ease;
-}
-.ip_button a:hover{
-	background-color: transparent;
-	color: #333;
-}
 .ip_home_social{
 	display: flex;
 	flex-direction: row;
@@ -566,7 +542,6 @@ html::-webkit-scrollbar-track-piece,
 /*---------------------------------------------------*/
 /*	 ABOUT
 /*---------------------------------------------------*/
-
 .ip_about{
 	width: 100%;
 	display: flow-root;
@@ -879,7 +854,6 @@ html::-webkit-scrollbar-track-piece,
 /*---------------------------------------------------*/
 /*	 SERVICES
 /*---------------------------------------------------*/
-
 .ip_service{
 	width: 100%;
 	display: flow-root;
@@ -980,7 +954,7 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_modalbox .service_popup_informations .main_title{
 	width: 100%;
-	margin-bottom: 23px;
+	margin-bottom: 20px;
 }
 .ip_modalbox .service_popup_informations .main_title h3{
 	font-size: 22px;
@@ -997,13 +971,11 @@ html::-webkit-scrollbar-track-piece,
 
 /*---------------------------------------------------*/
 /*	 FOOTER (enhancements only — layout in index.html)
-/*---------------------------------------------------*/
 /* Tablet/mobile footer centering: see @media (max-width: 1023px) below. */
 
 /*---------------------------------------------------*/
 /*	 MAGIC CURSOR
 /*---------------------------------------------------*/
-
 .mouse-cursor{
   position: fixed;
   left: 0;
@@ -1081,8 +1053,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 /*---------------------------------------------------*/
 /*	 MEDIA QUERIES
 /*---------------------------------------------------*/
-
-@media (max-width: 1600px) and (min-width: 1024px){
+@media (min-width: 1024px){
 	body{font-size: 15px;}
 	.ip_all_wrap{
 		--ivp-col-left: 35%;
@@ -1095,8 +1066,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_title > span:after{margin-left: 20px;}
 	.ip_home .content{padding-left: 50px;}
 	.ip_home .job{font-size: 23px;}
-	.ip_button a{padding: 13px 32px;}
-	.ip_home_social img{width: 36px;height: 36px;}
+	.ip_home_social img{width: 48px;height: 48px;}
 	.ip_section .section_inner{padding: 20px 50px 0px 50px;}
 	.ip_about .testimonials .list ul li .text{padding: 30px;}
 	.ip_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
