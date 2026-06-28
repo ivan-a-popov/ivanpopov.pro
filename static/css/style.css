@@ -259,11 +259,15 @@ h6 { font-size: 16px; }
 		animation: none;
 	}
 }
+.ip_header .menu .transition_link ul li a{
+	font-size: 16;
+	}
 .ip_header .menu ul li a{
 	transition: all .3s ease;
 }
 .ip_header .menu ul li a b{
 	transition: transform .3s ease, font-size .3s ease;
+	font-size: 15px;
 }
 .ip_header .menu ul li .ivp_menu_sub{
 	transition: opacity .3s ease, font-size .3s ease;
@@ -275,31 +279,9 @@ h6 { font-size: 16px; }
 	opacity: 1;
 }
 
-.ip_left_border{
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	width: var(--ivp-side-gutter);
-	background-color: #fff;
-	z-index: 10;
-	transition: width 0.25s ease;
-}
-.ip_right_border{
-	position: fixed;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	width: var(--ivp-side-gutter);
-	background-color: #fff;
-	z-index: 10;
-	transition: width 0.25s ease;
-}
-
 /*---------------------------------------------------*/
 /*	 MAINPART
 /*---------------------------------------------------*/
-
 .ip_mainpart{
 	position: absolute;
 	top: var(--ivp-bar-height);
@@ -578,30 +560,31 @@ html::-webkit-scrollbar-track-piece,
 	margin-top: 8px;
 	opacity: 0.8;
 }
-.ip_about .bio .wrapper{
+.ip_about  .wrapper {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
 }
-.ip_about .bio .left{
+.ip_about  .left {
 	width: 45%;
 }
-.ip_about .bio .left p{
+.ip_about  .left p {
 	margin-bottom: 15px;
 }
-.ip_about .bio .left p:last-child{
+.ip_about  .left p:last-child {
 	margin-bottom: 25px;
 }
-.ip_about .bio .right{
+.ip_about  .right {
 	width: 45%;
 }
-.ip_about .bio .right p{
+.ip_about  .right p {
 	margin-bottom: 15px;
 }
-.ip_about .bio .right p:last-child {
+.ip_about  .right p:last-child {
 	margin-bottom: 25px;
 }
+
 .ip_full_link{
 	position: absolute;
 	top: 0px;
@@ -1049,7 +1032,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 /*	 MEDIA QUERIES
 /*---------------------------------------------------*/
 @media (min-width: 1024px){
-	body{font-size: 15px;}
+	body{font-size: 16px;}
 	.ip_all_wrap{
 		--ivp-col-left: 35%;
 		--ivp-col-right: 65%;
@@ -1100,16 +1083,13 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_mainpart .main_content{width: 100%;}
 	.ip_home .content{padding: 0px 20px;}
 	.ip_home .job{font-size: 22px;}
-	.ip_about .bio .wrapper{flex-direction: column;align-items: baseline;}
-	.ip_about .bio .left{width: 100%;}
-	.ip_about .bio .right{width: 100%;margin-bottom: 25px;}
 	.ip_section .section_inner{padding: 10px 20px 0px 20px;}
 	.ip_modalbox .box_inner{width: 480px;}
 	.ip_modalbox .description_wrap{padding: 20px;}
 	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
 }
 /* Compact header: tighter typography (641px–767px uses grid; ≤640px uses flex below). */
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
 	.ip_all_wrap{
 		--ivp-menu-sub-font-size: 12px;
 		--ivp-menu-sub-font-size-active: 13px;
@@ -1125,30 +1105,24 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_header .menu ul li a:hover b{
 		transform: translateY(-6px);
 	}
-}
-/* ≤640px: flex header — grid 40/60 split is too tight for five menu items. */
-@media (max-width: 640px) {
+} */
+@media (max-width: 714px) {
 	.ip_header{
 		display: flex;
-		justify-content: stretch;
+		justify-content: space-around;
 	}
-	.ip_header .logo .text{ font-size: 14px; }
 	.ip_header .menu{ justify-content: flex-end; }
-	.ip_header .menu ul{ width: 100%; justify-content: space-between; }
-	.ip_header .menu ul li a{ font-size: 14px; }
+	.ip_header .menu ul{ width: 100%; justify-content: space-around; }
+	.ip_header .menu ul li a{ font-size: 15px; }
 
 	.ip_all_wrap{
 		--ivp-menu-padding-left: 4px;
 		--ivp-menu-padding-right: 4px;
-		--ivp-menu-sub-font-size: 12px;
-		--ivp-menu-sub-font-size-active: 14px;
+		--ivp-menu-sub-font-size: 14px;
+		--ivp-menu-sub-font-size-active: 16px;
 	}
 	.ip_header .logo{
 		display: none;
-	}
-	.ip_header .menu ul li a{
-		font-size: 13px;
-		padding: 0 4px;
 	}
 }
 /* Tablets / large phones: keep the full-height portrait two-column layout.*/
@@ -1249,9 +1223,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 .ip_all_wrap.has-touch .ip_swipe_nav{
 	display: block;
 }
-/* .ip_all_wrap.has-touch .ip_section .section_inner{
-	padding-bottom: 64px;
-} */
 
 @media (max-width: 1023px) {
 	.ip_swipe_nav{
@@ -1264,9 +1235,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		touch-action: pan-y;
 		overscroll-behavior-y: contain;
 	}
-	/* .ip_section .section_inner{
-		padding-bottom: 64px;
-	} */
 
 	/* Testimonials: horizontal scroll-snap is desktop-only; on mobile show
 	   every entry as a vertical list. Unfloat the subtree so stacked cards
