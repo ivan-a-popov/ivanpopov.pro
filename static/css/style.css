@@ -38,8 +38,7 @@
 /*	BASE (reset)
 /*------------------------------------------------------------------*/
 
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
-	{
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, b, i, ul, ol, li {
 	background: transparent;
 	border: 0;
 	margin: 0;
@@ -47,46 +46,15 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 	vertical-align: baseline;
 	outline: none;
 }
-
-article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
-    display: block;
+img {
+	vertical-align: middle;
+	max-width: 100%;
 }
-
-blockquote {
-	quotes: none;
-}
-
-blockquote:before,blockquote:after {
-	content: '';
-	content: none;
-}
-ul, ol{
-	margin:0px;	
-}
-ul li, ol li{
-	margin:0px;
-}
-img{
-	vertical-align:middle;
-	max-width:100%;
-}
-iframe{
-	max-width:100%;
-}
-del {
-	text-decoration: line-through;
-}
-a, i{
-	border:none;
-}
-a:hover{text-decoration:none;}
-
 
 /*------------------------------------------------------------------*/
 /*	ICONS
 /*------------------------------------------------------------------*/
-/* The icons are painted from inline SVG masks and inherit currentColor like a font glyph.
-*/
+/* The icons are painted from inline SVG masks and inherit currentColor like a font glyph. */
 
 .icon-cancel:before,
 .icon-quote-left:before,
@@ -117,7 +85,6 @@ a:hover{text-decoration:none;}
           mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M0 216C0 149.7 53.7 96 120 96l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64zm256 0c0-66.3 53.7-120 120-120l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64z'/%3E%3C/svg%3E");
 }
 .icon-quote-right:before { transform: rotate(180deg); }
-
 
 /*------------------------------------------------------------------*/
 /*	ANIMATION (rollIn / rollOut)
@@ -152,13 +119,12 @@ a:hover{text-decoration:none;}
   animation-name: rollOut;
 }
 
-
 /* --------------------------------
 |* Animated headline (clip effect)
 -------------------------------- */
-/* Word rotation is a vanilla-JS re-implementation of the CodyHouse JQuiry "clip" effect. 
+/* Word rotation is a vanilla-JS re-implementation of the CodyHouse "clip" effect.
    The active word carries .is-visible and stays in flow to size the line; the others are
-   .is-hidden and  absolutely stacked. JS animates the wrapper width to type/erase each
+   .is-hidden and absolutely stacked. JS animates the wrapper width to type/erase each
    phrase, clipped by overflow:hidden with the trailing cursor bar (::after). */
 .cd-words-wrapper {
   display: inline-block;
@@ -189,11 +155,12 @@ a:hover{text-decoration:none;}
 .cd-headline.clip .cd-words-wrapper::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: 50%;
   right: 0;
   width: 2px;
-  height: 100%;
-  background-color: #aebcb9;
+  height: 70%;
+  transform: translateY(-50%);
+  background-color: #999;
 }
 
 /*---------------------------------------------------*/
@@ -206,7 +173,7 @@ html {
 	margin: 0px;
 	scrollbar-gutter: stable;
 }
-body{
+body {
 	overflow-x: hidden;
 	width: 100%;
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
@@ -217,22 +184,15 @@ body{
 	font-weight: 400;
 	color: #7d7789;
 }
-svg{
+svg {
 	fill: currentcolor;
 }
-
-h1, h2, h3, h4, h5, h6{
-	font-weight:700;
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 700;
 	line-height: 1.2;
 	font-family: "Onest";
 	color: #333;
 }
-h1 { font-size: 42px; }
-h2 { font-size: 36px; }
-h3 { font-size: 30px; }
-h4 { font-size: 24px; }
-h5 { font-size: 20px; }
-h6 { font-size: 16px; }
 /* Header/footer layout and .ip_all_wrap tokens are inlined in index.html's <head>. */
 @media (min-width: 1024px){
 	.ip_all_wrap[data-magic-cursor="show"],
@@ -259,9 +219,6 @@ h6 { font-size: 16px; }
 		animation: none;
 	}
 }
-.ip_header .menu .transition_link ul li a{
-	font-size: 16;
-	}
 .ip_header .menu ul li a{
 	transition: all .3s ease;
 }
@@ -303,9 +260,8 @@ h6 { font-size: 16px; }
 	visibility: visible;
 	transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
-/* Portrait host (structural wrapper around the author photo). Becomes a size
-   container so the portrait crop can react to THIS column's width/height
-   (cqw/cqh) instead of the whole viewport. */
+/* Portrait host: a size container so the crop can react to THIS column's
+   width/height (cqw/cqh) instead of the whole viewport. */
 .ip_mainpart .author_image .author_image_inner{
 	position: absolute;
 	top: 0;
@@ -318,7 +274,6 @@ h6 { font-size: 16px; }
 	container-type: size;
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
-/* Portrait column */
 .ip_mainpart .author_image .author_image_inner .author_photo{
 	position: absolute;
 	z-index: 2;
@@ -359,7 +314,6 @@ h6 { font-size: 16px; }
 	right: 0px;
 	overflow: hidden;
 	overflow-y: auto;
-	
 	opacity: 0;
 	visibility: hidden;
 	z-index: 8;
@@ -415,24 +369,11 @@ html::-webkit-scrollbar-track-piece,
 	-webkit-appearance: none;
 	appearance: none;
 }
-@media (min-width: 1024px){
-	.ip_section{
-		scroll-behavior: smooth;
-	}
-}
 .ip_section .section_inner{
 	width: 100%;
 	display: flow-root;
 	position: relative;
 	padding: 20px 100px 0px 100px;
-}
-.ip_section .section_inner:before{
-	position: absolute;
-	content: "";
-	top: 0px;
-	bottom: 0px;
-	right: 0px;
-	width: 100px;
 }
 
 /*---------------------------------------------------*/
@@ -445,15 +386,14 @@ html::-webkit-scrollbar-track-piece,
 	display: flex;
 	align-items: center;
 }
-/* Dedicated home-only portrait (square 1.jpg), shown only when the two-column
+/* Dedicated home-only portrait (square 1.webp), shown only when the two-column
    layout collapses on narrow phones (see media queries). Hidden otherwise. */
 .ip_home_photo{
 	display: none;
 }
 .ip_home .content{
 	padding-left: 100px;
-	/* Fluid gaps around the name/line/job stack — scale with viewport instead of
-	   jumping at discrete breakpoints. */
+	/* Fluid gaps around the name/line/job stack — scale with viewport. */
 	--ip-home-name-gap: clamp(16px, calc(18px + 1.2vw), 30px);
 	--ip-home-line-gap: clamp(16px, calc(18px + 1.2vw), 30px);
 	--ip-home-line-width: clamp(40px, calc(25px + 2.5vw), 70px);
@@ -461,7 +401,6 @@ html::-webkit-scrollbar-track-piece,
 	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 }
 .ip_home .name{
-	/* Fluid size: keeps the original size on large screens, scales down smoothly*/
 	font-size: clamp(24px, calc(25px + 2.44vw), 64px);
 	font-weight: 600;
 	text-transform: uppercase;
@@ -488,7 +427,7 @@ html::-webkit-scrollbar-track-piece,
 	color: #7d7789;
 }
 .ip_home .job b{
-	font-weight:600;
+	font-weight: 600;
 	color: #333;
 }
 .ip_home_social{
@@ -512,13 +451,6 @@ html::-webkit-scrollbar-track-piece,
 	width: 48px;
 	height: 48px;
 	display: block;
-}
-.cd-headline.clip .cd-words-wrapper::after{
-	height: 70%;
-	top: 50%;
-	width: 2px;
-	transform: translateY(-50%);
-	background-color: #999;
 }
 
 /*---------------------------------------------------*/
@@ -552,36 +484,22 @@ html::-webkit-scrollbar-track-piece,
 	transform: translateY(-50%);
 	margin-left: 30px;
 }
-.ip_title .subtitle{
-	font-size: 16px;
-	color: #7d7789;
-	font-weight: 400;
-	font-style: italic;
-	margin-top: 8px;
-	opacity: 0.8;
-}
-.ip_about  .wrapper {
+.ip_about .wrapper {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
 }
-.ip_about  .left {
+.ip_about .left,
+.ip_about .right {
 	width: 45%;
 }
-.ip_about  .left p {
+.ip_about .left p,
+.ip_about .right p {
 	margin-bottom: 15px;
 }
-.ip_about  .left p:last-child {
-	margin-bottom: 25px;
-}
-.ip_about  .right {
-	width: 45%;
-}
-.ip_about  .right p {
-	margin-bottom: 15px;
-}
-.ip_about  .right p:last-child {
+.ip_about .left p:last-child,
+.ip_about .right p:last-child {
 	margin-bottom: 25px;
 }
 
@@ -597,11 +515,6 @@ html::-webkit-scrollbar-track-piece,
 	width: 100%;
 	display: flow-root;
 	margin-bottom: 90px;
-}
-@media (min-width: 1024px) {
-	#what .section_inner{
-		padding-top: 0;
-	}
 }
 .ip_about .testimonials .list{
 	width: 100%;
@@ -632,24 +545,24 @@ html::-webkit-scrollbar-track-piece,
 	position: absolute;
 	content: "";
 	height: 0px;
-    width: 0px;
+	width: 0px;
 	top: 100%;
-    left: 50px;
-    border: solid transparent;
-    border-top-color: #E5EDF4;
-    border-width: 18px 18px 0px 0px;
+	left: 50px;
+	border: solid transparent;
+	border-top-color: #E5EDF4;
+	border-width: 18px 18px 0px 0px;
 }
 .ip_about .testimonials .list ul li .text:after{
 	position: absolute;
 	content: "";
 	top: 100%;
-    left: 50px;
+	left: 50px;
 	height: 0px;
-    width: 0px;
-    border: solid transparent;
-    border-top-color: #f6fbff;
-    border-width: 14px 13px 0px 0px;
-    margin-left: 2px;
+	width: 0px;
+	border: solid transparent;
+	border-top-color: #f6fbff;
+	border-width: 14px 13px 0px 0px;
+	margin-left: 2px;
 }
 .ip_about .testimonials .list ul li .text i{
 	position: absolute;
@@ -693,12 +606,13 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_about .testimonials .details .info h3{
 	font-size: 16px;
-    margin-bottom: 2px;
-    font-weight: 600;
+	margin-bottom: 2px;
+	font-weight: 600;
 }
 .ip_about .testimonials .details .info span{
 	font-size: 14px;
 }
+/* Desktop: horizontal scroll-snap carousel (mobile uses a vertical list). */
 @media (min-width: 1024px) {
 	.ip_about .testimonials .list ul.testimonials-snap{
 		display: flex;
@@ -731,8 +645,7 @@ html::-webkit-scrollbar-track-piece,
 		flex: 0 0 calc((100% - 30px) / 2);
 		min-width: 0;
 		/* The base rule sets a 10px margin on every li; in this flex track the
-		   gap handles spacing, and the extra margin pushes card 2's right
-		   border past the scrollport and clips it. */
+		   gap handles spacing, and the extra margin clips card 2's right border. */
 		margin: 0;
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
@@ -744,7 +657,7 @@ html::-webkit-scrollbar-track-piece,
 		padding-top: 10px;
 		padding-bottom: 30px;
 		box-sizing: border-box;
-	}	
+	}
 	.ip_about .testimonials .list ul.testimonials-snap > li .text{
 		overflow: visible;
 	}
@@ -806,7 +719,7 @@ html::-webkit-scrollbar-track-piece,
 	height: 40px;
 	text-decoration: none;
 	color: #fff;
-	border:2px solid #fff;
+	border: 2px solid #fff;
 	border-radius: 10px;
 	position: relative;
 	transition: all .3s ease;
@@ -868,8 +781,8 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_service .service_list ul li .svg{
 	width: 60px;
-    height: 60px;
-    color: #333;
+	height: 60px;
+	color: #333;
 	margin-bottom: 27px;
 	transition: all .3s ease;
 }
@@ -892,19 +805,10 @@ html::-webkit-scrollbar-track-piece,
 .ip_service .service_list ul li .list_inner:hover .text{
 	color: #aaa;
 }
-.ip_service .popup_service_image{
-	opacity: 0;
-	visibility: hidden;
-	display: none;
-	position: absolute;
-	z-index: -111;
-}
+/* Data containers only — content is copied into the popup by JS. */
+.ip_service .popup_service_image,
 .ip_service .service_hidden_details{
-	opacity: 0;
-	visibility: hidden;
 	display: none;
-	position: absolute;
-	z-index: -111;
 }
 .ip_modalbox .service_popup_informations{
 	width: 100%;
@@ -946,10 +850,6 @@ html::-webkit-scrollbar-track-piece,
 .ip_modalbox .service_popup_informations .descriptions p:last-child{
 	margin-bottom: 0px;
 }
-
-/*---------------------------------------------------*/
-/*	 FOOTER (enhancements only — layout in index.html)
-/* Tablet/mobile footer centering: see @media (max-width: 1023px) below. */
 
 /*---------------------------------------------------*/
 /*	 MAGIC CURSOR
@@ -1022,159 +922,11 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 }
 .ip_all_wrap[data-magic-cursor="hide"] .mouse-cursor{
 	display: none;
-	opacity: 0;
-	visibility: hidden;
-	position: absolute;
-	z-index: -1111;
 }
 
 /*---------------------------------------------------*/
-/*	 MEDIA QUERIES
+/*	 SWIPE NAVIGATION (MOBILE) — dots built by JS
 /*---------------------------------------------------*/
-@media (min-width: 1024px){
-	body{font-size: 16px;}
-	.ip_all_wrap{
-		--ivp-col-left: 35%;
-		--ivp-col-right: 65%;
-	}
-	.ip_mainpart .author_image{width: 35%;}
-	.ip_mainpart .main_content{width: 65%;}
-	.ip_section .section_inner:before{width: 50px;}
-	.ip_title > span{letter-spacing: 3px;}
-	.ip_title > span:after{margin-left: 20px;}
-	.ip_home .content{padding-left: 50px;}
-	.ip_home .job{font-size: 23px;}
-	.ip_home_social img{width: 48px;height: 48px;}
-	.ip_section .section_inner{padding: 20px 50px 0px 50px;}
-	.ip_about .testimonials .list ul li .text{padding: 30px;}
-	.ip_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
-	.ip_modalbox .description_wrap{padding: 30px;}
-}
-@media (max-width: 1023px) {
-	.ip_all_wrap{
-		--ivp-col-left: 36%;
-		--ivp-col-right: 64%;
-	}
-	.ip_footer {justify-content: center;}
-	.mouse-cursor{display: none;}
-	.ip_all_wrap{
-		--ivp-side-gutter: 10px;
-	}
-	.ip_left_border,
-	.ip_right_border{
-		width: 0;
-		overflow: hidden;
-		pointer-events: none;
-	}
-	.ip_section .section_inner:before{width: 20px;}
-	.ip_mainpart .author_image{
-		width: 0;
-		height: 0;
-		opacity: 0;
-		visibility: hidden;
-		pointer-events: none;
-	}
-	.ip_mainpart .author_image .author_image_inner,
-	.ip_mainpart .author_image .author_photo{
-		height: 0;
-		opacity: 0;
-	}
-	.ip_mainpart{top: var(--ivp-bar-height);left: 0px;right: 0px;bottom: 0px;}
-	.ip_mainpart .main_content{width: 100%;}
-	.ip_home .content{padding: 0px 20px;}
-	.ip_home .job{font-size: 22px;}
-	.ip_section .section_inner{padding: 10px 20px 0px 20px;}
-	.ip_modalbox .box_inner{width: 480px;}
-	.ip_modalbox .description_wrap{padding: 20px;}
-	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
-}
-/* Compact header: tighter typography (641px–767px uses grid; ≤640px uses flex below). */
-/* @media (max-width: 767px) {
-	.ip_all_wrap{
-		--ivp-menu-sub-font-size: 12px;
-		--ivp-menu-sub-font-size-active: 13px;
-	}
-	.ip_header .logo .text{
-		padding-left: clamp(1px, 1.2vw, 18px);
-		letter-spacing: clamp(0px, 0.3vw, 0px);
-	}
-	.ip_header .menu ul li a{
-		font-size: clamp(13px, 2.2vw, 15px);
-	}
-	.ip_header .menu ul li.active a b,
-	.ip_header .menu ul li a:hover b{
-		transform: translateY(-6px);
-	}
-} */
-@media (max-width: 714px) {
-	.ip_header{
-		display: flex;
-		justify-content: space-around;
-	}
-	.ip_header .menu{ justify-content: flex-end; }
-	.ip_header .menu ul{ width: 100%; justify-content: space-around; }
-	.ip_header .menu ul li a{ font-size: 15px; }
-
-	.ip_all_wrap{
-		--ivp-menu-padding-left: 4px;
-		--ivp-menu-padding-right: 4px;
-		--ivp-menu-sub-font-size: 14px;
-		--ivp-menu-sub-font-size-active: 16px;
-	}
-	.ip_header .logo{
-		display: none;
-	}
-}
-/* Tablets / large phones: keep the full-height portrait two-column layout.*/
-@media (min-width: 639px) and (max-width: 1023px){
-	.ip_footer {justify-content: flex-start;}
-	.ip_mainpart .author_image{
-		width: 36%;
-		height: 100%;
-		opacity: 1;
-		visibility: visible;
-		pointer-events: auto;
-	}
-	.ip_mainpart .author_image .author_image_inner,
-	.ip_mainpart .author_image .author_photo{
-		height: 100%;
-		opacity: 1;
-		padding-bottom: 40px;
-	}
-	.ip_mainpart .main_content{width: 64%;}
-}
-/* On narrow phones, the full-height portrait column gets too thin, so hide the
-   shared column (handled by the max-width:1023px rule) and let only the home
-   section show the square 1.webp stacked above its content. Other sections keep
-   the photo hidden and use the full width. */
-@media (max-width: 639px) {
-	#home .ip_home{
-		flex-direction: column;
-		align-items: stretch;
-		justify-content: flex-start;
-		height: auto;
-		min-height: 100%;
-		font-size: 16px;
-	}
-	.ip_home_photo{
-		display: block;
-		width: 100%;
-	}
-	.ip_home_photo img{
-		display: block;
-		width: 100%;
-		height: clamp(220px, 40vh, 360px);
-		object-fit: cover;
-		object-position: center 30%;
-	}
-	.ip_home .content{padding: 20px 0px 0px 20px;}
-}
-
-/*---------------------------------------------------*/
-/*	SWIPE NAVIGATION (MOBILE)
-/*---------------------------------------------------*/
-
-/* Bottom dots: compact nav, touch screens, or narrow layout. */
 .ip_swipe_nav{
 	display: none;
 	position: fixed;
@@ -1219,26 +971,69 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
-/* Show dots + add bottom padding on touch devices (any width). */
+/* Show dots on touch devices at any width. */
 .ip_all_wrap.has-touch .ip_swipe_nav{
 	display: block;
 }
 
-@media (max-width: 1023px) {
-	.ip_swipe_nav{
-		display: block;
+/*---------------------------------------------------*/
+/*	 MEDIA QUERIES
+/*---------------------------------------------------*/
+@media (min-width: 1024px){
+	.ip_all_wrap{
+		--ivp-col-left: 35%;
+		--ivp-col-right: 65%;
 	}
+	.ip_mainpart .author_image{width: 35%;}
+	.ip_mainpart .main_content{width: 65%;}
+	.ip_section{scroll-behavior: smooth;}
+	.ip_section .section_inner{padding: 20px 50px 0px 50px;}
+	#what .section_inner{padding-top: 0;}
+	.ip_title > span{letter-spacing: 3px;}
+	.ip_title > span:after{margin-left: 20px;}
+	.ip_home .content{padding-left: 50px;}
+	.ip_home .job{font-size: 23px;}
+	.ip_about .testimonials .list ul li .text{padding: 30px;}
+	.ip_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
+	.ip_modalbox .description_wrap{padding: 30px;}
+}
+@media (max-width: 1023px) {
+	.ip_all_wrap{
+		--ivp-col-left: 36%;
+		--ivp-col-right: 64%;
+		--ivp-side-gutter: 10px;
+	}
+	.ip_footer{justify-content: center;}
+	.mouse-cursor{display: none;}
+	.ip_swipe_nav{display: block;}
+	.ip_mainpart{top: var(--ivp-bar-height);left: 0px;right: 0px;bottom: 0px;}
+	.ip_mainpart .author_image{
+		width: 0;
+		height: 0;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+	.ip_mainpart .author_image .author_image_inner,
+	.ip_mainpart .author_image .author_photo{
+		height: 0;
+		opacity: 0;
+	}
+	.ip_mainpart .main_content{width: 100%;}
 	/* Touch sections: enable momentum scroll. */
 	.ip_section{
-		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
 		touch-action: pan-y;
 		overscroll-behavior-y: contain;
 	}
-
-	/* Testimonials: horizontal scroll-snap is desktop-only; on mobile show
-	   every entry as a vertical list. Unfloat the subtree so stacked cards
-	   keep their height and spacing without a horizontal track. */
+	.ip_home .content{padding: 0px 20px;}
+	.ip_home .job{font-size: 22px;}
+	.ip_section .section_inner{padding: 10px 20px 0px 20px;}
+	.ip_modalbox .box_inner{width: 480px;}
+	.ip_modalbox .description_wrap{padding: 20px;}
+	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
+	/* Testimonials: horizontal snap is desktop-only; on mobile show every entry
+	   as a vertical list and unfloat the subtree so cards keep height/spacing. */
 	.ip_about .testimonials .list{
 		margin-top: 0;
 		padding-top: 10px;
@@ -1263,4 +1058,64 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_about .testimonials .list ul.testimonials-snap > li.is-clone{
 		display: none;
 	}
+}
+@media (max-width: 714px) {
+	.ip_header{
+		display: flex;
+		justify-content: space-around;
+	}
+	.ip_header .menu{ justify-content: flex-end; }
+	.ip_header .menu ul{ width: 100%; justify-content: space-around; }
+	.ip_header .menu ul li a{ font-size: 15px; }
+	.ip_all_wrap{
+		--ivp-menu-padding-left: 4px;
+		--ivp-menu-padding-right: 4px;
+		--ivp-menu-sub-font-size: 14px;
+		--ivp-menu-sub-font-size-active: 16px;
+	}
+	.ip_header .logo{
+		display: none;
+	}
+}
+/* Tablets / large phones: keep the full-height portrait two-column layout. */
+@media (min-width: 639px) and (max-width: 1023px){
+	.ip_footer{justify-content: flex-start;}
+	.ip_mainpart .author_image{
+		width: 36%;
+		height: 100%;
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+	.ip_mainpart .author_image .author_image_inner,
+	.ip_mainpart .author_image .author_photo{
+		height: 100%;
+		opacity: 1;
+		padding-bottom: 40px;
+	}
+	.ip_mainpart .main_content{width: 64%;}
+}
+/* On narrow phones the portrait column gets too thin, so only the home section
+   shows the square 1.webp stacked above its content; other sections use full width. */
+@media (max-width: 639px) {
+	#home .ip_home{
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
+		height: auto;
+		min-height: 100%;
+		font-size: 16px;
+	}
+	.ip_home_photo{
+		display: block;
+		width: 100%;
+	}
+	.ip_home_photo img{
+		display: block;
+		width: 100%;
+		height: clamp(220px, 40vh, 360px);
+		object-fit: cover;
+		object-position: center 30%;
+	}
+	.ip_home .content{padding: 20px 0px 0px 20px;}
 }
