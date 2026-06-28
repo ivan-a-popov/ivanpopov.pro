@@ -438,12 +438,8 @@ function ip_service_popup(){
 			}
 			var infos = modalBox.querySelector('.service_popup_informations');
 			if(infos){
-				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"></div></div>');
+				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"></div><div class="main_title"><h3>'+title+'</h3></div></div>');
 				ip_data_images();
-				var image = infos.querySelector('.image');
-				if(image){
-					image.insertAdjacentHTML('afterend', '<div class="main_title"><h3>'+title+'</h3></div>');
-				}
 			}
 		});
 	});
