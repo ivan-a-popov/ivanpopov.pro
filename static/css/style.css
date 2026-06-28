@@ -444,7 +444,7 @@ html::-webkit-scrollbar-track-piece,
 	opacity: 0.88;
 }
 .ip_home_social a:hover{
-	transform: scale(1.12);
+	transform: scale(1.25);
 	opacity: 1;
 }
 .ip_home_social img{
