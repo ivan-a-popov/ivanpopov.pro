@@ -87,9 +87,9 @@ body{margin:0}
 
 <!-- STYLES -->
 <!-- All app CSS loads async (preload + onload swap) so it not blocking the preloader's first paint.  -->
-<link rel="preload" as="style" href="static/css/style.css?v=e6cf652a" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=5e65b994" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/style.css?v=e6cf652a" />
+<link rel="stylesheet" href="static/css/style.css?v=5e65b994" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -410,7 +410,7 @@ body{margin:0}
 												</div>
 												<div class="details">
 													<div class="image">
-														<div class="main" data-img-url="static/img/testimonials/ukfed.jpg"></div>
+														<img class="main" src="static/img/testimonials/ukfed.jpg" alt="Сергей Гурьянов" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Сергей Гурьянов</h3>
@@ -431,7 +431,7 @@ body{margin:0}
 												</div>
 												<div class="details">
 													<div class="image">
-														<div class="main" data-img-url="static/img/testimonials/amalfi.jpg"></div>
+														<img class="main" src="static/img/testimonials/amalfi.jpg" alt="Эрман Ольга Михайловна" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Эрман Ольга Михайловна</h3>
@@ -449,7 +449,7 @@ body{margin:0}
 													</div>
 												<div class="details">
 													<div class="image">
-														<div class="main" data-img-url="static/img/testimonials/vsem-korobok.jpg"></div>
+														<img class="main" src="static/img/testimonials/vsem-korobok.jpg" alt="Илья Воробьев" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Илья Воробьев</h3>
@@ -475,7 +475,7 @@ body{margin:0}
 												</div>
 												<div class="details">
 													<div class="image">
-														<div class="main" data-img-url="static/img/testimonials/ipoint.jpg"></div>
+														<img class="main" src="static/img/testimonials/ipoint.jpg" alt="Попов Александр" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Попов Александр</h3>
@@ -497,7 +497,7 @@ body{margin:0}
 												</div>
 												<div class="details">
 													<div class="image">
-														<div class="main" data-img-url="static/img/testimonials/gm-light.png"></div>
+														<img class="main" src="static/img/testimonials/gm-light.png" alt="Екатерина Шрайбер" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Екатерина Шрайбер</h3>
@@ -519,7 +519,7 @@ body{margin:0}
 												</div>
 												<div class="details">
 													<div class="image">
-														<div class="main" data-img-url="static/img/testimonials/filters-market.jpg"></div>
+														<img class="main" src="static/img/testimonials/filters-market.jpg" alt="Валентин Воробьев" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Валентин Воробьев</h3>
@@ -555,21 +555,7 @@ body{margin:0}
 	</div>
 	<!-- /ALL WRAPPER -->
 	
-<!-- SCRIPTS -->
-<script src="static/js/init.js?v=1d47a18d"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-	setTimeout(function() {
-		var dataImages = document.querySelectorAll('[data-img-url]');
-		dataImages.forEach(function(element) {
-			var url = element.getAttribute('data-img-url');
-			element.style.backgroundImage = 'url(' + url + ')';
-		});
-	}, 200);
-});
-</script>
-<!-- /SCRIPTS -->
+<script src="static/js/init.js?v=72b4e04d"></script>
 
 </body>
 </html> 

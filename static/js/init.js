@@ -1,4 +1,5 @@
-// Vanilla (no-jQuery) site behavior. Custom scrollbars are now pure CSS.
+// Vanilla (no-jQuery) site behavior. 
+// Custom scrollbars, etc. are now pure CSS.
 
 // ----------  SMALL DOM HELPERS  ----------
 
@@ -46,7 +47,6 @@ ip_ready(function(){
 	ip_keyboard_navigation();
 	ip_service_popup();
 	ip_cursor();
-	ip_data_images();
 	ip_testimonials_snap();
 	ip_animated_headline();
 	ip_preloader();
@@ -438,8 +438,7 @@ function ip_service_popup(){
 			}
 			var infos = modalBox.querySelector('.service_popup_informations');
 			if(infos){
-				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img src="static/img/thumbs/4-2.jpg" alt="" /><div class="main" data-img-url="'+elImage+'"></div><div class="main_title"><h3>'+title+'</h3></div></div>');
-				ip_data_images();
+				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img class="main" src="'+elImage+'" alt="" width="640" height="320" /><div class="main_title"><h3>'+title+'</h3></div></div>');
 			}
 		});
 	});
@@ -541,20 +540,6 @@ function ip_cursor(){
 
 	inner.style.visibility = 'visible';
 	outer.style.visibility = 'visible';
-}
-
-// -----------------------------------------------------
-// ---------------   DATA IMAGES    --------------------
-// -----------------------------------------------------
-
-function ip_data_images(){
-
-	"use strict";
-
-	ip_all('*[data-img-url]').forEach(function(element){
-		var url = element.getAttribute('data-img-url');
-		element.style.backgroundImage = 'url(' + url + ')';
-	});
 }
 
 // -----------------------------------------------------
