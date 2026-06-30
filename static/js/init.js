@@ -405,12 +405,22 @@ function ip_service_popup(){
 			if(e.target !== boxInner){
 				return;
 			}
-			if(e.propertyName === 'opacity' || e.propertyName === 'visibility'){
+			if(e.propertyName === 'visibility'){
 				run();
 			}
 		}
+		function poll(){
+			if(settled || !modalBox.classList.contains('opened')){
+				return;
+			}
+			if(getComputedStyle(boxInner).visibility === 'visible'){
+				run();
+				return;
+			}
+			popupFocusTimer = setTimeout(poll, 40);
+		}
 		boxInner.addEventListener('transitionend', onEnd);
-		// box_inner uses a 0.3s delay before it becomes visible/focusable.
+		poll();
 		popupFocusTimer = setTimeout(run, 500);
 	}
 
