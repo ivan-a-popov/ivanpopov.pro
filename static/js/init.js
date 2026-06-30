@@ -2,6 +2,8 @@
 
 // Bumped when a modal opens so pending section-focus callbacks are ignored.
 var ip_section_focus_token = 0;
+// Element to restore focus to after any modal closes.
+var ip_modal_return_focus = null;
 
 // ----------  TINY DOM HELPERS  ----------
 function ip_ready(fn){
@@ -33,6 +35,7 @@ ip_ready(function(){
 	ip_swipe_navigation();
 	ip_keyboard_navigation();
 	ip_service_popup();
+	ip_qr_popup();
 	ip_cursor();
 	ip_testimonials_snap();
 	ip_animated_headline();
@@ -87,6 +90,9 @@ function ip_goto(href){
 	target.classList.remove('hidden');
 	target.classList.add('active');
 	target.scrollTop = 0;
+	if(href !== '#home'){
+		ip_qr_close();
+	}
 	// Defer so focus wins over the menu link that initiated navigation.
 	var focusToken = ++ip_section_focus_token;
 	setTimeout(function(){
@@ -235,7 +241,7 @@ function ip_swipe_navigation(){
 			return;
 		}
 		var modal = ip_one('.ip_modalbox');
-		if(e.touches.length !== 1 || (modal && modal.classList.contains('opened'))){
+		if(e.touches.length !== 1 || (modal && modal.classList.contains('opened')) || ip_qr_is_open()){
 			tracking = false;
 			return;
 		}
@@ -293,6 +299,14 @@ function ip_keyboard_navigation(){
 		if(key === 'Escape'){
 			if(closeModal()){
 				e.preventDefault();
+				return;
+			}
+			if(ip_qr_close()){
+				var qrOpener = ip_one('.ip_qr_open');
+				if(qrOpener){
+					qrOpener.focus({ preventScroll: true });
+				}
+				e.preventDefault();
 			}
 			return;
 		}
@@ -302,6 +316,9 @@ function ip_keyboard_navigation(){
 		}
 		// Section navigation is suspended while a popup is open.
 		if(modalBox && modalBox.classList.contains('opened')){
+			return;
+		}
+		if(ip_qr_is_open()){
 			return;
 		}
 		if(key === 'ArrowRight'){
@@ -345,7 +362,6 @@ function ip_service_popup(){
 	var descWrap		= modalBox.querySelector('.description_wrap');
 	var serviceCards	= ip_all('.ip_service .service-card');
 	var boxInner		= modalBox.querySelector('.box_inner');
-	var popupReturnFocus = null;
 	var popupFocusTimer = null;
 	if(descWrap && !descWrap.hasAttribute('tabindex')){
 		descWrap.setAttribute('tabindex', '-1');
@@ -370,7 +386,7 @@ function ip_service_popup(){
 		if(focused && focused !== descWrap){
 			if(focused.closest && focused.closest('.ip_section')){
 				focused.blur();
-			}else if(popupReturnFocus && focused === popupReturnFocus){
+			}else if(ip_modal_return_focus && focused === ip_modal_return_focus){
 				focused.blur();
 			}
 		}
@@ -423,8 +439,8 @@ function ip_service_popup(){
 		if(descWrap){
 			descWrap.innerHTML = '';
 		}
-		var restore = popupReturnFocus;
-		popupReturnFocus = null;
+		var restore = ip_modal_return_focus;
+		ip_modal_return_focus = null;
 		setTimeout(function(){
 			if(restore && document.contains(restore)){
 				restore.focus();
@@ -454,7 +470,7 @@ function ip_service_popup(){
 			var title	= titleEl ? titleEl.innerHTML : '';
 			var detailsEl = parent.querySelector('.service_hidden_details');
 			var content = detailsEl ? detailsEl.innerHTML : '';
-			popupReturnFocus = button;
+			ip_modal_return_focus = button;
 			ip_section_focus_token++;
 			modalBox.classList.add('opened');
 			modalBox.setAttribute('aria-modal', 'true');
@@ -473,6 +489,73 @@ function ip_service_popup(){
 		closePopup.addEventListener('click', function(e){
 			e.preventDefault();
 			closePopupModal();
+		});
+	}
+}
+
+// -------------  CONTACT QR PANEL  --------------------
+function ip_qr_is_open(){
+	var home = ip_one('#home');
+	return !!(home && home.classList.contains('ip_qr_shown'));
+}
+function ip_qr_close(){
+	var home = ip_one('#home');
+	var panel = ip_one('.ip_qr_panel');
+	var opener = ip_one('.ip_qr_open');
+	if(!home || !home.classList.contains('ip_qr_shown')){
+		return false;
+	}
+	home.classList.remove('ip_qr_shown');
+	if(panel){
+		panel.hidden = true;
+	}
+	if(opener){
+		opener.setAttribute('aria-expanded', 'false');
+		opener.classList.remove('ip_qr_open--active');
+	}
+	return true;
+}
+function ip_qr_open_panel(){
+	var home = ip_one('#home');
+	var panel = ip_one('.ip_qr_panel');
+	var opener = ip_one('.ip_qr_open');
+	if(!home || !panel){
+		return;
+	}
+	ip_section_focus_token++;
+	home.classList.add('ip_qr_shown');
+	panel.hidden = false;
+	if(opener){
+		opener.setAttribute('aria-expanded', 'true');
+		opener.classList.add('ip_qr_open--active');
+	}
+}
+function ip_qr_popup(){
+	var home = ip_one('#home');
+	var opener = ip_one('.ip_home_social .ip_qr_open');
+	var panel = ip_one('.ip_qr_panel');
+	var closer = ip_one('.ip_qr_panel__close');
+	if(!home || !opener || !panel){
+		return;
+	}
+	if(!panel.hasAttribute('tabindex')){
+		panel.setAttribute('tabindex', '-1');
+	}
+	opener.addEventListener('click', function(e){
+		e.preventDefault();
+		if(ip_qr_is_open()){
+			ip_qr_close();
+			opener.focus({ preventScroll: true });
+			return;
+		}
+		ip_qr_open_panel();
+		panel.focus({ preventScroll: true });
+	});
+	if(closer){
+		closer.addEventListener('click', function(e){
+			e.preventDefault();
+			ip_qr_close();
+			opener.focus({ preventScroll: true });
 		});
 	}
 }

@@ -77,9 +77,9 @@ body{margin:0}
 <!-- /CRITICAL CSS -->
 <link rel="preload" href="static/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <!-- STYLES -->
-<link rel="preload" as="style" href="static/css/style.css?v=5d129a5c" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=a51c33ba" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/style.css?v=5d129a5c" />
+<link rel="stylesheet" href="static/css/style.css?v=a51c33ba" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -107,7 +107,7 @@ body{margin:0}
 				<ul class="transition_link">
 					<li class="active"><a href="#home"><b>КТО<span class="ivp_menu_sub">такой</span></b></a></li>
 					<li><a href="#about"><b>ЧТО<span class="ivp_menu_sub">делаю</span></b></a></li>
-					<li><a href="#service"><b>ЗАЧЕМ<span class="ivp_menu_sub">обращаться</span></b></a></li>
+					<li><a href="#service"><b>ЗАЧЕМ<span class="ivp_menu_sub">обращаются</span></b></a></li>
 					<li><a href="#why"><b>ПОЧЕМУ<span class="ivp_menu_sub">ко мне</span></b></a></li>
 					<li><a href="#testimonials"><b>КАК<span class="ivp_menu_sub">успехи</span></b></a></li>
 				</ul>
@@ -158,10 +158,15 @@ body{margin:0}
 								<a href="https://vk.com/ivan_a_popov" target="_blank" rel="noopener noreferrer" aria-label="Написать во ВКонтакте">
 									<img src="static/img/social/vk.svg" alt="" width="40" height="40" decoding="async">
 								</a>
-								<a href="https://ivanpopov.pro" aria-label="Сайт ivanpopov.pro">
+								<a href="#" class="ip_qr_open" aria-label="QR-код с контактами" aria-expanded="false" aria-controls="ip_qr_panel">
 									<img src="static/img/social/qr.svg" alt="" width="40" height="40" decoding="async">
 								</a>
 							</div>
+						</div>
+						<div class="ip_qr_panel" id="ip_qr_panel" hidden aria-label="QR-код с контактами">
+							<button type="button" class="ip_qr_panel__close" aria-label="Закрыть"><i class="icon-cancel"></i></button>
+							<img class="ip_qr_panel__code" src="static/img/social/qr-vcard.svg" alt="" width="240" height="240" decoding="async">
+							<p class="ip_qr_panel__hint">Отсканируйте камерой, чтобы сохранить контакт</p>
 						</div>
 					</div>
 				</div>
@@ -517,6 +522,6 @@ body{margin:0}
 		<div class="mouse-cursor cursor-inner"></div>
 		<!-- /MAGIC CURSOR -->
 	</div>
-<script src="static/js/init.js?v=503a8b37"></script>
+<script src="static/js/init.js?v=ee165121"></script>
 </body>
 </html> 
