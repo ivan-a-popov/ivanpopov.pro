@@ -1102,6 +1102,36 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		display: none;
 	}
 }
+/* Short-but-wide viewports: disable horizontal snap and stack testimonials
+   vertically so each card can be fully seen without carousel constraints. */
+@media (min-width: 1024px) and (max-height: 920px){
+	.ip_about .testimonials .list{
+		margin-top: 0;
+		padding-top: 0px;
+	}
+	.ip_about .testimonials .list ul.testimonials-snap{
+		display: block;
+		overflow: visible;
+		scroll-snap-type: none;
+		scroll-behavior: auto;
+		cursor: default;
+	}
+	.ip_about .testimonials .list ul.testimonials-snap > li,
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-card,
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-quote,
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-author{
+		width: 100%;
+	}
+	.ip_about .testimonials .list ul.testimonials-snap > li{
+		margin-bottom: 75px;
+	}
+	.ip_about .testimonials .list ul.testimonials-snap > li:last-child{
+		margin-bottom: 0;
+	}
+	.ip_about .testimonials .list ul.testimonials-snap > li.is-clone{
+		display: none;
+	}
+}
 @media (max-width: 714px) {
 	.ip_header{
 		display: flex;

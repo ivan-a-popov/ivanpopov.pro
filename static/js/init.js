@@ -541,12 +541,28 @@ function ip_cursor(){
 // ------------   TESTIMONIALS SCROLL-SNAP   -----------
 // -----------------------------------------------------
 
+function ip_use_vertical_testimonials_layout(){
+
+	"use strict";
+
+	// Keep the desktop snap carousel only when there is enough vertical room.
+	// On short viewports (including some high-DPI phones/tablets reported as
+	// wide CSS widths), switch testimonials to the vertical list variant.
+	if(ip_is_mobile_layout()){
+		return true;
+	}
+	if(window.matchMedia){
+		return window.matchMedia('(max-height: 920px)').matches;
+	}
+	return (window.innerHeight || document.documentElement.clientHeight) <= 920;
+}
+
 function ip_testimonials_snap(){
 
 	"use strict";
 
 	// Horizontal snap + autoplay are desktop-only; mobile uses a vertical list (CSS).
-	if(ip_is_mobile_layout()){
+	if(ip_use_vertical_testimonials_layout()){
 		return;
 	}
 
