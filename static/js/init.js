@@ -80,12 +80,36 @@ function ip_goto(href){
 	ip_remove_classes(target, exit);
 	target.classList.add('animated');
 	ip_add_classes(target, enter);
-	sections.forEach(function(s){ s.classList.add('hidden'); });
+	sections.forEach(function(s){
+		s.classList.add('hidden');
+		s.classList.remove('active');
+	});
 	target.classList.remove('hidden');
 	target.classList.add('active');
 	target.scrollTop = 0;
-	target.focus({ preventScroll: true });
+	// Defer so focus wins over the menu link that initiated navigation.
+	setTimeout(function(){
+		if(target.classList.contains('active')){
+			ip_focus_section(target);
+		}
+	}, 0);
 	return true;
+}
+
+function ip_focus_section(section){
+	if(!section){
+		return null;
+	}
+	if(!section.hasAttribute('tabindex')){
+		section.setAttribute('tabindex', '-1');
+	}
+	section.focus({ preventScroll: true });
+	return section;
+}
+
+function ip_active_section(){
+	return ip_one('.ip_section.active:not(.hidden)')
+		|| ip_one('.ip_section.animated:not(.hidden)');
 }
 
 function ip_init_section_focus(){
@@ -94,10 +118,7 @@ function ip_init_section_focus(){
 			section.setAttribute('tabindex', '-1');
 		}
 	});
-	var active = ip_one('.ip_section.active') || ip_one('.ip_section.animated');
-	if(active){
-		active.focus({ preventScroll: true });
-	}
+	ip_focus_section(ip_active_section());
 }
 
 // Shared by swipe + keyboard section navigation.
@@ -245,11 +266,12 @@ function ip_swipe_navigation(){
 
 
 // ------------   KEYBOARD NAVIGATION    ---------------
-// Arrow Left/Right step through the menu sections (Up/Down stay free for
-// scrolling section content). Escape closes the service popup.
+// Arrow Left/Right step through sections. Up/Down scroll the active section
+// when focus is outside it (e.g. on a menu link). Escape closes the popup.
 function ip_keyboard_navigation(){
 	var modalBox	= ip_one('.ip_modalbox');
 	var headerHrefOpts = { activeLink: '.transition_link li.active a' };
+	var sectionScrollStep = 48;
 
 	function closeModal(){
 		if(!modalBox || !modalBox.classList.contains('opened')){
@@ -295,6 +317,28 @@ function ip_keyboard_navigation(){
 			if(ip_navigate_section(1, IP_NAV_LINKS_HEADER, headerHrefOpts)){ e.preventDefault(); }
 		}else if(key === 'ArrowLeft'){
 			if(ip_navigate_section(-1, IP_NAV_LINKS_HEADER, headerHrefOpts)){ e.preventDefault(); }
+		}else if(key === 'ArrowDown' || key === 'ArrowUp'){
+			var active = ip_active_section();
+			if(!active){
+				return;
+			}
+			var focused = document.activeElement;
+			// Nested focus inside a scrollable child: let the browser handle it.
+			if(focused !== active && active.contains(focused)){
+				var scrollParent = focused;
+				while(scrollParent && scrollParent !== active){
+					if(scrollParent.scrollHeight > scrollParent.clientHeight){
+						var overflowY = getComputedStyle(scrollParent).overflowY;
+						if(overflowY === 'auto' || overflowY === 'scroll'){
+							return;
+						}
+					}
+					scrollParent = scrollParent.parentElement;
+				}
+			}
+			active.scrollBy({ top: key === 'ArrowDown' ? sectionScrollStep : -sectionScrollStep });
+			ip_focus_section(active);
+			e.preventDefault();
 		}
 	});
 }
@@ -307,10 +351,42 @@ function ip_service_popup(){
 	}
 	var buttons			= ip_all('.ip_service .ip_full_link');
 	var closePopup		= modalBox.querySelector('.close');
+	var descWrap		= modalBox.querySelector('.description_wrap');
 	var serviceCards	= ip_all('.ip_service .service-card');
+	var popupReturnFocus = null;
+
+	if(descWrap && !descWrap.hasAttribute('tabindex')){
+		descWrap.setAttribute('tabindex', '-1');
+	}
+
 	function setLightCursor(on){
 		document.body.classList.toggle('ip_light_cursor', !!on);
 	}
+
+	function focusPopup(){
+		if(!descWrap){
+			return;
+		}
+		descWrap.focus({ preventScroll: true });
+	}
+
+	function closePopupModal(){
+		modalBox.classList.remove('opened');
+		setLightCursor(false);
+		if(descWrap){
+			descWrap.innerHTML = '';
+		}
+		var restore = popupReturnFocus;
+		popupReturnFocus = null;
+		setTimeout(function(){
+			if(restore && document.contains(restore)){
+				restore.focus();
+				return;
+			}
+			ip_focus_section(ip_active_section());
+		}, 0);
+	}
+
 	serviceCards.forEach(function(card){
 		card.addEventListener('mouseenter', function(){
 			setLightCursor(true);
@@ -332,9 +408,9 @@ function ip_service_popup(){
 			var title	= titleEl ? titleEl.innerHTML : '';
 			var detailsEl = parent.querySelector('.service_hidden_details');
 			var content = detailsEl ? detailsEl.innerHTML : '';
+			popupReturnFocus = button;
 			modalBox.classList.add('opened');
 			setLightCursor(true);
-			var descWrap = modalBox.querySelector('.description_wrap');
 			if(descWrap){
 				descWrap.innerHTML = content;
 			}
@@ -342,17 +418,17 @@ function ip_service_popup(){
 			if(infos){
 				infos.insertAdjacentHTML('afterbegin', '<div class="service-popup-hero"><img class="service-popup-hero__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup-hero__title"><h3>'+title+'</h3></div></div>');
 			}
+			setTimeout(function(){
+				if(modalBox.classList.contains('opened')){
+					focusPopup();
+				}
+			}, 0);
 		});
 	});
 	if(closePopup){
 		closePopup.addEventListener('click', function(e){
 			e.preventDefault();
-			modalBox.classList.remove('opened');
-			setLightCursor(false);
-			var descWrap = modalBox.querySelector('.description_wrap');
-			if(descWrap){
-				descWrap.innerHTML = '';
-			}
+			closePopupModal();
 		});
 	}
 }

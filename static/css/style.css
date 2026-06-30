@@ -319,6 +319,9 @@ h1, h2, h3, h4, h5, h6 {
 .ip_section:focus {
 	outline: none;
 }
+.ip_modalbox .description_wrap:focus {
+	outline: none;
+}
 
 /* Minimal scrollbars: thin thumb, no arrow buttons (incl. Windows Chromium). */
 html,
