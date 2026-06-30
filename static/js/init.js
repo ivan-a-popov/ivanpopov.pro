@@ -611,7 +611,7 @@ function ip_testimonials_snap(){
 		list.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
 	}
 	function isLastActive(){
-		var last = ip_one('#what');
+		var last = ip_one('#testimonials');
 		return last && last.classList.contains('active');
 	}
 	function scheduleAutoplay(){

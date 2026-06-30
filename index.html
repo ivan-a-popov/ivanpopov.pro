@@ -46,8 +46,8 @@ body{margin:0}
 <!-- If JS is disabled the loader is never dismissed, so hide it in that case. -->
 <noscript><style>#preloader{display:none!important}</style></noscript>
 <!-- /PRELOADER CSS  -->
-
-<!-- Crytical CSS needed for initial render inlined so header/footer layout is stable before
+<!-- CRITICAL CSS -->
+<!-- Needed for initial render inlined so header/footer layout is stable before
   async style.css downloads — prevents CLS when the stylesheet arrives -->
 <style>
 .ip_all_wrap{width:100%;min-height:100vh;position:relative;--ip-side-gutter:clamp(40px,2.8vw,52px);--ip-bar-height:clamp(60px,calc(52px + 1.1vw),70px);--ip-footer-height:clamp(20px,calc(16px + 1.8vw),50px);--ip-footer-font-size:clamp(8px,calc(4px + .5vw),16px);--ip-logo-font-size:clamp(16px,calc(15px + .9vw),25px);--ip-logo-padding-left:clamp(8px,calc(10px + 1.2vw),30px);--ip-menu-padding-left:clamp(8px,calc(10px + 1.1vw),30px);--ip-menu-padding-right:clamp(8px,calc(10px + 1.1vw),30px);--ip-menu-gap:0px;--ip-menu-sub-gap:3px;--ip-menu-sub-font-size:16px;--ip-base-font-size:16px;--ip-col-left:40%;--ip-col-right:60%}
@@ -74,7 +74,7 @@ body{margin:0}
 .ip_header .menu ul{width:100%;justify-content:flex-end;gap:var(--ip-menu-gap);padding-right:clamp(14px,1.8vw,28px)}
 .ip_header .menu ul li.active a b{font-size:1.5em}}
 </style>
-<!-- /CRITICAL CHROME CSS -->
+<!-- /CRITICAL CSS -->
 <link rel="preload" href="static/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <!-- STYLES -->
 <link rel="preload" as="style" href="static/css/style.css?v=4d54219f" onload="this.onload=null;this.rel='stylesheet'">
@@ -89,7 +89,6 @@ body{margin:0}
 		<div class="loader_line"></div>
 	</div>
 	<!-- /PRELOADER -->
-	
 	<!--  ALL WRAPPER -->
 	<div class="ip_all_wrap" data-magic-cursor="show" data-enter="rollIn" data-exit="rollOut">
 		<!-- Service popup shell (content copied from .service-card on open) -->
@@ -110,7 +109,7 @@ body{margin:0}
 					<li><a href="#about"><b>ЧТО<span class="ivp_menu_sub">делаю</span></b></a></li>
 					<li><a href="#service"><b>ЗАЧЕМ<span class="ivp_menu_sub">обращаться</span></b></a></li>
 					<li><a href="#why"><b>ПОЧЕМУ<span class="ivp_menu_sub">ко мне</span></b></a></li>
-					<li><a href="#what"><b>КАК<span class="ivp_menu_sub">успехи</span></b></a></li>
+					<li><a href="#testimonials"><b>КАК<span class="ivp_menu_sub">успехи</span></b></a></li>
 				</ul>
 			</div>
 		</div>
@@ -131,7 +130,6 @@ body{margin:0}
 				</div>
 			</div>
 			<div class="main_content">
-			
 				<!-- HOME -->
 				<div class="ip_section animated" id="home">
 					<div class="ip_home">
@@ -173,7 +171,7 @@ body{margin:0}
 				<!-- ABOUT -->
 				<div class="ip_section" id="about">
 					<div class="section_inner">
-						<div class="ip_about">
+						<div class="ip_info">
 							<div class="ip_title">
 								<span>В ОБЩЕМ</span>
 							</div>
@@ -204,33 +202,6 @@ body{margin:0}
 					</div>
 				</div>
 				<!-- /ABOUT -->
-				
-				<!-- WHY ME -->
-				<div class="ip_section" id="why">
-					<div class="section_inner">
-						<div class="ip_about">
-							<div class="ip_title">
-								<span>На одном языке</span>
-							</div>
-							<div class="wrapper">
-								<div class="left">
-									<p>Представители бизнеса и инженеры говорят на разных языках и часто с трудом понимают друг друга, — это противоречие вошло уже в анекдоты.</p>
-									<p>И правда: технические и бизнес-задачи лежат в разных плоскостях, физики и лирики мыслят в разных системах координат, иногда действительно будто живут в разных мирах.</p>
-									<p>Первый коммерческий сайт я запустил в 2008 году, и с тех пор работал в этой "точке напряжения" постоянно. Причём работал с разных сторон: сначала как руководитель интернет-проектов — заказчик IT-решений, затем как бизнес-аналитик и разработчик, сейчас — как консультант, архитектор и техлид.</p>
-									<p>Этот опыт даёт мне "сверхспособность" — понимать обе стороны и говорить с каждой из них на "родном" языке, объединяя миры.</p>
-								</div>
-								<div class="right">
-									<p>Говорят, что в эпоху LLM, ИИ-агентов и AI-сервисов эта сверхспособность утратит свою ценность. Я убежден, что всё ровно наоборот.</p> 
-									<p>Именно человеческое внимание, понимание и опыт приобретают особую  ценность в эпоху тотального доминирования ИИ.</p>
-									<p>Ведь ни одна LLM не почувствует реальной боли бизнеса, не предвидит "человеческие" последствия технических решений, не поймет, что за сухим описанием бизнес-процессов стоят люди и отношения между ними.</p>
-									<p>А человеческий подход — он и результат даёт человеческий. То есть такой, который работает для людей и на пользу бизнеса, а не ради галочки в отчёте о внедрении или красивого слайда про AI в презентации.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /WHY ME -->
-				
 				<!-- SERVICE -->
 				<div class="ip_section" id="service">
 					<div class="section_inner">
@@ -295,7 +266,6 @@ body{margin:0}
 													</div>
 												</div>
 											</div>
-											<!-- Modalbox Info -->
 										</div>
 									</li>
 									<li>
@@ -315,7 +285,6 @@ body{margin:0}
 													</div>
 												</div>
 											</div>
-											<!-- Modalbox Info -->
 										</div>
 									</li>
 									<li>
@@ -341,7 +310,6 @@ body{margin:0}
 													</div>
 												</div>
 											</div>
-											<!-- Modalbox Info -->
 										</div>
 									</li>
 									<li>
@@ -361,7 +329,6 @@ body{margin:0}
 													</div>
 												</div>
 											</div>
-											<!-- Modalbox Info -->
 										</div>
 									</li>
 								</ul>
@@ -369,12 +336,36 @@ body{margin:0}
 						</div>
 					</div>
 				</div>
-				<!-- /SERVICE -->
-				
-				<!-- HOW -->
-				<div class="ip_section" id="what">
+				<!-- /SERVICE -->				
+				<!-- WHY ME -->
+				<div class="ip_section" id="why">
 					<div class="section_inner">
-						<div class="ip_about">
+						<div class="ip_info">
+							<div class="ip_title">
+								<span>На одном языке</span>
+							</div>
+							<div class="wrapper">
+								<div class="left">
+									<p>Представители бизнеса и инженеры говорят на разных языках и часто с трудом понимают друг друга, — это противоречие вошло уже в анекдоты.</p>
+									<p>И правда: технические и бизнес-задачи лежат в разных плоскостях, физики и лирики мыслят в разных системах координат, иногда действительно будто живут в разных мирах.</p>
+									<p>Первый коммерческий сайт я запустил в 2008 году, и с тех пор работал в этой "точке напряжения" постоянно. Причём работал с разных сторон: сначала как руководитель интернет-проектов — заказчик IT-решений, затем как бизнес-аналитик и разработчик, сейчас — как консультант, архитектор и техлид.</p>
+									<p>Этот опыт даёт мне "сверхспособность" — понимать обе стороны и говорить с каждой из них на "родном" языке, объединяя миры.</p>
+								</div>
+								<div class="right">
+									<p>Говорят, что в эпоху LLM, ИИ-агентов и AI-сервисов эта сверхспособность утратит свою ценность. Я убежден, что всё ровно наоборот.</p> 
+									<p>Именно человеческое внимание, понимание и опыт приобретают особую  ценность в эпоху тотального доминирования ИИ.</p>
+									<p>Ведь ни одна LLM не почувствует реальной боли бизнеса, не предвидит "человеческие" последствия технических решений, не поймет, что за сухим описанием бизнес-процессов стоят люди и отношения между ними.</p>
+									<p>А человеческий подход — он и результат даёт человеческий. То есть такой, который работает для людей и на пользу бизнеса, а не ради галочки в отчёте о внедрении или красивого слайда про AI в презентации.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /WHY ME -->
+				<!-- HOW -->
+				<div class="ip_section" id="testimonials">
+					<div class="section_inner">
+						<div class="ip_info">
 							<div class="testimonials">
 								<div class="list">
 									<ul class="testimonials-snap">
@@ -390,7 +381,7 @@ body{margin:0}
 												</div>
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
-														<img class="main testimonial-author__avatar" src="static/img/testimonials/ukfed.jpg" alt="Сергей Гурьянов" width="60" height="60" />
+														<img class="main testimonial-author__avatar" src="static/img/clients/ukfed.jpg" alt="Сергей Гурьянов" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Сергей Гурьянов</h3>
@@ -411,7 +402,7 @@ body{margin:0}
 												</div>
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
-														<img class="main testimonial-author__avatar" src="static/img/testimonials/amalfi.jpg" alt="Эрман Ольга Михайловна" width="60" height="60" />
+														<img class="main testimonial-author__avatar" src="static/img/clients/amalfi.jpg" alt="Эрман Ольга Михайловна" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Эрман Ольга Михайловна</h3>
@@ -429,7 +420,7 @@ body{margin:0}
 													</div>
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
-														<img class="main testimonial-author__avatar" src="static/img/testimonials/vsem-korobok.jpg" alt="Илья Воробьев" width="60" height="60" />
+														<img class="main testimonial-author__avatar" src="static/img/clients/vsem-korobok.jpg" alt="Илья Воробьев" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Илья Воробьев</h3>
@@ -455,7 +446,7 @@ body{margin:0}
 												</div>
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
-														<img class="main testimonial-author__avatar" src="static/img/testimonials/ipoint.jpg" alt="Попов Александр" width="60" height="60" />
+														<img class="main testimonial-author__avatar" src="static/img/clients/ipoint.jpg" alt="Попов Александр" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Попов Александр</h3>
@@ -477,7 +468,7 @@ body{margin:0}
 												</div>
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
-														<img class="main testimonial-author__avatar" src="static/img/testimonials/gm-light.png" alt="Екатерина Шрайбер" width="60" height="60" />
+														<img class="main testimonial-author__avatar" src="static/img/clients/gm-light.png" alt="Екатерина Шрайбер" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Екатерина Шрайбер</h3>
@@ -491,15 +482,14 @@ body{margin:0}
 												<div class="testimonial-quote">
 													<i class="icon-quote-left"></i>
 													<i class="icon-quote-right"></i>
-													<p>
-													Я очень доволен работой.
+													<p>Я очень доволен работой.
 													На мою задачу предложили несколько вариантов решения с разной ценовой градацией. Сделали все
 													быстро. На вопросы отвечают оперативно. Надеюсь на дальнейшее сотрудничество.
 													</p>
 												</div>
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
-														<img class="main testimonial-author__avatar" src="static/img/testimonials/filters-market.jpg" alt="Валентин Воробьев" width="60" height="60" />
+														<img class="main testimonial-author__avatar" src="static/img/clients/filters-market.jpg" alt="Валентин Воробьев" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Валентин Воробьев</h3>
@@ -519,7 +509,6 @@ body{margin:0}
 			<!-- /MAIN_CONTENT -->
 		</div>
 		<!-- /MAINPART -->
-
 		<!-- FOOTER -->
 		<div class="ip_footer">
 			<div class="copyright">
@@ -527,13 +516,11 @@ body{margin:0}
 			</div>
 		</div>
 		<!-- /FOOTER -->
-		
 		<!-- MAGIC CURSOR -->
 		<div class="mouse-cursor cursor-outer"></div>
 		<div class="mouse-cursor cursor-inner"></div>
 		<!-- /MAGIC CURSOR -->
 	</div>
-	<!-- /ALL WRAPPER -->	
 <script src="static/js/init.js?v=d77ead10"></script>
 </body>
 </html> 
