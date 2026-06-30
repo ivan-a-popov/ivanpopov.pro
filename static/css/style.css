@@ -472,19 +472,17 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_about .wrapper {
 	width: 100%;
-	display: block;
+	display: flex;
+	justify-content: space-between;
 	margin-top: 20px;
 }
 .ip_about .left,
 .ip_about .right {
-	width: 100%;
+	width: 45%;
 }
 .ip_about .left p,
 .ip_about .right p {
 	margin-bottom: 15px;
-}
-.ip_about .left{
-	margin-bottom: 10px;
 }
 .ip_about .left p:last-child,
 .ip_about .right p:last-child {
@@ -1081,6 +1079,21 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_service .service_list ul li{
 		width: 100%;
 	}
+	.ip_about .wrapper{
+		display: block;
+	}
+	.ip_about .left,
+	.ip_about .right{
+		width: 100%;
+	}
+	.ip_about .left{
+		margin-bottom: 10px;
+	}
+}
+@media (min-width: 641px){
+	.ip_home_photo{
+		display: none;
+	}
 }
 /* Tablets: keep the full-height portrait two-column layout. */
 @media (min-width: 769px) and (max-width: 1023px){
@@ -1100,7 +1113,27 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	}
 	.ip_mainpart .main_content{width: 64%;}
 }
-@media (max-width: 768px) {
+/* Narrow landscape / small tablets: keep side portrait, but collapse inner content
+   to one column for readability. */
+@media (min-width: 641px) and (max-width: 768px){
+	.ip_footer{justify-content: flex-start;}
+	.ip_mainpart .author_image{
+		width: 42%;
+		height: 100%;
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+	.ip_mainpart .author_image .author_image_inner,
+	.ip_mainpart .author_image .author_photo{
+		height: 100%;
+		opacity: 1;
+		padding-bottom: 40px;
+	}
+	.ip_mainpart .main_content{width: 58%;}
+}
+/* Phones: full-width sections + square home photo above content. */
+@media (max-width: 640px) {
 	#home .ip_home{
 		flex-direction: column;
 		align-items: stretch;
@@ -1124,4 +1157,13 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		object-position: center 40%;
 	}
 	.ip_home .content{padding: 20px 20px 0;}
+}
+@media (max-width: 480px){
+	.ip_home_photo img{
+		aspect-ratio: 1 / 0.82;
+		object-position: center 55%;
+	}
+	.ip_home .content{
+		padding-top: 14px;
+	}
 }
