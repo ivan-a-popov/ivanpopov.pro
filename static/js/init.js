@@ -1,7 +1,4 @@
-// Vanilla (no-jQuery) site behavior. 
-// Custom scrollbars, etc. are now pure CSS.
-
-// ----------  SMALL DOM HELPERS  ----------
+// ----------  TINY DOM HELPERS  ----------
 
 function ip_ready(fn){
 	"use strict";
@@ -11,35 +8,26 @@ function ip_ready(fn){
 		document.addEventListener('DOMContentLoaded', fn);
 	}
 }
-
 function ip_all(selector, context){
 	"use strict";
 	return Array.prototype.slice.call((context || document).querySelectorAll(selector));
 }
-
 function ip_one(selector, context){
 	"use strict";
 	return (context || document).querySelector(selector);
 }
-
 function ip_add_classes(el, str){
 	"use strict";
 	if(!el || !str){ return; }
 	str.split(/\s+/).forEach(function(c){ if(c){ el.classList.add(c); } });
 }
-
 function ip_remove_classes(el, str){
 	"use strict";
 	if(!el || !str){ return; }
 	str.split(/\s+/).forEach(function(c){ if(c){ el.classList.remove(c); } });
 }
-
 ip_ready(function(){
-
 	"use strict";
-
-	// all ready functions here
-
 	ip_mark_touch_device();
 	ip_build_swipe_nav();
 	ip_page_transition();
@@ -50,29 +38,20 @@ ip_ready(function(){
 	ip_testimonials_snap();
 	ip_animated_headline();
 	ip_preloader();
-
 });
 
 // -----------------------------------------------------
 // -------------   PAGE TRANSITION    ------------------
 // -----------------------------------------------------
-
-// Shared navigation: switch to a section by its href (e.g. "#about").
-// Used by the header menu, the swipe dots and the touch swipe handler,
-// so every entry point keeps the section state and all menus in sync.
 function ip_goto(href){
-
 	"use strict";
-
 	if(!href){
 		return false;
 	}
-
 	var target = ip_one(href);
 	if(!target){
 		return false;
 	}
-
 	var sections	= ip_all('.ip_section');
 	var allLi		= ip_all('.transition_link li');
 	var wrapper		= ip_one('.ip_all_wrap');
@@ -85,11 +64,9 @@ function ip_goto(href){
 	var parents		= ip_all('.transition_link a[href="'+href+'"]').map(function(a){
 		return a.closest('li');
 	}).filter(Boolean);
-
 	if(parents.some(function(li){ return li.classList.contains('active'); })){
 		return false;
 	}
-
 	allLi.forEach(function(li){ li.classList.remove('active'); });
 	sections.forEach(function(s){
 		s.classList.remove('animated');
@@ -111,7 +88,6 @@ function ip_goto(href){
 	target.classList.remove('hidden');
 	target.classList.add('active');
 	target.scrollTop = 0;
-
 	return true;
 }
 
@@ -143,7 +119,6 @@ function ip_is_mobile_layout(){
 	}
 	return window.innerWidth <= 1023;
 }
-
 function ip_is_touch_device(){
 
 	"use strict";
@@ -153,35 +128,25 @@ function ip_is_touch_device(){
 	}
 	return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 }
-
 function ip_mark_touch_device(){
-
 	"use strict";
-
 	var wrap = ip_one('.ip_all_wrap');
 	if(wrap && ip_is_touch_device()){
 		wrap.classList.add('has-touch');
 	}
 }
 
-// Build the bottom dots indicator (mobile only, hidden by CSS on desktop).
-// The dots mirror the header menu order and reuse the .transition_link class
-// so the standard click handler navigates and ip_goto keeps them active.
+// Build the bottom dots indicator (mobile only, hidden by CSS on desktop)
 function ip_build_swipe_nav(){
-
 	"use strict";
-
 	if(ip_one('.ip_swipe_nav')){
 		return;
 	}
-
 	var links = ip_all('.ip_header .menu .transition_link a');
 	if(!links.length){
 		return;
 	}
-
 	var hasActiveSection = !!ip_one('.ip_section.active');
-
 	var dots = '';
 	links.forEach(function(a, i){
 		var href	= a.getAttribute('href');
@@ -192,17 +157,14 @@ function ip_build_swipe_nav(){
 			+ '<a href="'+href+'" aria-label="'+label+'"><span class="dot"></span></a>'
 			+ '</li>';
 	});
-
 	var html = '<div class="ip_swipe_nav" aria-label="Навигация по разделам">'
 		+ '<ul class="transition_link">'+dots+'</ul>'
 		+ '</div>'
-	
 	var wrap = ip_one('.ip_all_wrap');
 	if(wrap){
 		wrap.insertAdjacentHTML('beforeend', html);
 	}
 }
-
 function ip_swipe_navigation(){
 
 	"use strict";
@@ -222,9 +184,7 @@ function ip_swipe_navigation(){
 
 	function currentHref(){
 		// The active dot is the reliable source of truth: ip_goto keeps
-		// exactly one .transition_link item active. Sections cannot be used here
-		// because the legacy transition only adds .hidden to the previous section
-		// without clearing its .active class, so several stay "active" at once.
+		// exactly one .transition_link item active.
 		var dot = ip_one('.ip_swipe_nav li.active a');
 		if(dot){
 			return dot.getAttribute('href');
@@ -754,10 +714,6 @@ function ip_testimonials_snap(){
 // -----------------------------------------------------
 // ---------------   ANIMATED HEADLINE   ---------------
 // -----------------------------------------------------
-
-// Types the active phrase in, holds, erases it, then switches to
-// the next one by animating the wrapper width; overflow:hidden
-// plus the ::after bar give the typewriter/cursor look.
 function ip_animated_headline(){
 
 	"use strict";
@@ -773,25 +729,21 @@ function ip_animated_headline(){
 		if(!wrapper){ return; }
 		var words = Array.prototype.slice.call(wrapper.querySelectorAll('b'));
 		if(words.length < 2){ return; }
-
 		var visible = wrapper.querySelector('.is-visible') || words[0];
 		words.forEach(function(w){
 			w.classList.toggle('is-visible', w === visible);
 			w.classList.toggle('is-hidden', w !== visible);
 		});
-
 		function takeNext(word){
 			var i = words.indexOf(word);
 			return words[(i + 1) % words.length];
 		}
-
 		function switchWord(oldWord, newWord){
 			oldWord.classList.remove('is-visible');
 			oldWord.classList.add('is-hidden');
 			newWord.classList.remove('is-hidden');
 			newWord.classList.add('is-visible');
 		}
-
 		// Reduced motion: skip the width typing, just swap phrases on a timer.
 		if(reduce){
 			wrapper.style.width = 'auto';
@@ -819,7 +771,6 @@ function ip_animated_headline(){
 			wrapper.addEventListener('transitionend', onEnd);
 			window.setTimeout(onEnd, revealDuration + 80); // fallback if no transitionend
 		}
-
 		function hideWord(word){
 			var nextWord = takeNext(word);
 			animateWidth(2, function(){
@@ -827,13 +778,11 @@ function ip_animated_headline(){
 				showWord(nextWord);
 			});
 		}
-
 		function showWord(word){
 			animateWidth(word.offsetWidth + 10, function(){
 				window.setTimeout(function(){ hideWord(word); }, revealAnimationDelay);
 			});
 		}
-
 		wrapper.style.width = (visible.offsetWidth + 10) + 'px';
 		window.setTimeout(function(){ hideWord(visible); }, animationDelay);
 	});
