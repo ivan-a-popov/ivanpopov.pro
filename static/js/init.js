@@ -290,24 +290,20 @@ function ip_keyboard_navigation(){
 
 	document.addEventListener('keydown', function(e){
 		var key = e.key;
-
 		if(key === 'Escape'){
 			if(closeModal()){
 				e.preventDefault();
 			}
 			return;
 		}
-
 		// Leave typing and modified shortcuts (Ctrl/Cmd/Alt) untouched.
 		if(isTypingTarget(e.target) || e.ctrlKey || e.metaKey || e.altKey){
 			return;
 		}
-
 		// Section navigation is suspended while a popup is open.
 		if(modalBox && modalBox.classList.contains('opened')){
 			return;
 		}
-
 		if(key === 'ArrowRight'){
 			if(ip_navigate_section(1, IP_NAV_LINKS_HEADER, headerHrefOpts)){ e.preventDefault(); }
 		}else if(key === 'ArrowLeft'){
@@ -351,22 +347,18 @@ function ip_service_popup(){
 	var boxInner		= modalBox.querySelector('.box_inner');
 	var popupReturnFocus = null;
 	var popupFocusTimer = null;
-
 	if(descWrap && !descWrap.hasAttribute('tabindex')){
 		descWrap.setAttribute('tabindex', '-1');
 	}
-
 	function setLightCursor(on){
 		document.body.classList.toggle('ip_light_cursor', !!on);
 	}
-
 	function clearPopupFocusTimer(){
 		if(popupFocusTimer){
 			clearTimeout(popupFocusTimer);
 			popupFocusTimer = null;
 		}
 	}
-
 	function focusPopup(){
 		if(!descWrap || !modalBox.classList.contains('opened')){
 			return;
@@ -384,7 +376,6 @@ function ip_service_popup(){
 		}
 		descWrap.focus({ preventScroll: true });
 	}
-
 	function schedulePopupFocus(){
 		clearPopupFocusTimer();
 		if(!boxInner){
@@ -423,7 +414,6 @@ function ip_service_popup(){
 		poll();
 		popupFocusTimer = setTimeout(run, 500);
 	}
-
 	function closePopupModal(){
 		clearPopupFocusTimer();
 		ip_section_focus_token++;
@@ -443,7 +433,6 @@ function ip_service_popup(){
 			ip_focus_section(ip_active_section());
 		}, 0);
 	}
-
 	serviceCards.forEach(function(card){
 		card.addEventListener('mouseenter', function(){
 			setLightCursor(true);
@@ -491,11 +480,9 @@ function ip_service_popup(){
 // ---------------   PRELOADER   -----------------------
 function ip_preloader(){
 	var preloader = ip_one('#preloader');
-
 	if(!preloader){
 		return;
 	}
-
 	var run = function(){
 		setTimeout(function() {
 			preloader.classList.add('preloaded');
@@ -504,7 +491,6 @@ function ip_preloader(){
 			preloader.remove();
 		}, 850);
 	};
-
 	if(document.readyState === 'complete'){
 		run();
 	}else{
@@ -512,39 +498,31 @@ function ip_preloader(){
 	}
 }
 
-
 // ------------------   CURSOR    ----------------------
-
-
 function ip_cursor(){
 	var myCursor = ip_one('.mouse-cursor');
 	if(!myCursor){
 		return;
 	}
-
 	var inner = ip_one('.cursor-inner');
 	var outer = ip_one('.cursor-outer');
 	if(!inner || !outer){
 		return;
 	}
-
 	var hoverSelector = 'a';
 	var freeze = false;
-
 	window.addEventListener('mousemove', function(s){
 		if(!freeze){
 			outer.style.transform = 'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
 		}
 		inner.style.transform = 'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
 	});
-
 	document.body.addEventListener('mouseover', function(e){
 		if(e.target.closest && e.target.closest(hoverSelector)){
 			inner.classList.add('cursor-hover');
 			outer.classList.add('cursor-hover');
 		}
 	});
-
 	document.body.addEventListener('mouseout', function(e){
 		var matched = e.target.closest && e.target.closest(hoverSelector);
 		if(!matched){
@@ -553,14 +531,12 @@ function ip_cursor(){
 		inner.classList.remove('cursor-hover');
 		outer.classList.remove('cursor-hover');
 	});
-
 	inner.style.visibility = 'visible';
 	outer.style.visibility = 'visible';
 }
 
 
 // ------------   TESTIMONIALS SCROLL-SNAP   -----------
-
 function ip_use_vertical_testimonials_layout(){
 	// Keep the desktop snap carousel only when there is enough vertical room.
 	// On short viewports (including some high-DPI phones/tablets reported as
@@ -570,30 +546,25 @@ function ip_use_vertical_testimonials_layout(){
 	}
 	return window.matchMedia('(max-height: 920px)').matches && ip_is_touch_device();
 }
-
 function ip_testimonials_snap(){
 	// Horizontal snap + autoplay are desktop-only; mobile uses a vertical list (CSS).
 	if(ip_use_vertical_testimonials_layout()){
 		return;
 	}
-
 	var list = ip_one('.testimonials .testimonials-snap');
 	if(!list){
 		return;
 	}
-
 	var items = list.querySelectorAll(':scope > li');
 	if(items.length < 2){
 		return;
 	}
-
 	var realItems = [...items];
 	var realCount = realItems.length;
-
 	// Build an infinite track: a full copy of every card on each side of the
 	// originals. The three copies are identical, so re-centering into the middle
 	// (real) copy is an invisible instant jump — autoplay and manual scroll then
-	// loop seamlessly in both directions without Owl-style cloned-slide bookkeeping.
+	// loop seamlessly in both directions
 	var leadFrag = document.createDocumentFragment();
 	var trailFrag = document.createDocumentFragment();
 	realItems.forEach(function(li){
@@ -608,7 +579,6 @@ function ip_testimonials_snap(){
 	});
 	list.insertBefore(leadFrag, realItems[0]);
 	list.appendChild(trailFrag);
-
 	var slides = [...list.querySelectorAll(':scope > li')];
 	var firstRealDom = realCount;          // real cards occupy [realCount .. 2*realCount-1]
 	var currentDom = firstRealDom;
@@ -618,7 +588,6 @@ function ip_testimonials_snap(){
 	var dragging = false;
 	var dragStartX = 0;
 	var dragScrollLeft = 0;
-
 	function jumpTo(domIndex){
 		var slide = slides[domIndex];
 		if(!slide){
@@ -634,7 +603,6 @@ function ip_testimonials_snap(){
 		list.style.scrollBehavior = prev;
 		currentDom = domIndex;
 	}
-
 	function scrollToDom(domIndex){
 		var slide = slides[domIndex];
 		if(!slide){
@@ -642,12 +610,10 @@ function ip_testimonials_snap(){
 		}
 		list.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
 	}
-
 	function isLastActive(){
 		var last = ip_one('#what');
 		return last && last.classList.contains('active');
 	}
-
 	function scheduleAutoplay(){
 		if(timer){
 			clearInterval(timer);
@@ -664,10 +630,8 @@ function ip_testimonials_snap(){
 			scrollToDom(currentDom);
 		}, 5000);
 	}
-
 	jumpTo(firstRealDom);
 	requestAnimationFrame(function(){ jumpTo(firstRealDom); });
-
 	list.addEventListener('mouseenter', function(){
 		paused = true;
 	});
@@ -682,7 +646,6 @@ function ip_testimonials_snap(){
 	list.addEventListener('touchend', function(){
 		paused = false;
 	}, { passive: true });
-
 	// Click-drag and trackpad horizontal scroll: stop propagation on the track so
 	// the section's own scroll container does not hijack the horizontal gesture.
 	function onDragMove(e){
@@ -693,7 +656,6 @@ function ip_testimonials_snap(){
 		e.stopPropagation();
 		list.scrollLeft = dragScrollLeft - (e.clientX - dragStartX);
 	}
-
 	function endDrag(){
 		if(!dragging){
 			return;
@@ -704,7 +666,6 @@ function ip_testimonials_snap(){
 		window.removeEventListener('mousemove', onDragMove);
 		window.removeEventListener('mouseup', endDrag);
 	}
-
 	list.addEventListener('mousedown', function(e){
 		if(e.button !== 0){
 			return;
@@ -719,17 +680,14 @@ function ip_testimonials_snap(){
 		window.addEventListener('mousemove', onDragMove);
 		window.addEventListener('mouseup', endDrag);
 	});
-
 	list.addEventListener('wheel', function(e){
 		if(Math.abs(e.deltaX) > Math.abs(e.deltaY)){
 			e.stopPropagation();
 		}
 	}, { passive: true });
-
 	list.addEventListener('touchmove', function(e){
 		e.stopPropagation();
 	}, { passive: true });
-
 	list.addEventListener('scroll', function(){
 		if(scrollEndTimer){
 			clearTimeout(scrollEndTimer);
@@ -758,15 +716,12 @@ function ip_testimonials_snap(){
 	scheduleAutoplay();
 }
 
-
 // ---------------   ANIMATED HEADLINE   ---------------
-
 function ip_animated_headline(){
 	var animationDelay = 1200;       // initial wait before the first erase
 	var revealDuration = 800;        // type / erase width animation duration
 	var revealAnimationDelay = 800;  // hold time while a phrase is fully shown
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 	ip_all('.cd-headline.clip').forEach(function(headline){
 		var wrapper = headline.querySelector('.cd-words-wrapper');
 		if(!wrapper){ return; }
@@ -798,7 +753,6 @@ function ip_animated_headline(){
 			}, animationDelay + revealAnimationDelay + revealDuration);
 			return;
 		}
-
 		function animateWidth(px, done){
 			wrapper.style.transition = 'width ' + revealDuration + 'ms';
 			void wrapper.offsetWidth; // reflow so the transition runs from current width
