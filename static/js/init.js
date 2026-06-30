@@ -25,6 +25,7 @@ function ip_remove_classes(el, str){
 }
 ip_ready(function(){
 	ip_mark_touch_device();
+	ip_init_section_focus();
 	ip_build_swipe_nav();
 	ip_page_transition();
 	ip_swipe_navigation();
@@ -83,7 +84,20 @@ function ip_goto(href){
 	target.classList.remove('hidden');
 	target.classList.add('active');
 	target.scrollTop = 0;
+	target.focus({ preventScroll: true });
 	return true;
+}
+
+function ip_init_section_focus(){
+	ip_all('.ip_section').forEach(function(section){
+		if(!section.hasAttribute('tabindex')){
+			section.setAttribute('tabindex', '-1');
+		}
+	});
+	var active = ip_one('.ip_section.active') || ip_one('.ip_section.animated');
+	if(active){
+		active.focus({ preventScroll: true });
+	}
 }
 
 // Shared by swipe + keyboard section navigation.
