@@ -284,15 +284,7 @@ h1, h2, h3, h4, h5, h6 {
 	height: 100%;
 	box-sizing: border-box;
 	object-fit: cover;
-	/* Keep the head from being cut on wide/landscape columns.
-	   Image is 1096x1484 (aspect 0.739) -> when cover crops vertically the scaled
-	   height is containerWidth/0.739 = 1.354*100cqw. The total vertical overflow is
-	   (135.4cqw - 100cqh); a centered crop removes half of it (67.7cqw - 50cqh) from the
-	   top. We cap the TOP crop at ~25.2% of the scaled height (34.1cqw), just above
-	   the crown (which sits at 30%), so once the head nears the top edge we stop
-	   trimming the top and trim the bottom instead. The crop stays centered on
-	   normal columns; max(0px, ...) disables it when the column crops sideways. */
-	object-position: center calc(-1 * max(0px, min(67.7cqw - 50cqh, 34.1cqw)));
+	object-position: center 30%;
 	pointer-events: none;
 	user-select: none;
 	transition: height 0.25s ease, opacity 0.25s ease;
@@ -383,11 +375,6 @@ html::-webkit-scrollbar-track-piece,
 	height: 100%;
 	display: flex;
 	align-items: center;
-}
-/* Dedicated home-only portrait (square 1.webp), shown only when the two-column
-   layout collapses on narrow phones (see media queries). Hidden otherwise. */
-.ip_home_photo{
-	display: none;
 }
 .ip_home .content{
 	/* Fluid gaps around the name/line/job stack — scale with viewport. */
@@ -482,17 +469,19 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_about .wrapper {
 	width: 100%;
-	display: flex;
-	justify-content: space-between;
+	display: block;
 	margin-top: 20px;
 }
 .ip_about .left,
 .ip_about .right {
-	width: 45%;
+	width: 100%;
 }
 .ip_about .left p,
 .ip_about .right p {
 	margin-bottom: 15px;
+}
+.ip_about .left{
+	margin-bottom: 10px;
 }
 .ip_about .left p:last-child,
 .ip_about .right p:last-child {
@@ -749,15 +738,16 @@ html::-webkit-scrollbar-track-piece,
 	margin-top: 0px;
 }
 .ip_service .service_list ul{
-	margin: 0px 0px 0px -50px;
+	margin: 0;
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
+	gap: 5px;
 }
 .ip_service .service_list ul li{
-	margin: 0px 0px 50px 0px;
-	width: 50%;
-	padding-left: 50px;
+	margin: 0;
+	width: calc(50% - 2.5px);
+	padding-left: 0;
 }
 .ip_service .service-card{
 	width: 100%;
@@ -768,6 +758,12 @@ html::-webkit-scrollbar-track-piece,
 	padding: 70px 40px 63px;
 	text-align: center;
 	transition: all .3s ease;
+}
+.ip_service .service-card .title,
+.ip_service .service-card .service-card__summary{
+	word-break: normal;
+	overflow-wrap: normal;
+	hyphens: none;
 }
 .ip_service .service-card:hover{
 	background-color: #333;
@@ -1078,6 +1074,11 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		display: none;
 	}
 }
+@media (max-width: 767px){
+	.ip_service .service_list ul li{
+		width: 100%;
+	}
+}
 /* Tablets / large phones: keep the full-height portrait two-column layout. */
 @media (min-width: 639px) and (max-width: 1023px){
 	.ip_footer{justify-content: flex-start;}
@@ -1096,8 +1097,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	}
 	.ip_mainpart .main_content{width: 64%;}
 }
-/* On narrow phones the portrait column gets too thin, so only the home section
-   shows the square 1.webp stacked above its content; other sections use full width. */
 @media (max-width: 639px) {
 	#home .ip_home{
 		flex-direction: column;
@@ -1106,19 +1105,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		height: auto;
 		min-height: 100%;
 		font-size: 16px;
-	}
-	.ip_home_photo{
-		display: block;
-		width: 100%;
-		padding: 0 20px;
-		box-sizing: border-box;
-	}
-	.ip_home_photo img{
-		display: block;
-		width: 100%;
-		height: clamp(220px, 40vh, 360px);
-		object-fit: cover;
-		object-position: center 30%;
 	}
 	.ip_home .content{padding: 20px 0px 0px 20px;}
 }
