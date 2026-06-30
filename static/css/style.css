@@ -376,6 +376,9 @@ html::-webkit-scrollbar-track-piece,
 	display: flex;
 	align-items: center;
 }
+.ip_home_photo{
+	display: none;
+}
 .ip_home .content{
 	/* Fluid gaps around the name/line/job stack — scale with viewport. */
 	--ip-home-name-gap: clamp(16px, calc(18px + 1.2vw), 30px);
@@ -1074,13 +1077,13 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		display: none;
 	}
 }
-@media (max-width: 767px){
+@media (max-width: 768px){
 	.ip_service .service_list ul li{
 		width: 100%;
 	}
 }
-/* Tablets / large phones: keep the full-height portrait two-column layout. */
-@media (min-width: 639px) and (max-width: 1023px){
+/* Tablets: keep the full-height portrait two-column layout. */
+@media (min-width: 769px) and (max-width: 1023px){
 	.ip_footer{justify-content: flex-start;}
 	.ip_mainpart .author_image{
 		width: 36%;
@@ -1097,7 +1100,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	}
 	.ip_mainpart .main_content{width: 64%;}
 }
-@media (max-width: 639px) {
+@media (max-width: 768px) {
 	#home .ip_home{
 		flex-direction: column;
 		align-items: stretch;
@@ -1106,5 +1109,19 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		min-height: 100%;
 		font-size: 16px;
 	}
-	.ip_home .content{padding: 20px 0px 0px 20px;}
+	.ip_home_photo{
+		display: block;
+		width: 100%;
+		padding: 0 20px;
+		box-sizing: border-box;
+	}
+	.ip_home_photo img{
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		object-position: center 30%;
+	}
+	.ip_home .content{padding: 20px 20px 0;}
 }
