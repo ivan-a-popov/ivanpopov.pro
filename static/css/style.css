@@ -659,6 +659,7 @@ html::-webkit-scrollbar-track-piece,
 	left: 0px;
 	right: 0px;
 	height: 100vh;
+	height: 100dvh;
 	z-index: 20;
 	background-color: rgba(0,0,0,.8);
 	opacity: 0;
@@ -673,7 +674,8 @@ html::-webkit-scrollbar-track-piece,
 	position: absolute;
 	top: var(--ivp-bar-height);
 	bottom: var(--ivp-bar-height);
-	width: 720px;
+	width: min(720px, calc(100vw - 24px));
+	max-width: calc(100vw - 24px);
 	left: 50%;
 	transform: translateX(-50%);
 	background-color: #fff;
@@ -977,6 +979,25 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 /*---------------------------------------------------*/
 /*	 MEDIA QUERIES
 /*---------------------------------------------------*/
+/* Two-column services: slightly wider inner spacing for readability. */
+@media (min-width: 769px) and (max-width: 1699px){
+	.ip_service .service-card{
+		padding: 70px 48px 63px;
+	}
+}
+/* On very wide screens the content column becomes too roomy; switch services
+   from 2-up to 3-up cards for better line lengths. */
+@media (min-width: 1700px){
+	.ip_service .service_list ul li{
+		width: calc((100% - 10px) / 3);
+	}
+	.ip_service .service-card{
+		padding: 56px 28px 50px;
+	}
+	.ip_service .service-card .title{
+		font-size: 22px;
+	}
+}
 @media (min-width: 1024px){
 	.ip_all_wrap{
 		--ivp-col-left: 35%;
@@ -992,7 +1013,12 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_home .content{padding-left: 50px;}
 	.ip_home .job{font-size: 23px;}
 	.testimonials .testimonial-quote{padding: 30px;}
-	.ip_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
+	.ip_modalbox .box_inner{
+		width: min(620px, calc(100vw - 40px));
+		max-width: calc(100vw - 40px);
+		top: 45px;
+		bottom: 45px;
+	}
 	.ip_modalbox .description_wrap{padding: 30px;}
 }
 @media (max-width: 1023px) {
@@ -1027,8 +1053,27 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_home .content{padding: 0px 20px;}
 	.ip_home .job{font-size: 22px;}
 	.ip_section .section_inner{padding: 10px 20px 0px 20px;}
-	.ip_modalbox .box_inner{width: 480px;}
-	.ip_modalbox .description_wrap{padding: 20px;}
+	.ip_modalbox .box_inner{
+		width: min(520px, calc(100vw - 16px));
+		max-width: calc(100vw - 16px);
+		top: max(10px, env(safe-area-inset-top));
+		bottom: max(10px, env(safe-area-inset-bottom));
+	}
+	.ip_modalbox .close{
+		position: absolute;
+		left: auto;
+		right: 10px;
+		top: 10px;
+		margin-left: 0;
+	}
+	.ip_modalbox .close a{
+		width: 36px;
+		height: 36px;
+		color: #666;
+		border-color: #999;
+		background: rgba(255,255,255,.95);
+	}
+	.ip_modalbox .description_wrap{padding: 58px 16px 16px;}
 	.ip_modalbox .service_popup_informations .service-popup-hero__title h3{font-size: 20px;}
 	/* Testimonials: horizontal snap is desktop-only; on mobile show every entry
 	   as a vertical list and unfloat the subtree so cards keep height/spacing. */
