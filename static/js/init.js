@@ -36,9 +36,9 @@ ip_ready(function(){
 	ip_preloader();
 });
 
-// -----------------------------------------------------
+
 // -------------   PAGE TRANSITION    ------------------
-// -----------------------------------------------------
+
 function ip_goto(href){
 	if(!href){
 		return false;
@@ -141,10 +141,8 @@ function ip_page_transition(){
 	});
 }
 
-// -----------------------------------------------------
-// -----------   SWIPE NAVIGATION (MOBILE)   -----------
-// -----------------------------------------------------
 
+// -----------   SWIPE NAVIGATION (MOBILE)   -----------
 // Mirrors the CSS 1023px breakpoint where stacked/mobile content layout
 // takes over from the desktop two-column layout.
 function ip_is_mobile_layout(){
@@ -200,7 +198,6 @@ function ip_swipe_navigation(){
 		activeLink: '.ip_swipe_nav li.active a',
 		fallbackAnimated: true
 	};
-
 	mainpart.addEventListener('touchstart', function(e){
 		if(!wrap || !wrap.classList.contains('has-touch')){
 			tracking = false;
@@ -217,31 +214,23 @@ function ip_swipe_navigation(){
 		startTime = Date.now();
 		tracking = true;
 	}, { passive: true });
-
 	mainpart.addEventListener('touchend', function(e){
 		if(!tracking){
 			return;
 		}
 		tracking = false;
-
 		var t	= e.changedTouches[0];
 		var dx	= t.clientX - startX;
 		var dy	= t.clientY - startY;
-
-		// Only treat quick, mostly-horizontal gestures as section swipes so
-		// vertical scrolling inside a section stays untouched.
 		if(Date.now() - startTime > 900){ return; }
 		if(Math.abs(dx) < 60){ return; }
 		if(Math.abs(dx) < Math.abs(dy) * 1.4){ return; }
-
 		ip_navigate_section(dx < 0 ? 1 : -1, IP_NAV_LINKS_SWIPE, swipeHrefOpts);
 	}, { passive: true });
 }
 
-// -----------------------------------------------------
-// ------------   KEYBOARD NAVIGATION    ---------------
-// -----------------------------------------------------
 
+// ------------   KEYBOARD NAVIGATION    ---------------
 // Arrow Left/Right step through the menu sections (Up/Down stay free for
 // scrolling section content). Escape closes the service popup.
 function ip_keyboard_navigation(){
@@ -296,10 +285,7 @@ function ip_keyboard_navigation(){
 	});
 }
 
-// -------------------------------------------------
 // -------------  SERVICE POPUP  -------------------
-// -------------------------------------------------
-
 function ip_service_popup(){
 	var modalBox		= ip_one('.ip_modalbox');
 	if(!modalBox){
@@ -308,11 +294,9 @@ function ip_service_popup(){
 	var buttons			= ip_all('.ip_service .ip_full_link');
 	var closePopup		= modalBox.querySelector('.close');
 	var serviceCards	= ip_all('.ip_service .service-card');
-
 	function setLightCursor(on){
 		document.body.classList.toggle('ip_light_cursor', !!on);
 	}
-
 	serviceCards.forEach(function(card){
 		card.addEventListener('mouseenter', function(){
 			setLightCursor(true);
@@ -323,7 +307,6 @@ function ip_service_popup(){
 			}
 		});
 	});
-
 	buttons.forEach(function(button){
 		button.addEventListener('click', function(e){
 			e.preventDefault();
@@ -335,10 +318,8 @@ function ip_service_popup(){
 			var title	= titleEl ? titleEl.innerHTML : '';
 			var detailsEl = parent.querySelector('.service_hidden_details');
 			var content = detailsEl ? detailsEl.innerHTML : '';
-
 			modalBox.classList.add('opened');
 			setLightCursor(true);
-
 			var descWrap = modalBox.querySelector('.description_wrap');
 			if(descWrap){
 				descWrap.innerHTML = content;
@@ -349,7 +330,6 @@ function ip_service_popup(){
 			}
 		});
 	});
-
 	if(closePopup){
 		closePopup.addEventListener('click', function(e){
 			e.preventDefault();
@@ -363,10 +343,7 @@ function ip_service_popup(){
 	}
 }
 
-// -----------------------------------------------------
 // ---------------   PRELOADER   -----------------------
-// -----------------------------------------------------
-
 function ip_preloader(){
 	var preloader = ip_one('#preloader');
 
@@ -390,9 +367,9 @@ function ip_preloader(){
 	}
 }
 
-// -----------------------------------------------------
+
 // ------------------   CURSOR    ----------------------
-// -----------------------------------------------------
+
 
 function ip_cursor(){
 	var myCursor = ip_one('.mouse-cursor');
@@ -436,9 +413,8 @@ function ip_cursor(){
 	outer.style.visibility = 'visible';
 }
 
-// -----------------------------------------------------
+
 // ------------   TESTIMONIALS SCROLL-SNAP   -----------
-// -----------------------------------------------------
 
 function ip_use_vertical_testimonials_layout(){
 	// Keep the desktop snap carousel only when there is enough vertical room.
@@ -637,9 +613,9 @@ function ip_testimonials_snap(){
 	scheduleAutoplay();
 }
 
-// -----------------------------------------------------
+
 // ---------------   ANIMATED HEADLINE   ---------------
-// -----------------------------------------------------
+
 function ip_animated_headline(){
 	var animationDelay = 1200;       // initial wait before the first erase
 	var revealDuration = 800;        // type / erase width animation duration
