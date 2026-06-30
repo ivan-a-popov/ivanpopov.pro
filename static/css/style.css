@@ -252,7 +252,6 @@ h1, h2, h3, h4, h5, h6 {
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	width: 40%;
 	height: 100%;
 	z-index: 15;
 	overflow: hidden;
@@ -303,7 +302,6 @@ h1, h2, h3, h4, h5, h6 {
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
-	width: 60%;
 	transition: width 0.25s ease;
 }
 .ip_section{
@@ -392,7 +390,6 @@ html::-webkit-scrollbar-track-piece,
 	display: none;
 }
 .ip_home .content{
-	padding-left: 100px;
 	/* Fluid gaps around the name/line/job stack — scale with viewport. */
 	--ip-home-name-gap: clamp(16px, calc(18px + 1.2vw), 30px);
 	--ip-home-line-gap: clamp(16px, calc(18px + 1.2vw), 30px);
@@ -414,7 +411,6 @@ html::-webkit-scrollbar-track-piece,
 	margin-bottom: var(--ip-home-line-gap);
 }
 .ip_home .job{
-	font-size: 25px;
 	margin-bottom: var(--ip-home-job-gap);
 	font-weight: 300;
 }
@@ -927,9 +923,6 @@ body.ip_light_cursor .mouse-cursor.cursor-inner.cursor-hover::before{
 body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
   opacity: 0.75;
   border-color: #fff;
-}
-.ip_all_wrap[data-magic-cursor="hide"] .mouse-cursor{
-	display: none;
 }
 
 /*---------------------------------------------------*/

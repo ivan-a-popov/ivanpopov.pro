@@ -507,7 +507,7 @@ function ip_cursor(){
 		return;
 	}
 
-	var hoverSelector = 'a, .cursor-pointer';
+	var hoverSelector = 'a';
 	var freeze = false;
 
 	window.addEventListener('mousemove', function(s){
@@ -527,11 +527,6 @@ function ip_cursor(){
 	document.body.addEventListener('mouseout', function(e){
 		var matched = e.target.closest && e.target.closest(hoverSelector);
 		if(!matched){
-			return;
-		}
-		// Leaving an <a> that still sits inside a hovered .cursor-pointer must not
-		// drop the hover state (the wrapping pointer is still active).
-		if(matched.tagName && matched.tagName.toLowerCase() === 'a' && matched.closest('.cursor-pointer')){
 			return;
 		}
 		inner.classList.remove('cursor-hover');
