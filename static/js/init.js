@@ -1,7 +1,9 @@
 "use strict";
 
-// ----------  TINY DOM HELPERS  ----------
+// Bumped when a modal opens so pending section-focus callbacks are ignored.
+var ip_section_focus_token = 0;
 
+// ----------  TINY DOM HELPERS  ----------
 function ip_ready(fn){
 	if(document.readyState !== 'loading'){
 		fn();
@@ -37,9 +39,7 @@ ip_ready(function(){
 	ip_preloader();
 });
 
-
 // -------------   PAGE TRANSITION    ------------------
-
 function ip_goto(href){
 	if(!href){
 		return false;
@@ -88,14 +88,20 @@ function ip_goto(href){
 	target.classList.add('active');
 	target.scrollTop = 0;
 	// Defer so focus wins over the menu link that initiated navigation.
+	var focusToken = ++ip_section_focus_token;
 	setTimeout(function(){
+		if(focusToken !== ip_section_focus_token){
+			return;
+		}
+		if(ip_one('.ip_modalbox.opened')){
+			return;
+		}
 		if(target.classList.contains('active')){
 			ip_focus_section(target);
 		}
 	}, 0);
 	return true;
 }
-
 function ip_focus_section(section){
 	if(!section){
 		return null;
@@ -106,12 +112,10 @@ function ip_focus_section(section){
 	section.focus({ preventScroll: true });
 	return section;
 }
-
 function ip_active_section(){
 	return ip_one('.ip_section.active:not(.hidden)')
 		|| ip_one('.ip_section.animated:not(.hidden)');
 }
-
 function ip_init_section_focus(){
 	ip_all('.ip_section').forEach(function(section){
 		if(!section.hasAttribute('tabindex')){
@@ -120,17 +124,14 @@ function ip_init_section_focus(){
 	});
 	ip_focus_section(ip_active_section());
 }
-
 // Shared by swipe + keyboard section navigation.
 var IP_NAV_LINKS_HEADER = '.ip_header .menu .transition_link a';
 var IP_NAV_LINKS_SWIPE = '.ip_swipe_nav .transition_link a';
-
 function ip_nav_section_order(linkSelector){
 	return ip_all(linkSelector).map(function(a){
 		return a.getAttribute('href');
 	});
 }
-
 function ip_current_section_href(opts){
 	opts = opts || {};
 	var active = ip_one(opts.activeLink || '.transition_link li.active a');
@@ -148,7 +149,6 @@ function ip_current_section_href(opts){
 	var last = visible[visible.length - 1];
 	return last ? ('#' + last.id) : null;
 }
-
 function ip_navigate_section(step, linkSelector, hrefOpts){
 	var order = ip_nav_section_order(linkSelector);
 	if(!order.length){
@@ -165,7 +165,6 @@ function ip_navigate_section(step, linkSelector, hrefOpts){
 	ip_goto(order[nextIndex]);
 	return true;
 }
-
 function ip_page_transition(){
 	ip_all('.transition_link a').forEach(function(link){
 		link.addEventListener('click', function(e){
@@ -175,7 +174,6 @@ function ip_page_transition(){
 		});
 	});
 }
-
 
 // -----------   SWIPE NAVIGATION (MOBILE)   -----------
 // Mirrors the CSS 1023px breakpoint where stacked/mobile content layout
@@ -192,7 +190,6 @@ function ip_mark_touch_device(){
 		wrap.classList.add('has-touch');
 	}
 }
-
 // Build the bottom dots indicator (mobile only, hidden by CSS on desktop)
 function ip_build_swipe_nav(){
 	if(ip_one('.ip_swipe_nav')){
@@ -227,7 +224,6 @@ function ip_swipe_navigation(){
 	if(!mainpart){
 		return;
 	}
-
 	var startX = 0, startY = 0, startTime = 0, tracking = false;
 	var swipeHrefOpts = {
 		activeLink: '.ip_swipe_nav li.active a',
@@ -263,7 +259,6 @@ function ip_swipe_navigation(){
 		ip_navigate_section(dx < 0 ? 1 : -1, IP_NAV_LINKS_SWIPE, swipeHrefOpts);
 	}, { passive: true });
 }
-
 
 // ------------   KEYBOARD NAVIGATION    ---------------
 // Arrow Left/Right step through sections. Up/Down scroll the active section
@@ -353,7 +348,9 @@ function ip_service_popup(){
 	var closePopup		= modalBox.querySelector('.close');
 	var descWrap		= modalBox.querySelector('.description_wrap');
 	var serviceCards	= ip_all('.ip_service .service-card');
+	var boxInner		= modalBox.querySelector('.box_inner');
 	var popupReturnFocus = null;
+	var popupFocusTimer = null;
 
 	if(descWrap && !descWrap.hasAttribute('tabindex')){
 		descWrap.setAttribute('tabindex', '-1');
@@ -363,15 +360,65 @@ function ip_service_popup(){
 		document.body.classList.toggle('ip_light_cursor', !!on);
 	}
 
+	function clearPopupFocusTimer(){
+		if(popupFocusTimer){
+			clearTimeout(popupFocusTimer);
+			popupFocusTimer = null;
+		}
+	}
+
 	function focusPopup(){
-		if(!descWrap){
+		if(!descWrap || !modalBox.classList.contains('opened')){
 			return;
+		}
+		if(boxInner && getComputedStyle(boxInner).visibility === 'hidden'){
+			return;
+		}
+		var focused = document.activeElement;
+		if(focused && focused !== descWrap){
+			if(focused.closest && focused.closest('.ip_section')){
+				focused.blur();
+			}else if(popupReturnFocus && focused === popupReturnFocus){
+				focused.blur();
+			}
 		}
 		descWrap.focus({ preventScroll: true });
 	}
 
+	function schedulePopupFocus(){
+		clearPopupFocusTimer();
+		if(!boxInner){
+			focusPopup();
+			return;
+		}
+		var settled = false;
+		function run(){
+			if(settled || !modalBox.classList.contains('opened')){
+				return;
+			}
+			settled = true;
+			clearPopupFocusTimer();
+			boxInner.removeEventListener('transitionend', onEnd);
+			focusPopup();
+		}
+		function onEnd(e){
+			if(e.target !== boxInner){
+				return;
+			}
+			if(e.propertyName === 'opacity' || e.propertyName === 'visibility'){
+				run();
+			}
+		}
+		boxInner.addEventListener('transitionend', onEnd);
+		// box_inner uses a 0.3s delay before it becomes visible/focusable.
+		popupFocusTimer = setTimeout(run, 500);
+	}
+
 	function closePopupModal(){
+		clearPopupFocusTimer();
+		ip_section_focus_token++;
 		modalBox.classList.remove('opened');
+		modalBox.removeAttribute('aria-modal');
 		setLightCursor(false);
 		if(descWrap){
 			descWrap.innerHTML = '';
@@ -409,7 +456,9 @@ function ip_service_popup(){
 			var detailsEl = parent.querySelector('.service_hidden_details');
 			var content = detailsEl ? detailsEl.innerHTML : '';
 			popupReturnFocus = button;
+			ip_section_focus_token++;
 			modalBox.classList.add('opened');
+			modalBox.setAttribute('aria-modal', 'true');
 			setLightCursor(true);
 			if(descWrap){
 				descWrap.innerHTML = content;
@@ -418,11 +467,7 @@ function ip_service_popup(){
 			if(infos){
 				infos.insertAdjacentHTML('afterbegin', '<div class="service-popup-hero"><img class="service-popup-hero__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup-hero__title"><h3>'+title+'</h3></div></div>');
 			}
-			setTimeout(function(){
-				if(modalBox.classList.contains('opened')){
-					focusPopup();
-				}
-			}, 0);
+			schedulePopupFocus();
 		});
 	});
 	if(closePopup){
