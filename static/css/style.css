@@ -524,12 +524,12 @@ html::-webkit-scrollbar-track-piece,
 .ip_about .testimonials .list ul li{
 	margin: 0px;
 }
-.ip_about .testimonials .list ul li .list_inner{
+.testimonials .testimonial-card{
 	width: 100%;
 	display: flow-root;
 	position: relative;
 }
-.ip_about .testimonials .list ul li .text{
+.testimonials .testimonial-quote{
 	width: 100%;
 	display: flow-root;
 	position: relative;
@@ -537,7 +537,7 @@ html::-webkit-scrollbar-track-piece,
 	padding: 15px;
 	margin-bottom: 30px;
 }
-.ip_about .testimonials .list ul li .text:before{
+.testimonials .testimonial-quote:before{
 	position: absolute;
 	content: "";
 	height: 0px;
@@ -548,7 +548,7 @@ html::-webkit-scrollbar-track-piece,
 	border-top-color: #E5EDF4;
 	border-width: 0px 18px 0px 0px;
 }
-.ip_about .testimonials .list ul li .text:after{
+.testimonials .testimonial-quote:after{
 	position: absolute;
 	content: "";
 	top: 100%;
@@ -560,7 +560,7 @@ html::-webkit-scrollbar-track-piece,
 	border-width: 0px 13px 0px 0px;
 	margin-left: 2px;
 }
-.ip_about .testimonials .list ul li .text i{
+.testimonials .testimonial-quote i{
 	position: absolute;
 	z-index: 1;
 	font-size: 30px;
@@ -568,25 +568,25 @@ html::-webkit-scrollbar-track-piece,
 	left: 50px;
 	color: #E5EDF4;
 }
-.ip_about .testimonials .list ul li .text i.icon-quote-right{
+.testimonials .testimonial-quote i.icon-quote-right{
 	top: auto;
 	left: auto;
 	right: 50px;
 	bottom: -29px;
 }
-.ip_about .testimonials .details{
+.testimonials .testimonial-author{
 	width: 100%;
 	display: flex;
 	align-items: center;
 	padding-left: 20px;
 }
-.ip_about .testimonials .details .image{
+.testimonials .testimonial-author__image{
 	position: relative;
 	width: 60px;
 	height: 60px;
 	flex: 0 0 60px;
 }
-.ip_about .testimonials .details .image .main{
+.testimonials .testimonial-author__avatar{
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -594,15 +594,15 @@ html::-webkit-scrollbar-track-piece,
 	object-position: center;
 	border-radius: 100%;
 }
-.ip_about .testimonials .details .info{
+.testimonials .testimonial-author .info{
 	padding-left: 20px;
 }
-.ip_about .testimonials .details .info h3{
+.testimonials .testimonial-author .info h3{
 	font-size: 16px;
 	margin-bottom: 2px;
 	font-weight: 600;
 }
-.ip_about .testimonials .details .info span{
+.testimonials .testimonial-author .info span{
 	font-size: 14px;
 }
 /* Desktop: horizontal scroll-snap carousel (mobile uses a vertical list). */
@@ -643,7 +643,7 @@ html::-webkit-scrollbar-track-piece,
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
 	}
-	.ip_about .testimonials .list ul.testimonials-snap > li .list_inner{
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-card{
 		width: 100%;
 		height: 100%;
 		overflow: visible;
@@ -651,10 +651,10 @@ html::-webkit-scrollbar-track-piece,
 		padding-bottom: 30px;
 		box-sizing: border-box;
 	}
-	.ip_about .testimonials .list ul.testimonials-snap > li .text{
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-quote{
 		overflow: visible;
 	}
-	.ip_about .testimonials .list ul.testimonials-snap > li .text i{
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-quote i{
 		z-index: 2;
 	}
 }
@@ -759,7 +759,7 @@ html::-webkit-scrollbar-track-piece,
 	width: 50%;
 	padding-left: 50px;
 }
-.ip_service .service_list ul li .list_inner{
+.ip_service .service-card{
 	width: 100%;
 	height: 100%;
 	display: flow-root;
@@ -769,33 +769,33 @@ html::-webkit-scrollbar-track-piece,
 	text-align: center;
 	transition: all .3s ease;
 }
-.ip_service .service_list ul li .list_inner:hover{
+.ip_service .service-card:hover{
 	background-color: #333;
 }
-.ip_service .service_list ul li .svg{
+.ip_service .service-card .svg{
 	width: 60px;
 	height: 60px;
 	color: #333;
 	margin-bottom: 27px;
 	transition: all .3s ease;
 }
-.ip_service .service_list ul li .list_inner:hover .svg{
+.ip_service .service-card:hover .svg{
 	color: #fff;
 }
-.ip_service .service_list ul li .title{
+.ip_service .service-card .title{
 	font-weight: 500;
 	font-size: 24px;
 	color: #333;
 	margin-bottom: 15px;
 	transition: all .3s ease;
 }
-.ip_service .service_list ul li .list_inner:hover .title{
+.ip_service .service-card:hover .title{
 	color: #fff;
 }
-.ip_service .service_list ul li .list_inner .text{
+.ip_service .service-card .service-card__summary{
 	transition: all .3s ease;
 }
-.ip_service .service_list ul li .list_inner:hover .text{
+.ip_service .service-card:hover .service-card__summary{
 	color: #aaa;
 }
 /* Data containers only — content is copied into the popup by JS. */
@@ -807,18 +807,18 @@ html::-webkit-scrollbar-track-piece,
 	width: 100%;
 	display: flow-root;
 }
-.ip_modalbox .service_popup_informations .image{
+.ip_modalbox .service_popup_informations .service-popup-hero{
 	width: 100%;
 	position: relative;
 	margin-bottom: 37px;
 }
-.ip_modalbox .service_popup_informations .image .main{
+.ip_modalbox .service_popup_informations .service-popup-hero__image{
 	display: block;
 	width: 100%;
 	height: auto;
 	object-fit: cover;
 }
-.ip_modalbox .service_popup_informations .image::after{
+.ip_modalbox .service_popup_informations .service-popup-hero::after{
 	content: '';
 	position: absolute;
 	top: 0;
@@ -829,7 +829,7 @@ html::-webkit-scrollbar-track-piece,
 	pointer-events: none;
 	z-index: 1;
 }
-.ip_modalbox .service_popup_informations .main_title{
+.ip_modalbox .service_popup_informations .service-popup-hero__title{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -839,7 +839,7 @@ html::-webkit-scrollbar-track-piece,
 	max-width: 100%;
 	box-sizing: border-box;
 }
-.ip_modalbox .service_popup_informations .main_title h3{
+.ip_modalbox .service_popup_informations .service-popup-hero__title h3{
 	font-size: 22px;
 	color: #fff;
 	margin: 0;
@@ -994,7 +994,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_title > span:after{margin-left: 20px;}
 	.ip_home .content{padding-left: 50px;}
 	.ip_home .job{font-size: 23px;}
-	.ip_about .testimonials .list ul li .text{padding: 30px;}
+	.testimonials .testimonial-quote{padding: 30px;}
 	.ip_modalbox .box_inner{width: 620px;top: 45px;bottom: 45px;}
 	.ip_modalbox .description_wrap{padding: 30px;}
 }
@@ -1032,7 +1032,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_section .section_inner{padding: 10px 20px 0px 20px;}
 	.ip_modalbox .box_inner{width: 480px;}
 	.ip_modalbox .description_wrap{padding: 20px;}
-	.ip_modalbox .service_popup_informations .main_title h3{font-size: 20px;}
+	.ip_modalbox .service_popup_informations .service-popup-hero__title h3{font-size: 20px;}
 	/* Testimonials: horizontal snap is desktop-only; on mobile show every entry
 	   as a vertical list and unfloat the subtree so cards keep height/spacing. */
 	.ip_about .testimonials .list{
@@ -1044,9 +1044,9 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		overflow: visible;
 	}
 	.ip_about .testimonials .list ul.testimonials-snap > li,
-	.ip_about .testimonials .list ul.testimonials-snap > li .list_inner,
-	.ip_about .testimonials .list ul.testimonials-snap > li .text,
-	.ip_about .testimonials .list ul.testimonials-snap > li .details{
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-card,
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-quote,
+	.ip_about .testimonials .list ul.testimonials-snap > li .testimonial-author{
 		width: 100%;
 	}
 	.ip_about .testimonials .list ul.testimonials-snap > li{

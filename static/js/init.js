@@ -398,9 +398,9 @@ function ip_service_popup(){
 	if(!modalBox){
 		return;
 	}
-	var buttons			= ip_all('.ip_service .service_list ul li .ip_full_link');
+	var buttons			= ip_all('.ip_service .ip_full_link');
 	var closePopup		= modalBox.querySelector('.close');
-	var serviceCards	= ip_all('.ip_service .service_list ul li .list_inner');
+	var serviceCards	= ip_all('.ip_service .service-card');
 
 	function setLightCursor(on){
 		document.body.classList.toggle('ip_light_cursor', !!on);
@@ -420,7 +420,7 @@ function ip_service_popup(){
 	buttons.forEach(function(button){
 		button.addEventListener('click', function(e){
 			e.preventDefault();
-			var parent	= button.closest('.list_inner');
+			var parent	= button.closest('.service-card');
 			if(!parent){ return; }
 			var popupImg = parent.querySelector('.popup_service_image');
 			var elImage	= (popupImg && (popupImg.getAttribute('data-popup-img') || popupImg.getAttribute('src'))) || '';
@@ -438,7 +438,7 @@ function ip_service_popup(){
 			}
 			var infos = modalBox.querySelector('.service_popup_informations');
 			if(infos){
-				infos.insertAdjacentHTML('afterbegin', '<div class="image"><img class="main" src="'+elImage+'" alt="" width="640" height="320" /><div class="main_title"><h3>'+title+'</h3></div></div>');
+				infos.insertAdjacentHTML('afterbegin', '<div class="service-popup-hero"><img class="service-popup-hero__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup-hero__title"><h3>'+title+'</h3></div></div>');
 			}
 		});
 	});
@@ -550,7 +550,7 @@ function ip_testimonials_snap(){
 		return;
 	}
 
-	var list = document.querySelector('.ip_about .testimonials .testimonials-snap');
+	var list = document.querySelector('.testimonials .testimonials-snap');
 	if(!list){
 		return;
 	}
