@@ -373,7 +373,7 @@ html::-webkit-scrollbar-track-piece,
 	width: 100%;
 	display: flow-root;
 	position: relative;
-	padding: 0px 100px 0px 100px;
+	padding: 0px;
 }
 
 /*---------------------------------------------------*/
@@ -995,7 +995,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_mainpart .author_image{width: 35%;}
 	.ip_mainpart .main_content{width: 65%;}
 	.ip_section{scroll-behavior: smooth;}
-	.ip_section .section_inner{padding: 0px 50px 0px 50px;}
+	.ip_section .section_inner{padding: 0px 40px 0px 40px;}
 	#what .section_inner{padding-top: 0;}
 	.ip_title > span{letter-spacing: 3px;}
 	.ip_title > span:after{margin-left: 20px;}
