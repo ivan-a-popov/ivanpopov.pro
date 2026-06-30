@@ -552,7 +552,9 @@ function ip_use_vertical_testimonials_layout(){
 		return true;
 	}
 	if(window.matchMedia){
-		return window.matchMedia('(max-height: 920px)').matches;
+		var shortViewport = window.matchMedia('(max-height: 920px)').matches;
+		var touchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+		return shortViewport && touchLike;
 	}
 	return (window.innerHeight || document.documentElement.clientHeight) <= 920;
 }
