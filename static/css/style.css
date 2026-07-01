@@ -468,18 +468,31 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_qr_panel__close{
 	position: absolute;
-	top: 0;
-	right: 0;
-	border: 0;
-	background: transparent;
-	color: #7d7789;
-	padding: 8px;
+	top: 12px;
+	right: 16px;
+	z-index: 2;
+	display: block;
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	border: 2px solid #999;
+	border-radius: 10px;
+	background: rgba(255,255,255,.95);
+	color: #666;
 	cursor: pointer;
+	transition: all .3s ease;
 	line-height: 1;
-	font-size: 18px;
+	font-size: 16px;
+}
+.ip_qr_panel__close:hover{
+	border-radius: 100%;
+	background: #fff;
 }
 .ip_qr_panel__close i{
-	font-size: 18px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }
 .ip_qr_panel__code{
 	display: block;
@@ -1119,6 +1132,10 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	}
 	.ip_modalbox .description_wrap{padding: 16px;}
 	.ip_modalbox .service_popup_informations .service-popup-hero__close a{
+		width: 36px;
+		height: 36px;
+	}
+	.ip_qr_panel__close{
 		width: 36px;
 		height: 36px;
 	}
