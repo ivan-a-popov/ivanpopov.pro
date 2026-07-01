@@ -1216,12 +1216,18 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		display: none;
 	}
 }
+/* Side portrait: stop above the fixed footer copyright line. */
+@media (min-width: 641px) and (max-width: 1023px){
+	.ip_mainpart .author_image{
+		height: auto;
+		bottom: var(--ip-footer-height);
+	}
+}
 /* Tablets: keep the full-height portrait two-column layout. */
 @media (min-width: 769px) and (max-width: 1023px){
 	.ip_footer{justify-content: flex-start;}
 	.ip_mainpart .author_image{
 		width: 36%;
-		height: 100%;
 		opacity: 1;
 		visibility: visible;
 		pointer-events: auto;
@@ -1239,7 +1245,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_footer{justify-content: flex-start;}
 	.ip_mainpart .author_image{
 		width: 42%;
-		height: 100%;
 		opacity: 1;
 		visibility: visible;
 		pointer-events: auto;
