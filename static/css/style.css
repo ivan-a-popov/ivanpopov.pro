@@ -220,13 +220,13 @@ h1, h2, h3, h4, h5, h6 {
 	transition: transform .3s ease, font-size .3s ease;
 	font-size: 15px;
 }
-.ip_header .menu ul li .ivp_menu_sub{
+.ip_header .menu ul li .ip_menu_sub{
 	transition: opacity .3s ease, font-size .3s ease;
 }
 .ip_header .menu ul li a:hover b{
 	transform: translateY(-8px);
 }
-.ip_header .menu ul li a:hover .ivp_menu_sub{
+.ip_header .menu ul li a:hover .ip_menu_sub{
 	opacity: 1;
 }
 
@@ -1188,8 +1188,8 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.ip_header .menu ul{ width: 100%; justify-content: space-around; }
 	.ip_header .menu ul li a{ font-size: 15px; }
 	.ip_all_wrap{
-		--ip-menu-padding-left: 4px;
-		--ip-menu-padding-right: 4px;
+		--ip-menu-padding-left: 6px;
+		--ip-menu-padding-right: 6px;
 		--ip-menu-sub-font-size: 16px;
 	}
 	.ip_header .logo{
