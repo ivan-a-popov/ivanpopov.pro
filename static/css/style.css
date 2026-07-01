@@ -384,6 +384,21 @@ html::-webkit-scrollbar-track-piece,
 	--ip-home-line-width: clamp(40px, calc(25px + 2.5vw), 70px);
 	--ip-home-line-height: clamp(3px, calc(2px + 0.15vw), 5px);
 	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
+	box-sizing: border-box;
+}
+.ip_home_stack{
+	position: relative;
+}
+#home.ip_qr_shown .ip_qr_panel{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+#home.ip_qr_shown .ip_qr_panel__code{
+	width: min(176px, 48vw);
+	height: auto;
 }
 .ip_home .name{
 	font-size: clamp(24px, calc(25px + 2.44vw), 64px);
@@ -444,16 +459,12 @@ html::-webkit-scrollbar-track-piece,
 
 .ip_qr_panel{
 	display: none;
-	position: relative;
+	position: absolute;
+	inset: 0;
+	z-index: 2;
 	box-sizing: border-box;
-	width: 100%;
-}
-#home.ip_qr_shown .ip_qr_panel{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
+	padding: 16px;
+	background: #fff;
 }
 .ip_qr_panel__close{
 	position: absolute;
@@ -471,9 +482,9 @@ html::-webkit-scrollbar-track-piece,
 	font-size: 18px;
 }
 .ip_qr_panel__code{
-	width: min(220px, 72vw);
-	height: auto;
 	display: block;
+	width: min(176px, 48vw);
+	height: auto;
 }
 .ip_qr_panel__hint{
 	margin: 12px 0 0;
@@ -1281,39 +1292,8 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 		object-position: center 40%;
 	}
 	.ip_home .content{padding: 20px 20px 0;}
-	#home.ip_qr_shown .ip_home{
-		min-height: calc(100dvh - var(--ip-bar-height) - var(--ip-footer-height));
-		justify-content: flex-start;
-	}
-	#home.ip_qr_shown .ip_home_photo{
-		flex: 0 0 50%;
-		max-height: 50dvh;
-		overflow: hidden;
-		padding-bottom: 0;
-	}
-	#home.ip_qr_shown .ip_home_photo img{
-		width: 100%;
-		height: 100%;
-		aspect-ratio: auto;
-		object-fit: cover;
-		object-position: center 40%;
-	}
-	#home.ip_qr_shown .content{
-		display: none;
-	}
-	#home.ip_qr_shown .ip_qr_panel{
-		flex: 1 1 50%;
-		min-height: 0;
-		padding: 8px 20px calc(var(--ip-footer-height) + 12px);
-	}
-}
-@media (min-width: 641px){
-	#home.ip_qr_shown .ip_qr_panel{
-		align-items: flex-start;
-		padding: 8px 0 0;
-	}
-	#home.ip_qr_shown .ip_qr_panel .ip_qr_panel__code{
-		width: 168px;
+	#home.ip_qr_shown .ip_qr_panel__code{
+		width: min(200px, 58vw);
 	}
 }
 @media (max-width: 480px){
