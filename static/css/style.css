@@ -1,5 +1,23 @@
 @charset "utf-8";
 
+/*==================================================================
+	MOBILE-FIRST STYLESHEET
+
+	Base rules target the smallest phones; layout scales up through
+	canonical min-width breakpoints:
+	  480px  — phone landscape tweaks
+	  640px  — side portrait appears (two-column shell)
+	  768px  — 2-up services, two-column text blocks
+	  1024px — full desktop (35/65 split, magic cursor, snap carousel)
+	           mirrored in init.js via matchMedia('(max-width: 1023px)')
+	  1700px — 3-up services on extra-wide screens
+
+	Layout tokens (--ip-bar-height, --ip-side-gutter, --ip-layout-max…)
+	and header/footer layout live inline in index.html's <head> so the
+	first paint is stable before this file loads. The whole layout is
+	capped at --ip-layout-max and centered (see index.html).
+==================================================================*/
+
 /* Onest (self-hosted; SIL OFL) — weights 300–800, Cyrillic + Latin subsets */
 @font-face {
 	font-family: "Onest";
@@ -34,9 +52,9 @@
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/*------------------------------------------------------------------*/
-/*	BASE (reset)
-/*------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	RESET + BASE
+------------------------------------------------------------------*/
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, b, i, ul, ol, li {
 	background: transparent;
 	border: 0;
@@ -49,10 +67,65 @@ img {
 	vertical-align: middle;
 	max-width: 100%;
 }
+html {
+	overflow-x: hidden;
+	padding: 0px;
+	margin: 0px;
+	scrollbar-gutter: stable;
+}
+body {
+	overflow-x: hidden;
+	width: 100%;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+	/* Fluid body copy: 16px on phones/laptops, ~18px near the layout cap. */
+	font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+	line-height: 1.7;
+	letter-spacing: 0px;
+	word-wrap: break-word;
+	font-weight: 400;
+	color: #7d7789;
+}
+svg {
+	fill: currentcolor;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 700;
+	line-height: 1.2;
+	font-family: "Onest";
+	color: #333;
+}
+/* Column split consumed by .author_image / .main_content below.
+   Portrait hidden on phones, widens through the breakpoints. */
+.ip_all_wrap{
+	--ip-col-left: 0%;
+	--ip-col-right: 100%;
+}
+@media (min-width: 640px){
+	.ip_all_wrap{
+		--ip-col-left: 42%;
+		--ip-col-right: 58%;
+	}
+}
+@media (min-width: 768px){
+	.ip_all_wrap{
+		--ip-col-left: 36%;
+		--ip-col-right: 64%;
+	}
+}
+@media (min-width: 1024px){
+	.ip_all_wrap{
+		--ip-col-left: 35%;
+		--ip-col-right: 65%;
+	}
+	.ip_all_wrap[data-magic-cursor="show"],
+	.ip_all_wrap[data-magic-cursor="show"] *{
+		cursor: none !important;
+	}
+}
 
-/*------------------------------------------------------------------*/
-/*	ICONS
-/*------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	ICONS
+------------------------------------------------------------------*/
 /* The icons are painted from inline SVG masks and inherit currentColor like a font glyph. */
 .icon-cancel:before,
 .icon-quote-left:before,
@@ -82,9 +155,9 @@ img {
 }
 .icon-quote-right:before { transform: rotate(180deg); }
 
-/*------------------------------------------------------------------*/
-/*	ANIMATION (rollIn / rollOut)
-/*------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	ANIMATION (rollIn / rollOut)
+------------------------------------------------------------------*/
 .animated {
   animation-duration: 1.2s;
   animation-fill-mode: both;
@@ -141,7 +214,7 @@ img {
 }
 
 /* --------------------------------
-|* Animated headline (clip effect)
+	Animated headline (clip effect)
 -------------------------------- */
 .cd-words-wrapper {
   display: inline-block;
@@ -180,47 +253,9 @@ img {
   background-color: #999;
 }
 
-/*---------------------------------------------------*/
-/*	 BASE
-/*---------------------------------------------------*/
-html {
-	overflow-x: hidden;
-	padding: 0px;
-	margin: 0px;
-	scrollbar-gutter: stable;
-}
-body {
-	overflow-x: hidden;
-	width: 100%;
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-	font-size: 16px;
-	line-height: 1.7;
-	letter-spacing: 0px;
-	word-wrap: break-word;
-	font-weight: 400;
-	color: #7d7789;
-}
-svg {
-	fill: currentcolor;
-}
-h1, h2, h3, h4, h5, h6 {
-	font-weight: 700;
-	line-height: 1.2;
-	font-family: "Onest";
-	color: #333;
-}
-/* Header/footer layout and .ip_all_wrap tokens are inlined in index.html's <head>. */
-@media (min-width: 1024px){
-	.ip_all_wrap[data-magic-cursor="show"],
-	.ip_all_wrap[data-magic-cursor="show"] *{
-		cursor: none !important;
-	}
-}
-
-/*---------------------------------------------------*/
-/*	 HEADER (enhancements — layout in index.html)
-/*---------------------------------------------------*/
-
+/*------------------------------------------------------------------
+	HEADER (enhancements — layout in index.html)
+------------------------------------------------------------------*/
 .ip_header .logo .text .logo-cursor{
 	margin-left: 1px;
 	font-weight: 400;
@@ -240,7 +275,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .ip_header .menu ul li a b{
 	transition: transform .3s ease, font-size .3s ease;
-	font-size: 15px;
+	font-size: .9375rem;
 }
 .ip_header .menu ul li .ip_menu_sub{
 	transition: opacity .3s ease, font-size .3s ease;
@@ -252,30 +287,32 @@ h1, h2, h3, h4, h5, h6 {
 	opacity: 1;
 }
 
-/*---------------------------------------------------*/
-/*	 MAINPART
-/*---------------------------------------------------*/
+/*------------------------------------------------------------------
+	MAINPART + SECTIONS
+------------------------------------------------------------------*/
 .ip_mainpart{
 	position: absolute;
 	top: var(--ip-bar-height);
-	bottom: var(--ip-bar-height);
-	left: var(--ip-side-gutter);
-	right: var(--ip-side-gutter);
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 	overflow: hidden;
 	transition: top 0.25s ease, bottom 0.25s ease, left 0.25s ease, right 0.25s ease;
 }
+/* Side portrait: hidden on phones, appears with the two-column shell. */
 .ip_mainpart .author_image{
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	height: 100%;
+	width: var(--ip-col-left);
+	height: 0;
 	z-index: 15;
 	overflow: hidden;
-	opacity: 1;
-	visibility: visible;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
 	transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
-/* Portrait host container for the side photo. */
 .ip_mainpart .author_image .author_image_inner{
 	position: absolute;
 	top: 0;
@@ -283,8 +320,9 @@ h1, h2, h3, h4, h5, h6 {
 	right: 0;
 	bottom: 0;
 	width: 100%;
-	height: 100%;
+	height: 0;
 	overflow: hidden;
+	opacity: 0;
 	transition: height 0.25s ease, opacity 0.25s ease;
 }
 .ip_mainpart .author_image .author_image_inner .author_photo{
@@ -295,10 +333,11 @@ h1, h2, h3, h4, h5, h6 {
 	right: 0;
 	bottom: 0;
 	width: 100%;
-	height: 100%;
+	height: 0;
 	box-sizing: border-box;
 	object-fit: cover;
 	object-position: center;
+	opacity: 0;
 	pointer-events: none;
 	user-select: none;
 	transition: height 0.25s ease, opacity 0.25s ease;
@@ -308,6 +347,7 @@ h1, h2, h3, h4, h5, h6 {
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
+	width: var(--ip-col-right);
 	transition: width 0.25s ease;
 }
 .ip_section{
@@ -322,6 +362,10 @@ h1, h2, h3, h4, h5, h6 {
 	visibility: hidden;
 	z-index: 8;
 	transition: visibility 1s linear, opacity 0s linear;
+	/* Touch: momentum scroll, vertical panning only, no scroll chaining. */
+	-webkit-overflow-scrolling: touch;
+	touch-action: pan-y;
+	overscroll-behavior-y: contain;
 }
 .ip_section.animated {
 	opacity: 1;
@@ -341,10 +385,20 @@ h1, h2, h3, h4, h5, h6 {
 .ip_section:focus {
 	outline: none;
 }
-.ip_modalbox .description_wrap:focus {
-	outline: none;
+.ip_section .section_inner{
+	width: 100%;
+	display: flow-root;
+	position: relative;
+	padding: 10px 20px 0px 20px;
 }
-
+.ip_full_link{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 5;
+}
 /* Minimal scrollbars: thin thumb, no arrow buttons (incl. Windows Chromium). */
 html,
 .ip_section,
@@ -379,25 +433,63 @@ html::-webkit-scrollbar-track-piece,
 	-webkit-appearance: none;
 	appearance: none;
 }
-.ip_section .section_inner{
-	width: 100%;
-	display: flow-root;
-	position: relative;
-	padding: 0px;
+/* 640px+: portrait visible, stops above the fixed footer copyright line. */
+@media (min-width: 640px){
+	.ip_mainpart .author_image{
+		height: auto;
+		bottom: var(--ip-footer-height);
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+	.ip_mainpart .author_image .author_image_inner,
+	.ip_mainpart .author_image .author_image_inner .author_photo{
+		height: 100%;
+		opacity: 1;
+	}
+}
+/* Desktop: gutters around the mainpart, full-height portrait, smooth scroll. */
+@media (min-width: 1024px){
+	.ip_mainpart{
+		bottom: var(--ip-bar-height);
+		left: var(--ip-side-gutter);
+		right: var(--ip-side-gutter);
+	}
+	.ip_mainpart .author_image{
+		height: 100%;
+		bottom: auto;
+	}
+	.ip_section{scroll-behavior: smooth;}
+	.ip_section .section_inner{padding: 0px 40px 0px 40px;}
 }
 
-/*---------------------------------------------------*/
-/*	 HOME
-/*---------------------------------------------------*/
+/*------------------------------------------------------------------
+	HOME
+------------------------------------------------------------------*/
+/* Phones: square photo stacked above the content. */
 .ip_home{
 	position: relative;
 	width: 100%;
-	height: 100%;
+	height: auto;
+	min-height: 100%;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
 }
 .ip_home_photo{
-	display: none;
+	display: block;
+	width: 100%;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+.ip_home_photo img{
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1 / 0.82;
+	object-fit: cover;
+	object-position: center 55%;
 }
 .ip_home .content{
 	/* Fluid gaps around the name/line/job stack — scale with viewport. */
@@ -407,20 +499,10 @@ html::-webkit-scrollbar-track-piece,
 	--ip-home-line-height: clamp(3px, calc(2px + 0.15vw), 5px);
 	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 	box-sizing: border-box;
+	padding: 14px 20px 0;
 }
 .ip_home_stack{
 	position: relative;
-}
-#home.ip_qr_shown .ip_qr_panel{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
-#home.ip_qr_shown .ip_qr_panel__code{
-	width: min(176px, 48vw);
-	height: auto;
 }
 .ip_home .name{
 	font-size: clamp(24px, calc(25px + 2.44vw), 64px);
@@ -437,6 +519,7 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_home .job{
 	margin-bottom: var(--ip-home-job-gap);
+	font-size: 1.375rem;
 	font-weight: 300;
 }
 .ip_home .job .blc{
@@ -473,12 +556,10 @@ html::-webkit-scrollbar-track-piece,
 	height: 48px;
 	display: block;
 }
-
 .ip_home_social a.ip_qr_open--active{
 	opacity: 1;
 	transform: scale(1.25);
 }
-
 .ip_qr_panel{
 	display: none;
 	position: absolute;
@@ -488,14 +569,21 @@ html::-webkit-scrollbar-track-piece,
 	padding: 16px;
 	background: #fff;
 }
+#home.ip_qr_shown .ip_qr_panel{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
 .ip_qr_panel__close{
 	position: absolute;
 	top: 12px;
 	right: 16px;
 	z-index: 2;
 	display: block;
-	width: 40px;
-	height: 40px;
+	width: 44px;
+	height: 44px;
 	padding: 0;
 	border: 2px solid #999;
 	border-radius: 10px;
@@ -504,7 +592,7 @@ html::-webkit-scrollbar-track-piece,
 	cursor: pointer;
 	transition: all .3s ease;
 	line-height: 1;
-	font-size: 16px;
+	font-size: 1rem;
 }
 .ip_qr_panel__close:hover{
 	border-radius: 100%;
@@ -516,23 +604,64 @@ html::-webkit-scrollbar-track-piece,
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
-.ip_qr_panel__code{
+.ip_qr_panel__code,
+#home.ip_qr_shown .ip_qr_panel__code{
 	display: block;
-	width: min(176px, 48vw);
+	width: min(200px, 58vw);
 	height: auto;
 }
 .ip_qr_panel__hint{
 	margin: 12px 0 0;
 	max-width: 260px;
 	font-family: "Onest", sans-serif;
-	font-size: 14px;
+	font-size: .875rem;
 	line-height: 1.4;
 	color: #7d7789;
 }
+@media (min-width: 480px){
+	.ip_home_photo img{
+		aspect-ratio: 1 / 1;
+		object-position: center 40%;
+	}
+	.ip_home .content{
+		padding-top: 20px;
+	}
+}
+/* 640px+: side portrait replaces the stacked photo; content centers vertically. */
+@media (min-width: 640px){
+	.ip_home{
+		height: 100%;
+		min-height: 0;
+		flex-direction: row;
+		align-items: center;
+	}
+	.ip_home_photo{
+		display: none;
+	}
+	.ip_home .content{
+		padding: 0 20px;
+	}
+	.ip_qr_panel__code,
+	#home.ip_qr_shown .ip_qr_panel__code{
+		width: min(176px, 48vw);
+	}
+}
+@media (min-width: 1024px){
+	.ip_home .content{
+		padding: 0 0 0 50px;
+	}
+	.ip_home .job{
+		font-size: 1.4375rem;
+	}
+	.ip_qr_panel__close{
+		width: 40px;
+		height: 40px;
+	}
+}
 
-/*---------------------------------------------------*/
-/*	 ABOUT
-/*---------------------------------------------------*/
+/*------------------------------------------------------------------
+	ABOUT / WHY (text sections)
+------------------------------------------------------------------*/
 .ip_info{
 	width: 100%;
 	display: flow-root;
@@ -561,15 +690,14 @@ html::-webkit-scrollbar-track-piece,
 	transform: translateY(-50%);
 	margin-left: 30px;
 }
+/* Single column on phones, two columns from 768px. */
 .ip_info .wrapper {
 	width: 100%;
-	display: flex;
-	justify-content: space-between;
+	display: block;
 	margin-top: 20px;
 }
-.ip_info .left,
-.ip_info .right {
-	width: 45%;
+.ip_info .left{
+	margin-bottom: 10px;
 }
 .ip_info .left p,
 .ip_info .right p {
@@ -579,15 +707,31 @@ html::-webkit-scrollbar-track-piece,
 .ip_info .right p:last-child {
 	margin-bottom: 25px;
 }
-
-.ip_full_link{
-	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	z-index: 5;
+@media (min-width: 768px){
+	.ip_info .wrapper{
+		display: flex;
+		justify-content: space-between;
+	}
+	.ip_info .left,
+	.ip_info .right{
+		width: 45%;
+	}
+	.ip_info .left{
+		margin-bottom: 0;
+	}
 }
+@media (min-width: 1024px){
+	.ip_title > span{letter-spacing: 3px;}
+	.ip_title > span:after{margin-left: 20px;}
+}
+
+/*------------------------------------------------------------------
+	TESTIMONIALS
+	Base: vertical list (phones, and any layout without room for the
+	carousel). Desktop with enough vertical room (or a fine pointer)
+	gets the horizontal scroll-snap carousel — the same condition
+	ip_use_vertical_testimonials_layout() checks in init.js.
+------------------------------------------------------------------*/
 .testimonials{
 	width: 100%;
 	display: flow-root;
@@ -603,7 +747,14 @@ html::-webkit-scrollbar-track-piece,
 	list-style-type: none;
 }
 .testimonials .list ul li{
-	margin: 0px;
+	margin: 0px 0px 75px;
+}
+.testimonials .list ul li:last-child{
+	margin-bottom: 0;
+}
+/* Loop clones exist only for the carousel; never show them stacked. */
+.testimonials .list ul.testimonials-snap > li.is-clone{
+	display: none;
 }
 .testimonials .testimonial-card{
 	width: 100%;
@@ -679,16 +830,21 @@ html::-webkit-scrollbar-track-piece,
 	padding-left: 20px;
 }
 .testimonials .testimonial-author .info h3{
-	font-size: 16px;
+	font-size: 1rem;
 	margin-bottom: 2px;
 	font-weight: 600;
 }
 .testimonials .testimonial-author .info span{
-	font-size: 14px;
+	font-size: .875rem;
 }
-/* Desktop: horizontal scroll-snap carousel (mobile uses a vertical list). */
-@media (min-width: 1024px) {
-	.ip_info .testimonials .list ul.testimonials-snap{
+@media (min-width: 1024px){
+	.testimonials .testimonial-quote{padding: 30px;}
+}
+/* Horizontal scroll-snap carousel: desktop with vertical room, or any
+   desktop-width device driven by a fine pointer. */
+@media (min-width: 1024px) and (min-height: 921px),
+	   (min-width: 1024px) and (hover: hover) and (pointer: fine){
+	.testimonials .list ul.testimonials-snap{
 		display: flex;
 		flex-direction: row;
 		align-items: stretch;
@@ -704,27 +860,30 @@ html::-webkit-scrollbar-track-piece,
 		cursor: grab;
 		scrollbar-width: none;
 	}
-	.ip_info .testimonials .list ul.testimonials-snap::-webkit-scrollbar{
+	.testimonials .list ul.testimonials-snap::-webkit-scrollbar{
 		display: none;
 	}
-	.ip_info .testimonials .list ul.testimonials-snap.is-dragging{
+	.testimonials .list ul.testimonials-snap.is-dragging{
 		cursor: grabbing;
 		scroll-snap-type: none;
 		user-select: none;
 	}
-	.ip_info .testimonials .list ul.testimonials-snap:active{
+	.testimonials .list ul.testimonials-snap:active{
 		cursor: grabbing;
 	}
-	.ip_info .testimonials .list ul.testimonials-snap > li{
+	.testimonials .list ul.testimonials-snap > li{
 		flex: 0 0 calc((100% - 30px) / 2);
 		min-width: 0;
-		/* The base rule sets a 10px margin on every li; in this flex track the
-		   gap handles spacing, and the extra margin clips card 2's right border. */
+		/* Track spacing comes from the flex gap; extra margins would clip
+		   card 2's right border. */
 		margin: 0;
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
 	}
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-card{
+	.testimonials .list ul.testimonials-snap > li.is-clone{
+		display: block;
+	}
+	.testimonials .list ul.testimonials-snap > li .testimonial-card{
 		width: 100%;
 		height: 100%;
 		overflow: visible;
@@ -732,67 +891,17 @@ html::-webkit-scrollbar-track-piece,
 		padding-bottom: 30px;
 		box-sizing: border-box;
 	}
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-quote{
+	.testimonials .list ul.testimonials-snap > li .testimonial-quote{
 		overflow: visible;
 	}
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-quote i{
+	.testimonials .list ul.testimonials-snap > li .testimonial-quote i{
 		z-index: 2;
 	}
 }
 
-/*---------------------------------------------------*/
-/*	 MODALBOX
-/*---------------------------------------------------*/
-.ip_modalbox{
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	height: 100vh;
-	height: 100dvh;
-	z-index: 20;
-	background-color: rgba(0,0,0,.8);
-	opacity: 0;
-	visibility: hidden;
-	transition: all .3s ease;
-}
-.ip_modalbox.opened{
-	opacity: 1;
-	visibility: visible;
-}
-.ip_modalbox .box_inner{
-	position: absolute;
-	top: var(--ip-bar-height);
-	bottom: var(--ip-bar-height);
-	width: min(720px, calc(100vw - 24px));
-	max-width: calc(100vw - 24px);
-	left: 50%;
-	transform: translateX(-50%);
-	background-color: #fff;
-	z-index: 1;
-	opacity: 0;
-	visibility: hidden;
-	margin-top: -20px;
-	transition: all .3s ease;
-	transition-delay: .3s;
-}
-.ip_modalbox.opened .box_inner{
-	opacity: 1;
-	visibility: visible;
-	margin-top: 0px;
-}
-.ip_modalbox .description_wrap{
-	position: relative;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	padding: 30px;
-	overflow-y: auto;
-}
-
-/*---------------------------------------------------*/
-/*	 SERVICES
-/*---------------------------------------------------*/
+/*------------------------------------------------------------------
+	SERVICES
+------------------------------------------------------------------*/
 .ip_service{
 	width: 100%;
 	display: flow-root;
@@ -810,9 +919,10 @@ html::-webkit-scrollbar-track-piece,
 	flex-wrap: wrap;
 	gap: 5px;
 }
+/* 1-up on phones → 2-up from 768px → 3-up on extra-wide screens. */
 .ip_service .service_list ul li{
 	margin: 0;
-	width: calc(50% - 2.5px);
+	width: 100%;
 	padding-left: 0;
 }
 .ip_service .service-card{
@@ -846,7 +956,7 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_service .service-card .title{
 	font-weight: 500;
-	font-size: 24px;
+	font-size: 1.5rem;
 	color: #333;
 	margin-bottom: 15px;
 	transition: all .3s ease;
@@ -864,6 +974,79 @@ html::-webkit-scrollbar-track-piece,
 .ip_service .popup_service_image,
 .ip_service .service_hidden_details{
 	display: none;
+}
+@media (min-width: 768px){
+	.ip_service .service_list ul li{
+		width: calc(50% - 2.5px);
+	}
+	.ip_service .service-card{
+		padding: 70px 48px 63px;
+	}
+}
+/* Extra-wide: 3-up cards for better line lengths inside the content column. */
+@media (min-width: 1700px){
+	.ip_service .service_list ul li{
+		width: calc((100% - 10px) / 3);
+	}
+	.ip_service .service-card{
+		padding: 56px 28px 50px;
+	}
+	.ip_service .service-card .title{
+		font-size: 1.375rem;
+	}
+}
+
+/*------------------------------------------------------------------
+	MODALBOX (service popup)
+------------------------------------------------------------------*/
+.ip_modalbox{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100vh;
+	height: 100dvh;
+	z-index: 20;
+	background-color: rgba(0,0,0,.8);
+	opacity: 0;
+	visibility: hidden;
+	transition: all .3s ease;
+}
+.ip_modalbox.opened{
+	opacity: 1;
+	visibility: visible;
+}
+.ip_modalbox .box_inner{
+	position: absolute;
+	top: max(10px, env(safe-area-inset-top));
+	bottom: max(10px, env(safe-area-inset-bottom));
+	width: min(520px, calc(100vw - 16px));
+	max-width: calc(100vw - 16px);
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #fff;
+	z-index: 1;
+	opacity: 0;
+	visibility: hidden;
+	margin-top: -20px;
+	transition: all .3s ease;
+	transition-delay: .3s;
+}
+.ip_modalbox.opened .box_inner{
+	opacity: 1;
+	visibility: visible;
+	margin-top: 0px;
+}
+.ip_modalbox .description_wrap{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 16px;
+	overflow-y: auto;
+}
+.ip_modalbox .description_wrap:focus {
+	outline: none;
 }
 .ip_modalbox .service_popup_informations{
 	width: 100%;
@@ -902,7 +1085,7 @@ html::-webkit-scrollbar-track-piece,
 	box-sizing: border-box;
 }
 .ip_modalbox .service_popup_informations .service-popup-hero__title h3{
-	font-size: 22px;
+	font-size: 1.25rem;
 	color: #fff;
 	margin: 0;
 	text-shadow: 0 1px 3px rgba(0,0,0,.45);
@@ -916,8 +1099,8 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_modalbox .service_popup_informations .service-popup-hero__close a{
 	display: block;
-	width: 40px;
-	height: 40px;
+	width: 44px;
+	height: 44px;
 	text-decoration: none;
 	color: #fff;
 	border: 2px solid rgba(255,255,255,.85);
@@ -945,11 +1128,28 @@ html::-webkit-scrollbar-track-piece,
 .ip_modalbox .service_popup_informations .descriptions p:last-child{
 	margin-bottom: 0px;
 }
+@media (min-width: 1024px){
+	.ip_modalbox .box_inner{
+		width: min(620px, calc(100vw - 40px));
+		max-width: calc(100vw - 40px);
+		top: 45px;
+		bottom: 45px;
+	}
+	.ip_modalbox .description_wrap{padding: 30px;}
+	.ip_modalbox .service_popup_informations .service-popup-hero__title h3{
+		font-size: 1.375rem;
+	}
+	.ip_modalbox .service_popup_informations .service-popup-hero__close a{
+		width: 40px;
+		height: 40px;
+	}
+}
 
-/*---------------------------------------------------*/
-/*	 MAGIC CURSOR
-/*---------------------------------------------------*/
+/*------------------------------------------------------------------
+	MAGIC CURSOR (desktop only)
+------------------------------------------------------------------*/
 .mouse-cursor{
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -1015,12 +1215,16 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
   opacity: 0.75;
   border-color: #fff;
 }
+@media (min-width: 1024px){
+	.mouse-cursor{display: block;}
+}
 
-/*---------------------------------------------------*/
-/*	 SWIPE NAVIGATION (MOBILE) — dots built by JS
-/*---------------------------------------------------*/
+/*------------------------------------------------------------------
+	SWIPE NAVIGATION (dots built by JS)
+	Visible on narrow layouts and on any touch device (.has-touch).
+------------------------------------------------------------------*/
 .ip_swipe_nav{
-	display: none;
+	display: block;
 	position: fixed;
 	left: 50%;
 	bottom: 14px;
@@ -1063,274 +1267,11 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
-/* Show dots on touch devices at any width. */
+@media (min-width: 1024px){
+	.ip_swipe_nav{display: none;}
+}
+/* Touch devices keep the dots at any width (higher specificity than the
+   min-width hide above). */
 .ip_all_wrap.has-touch .ip_swipe_nav{
 	display: block;
-}
-
-/*---------------------------------------------------*/
-/*	 MEDIA QUERIES
-/*---------------------------------------------------*/
-/* Two-column services: slightly wider inner spacing for readability. */
-@media (min-width: 769px) and (max-width: 1699px){
-	.ip_service .service-card{
-		padding: 70px 48px 63px;
-	}
-}
-/* On very wide screens the content column becomes too roomy; switch services
-   from 2-up to 3-up cards for better line lengths. */
-@media (min-width: 1700px){
-	.ip_service .service_list ul li{
-		width: calc((100% - 10px) / 3);
-	}
-	.ip_service .service-card{
-		padding: 56px 28px 50px;
-	}
-	.ip_service .service-card .title{
-		font-size: 22px;
-	}
-}
-@media (min-width: 1024px){
-	.ip_all_wrap{
-		--ip-col-left: 35%;
-		--ip-col-right: 65%;
-	}
-	.ip_mainpart .author_image{width: 35%;}
-	.ip_mainpart .main_content{width: 65%;}
-	.ip_section{scroll-behavior: smooth;}
-	.ip_section .section_inner{padding: 0px 40px 0px 40px;}
-	#testimonials .section_inner{padding-top: 0;}
-	.ip_title > span{letter-spacing: 3px;}
-	.ip_title > span:after{margin-left: 20px;}
-	.ip_home .content{padding-left: 50px;}
-	.ip_home .job{font-size: 23px;}
-	.testimonials .testimonial-quote{padding: 30px;}
-	.ip_modalbox .box_inner{
-		width: min(620px, calc(100vw - 40px));
-		max-width: calc(100vw - 40px);
-		top: 45px;
-		bottom: 45px;
-	}
-	.ip_modalbox .description_wrap{padding: 30px;}
-}
-@media (max-width: 1023px) {
-	.ip_all_wrap{
-		--ip-col-left: 36%;
-		--ip-col-right: 64%;
-		--ip-side-gutter: 10px;
-	}
-	.ip_footer{justify-content: center;}
-	.mouse-cursor{display: none;}
-	.ip_swipe_nav{display: block;}
-	.ip_mainpart{top: var(--ip-bar-height);left: 0px;right: 0px;bottom: 0px;}
-	.ip_mainpart .author_image{
-		width: 0;
-		height: 0;
-		opacity: 0;
-		visibility: hidden;
-		pointer-events: none;
-	}
-	.ip_mainpart .author_image .author_image_inner,
-	.ip_mainpart .author_image .author_photo{
-		height: 0;
-		opacity: 0;
-	}
-	.ip_mainpart .main_content{width: 100%;}
-	/* Touch sections: enable momentum scroll. */
-	.ip_section{
-		-webkit-overflow-scrolling: touch;
-		touch-action: pan-y;
-		overscroll-behavior-y: contain;
-	}
-	.ip_home .content{padding: 0px 20px;}
-	.ip_home .job{font-size: 22px;}
-	.ip_section .section_inner{padding: 10px 20px 0px 20px;}
-	.ip_modalbox .box_inner{
-		width: min(520px, calc(100vw - 16px));
-		max-width: calc(100vw - 16px);
-		top: max(10px, env(safe-area-inset-top));
-		bottom: max(10px, env(safe-area-inset-bottom));
-	}
-	.ip_modalbox .description_wrap{padding: 16px;}
-	.ip_modalbox .service_popup_informations .service-popup-hero__close a{
-		width: 36px;
-		height: 36px;
-	}
-	.ip_qr_panel__close{
-		width: 36px;
-		height: 36px;
-	}
-	.ip_modalbox .service_popup_informations .service-popup-hero__title h3{font-size: 20px;}
-	/* Testimonials: horizontal snap is desktop-only; on mobile show every entry
-	   as a vertical list and unfloat the subtree so cards keep height/spacing. */
-	.ip_info .testimonials .list{
-		margin-top: 0;
-		padding-top: 0px;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap{
-		display: block;
-		overflow: visible;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap > li,
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-card,
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-quote,
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-author{
-		width: 100%;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap > li{
-		margin-bottom: 75px;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap > li:last-child{
-		margin-bottom: 0;
-	}
-	/* Loop clones are desktop-only; never show the triplicated cards stacked. */
-	.ip_info .testimonials .list ul.testimonials-snap > li.is-clone{
-		display: none;
-	}
-}
-/* Short touch/coarse-pointer viewports: disable horizontal snap and stack
-   testimonials vertically so each card can be fully seen. */
-@media (min-width: 1024px) and (max-height: 920px) and (hover: none),
-	   (min-width: 1024px) and (max-height: 920px) and (pointer: coarse){
-	.ip_info .testimonials .list{
-		margin-top: 0;
-		padding-top: 0px;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap{
-		display: block;
-		overflow: visible;
-		scroll-snap-type: none;
-		scroll-behavior: auto;
-		cursor: default;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap > li,
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-card,
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-quote,
-	.ip_info .testimonials .list ul.testimonials-snap > li .testimonial-author{
-		width: 100%;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap > li{
-		margin-bottom: 75px;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap > li:last-child{
-		margin-bottom: 0;
-	}
-	.ip_info .testimonials .list ul.testimonials-snap > li.is-clone{
-		display: none;
-	}
-}
-@media (max-width: 714px) {
-	.ip_header{
-		display: flex;
-		justify-content: space-around;
-	}
-	.ip_header .menu{ justify-content: flex-end; }
-	.ip_header .menu ul{ width: 100%; justify-content: space-around; }
-	.ip_header .menu ul li a{ font-size: 15px; }
-	.ip_all_wrap{
-		--ip-menu-padding-left: 6px;
-		--ip-menu-padding-right: 6px;
-		--ip-menu-sub-font-size: 16px;
-	}
-	.ip_header .logo{
-		display: none;
-	}
-}
-@media (max-width: 768px){
-	.ip_service .service_list ul li{
-		width: 100%;
-	}
-	.ip_info .wrapper{
-		display: block;
-	}
-	.ip_info .left,
-	.ip_info .right{
-		width: 100%;
-	}
-	.ip_info .left{
-		margin-bottom: 10px;
-	}
-}
-@media (min-width: 641px){
-	.ip_home_photo{
-		display: none;
-	}
-}
-/* Side portrait: stop above the fixed footer copyright line. */
-@media (min-width: 641px) and (max-width: 1023px){
-	.ip_mainpart .author_image{
-		height: auto;
-		bottom: var(--ip-footer-height);
-	}
-}
-/* Tablets: keep the full-height portrait two-column layout. */
-@media (min-width: 769px) and (max-width: 1023px){
-	.ip_footer{justify-content: flex-start;}
-	.ip_mainpart .author_image{
-		width: 36%;
-		opacity: 1;
-		visibility: visible;
-		pointer-events: auto;
-	}
-	.ip_mainpart .author_image .author_image_inner,
-	.ip_mainpart .author_image .author_photo{
-		height: 100%;
-		opacity: 1;
-	}
-	.ip_mainpart .main_content{width: 64%;}
-}
-/* Narrow landscape / small tablets: keep side portrait, but collapse inner content
-   to one column for readability. */
-@media (min-width: 641px) and (max-width: 768px){
-	.ip_footer{justify-content: flex-start;}
-	.ip_mainpart .author_image{
-		width: 42%;
-		opacity: 1;
-		visibility: visible;
-		pointer-events: auto;
-	}
-	.ip_mainpart .author_image .author_image_inner,
-	.ip_mainpart .author_image .author_photo{
-		height: 100%;
-		opacity: 1;
-	}
-	.ip_mainpart .main_content{width: 58%;}
-}
-/* Phones: full-width sections + square home photo above content. */
-@media (max-width: 640px) {
-	#home .ip_home{
-		flex-direction: column;
-		align-items: stretch;
-		justify-content: flex-start;
-		height: auto;
-		min-height: 100%;
-		font-size: 16px;
-	}
-	.ip_home_photo{
-		display: block;
-		width: 100%;
-		padding: 0 20px;
-		box-sizing: border-box;
-	}
-	.ip_home_photo img{
-		display: block;
-		width: 100%;
-		height: auto;
-		aspect-ratio: 1 / 1;
-		object-fit: cover;
-		object-position: center 40%;
-	}
-	.ip_home .content{padding: 20px 20px 0;}
-	#home.ip_qr_shown .ip_qr_panel__code{
-		width: min(200px, 58vw);
-	}
-}
-@media (max-width: 480px){
-	.ip_home_photo img{
-		aspect-ratio: 1 / 0.82;
-		object-position: center 55%;
-	}
-	.ip_home .content{
-		padding-top: 14px;
-	}
 }
