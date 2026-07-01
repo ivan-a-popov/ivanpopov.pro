@@ -358,7 +358,6 @@ function ip_service_popup(){
 		return;
 	}
 	var buttons			= ip_all('.ip_service .ip_full_link');
-	var closePopup		= modalBox.querySelector('.close');
 	var descWrap		= modalBox.querySelector('.description_wrap');
 	var serviceCards	= ip_all('.ip_service .service-card');
 	var boxInner		= modalBox.querySelector('.box_inner');
@@ -480,17 +479,18 @@ function ip_service_popup(){
 			}
 			var infos = modalBox.querySelector('.service_popup_informations');
 			if(infos){
-				infos.insertAdjacentHTML('afterbegin', '<div class="service-popup-hero"><img class="service-popup-hero__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup-hero__title"><h3>'+title+'</h3></div></div>');
+				infos.insertAdjacentHTML('afterbegin', '<div class="service-popup-hero"><img class="service-popup-hero__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup-hero__title"><h3>'+title+'</h3></div><div class="service-popup-hero__close"><a href="#" aria-label="Закрыть"><i class="icon-cancel"></i></a></div></div>');
 			}
 			schedulePopupFocus();
 		});
 	});
-	if(closePopup){
-		closePopup.addEventListener('click', function(e){
+	modalBox.addEventListener('click', function(e){
+		var closeLink = e.target.closest('.service-popup-hero__close a');
+		if(closeLink){
 			e.preventDefault();
 			closePopupModal();
-		});
-	}
+		}
+	});
 }
 
 // -------------  CONTACT QR PANEL  --------------------
