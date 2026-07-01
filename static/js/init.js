@@ -57,8 +57,17 @@ function ip_goto(href){
 	if(!wrapper){
 		return false;
 	}
-	var enter		= wrapper.getAttribute('data-enter');
-	var exit		= wrapper.getAttribute('data-exit');
+	var enterFwd	= wrapper.getAttribute('data-enter');
+	var exitFwd		= wrapper.getAttribute('data-exit');
+	var enterBack	= wrapper.getAttribute('data-enter-back') || 'rollInBack';
+	var exitBack	= wrapper.getAttribute('data-exit-back') || 'rollOutBack';
+	var order		= ip_nav_section_order(IP_NAV_LINKS_HEADER);
+	var currentIndex	= order.indexOf(ip_current_section_href());
+	var targetIndex	= order.indexOf(href);
+	var backward	= currentIndex >= 0 && targetIndex >= 0 && targetIndex < currentIndex;
+	var enter		= backward ? enterFwd : enterBack;
+	var exit		= backward ? exitFwd : exitBack;
+	var allAnim		= [enterFwd, exitFwd, enterBack, exitBack].filter(Boolean).join(' ');
 	// Every link (header, swipe dots) that points to this section.
 	var parents		= ip_all('.transition_link a[href="'+href+'"]').map(function(a){
 		return a.closest('li');
@@ -69,7 +78,7 @@ function ip_goto(href){
 	allLi.forEach(function(li){ li.classList.remove('active'); });
 	sections.forEach(function(s){
 		s.classList.remove('animated');
-		ip_remove_classes(s, enter);
+		ip_remove_classes(s, allAnim);
 	});
 	if(wrapper.classList.contains('opened')){
 		sections.forEach(function(s){
@@ -80,7 +89,7 @@ function ip_goto(href){
 	parents.forEach(function(li){ li.classList.add('active'); });
 	wrapper.classList.add('opened');
 	target.classList.remove('animated');
-	ip_remove_classes(target, exit);
+	ip_remove_classes(target, allAnim);
 	target.classList.add('animated');
 	ip_add_classes(target, enter);
 	sections.forEach(function(s){
