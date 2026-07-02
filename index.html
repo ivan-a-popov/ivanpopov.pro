@@ -50,7 +50,7 @@ body{margin:0}
 <!-- Needed for initial render inlined so header/footer layout is stable before
   async style.css downloads — prevents CLS when the stylesheet arrives -->
 <style>
-.ip_all_wrap{width:100%;min-height:100vh;position:relative;max-width:var(--ip-layout-max);margin-inline:auto;--ip-layout-max:1880px;--ip-side-gutter:10px;--ip-bar-height:clamp(60px,calc(52px + 1.1vw),70px);--ip-footer-height:clamp(20px,calc(16px + 1.8vw),50px);--ip-footer-font-size:clamp(7px,calc(7px + .4vw),16px);--ip-logo-font-size:clamp(16px,calc(15px + .9vw),25px);--ip-logo-padding-left:clamp(8px,calc(10px + 1.2vw),30px);--ip-logo-menu-gap:5px;--ip-menu-padding-left:6px;--ip-menu-padding-right:6px;--ip-menu-gap:0px;--ip-menu-sub-gap:3px;--ip-menu-sub-font-size:16px}
+.ip_all_wrap{width:100%;min-height:100vh;position:relative;max-width:var(--ip-layout-max);margin-inline:auto;--ip-layout-max:1880px;--ip-side-gutter:10px;--ip-bar-height:clamp(60px,calc(52px + 1.1vw),70px);--ip-footer-height:clamp(20px,calc(16px + 1.8vw),50px);--ip-logo-font-size:clamp(16px,calc(15px + .9vw),25px);--ip-logo-padding-left:clamp(8px,calc(10px + 1.2vw),30px);--ip-logo-menu-gap:5px;--ip-menu-padding-left:6px;--ip-menu-padding-right:6px;--ip-menu-gap:0px;--ip-menu-sub-gap:3px;--ip-menu-sub-font-size:16px}
 .ip_all_wrap,.ip_all_wrap *{box-sizing:border-box}
 .ip_header{position:fixed;top:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-bar-height);line-height:var(--ip-bar-height);background:#fff;z-index:10;display:flex;align-items:center;column-gap:var(--ip-logo-menu-gap)}
 .ip_header .logo{display:none;flex:0 0 auto}
@@ -66,6 +66,8 @@ body{margin:0}
 .ip_header .menu ul li.active .ip_menu_sub{opacity:1;transform:translateX(-50%) scale(1)}
 .ip_footer{position:fixed;bottom:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-footer-height);background:#fff;z-index:10;line-height:var(--ip-footer-height);font-size:var(--ip-footer-font-size);display:flex;align-items:center;justify-content:center;padding:0 var(--ip-side-gutter)}
 .ip_footer .copyright p{margin:0;color:#333;font-family:Onest,sans-serif;text-align:center;font-size:var(--ip-footer-font-size)}
+@media (max-width:1340px){
+.ip_all_wrap{--ip-footer-font-size:clamp(7px,calc(8px + .4vw), 16px);}}
 @media (min-width:640px){
 .ip_footer{justify-content:flex-start}}
 @media (min-width:690px){
@@ -84,9 +86,9 @@ body{margin:0}
 <!-- /CRITICAL CSS -->
 <link rel="preload" href="static/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <!-- STYLES -->
-<link rel="preload" as="style" href="static/css/style.css?v=cb954d7b" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=9fafecd9" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/style.css?v=cb954d7b" />
+<link rel="stylesheet" href="static/css/style.css?v=9fafecd9" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -171,7 +173,7 @@ body{margin:0}
 								</div>
 								<div class="ip_qr_panel" id="ip_qr_panel" hidden aria-label="QR-код с контактами">
 									<button type="button" class="ip_qr_panel__close" aria-label="Закрыть"><i class="icon-cancel"></i></button>
-									<img class="ip_qr_panel__code" src="static/img/social/qr-vcard.svg" alt="" width="200" height="200" decoding="async">
+									<img class="ip_qr_panel__code" src="static/img/social/qr-vcard.svg" alt="" width="240" height="240" decoding="async">
 								</div>
 							</div>
 						</div>

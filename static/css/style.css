@@ -132,9 +132,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .icon-quote-right:before { transform: rotate(180deg); }
 
-/*
-	ANIMATION (rollIn / rollOut)
-*/
+/*	ANIMATION (rollIn / rollOut) */
 .animated {
   animation-duration: 1.2s;
   animation-fill-mode: both;
@@ -190,9 +188,7 @@ h1, h2, h3, h4, h5, h6 {
   animation-name: rollOutBack;
 }
 
-/* --------------------------------
-	Animated headline (clip effect)
--------------------------------- */
+/*	Animated headline (clip effect) */
 .cd-words-wrapper {
   display: inline-block;
   position: relative;
@@ -515,7 +511,7 @@ html::-webkit-scrollbar-track-piece,
 	opacity: 0.88;
 }
 .ip_home_social a:hover{
-	transform: scale(1.25);
+	transform: scale(1.3);
 	opacity: 1;
 }
 .ip_home_social img{
@@ -525,7 +521,7 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_home_social a.ip_qr_open--active{
 	opacity: 1;
-	transform: scale(1.25);
+	transform: scale(1.4);
 }
 .ip_qr_panel{
 	display: none;
@@ -545,8 +541,8 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_qr_panel__close{
 	position: absolute;
-	top: 12px;
-	right: 16px;
+	top: 0px;
+	right: 0px;
 	z-index: 2;
 	display: block;
 	width: 44px;
@@ -574,17 +570,10 @@ html::-webkit-scrollbar-track-piece,
 .ip_qr_panel__code,
 #home.ip_qr_shown .ip_qr_panel__code{
 	display: block;
-	width: min(200px, 58vw);
+	width: min(220px, 58vw);
 	height: auto;
 }
-.ip_qr_panel__hint{
-	margin: 12px 0 0;
-	max-width: 260px;
-	font-family: "Onest", sans-serif;
-	font-size: .875rem;
-	line-height: 1.4;
-	color: #7d7789;
-}
+
 @media (min-width: 480px){
 	.ip_home_photo img{
 		aspect-ratio: 1 / 1;
@@ -610,7 +599,7 @@ html::-webkit-scrollbar-track-piece,
 	}
 	.ip_qr_panel__code,
 	#home.ip_qr_shown .ip_qr_panel__code{
-		width: min(176px, 48vw);
+		width: min(200px, 48vw);
 	}
 }
 @media (min-width: 1024px){
