@@ -61,7 +61,7 @@ body {
 	line-height: 1.7;
 	letter-spacing: 0px;
 	word-wrap: break-word;
-	font-weight: 400;
+	font-weight: 450;
 	color: #7d7789;
 }
 svg {
@@ -229,7 +229,7 @@ h1, h2, h3, h4, h5, h6 {
 /* HEADER */
 .ip_header .logo .text .logo-cursor{
 	margin-left: 1px;
-	font-weight: 400;
+	font-weight: 500;
 	animation: logo-cursor-blink 1.2s step-end infinite;
 }
 @keyframes logo-cursor-blink{
@@ -488,7 +488,7 @@ html::-webkit-scrollbar-track-piece,
 .ip_home .job .blc{
 	display: block;
 	margin-top: 8px;
-	font-weight: 450;
+	font-weight: 500;
 }
 .ip_home .job span{
 	color: #7d7789;
@@ -515,8 +515,8 @@ html::-webkit-scrollbar-track-piece,
 	opacity: 1;
 }
 .ip_home_social img{
-	width: 48px;
-	height: 48px;
+	width: 42px;
+	height: 42px;
 	display: block;
 }
 .ip_home_social a.ip_qr_open--active{
@@ -529,24 +529,21 @@ html::-webkit-scrollbar-track-piece,
 	inset: 0;
 	z-index: 2;
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 16px;
 	background: #fff;
 }
 #home.ip_qr_shown .ip_qr_panel{
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
 }
 .ip_qr_panel__close{
 	position: absolute;
 	top: 0px;
-	right: 0px;
+	right: calc(var(--ip-col-right) / 2 - 72px);;
 	z-index: 2;
 	display: block;
-	width: 44px;
-	height: 44px;
+	width: 40px;
+	height: 40px;
 	padding-left: 2px;
 	border: 2px solid #999;
 	border-radius: 10px;
@@ -599,7 +596,7 @@ html::-webkit-scrollbar-track-piece,
 	}
 	.ip_qr_panel__code,
 	#home.ip_qr_shown .ip_qr_panel__code{
-		width: min(200px, 48vw);
+		width: min(220px, 48vw);
 	}
 }
 @media (min-width: 1024px){
@@ -610,8 +607,8 @@ html::-webkit-scrollbar-track-piece,
 		font-size: 1.4375rem;
 	}
 	.ip_qr_panel__close{
-		width: 40px;
-		height: 40px;
+		width: 44px;
+		height: 44px;
 	}
 }
 
@@ -847,9 +844,7 @@ html::-webkit-scrollbar-track-piece,
 	}
 }
 
-/*
-	SERVICES
-*/
+/*	SERVICES */
 .ip_service{
 	width: 100%;
 	display: flow-root;
@@ -944,9 +939,7 @@ html::-webkit-scrollbar-track-piece,
 	}
 }
 
-/*
-	MODALBOX (service popup)
-*/
+/*	MODALBOX (service popup) */
 .ip_modalbox{
 	position: fixed;
 	top: 0px;
@@ -1043,7 +1036,7 @@ html::-webkit-scrollbar-track-piece,
 	top: 0;
 	right: 0;
 	z-index: 2;
-	padding: 12px 16px;
+	padding: 12px 14px;
 }
 .ip_modalbox .service_popup_informations .service-popup-hero__close a{
 	display: block;
