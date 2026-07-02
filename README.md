@@ -17,3 +17,12 @@ style.css:
 	capped at --ip-layout-max and centered (see index.html).
 ==================================================================*/
 
+/* Onest (self-hosted; SIL OFL) — weights 300–800, Cyrillic + Latin subsets */
+
+*------------------------------------------------------------------
+	TESTIMONIALS
+	Base: vertical list (phones, and any layout without room for the
+	carousel). Desktop with enough vertical room (or a fine pointer)
+	gets the horizontal scroll-snap carousel — the same condition
+	ip_use_vertical_testimonials_layout() checks in init.js.
+------------------------------------------------------------------*/

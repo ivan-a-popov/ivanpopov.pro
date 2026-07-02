@@ -76,14 +76,17 @@ body{margin:0}
 .ip_header .menu ul li a{font-size:1rem}
 .ip_header .menu ul li.active a b{font-size:1.5em}}
 @media (min-width:1024px){
-.ip_all_wrap{--ip-side-gutter:clamp(40px,2.8vw,52px);--ip-logo-padding-left:var(--ip-side-gutter)}}
+.ip_all_wrap{--ip-side-gutter:clamp(40px,2.8vw,52px);--ip-logo-padding-left:var(--ip-side-gutter)}
+/* Last menu item's text ends on the content text edge: side gutter + the 40px
+   .section_inner side padding (style.css, >=1024). Keeps it clear of the scrollbar. */
+.ip_header .menu ul{padding-right:calc(var(--ip-side-gutter) + 40px - var(--ip-menu-padding-right))}}
 </style>
 <!-- /CRITICAL CSS -->
 <link rel="preload" href="static/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <!-- STYLES -->
-<link rel="preload" as="style" href="static/css/style.css?v=ad5491a9" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=e0eae541" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/style.css?v=ad5491a9" />
+<link rel="stylesheet" href="static/css/style.css?v=e0eae541" />
 </noscript>
 <!-- /STYLES -->
 </head>
