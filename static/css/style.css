@@ -93,8 +93,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (min-width: 1024px){
 	.ip_all_wrap{
-		--ip-col-left: 35%;
-		--ip-col-right: 65%;
+		--ip-col-left: 40%;
+		--ip-col-right: 60%;
 	}
 	.ip_all_wrap[data-magic-cursor="show"],
 	.ip_all_wrap[data-magic-cursor="show"] *{
@@ -425,13 +425,8 @@ html::-webkit-scrollbar-track-piece,
 /* Desktop: gutters around the mainpart, full-height portrait, smooth scroll. */
 @media (min-width: 1024px){
 	.ip_mainpart{
-		bottom: var(--ip-bar-height);
 		left: var(--ip-side-gutter);
 		right: var(--ip-side-gutter);
-	}
-	.ip_mainpart .author_image{
-		height: 100%;
-		bottom: auto;
 	}
 	.ip_section{scroll-behavior: smooth;}
 	.ip_section .section_inner{padding: 0px 40px 0px 40px;}
