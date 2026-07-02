@@ -54,15 +54,14 @@ body{margin:0}
 .ip_all_wrap,.ip_all_wrap *{box-sizing:border-box}
 .ip_header{position:fixed;top:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-bar-height);line-height:var(--ip-bar-height);background:#fff;z-index:10;display:flex;align-items:center;column-gap:var(--ip-logo-menu-gap)}
 .ip_header .logo{display:none;flex:0 0 auto}
-.ip_header .logo .text{text-decoration:none;color:#000;font-family:Consolas,monospace;letter-spacing:2px;font-size:var(--ip-logo-font-size);font-weight:800;line-height:var(--ip-bar-height);padding-left:var(--ip-logo-padding-left)}
-.ip_header .logo .text .logo-label{position:relative;top:2px}
+.ip_header .logo .text{text-decoration:none;color:#000;font-family:Consolas,monospace;font-size:var(--ip-logo-font-size);font-weight:800;line-height:var(--ip-bar-height);padding-left:var(--ip-logo-padding-left)}
 .ip_header .menu{position:relative;flex:1 1 auto;min-width:0;overflow-x:clip;display:flex}
 .ip_header .menu ul{margin:0;list-style:none;display:flex;flex-wrap:nowrap;align-items:center;width:100%;justify-content:space-around;gap:var(--ip-menu-gap)}
 .ip_header .menu ul li{margin:0;flex:0 0 auto}
-.ip_header .menu ul li a{text-decoration:none;text-transform:uppercase;color:#333;font-family:Onest,sans-serif;font-weight:500;font-size:.9375rem;line-height:1;padding:0 var(--ip-menu-padding-right) 0 var(--ip-menu-padding-left);position:relative;display:inline-grid;justify-items:center}
+.ip_header .menu ul li a{text-decoration:none;text-transform:uppercase;color:#333;font-family:Onest,sans-serif;font-weight:500;font-size:.9rem;line-height:1;padding:0 var(--ip-menu-padding-right) 0 var(--ip-menu-padding-left);position:relative;display:inline-grid;justify-items:center}
 .ip_header .menu ul li a b{position:relative;display:inline-block;line-height:1}
 .ip_header .menu ul li .ip_menu_sub{position:absolute;left:50%;top:100%;margin-top:var(--ip-menu-sub-gap);transform:translateX(-50%) scale(.88);transform-origin:top;text-align:center;font-size:var(--ip-menu-sub-font-size);font-weight:600;line-height:1;letter-spacing:.5px;text-transform:lowercase;white-space:nowrap;opacity:0;pointer-events:none}
-.ip_header .menu ul li.active a b{transform:translateY(-8px);font-size:1.25em}
+.ip_header .menu ul li.active a b{transform:translateY(-8px);font-size:1.2em}
 .ip_header .menu ul li.active .ip_menu_sub{opacity:1;transform:translateX(-50%) scale(1)}
 .ip_footer{position:fixed;bottom:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-footer-height);background:#fff;z-index:10;line-height:var(--ip-footer-height);font-size:var(--ip-footer-font-size);display:flex;align-items:center;justify-content:center;padding:0 var(--ip-side-gutter)}
 .ip_footer .copyright p{margin:0;color:#333;font-family:Onest,sans-serif;text-align:center;}
@@ -74,11 +73,11 @@ body{margin:0}
 .ip_all_wrap{--ip-menu-padding-left:clamp(4px,calc(24px - 1vw),24px);--ip-menu-padding-right:clamp(8px,calc(4px + .5vw),64px);--ip-menu-gap:clamp(6px,calc(22px - .85vw),24px);--ip-menu-sub-font-size:14px}
 .ip_header{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:var(--ip-logo-menu-gap)}
 .ip_header .logo{display:block}
-.ip_header .menu ul{justify-content:flex-end;padding-right:clamp(14px,1.8vw,28px)}
+.ip_header .menu ul{justify-content:flex-end;padding-right:clamp(14px,2vw,28px)}
 .ip_header .menu ul li a{font-size:1rem}
 .ip_header .menu ul li.active a b{font-size:1.5em}}
 @media (min-width:1024px){
-.ip_all_wrap{--ip-side-gutter:clamp(40px,2.8vw,52px);--ip-logo-padding-left:var(--ip-side-gutter)}
+.ip_all_wrap{--ip-side-gutter:clamp(10px,2.8vw,52px);--ip-logo-padding-left:var(--ip-side-gutter)}
 /* Last menu item's text ends on the content text edge: side gutter + the 40px
    .section_inner side padding (style.css, >=1024). Keeps it clear of the scrollbar. */
 .ip_header .menu ul{padding-right:calc(var(--ip-side-gutter) + 40px - var(--ip-menu-padding-right))}}
@@ -171,9 +170,9 @@ body{margin:0}
 										<img src="static/img/social/qr.svg" alt="" width="40" height="40" decoding="async">
 									</a>
 								</div>
-								<div class="ip_qr_panel" id="ip_qr_panel" hidden aria-label="QR-код с контактами">
+								<div class="ip_qr_panel" id="ip_qr_panel" hidden aria-label="QR-код - визитка VCard">
 									<button type="button" class="ip_qr_panel__close" aria-label="Закрыть"><i class="icon-cancel"></i></button>
-									<img class="ip_qr_panel__code" src="static/img/social/qr-vcard.svg" alt="" width="240" height="240" decoding="async">
+									<img class="ip_qr_panel__code" src="static/img/social/qr-vcard.svg" alt="" width="200" height="200" decoding="async">
 								</div>
 							</div>
 						</div>
