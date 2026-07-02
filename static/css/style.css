@@ -529,7 +529,7 @@ html::-webkit-scrollbar-track-piece,
 	inset: 0;
 	z-index: 2;
 	box-sizing: border-box;
-	padding: 16px;
+	padding: 20px;
 	background: #fff;
 }
 #home.ip_qr_shown .ip_qr_panel{
@@ -547,7 +547,7 @@ html::-webkit-scrollbar-track-piece,
 	display: block;
 	width: 44px;
 	height: 44px;
-	padding: 0;
+	padding-left: 2px;
 	border: 2px solid #999;
 	border-radius: 10px;
 	background: rgba(255,255,255,.95);
