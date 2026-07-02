@@ -677,11 +677,6 @@ html::-webkit-scrollbar-track-piece,
 }
 
 /* TESTIMONIALS */
-.testimonials{
-	width: 100%;
-	display: flow-root;
-	margin-bottom: 90px;
-}
 .testimonials .list{
 	width: 100%;
 	display: flow-root;
@@ -693,9 +688,6 @@ html::-webkit-scrollbar-track-piece,
 }
 .testimonials .list ul li{
 	margin: 0px 0px 75px;
-}
-.testimonials .list ul li:last-child{
-	margin-bottom: 0;
 }
 /* Loop clones exist only for the carousel; never show them stacked. */
 .testimonials .list ul.testimonials-snap > li.is-clone{
@@ -1086,9 +1078,7 @@ html::-webkit-scrollbar-track-piece,
 	}
 }
 
-/*
-	MAGIC CURSOR (desktop only)
-*/
+/*	MAGIC CURSOR (desktop only) */
 .mouse-cursor{
   display: none;
   position: fixed;
