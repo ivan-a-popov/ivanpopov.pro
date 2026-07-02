@@ -61,9 +61,9 @@ body{margin:0}
 .ip_header .menu ul li{margin:0;flex:0 0 auto}
 .ip_header .menu ul li a{text-decoration:none;text-transform:uppercase;color:#333;font-family:Onest,sans-serif;font-weight:500;font-size:.9375rem;line-height:1;padding:0 var(--ip-menu-padding-right) 0 var(--ip-menu-padding-left);position:relative;display:inline-grid;justify-items:center}
 .ip_header .menu ul li a b{position:relative;display:inline-block;line-height:1}
-.ip_header .menu ul li .ip_menu_sub{position:absolute;left:50%;top:100%;margin-top:var(--ip-menu-sub-gap);transform:translateX(-50%);text-align:center;font-size:var(--ip-menu-sub-font-size);font-weight:600;line-height:1;letter-spacing:.5px;text-transform:lowercase;white-space:nowrap;opacity:0;pointer-events:none}
+.ip_header .menu ul li .ip_menu_sub{position:absolute;left:50%;top:100%;margin-top:var(--ip-menu-sub-gap);transform:translateX(-50%) scale(.88);transform-origin:top;text-align:center;font-size:var(--ip-menu-sub-font-size);font-weight:600;line-height:1;letter-spacing:.5px;text-transform:lowercase;white-space:nowrap;opacity:0;pointer-events:none}
 .ip_header .menu ul li.active a b{transform:translateY(-8px);font-size:1.25em}
-.ip_header .menu ul li.active .ip_menu_sub{opacity:1}
+.ip_header .menu ul li.active .ip_menu_sub{opacity:1;transform:translateX(-50%) scale(1)}
 .ip_footer{position:fixed;bottom:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-footer-height);background:#fff;z-index:10;line-height:var(--ip-footer-height);font-size:var(--ip-footer-font-size);display:flex;align-items:center;justify-content:center;padding:0 var(--ip-side-gutter)}
 .ip_footer .copyright p{margin:0;color:#333;font-family:Onest,sans-serif;text-align:center;font-size:var(--ip-footer-font-size)}
 @media (min-width:640px){
@@ -84,9 +84,9 @@ body{margin:0}
 <!-- /CRITICAL CSS -->
 <link rel="preload" href="static/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <!-- STYLES -->
-<link rel="preload" as="style" href="static/css/style.css?v=e0eae541" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="static/css/style.css?v=9c85894e" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-<link rel="stylesheet" href="static/css/style.css?v=e0eae541" />
+<link rel="stylesheet" href="static/css/style.css?v=9c85894e" />
 </noscript>
 <!-- /STYLES -->
 </head>
@@ -201,7 +201,7 @@ body{margin:0}
 							<div class="wrapper">
 								<div class="left">
 									<p>Программирую с 1991 года, с 1996-го — плюс-минус осознанно. В 2001 начинаю изучать Линукс и зарабатывать в сфере обслуживания ПК.</p> 
-									<p>В 2008-м создал и возглавил интернет магазин depolamp.ru (ныне ksize.ru). В дальнейшем интернет-магазинов было много, а роли различные — от линейного менеджера / рядового программиста до руководителя проекта и IT-директора (2 раза по 5 лет). C 2019 года внедряю RetailCRM и МойСклад как партнер-интегратор. Помогаю с анализом, настройкой и оптимизацией бизнес-процессов, интеграцией внутренних и внешних систем, созданием собственных API и другой кастомной разработкой.</p>
+									<p>В 2008-м запустил интернет магазин depolamp.ru (ныне ksize.ru). В дальнейшем интернет-магазинов было много, а роли различные — от линейного менеджера / рядового программиста до руководителя проекта и IT-директора (2 раза по 5 лет). C 2019 года внедряю RetailCRM и МойСклад как партнер-интегратор. Помогаю с анализом, настройкой и оптимизацией бизнес-процессов, интеграцией внутренних и внешних систем, созданием собственных API и другой кастомной разработкой.</p>
 									<p>Работаю со всеми платформами, кроме Apple. Берусь за самые сложные случаи: "по сарафану" ко мне часто приходят после того, как все остальные уже отказались либо не справились.</p>
 								</div>
 								<div class="right">
