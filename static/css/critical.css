@@ -112,6 +112,9 @@ body {
 	--ip-menu-padding-right: 6px;
 	--ip-menu-gap: clamp(0px,calc(1px+.85vw),30px);
 	--ip-menu-sub-gap: 3px;
+	/* Sub-label size is its OWN knob (absolute units, never em) so it stays
+	   capped while the active main word grows via font-size:1.2em/1.5em. */
+	--ip-menu-sub-font-size: 16px;
 	/* Column split consumed by .author_image / .main_content (style.css).
 	   Portrait hidden on phones, widens through the breakpoints. */
 	--ip-col-left: 0%;
@@ -196,7 +199,7 @@ body {
 	transform: translateX(-50%) scale(.88);
 	transform-origin: top;
 	text-align: center;
-	font-size: var(--ip-menu-sub-font-size);
+	font-size: var(--ip-menu-sub-font-size, 14px);
 	font-weight: 600;
 	line-height: 1;
 	letter-spacing: .5px;
