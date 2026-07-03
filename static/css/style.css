@@ -369,7 +369,7 @@ html,
 }
 .ip_home .content{
 	/* Fluid gaps around the name/line/job stack — scale with viewport. */
-	--ip-home-name-gap: clamp(16px, calc(18px + 1.2vw), 30px);
+	--ip-home-name-gap: clamp(16px, calc(16px + 1.2vw), 30px);
 	--ip-home-line-gap: clamp(16px, calc(18px + 1.2vw), 30px);
 	--ip-home-line-width: clamp(40px, calc(25px + 2.5vw), 70px);
 	--ip-home-line-height: clamp(3px, calc(2px + 0.15vw), 5px);
