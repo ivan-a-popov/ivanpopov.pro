@@ -53,7 +53,7 @@ body {
 	line-height: 1.7;
 	overflow-wrap: break-word;
 	font-weight: 450;
-	color: #7d7789;
+	color: var(--text-sub);
 }
 svg {
 	fill: currentcolor;
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
 	line-height: 1.2;
 	font-family: "Onest";
-	color: #333;
+	color: var(--text-main);
 }
 /* The --ip-col-* column split consumed by .author_image / .main_content
    below is defined in critical.css together with the other layout vars. */
@@ -190,7 +190,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 2px;
   height: 70%;
   transform: translateY(-50%);
-  background-color: #999;
+  background-color: var(--caret-color);
 }
 
 /* HEADER */
@@ -392,7 +392,7 @@ html,
 	display: inline-block;
 	width: var(--ip-home-line-width);
 	height: var(--ip-home-line-height);
-	background-color: #333;
+	background-color: var(--accent);
 	margin-bottom: var(--ip-home-line-gap);
 }
 .ip_home .job{
@@ -406,11 +406,11 @@ html,
 	font-weight: 500;
 }
 .ip_home .job span{
-	color: #7d7789;
+	color: var(--text-sub);
 }
 .ip_home .job b{
 	font-weight: 600;
-	color: #333;
+	color: var(--text-main);
 }
 .ip_home_social{
 	display: flex;
@@ -438,13 +438,22 @@ html,
 	opacity: 1;
 	transform: scale(1.4);
 }
+/* The QR glyph (qr.svg) is a raster of black modules on transparent — an
+   <img>, so it can't inherit currentColor. Invert it in dark mode so it stays
+   visible against the dark background. The brand-colored tg/vk icons are left
+   as-is. */
+@media (prefers-color-scheme: dark){
+	.ip_home_social a.ip_qr_open img{
+		filter: invert(1);
+	}
+}
 .ip_qr_panel{
 	display: none;
 	position: absolute;
 	inset: 0;
 	z-index: 2;
 	padding: 16px;
-	background: #fff;
+	background: var(--bg-color);
 }
 /* Receives programmatic focus (tabindex="-1") when opened. */
 .ip_qr_panel:focus{
@@ -463,10 +472,10 @@ html,
 	width: 40px;
 	height: 40px;
 	padding-left: 2px;
-	border: 2px solid #999;
+	border: 2px solid var(--caret-color);
 	border-radius: 10px;
-	background: rgba(255,255,255,.95);
-	color: #666;
+	background: var(--surface);
+	color: var(--text-muted);
 	cursor: pointer;
 	transition: border-radius .3s ease, background-color .3s ease;
 	line-height: 1;
@@ -474,7 +483,7 @@ html,
 }
 .ip_qr_panel__close:hover{
 	border-radius: 100%;
-	background: #fff;
+	background: var(--surface);
 }
 .ip_qr_panel__close i{
 	position: absolute;
@@ -537,7 +546,7 @@ html,
 	display: inline-block;
 	position: relative;
 	font-family: "Onest";
-	color: #333;
+	color: var(--text-main);
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 4px;
@@ -547,7 +556,7 @@ html,
 	content: "";
 	width: 5000px;
 	height: 1px;
-	background-color: #7d7789;
+	background-color: var(--rule-color);
 	left: 100%;
 	top: 50%;
 	transform: translateY(-50%);
@@ -603,7 +612,7 @@ html,
 }
 .testimonials .testimonial-quote{
 	position: relative;
-	border: 2px solid #E5EDF4;
+	border: 2px solid var(--quote-border);
 	padding: 15px;
 	margin-bottom: 30px;
 }
@@ -615,7 +624,7 @@ html,
 	top: 100%;
 	left: 50px;
 	border: solid transparent;
-	border-top-color: #E5EDF4;
+	border-top-color: var(--quote-border);
 	border-width: 0 18px 0 0;
 }
 .testimonials .testimonial-quote:after{
@@ -626,7 +635,7 @@ html,
 	height: 0;
 	width: 0;
 	border: solid transparent;
-	border-top-color: #f6fbff;
+	border-top-color: var(--quote-fill);
 	border-width: 0 13px 0 0;
 	margin-left: 2px;
 }
@@ -636,7 +645,7 @@ html,
 	font-size: 30px;
 	top: -29px;
 	left: 50px;
-	color: #E5EDF4;
+	color: var(--quote-border);
 }
 .testimonials .testimonial-quote i.icon-quote-right{
 	top: auto;
@@ -749,7 +758,7 @@ html,
 	width: 100%;
 	height: 100%;
 	position: relative;
-	border: 1px solid #b9b8c3;
+	border: 1px solid var(--card-border);
 	padding: 70px 40px 63px;
 	text-align: center;
 	transition: background-color .3s ease;
@@ -761,33 +770,33 @@ html,
 	overflow-wrap: normal;
 }
 .ip_service .service-card:hover{
-	background-color: #333;
+	background-color: var(--card-hover-bg);
 }
 .ip_service .service-card .svg{
 	width: 60px;
 	height: 60px;
-	color: #333;
+	color: var(--text-main);
 	margin-bottom: 27px;
 	transition: color .3s ease;
 }
 .ip_service .service-card:hover .svg{
-	color: #fff;
+	color: var(--on-accent);
 }
 .ip_service .service-card .title{
 	font-weight: 500;
 	font-size: 1.5rem;
-	color: #333;
+	color: var(--text-main);
 	margin-bottom: 15px;
 	transition: color .3s ease;
 }
 .ip_service .service-card:hover .title{
-	color: #fff;
+	color: var(--on-accent);
 }
 .ip_service .service-card .service-card__summary{
 	transition: color .3s ease;
 }
 .ip_service .service-card:hover .service-card__summary{
-	color: #aaa;
+	color: var(--card-hover-summary);
 }
 /* Data containers only — content is copied into the popup by JS. */
 .ip_service .popup_service_image,
@@ -824,7 +833,7 @@ html,
 	height: 100vh;
 	height: 100dvh;
 	z-index: 20;
-	background-color: rgba(0,0,0,.8);
+	background-color: var(--overlay);
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity .3s ease, visibility .3s ease;
@@ -841,7 +850,7 @@ html,
 	max-width: calc(100vw - 16px);
 	left: 50%;
 	transform: translateX(-50%);
-	background-color: #fff;
+	background-color: var(--surface);
 	z-index: 1;
 	opacity: 0;
 	visibility: hidden;
@@ -980,7 +989,7 @@ html,
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #333;
+  background-color: var(--accent);
   transition: transform .3s ease-in-out, opacity .3s ease-in-out;
 }
 .cursor-inner.cursor-hover::before {
@@ -992,7 +1001,7 @@ html,
   margin-top: -15px;
   width: 30px;
   height: 30px;
-  border: 2px solid #333;
+  border: 2px solid var(--accent);
   z-index: 100;
   opacity: .5;
   transition: transform .08s ease-out, opacity .08s ease-out;
@@ -1001,22 +1010,22 @@ html,
   opacity: 0;
 }
 body.ip_light_cursor .mouse-cursor.cursor-inner::before{
-  background-color: #fff;
+  background-color: var(--cursor-invert);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
 }
 body.ip_light_cursor .mouse-cursor.cursor-outer{
-  border-color: #fff;
+  border-color: var(--cursor-invert);
   opacity: 0.9;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
 }
 body.ip_light_cursor .mouse-cursor.cursor-inner.cursor-hover::before{
-  background-color: #fff;
+  background-color: var(--cursor-invert);
   opacity: 0.55;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
 }
 body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
   opacity: 0.75;
-  border-color: #fff;
+  border-color: var(--cursor-invert);
 }
 @media (min-width: 920px){
 	.mouse-cursor{display: block;}

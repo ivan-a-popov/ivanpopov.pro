@@ -1,6 +1,59 @@
+/* THEME TOKENS */
+/* Single source of truth for colors. Defined here (inlined in <head>) so the
+   shell, preloader and page background paint in the correct scheme on first
+   render — before the async style.css arrives (no theme flash, no CLS). */
+:root {
+	color-scheme: light dark;
+	--bg-color: #fff;              /* page + header/footer surface */
+	--surface: #fff;              /* modal inner / QR panel */
+	--text-main: #333;            /* headings, nav, strong copy */
+	--text-sub: #7d7789;          /* body copy */
+	--text-muted: #666;           /* secondary controls (QR close icon) */
+	--logo-color: #000;           /* wordmark */
+	--accent: #333;              /* decorative line + magic cursor dot */
+	--rule-color: #7d7789;        /* section-title trailing rule */
+	--card-border: #b9b8c3;       /* service card outline */
+	--card-hover-bg: #333;        /* service card hover fill (kept dark both themes) */
+	--card-hover-summary: #aaa;   /* summary text on the hover fill */
+	--on-accent: #fff;            /* text/icons on top of dark accent fills */
+	--quote-border: #E5EDF4;      /* testimonial bubble border + tail + quotes */
+	--quote-fill: #f6fbff;        /* testimonial tail inner triangle (bubble interior) */
+	--caret-color: #999;          /* headline caret + QR close border */
+	--cursor-invert: #fff;        /* magic cursor over dark surfaces */
+	--overlay: rgba(0, 0, 0, .8); /* modal backdrop */
+	--preloader-bg: #000;         /* loader curtains */
+	--preloader-line: #fff;       /* loader growing line */
+	--preloader-line-dim: #777;   /* loader dim sweep */
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg-color: #131516;
+		--surface: #181a1a;
+		--text-main: #a09c96;         /* headings/nav — darkreader #333 */
+		--text-sub: #7a7267;          /* body + popup copy — darkreader #7d7789 */
+		--text-muted: #868077;        /* secondary controls — darkreader #666 */
+		--logo-color: #bab8b6;        /* wordmark — darkreader neutral text */
+		--accent: #a09c96;
+		--rule-color: #4d5356;
+		--card-border: #353a3c;       /* darkreader #b9b8c3 border */
+		--card-hover-bg: #1e2222;     /* darkreader #333 fill */
+		--card-hover-summary: #8e8a82;
+		--on-accent: #bab8b6;
+		--quote-border: #353a3c;
+		--quote-fill: #131516;        /* matches --bg-color so the tail reads as a hole */
+		--caret-color: #868077;
+		--cursor-invert: #bab8b6;
+		--overlay: rgba(0, 0, 0, .8);
+		--preloader-bg: #131516;      /* matches page bg for a seamless reveal */
+		--preloader-line: #bab8b6;
+		--preloader-line-dim: #484e51; /* darkreader #777 */
+	}
+}
+
 /* BASE */
 html {
 	overflow-x: hidden;
+	background-color: var(--bg-color);
 }
 
 /* PRELOADER */
@@ -13,7 +66,7 @@ html {
 	z-index: 99999;
 	display: flex;
 }
-/* Two black half-screen curtains that scale away once loaded. */
+/* Two half-screen curtains that scale away once loaded. */
 #preloader:before,
 #preloader:after {
 	content: '';
@@ -23,7 +76,7 @@ html {
 	width: 50%;
 	height: 100%;
 	z-index: -1;
-	background-color: #000;
+	background-color: var(--preloader-bg);
 	transform-origin: left center;
 	transition: all .3s ease 0s;
 }
@@ -48,7 +101,7 @@ html {
 	width: 1px;
 	height: 0;
 	transform: translateY(-50%);
-	background-color: #fff;
+	background-color: var(--preloader-line);
 	animation: lineheight 1000ms ease-in-out 0s forwards;
 }
 #preloader .loader_line:after {
@@ -58,7 +111,7 @@ html {
 	top: 0;
 	width: 1px;
 	height: 100%;
-	background-color: #777;
+	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
 	animation: lineround 1200ms linear 0s infinite;
 	animation-delay: 2000ms;
@@ -99,7 +152,7 @@ html {
 	--ip-bar-height: clamp(60px, calc(52px + 1.1vw), 70px);
 	--ip-footer-height: clamp(20px, calc(16px + 1.8vw), 50px);
 	/* Footer copy: body-sized on wide screens, shrinks below 1340px (see media). */
-	--ip-footer-font-size: 1em;
+	--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);
 	--ip-logo-font-size: clamp(16px, calc(15px + .9vw), 25px);
 	--ip-logo-padding-left: clamp(8px, calc(10px + 1.2vw), 30px);
 	--ip-logo-menu-gap: 5px;
@@ -123,7 +176,7 @@ html {
 	margin-inline: auto;
 	height: var(--ip-bar-height);
 	line-height: var(--ip-bar-height);
-	background: #fff;
+	background: var(--bg-color);
 	z-index: 10;
 	display: flex;
 	align-items: center;
@@ -135,7 +188,7 @@ html {
 }
 .ip_header .logo .text {
 	text-decoration: none;
-	color: #000;
+	color: var(--logo-color);
 	font-family: Consolas, monospace;
 	font-size: var(--ip-logo-font-size);
 	font-weight: 800;
@@ -166,7 +219,7 @@ html {
 .ip_header .menu ul li a {
 	text-decoration: none;
 	text-transform: uppercase;
-	color: #333;
+	color: var(--text-main);
 	font-family: Onest, sans-serif;
 	font-weight: 500;
 	font-size: .9rem;
@@ -215,7 +268,7 @@ html {
 	max-width: var(--ip-layout-max);
 	margin-inline: auto;
 	height: var(--ip-footer-height);
-	background: #fff;
+	background: var(--bg-color);
 	z-index: 10;
 	line-height: var(--ip-footer-height);
 	font-size: var(--ip-footer-font-size);
@@ -226,7 +279,7 @@ html {
 }
 .ip_footer .copyright p {
 	margin: 0;
-	color: #333;
+	color: var(--text-main);
 	font-family: Onest, sans-serif;
 	text-align: center;
 }
@@ -234,7 +287,6 @@ html {
 .ip_mainpart {visibility: hidden;}
 @media (max-width: 878px) {
 	.ip_all_wrap {
-		--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);
 	/* Column split consumed by .author_image / .main_content (style.css).
 	   Portrait hidden on phones, widens through the breakpoints. */
 		--ip-col-left: 0%;
