@@ -1,12 +1,50 @@
 #!/usr/bin/env bash
-# Re-stamp ?v=<content-hash> onto local CSS/JS references in index.html.
+# 1) Inject minified static/css/critical.css between the "CRITICAL CSS"
+#    markers in index.html (that inline block is generated — edit the css
+#    file, not the HTML).
+# 2) Re-stamp ?v=<content-hash> onto local CSS/JS references in index.html.
 # Run before committing/deploying after editing any CSS or JS file, so the
 # immutable cache rule in nginx.conf always serves the latest version.
 set -euo pipefail
 
 cd "$(dirname "$0")"
 HTML="index.html"
+CRITICAL="static/css/critical.css"
 
+# ---- Critical CSS injection -------------------------------------------------
+[ -f "$CRITICAL" ] || { echo "error: $CRITICAL not found" >&2; exit 1; }
+grep -q '<!-- CRITICAL CSS -->' "$HTML" && grep -q '<!-- /CRITICAL CSS -->' "$HTML" \
+    || { echo "error: CRITICAL CSS markers not found in $HTML" >&2; exit 1; }
+
+# Minify: strip /* */ comments, collapse whitespace, drop spaces around
+# punctuation and trailing semicolons. Good enough for this file; it contains
+# no strings/URLs where whitespace would be significant.
+min_css="$(tr '\n' ' ' < "$CRITICAL" \
+    | sed -E 's~/\*([^*]|\*+[^*/])*\*+/~ ~g' \
+    | sed -E 's/[[:space:]]+/ /g; s/ *([{};:,>]) */\1/g; s/;}/}/g' \
+    | sed -E 's/^ +//; s/ +$//')"
+
+tmp_css="$(mktemp)"
+trap 'rm -f "$tmp_css"' EXIT
+printf '%s\n' "$min_css" > "$tmp_css"
+
+awk -v cssfile="$tmp_css" '
+    /<!-- CRITICAL CSS -->/ {
+        print
+        print "<style>"
+        while ((getline line < cssfile) > 0) print line
+        close(cssfile)
+        print "</style>"
+        skip = 1
+        next
+    }
+    /<!-- \/CRITICAL CSS -->/ { skip = 0 }
+    skip { next }
+    { print }
+' "$HTML" > "$HTML.tmp" && mv "$HTML.tmp" "$HTML"
+echo "injected $CRITICAL into $HTML ($(printf '%s' "$min_css" | wc -c) bytes minified)"
+
+# ---- Cache-bust stamping ----------------------------------------------------
 # Every local css/js currently referenced in the HTML (ignores external URLs).
 mapfile -t assets < <(grep -oE '(href|src)="(static/[^"?]+\.(css|js))' "$HTML" \
     | sed -E 's/^(href|src)="//' | sort -u)

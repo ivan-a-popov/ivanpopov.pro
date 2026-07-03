@@ -34,33 +34,24 @@
 }
 
 /* RESET + BASE */
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, b, i, ul, ol, li {
-	background: transparent;
-	border: 0;
+/* html/body zeroing and box-sizing live in critical.css (inlined in the HTML). */
+h1, h2, h3, h4, h5, h6, p, ul, ol, li {
 	margin: 0;
 	padding: 0;
-	vertical-align: baseline;
-	outline: none;
 }
 img {
 	vertical-align: middle;
 	max-width: 100%;
 }
 html {
-	overflow-x: hidden;
-	padding: 0px;
-	margin: 0px;
 	scrollbar-gutter: stable;
 }
 body {
-	overflow-x: hidden;
-	width: 100%;
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 	/* Fluid body copy: 16px on phones/laptops, ~18px near the layout cap. */
 	font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
 	line-height: 1.7;
-	letter-spacing: 0px;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 	font-weight: 450;
 	color: #7d7789;
 }
@@ -73,29 +64,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: "Onest";
 	color: #333;
 }
-/* Column split consumed by .author_image / .main_content below.
-   Portrait hidden on phones, widens through the breakpoints. */
-.ip_all_wrap{
-	--ip-col-left: 0%;
-	--ip-col-right: 100%;
-}
-@media (min-width: 640px){
-	.ip_all_wrap{
-		--ip-col-left: 42%;
-		--ip-col-right: 58%;
-	}
-}
-@media (min-width: 768px){
-	.ip_all_wrap{
-		--ip-col-left: 36%;
-		--ip-col-right: 64%;
-	}
-}
+/* The --ip-col-* column split consumed by .author_image / .main_content
+   below is defined in critical.css together with the other layout vars. */
+/* Desktop: native pointer replaced by the magic cursor. */
 @media (min-width: 1024px){
-	.ip_all_wrap{
-		--ip-col-left: 40%;
-		--ip-col-right: 60%;
-	}
 	.ip_all_wrap[data-magic-cursor="show"],
 	.ip_all_wrap[data-magic-cursor="show"] *{
 		cursor: none !important;
@@ -113,22 +85,17 @@ h1, h2, h3, h4, h5, h6 {
   height: 1em;
   background-color: currentColor;
   vertical-align: -0.125em;
-  -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-          mask-position: center;
-  -webkit-mask-size: contain;
-          mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
 }
 .icon-cancel:before {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'/%3E%3C/svg%3E");
 }
 /* Closing quote (icon-quote-right) is the opening glyph rotated 180deg. */
 .icon-quote-left:before,
 .icon-quote-right:before {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M0 216C0 149.7 53.7 96 120 96l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64zm256 0c0-66.3 53.7-120 120-120l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64z'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M0 216C0 149.7 53.7 96 120 96l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64zm256 0c0-66.3 53.7-120 120-120l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M0 216C0 149.7 53.7 96 120 96l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64zm256 0c0-66.3 53.7-120 120-120l8 0c13.3 0 24 10.7 24 24l0 16c0 13.3-10.7 24-24 24l-8 0c-30.9 0-56 25.1-56 56l0 8 64 0c35.3 0 64 28.7 64 64l0 64c0 35.3-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64l0-32 0-32 0-64z'/%3E%3C/svg%3E");
 }
 .icon-quote-right:before { transform: rotate(180deg); }
 
@@ -241,9 +208,6 @@ h1, h2, h3, h4, h5, h6 {
 		animation: none;
 	}
 }
-.ip_header .menu ul li a{
-	transition: all .3s ease;
-}
 .ip_header .menu ul li a b{
 	transition: transform .3s ease, font-size .3s ease;
 	font-size: .9375rem;
@@ -262,18 +226,15 @@ h1, h2, h3, h4, h5, h6 {
 /*	MAINPART + SECTIONS */
 .ip_mainpart{
 	position: absolute;
-	top: var(--ip-bar-height);
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
+	inset: var(--ip-bar-height) 0 0;
 	overflow: hidden;
 	transition: top 0.25s ease, bottom 0.25s ease, left 0.25s ease, right 0.25s ease;
 }
 /* Side portrait: hidden on phones, appears with the two-column shell. */
 .ip_mainpart .author_image{
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	width: var(--ip-col-left);
 	height: 0;
 	z-index: 15;
@@ -285,10 +246,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .ip_mainpart .author_image .author_image_inner{
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	inset: 0;
 	width: 100%;
 	height: 0;
 	overflow: hidden;
@@ -298,13 +256,9 @@ h1, h2, h3, h4, h5, h6 {
 .ip_mainpart .author_image .author_image_inner .author_photo{
 	position: absolute;
 	z-index: 2;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	inset: 0;
 	width: 100%;
 	height: 0;
-	box-sizing: border-box;
 	object-fit: cover;
 	object-position: center;
 	opacity: 0;
@@ -314,26 +268,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 .ip_mainpart .main_content{
 	position: absolute;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
+	top: 0;
+	right: 0;
+	bottom: 0;
 	width: var(--ip-col-right);
 	transition: width 0.25s ease;
 }
 .ip_section{
 	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	overflow: hidden;
-	overflow-y: auto;
+	inset: 0;
+	overflow: hidden auto;
 	opacity: 0;
 	visibility: hidden;
 	z-index: 8;
 	transition: visibility 1s linear, opacity 0s linear;
-	/* Touch: momentum scroll, vertical panning only, no scroll chaining. */
-	-webkit-overflow-scrolling: touch;
+	/* Touch: vertical panning only, no scroll chaining. */
 	touch-action: pan-y;
 	overscroll-behavior-y: contain;
 }
@@ -356,52 +305,22 @@ h1, h2, h3, h4, h5, h6 {
 	outline: none;
 }
 .ip_section .section_inner{
-	width: 100%;
-	display: flow-root;
 	position: relative;
-	padding: 10px 20px 0px 20px;
+	padding: 10px 20px 0;
 }
 .ip_full_link{
 	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
+	inset: 0;
 	z-index: 5;
 }
-/* Minimal scrollbars: thin thumb, no arrow buttons (incl. Windows Chromium). */
+/* Minimal scrollbars: thin thumb without arrow buttons. Supported by all
+   evergreen browsers (Chrome 121+, Firefox, Safari 18.2+); older ones just
+   get the default scrollbar. */
 html,
 .ip_section,
 .ip_modalbox .description_wrap{
 	scrollbar-width: thin;
 	scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
-}
-html::-webkit-scrollbar,
-.ip_section::-webkit-scrollbar,
-.ip_modalbox .description_wrap::-webkit-scrollbar{
-	width: 6px;
-	height: 6px;
-	-webkit-appearance: none;
-	appearance: none;
-}
-html::-webkit-scrollbar-thumb,
-.ip_section::-webkit-scrollbar-thumb,
-.ip_modalbox .description_wrap::-webkit-scrollbar-thumb{
-	background-color: rgba(153, 153, 153, 0.65);
-	border-radius: 3px;
-	border: none;
-	-webkit-appearance: none;
-	appearance: none;
-}
-html::-webkit-scrollbar-track,
-html::-webkit-scrollbar-track-piece,
-.ip_section::-webkit-scrollbar-track,
-.ip_section::-webkit-scrollbar-track-piece,
-.ip_modalbox .description_wrap::-webkit-scrollbar-track,
-.ip_modalbox .description_wrap::-webkit-scrollbar-track-piece{
-	background: transparent;
-	-webkit-appearance: none;
-	appearance: none;
 }
 /* 640px+: portrait visible, stops above the fixed footer copyright line. */
 @media (min-width: 640px){
@@ -425,26 +344,21 @@ html::-webkit-scrollbar-track-piece,
 		right: var(--ip-side-gutter);
 	}
 	.ip_section{scroll-behavior: smooth;}
-	.ip_section .section_inner{padding: 0px 40px 0px 40px;}
+	.ip_section .section_inner{padding: 0 40px;}
 }
 
 /*	HOME */
 /* Phones: square photo stacked above the content. */
 .ip_home{
 	position: relative;
-	width: 100%;
-	height: auto;
 	min-height: 100%;
 	display: flex;
 	flex-direction: column;
-	align-items: stretch;
-	justify-content: flex-start;
 }
 .ip_home_photo{
 	display: block;
 	width: 100%;
 	padding: 0 20px;
-	box-sizing: border-box;
 }
 .ip_home_photo img{
 	display: block;
@@ -461,7 +375,6 @@ html::-webkit-scrollbar-track-piece,
 	--ip-home-line-width: clamp(40px, calc(25px + 2.5vw), 70px);
 	--ip-home-line-height: clamp(3px, calc(2px + 0.15vw), 5px);
 	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
-	box-sizing: border-box;
 	padding: 14px 20px 0;
 }
 .ip_home_stack{
@@ -528,9 +441,12 @@ html::-webkit-scrollbar-track-piece,
 	position: absolute;
 	inset: 0;
 	z-index: 2;
-	box-sizing: border-box;
 	padding: 16px;
 	background: #fff;
+}
+/* Receives programmatic focus (tabindex="-1") when opened. */
+.ip_qr_panel:focus{
+	outline: none;
 }
 #home.ip_qr_shown .ip_qr_panel{
 	display: flex;
@@ -538,8 +454,8 @@ html::-webkit-scrollbar-track-piece,
 }
 .ip_qr_panel__close{
 	position: absolute;
-	top: 0px;
-	right: calc(var(--ip-col-right) / 2 - 72px);;
+	top: 0;
+	right: calc(var(--ip-col-right) / 2 - 72px);
 	z-index: 2;
 	display: block;
 	width: 40px;
@@ -550,7 +466,7 @@ html::-webkit-scrollbar-track-piece,
 	background: rgba(255,255,255,.95);
 	color: #666;
 	cursor: pointer;
-	transition: all .3s ease;
+	transition: border-radius .3s ease, background-color .3s ease;
 	line-height: 1;
 	font-size: 1rem;
 }
@@ -564,8 +480,7 @@ html::-webkit-scrollbar-track-piece,
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
-.ip_qr_panel__code,
-#home.ip_qr_shown .ip_qr_panel__code{
+.ip_qr_panel__code{
 	display: block;
 	width: min(220px, 58vw);
 	height: auto;
@@ -594,8 +509,7 @@ html::-webkit-scrollbar-track-piece,
 	.ip_home .content{
 		padding: 0 20px;
 	}
-	.ip_qr_panel__code,
-	#home.ip_qr_shown .ip_qr_panel__code{
+	.ip_qr_panel__code{
 		width: min(220px, 48vw);
 	}
 }
@@ -613,12 +527,8 @@ html::-webkit-scrollbar-track-piece,
 }
 
 /* ABOUT / WHY (text sections) */
-.ip_info{
-	width: 100%;
-	display: flow-root;
-}
+/* overflow:hidden clips the 5000px title rule drawn by span:after below. */
 .ip_title{
-	width: 100%;
 	overflow: hidden;
 }
 .ip_title > span{
@@ -643,8 +553,6 @@ html::-webkit-scrollbar-track-piece,
 }
 /* Single column on phones, two columns from 768px. */
 .ip_info .wrapper {
-	width: 100%;
-	display: block;
 	margin-top: 20px;
 }
 .ip_info .left{
@@ -677,30 +585,21 @@ html::-webkit-scrollbar-track-piece,
 }
 
 /* TESTIMONIALS */
-.testimonials .list{
-	width: 100%;
-	display: flow-root;
-	margin-top: 0;
-}
 .testimonials .list ul{
 	margin: 10px;
 	list-style-type: none;
 }
 .testimonials .list ul li{
-	margin: 0px 0px 75px;
+	margin: 0 0 75px;
 }
 /* Loop clones exist only for the carousel; never show them stacked. */
 .testimonials .list ul.testimonials-snap > li.is-clone{
 	display: none;
 }
 .testimonials .testimonial-card{
-	width: 100%;
-	display: flow-root;
 	position: relative;
 }
 .testimonials .testimonial-quote{
-	width: 100%;
-	display: flow-root;
 	position: relative;
 	border: 2px solid #E5EDF4;
 	padding: 15px;
@@ -709,24 +608,24 @@ html::-webkit-scrollbar-track-piece,
 .testimonials .testimonial-quote:before{
 	position: absolute;
 	content: "";
-	height: 0px;
-	width: 0px;
+	height: 0;
+	width: 0;
 	top: 100%;
 	left: 50px;
 	border: solid transparent;
 	border-top-color: #E5EDF4;
-	border-width: 0px 18px 0px 0px;
+	border-width: 0 18px 0 0;
 }
 .testimonials .testimonial-quote:after{
 	position: absolute;
 	content: "";
 	top: 100%;
 	left: 50px;
-	height: 0px;
-	width: 0px;
+	height: 0;
+	width: 0;
 	border: solid transparent;
 	border-top-color: #f6fbff;
-	border-width: 0px 13px 0px 0px;
+	border-width: 0 13px 0 0;
 	margin-left: 2px;
 }
 .testimonials .testimonial-quote i{
@@ -744,7 +643,6 @@ html::-webkit-scrollbar-track-piece,
 	bottom: -29px;
 }
 .testimonials .testimonial-author{
-	width: 100%;
 	display: flex;
 	align-items: center;
 	padding-left: 20px;
@@ -791,14 +689,10 @@ html::-webkit-scrollbar-track-piece,
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
 		scroll-behavior: smooth;
-		-webkit-overflow-scrolling: touch;
 		touch-action: pan-x;
 		overscroll-behavior-x: contain;
 		cursor: grab;
 		scrollbar-width: none;
-	}
-	.testimonials .list ul.testimonials-snap::-webkit-scrollbar{
-		display: none;
 	}
 	.testimonials .list ul.testimonials-snap.is-dragging{
 		cursor: grabbing;
@@ -826,7 +720,6 @@ html::-webkit-scrollbar-track-piece,
 		overflow: visible;
 		padding-top: 10px;
 		padding-bottom: 30px;
-		box-sizing: border-box;
 	}
 	.testimonials .list ul.testimonials-snap > li .testimonial-quote{
 		overflow: visible;
@@ -838,17 +731,9 @@ html::-webkit-scrollbar-track-piece,
 
 /*	SERVICES */
 .ip_service{
-	width: 100%;
-	display: flow-root;
 	margin-bottom: 70px;
 }
-.ip_service .service_list{
-	width: 100%;
-	display: flow-root;
-	margin-top: 0px;
-}
 .ip_service .service_list ul{
-	margin: 0;
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
@@ -856,25 +741,22 @@ html::-webkit-scrollbar-track-piece,
 }
 /* 1-up on phones → 2-up from 768px → 3-up on extra-wide screens. */
 .ip_service .service_list ul li{
-	margin: 0;
 	width: 100%;
-	padding-left: 0;
 }
 .ip_service .service-card{
 	width: 100%;
 	height: 100%;
-	display: flow-root;
 	position: relative;
 	border: 1px solid #b9b8c3;
 	padding: 70px 40px 63px;
 	text-align: center;
-	transition: all .3s ease;
+	transition: background-color .3s ease;
 }
+/* Keep card titles/summaries on natural word boundaries despite the
+   body-level overflow-wrap: break-word. */
 .ip_service .service-card .title,
 .ip_service .service-card .service-card__summary{
-	word-break: normal;
 	overflow-wrap: normal;
-	hyphens: none;
 }
 .ip_service .service-card:hover{
 	background-color: #333;
@@ -884,7 +766,7 @@ html::-webkit-scrollbar-track-piece,
 	height: 60px;
 	color: #333;
 	margin-bottom: 27px;
-	transition: all .3s ease;
+	transition: color .3s ease;
 }
 .ip_service .service-card:hover .svg{
 	color: #fff;
@@ -894,13 +776,13 @@ html::-webkit-scrollbar-track-piece,
 	font-size: 1.5rem;
 	color: #333;
 	margin-bottom: 15px;
-	transition: all .3s ease;
+	transition: color .3s ease;
 }
 .ip_service .service-card:hover .title{
 	color: #fff;
 }
 .ip_service .service-card .service-card__summary{
-	transition: all .3s ease;
+	transition: color .3s ease;
 }
 .ip_service .service-card:hover .service-card__summary{
 	color: #aaa;
@@ -934,16 +816,16 @@ html::-webkit-scrollbar-track-piece,
 /*	MODALBOX (service popup) */
 .ip_modalbox{
 	position: fixed;
-	top: 0px;
-	left: 0px;
-	right: 0px;
+	top: 0;
+	left: 0;
+	right: 0;
 	height: 100vh;
 	height: 100dvh;
 	z-index: 20;
 	background-color: rgba(0,0,0,.8);
 	opacity: 0;
 	visibility: hidden;
-	transition: all .3s ease;
+	transition: opacity .3s ease, visibility .3s ease;
 }
 .ip_modalbox.opened{
 	opacity: 1;
@@ -962,28 +844,23 @@ html::-webkit-scrollbar-track-piece,
 	opacity: 0;
 	visibility: hidden;
 	margin-top: -20px;
-	transition: all .3s ease;
-	transition-delay: .3s;
+	/* Delayed so the backdrop fades in first (and out last on close). */
+	transition: opacity .3s ease .3s, visibility .3s ease .3s, margin-top .3s ease .3s;
 }
 .ip_modalbox.opened .box_inner{
 	opacity: 1;
 	visibility: visible;
-	margin-top: 0px;
+	margin-top: 0;
 }
 .ip_modalbox .description_wrap{
 	position: relative;
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
+	overflow: hidden auto;
 	padding: 16px;
-	overflow-y: auto;
 }
 .ip_modalbox .description_wrap:focus {
 	outline: none;
-}
-.ip_modalbox .service_popup_informations{
-	width: 100%;
-	display: flow-root;
 }
 .ip_modalbox .service_popup_informations .service-popup-hero{
 	width: 100%;
@@ -1012,15 +889,12 @@ html::-webkit-scrollbar-track-piece,
 	top: 0;
 	left: 0;
 	z-index: 2;
-	margin: 0;
 	padding: 16px 72px 16px 20px;
 	max-width: 100%;
-	box-sizing: border-box;
 }
 .ip_modalbox .service_popup_informations .service-popup-hero__title h3{
 	font-size: 1.25rem;
 	color: #fff;
-	margin: 0;
 	text-shadow: 0 1px 3px rgba(0,0,0,.45);
 }
 .ip_modalbox .service_popup_informations .service-popup-hero__close{
@@ -1039,7 +913,7 @@ html::-webkit-scrollbar-track-piece,
 	border: 2px solid rgba(255,255,255,.85);
 	border-radius: 10px;
 	position: relative;
-	transition: all .3s ease;
+	transition: border-radius .3s ease, background-color .3s ease;
 	background: rgba(0,0,0,.15);
 }
 .ip_modalbox .service_popup_informations .service-popup-hero__close a:hover{
@@ -1052,14 +926,11 @@ html::-webkit-scrollbar-track-piece,
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
-.ip_modalbox .service_popup_informations .descriptions{
-	width: 100%;
-}
 .ip_modalbox .service_popup_informations .descriptions p{
 	margin-bottom: 15px;
 }
 .ip_modalbox .service_popup_informations .descriptions p:last-child{
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 @media (min-width: 1024px){
 	.ip_modalbox .box_inner{
@@ -1120,7 +991,6 @@ html::-webkit-scrollbar-track-piece,
   width: 30px;
   height: 30px;
   border: 2px solid #333;
-  box-sizing: border-box;
   z-index: 100;
   opacity: .5;
   transition: transform .08s ease-out, opacity .08s ease-out;
@@ -1146,7 +1016,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
   opacity: 0.75;
   border-color: #fff;
 }
-@media (min-width: 1024px){
+@media (min-width: 920px){
 	.mouse-cursor{display: block;}
 }
 
@@ -1166,15 +1036,9 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	background: transparent;
 }
 .ip_swipe_nav ul{
-	margin: 0;
-	padding: 0;
 	list-style: none;
 	display: flex;
 	align-items: center;
-}
-.ip_swipe_nav ul li{
-	margin: 0;
-	float: none;
 }
 .ip_swipe_nav ul li a{
 	display: flex;
