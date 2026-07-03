@@ -231,9 +231,7 @@ html {
 	text-align: center;
 }
 /* CLS guard */
-.ip_mainpart {
-	visibility: hidden;
-}
+.ip_mainpart {visibility: hidden;}
 @media (max-width: 878px) {
 	.ip_all_wrap {
 		--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);

@@ -288,7 +288,7 @@ function ip_keyboard_navigation(){
 			return false;
 		}
 		// Reuse the existing close handler so cursor state is reset.
-		var close = modalBox.querySelector('.close');
+		var close = modalBox.querySelector('.service-popup-hero__close a');
 		if(close){
 			close.click();
 		}
