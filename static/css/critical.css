@@ -294,6 +294,6 @@ body {
 	   40px .section_inner side padding (style.css, >=1024). Keeps it clear
 	   of the scrollbar. */
 	.ip_header .menu ul {
-		padding-right: calc(var(--ip-side-gutter) + 40px - var(--ip-menu-padding-right));
+		padding-right: var(--ip-menu-padding-right);
 	}
 }
