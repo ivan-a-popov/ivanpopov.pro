@@ -191,7 +191,7 @@ function ip_page_transition(){
 }
 
 // -----------   SWIPE NAVIGATION (MOBILE)   -----------
-// Mirrors the CSS breakpoint where stacked/mobile content layout
+// Mirrors the CSS 1023px breakpoint where stacked/mobile content layout
 // takes over from the desktop two-column layout.
 function ip_is_mobile_layout(){
 	return window.matchMedia('(max-width: 1023px)').matches;
