@@ -344,7 +344,6 @@ html,
 		right: var(--ip-side-gutter);
 	}
 	.ip_section{scroll-behavior: smooth;}
-	.ip_section .section_inner{padding: 0 40px;}
 }
 
 /*	HOME */
@@ -381,7 +380,7 @@ html,
 	position: relative;
 }
 .ip_home .name{
-	font-size: clamp(24px, calc(25px + 2.44vw), 64px);
+	font-size: clamp(24px, calc(20px + 2vw), 42px);
 	font-weight: 600;
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
@@ -1065,8 +1064,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 @media (min-width: 1024px){
 	.ip_swipe_nav{display: none;}
 }
-/* Touch devices keep the dots at any width (higher specificity than the
-   min-width hide above). */
+/* Touch devices keep the dots at any width (higher specificity here). */
 .ip_all_wrap.has-touch .ip_swipe_nav{
 	display: block;
 }
