@@ -230,7 +230,7 @@ html {
 	font-family: Onest, sans-serif;
 	text-align: center;
 }
-@media (max-width: 1340px) {
+@media (max-width: 878px) {
 	.ip_all_wrap {
 		--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);
 	/* Column split consumed by .author_image / .main_content (style.css).
@@ -241,8 +241,8 @@ html {
 }
 @media (min-width: 640px) {
 	.ip_all_wrap {
-		--ip-col-left: 42%;
-		--ip-col-right: 58%;
+		--ip-col-left: 36%;
+		--ip-col-right: 64%;
 	}
 	.ip_footer {
 		justify-content: flex-start;
