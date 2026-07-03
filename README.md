@@ -1,3 +1,15 @@
+/*
+	CRITICAL CSS — source of the inline <style> block in index.html.
+	stamp-cache.sh minifies this file and injects it between the
+	"CRITICAL CSS" markers there, so edit HERE and re-run the script.
+
+	Only what the first paint needs before the async style.css arrives:
+	- the preloader (paints the FCP frame);
+	- the fixed header/footer shell + its layout variables (prevents CLS).
+	Note: avoid a trailing "**" + "/" comment ending — the sed minifier
+	in stamp-cache.sh does not handle that edge case.
+*/
+
 style.css:
 /*==================================================================
 	MOBILE-FIRST STYLESHEET
