@@ -235,8 +235,8 @@ html {
 		--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);
 	/* Column split consumed by .author_image / .main_content (style.css).
 	   Portrait hidden on phones, widens through the breakpoints. */
-	--ip-col-left: 0%;
-	--ip-col-right: 100%;
+		--ip-col-left: 0%;
+		--ip-col-right: 100%;
 	}
 }
 @media (min-width: 640px) {
