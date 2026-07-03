@@ -1051,14 +1051,15 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	display: flex;
 	align-items: center;
 }
-.ip_swipe_nav ul li a{
+/* Dots are decorative indicators, not interactive; no touch-target sizing. */
+.ip_swipe_nav ul li{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 7px;
-	text-decoration: none;
+	pointer-events: none;
 }
-.ip_swipe_nav ul li a .dot{
+.ip_swipe_nav ul li .dot{
 	display: block;
 	width: 7px;
 	height: 7px;
@@ -1067,7 +1068,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 	transition: width .3s ease, height .3s ease, background-color .3s ease;
 }
-.ip_swipe_nav ul li.active a .dot{
+.ip_swipe_nav ul li.active .dot{
 	width: 9px;
 	height: 9px;
 	background: #fff;

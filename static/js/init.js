@@ -68,9 +68,9 @@ function ip_goto(href){
 	var enter		= backward ? enterFwd : enterBack;
 	var exit		= backward ? exitFwd : exitBack;
 	var allAnim		= [enterFwd, exitFwd, enterBack, exitBack].filter(Boolean).join(' ');
-	// Every link (header, swipe dots) that points to this section.
-	var parents		= ip_all('.transition_link a[href="'+href+'"]').map(function(a){
-		return a.closest('li');
+	// Every element (header link, decorative swipe dot) pointing to this section.
+	var parents		= ip_all('.transition_link a[href="'+href+'"], .transition_link li[data-href="'+href+'"]').map(function(el){
+		return el.closest('li');
 	}).filter(Boolean);
 	if(parents.some(function(li){ return li.classList.contains('active'); })){
 		return false;
@@ -141,17 +141,17 @@ function ip_init_section_focus(){
 }
 // Shared by swipe + keyboard section navigation.
 var IP_NAV_LINKS_HEADER = '.ip_header .menu .transition_link a';
-var IP_NAV_LINKS_SWIPE = '.ip_swipe_nav .transition_link a';
+var IP_NAV_LINKS_SWIPE = '.ip_swipe_nav .transition_link li';
 function ip_nav_section_order(linkSelector){
-	return ip_all(linkSelector).map(function(a){
-		return a.getAttribute('href');
+	return ip_all(linkSelector).map(function(el){
+		return el.getAttribute('href') || el.getAttribute('data-href');
 	});
 }
 function ip_current_section_href(opts){
 	opts = opts || {};
 	var active = ip_one(opts.activeLink || '.transition_link li.active a');
 	if(active){
-		return active.getAttribute('href');
+		return active.getAttribute('href') || active.getAttribute('data-href');
 	}
 	var visible = ip_all('.ip_section.active').filter(function(s){
 		return !s.classList.contains('hidden');
@@ -218,14 +218,12 @@ function ip_build_swipe_nav(){
 	var dots = '';
 	links.forEach(function(a, i){
 		var href	= a.getAttribute('href');
-		var label	= (a.textContent || '').trim();
 		var targetEl = href ? ip_one(href) : null;
 		var active	= (targetEl && targetEl.classList.contains('active')) || (i === 0 && !hasActiveSection);
-		dots += '<li class="'+(active ? 'active' : '')+'">'
-			+ '<a href="'+href+'" aria-label="'+label+'"><span class="dot"></span></a>'
-			+ '</li>';
+		// Dots are decorative position indicators, not touch targets: no anchor.
+		dots += '<li class="'+(active ? 'active' : '')+'" data-href="'+href+'"><span class="dot"></span></li>';
 	});
-	var html = '<div class="ip_swipe_nav" aria-label="Навигация по разделам">'
+	var html = '<div class="ip_swipe_nav" aria-hidden="true">'
 		+ '<ul class="transition_link">'+dots+'</ul>'
 		+ '</div>'
 	var wrap = ip_one('.ip_all_wrap');
@@ -241,7 +239,7 @@ function ip_swipe_navigation(){
 	}
 	var startX = 0, startY = 0, startTime = 0, tracking = false;
 	var swipeHrefOpts = {
-		activeLink: '.ip_swipe_nav li.active a',
+		activeLink: '.ip_swipe_nav .transition_link li.active',
 		fallbackAnimated: true
 	};
 	mainpart.addEventListener('touchstart', function(e){
