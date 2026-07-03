@@ -9,7 +9,14 @@
 	Note: avoid a trailing "**" + "/" comment ending — the sed minifier
 	in stamp-cache.sh does not handle that edge case.
 */
+/* CLS guard: the mainpart layout (absolute sections, columns, home) lives in
+   style.css, which loads async. Until it applies, the content would render in
+   normal block flow and then snap into the overlay layout — a full-viewport
+   layout shift. The full-screen preloader already covers this window, so we
+   keep the mainpart hidden here and let style.css reveal it in its final
+   position (visibility:hidden elements don't contribute to CLS). */
 
+   
 style.css:
 /*==================================================================
 	MOBILE-FIRST STYLESHEET

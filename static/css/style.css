@@ -228,6 +228,9 @@ h1, h2, h3, h4, h5, h6 {
 	position: absolute;
 	inset: var(--ip-bar-height) 0 0;
 	overflow: hidden;
+	/* Reveals the mainpart once its layout is in place — see the CLS guard in
+	   critical.css that hides it until this stylesheet applies. */
+	visibility: visible;
 	transition: top 0.25s ease, bottom 0.25s ease, left 0.25s ease, right 0.25s ease;
 }
 /* Side portrait: hidden on phones, appears with the two-column shell. */
