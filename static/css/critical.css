@@ -1,11 +1,6 @@
 /* BASE */
 html {
 	overflow-x: hidden;
-	margin: 0;
-	padding: 0;
-}
-body {
-	margin: 0;
 }
 
 /* PRELOADER */
@@ -114,10 +109,6 @@ body {
 	   capped — and scales with the user's font size — while the active main word
 	   grows via font-size:1.2em/1.5em. */
 	--ip-menu-sub-font-size: .9rem;
-	/* Column split consumed by .author_image / .main_content (style.css).
-	   Portrait hidden on phones, widens through the breakpoints. */
-	--ip-col-left: 0%;
-	--ip-col-right: 100%;
 }
 .ip_all_wrap,
 .ip_all_wrap * {
@@ -242,6 +233,10 @@ body {
 @media (max-width: 1340px) {
 	.ip_all_wrap {
 		--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);
+	/* Column split consumed by .author_image / .main_content (style.css).
+	   Portrait hidden on phones, widens through the breakpoints. */
+	--ip-col-left: 0%;
+	--ip-col-right: 100%;
 	}
 }
 @media (min-width: 640px) {
