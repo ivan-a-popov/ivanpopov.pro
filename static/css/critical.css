@@ -100,7 +100,7 @@ body {
 	max-width: var(--ip-layout-max);
 	margin-inline: auto;
 	--ip-layout-max: 1880px;
-	--ip-side-gutter: 10px;
+	--ip-side-gutter: 0px;
 	--ip-bar-height: clamp(60px, calc(52px + 1.1vw), 70px);
 	--ip-footer-height: clamp(20px, calc(16px + 1.8vw), 50px);
 	/* Footer copy: body-sized on wide screens, shrinks below 1340px (see media). */
@@ -110,7 +110,7 @@ body {
 	--ip-logo-menu-gap: 5px;
 	--ip-menu-padding-left: 6px;
 	--ip-menu-padding-right: 6px;
-	--ip-menu-gap: clamp(0px,calc(1px+.85vw),30px);
+	--ip-menu-gap: clamp(6px,calc(1px+.85vw),42px);
 	--ip-menu-sub-gap: 3px;
 	/* Sub-label size is its OWN knob (absolute units, never em) so it stays
 	   capped while the active main word grows via font-size:1.2em/1.5em. */
@@ -289,7 +289,6 @@ body {
 }
 @media (min-width: 1024px) {
 	.ip_all_wrap {
-		--ip-side-gutter: clamp(10px, 2.8vw, 52px);
 		--ip-logo-padding-left: var(--ip-side-gutter);
 		--ip-col-left: 40%;
 		--ip-col-right: 60%;
