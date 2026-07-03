@@ -122,9 +122,9 @@ body {
 	--ip-logo-menu-gap: 5px;
 	--ip-menu-padding-left: 6px;
 	--ip-menu-padding-right: 6px;
-	--ip-menu-gap: 0px;
+	--ip-menu-gap: clamp(0,calc(1px+.85vw),30px);
 	--ip-menu-sub-gap: 3px;
-	--ip-menu-sub-font-size: 16px;
+	--ip-menu-sub-font-size: clamp(8px, calc(10px + .7vw), 20px);
 	/* Column split consumed by .author_image / .main_content (style.css).
 	   Portrait hidden on phones, widens through the breakpoints. */
 	--ip-col-left: 0%;
@@ -225,7 +225,7 @@ body {
 }
 .ip_header .menu ul li.active .ip_menu_sub {
 	opacity: 1;
-	transform: translateX(-50%) scale(1);
+	transform: translateX(-50%) scale(1.1);
 }
 .ip_footer {
 	position: fixed;
@@ -252,7 +252,7 @@ body {
 }
 @media (max-width: 1340px) {
 	.ip_all_wrap {
-		--ip-footer-font-size: clamp(7px, calc(7px + .4vw), 16px);
+		--ip-footer-font-size: clamp(7px, calc(7px + .4vw), 20px);
 	}
 }
 @media (min-width: 640px) {
@@ -269,7 +269,6 @@ body {
 		--ip-menu-padding-left: clamp(4px, calc(24px - 1vw), 24px);
 		--ip-menu-padding-right: clamp(8px, calc(4px + .5vw), 64px);
 		--ip-menu-gap: clamp(6px, calc(22px - .85vw), 24px);
-		--ip-menu-sub-font-size: 14px;
 	}
 	.ip_header {
 		display: grid;
@@ -294,6 +293,7 @@ body {
 	.ip_all_wrap {
 		--ip-col-left: 36%;
 		--ip-col-right: 64%;
+		--ip-menu-gap: clamp(6px, calc(22px + .85vw), 30px);
 	}
 }
 @media (min-width: 1024px) {
@@ -302,6 +302,8 @@ body {
 		--ip-logo-padding-left: var(--ip-side-gutter);
 		--ip-col-left: 40%;
 		--ip-col-right: 60%;
+		--ip-menu-sub-font-size: clamp(calc(14px+.1vw), calc(16+.5vw), calc(16px+1.5vw);
+		--ip-menu-gap: clamp(12px, calc(22px + .85vw), 30px);
 	}
 	/* Last menu item's text ends on the content text edge: side gutter + the
 	   40px .section_inner side padding (style.css, >=1024). Keeps it clear
