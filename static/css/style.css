@@ -482,7 +482,7 @@ html,
 }
 .ip_qr_panel__code{
 	display: block;
-	width: min(220px, 58vw);
+	width: min(180px, 58vw);
 	height: auto;
 }
 

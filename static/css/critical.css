@@ -100,7 +100,7 @@ body {
 	max-width: var(--ip-layout-max);
 	margin-inline: auto;
 	--ip-layout-max: 1880px;
-	--ip-side-gutter: 0px;
+	--ip-side-gutter: 10px;
 	--ip-bar-height: clamp(60px, calc(52px + 1.1vw), 70px);
 	--ip-footer-height: clamp(20px, calc(16px + 1.8vw), 50px);
 	/* Footer copy: body-sized on wide screens, shrinks below 1340px (see media). */
@@ -284,16 +284,11 @@ body {
 	.ip_all_wrap {
 		--ip-col-left: 36%;
 		--ip-col-right: 64%;
-		--ip-menu-gap: clamp(6px, calc(22px + .85vw), 30px);
+		--ip-logo-padding-left: var(--ip-side-gutter);
+		--ip-menu-gap: clamp(12px, calc(22px + .85vw), 30px);
 	}
 }
 @media (min-width: 1024px) {
-	.ip_all_wrap {
-		--ip-logo-padding-left: var(--ip-side-gutter);
-		--ip-col-left: 40%;
-		--ip-col-right: 60%;
-		--ip-menu-gap: clamp(12px, calc(22px + .85vw), 30px);
-	}
 	/* Last menu item's text ends on the content text edge: side gutter + the
 	   40px .section_inner side padding (style.css, >=1024). Keeps it clear
 	   of the scrollbar. */
