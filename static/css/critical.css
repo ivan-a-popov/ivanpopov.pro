@@ -112,9 +112,10 @@ body {
 	--ip-menu-padding-right: 6px;
 	--ip-menu-gap: clamp(6px,calc(1px+.85vw),42px);
 	--ip-menu-sub-gap: 3px;
-	/* Sub-label size is its OWN knob (absolute units, never em) so it stays
-	   capped while the active main word grows via font-size:1.2em/1.5em. */
-	--ip-menu-sub-font-size: 16px;
+	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
+	   capped — and scales with the user's font size — while the active main word
+	   grows via font-size:1.2em/1.5em. */
+	--ip-menu-sub-font-size: .9rem;
 	/* Column split consumed by .author_image / .main_content (style.css).
 	   Portrait hidden on phones, widens through the breakpoints. */
 	--ip-col-left: 0%;
@@ -199,7 +200,7 @@ body {
 	transform: translateX(-50%) scale(.88);
 	transform-origin: top;
 	text-align: center;
-	font-size: var(--ip-menu-sub-font-size, 14px);
+	font-size: var(--ip-menu-sub-font-size);
 	font-weight: 600;
 	line-height: 1;
 	letter-spacing: .5px;
@@ -259,7 +260,7 @@ body {
 		--ip-menu-padding-left: clamp(4px, calc(24px - 1vw), 24px);
 		--ip-menu-padding-right: clamp(8px, calc(4px + .5vw), 64px);
 		--ip-menu-gap: clamp(6px, calc(22px - .85vw), 24px);
-		--ip-menu-sub-font-size: 14px;
+		--ip-menu-sub-font-size: .875rem;
 	}
 	.ip_header {
 		display: grid;
