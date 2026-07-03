@@ -108,8 +108,6 @@ body {
 	--ip-logo-font-size: clamp(16px, calc(15px + .9vw), 25px);
 	--ip-logo-padding-left: clamp(8px, calc(10px + 1.2vw), 30px);
 	--ip-logo-menu-gap: 5px;
-	--ip-menu-padding-left: 6px;
-	--ip-menu-padding-right: 6px;
 	--ip-menu-gap: clamp(6px,calc(1px+.85vw),42px);
 	--ip-menu-sub-gap: 3px;
 	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
