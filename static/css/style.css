@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
 /*	MAINPART + SECTIONS */
 .ip_mainpart{
 	position: absolute;
-	inset: var(--ip-bar-height) 0 0;
+	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
 	overflow: hidden;
 	/* Reveals the mainpart once its layout is in place — see the CLS guard in
 	  critical.css that hides it until this stylesheet applies. */
@@ -245,6 +245,7 @@ h1, h2, h3, h4, h5, h6 {
 	transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
 .ip_mainpart .author_image .author_image_inner{
+	position: absolute;
 	inset: 0;
 	width: 100%;
 	height: 0;
@@ -256,6 +257,7 @@ h1, h2, h3, h4, h5, h6 {
 	position: absolute;
 	z-index: 2;
 	inset: 0;
+	display: block;
 	width: 100%;
 	height: 0;
 	object-fit: cover;
@@ -321,20 +323,26 @@ html,
 	scrollbar-width: thin;
 	scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
 }
-/* 640px+: portrait visible, stops above the fixed footer copyright line. */
+/* 640px+: portrait visible, fills the mainpart column above the footer. */
 @media (min-width: 640px){
 	.ip_mainpart .author_image{
+		top: 0;
+		left: 0;
+		bottom: 0;
 		height: auto;
-		bottom: var(--ip-footer-height);
 		opacity: 1;
 		visibility: visible;
 		pointer-events: auto;
 	}
 	.ip_mainpart .author_image .author_image_inner,
 	.ip_mainpart .author_image .author_image_inner .author_photo{
-		height: 100%;
-		bottom: var(--ip-footer-height);
 		opacity: 1;
+	}
+	.ip_mainpart .author_image .author_image_inner{
+		height: auto;
+	}
+	.ip_mainpart .author_image .author_image_inner .author_photo{
+		height: 100%;
 	}
 }
 /* full-height portrait, smooth scroll. */

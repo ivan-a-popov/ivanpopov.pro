@@ -65,6 +65,9 @@ html {
 	overflow-x: hidden;
 	background-color: var(--bg-color);
 }
+body {
+	margin: 0;
+}
 
 /* PRELOADER */
 #preloader {
@@ -163,12 +166,12 @@ html {
 	--ip-col-left: 0%;
 	--ip-col-right: 100%;
 	--ip-layout-max: 1880px;
-	--ip-bar-height: clamp(40px, calc(42px + 1.1vw), 60px);
-	--ip-footer-height: clamp(10px, 20px, 30px);
-	--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);
+	--ip-bar-height: calc(42px + 1vw);
+	--ip-footer-height: calc(7px + .5vw);
+	--ip-footer-font-size: calc(6px + .45vw);
 	--ip-logo-font-size: clamp(16px, calc(15px + .9vw), 25px);
-	--ip-logo-padding-left: clamp(8px, calc(10px + 1.2vw), 30px);
-	--ip-logo-menu-gap: 5px;
+	--ip-logo-padding-left: .9vw;
+	--ip-logo-menu-gap: 10px;
 	--ip-menu-gap: clamp(6px,calc(1px+.85vw),42px);
 	--ip-menu-sub-gap: 3px;
 	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
@@ -282,13 +285,13 @@ html {
 	margin-inline: auto;
 	height: var(--ip-footer-height);
 	background: var(--bg-color);
-	z-index: 10;
+	z-index: 20;
 	line-height: var(--ip-footer-height);
 	font-size: var(--ip-footer-font-size);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0 ;
+	padding: 0 1em;
 }
 .ip_footer .copyright p {
 	margin: 0;
