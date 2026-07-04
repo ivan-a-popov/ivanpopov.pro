@@ -1,7 +1,19 @@
+/*	CRITICAL CSS — source of the inline <style> block in index.html.
+	stamp-cache.sh minifies this file and injects it between the
+	"CRITICAL CSS" markers there, so edit HERE and re-run the script.
+
+	Only what the first paint needs before the async style.css arrives:
+	- the preloader (paints the FCP frame);
+	- the fixed header/footer shell + its layout variables (prevents CLS).
+	Note: avoid a trailing "**" + "/" comment ending — the sed minifier
+	in stamp-cache.sh does not handle that edge case. 
+*/
+
 /* THEME TOKENS */
 /* Single source of truth for colors. Defined here (inlined in <head>) so the
    shell, preloader and page background paint in the correct scheme on first
-   render — before the async style.css arrives (no theme flash, no CLS). */
+   render — before the async style.css arrives (no theme flash, no CLS). 
+*/
 :root {
 	color-scheme: light dark;
 	--bg-color: #fff;              /* page + header/footer surface */
@@ -146,11 +158,14 @@ html {
 	min-height: 100vh;
 	max-width: var(--ip-layout-max);
 	margin-inline: auto;
+	/* Column split consumed by .author_image / .main_content (style.css).
+	   Portrait hidden on phones, widens through the breakpoints. */
+	--ip-col-left: 0%;
+	--ip-col-right: 100%;
 	--ip-layout-max: 1880px;
 	--ip-side-gutter: 10px;
 	--ip-bar-height: clamp(60px, calc(52px + 1.1vw), 70px);
-	--ip-footer-height: clamp(20px, calc(16px + 1.8vw), 50px);
-	/* Footer copy: body-sized on wide screens, shrinks below 1340px (see media). */
+	--ip-footer-height: clamp(20px,25px,30px);
 	--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);
 	--ip-logo-font-size: clamp(16px, calc(15px + .9vw), 25px);
 	--ip-logo-padding-left: clamp(8px, calc(10px + 1.2vw), 30px);
@@ -282,32 +297,32 @@ html {
 	font-family: Onest, sans-serif;
 	text-align: center;
 }
-/* CLS guard */
+/* CLS guard: the mainpart layout (absolute sections, columns, home) lives 
+in style.css, which loads async. Until it applies, the content would render 
+in normal block flow and then snap into the overlay layout — a full-viewport 
+layout shift. The full-screen preloader already covers this window, so we 
+keep the mainpart hidden here and let style.css reveal it in its final position
+(visibility:hidden elements don't contribute to CLS).*/
 .ip_mainpart {visibility: hidden;}
-@media (max-width: 878px) {
-	.ip_all_wrap {
-	/* Column split consumed by .author_image / .main_content (style.css).
-	   Portrait hidden on phones, widens through the breakpoints. */
-		--ip-col-left: 0%;
-		--ip-col-right: 100%;
-	}
+@media (max-width: 639px) {
+  .ip_footer {
+		justify-content: center;
+  }
 }
 @media (min-width: 640px) {
 	.ip_all_wrap {
+		/* Column split consumed by .author_image / .main_content (style.css).
+		  Portrait hidden on phones, widens through the breakpoints. */
 		--ip-col-left: 36%;
 		--ip-col-right: 64%;
-	}
-	.ip_footer {
-		justify-content: flex-start;
-	}
-}
-@media (min-width: 690px) {
-	.ip_all_wrap {
 		--ip-menu-padding-left: clamp(4px, calc(24px - 1vw), 24px);
 		--ip-menu-padding-right: clamp(8px, calc(4px + .5vw), 64px);
 		--ip-menu-gap: clamp(6px, calc(22px - .85vw), 24px);
 		--ip-menu-sub-font-size: .875rem;
 	}
+	.ip_footer {
+	  justify-content: flex-start;
+  }
 	.ip_header {
 		display: grid;
 		grid-template-columns: auto minmax(0, 1fr);
