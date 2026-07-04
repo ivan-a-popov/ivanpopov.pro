@@ -144,7 +144,6 @@ html {
 .ip_all_wrap {
 	width: 100%;
 	min-height: 100vh;
-	position: relative;
 	max-width: var(--ip-layout-max);
 	margin-inline: auto;
 	--ip-layout-max: 1880px;
