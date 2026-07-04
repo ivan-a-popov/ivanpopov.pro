@@ -156,7 +156,8 @@ html {
 	min-height: 100vh;
 	max-width: var(--ip-layout-max);
 	margin-inline: auto;
-	/* Column split consumed by .author_image / .main_content (style.css).
+	/* The --ip-col-* column split consumed by .author_image / .main_content
+	   below is defined in critical.css together with the other layout vars.
 	   Portrait hidden on phones, widens through the breakpoints. */
 	--ip-col-left: 0%;
 	--ip-col-right: 100%;

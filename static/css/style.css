@@ -64,8 +64,6 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: "Onest";
 	color: var(--text-main);
 }
-/* The --ip-col-* column split consumed by .author_image / .main_content
-   below is defined in critical.css together with the other layout vars. */
 /* Desktop: native pointer replaced by the magic cursor. */
 @media (min-width: 1024px){
 	.ip_all_wrap[data-magic-cursor="show"],
