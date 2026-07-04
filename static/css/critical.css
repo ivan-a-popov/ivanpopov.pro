@@ -16,8 +16,7 @@
 */
 :root {
 	color-scheme: light dark;
-	--bg-color: #fff;              /* page + header/footer surface */
-	--surface: #fff;              /* modal inner / QR panel */
+	--bg-color: #fff;              /* page, header/footer, modals, QR panel */
 	--text-main: #333;            /* headings, nav, strong copy */
 	--text-sub: #7d7789;          /* body copy */
 	--text-muted: #666;           /* secondary controls (QR close icon) */
@@ -40,7 +39,6 @@
 @media (prefers-color-scheme: dark) {
 	:root {
 		--bg-color: #131516;
-		--surface: #181a1a;
 		--text-main: #a09c96;         /* headings/nav — darkreader #333 */
 		--text-sub: #7a7267;          /* body + popup copy — darkreader #7d7789 */
 		--text-muted: #868077;        /* secondary controls — darkreader #666 */
