@@ -16,7 +16,6 @@
    keep the mainpart hidden here and let style.css reveal it in its final
    position (visibility:hidden elements don't contribute to CLS). */
 
-   
 style.css:
 /*==================================================================
 	MOBILE-FIRST STYLESHEET

@@ -43,6 +43,63 @@
 <link rel="stylesheet" href="static/css/style.css?v=ec127519" />
 </noscript>
 <!-- /STYLES -->
+<!-- Critical inline JS: dismisses the preloader once the above-the-fold is
+  ready, so it never waits on the deferred init.js request. The block below is
+  generated from static/js/critical.js by stamp-cache.sh — do NOT edit it by
+  hand, edit critical.js and re-run the script. -->
+<!-- CRITICAL JS -->
+<script>
+"use strict";
+(function(){
+function dismiss(preloader){
+preloader.classList.add('preloaded');
+setTimeout(function(){
+if(preloader.parentNode){ preloader.remove(); }
+}, 800);
+}
+function whenStylesReady(){
+return new Promise(function(resolve){
+var mainpart = document.querySelector('.ip_mainpart');
+if(!mainpart){ resolve(); return; }
+(function poll(){
+if(getComputedStyle(mainpart).visibility === 'visible'){ resolve(); return; }
+setTimeout(poll, 50);
+})();
+});
+}
+function whenHeroReady(){
+var imgs = [].slice.call(document.querySelectorAll('#author_photo_img, #home .ip_home_photo img'));
+return Promise.all(imgs.map(function(img){
+return new Promise(function(resolve){
+if(img.complete){ resolve(); return; }
+img.addEventListener('load', resolve, { once: true });
+img.addEventListener('error', resolve, { once: true });
+});
+}));
+}
+function start(){
+var preloader = document.getElementById('preloader');
+if(!preloader){ return; }
+var done = false;
+function finish(){
+if(done){ return; }
+done = true;
+dismiss(preloader);
+}
+var fallback = setTimeout(finish, 3000);
+whenStylesReady().then(whenHeroReady).then(function(){
+clearTimeout(fallback);
+requestAnimationFrame(finish);
+});
+}
+if(document.readyState !== 'loading'){
+start();
+}else{
+document.addEventListener('DOMContentLoaded', start);
+}
+})();
+</script>
+<!-- /CRITICAL JS -->
 </head>
 <body> 	
 	<!-- PRELOADER -->
@@ -485,6 +542,6 @@
 		<div class="mouse-cursor cursor-inner"></div>
 		<!-- /MAGIC CURSOR -->
 	</div>
-<script src="static/js/init.js?v=f723a38a"></script>
+<script defer src="static/js/init.js?v=c586beed"></script>
 </body>
 </html> 

@@ -39,7 +39,6 @@ ip_ready(function(){
 	ip_cursor();
 	ip_testimonials_snap();
 	ip_animated_headline();
-	ip_preloader();
 });
 
 // -------------   PAGE TRANSITION    ------------------
@@ -564,27 +563,6 @@ function ip_qr_popup(){
 			ip_qr_close();
 			opener.focus({ preventScroll: true });
 		});
-	}
-}
-
-// ---------------   PRELOADER   -----------------------
-function ip_preloader(){
-	var preloader = ip_one('#preloader');
-	if(!preloader){
-		return;
-	}
-	var run = function(){
-		setTimeout(function() {
-			preloader.classList.add('preloaded');
-		}, 180);
-		setTimeout(function() {
-			preloader.remove();
-		}, 850);
-	};
-	if(document.readyState === 'complete'){
-		run();
-	}else{
-		window.addEventListener('load', run, { once: true });
 	}
 }
 
