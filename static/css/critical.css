@@ -164,7 +164,7 @@ html {
 	--ip-col-right: 100%;
 	--ip-layout-max: 1880px;
 	--ip-side-gutter: 10px;
-	--ip-bar-height: clamp(60px, calc(52px + 1.1vw), 70px);
+	--ip-bar-height: clamp(40px, calc(42px + 1.1vw), 60px);
 	--ip-footer-height: clamp(20px,30px,40px);
 	--ip-footer-font-size: clamp(7px, calc(7px + .45vw), 20px);
 	--ip-logo-font-size: clamp(16px, calc(15px + .9vw), 25px);
