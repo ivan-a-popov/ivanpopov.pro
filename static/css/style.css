@@ -334,15 +334,12 @@ html,
 	.ip_mainpart .author_image .author_image_inner,
 	.ip_mainpart .author_image .author_image_inner .author_photo{
 		height: 100%;
+		bottom: var(--ip-footer-height);
 		opacity: 1;
 	}
 }
-/* Desktop: gutters around the mainpart, full-height portrait, smooth scroll. */
+/* full-height portrait, smooth scroll. */
 @media (min-width: 1024px){
-	.ip_mainpart{
-		left: var(--ip-side-gutter);
-		right: var(--ip-side-gutter);
-	}
 	.ip_section{scroll-behavior: smooth;}
 }
 
@@ -581,7 +578,7 @@ html,
 	}
 	.ip_info .left,
 	.ip_info .right{
-		width: 45%;
+		width: 46%;
 	}
 	.ip_info .left{
 		margin-bottom: 0;
