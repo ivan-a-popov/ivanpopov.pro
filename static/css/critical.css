@@ -152,6 +152,7 @@ html {
 
 /* LAYOUT SHELL — wrapper variables, fixed header and footer */
 .ip_all_wrap {
+	position: relative;
 	width: 100%;
 	min-height: 100vh;
 	max-width: var(--ip-layout-max);
@@ -345,7 +346,6 @@ keep the mainpart hidden here and let style.css reveal it in its final position
 	.ip_all_wrap {
 		--ip-col-left: 36%;
 		--ip-col-right: 64%;
-		--ip-logo-padding-left: var(--ip-side-gutter);
 		--ip-menu-gap: clamp(12px, calc(22px + .85vw), 30px);
 	}
 }

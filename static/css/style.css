@@ -235,7 +235,6 @@ h1, h2, h3, h4, h5, h6 {
 .ip_mainpart .author_image{
 	position: absolute;
 	top: 0;
-	left: var(--ip-side-gutter);
 	width: var(--ip-col-left);
 	height: 0;
 	z-index: 15;
