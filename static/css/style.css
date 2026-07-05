@@ -1038,7 +1038,6 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	display: flex;
 	align-items: center;
 }
-/* Dots are decorative indicators, not interactive; no touch-target sizing. */
 .ip_swipe_nav ul li{
 	display: flex;
 	align-items: center;

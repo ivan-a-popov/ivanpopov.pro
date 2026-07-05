@@ -54,7 +54,7 @@
 		--caret-color: #868077;
 		--cursor-invert: #bab8b6;
 		--overlay: rgba(0, 0, 0, .8);
-		--preloader-bg: #131516;      /* matches page bg for a seamless reveal */
+		--preloader-bg: #000;         /* darker than page bg — visible curtain peel */
 		--preloader-line: #bab8b6;
 		--preloader-line-dim: #484e51; /* darkreader #777 */
 	}
@@ -146,7 +146,7 @@ body {
 }
 #preloader.preloaded:before,
 #preloader.preloaded:after {
-	animation: preloadedzero 300ms ease-in-out 500ms forwards;
+	animation: preloadedzero 500ms ease-in-out 500ms forwards;
 }
 @keyframes preloadedzero {
 	0% { transform: scaleX(1); }

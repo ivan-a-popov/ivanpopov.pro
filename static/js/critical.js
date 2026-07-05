@@ -6,10 +6,10 @@
 (function(){
 	function dismiss(preloader){
 		preloader.classList.add('preloaded');
-		// Remove after the CSS reveal (panels 500ms delay + 300ms, line .8s) finishes.
+		// Remove after the CSS reveal (panels 500ms delay + 500ms, line .8s) finishes.
 		setTimeout(function(){
 			if(preloader.parentNode){ preloader.remove(); }
-		}, 800);
+		}, 1000);
 	}
 	function whenStylesReady(){
 		// .ip_mainpart is hidden by critical.css and flips to visible only once

@@ -29,7 +29,6 @@ style.css:
 /* Horizontal scroll-snap carousel: desktop with vertical room, or any
    desktop-width device driven by a fine pointer. */
 
-/*
-	SWIPE NAVIGATION (dots built by JS)
-	Visible on narrow layouts and on any touch device (.has-touch).
-*/
+/*	SWIPE NAVIGATION (dots built by JS)
+	Visible on narrow layouts and on any touch device (.has-touch).*/
+/* Dots are decorative indicators, not interactive; no touch-target sizing. */
