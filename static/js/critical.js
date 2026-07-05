@@ -6,7 +6,7 @@
 (function(){
 	function dismiss(preloader){
 		preloader.classList.add('preloaded');
-		// Remove after the CSS reveal (panels 500ms delay + 500ms, line .8s) finishes.
+		// Remove after curtain peel finishes (500ms delay + 500ms scaleX).
 		setTimeout(function(){
 			if(preloader.parentNode){ preloader.remove(); }
 		}, 1000);
