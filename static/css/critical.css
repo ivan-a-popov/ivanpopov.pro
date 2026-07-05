@@ -171,13 +171,14 @@ body {
 	--ip-footer-font-size: calc(6px + .45vw);
 	--ip-logo-font-size: clamp(16px, calc(15px + 1vw), 30px);
 	--ip-logo-padding-left: .9vw;
-	--ip-logo-menu-gap: 10px;
-	--ip-menu-gap: clamp(6px,calc(1px+.85vw),42px);
+	--ip-logo-menu-gap: 5px;
+	--ip-menu-gap: clamp(6px, calc(5px + .85vw), 42px);
 	--ip-menu-sub-gap: 2px;
 	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
 	   capped — and scales with the user's font size — while the active main word
 	   grows via font-size:1.2em/1.5em. */
 	--ip-menu-sub-font-size: .9rem;
+	--ip-menu-padding-right: clamp(8px, calc(4px + .5vw), 64px);
 }
 .ip_all_wrap,
 .ip_all_wrap * {
@@ -255,7 +256,7 @@ body {
 	left: 50%;
 	top: 100%;
 	margin-top: var(--ip-menu-sub-gap);
-	transform: translateX(-50%) scale(1.1);
+	transform: translateX(-50%) scale(0.88);
 	transform-origin: top;
 	text-align: center;
 	font-size: var(--ip-menu-sub-font-size);
@@ -270,11 +271,11 @@ body {
 /* The active item is raised/enlarged on first paint — layout-affecting. */
 .ip_header .menu ul li.active a b {
 	transform: translateY(-8px);
-	font-size: 1.2em;
+	font-size: .9em;
 }
 .ip_header .menu ul li.active .ip_menu_sub {
 	opacity: 1;
-	transform: translateX(-50%) scale(1.2);
+	transform: translateX(-50%) scale(1);
 }
 .ip_footer {
 	position: fixed;
@@ -318,9 +319,8 @@ keep the mainpart hidden here and let style.css reveal it in its final position
 		--ip-col-left: 36%;
 		--ip-col-right: 64%;
 		--ip-menu-padding-left: clamp(4px, calc(24px - 1vw), 24px);
-		--ip-menu-padding-right: clamp(8px, calc(4px + .5vw), 64px);
-		--ip-menu-gap: clamp(6px, calc(22px - .85vw), 24px);
-		--ip-menu-sub-font-size: 1rem;
+		--ip-menu-gap: clamp(6px, calc(20px - .85vw), 24px);
+		--ip-menu-sub-font-size: .9rem;
 	}
 	.ip_footer {
 	  justify-content: flex-start;
