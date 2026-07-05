@@ -26,3 +26,10 @@ style.css:
 	gets the horizontal scroll-snap carousel — the same condition
 	ip_use_vertical_testimonials_layout() checks in init.js.
 ------------------------------------------------------------------*/
+/* Horizontal scroll-snap carousel: desktop with vertical room, or any
+   desktop-width device driven by a fine pointer. */
+
+/*
+	SWIPE NAVIGATION (dots built by JS)
+	Visible on narrow layouts and on any touch device (.has-touch).
+*/

@@ -152,7 +152,6 @@ h1, h2, h3, h4, h5, h6 {
 .rollOutBack {
   animation-name: rollOutBack;
 }
-
 /*	Animated headline (clip effect) */
 .cd-words-wrapper {
   display: inline-block;
@@ -226,8 +225,6 @@ h1, h2, h3, h4, h5, h6 {
 	position: absolute;
 	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
 	overflow: hidden;
-	/* Reveals the mainpart once its layout is in place — see the CLS guard in
-	  critical.css that hides it until this stylesheet applies. */
 	visibility: visible;
 	transition: top 0.25s ease, bottom 0.25s ease, left 0.25s ease, right 0.25s ease;
 }
@@ -314,9 +311,7 @@ h1, h2, h3, h4, h5, h6 {
 	inset: 0;
 	z-index: 5;
 }
-/* Minimal scrollbars: thin thumb without arrow buttons. Supported by all
-   evergreen browsers (Chrome 121+, Firefox, Safari 18.2+); older ones just
-   get the default scrollbar. */
+/* Minimal scrollbars: thin thumb without arrow buttons. */
 html,
 .ip_section,
 .ip_modalbox .description_wrap{
@@ -345,7 +340,6 @@ html,
 		height: 100%;
 	}
 }
-/* full-height portrait, smooth scroll. */
 @media (min-width: 1024px){
 	.ip_section{scroll-behavior: smooth;}
 }
@@ -440,9 +434,7 @@ html,
 	transform: scale(1.4);
 }
 /* The QR glyph (qr.svg) is a raster of black modules on transparent — an
-   <img>, so it can't inherit currentColor. Invert it in dark mode so it stays
-   visible against the dark background. The brand-colored tg/vk icons are left
-   as-is. */
+   <img>, so it can't inherit currentColor. Invert it in dark mode. */
 @media (prefers-color-scheme: dark){
 	.ip_home_social a.ip_qr_open img{
 		filter: invert(1);
@@ -497,7 +489,6 @@ html,
 	width: min(180px, 58vw);
 	height: auto;
 }
-
 @media (min-width: 480px){
 	.ip_home_photo img{
 		aspect-ratio: 1 / 1;
@@ -687,8 +678,7 @@ html,
 @media (min-width: 1024px){
 	.testimonials .testimonial-quote{padding: 30px;}
 }
-/* Horizontal scroll-snap carousel: desktop with vertical room, or any
-   desktop-width device driven by a fine pointer. */
+/* Horizontal scroll-snap carousel. */
 @media (min-width: 1024px) and (min-height: 921px),
 	   (min-width: 1024px) and (hover: hover) and (pointer: fine){
 	.testimonials .list ul.testimonials-snap{
@@ -717,8 +707,7 @@ html,
 	.testimonials .list ul.testimonials-snap > li{
 		flex: 0 0 calc((100% - 30px) / 2);
 		min-width: 0;
-		/* Track spacing comes from the flex gap; extra margins would clip
-		   card 2's right border. */
+		/* Track spacing comes from the flex gap; extra margins would clip card 2's right border. */
 		margin: 0;
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
@@ -1032,10 +1021,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	.mouse-cursor{display: block;}
 }
 
-/*
-	SWIPE NAVIGATION (dots built by JS)
-	Visible on narrow layouts and on any touch device (.has-touch).
-*/
+/* SWIPE NAVIGATION (dots built by JS) */
 .ip_swipe_nav{
 	display: block;
 	position: fixed;
@@ -1074,6 +1060,17 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	height: 9px;
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+@media (prefers-color-scheme: dark){
+	/* Mirror light-theme dots: muted fill + contrasting halo instead of bright white. */
+	.ip_swipe_nav ul li .dot{
+		background: rgba(0, 0, 0, 0.55);
+		box-shadow: 0 1px 3px rgba(255, 255, 255, 0.45);
+	}
+	.ip_swipe_nav ul li.active .dot{
+		background: #000;
+		box-shadow: 0 1px 4px rgba(255, 255, 255, 0.6);
+	}
 }
 @media (min-width: 1024px){
 	.ip_swipe_nav{display: none;}
