@@ -453,7 +453,7 @@ html,
 	position: absolute;
 	inset: 0;
 	z-index: 2;
-	padding: 16px;
+	padding: 4px 0;
 	background: var(--bg-color);
 }
 /* Receives programmatic focus (tabindex="-1") when opened. */
@@ -467,7 +467,7 @@ html,
 .ip_qr_panel__close{
 	position: absolute;
 	top: 0;
-	right: calc(var(--ip-col-right) / 2 - 72px);
+	right: calc(var(--ip-col-right) / 2 - 78px);
 	z-index: 2;
 	display: block;
 	width: 40px;
