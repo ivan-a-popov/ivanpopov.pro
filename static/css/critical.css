@@ -172,12 +172,12 @@ body {
 	--ip-logo-font-size: clamp(16px, calc(15px + 1vw), 30px);
 	--ip-logo-padding-left: .9vw;
 	--ip-logo-menu-gap: 5px;
-	--ip-menu-gap: clamp(6px, calc(5px + .85vw), 42px);
-	--ip-menu-sub-gap: 2px;
 	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
 	   capped — and scales with the user's font size — while the active main word
 	   grows via font-size:1.2em/1.5em. */
 	--ip-menu-sub-font-size: .9rem;
+	--ip-menu-gap: clamp(6px, calc(5px + .85vw), 42px);
+	--ip-menu-sub-gap: 2px;
 	--ip-menu-padding-right: clamp(8px, calc(4px + .5vw), 64px);
 }
 .ip_all_wrap,
@@ -239,7 +239,7 @@ body {
 	color: var(--text-main);
 	font-family: Onest, sans-serif;
 	font-weight: 500;
-	font-size: .9rem;
+	font-size: var(--ip-menu-sub-font-size);
 	line-height: 1;
 	padding: 0 var(--ip-menu-padding-right) 0 var(--ip-menu-padding-left);
 	position: relative;
@@ -271,7 +271,7 @@ body {
 /* The active item is raised/enlarged on first paint — layout-affecting. */
 .ip_header .menu ul li.active a b {
 	transform: translateY(-8px);
-	font-size: .9em;
+	font-size: 1em;
 }
 .ip_header .menu ul li.active .ip_menu_sub {
 	opacity: 1;
@@ -310,7 +310,13 @@ keep the mainpart hidden here and let style.css reveal it in its final position
 @media (max-width: 639px) {
   .ip_footer {
 		justify-content: center;
-  }
+	}
+	.ip_header .menu ul li a {
+		font-size: .9rem;
+	}
+	.ip_header .menu ul li.active a b {
+		font-size: 1.2em;
+	}
 }
 @media (min-width: 640px) {
 	.ip_all_wrap {
@@ -320,7 +326,6 @@ keep the mainpart hidden here and let style.css reveal it in its final position
 		--ip-col-right: 64%;
 		--ip-menu-padding-left: clamp(4px, calc(24px - 1vw), 24px);
 		--ip-menu-gap: clamp(6px, calc(20px - .85vw), 24px);
-		--ip-menu-sub-font-size: .9rem;
 	}
 	.ip_footer {
 	  justify-content: flex-start;
