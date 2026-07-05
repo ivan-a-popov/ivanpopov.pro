@@ -169,11 +169,11 @@ body {
 	--ip-bar-height: calc(42px + 1vw);
 	--ip-footer-height: calc(7px + .5vw);
 	--ip-footer-font-size: calc(6px + .45vw);
-	--ip-logo-font-size: clamp(16px, calc(15px + .9vw), 25px);
+	--ip-logo-font-size: clamp(16px, calc(15px + 1vw), 30px);
 	--ip-logo-padding-left: .9vw;
 	--ip-logo-menu-gap: 10px;
 	--ip-menu-gap: clamp(6px,calc(1px+.85vw),42px);
-	--ip-menu-sub-gap: 3px;
+	--ip-menu-sub-gap: 2px;
 	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
 	   capped — and scales with the user's font size — while the active main word
 	   grows via font-size:1.2em/1.5em. */
@@ -255,7 +255,7 @@ body {
 	left: 50%;
 	top: 100%;
 	margin-top: var(--ip-menu-sub-gap);
-	transform: translateX(-50%) scale(.88);
+	transform: translateX(-50%) scale(1.1);
 	transform-origin: top;
 	text-align: center;
 	font-size: var(--ip-menu-sub-font-size);
@@ -274,7 +274,7 @@ body {
 }
 .ip_header .menu ul li.active .ip_menu_sub {
 	opacity: 1;
-	transform: translateX(-50%) scale(1);
+	transform: translateX(-50%) scale(1.2);
 }
 .ip_footer {
 	position: fixed;
@@ -320,7 +320,7 @@ keep the mainpart hidden here and let style.css reveal it in its final position
 		--ip-menu-padding-left: clamp(4px, calc(24px - 1vw), 24px);
 		--ip-menu-padding-right: clamp(8px, calc(4px + .5vw), 64px);
 		--ip-menu-gap: clamp(6px, calc(22px - .85vw), 24px);
-		--ip-menu-sub-font-size: .875rem;
+		--ip-menu-sub-font-size: 1rem;
 	}
 	.ip_footer {
 	  justify-content: flex-start;

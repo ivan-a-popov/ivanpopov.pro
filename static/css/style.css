@@ -207,7 +207,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .ip_header .menu ul li a b{
 	transition: transform .3s ease, font-size .3s ease;
-	font-size: .9375rem;
 }
 .ip_header .menu ul li .ip_menu_sub{
 	transition: opacity .3s ease, transform .3s ease;
@@ -217,7 +216,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .ip_header .menu ul li a:hover .ip_menu_sub{
 	opacity: 1;
-	transform: translateX(-50%) scale(1);
+	transform: translateX(-50%) scale(1.1);
 }
 
 /*	MAINPART + SECTIONS */
