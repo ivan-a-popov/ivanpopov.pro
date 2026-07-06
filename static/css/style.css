@@ -206,17 +206,24 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 .ip_header .menu ul li a b{
+	transform-origin: center bottom;
 	transition: transform .3s ease;
 }
 .ip_header .menu ul li .ip_menu_sub{
 	transition: opacity .3s ease, transform .3s ease;
 }
-.ip_header .menu ul li a:hover b{
-	transform: translateY(-8px);
-}
-.ip_header .menu ul li a:hover .ip_menu_sub{
-	opacity: 1;
-	transform: translateX(-50%) scale(1);
+/* Hover affordance: desktop pointer only (>=1024 in concert with critical.css). */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine){
+	.ip_header .menu ul li a:hover b{
+		transform: translateY(-8px) scale(1.2);
+	}
+	.ip_header .menu ul li.active a:hover b{
+		transform: translateY(-8px) scale(1.5);
+	}
+	.ip_header .menu ul li a:hover .ip_menu_sub{
+		opacity: 1;
+		transform: translateX(-50%) scale(1);
+	}
 }
 
 /*	MAINPART + SECTIONS */
