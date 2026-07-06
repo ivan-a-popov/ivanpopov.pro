@@ -206,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 .ip_header .menu ul li a b{
-	transition: transform .3s ease, font-size .3s ease;
+	transition: transform .3s ease;
 }
 .ip_header .menu ul li .ip_menu_sub{
 	transition: opacity .3s ease, transform .3s ease;
@@ -216,7 +216,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .ip_header .menu ul li a:hover .ip_menu_sub{
 	opacity: 1;
-	transform: translateX(-50%) scale(1.1);
+	transform: translateX(-50%) scale(1);
 }
 
 /*	MAINPART + SECTIONS */
@@ -225,7 +225,6 @@ h1, h2, h3, h4, h5, h6 {
 	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
 	overflow: hidden;
 	visibility: visible;
-	transition: top 0.25s ease, bottom 0.25s ease, left 0.25s ease, right 0.25s ease;
 }
 /* Side portrait: hidden on phones, appears with the two-column shell. */
 .ip_mainpart .author_image{
@@ -238,7 +237,6 @@ h1, h2, h3, h4, h5, h6 {
 	opacity: 0;
 	visibility: hidden;
 	pointer-events: none;
-	transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
 .ip_mainpart .author_image .author_image_inner{
 	position: absolute;
@@ -247,7 +245,6 @@ h1, h2, h3, h4, h5, h6 {
 	height: 0;
 	overflow: hidden;
 	opacity: 0;
-	transition: height 0.25s ease, opacity 0.25s ease;
 }
 .ip_mainpart .author_image .author_image_inner .author_photo{
 	position: absolute;
@@ -261,7 +258,6 @@ h1, h2, h3, h4, h5, h6 {
 	opacity: 0;
 	pointer-events: none;
 	user-select: none;
-	transition: height 0.25s ease, opacity 0.25s ease;
 }
 .ip_mainpart .main_content{
 	position: absolute;
@@ -269,7 +265,6 @@ h1, h2, h3, h4, h5, h6 {
 	right: 0;
 	bottom: 0;
 	width: var(--ip-col-right);
-	transition: width 0.25s ease;
 }
 .ip_section{
 	position: absolute;
@@ -277,8 +272,10 @@ h1, h2, h3, h4, h5, h6 {
 	overflow: hidden auto;
 	opacity: 0;
 	visibility: hidden;
+	pointer-events: none;
 	z-index: 8;
-	transition: visibility 1s linear, opacity 0s linear;
+	/* Defer visibility:hidden so rollOut (1.2s) stays painted while exiting. */
+	transition: visibility 0s linear 1.2s;
 	/* Touch: vertical panning only, no scroll chaining. */
 	touch-action: pan-y;
 	overscroll-behavior-y: contain;
@@ -286,16 +283,20 @@ h1, h2, h3, h4, h5, h6 {
 .ip_section.animated {
 	opacity: 1;
 	visibility: visible;
+	pointer-events: auto;
 	z-index: 9;
 }
 .ip_section.active {
 	opacity: 1;
 	visibility: visible;
+	pointer-events: auto;
 	z-index: 10;
+	transition: visibility 0s linear 0s;
 }
 .ip_section.hidden {
 	opacity: 0;
 	visibility: hidden;
+	pointer-events: none;
 	z-index: 9;
 }
 .ip_section:focus {
@@ -750,7 +751,6 @@ html,
 	border: 1px solid var(--card-border);
 	padding: 70px 40px 63px;
 	text-align: center;
-	transition: background-color .3s ease;
 }
 /* Keep card titles/summaries on natural word boundaries despite the
    body-level overflow-wrap: break-word. */
@@ -766,7 +766,6 @@ html,
 	height: 60px;
 	color: var(--text-main);
 	margin-bottom: 27px;
-	transition: color .3s ease;
 }
 .ip_service .service-card:hover .svg{
 	color: var(--on-accent);
@@ -776,13 +775,9 @@ html,
 	font-size: 1.5rem;
 	color: var(--text-main);
 	margin-bottom: 15px;
-	transition: color .3s ease;
 }
 .ip_service .service-card:hover .title{
 	color: var(--on-accent);
-}
-.ip_service .service-card .service-card__summary{
-	transition: color .3s ease;
 }
 .ip_service .service-card:hover .service-card__summary{
 	color: var(--card-hover-summary);
@@ -825,11 +820,14 @@ html,
 	background-color: var(--overlay);
 	opacity: 0;
 	visibility: hidden;
-	transition: opacity .3s ease, visibility .3s ease;
+	pointer-events: none;
+	transition: opacity .3s ease, visibility 0s linear .3s;
 }
 .ip_modalbox.opened{
 	opacity: 1;
 	visibility: visible;
+	pointer-events: auto;
+	transition: opacity .3s ease, visibility 0s linear 0s;
 }
 .ip_modalbox .box_inner{
 	position: absolute;
@@ -838,19 +836,19 @@ html,
 	width: min(520px, calc(100vw - 16px));
 	max-width: calc(100vw - 16px);
 	left: 50%;
-	transform: translateX(-50%);
+	transform: translateX(-50%) translateY(-20px);
 	background-color: var(--bg-color);
 	z-index: 1;
 	opacity: 0;
 	visibility: hidden;
-	margin-top: -20px;
 	/* Delayed so the backdrop fades in first (and out last on close). */
-	transition: opacity .3s ease .3s, visibility .3s ease .3s, margin-top .3s ease .3s;
+	transition: opacity .3s ease .3s, transform .3s ease .3s, visibility 0s linear .6s;
 }
 .ip_modalbox.opened .box_inner{
 	opacity: 1;
 	visibility: visible;
-	margin-top: 0;
+	transform: translateX(-50%) translateY(0);
+	transition: opacity .3s ease .3s, transform .3s ease .3s, visibility 0s linear .3s;
 }
 .ip_modalbox .description_wrap{
 	position: relative;
@@ -1051,11 +1049,11 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
 	border-radius: 50%;
 	background: rgba(255, 255, 255, 0.55);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-	transition: width .3s ease, height .3s ease, background-color .3s ease;
+	transform: scale(1);
+	transition: transform .3s ease;
 }
 .ip_swipe_nav ul li.active .dot{
-	width: 9px;
-	height: 9px;
+	transform: scale(1.286);
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
