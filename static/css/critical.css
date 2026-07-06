@@ -238,7 +238,6 @@ body {
 	text-transform: uppercase;
 	color: var(--text-main);
 	font-family: Onest, sans-serif;
-	font-weight: 500;
 	font-size: var(--ip-menu-sub-font-size);
 	line-height: 1;
 	padding: 0 var(--ip-menu-padding-right) 0 var(--ip-menu-padding-left);
@@ -254,6 +253,7 @@ body {
 }
 .ip_header .menu ul li a:hover b {
 	font-weight: 600;
+	font-size: 1.2em;
 }
 .ip_header .menu ul li .ip_menu_sub {
 	position: absolute;
@@ -276,7 +276,7 @@ body {
 .ip_header .menu ul li.active a b {
 	transform: translateY(-8px);
 	font-size: 1em;
-	font-weight: 600;
+	font-weight: 700;
 }
 .ip_header .menu ul li.active .ip_menu_sub {
 	opacity: 1;
