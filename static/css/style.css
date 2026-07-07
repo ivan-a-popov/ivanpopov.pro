@@ -299,6 +299,12 @@ h1, h2, h3, h4, h5, h6 {
 	position: relative;
 	padding: 10px 20px 0;
 }
+/* Phones/tablets: room below the last line for fixed swipe dots + home indicator. */
+@media (max-width: 1023px){
+	.ip_section .section_inner{
+		padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+	}
+}
 .ip_full_link{
 	position: absolute;
 	inset: 0;
