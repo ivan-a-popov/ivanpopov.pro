@@ -6,12 +6,13 @@
 (function(){
 	var GROW_HALF_MS = 1000;
 	var HOLD_MS = 400;
-	var BLINK_MS = 900;
+	var BLINK_MS = 1350;
 	var BLINK_COUNT = 2;
 	var GROW_FULL_MS = 500;
 	var PEEL_MS = 500;
 	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS * BLINK_COUNT;
 	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
+	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
 
 	function dismiss(preloader){
 		preloader.classList.add('preloaded');
@@ -67,7 +68,7 @@
 			done = true;
 			dismiss(preloader);
 		}
-		var fallback = setTimeout(finish, 4000);
+		var fallback = setTimeout(finish, FALLBACK_MS);
 		Promise.all([
 			whenStylesReady().then(whenHeroReady),
 			whenLineSequenceReady()

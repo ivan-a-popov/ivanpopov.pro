@@ -99,15 +99,16 @@ body {
 	transform-origin: right center;
 }
 /* Preloader timing (keep in sync with critical.js):
-   half-grow 1000ms → hold 400ms → blink×2 900ms → full-grow 500ms → peel 500ms */
+   half-grow 1000ms → hold 400ms → blink×2 1350ms → full-grow 500ms → peel 500ms
+   Full-grow uses clip-path (not height) so .loader_line::after never layout-shifts. */
 #preloader .loader_line {
 	margin: auto;
 	width: 1px;
-	height: 250px;
+	height: 100%;
 	position: relative;
 	overflow: hidden;
-	/* Full-height spread first; line vanishes exactly when the peel begins. */
-	transition: height 500ms ease 0s, opacity 0s linear 500ms;
+	clip-path: inset(calc(50% - 125px) 0 calc(50% - 125px) 0);
+	transition: clip-path 500ms ease 0s, opacity 0s linear 500ms;
 }
 #preloader .loader_line:before {
 	content: '';
@@ -129,8 +130,8 @@ body {
 	height: 100%;
 	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
-	/* Hold 400ms after half-grow, then two dim sweeps (600ms × 1.5 each). */
-	animation: lineround 900ms linear 1400ms 2 forwards;
+	/* Hold 400ms after half-grow, then two dim sweeps. */
+	animation: lineround 1350ms linear 1400ms 2 forwards;
 }
 @keyframes lineheight {
 	0% { height: 0; }
@@ -150,7 +151,7 @@ body {
 }
 #preloader.preloaded .loader_line {
 	opacity: 0;
-	height: 100% !important;
+	clip-path: inset(0 0 0 0);
 }
 #preloader.preloaded:before,
 #preloader.preloaded:after {
@@ -355,13 +356,16 @@ body {
 	font-family: Onest, sans-serif;
 	text-align: center;
 }
-/* CLS guard: the mainpart layout (absolute sections, columns, home) lives 
-in style.css, which loads async. Until it applies, the content would render 
-in normal block flow and then snap into the overlay layout — a full-viewport 
-layout shift. The full-screen preloader already covers this window, so we 
-keep the mainpart hidden here and let style.css reveal it in its final position
-(visibility:hidden elements don't contribute to CLS).*/
-.ip_mainpart {visibility: hidden;}
+/* CLS guard: the mainpart layout (absolute sections, columns, home) lives
+in style.css, which loads async. Pin it out of document flow here so content
+does not snap when style.css arrives; keep hidden until style.css reveals it
+(visibility:hidden elements don't contribute to CLS). */
+.ip_mainpart {
+	position: absolute;
+	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
+	overflow: hidden;
+	visibility: hidden;
+}
 @media (max-width: 639px) {
   .ip_footer {
 		justify-content: center;
