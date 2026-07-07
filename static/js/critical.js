@@ -4,12 +4,20 @@
 // is ready (style.css applied + hero image decoded), independent of the deferred
 // init.js. A hard timeout guarantees the overlay never traps the user.
 (function(){
+	var GROW_HALF_MS = 1000;
+	var HOLD_MS = 400;
+	var BLINK_MS = 900;
+	var BLINK_COUNT = 2;
+	var GROW_FULL_MS = 500;
+	var PEEL_MS = 500;
+	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS * BLINK_COUNT;
+	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
+
 	function dismiss(preloader){
 		preloader.classList.add('preloaded');
-		// Remove after curtain peel finishes (500ms delay + 500ms scaleX).
 		setTimeout(function(){
 			if(preloader.parentNode){ preloader.remove(); }
-		}, 1000);
+		}, DISMISS_MS);
 	}
 	function whenStylesReady(){
 		// .ip_mainpart is hidden by critical.css and flips to visible only once
@@ -33,10 +41,8 @@
 			});
 		}));
 	}
-	// Line growth is a 1000ms height keyframe on .loader_line::before; curtain peel
-	// must not start until that animation finishes (see critical.css).
-	function whenLineGrown(){
-		var LINE_MS = 1000;
+	// half-grow → hold → blink×2; dismiss triggers full-grow then peel (see critical.css).
+	function whenLineSequenceReady(){
 		return new Promise(function(resolve){
 			var line = document.querySelector('#preloader .loader_line');
 			if(!line){ resolve(); return; }
@@ -47,9 +53,9 @@
 				resolve();
 			}
 			line.addEventListener('animationend', function(e){
-				if(e.animationName === 'lineheight'){ finish(); }
+				if(e.animationName === 'lineround'){ finish(); }
 			});
-			setTimeout(finish, LINE_MS);
+			setTimeout(finish, SEQUENCE_MS);
 		});
 	}
 	function start(){
@@ -64,7 +70,7 @@
 		var fallback = setTimeout(finish, 4000);
 		Promise.all([
 			whenStylesReady().then(whenHeroReady),
-			whenLineGrown()
+			whenLineSequenceReady()
 		]).then(function(){
 			clearTimeout(fallback);
 			requestAnimationFrame(finish);

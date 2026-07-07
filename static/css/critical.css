@@ -98,13 +98,16 @@ body {
 	right: 0;
 	transform-origin: right center;
 }
+/* Preloader timing (keep in sync with critical.js):
+   half-grow 1000ms → hold 400ms → blink×2 900ms → full-grow 500ms → peel 500ms */
 #preloader .loader_line {
 	margin: auto;
 	width: 1px;
-	height: 100%;
+	height: 250px;
 	position: relative;
 	overflow: hidden;
-	transition: opacity .4s ease 0s;
+	/* Full-height spread first; line vanishes exactly when the peel begins. */
+	transition: height 500ms ease 0s, opacity 0s linear 500ms;
 }
 #preloader .loader_line:before {
 	content: '';
@@ -126,8 +129,8 @@ body {
 	height: 100%;
 	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
-	animation: lineround 1200ms linear 0s infinite;
-	animation-delay: 2000ms;
+	/* Hold 400ms after half-grow, then two dim sweeps (600ms × 1.5 each). */
+	animation: lineround 900ms linear 1400ms 2 forwards;
 }
 @keyframes lineheight {
 	0% { height: 0; }
@@ -147,8 +150,7 @@ body {
 }
 #preloader.preloaded .loader_line {
 	opacity: 0;
-	height: 100%;
-	transition-delay: 500ms;
+	height: 100% !important;
 }
 #preloader.preloaded:before,
 #preloader.preloaded:after {
