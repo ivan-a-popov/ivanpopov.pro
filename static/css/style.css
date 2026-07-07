@@ -378,7 +378,7 @@ html,
 }
 .ip_home .name{
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
-	font-weight: 600;
+	font-weight: 550;
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
 }
@@ -386,25 +386,21 @@ html,
 	display: inline-block;
 	width: var(--ip-home-line-width);
 	height: var(--ip-home-line-height);
-	background-color: var(--accent);
+	background-color: var(--text-sub);
 	margin-bottom: var(--ip-home-line-gap);
 }
 .ip_home .job{
 	margin-bottom: var(--ip-home-job-gap);
 	font-size: 1.375rem;
-	font-weight: 300;
+	color: var(--text-main);
 }
 .ip_home .job .blc{
 	display: block;
 	margin-top: 8px;
-	font-weight: 500;
-	color: var(--text-main);
-}
-.ip_home .job span{
-	color: var(--text-sub);
+	font-weight: 600;
 }
 .ip_home .job b{
-	font-weight: 600;
+	font-weight: 650;
 }
 .ip_home_social{
 	display: flex;
