@@ -275,7 +275,6 @@ body {
 	position: relative;
 	display: inline-block;
 	line-height: 1;
-	font-weight: 550;
 }
 .ip_header .menu ul li a:hover b {
 	font-weight: 600;
