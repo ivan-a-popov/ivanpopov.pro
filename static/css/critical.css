@@ -108,6 +108,7 @@ body {
 	height: 250px;
 	position: relative;
 	overflow: hidden;
+	--loader-scale-full: 1;
 	transform: scaleY(1);
 	transform-origin: center center;
 	transition: transform 500ms ease 0s, opacity 0s linear 500ms;
@@ -130,6 +131,7 @@ body {
 	top: 0;
 	width: 1px;
 	height: 100%;
+	opacity: 0;
 	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
 	/* Hold 400ms after half-grow, then two dim sweeps. */
@@ -140,8 +142,8 @@ body {
 	100% { height: 100%; }
 }
 @keyframes lineround {
-	0% { transform: translateY(-100%); }
-	100% { transform: translateY(200%); }
+	0% { opacity: 1; transform: translateY(-100%); }
+	100% { opacity: 1; transform: translateY(200%); }
 }
 #preloader.preloaded .loader_line:before {
 	/* Snap to full height if dismiss lands mid-keyframe. */
@@ -153,7 +155,7 @@ body {
 }
 #preloader.preloaded .loader_line {
 	opacity: 0;
-	transform: scaleY(calc(100dvh / 250px));
+	transform: scaleY(var(--loader-scale-full));
 }
 #preloader.preloaded:before,
 #preloader.preloaded:after {
