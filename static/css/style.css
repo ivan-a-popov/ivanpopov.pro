@@ -398,6 +398,39 @@ html,
 	display: block;
 	margin-top: 8px;
 	font-weight: 600;
+	--blc-shimmer-peak: color-mix(in srgb, var(--text-main) 6%, #fff 94%);
+	--blc-shimmer-shoulder: color-mix(in srgb, var(--text-main) 35%, #fff 65%);
+}
+@media (prefers-color-scheme: dark){
+	.ip_home .job .blc{
+		--blc-shimmer-peak: #fff;
+		--blc-shimmer-shoulder: color-mix(in srgb, var(--text-main) 12%, #fff 88%);
+	}
+}
+/* Left-to-right gleam on “с человеческим лицом” during each clip hold (see init.js). */
+@keyframes ip-blc-shimmer{
+	0%{ background-position: 130% center; }
+	100%{ background-position: -30% center; }
+}
+@media (prefers-reduced-motion: no-preference){
+	.ip_home .job .blc.is-shimmer{
+		background-image: linear-gradient(
+			90deg,
+			var(--text-main) 0%,
+			var(--text-main) 32%,
+			var(--blc-shimmer-shoulder) 42%,
+			var(--blc-shimmer-peak) 50%,
+			var(--blc-shimmer-shoulder) 58%,
+			var(--text-main) 68%,
+			var(--text-main) 100%
+		);
+		background-size: 340% 100%;
+		background-clip: text;
+		-webkit-background-clip: text;
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+		animation: ip-blc-shimmer 1350ms ease-in-out 1;
+	}
 }
 .ip_home .job b{
 	font-weight: 650;

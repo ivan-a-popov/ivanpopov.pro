@@ -788,7 +788,7 @@ function ip_testimonials_snap(){
 function ip_animated_headline(){
 	var animationDelay = 1200;       // initial wait before the first erase
 	var revealDuration = 800;        // type / erase width animation duration
-	var revealAnimationDelay = 800;  // hold time while a phrase is fully shown
+	var revealAnimationDelay = 800;  // hold while phrase is fully shown (+ blc shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	ip_all('.cd-headline.clip').forEach(function(headline){
 		var wrapper = headline.querySelector('.cd-words-wrapper');
@@ -843,8 +843,16 @@ function ip_animated_headline(){
 				showWord(nextWord);
 			});
 		}
+		var blc = headline.querySelector('.blc');
+		function triggerBlcShimmer(){
+			if(!blc){ return; }
+			blc.classList.remove('is-shimmer');
+			void blc.offsetWidth; // restart CSS animation each hold
+			blc.classList.add('is-shimmer');
+		}
 		function showWord(word){
 			animateWidth(word.offsetWidth + 10, function(){
+				triggerBlcShimmer();
 				window.setTimeout(function(){ hideWord(word); }, revealAnimationDelay);
 			});
 		}

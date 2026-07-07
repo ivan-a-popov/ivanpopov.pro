@@ -135,7 +135,7 @@ body {
 	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
 	/* Hold 400ms after half-grow, then two dim sweeps. */
-	animation: lineround 1350ms linear 1400ms 2 forwards;
+	animation: lineround 1350ms linear 1400ms 1 forwards;
 }
 @keyframes lineheight {
 	0% { height: 0; }
