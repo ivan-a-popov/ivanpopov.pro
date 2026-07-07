@@ -180,7 +180,6 @@ body {
 	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
 	   capped — and scales with the user's font size — while the active main word
 	   grows via font-size:1.2em/1.5em. */
-	--ip-menu-sub-font-size: .9rem;
 	--ip-menu-gap: clamp(6px, calc(5px + .85vw), 42px);
 	--ip-menu-sub-gap: 2px;
 	--ip-menu-padding-inline: clamp(8px, calc(4px + .5vw), 64px);
@@ -255,7 +254,6 @@ body {
 	text-transform: uppercase;
 	color: var(--text-main);
 	font-family: Onest, sans-serif;
-	font-size: var(--ip-menu-sub-font-size);
 	line-height: 1;
 	padding-inline: var(--ip-menu-link-padding);
 	position: relative;
@@ -282,7 +280,6 @@ body {
 	transform: translateX(-50%);
 	transform-origin: top center;
 	text-align: center;
-	font-size: var(--ip-menu-sub-font-size);
 	font-weight: 500;
 	line-height: 1;
 	letter-spacing: .5px;
