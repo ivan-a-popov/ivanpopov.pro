@@ -48,7 +48,7 @@
 			});
 		}));
 	}
-	// half-grow → hold → blink×2; dismiss triggers full-grow then peel (see critical.css).
+	// half-grow → hold → blink; dismiss triggers full-grow then peel (see critical.css).
 	function whenLineSequenceReady(){
 		return new Promise(function(resolve){
 			var line = document.querySelector('#preloader .loader_line');

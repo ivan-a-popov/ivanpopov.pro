@@ -787,8 +787,8 @@ function ip_testimonials_snap(){
 // ---------------   ANIMATED HEADLINE   ---------------
 function ip_animated_headline(){
 	var animationDelay = 1200;       // initial wait before the first erase
-	var revealDuration = 800;        // type / erase width animation duration
-	var revealAnimationDelay = 800;  // hold while phrase is fully shown (+ blc shimmer)
+	var revealDuration = 900;        // type / erase width animation duration
+	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ blc shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	ip_all('.cd-headline.clip').forEach(function(headline){
 		var wrapper = headline.querySelector('.cd-words-wrapper');
