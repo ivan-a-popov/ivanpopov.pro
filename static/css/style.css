@@ -398,13 +398,13 @@ html,
 	display: block;
 	margin-top: 8px;
 	font-weight: 500;
+	color: var(--text-main);
 }
 .ip_home .job span{
 	color: var(--text-sub);
 }
 .ip_home .job b{
 	font-weight: 600;
-	color: var(--text-main);
 }
 .ip_home_social{
 	display: flex;
