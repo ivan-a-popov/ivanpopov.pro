@@ -90,8 +90,8 @@ body {
 	height: 100%;
 	z-index: -1;
 	background-color: var(--preloader-bg);
+	transform: scaleX(1);
 	transform-origin: left center;
-	transition: all .3s ease 0s;
 }
 #preloader:after {
 	left: auto;
@@ -101,10 +101,10 @@ body {
 #preloader .loader_line {
 	margin: auto;
 	width: 1px;
-	height: 250px;
+	height: 100%;
 	position: relative;
 	overflow: hidden;
-	transition: opacity .8s ease 0s;
+	transition: opacity .4s ease 0s;
 }
 #preloader .loader_line:before {
 	content: '';
@@ -112,9 +112,8 @@ body {
 	left: 0;
 	top: 50%;
 	width: 1px;
-	height: 100%;
-	transform: translateY(-50%) scaleY(0);
-	transform-origin: center center;
+	height: 0;
+	transform: translateY(-50%);
 	background-color: var(--preloader-line);
 	animation: lineheight 1000ms ease-in-out 0s forwards;
 }
@@ -131,18 +130,25 @@ body {
 	animation-delay: 2000ms;
 }
 @keyframes lineheight {
-	0% { transform: translateY(-50%) scaleY(0); }
-	100% { transform: translateY(-50%) scaleY(1); }
+	0% { height: 0; }
+	100% { height: 100%; }
 }
 @keyframes lineround {
 	0% { transform: translateY(-100%); }
 	100% { transform: translateY(200%); }
+}
+#preloader.preloaded .loader_line:before {
+	/* Snap to full height if dismiss lands mid-keyframe. */
+	animation: none;
+	height: 100%;
 }
 #preloader.preloaded .loader_line:after {
 	opacity: 0;
 }
 #preloader.preloaded .loader_line {
 	opacity: 0;
+	height: 100%;
+	transition-delay: 500ms;
 }
 #preloader.preloaded:before,
 #preloader.preloaded:after {

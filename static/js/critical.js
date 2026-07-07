@@ -33,6 +33,25 @@
 			});
 		}));
 	}
+	// Line growth is a 1000ms height keyframe on .loader_line::before; curtain peel
+	// must not start until that animation finishes (see critical.css).
+	function whenLineGrown(){
+		var LINE_MS = 1000;
+		return new Promise(function(resolve){
+			var line = document.querySelector('#preloader .loader_line');
+			if(!line){ resolve(); return; }
+			var settled = false;
+			function finish(){
+				if(settled){ return; }
+				settled = true;
+				resolve();
+			}
+			line.addEventListener('animationend', function(e){
+				if(e.animationName === 'lineheight'){ finish(); }
+			});
+			setTimeout(finish, LINE_MS);
+		});
+	}
 	function start(){
 		var preloader = document.getElementById('preloader');
 		if(!preloader){ return; }
@@ -42,8 +61,11 @@
 			done = true;
 			dismiss(preloader);
 		}
-		var fallback = setTimeout(finish, 3000);
-		whenStylesReady().then(whenHeroReady).then(function(){
+		var fallback = setTimeout(finish, 4000);
+		Promise.all([
+			whenStylesReady().then(whenHeroReady),
+			whenLineGrown()
+		]).then(function(){
 			clearTimeout(fallback);
 			requestAnimationFrame(finish);
 		});
