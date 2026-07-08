@@ -409,7 +409,7 @@ html,
 }
 /* Left-to-right gleam on “с человеческим лицом” during each clip hold (see init.js). */
 @keyframes ip-blc-shimmer{
-	0%{ background-position: 100% center; }
+	0%{ background-position: 130% center; }
 	100%{ background-position: -30% center; }
 }
 @media (prefers-reduced-motion: no-preference){
