@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Phones/tablets: room below the last line for fixed swipe dots + home indicator. */
 @media (max-width: 1023px){
 	.ip_section .section_inner{
-		padding-bottom: calc(48px + var(--safe-area-inset-bottom, 0px));
+		padding-bottom: 48px;
 	}
 }
 .ip_full_link{
