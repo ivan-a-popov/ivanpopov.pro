@@ -786,7 +786,7 @@ function ip_testimonials_snap(){
 
 // ---------------   ANIMATED HEADLINE   ---------------
 function ip_animated_headline(){
-	var animationDelay = 1000;       // initial wait before the first erase
+	var animationDelay = 1200;       // initial wait before the first erase
 	var revealDuration = 850;        // type / erase width animation duration
 	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ blc shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -821,8 +821,8 @@ function ip_animated_headline(){
 			}, animationDelay + revealAnimationDelay + revealDuration);
 			return;
 		}
-		function animateWidth(px, done){
-			wrapper.style.transition = 'width ' + revealDuration + 'ms';
+		function animateWidth(px, done, timingFn){
+			wrapper.style.transition = 'width ' + revealDuration + 'ms ' + (timingFn || 'ease');
 			void wrapper.offsetWidth; // reflow so the transition runs from current width
 			wrapper.style.width = px + 'px';
 			var finished = false;
@@ -854,7 +854,7 @@ function ip_animated_headline(){
 			animateWidth(word.offsetWidth + 10, function(){
 				triggerBlcShimmer();
 				window.setTimeout(function(){ hideWord(word); }, revealAnimationDelay);
-			});
+			}, 'linear');
 		}
 		wrapper.style.width = (visible.offsetWidth + 10) + 'px';
 		window.setTimeout(function(){ hideWord(visible); }, animationDelay);
