@@ -285,7 +285,7 @@ function ip_keyboard_navigation(){
 			return false;
 		}
 		// Reuse the existing close handler so cursor state is reset.
-		var close = modalBox.querySelector('.service-popup-hero__close a');
+		var close = modalBox.querySelector('.service-popup__close a');
 		if(close){
 			close.click();
 		}
@@ -485,13 +485,13 @@ function ip_service_popup(){
 			}
 			var infos = modalBox.querySelector('.service_popup_informations');
 			if(infos){
-				infos.insertAdjacentHTML('afterbegin', '<div class="service-popup-hero"><img class="service-popup-hero__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup-hero__title"><h3>'+title+'</h3></div><div class="service-popup-hero__close"><a href="#" aria-label="Закрыть"><i class="icon-cancel"></i></a></div></div>');
+				infos.insertAdjacentHTML('afterbegin', '<div class="service-popup"><img class="service-popup__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup__title"><h3>'+title+'</h3></div><div class="service-popup__close"><a href="#" aria-label="Закрыть"><i class="icon-cancel"></i></a></div></div>');
 			}
 			schedulePopupFocus();
 		});
 	});
 	modalBox.addEventListener('click', function(e){
-		var closeLink = e.target.closest('.service-popup-hero__close a');
+		var closeLink = e.target.closest('.service-popup__close a');
 		if(closeLink){
 			e.preventDefault();
 			closePopupModal();

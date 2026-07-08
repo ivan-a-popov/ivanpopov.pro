@@ -888,18 +888,18 @@ html,
 .ip_modalbox .description_wrap:focus {
 	outline: none;
 }
-.ip_modalbox .service_popup_informations .service-popup-hero{
+.ip_modalbox .service_popup_informations .service-popup{
 	width: 100%;
 	position: relative;
 	margin-bottom: 37px;
 }
-.ip_modalbox .service_popup_informations .service-popup-hero__image{
+.ip_modalbox .service_popup_informations .service-popup__image{
 	display: block;
 	width: 100%;
 	height: auto;
 	object-fit: cover;
 }
-.ip_modalbox .service_popup_informations .service-popup-hero::after{
+.ip_modalbox .service_popup_informations .service-popup::after{
 	content: '';
 	position: absolute;
 	top: 0;
@@ -910,7 +910,7 @@ html,
 	pointer-events: none;
 	z-index: 1;
 }
-.ip_modalbox .service_popup_informations .service-popup-hero__title{
+.ip_modalbox .service_popup_informations .service-popup__title{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -918,19 +918,19 @@ html,
 	padding: 16px 72px 16px 20px;
 	max-width: 100%;
 }
-.ip_modalbox .service_popup_informations .service-popup-hero__title h3{
+.ip_modalbox .service_popup_informations .service-popup__title h3{
 	font-size: 1.25rem;
 	color: #fff;
 	text-shadow: 0 1px 3px rgba(0,0,0,.45);
 }
-.ip_modalbox .service_popup_informations .service-popup-hero__close{
+.ip_modalbox .service_popup_informations .service-popup__close{
 	position: absolute;
 	top: 0;
 	right: 0;
 	z-index: 2;
 	padding: 12px 14px;
 }
-.ip_modalbox .service_popup_informations .service-popup-hero__close a{
+.ip_modalbox .service_popup_informations .service-popup__close a{
 	display: block;
 	width: 44px;
 	height: 44px;
@@ -942,11 +942,11 @@ html,
 	transition: border-radius .3s ease, background-color .3s ease;
 	background: rgba(0,0,0,.15);
 }
-.ip_modalbox .service_popup_informations .service-popup-hero__close a:hover{
+.ip_modalbox .service_popup_informations .service-popup__close a:hover{
 	border-radius: 100%;
 	background: rgba(0,0,0,.25);
 }
-.ip_modalbox .service_popup_informations .service-popup-hero__close a i{
+.ip_modalbox .service_popup_informations .service-popup__close a i{
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -966,10 +966,10 @@ html,
 		bottom: 45px;
 	}
 	.ip_modalbox .description_wrap{padding: 30px;}
-	.ip_modalbox .service_popup_informations .service-popup-hero__title h3{
+	.ip_modalbox .service_popup_informations .service-popup__title h3{
 		font-size: 1.375rem;
 	}
-	.ip_modalbox .service_popup_informations .service-popup-hero__close a{
+	.ip_modalbox .service_popup_informations .service-popup__close a{
 		width: 40px;
 		height: 40px;
 	}
