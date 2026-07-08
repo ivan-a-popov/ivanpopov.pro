@@ -184,8 +184,8 @@ body {
 	--ip-col-right: 100%;
 	--ip-layout-max: 1880px;
 	--ip-bar-height: calc(42px + 1vw);
-	--ip-footer-bar: calc(7px + .5vw);
-	--ip-footer-height: calc(var(--ip-footer-bar) + env(safe-area-inset-bottom, 0px));
+  /* --safe-area-inset-bottom: 1px; */
+	--ip-footer-height: calc(7px + .5vw);;
 	--ip-footer-font-size: calc(6px + .45vw);
 	--ip-logo-font-size: clamp(16px, calc(15px + 1vw), 30px);
 	--ip-logo-padding-left: .9vw;
@@ -347,12 +347,12 @@ body {
 	height: var(--ip-footer-height);
 	background: var(--bg-color);
 	z-index: 20;
-	line-height: var(--ip-footer-bar);
+	line-height: var(--ip-footer-height);
 	font-size: var(--ip-footer-font-size);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0 1em env(safe-area-inset-bottom, 0px);
+	padding: 0 1em 0 0;
 }
 .ip_footer .copyright p {
 	margin: 0;

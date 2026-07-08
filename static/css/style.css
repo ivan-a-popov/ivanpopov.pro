@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Phones/tablets: room below the last line for fixed swipe dots + home indicator. */
 @media (max-width: 1023px){
 	.ip_section .section_inner{
-		padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+		padding-bottom: calc(48px + var(--safe-area-inset-bottom, 0px));
 	}
 }
 .ip_full_link{
@@ -313,7 +313,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Minimal scrollbars: thin thumb without arrow buttons. */
 html,
 .ip_section,
-.ip_modalbox .description_wrap{
+.ip_modalbox .service_popup_informations .descriptions{
 	scrollbar-width: thin;
 	scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
 }
@@ -859,8 +859,8 @@ html,
 }
 .ip_modalbox .box_inner{
 	position: absolute;
-	top: max(10px, env(safe-area-inset-top));
-	bottom: max(10px, env(safe-area-inset-bottom));
+	top: 10px;
+	bottom: var(--ip-footer-height);
 	width: min(520px, calc(100vw - 16px));
 	max-width: calc(100vw - 16px);
 	left: 50%;
@@ -880,18 +880,27 @@ html,
 }
 .ip_modalbox .description_wrap{
 	position: relative;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 	height: 100%;
-	overflow: hidden auto;
+	overflow: hidden;
 	padding: 16px;
+}
+.ip_modalbox .service_popup_informations{
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-height: 0;
+	width: 100%;
 }
 .ip_modalbox .description_wrap:focus {
 	outline: none;
 }
 .ip_modalbox .service_popup_informations .service-popup{
+	flex-shrink: 0;
 	width: 100%;
 	position: relative;
-	margin-bottom: 37px;
 }
 .ip_modalbox .service_popup_informations .service-popup__image{
 	display: block;
@@ -952,18 +961,19 @@ html,
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
+.ip_modalbox .service_popup_informations .descriptions{
+	flex: 1;
+	min-height: 0;
+	overflow-y: auto;
+	padding-top: 20px;
+}
 .ip_modalbox .service_popup_informations .descriptions p{
 	margin-bottom: 15px;
 }
-.ip_modalbox .service_popup_informations .descriptions p:last-child{
-	margin-bottom: 0;
-}
 @media (min-width: 1024px){
 	.ip_modalbox .box_inner{
-		width: min(620px, calc(100vw - 40px));
+		/* width: min(520px, calc(100vw - 40px)); */
 		max-width: calc(100vw - 40px);
-		top: 45px;
-		bottom: 45px;
 	}
 	.ip_modalbox .description_wrap{padding: 30px;}
 	.ip_modalbox .service_popup_informations .service-popup__title h3{
