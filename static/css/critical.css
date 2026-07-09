@@ -357,6 +357,15 @@ body {
 	font-family: Onest, sans-serif;
 	text-align: center;
 }
+/* Filled mark from copyhuy.svg — 1em + currentColor keep it in step with footer type/theme. */
+.ip_footer .copyright__mark {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	margin-inline-end: 0.2em;
+	vertical-align: -0.15em;
+	fill: var(--text-main);
+}
 /* CLS guard: the mainpart layout (absolute sections, columns, home) lives
 in style.css, which loads async. Pin it out of document flow here so content
 does not snap when style.css arrives; keep hidden until style.css reveals it
