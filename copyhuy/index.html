@@ -49,8 +49,13 @@ main{width:100%;max-width:38rem;flex:1}
 	max-width:38rem;
 	display:flex;
 	justify-content:flex-end;
-	margin:1.25rem 0 0;
+	margin:0;
+	padding:1.25rem 0 0.5rem;
 	font:0.95rem ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+	position:sticky;
+	top:0;
+	z-index:10;
+	background:var(--bg);
 }
 .lang-switch button{
 	background:none;
@@ -203,20 +208,24 @@ footer a{color:inherit}
 </main>
 
 <footer>
-	<p class="l-en" lang="en">This page itself is, of course, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 468" width="1em" height="1em"
+	<p class="l-en" lang="en">This page itself is, of course, <br>
+	  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 468" width="1em" height="1em"
 		aria-hidden="true" focusable="false">
 		<path fill="currentColor" fill-rule="evenodd"
 			d="M235 10 A222 222 0 1 1 235 454 A222 222 0 1 1 235 10 Z M235 47 A185 185 0 1 0 235 417 A185 185 0 1 0 235 47 Z" />
 		<path  fill="currentColor" d="M83.4 229 A124 124 0 0 0 324.4 277.3 L285.3 264.4 A83 83 0 0 1 124.6 229 Z" />
 		<path  fill="currentColor" d="M151.3 264 A128 128 0 0 1 388.5 190.4 L351.7 211.9 A85 85 0 0 0 194.5 264 Z" />
-	</svg> <a href="https://ivanpopov.pro/">Ivan Popov</a>, 2026</p>
-	<p class="l-ru" lang="ru">Эта страница, естественно, тоже <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 468" width="1em" height="1em" 
+	  </svg>
+	</p>
+	<p class="l-en" lang="en" style="font-size: 0.5em;padding-top: 0px;"><a href="https://ivanpopov.pro/">Ivan&nbsp;Popov</a>, 2026</p>
+	<p class="l-ru" lang="ru">Эта страница, разумеется, тоже <br><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 468" width="1em" height="1em" 
 	  aria-hidden="true" focusable="false"> 
 		<path fill="currentColor" fill-rule="evenodd"
 			d="M235 10 A222 222 0 1 1 235 454 A222 222 0 1 1 235 10 Z M235 47 A185 185 0 1 0 235 417 A185 185 0 1 0 235 47 Z" />
 		<path  fill="currentColor" d="M83.4 229 A124 124 0 0 0 324.4 277.3 L285.3 264.4 A83 83 0 0 1 124.6 229 Z" />
 		<path  fill="currentColor" d="M151.3 264 A128 128 0 0 1 388.5 190.4 L351.7 211.9 A85 85 0 0 0 194.5 264 Z" />
-	</svg> <a href="https://ivanpopov.pro/">Иван Попов</a>, 2026</p>
+	</svg></p>
+	<p class="l-ru" lang="ru" style="font-size: 0.5em;padding-top: 0px;"><a href="https://ivanpopov.pro/">Иван&nbsp;Попов</a>, 2026</p>
 </footer>
 
 <script>
