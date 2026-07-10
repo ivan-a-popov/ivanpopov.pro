@@ -55,7 +55,13 @@ main{width:100%;max-width:38rem;flex:1}
 	position:sticky;
 	top:0;
 	z-index:10;
-	background:var(--bg);
+	pointer-events:none;
+}
+.lang-switch-box{
+	display:flex;
+	pointer-events:auto;
+	background:color-mix(in srgb,var(--bg) 50%,transparent);
+	padding:0.15rem;
 }
 .lang-switch button{
 	background:none;
@@ -139,8 +145,10 @@ footer a{color:inherit}
 <body>
 
 <nav class="lang-switch" aria-label="Language">
-	<button type="button" data-set="en" aria-pressed="true">EN</button>
-	<button type="button" data-set="ru" aria-pressed="false">RU</button>
+	<div class="lang-switch-box">
+		<button type="button" data-set="en" aria-pressed="true">EN</button>
+		<button type="button" data-set="ru" aria-pressed="false">RU</button>
+	</div>
 </nav>
 
 <main>
