@@ -45,9 +45,12 @@ body{
 }
 main{width:100%;max-width:38rem;flex:1}
 .lang-switch{
-	align-self:flex-end;
+	width:100%;
+	max-width:38rem;
+	display:flex;
+	justify-content:flex-end;
 	margin:1.25rem 0 0;
-	font:0.85rem ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+	font:0.95rem ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 .lang-switch button{
 	background:none;
@@ -55,7 +58,7 @@ main{width:100%;max-width:38rem;flex:1}
 	color:var(--sub);
 	font:inherit;
 	cursor:pointer;
-	padding:0.3rem 0.5rem;
+	padding:0.35rem 0.55rem;
 }
 .lang-switch button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:0.3em}
 .hero{text-align:center;margin:3.5rem 0 3rem}
