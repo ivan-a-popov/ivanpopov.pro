@@ -20,13 +20,15 @@
 	color-scheme:light dark;
 	--bg:#fff;
 	--ink:#111;
+	--heading:#111;
 	--sub:#666;
 	--rule:#ddd;
 }
 @media (prefers-color-scheme:dark){
 	:root{
 		--bg:#0e1011;
-		--ink:#c6c2bb;
+		--ink:#9e9a92;
+		--heading:#c6c2bb;
 		--sub:#7d786f;
 		--rule:#2c3032;
 	}
@@ -75,6 +77,7 @@ main{width:100%;max-width:38rem;flex:1}
 .hero{text-align:center;margin:3.5rem 0 3rem}
 .hero svg{width:min(46vw,15rem);height:auto;display:block;margin:0 auto}
 .hero h1{
+	color:var(--heading);
 	font:700 clamp(2rem,7vw,3rem)/1.1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 	letter-spacing:-0.02em;
 	margin:2rem 0 0.5rem;
