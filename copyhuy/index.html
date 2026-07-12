@@ -28,7 +28,7 @@
 	:root{
 		--bg:#0e1011;
 		--ink:#9e9a92;
-		--heading:#c6c2bb;
+		--heading:#ddd9d1;
 		--sub:#7d786f;
 		--rule:#2c3032;
 	}
@@ -85,10 +85,10 @@ main{width:100%;max-width:38rem;flex:1}
 .hero p{color:var(--sub);margin:0;font-style:italic}
 article p{margin:0 0 1.3rem;text-align:justify}
 .kicker{
-	font:0.8rem ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+	font:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 	letter-spacing:0.18em;
 	text-transform:uppercase;
-	color:var(--sub);
+	color:var(--heading);
 	margin-bottom:2rem;
 	text-align:center;
 }
@@ -99,7 +99,7 @@ article .note{color:var(--sub);font-style:italic;font-size:1rem}
 	padding-top:2rem;
 	text-align:center;
 }
-.recipe .kicker{margin-bottom:1.5rem}
+.recipe .kicker{margin-bottom:1.5rem;color:var(--heading);}
 .recipe .strip{
 	font:400 3rem/1 Georgia,serif;
 	display:flex;
@@ -110,7 +110,7 @@ article .note{color:var(--sub);font-style:italic;font-size:1rem}
 }
 .recipe .strip svg{width:1em;height:1em}
 .recipe .strip .arrow{font-size:0.5em;color:var(--sub)}
-.recipe p{margin:0;font-size:1rem;color:var(--sub)}
+.recipe p{margin:0;font-size:1rem;color:var(--)}
 .get{
 	border-top:1px solid var(--rule);
 	margin-top:3rem;
