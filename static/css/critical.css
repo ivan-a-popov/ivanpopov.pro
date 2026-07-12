@@ -8,8 +8,8 @@
 	- above-the-fold main shell (sections absolute, home, columns) so style.css
 	  cannot restack the page under Slow 4G (CLS ~0.9 on .ip_all_wrap);
 	- modal/cursors out of flow; scrollbar-gutter reserved from frame one.
-	.ip_mainpart stays visibility:hidden until critical.js adds .is-ready after
-	style.css has settled (double-rAF), so late CSS never paints a snap frame.
+	.ip_mainpart uses its final geometry from the first paint. The fixed,
+	opaque preloader covers it while style.css, fonts and hero images settle.
 	Note: avoid a trailing "**" + "/" comment ending — the sed minifier
 	in stamp-cache.sh does not handle that edge case.
 */
@@ -456,14 +456,12 @@ body {
 	fill: var(--text-main);
 }
 /* ATF main shell — must match style.css box model so async CSS cannot restack.
-   Stay hidden until critical.js adds .is-ready after style.css settles. */
+   Keep it rendered from first paint: toggling visibility on this full-viewport
+   subtree is itself reported by Lighthouse as a large layout shift. */
 .ip_mainpart {
 	position: absolute;
 	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
 	overflow: hidden;
-	visibility: hidden;
-}
-.ip_mainpart.is-ready {
 	visibility: visible;
 }
 .ip_mainpart .author_image {

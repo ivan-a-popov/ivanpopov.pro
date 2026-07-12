@@ -186,9 +186,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*	MAINPART + SECTIONS */
-/* visibility is owned by critical.css + .is-ready (critical.js). Do not flip
-   it here — that raced with layout rules in the same stylesheet and caused
-   ~0.95 CLS on .ip_all_wrap under Slow 4G. */
+/* The full ATF shell, including visible .ip_mainpart geometry, lives in
+   critical.css. It renders behind the fixed opaque preloader from first paint;
+   do not add a delayed visibility toggle, which Lighthouse counts as CLS. */
 .ip_mainpart{
 	position: absolute;
 	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;

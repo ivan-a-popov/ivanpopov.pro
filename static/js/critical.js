@@ -1,7 +1,7 @@
 "use strict";
 // Critical, inlined by stamp-cache.sh between the CRITICAL JS markers in
-// index.html. Dismisses the preloader once above-the-fold is ready (style.css
-// settled + mainpart revealed + hero decoded), independent of deferred init.js.
+// index.html. Dismisses the preloader once above-the-fold is ready (style.css,
+// fonts and hero decoded), independent of deferred init.js.
 // A hard timeout guarantees the overlay never traps the user.
 (function(){
 	var GROW_HALF_MS = 1000;
@@ -30,33 +30,26 @@
 		return getComputedStyle(document.documentElement)
 			.getPropertyValue('--ip-styles-ready').trim() === '1';
 	}
-	function revealMainpart(){
-		var mainpart = document.querySelector('.ip_mainpart');
-		if(mainpart){ mainpart.classList.add('is-ready'); }
-	}
 	function whenStylesReady(){
-		// Wait for async style.css (sentinel), let layout commit while mainpart
-		// is still visibility:hidden, then reveal — never in the same frame as
-		// the stylesheet's first apply (that race caused ~0.95 CLS).
+		// Wait for async style.css (sentinel), then let its layout settle behind
+		// the fixed opaque preloader before the curtains open.
 		return new Promise(function(resolve){
-			function settleThenReveal(){
+			function settle(){
 				requestAnimationFrame(function(){
 					requestAnimationFrame(function(){
-						revealMainpart();
 						resolve();
 					});
 				});
 			}
 			(function poll(){
-				if(stylesApplied()){ settleThenReveal(); return; }
+				if(stylesApplied()){ settle(); return; }
 				setTimeout(poll, 50);
 			})();
 		});
 	}
 	// Onest faces are registered by the inline critical CSS, so loads can be
-	// kicked off right away. Gating the reveal on them means any swap happens
-	// while .ip_mainpart is still hidden — zero CLS. Timeout keeps a slow font
-	// from stalling the reveal (the metric-matched fallback covers that path).
+	// kicked off right away. Wait before opening the opaque preloader; the
+	// metric-matched fallback keeps the rendered page stable meanwhile.
 	function whenFontsReady(){
 		if(!document.fonts || !document.fonts.load){ return Promise.resolve(); }
 		var faces = Promise.all([
@@ -103,8 +96,6 @@
 		function finish(){
 			if(done){ return; }
 			done = true;
-			// Fallback path: never leave mainpart hidden if the overlay is forced off.
-			revealMainpart();
 			dismiss(preloader);
 		}
 		var fallback = setTimeout(finish, FALLBACK_MS);
