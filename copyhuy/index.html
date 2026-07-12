@@ -50,7 +50,7 @@ main{width:100%;max-width:38rem;flex:1}
 	width:100%;
 	max-width:38rem;
 	display:flex;
-	justify-content:flex-end;
+	justify-content:space-between;
 	margin:0;
 	padding:1.25rem 0 0.5rem;
 	font:0.95rem ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -59,21 +59,23 @@ main{width:100%;max-width:38rem;flex:1}
 	z-index:10;
 	pointer-events:none;
 }
-.lang-switch-box{
+.lang-switch-box,.download-switch{
 	display:flex;
 	pointer-events:auto;
 	background:color-mix(in srgb,var(--bg) 50%,transparent);
 	padding:0.15rem;
 }
-.lang-switch button{
+.lang-switch button,.download-switch a{
 	background:none;
 	border:none;
 	color:var(--sub);
 	font:inherit;
 	cursor:pointer;
 	padding:0.35rem 0.55rem;
+	text-decoration:none;
 }
 .lang-switch button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:0.3em}
+.download-switch a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:0.3em}
 .hero{text-align:center;margin:3.5rem 0 3rem}
 .hero svg{width:min(46vw,15rem);height:auto;display:block;margin:0 auto}
 .hero h1{
@@ -93,12 +95,6 @@ article p{margin:0 0 1.3rem;text-align:justify}
 	text-align:center;
 }
 article .note{color:var(--sub);font-style:italic;font-size:1rem}
-.recipe{
-	border-top:1px solid var(--rule);
-	margin-top:3rem;
-	padding-top:2rem;
-	text-align:center;
-}
 .recipe .kicker{margin-bottom:1.5rem;color:var(--heading);}
 .recipe .strip{
 	font:400 3rem/1 Georgia,serif;
@@ -110,25 +106,7 @@ article .note{color:var(--sub);font-style:italic;font-size:1rem}
 }
 .recipe .strip svg{width:1em;height:1em}
 .recipe .strip .arrow{font-size:0.8em;color:var(--sub)}
-.recipe p{margin:0;font-size:1rem;color:var(--sub)}
-.get{
-	border-top:1px solid var(--rule);
-	margin-top:3rem;
-	padding-top:2rem;
-	text-align:center;
-	font-size:1rem;
-}
-.get p{margin:0 0 1rem;color:var(--sub)}
-.get a{
-	display:inline-block;
-	font:0.9rem ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-	color:var(--ink);
-	border:1px solid var(--ink);
-	padding:0.6rem 1.2rem;
-	margin:0 0.35rem 0.7rem;
-	text-decoration:none;
-}
-.get a:hover{background:var(--ink);color:var(--bg)}
+.recipe p{margin:0;font-size:1rem;color:var(--ink)}
 footer{
 	width:100%;
 	max-width:38rem;
@@ -155,10 +133,14 @@ footer a{color:inherit}
 	</symbol>
 </svg>
 
-<nav class="lang-switch" aria-label="Language">
+<nav class="lang-switch" aria-label="Download and language">
 	<div class="lang-switch-box">
 		<button type="button" data-set="en" aria-pressed="true">EN</button>
 		<button type="button" data-set="ru" aria-pressed="false">RU</button>
+	</div>
+	<div class="download-switch">
+		<a href="copyhuy.svg" download>SVG</a>
+		<a href="copyhuy-1024.png" download>PNG</a>
 	</div>
 </nav>
 
@@ -195,7 +177,7 @@ footer a{color:inherit}
 		<p>Копихуй базируется на известных ключевых концепциях: share (делитесь своими достижениями), adopt (применяйте успешные разработки других), re-use (переиспользуйте результаты друг друга).</p>
 		<p>А посему: копируйте, цитируйте, переделывайте, применяйте как угодно и скармливайте любым моделям всё, что отмечено этим знаком. Разрешения не требуется, ссылка на источник не обязательна (но, несомненно, будет приятна и послужит очевидной демонстрацией вашей воспитанности). Кстати: исходный знак &copy; взят с <a href="https://upload.wikimedia.org/wikipedia/commons/archive/b/b0/20070630081603%21Copyright.svg">Викисклада</a> — будем надеяться, они не потащат меня в суд.</p>
 		<p>«Копихуй» не лицензия и не юридический инструмент. Это всего лишь декларация личных взглядов — старых, почти как первые хакеры, но современных, как никогда.</p>
-		<p class="note">Что изображено на знаке — ясно из его названия (и в этом смысле знак визуально демонстрирует слабость идеалистических идей в реальной жизни). Но кто-то, вероятно, разглядит и другой символ — разорванную цепь, метафору сброшенных оков. Это прочтение также не лишено смысла. Есть и другие.</p>
+		<p class="note">Что изображено на знаке, ясно из его названия (и в этом смысле знак визуально демонстрирует слабость идеалистических идей в реальной жизни). Но кто-то, вероятно, разглядит и другой символ — разорванную цепь, метафору сброшенных оков. Это прочтение также не лишено смысла. Есть и другие.</p>
 	</article>
 
 	<section class="recipe">
@@ -212,13 +194,6 @@ footer a{color:inherit}
 		</div>
 		<p class="l-en" lang="en">Take &copy; and cut the C in half. Shift the bottom half slightly to the left, and the top half to the right and down. That&rsquo;s it. You&rsquo;ve just crafted a copyhuy. Share it. Give it a use. That&rsquo;s exactly what Copyhuy is all about.</p>
 		<p class="l-ru" lang="ru">Берёте &copy; и разрезаете C пополам. Сдвигаете нижнюю половинку чуть влево, а верхнюю — вправо и вниз. Всё: вы только что скрафтили копихуй. Используйте его. Поделитесь им. Копихуй — именно про это.</p>
-	</section>
-
-	<section class="get">
-		<p class="l-en" lang="en">&hellip;or just download a ready-made file:</p>
-		<p class="l-ru" lang="ru">&hellip;или просто скачайте готовый файл:</p>
-		<a href="copyhuy.svg" download>SVG</a>
-		<a href="copyhuy-1024.png" download>PNG</a>
 	</section>
 </main>
 
