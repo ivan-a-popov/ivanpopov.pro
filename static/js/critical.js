@@ -53,6 +53,22 @@
 			})();
 		});
 	}
+	// Onest faces are registered by the inline critical CSS, so loads can be
+	// kicked off right away. Gating the reveal on them means any swap happens
+	// while .ip_mainpart is still hidden — zero CLS. Timeout keeps a slow font
+	// from stalling the reveal (the metric-matched fallback covers that path).
+	function whenFontsReady(){
+		if(!document.fonts || !document.fonts.load){ return Promise.resolve(); }
+		var faces = Promise.all([
+			document.fonts.load('550 1em Onest', 'Иван Попов'),
+			document.fonts.load('700 1em Onest', 'Кто такой'),
+			document.fonts.load('650 1em Onest', 'AI')
+		]).catch(function(){});
+		return Promise.race([
+			faces,
+			new Promise(function(resolve){ setTimeout(resolve, 2500); })
+		]);
+	}
 	function whenHeroReady(){
 		var imgs = [].slice.call(document.querySelectorAll('#author_photo_img, #home .ip_home_photo img'));
 		return Promise.all(imgs.map(function(img){
@@ -94,6 +110,7 @@
 		var fallback = setTimeout(finish, FALLBACK_MS);
 		Promise.all([
 			whenStylesReady().then(whenHeroReady),
+			whenFontsReady(),
 			whenLineSequenceReady()
 		]).then(function(){
 			clearTimeout(fallback);
