@@ -7,6 +7,7 @@
 # 3) Re-stamp ?v=<content-hash> onto local CSS/JS references in index.html.
 # Run before committing/deploying after editing any CSS or JS file, so the
 # immutable cache rule in nginx.conf always serves the latest version.
+# 4) Sync with the latest version of copyhuy via rsync
 set -euo pipefail
 
 cd "$(dirname "$0")"
@@ -91,3 +92,4 @@ for asset in "${assets[@]}"; do
     sed -i -E "s#(${asset})(\?v=[0-9a-f]+)?#\1?v=${hash}#g" "$HTML"
     echo "stamped $asset -> ?v=${hash}"
 done
+rsync -avz --delete --exclude='CNAME' --exclude='google198343f09b8d4624.html' --exclude='.git' /home/ipopov/dev/copyhuy/* /home/ipopov/dev/ivanpopov.pro/copyhuy/

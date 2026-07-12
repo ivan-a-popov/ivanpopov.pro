@@ -2,11 +2,16 @@
 	stamp-cache.sh minifies this file and injects it between the
 	"CRITICAL CSS" markers there, so edit HERE and re-run the script.
 
-	Only what the first paint needs before the async style.css arrives:
-	- the preloader (paints the FCP frame);
-	- the fixed header/footer shell + its layout variables (prevents CLS).
+	First paint before async style.css:
+	- preloader (FCP);
+	- fixed header/footer + layout variables;
+	- above-the-fold main shell (sections absolute, home, columns) so style.css
+	  cannot restack the page under Slow 4G (CLS ~0.9 on .ip_all_wrap);
+	- modal/cursors out of flow; scrollbar-gutter reserved from frame one.
+	.ip_mainpart stays visibility:hidden until critical.js adds .is-ready after
+	style.css has settled (double-rAF), so late CSS never paints a snap frame.
 	Note: avoid a trailing "**" + "/" comment ending — the sed minifier
-	in stamp-cache.sh does not handle that edge case. 
+	in stamp-cache.sh does not handle that edge case.
 */
 
 /* THEME TOKENS */
@@ -64,9 +69,29 @@
 html {
 	overflow-x: hidden;
 	background-color: var(--bg-color);
+	/* Reserve gutter before async style.css — otherwise html{scrollbar-gutter}
+	   there shifts the whole shell when the stylesheet arrives. */
+	scrollbar-gutter: stable;
 }
 body {
 	margin: 0;
+}
+/* Out of flow from first paint (full chrome lives in style.css). */
+.ip_modalbox {
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+.mouse-cursor {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	pointer-events: none;
+	visibility: hidden;
 }
 
 /* PRELOADER */
@@ -366,15 +391,135 @@ body {
 	vertical-align: -0.15em;
 	fill: var(--text-main);
 }
-/* CLS guard: the mainpart layout (absolute sections, columns, home) lives
-in style.css, which loads async. Pin it out of document flow here so content
-does not snap when style.css arrives; keep hidden until style.css reveals it
-(visibility:hidden elements don't contribute to CLS). */
+/* ATF main shell — must match style.css box model so async CSS cannot restack.
+   Stay hidden until critical.js adds .is-ready after style.css settles. */
 .ip_mainpart {
 	position: absolute;
 	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
 	overflow: hidden;
 	visibility: hidden;
+}
+.ip_mainpart.is-ready {
+	visibility: visible;
+}
+.ip_mainpart .author_image {
+	position: absolute;
+	top: 0;
+	width: var(--ip-col-left);
+	height: 0;
+	z-index: 15;
+	overflow: hidden;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+.ip_mainpart .author_image .author_image_inner {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	opacity: 0;
+}
+.ip_mainpart .author_image .author_image_inner .author_photo {
+	position: absolute;
+	z-index: 2;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 0;
+	object-fit: cover;
+	object-position: center;
+	opacity: 0;
+	pointer-events: none;
+	user-select: none;
+}
+.ip_mainpart .main_content {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: var(--ip-col-right);
+}
+.ip_section {
+	position: absolute;
+	inset: 0;
+	overflow: hidden auto;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	z-index: 8;
+}
+.ip_section.animated,
+.ip_section.active {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	z-index: 9;
+}
+.ip_section.active {
+	z-index: 10;
+}
+.ip_home {
+	position: relative;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.ip_home_photo {
+	display: block;
+	width: 100%;
+	padding: 0 20px;
+}
+.ip_home_photo img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1 / 0.82;
+	object-fit: cover;
+	object-position: center 55%;
+}
+.ip_home .content {
+	--ip-home-name-gap: clamp(16px, calc(16px + 1.2vw), 30px);
+	--ip-home-line-gap: clamp(16px, calc(18px + 1.2vw), 30px);
+	--ip-home-line-width: clamp(40px, calc(25px + 2.5vw), 70px);
+	--ip-home-line-height: clamp(3px, calc(2px + 0.15vw), 5px);
+	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
+	padding: 14px 20px 0;
+}
+.ip_home .name {
+	font-size: clamp(24px, calc(20px + 2vw), 42px);
+	font-weight: 550;
+	text-transform: uppercase;
+	margin-bottom: var(--ip-home-name-gap);
+	font-family: Onest, sans-serif;
+	color: var(--text-main);
+	line-height: 1.2;
+}
+.ip_home .line {
+	display: inline-block;
+	width: var(--ip-home-line-width);
+	height: var(--ip-home-line-height);
+	background-color: var(--text-sub);
+	margin-bottom: var(--ip-home-line-gap);
+}
+.ip_home .job {
+	margin-bottom: var(--ip-home-job-gap);
+	font-size: 1.375rem;
+	color: var(--text-main);
+	font-family: Onest, sans-serif;
+	line-height: 1.2;
+}
+.ip_home_social {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 22px;
+}
+.ip_home_social img {
+	width: 42px;
+	height: 42px;
+	display: block;
 }
 @media (max-width: 639px) {
   .ip_footer {
@@ -398,9 +543,18 @@ does not snap when style.css arrives; keep hidden until style.css reveals it
 		}
 	}
 }
+@media (min-width: 480px) {
+	.ip_home_photo img {
+		aspect-ratio: 1 / 1;
+		object-position: center 40%;
+	}
+	.ip_home .content {
+		padding-top: 20px;
+	}
+}
 @media (min-width: 640px) {
 	.ip_all_wrap {
-		/* Column split consumed by .author_image / .main_content (style.css).
+		/* Column split consumed by .author_image / .main_content.
 		  Portrait hidden on phones, widens through the breakpoints. */
 		--ip-col-left: 36%;
 		--ip-col-right: 64%;
@@ -429,6 +583,37 @@ does not snap when style.css arrives; keep hidden until style.css reveals it
 	.ip_header .menu ul li a {
 		font-size: 1rem;
 	}
+	.ip_mainpart .author_image {
+		top: 0;
+		left: 0;
+		bottom: 0;
+		height: auto;
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+	.ip_mainpart .author_image .author_image_inner,
+	.ip_mainpart .author_image .author_image_inner .author_photo {
+		opacity: 1;
+	}
+	.ip_mainpart .author_image .author_image_inner {
+		height: auto;
+	}
+	.ip_mainpart .author_image .author_image_inner .author_photo {
+		height: 100%;
+	}
+	.ip_home {
+		height: 100%;
+		min-height: 0;
+		flex-direction: row;
+		align-items: center;
+	}
+	.ip_home_photo {
+		display: none;
+	}
+	.ip_home .content {
+		padding: 0 20px;
+	}
 }
 /* Tablet: active sub slightly smaller than desktop; hover stays below active. */
 @media (min-width: 640px) and (max-width: 1023px) {
@@ -450,5 +635,11 @@ does not snap when style.css arrives; keep hidden until style.css reveals it
 	/* Content-edge alignment + scale bleed so magnified last item is not clipped. */
 	.ip_header .menu ul {
 		padding-right: calc(var(--ip-menu-padding-inline) + var(--ip-menu-scale-bleed));
+	}
+	.ip_home .content {
+		padding: 0 0 0 50px;
+	}
+	.ip_home .job {
+		font-size: 1.4375rem;
 	}
 }

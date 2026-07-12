@@ -1,8 +1,8 @@
 "use strict";
 // Critical, inlined by stamp-cache.sh between the CRITICAL JS markers in
-// index.html. Its only job: dismiss the preloader as soon as the above-the-fold
-// is ready (style.css applied + hero image decoded), independent of the deferred
-// init.js. A hard timeout guarantees the overlay never traps the user.
+// index.html. Dismisses the preloader once above-the-fold is ready (style.css
+// settled + mainpart revealed + hero decoded), independent of deferred init.js.
+// A hard timeout guarantees the overlay never traps the user.
 (function(){
 	var GROW_HALF_MS = 1000;
 	var HOLD_MS = 400;
@@ -26,14 +26,29 @@
 			if(preloader.parentNode){ preloader.remove(); }
 		}, DISMISS_MS);
 	}
+	function stylesApplied(){
+		return getComputedStyle(document.documentElement)
+			.getPropertyValue('--ip-styles-ready').trim() === '1';
+	}
+	function revealMainpart(){
+		var mainpart = document.querySelector('.ip_mainpart');
+		if(mainpart){ mainpart.classList.add('is-ready'); }
+	}
 	function whenStylesReady(){
-		// .ip_mainpart is hidden by critical.css and flips to visible only once
-		// style.css applies, so its computed visibility is the reveal signal.
+		// Wait for async style.css (sentinel), let layout commit while mainpart
+		// is still visibility:hidden, then reveal — never in the same frame as
+		// the stylesheet's first apply (that race caused ~0.95 CLS).
 		return new Promise(function(resolve){
-			var mainpart = document.querySelector('.ip_mainpart');
-			if(!mainpart){ resolve(); return; }
+			function settleThenReveal(){
+				requestAnimationFrame(function(){
+					requestAnimationFrame(function(){
+						revealMainpart();
+						resolve();
+					});
+				});
+			}
 			(function poll(){
-				if(getComputedStyle(mainpart).visibility === 'visible'){ resolve(); return; }
+				if(stylesApplied()){ settleThenReveal(); return; }
 				setTimeout(poll, 50);
 			})();
 		});
@@ -72,6 +87,8 @@
 		function finish(){
 			if(done){ return; }
 			done = true;
+			// Fallback path: never leave mainpart hidden if the overlay is forced off.
+			revealMainpart();
 			dismiss(preloader);
 		}
 		var fallback = setTimeout(finish, FALLBACK_MS);

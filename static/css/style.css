@@ -45,6 +45,8 @@ img {
 }
 html {
 	scrollbar-gutter: stable;
+	/* Sentinel for critical.js: set only once this stylesheet applies. */
+	--ip-styles-ready: 1;
 }
 body {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
@@ -213,11 +215,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*	MAINPART + SECTIONS */
+/* visibility is owned by critical.css + .is-ready (critical.js). Do not flip
+   it here — that raced with layout rules in the same stylesheet and caused
+   ~0.95 CLS on .ip_all_wrap under Slow 4G. */
 .ip_mainpart{
 	position: absolute;
 	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
 	overflow: hidden;
-	visibility: visible;
 }
 /* Side portrait: hidden on phones, appears with the two-column shell. */
 .ip_mainpart .author_image{
