@@ -440,14 +440,14 @@ body {
 	justify-content: center;
 	padding: .9em;
 }
-.ip_footer .copyright p {
+.ip_footer .copyhuy p {
 	margin: 0;
 	color: var(--text-main);
 	font-family: Onest, "Onest Fallback", sans-serif;
 	text-align: center;
 }
 /* Filled mark from copyhuy.svg — 1em + currentColor keep it in step with footer type/theme. */
-.ip_footer .copyright__mark {
+.ip_footer .copyhuy__mark {
 	display: inline-block;
 	width: 1em;
 	height: 1em;
