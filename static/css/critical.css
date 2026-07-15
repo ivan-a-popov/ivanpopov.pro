@@ -139,6 +139,25 @@ html {
 }
 body {
 	margin: 0;
+	/* Body typography duplicated from style.css: inline elements on the home
+	   screen (e.g. the .line span) sit in line boxes sized by these metrics,
+	   so they must match from first paint or content below them shifts. */
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+	font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+	line-height: 1.7;
+	overflow-wrap: break-word;
+	font-weight: 450;
+	color: var(--text-sub);
+}
+/* Same reset as style.css — UA heading/list margins must never exist on first
+   paint, or the whole home column jumps up when style.css lands (CLS). */
+h1, h2, h3, h4, h5, h6, p, ul, ol, li {
+	margin: 0;
+	padding: 0;
+}
+img {
+	vertical-align: middle;
+	max-width: 100%;
 }
 /* Out of flow from first paint (full chrome lives in style.css). */
 .ip_modalbox {
@@ -571,6 +590,60 @@ body {
 	color: var(--text-main);
 	font-family: Onest, "Onest Fallback", sans-serif;
 	line-height: 1.2;
+}
+/* Animated headline: duplicated from style.css. Without these rules the six
+   phrases paint stacked (and reflow again if init.js starts the width
+   animation before style.css applies) — Lighthouse reported that collapse as
+   a ~0.93 full-viewport CLS on .ip_all_wrap. */
+.cd-words-wrapper {
+	display: inline-block;
+	position: relative;
+	text-align: left;
+	vertical-align: top;
+}
+.cd-words-wrapper b {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	white-space: nowrap;
+	opacity: 0;
+}
+.cd-words-wrapper b.is-visible {
+	position: relative;
+	opacity: 1;
+}
+.cd-headline.clip span {
+	display: inline-block;
+	padding: .2em 0;
+}
+.cd-headline.clip .cd-words-wrapper {
+	overflow: hidden;
+	vertical-align: top;
+}
+.ip_home .job b {
+	font-weight: 650;
+}
+.ip_home .job .blc {
+	display: block;
+	margin-top: 8px;
+	font-weight: 600;
+}
+.ip_home_social a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: .88;
+}
+/* init.js (deferred) may insert the swipe dots before async style.css applies;
+   keep them out of flow from the start so they never paint in-flow at the top
+   of the wrapper and then jump (CLS). Full look lives in style.css. */
+.ip_swipe_nav {
+	position: fixed;
+	left: 50%;
+	bottom: 14px;
+	transform: translateX(-50%);
+	z-index: 14;
 }
 .ip_home_social {
 	display: flex;
