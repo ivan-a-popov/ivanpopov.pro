@@ -644,6 +644,36 @@ img {
 	bottom: 14px;
 	transform: translateX(-50%);
 	z-index: 14;
+	padding: 8px 14px;
+}
+.ip_swipe_nav ul {
+	list-style: none;
+	display: flex;
+	align-items: center;
+}
+.ip_swipe_nav ul li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 7px;
+}
+.ip_swipe_nav ul li .dot {
+	display: block;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.55);
+}
+@media (prefers-color-scheme: dark) {
+	.ip_swipe_nav ul li .dot {
+		background: rgba(0, 0, 0, 0.55);
+	}
+}
+@media (min-width: 1024px) {
+	.ip_swipe_nav { display: none; }
+}
+.ip_all_wrap.has-touch .ip_swipe_nav {
+	display: block;
 }
 .ip_home_social {
 	display: flex;
