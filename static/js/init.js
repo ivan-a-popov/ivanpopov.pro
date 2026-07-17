@@ -74,18 +74,18 @@ function ip_goto(href){
 	if(parents.some(function(li){ return li.classList.contains('active'); })){
 		return false;
 	}
+	var current = ip_active_section();
 	allLi.forEach(function(li){ li.classList.remove('active'); });
 	sections.forEach(function(s){
 		s.classList.remove('animated');
 		ip_remove_classes(s, allAnim);
 	});
-	sections.forEach(function(s){
-		s.classList.add('animated');
-		ip_add_classes(s, exit);
-	});
+	// Only the section being left animates out; the rest are already hidden.
+	if(current && current !== target){
+		current.classList.add('animated');
+		ip_add_classes(current, exit);
+	}
 	parents.forEach(function(li){ li.classList.add('active'); });
-	target.classList.remove('animated');
-	ip_remove_classes(target, allAnim);
 	target.classList.add('animated');
 	ip_add_classes(target, enter);
 	sections.forEach(function(s){
