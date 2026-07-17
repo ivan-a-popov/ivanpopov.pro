@@ -46,6 +46,8 @@
 <noscript><style>#preloader{display:none!important}.ip_mainpart{visibility:visible!important}</style></noscript>
 <link rel="preload" href="static/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="static/fonts/onest/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="static/img/about/ip-foto-mobile.webp" as="image" media="(max-width: 639.98px)" fetchpriority="high">
+<link rel="preload" href="static/img/about/ip-foto.webp" as="image" media="(min-width: 640px)" fetchpriority="high">
 <!-- STYLES -->
 <link rel="preload" as="style" href="static/css/style.css?v=37c86d30" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
@@ -199,14 +201,20 @@ document.addEventListener('DOMContentLoaded', start);
 		<div class="ip_mainpart">
 			<div class="author_image" id="author_image">
 				<div class="author_image_inner">
-					<img class="author_photo" id="author_photo_img"
-					src="static/img/about/ip-foto.webp"
-						alt=""
-						width="610"
-						height="825"
-						decoding="async"
-						fetchpriority="high"
-						data-src-bw="static/img/about/ip-foto.webp">
+					<!-- Phones match the <source> and get an inline 1x1 gif, so the
+					  hidden 19KB portrait never competes with the mobile LCP photo.
+					  Media queries pair with the preloads in <head> and the 640px
+					  CSS breakpoint; real photo stays the fallback src. -->
+					<picture>
+						<source media="(max-width: 639.98px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+						<img class="author_photo" id="author_photo_img"
+							src="static/img/about/ip-foto.webp"
+							alt=""
+							width="610"
+							height="825"
+							decoding="async"
+							fetchpriority="high">
+					</picture>
 				</div>
 			</div>
 			<div class="main_content">
@@ -214,7 +222,12 @@ document.addEventListener('DOMContentLoaded', start);
 				<div class="ip_section animated" id="home">
 					<div class="ip_home">
 						<div class="ip_home_photo" aria-hidden="true">
-							<img src="static/img/about/ip-foto-mobile.webp" alt="" width="600" height="600" decoding="async" loading="eager" fetchpriority="high" srcset="static/img/about/ip-foto-mobile.webp 600w" sizes="(max-width: 640px) calc(100vw - 40px), 600px">
+							<!-- Mirror of the author_image picture: ≥640px viewports get the
+							  inline gif (block is display:none there), phones the real photo. -->
+							<picture>
+								<source media="(min-width: 640px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+								<img src="static/img/about/ip-foto-mobile.webp" alt="" width="600" height="600" decoding="async" fetchpriority="high">
+							</picture>
 						</div>
 						<div class="content">
 							<h3 class="name">Иван <span>Попов</span></h3>
