@@ -31,3 +31,7 @@ Key facts:
 - [Telegram](https://t.me/ivan_a_popov): Primary contact channel
 - [VKontakte](https://vk.com/ivan_a_popov): Alternative contact channel
 - [Official site](https://ivanpopov.pro/): Landing page with QR vCard
+
+## Optional
+
+- [Open Graph image](https://ivanpopov.pro/static/img/about/og-image-2026.jpg): Social preview image for the site
