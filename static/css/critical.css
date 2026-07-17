@@ -206,7 +206,7 @@ img {
 	transform-origin: right center;
 }
 /* Preloader timing (keep in sync with critical.js):
-   half-grow 1000ms → hold 400ms → blink×1 1350ms → full-grow 500ms → peel 500ms
+   half-grow 1000ms → hold 400ms → blink 1350ms → full-grow 500ms → peel 500ms
    Box stays 250px (overflow clips the dim sweep); full-grow uses scaleY so CLS
    stays zero and ::after never paints at the viewport top. */
 #preloader .loader_line {
