@@ -283,7 +283,7 @@ img {
 	--ip-footer-font-size: calc(6px + .45vw);
 	--ip-logo-font-size: clamp(1rem, 1.5em, 2rem);
 	--ip-logo-padding-left: .9vw;
-	--ip-logo-menu-gap: 5px;
+	--ip-logo-menu-gap: 1px;
 	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
 	   capped — and scales with the user's font size — while the active main word
 	   grows via font-size:1.2em/1.5em. */
@@ -325,6 +325,11 @@ img {
 	font-weight: 800;
 	line-height: var(--ip-bar-height);
 	padding-left: var(--ip-logo-padding-left);
+	/* Wordmark is a single line, always: body{overflow-wrap:break-word} would
+	   otherwise split it mid-word in the narrow 36% column (iPad portrait).
+	   Monospace spaces are a full advance wide — pull them in to ~half. */
+	white-space: nowrap;
+	word-spacing: -0.3em;
 }
 .ip_header .menu {
 	position: relative;
