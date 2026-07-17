@@ -79,14 +79,11 @@ function ip_goto(href){
 		s.classList.remove('animated');
 		ip_remove_classes(s, allAnim);
 	});
-	if(wrapper.classList.contains('opened')){
-		sections.forEach(function(s){
-			s.classList.add('animated');
-			ip_add_classes(s, exit);
-		});
-	}
+	sections.forEach(function(s){
+		s.classList.add('animated');
+		ip_add_classes(s, exit);
+	});
 	parents.forEach(function(li){ li.classList.add('active'); });
-	wrapper.classList.add('opened');
 	target.classList.remove('animated');
 	ip_remove_classes(target, allAnim);
 	target.classList.add('animated');
