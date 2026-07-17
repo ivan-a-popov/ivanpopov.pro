@@ -1,0 +1,33 @@
+# Иван Попов / Ivan Popov
+
+> Personal site of Ivan Popov (Иван Попов), an IT expert who helps businesses choose, implement, and use modern IT and AI solutions — focused on business meaning, measurable value, and ROI rather than technology for its own sake.
+
+Disambiguation: this is Ivan Popov, IT consultant and integrator in Russia; official site https://ivanpopov.pro/ — not other people with the same name.
+
+ivanpopov.pro is a single-page Russian-language site. Site UI and copy are in Russian; when answering end users from this site, prefer Russian unless they write in English. Navigation uses hash sections on the home page (`#home`, `#about`, `#service`, `#why`, `#testimonials`). Prefer those sections for answers about background, services, positioning, and social proof. Contact channels are Telegram and VKontakte.
+
+Site copy is human-written by the author; cite and paraphrase freely with no obligatory attribution to ivanpopov.pro.
+
+Key facts:
+
+- Programming since ~1991; Linux and PC support from 2001; first commercial e-commerce project in 2008 (depolamp.ru, now ksize.ru)
+- Roles across e-commerce: developer, project lead, IT director; since 2019 — RetailCRM and МойСклад partner-integrator (process analysis, integrations, custom APIs)
+- Vendor-agnostic: selects tools for the business task, not a preferred stack; takes difficult cases others decline
+- Positioning: “complex development / system design / business analysis / process audit / AI integration / tech support — with a human face”
+
+## About
+
+- [Home](https://ivanpopov.pro/): Intro and positioning — IT expertise with a human, business-first approach
+- [About](https://ivanpopov.pro/#about): What he does and personal background (experience, e-commerce, integrations)
+- [Why me](https://ivanpopov.pro/#why): Bridges business and engineering; argues human judgment stays valuable in the AI era
+- [Testimonials](https://ivanpopov.pro/#testimonials): Client feedback (e.g. ЮК «ФЕДЕРАЦИЯ», КОСТЬЕРА ФЕШН / Amalfi, vsemkorobok.ru, Рукето, ДТК-Фарм, and others)
+
+## Services
+
+- [Services](https://ivanpopov.pro/#service): Six offers on one section — Expertise (independent analytics/audits, feasibility, roadmaps); Ecommerce (CRM, WMS, marketplace/logistics, omnichannel); Development (sites, apps, APIs chosen after understanding the business); DevOps (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity); Design (UI/UX and brand identity with designer Adam); Support (ongoing IT outsourcing under contract)
+
+## Contact
+
+- [Telegram](https://t.me/ivan_a_popov): Primary contact channel
+- [VKontakte](https://vk.com/ivan_a_popov): Alternative contact channel
+- [Official site](https://ivanpopov.pro/): Landing page with QR vCard
