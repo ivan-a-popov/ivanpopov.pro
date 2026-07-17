@@ -37,6 +37,8 @@
 	--caret-color: #999;          /* headline caret + QR close border */
 	--cursor-invert: #fff;        /* magic cursor over dark surfaces */
 	--overlay: rgba(0, 0, 0, .8); /* modal backdrop */
+	/* Both themes: #000 is darker than the dark page bg, so the curtain peel
+	   stays visible. --overlay is also theme-invariant. */
 	--preloader-bg: #000;         /* loader curtains */
 	--preloader-line: #fff;       /* loader growing line */
 	--preloader-line-dim: #777;   /* loader dim sweep */
@@ -58,8 +60,6 @@
 		--quote-fill: #131516;        /* matches --bg-color so the tail reads as a hole */
 		--caret-color: #868077;
 		--cursor-invert: #bab8b6;
-		--overlay: rgba(0, 0, 0, .8);
-		--preloader-bg: #000;         /* darker than page bg — visible curtain peel */
 		--preloader-line: #bab8b6;
 		--preloader-line-dim: #484e51; /* darkreader #777 */
 	}
@@ -198,7 +198,6 @@ img {
 	height: 100%;
 	z-index: -1;
 	background-color: var(--preloader-bg);
-	transform: scaleX(1);
 	transform-origin: left center;
 }
 #preloader:after {
@@ -207,7 +206,7 @@ img {
 	transform-origin: right center;
 }
 /* Preloader timing (keep in sync with critical.js):
-   half-grow 1000ms → hold 400ms → blink×2 1350ms → full-grow 500ms → peel 500ms
+   half-grow 1000ms → hold 400ms → blink×1 1350ms → full-grow 500ms → peel 500ms
    Box stays 250px (overflow clips the dim sweep); full-grow uses scaleY so CLS
    stays zero and ::after never paints at the viewport top. */
 #preloader .loader_line {
@@ -215,10 +214,9 @@ img {
 	width: 1px;
 	height: 250px;
 	position: relative;
+	/* Load-bearing: the parked dim sweep (translateY(-100%) before the
+	   animation, translateY(200%) after it) is hidden by this clip alone. */
 	overflow: hidden;
-	--loader-scale-full: 1;
-	transform: scaleY(1);
-	transform-origin: center center;
 	transition: transform 500ms ease 0s, opacity 0s linear 500ms;
 }
 #preloader .loader_line:before {
@@ -239,38 +237,27 @@ img {
 	top: 0;
 	width: 1px;
 	height: 100%;
-	opacity: 0;
 	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
-	/* Hold 400ms after half-grow, then two dim sweeps. */
 	animation: lineround 1350ms linear 1400ms 1 forwards;
 }
+/* 0% frames fall back to the elements' base styles. */
 @keyframes lineheight {
-	0% { height: 0; }
 	100% { height: 100%; }
 }
 @keyframes lineround {
-	0% { opacity: 1; transform: translateY(-100%); }
-	100% { opacity: 1; transform: translateY(200%); }
-}
-#preloader.preloaded .loader_line:before {
-	/* Snap to full height if dismiss lands mid-keyframe. */
-	animation: none;
-	height: 100%;
-}
-#preloader.preloaded .loader_line:after {
-	opacity: 0;
+	100% { transform: translateY(200%); }
 }
 #preloader.preloaded .loader_line {
 	opacity: 0;
-	transform: scaleY(var(--loader-scale-full));
+	/* Set by critical.js dismiss() to viewport/box ratio before .preloaded lands. */
+	transform: scaleY(var(--loader-scale-full, 1));
 }
 #preloader.preloaded:before,
 #preloader.preloaded:after {
 	animation: preloadedzero 500ms ease-in-out 500ms forwards;
 }
 @keyframes preloadedzero {
-	0% { transform: scaleX(1); }
 	100% { transform: scaleX(0); }
 }
 
@@ -292,7 +279,7 @@ img {
 	--ip-col-right: 100%;
 	--ip-layout-max: 1880px;
 	--ip-bar-height: 48px;
-	--ip-footer-height: calc(7px + .5vw);;
+	--ip-footer-height: calc(7px + .5vw);
 	--ip-footer-font-size: calc(6px + .45vw);
 	--ip-logo-font-size: clamp(1rem, 1.5em, 2rem);
 	--ip-logo-padding-left: .9vw;
