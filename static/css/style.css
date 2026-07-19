@@ -811,8 +811,7 @@ html,
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 100vh;
-	height: 100dvh;
+	height: auto;
 	z-index: 20;
 	background-color: var(--overlay);
 	opacity: 0;
@@ -938,10 +937,11 @@ html,
 }
 .ip_modalbox .service_popup_informations .descriptions p{
 	margin-bottom: 15px;
+	margin-right: 10px;
 }
 @media (min-width: 1024px){
 	.ip_modalbox .box_inner{
-		/* width: min(520px, calc(100vw - 40px)); */
+		width: min(520px, calc(100vw - 40px));
 		max-width: calc(100vw - 40px);
 	}
 	.ip_modalbox .description_wrap{padding: 30px;}
