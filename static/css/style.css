@@ -749,7 +749,7 @@ html,
 	height: 100%;
 	position: relative;
 	border: 1px solid var(--card-border);
-	padding: 70px 40px 63px;
+	padding: 70px 30px 63px;
 	text-align: center;
 }
 /* Keep card titles/summaries on natural word boundaries despite the
@@ -791,9 +791,6 @@ html,
 	.ip_service .service_list ul li{
 		width: calc(50% - 2.5px);
 	}
-	.ip_service .service-card{
-		padding: 70px 48px 63px;
-	}
 }
 /* Extra-wide: 3-up cards for better line lengths inside the content column. */
 @media (min-width: 1700px){
@@ -833,7 +830,7 @@ html,
 	position: absolute;
 	top: 10px;
 	bottom: var(--ip-footer-height);
-	width: min(520px, calc(100vw - 16px));
+	width: clamp(520px, 50vw, calc(100vw - 16px));
 	max-width: calc(100vw - 16px);
 	left: 50%;
 	transform: translateX(-50%) translateY(-20px);
