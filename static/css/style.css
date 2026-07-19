@@ -448,7 +448,7 @@ html,
 	position: absolute;
 	inset: 0;
 	z-index: 2;
-	padding: 4px 0;
+	padding: 5px;
 	background: var(--bg-color);
 }
 /* Receives programmatic focus (tabindex="-1") when opened. */
@@ -489,7 +489,7 @@ html,
 }
 .ip_qr_panel__code{
 	display: block;
-	width: min(180px, 58vw);
+	width: min(220px, 58vw);
 	height: auto;
 }
 @media (min-width: 480px){
@@ -514,9 +514,6 @@ html,
 	}
 	.ip_home .content{
 		padding: 0 20px;
-	}
-	.ip_qr_panel__code{
-		width: min(220px, 48vw);
 	}
 }
 @media (min-width: 1024px){
