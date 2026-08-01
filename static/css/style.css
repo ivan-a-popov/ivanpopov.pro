@@ -569,6 +569,21 @@ html,
 .ip_info .right p:last-child {
 	margin-bottom: 25px;
 }
+.ip_section p a,
+.ip_modalbox p a {
+	color: var(--text-main);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
+	font-weight: 500;
+	transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.ip_section p a:hover,
+.ip_modalbox p a:hover {
+	color: var(--accent);
+	text-decoration-color: transparent;
+}
 @media (min-width: 768px){
 	.ip_info .wrapper{
 		display: flex;
