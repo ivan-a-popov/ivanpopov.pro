@@ -554,6 +554,15 @@ html,
 	transform: translateY(-50%);
 	margin-left: 30px;
 }
+.ip_title--right{
+	text-align: right;
+}
+.ip_title--right > span:after{
+	left: auto;
+	right: 100%;
+	margin-left: 0;
+	margin-right: 30px;
+}
 /* Single column on phones, two columns from 768px. */
 .ip_info .wrapper {
 	margin-top: 20px;
@@ -600,6 +609,7 @@ html,
 @media (min-width: 1024px){
 	.ip_title > span{letter-spacing: 3px;}
 	.ip_title > span:after{margin-left: 20px;}
+	.ip_title--right > span:after{margin-left: 0; margin-right: 20px;}
 }
 
 /* TESTIMONIALS */
