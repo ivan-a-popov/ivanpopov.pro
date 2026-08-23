@@ -34,4 +34,4 @@ Key facts:
 
 ## Optional
 
-- [Open Graph image](https://ivanpopov.pro/static/img/about/og-image.jpg): Social preview image for the site (630×1200 portrait)
+- [Open Graph image](https://ivanpopov.pro/static/img/about/og-cover-1200x630.jpg): Social preview image for the site (1200×630; WhatsApp crawler gets og-image-square.jpg via nginx UA map)
