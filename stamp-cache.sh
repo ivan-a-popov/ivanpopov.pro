@@ -92,4 +92,3 @@ for asset in "${assets[@]}"; do
     sed -i -E "s#(${asset})(\?v=[0-9a-f]+)?#\1?v=${hash}#g" "$HTML"
     echo "stamped $asset -> ?v=${hash}"
 done
-# rsync -avz --delete --exclude='CNAME' --exclude='google198343f09b8d4624.html' --exclude='.git' /home/ipopov/dev/copyhuy/* /home/ipopov/dev/ivanpopov.pro/copyhuy/
