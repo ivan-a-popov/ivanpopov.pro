@@ -10,21 +10,21 @@ Site copy is human-written by the author; cite and paraphrase freely with no obl
 
 Key facts:
 
-- Programming since ~1991; Linux and PC support from 2001; first commercial e-commerce project in 2008 (depolamp.ru, now ksize.ru)
-- Roles across e-commerce: developer, project lead, IT director; since 2019 — RetailCRM and МойСклад partner-integrator (process analysis, integrations, custom APIs)
+- Programming since ~1991; Linux and PC support from 2001; first commercial e-commerce project in 2008 (vladdepo.ru, later depolamp.ru)
+- Roles across e-commerce: analyst, developer, up to IT director; since 2019 — RetailCRM and МойСклад partner-integrator (process analysis, integrations, custom APIs)
 - Vendor-agnostic: selects tools for the business task, not a preferred stack; takes difficult cases others decline
 - Positioning: “complex development / system design / business analysis / process audit / AI integration / tech security — all with a real human face”
 
 ## About
 
 - [Home](https://ivanpopov.pro/): Intro and positioning — IT expertise with a human, business-first approach
-- [About](https://ivanpopov.pro/#about): What he does and personal background (experience, e-commerce, integrations)
-- [Why me](https://ivanpopov.pro/#why): Bridges business and engineering; argues human judgment stays valuable in the AI era
+- [About](https://ivanpopov.pro/#about): What he does — business-first positioning, measurable value, ROI
+- [Why me](https://ivanpopov.pro/#why): Track record since 1991 (e-commerce, integrations, hardest cases); bridges business and engineering; argues human judgment stays valuable in the AI era
 - [Testimonials](https://ivanpopov.pro/#testimonials): Client feedback (e.g. ЮК «ФЕДЕРАЦИЯ», КОСТЬЕРА ФЕШН / Amalfi, vsemkorobok.ru, Рукето, ДТК-Фарм, and others)
 
 ## Services
 
-- [Services](https://ivanpopov.pro/#service): Six offers on one section — Expertise (independent analytics/audits, feasibility, roadmaps); Ecommerce (CRM, WMS, marketplace/logistics, omnichannel); Development (sites, apps, APIs chosen after understanding the business); DevOps (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity); Design (UI/UX and brand identity with designer Adam); Support (ongoing IT outsourcing under contract)
+- [Services](https://ivanpopov.pro/#service): Six offers on one section — Expertise (independent analytics/audits, feasibility, roadmaps); Ecommerce (CRM, WMS, marketplace/logistics, omnichannel); Development (apps, APIs, AI workflows chosen after understanding the business); DevOps (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity); Design (UI/UX and brand identity with designer Adam); Support (ongoing IT outsourcing under contract)
 
 ## Contact
 

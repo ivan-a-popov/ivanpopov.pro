@@ -530,11 +530,13 @@ html,
 }
 
 /* ABOUT / WHY (text sections) */
-/* overflow:hidden clips the 5000px title rule drawn by span:after below. */
+/* overflow:hidden clips the 5000px title rule drawn by :after below. */
 .ip_title{
 	overflow: hidden;
 }
-.ip_title > span{
+/* span and h2 are interchangeable here: inline-block is what anchors the rule
+   below at the end of the text, and font-size/line-height undo the h1-h6 base. */
+.ip_title > :is(span, h2){
 	display: inline-block;
 	position: relative;
 	font-family: Onest, "Onest Fallback", sans-serif;
@@ -542,8 +544,10 @@ html,
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 4px;
+	font-size: inherit;
+	line-height: inherit;
 }
-.ip_title > span:after{
+.ip_title > :is(span, h2):after{
 	position: absolute;
 	content: "";
 	width: 5000px;
@@ -557,7 +561,7 @@ html,
 .ip_title--right{
 	text-align: right;
 }
-.ip_title--right > span:after{
+.ip_title--right > :is(span, h2):after{
 	left: auto;
 	right: 100%;
 	margin-left: 0;
@@ -607,9 +611,9 @@ html,
 	}
 }
 @media (min-width: 1024px){
-	.ip_title > span{letter-spacing: 3px;}
-	.ip_title > span:after{margin-left: 20px;}
-	.ip_title--right > span:after{margin-left: 0; margin-right: 20px;}
+	.ip_title > :is(span, h2){letter-spacing: 3px;}
+	.ip_title > :is(span, h2):after{margin-left: 20px;}
+	.ip_title--right > :is(span, h2):after{margin-left: 0; margin-right: 20px;}
 }
 
 /* TESTIMONIALS */
