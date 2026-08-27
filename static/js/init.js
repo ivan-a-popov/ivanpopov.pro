@@ -360,7 +360,7 @@ function ip_service_popup(){
 	if(!modalBox){
 		return;
 	}
-	var buttons			= ip_all('.ip_service .ip_full_link');
+	var buttons			= ip_all('.ip_service .ip_full_link, .ip_partners .ip_full_link');
 	var descWrap		= modalBox.querySelector('.description_wrap');
 	var serviceCards	= ip_all('.ip_service .service-card');
 	var boxInner		= modalBox.querySelector('.box_inner');
@@ -435,7 +435,7 @@ function ip_service_popup(){
 	function closePopupModal(){
 		clearPopupFocusTimer();
 		ip_section_focus_token++;
-		modalBox.classList.remove('opened');
+		modalBox.classList.remove('opened', 'ip_modalbox--partner');
 		modalBox.removeAttribute('aria-modal');
 		setLightCursor(false);
 		if(descWrap){
@@ -464,16 +464,14 @@ function ip_service_popup(){
 	buttons.forEach(function(button){
 		button.addEventListener('click', function(e){
 			e.preventDefault();
-			var parent	= button.closest('.service-card');
+			var partner	= button.closest('.partner-card');
+			var parent	= partner || button.closest('.service-card');
 			if(!parent){ return; }
-			var popupImg = parent.querySelector('.popup_service_image');
-			var elImage	= (popupImg && (popupImg.getAttribute('data-popup-img') || popupImg.getAttribute('src'))) || '';
-			var titleEl	= parent.querySelector('.title');
-			var title	= titleEl ? titleEl.innerHTML : '';
-			var detailsEl = parent.querySelector('.service_hidden_details');
+			var detailsEl = parent.querySelector(partner ? '.partner_hidden_details' : '.service_hidden_details');
 			var content = detailsEl ? detailsEl.innerHTML : '';
 			ip_modal_return_focus = button;
 			ip_section_focus_token++;
+			modalBox.classList.toggle('ip_modalbox--partner', !!partner);
 			modalBox.classList.add('opened');
 			modalBox.setAttribute('aria-modal', 'true');
 			setLightCursor(true);
@@ -482,7 +480,19 @@ function ip_service_popup(){
 			}
 			var infos = modalBox.querySelector('.service_popup_informations');
 			if(infos){
-				infos.insertAdjacentHTML('afterbegin', '<div class="service-popup"><img class="service-popup__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup__title"><h3>'+title+'</h3></div><div class="service-popup__close"><a href="#" aria-label="Закрыть"><i class="icon-cancel"></i></a></div></div>');
+				var closeHtml = '<div class="service-popup__close"><a href="#" aria-label="Закрыть"><i class="icon-cancel"></i></a></div>';
+				if(partner){
+					var logoEl = parent.querySelector('.partner-card__logo');
+					var logoSrc = logoEl ? (logoEl.getAttribute('src') || '') : '';
+					var title = parent.getAttribute('data-partner-title') || '';
+					infos.insertAdjacentHTML('afterbegin', '<div class="partner-popup"><img class="partner-popup__logo" src="'+logoSrc+'" alt="" /><div class="partner-popup__title"><h3>'+title+'</h3></div>'+closeHtml+'</div>');
+				}else{
+					var popupImg = parent.querySelector('.popup_service_image');
+					var elImage	= (popupImg && (popupImg.getAttribute('data-popup-img') || popupImg.getAttribute('src'))) || '';
+					var titleEl	= parent.querySelector('.title');
+					var title	= titleEl ? titleEl.innerHTML : '';
+					infos.insertAdjacentHTML('afterbegin', '<div class="service-popup"><img class="service-popup__image" src="'+elImage+'" alt="" width="640" height="320" /><div class="service-popup__title"><h3>'+title+'</h3></div>'+closeHtml+'</div>');
+				}
 			}
 			schedulePopupFocus();
 		});
