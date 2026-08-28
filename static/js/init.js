@@ -29,9 +29,11 @@ function ip_remove_classes(el, str){
 }
 ip_ready(function(){
 	ip_mark_touch_device();
+	ip_apply_landing_section();
 	ip_init_section_focus();
 	ip_build_swipe_nav();
 	ip_page_transition();
+	ip_history_navigation();
 	ip_swipe_navigation();
 	ip_keyboard_navigation();
 	ip_service_popup();
@@ -41,8 +43,50 @@ ip_ready(function(){
 	ip_animated_headline();
 });
 
+function ip_href_from_location(){
+	var hash = location.hash;
+	if(!hash || hash === '#'){
+		return '#home';
+	}
+	return hash;
+}
+function ip_apply_landing_section(){
+	var href = ip_href_from_location();
+	if(href !== '#home'){
+		ip_goto(href, { instant: true, updateHash: false });
+	}
+	document.documentElement.removeAttribute('data-ip-section');
+}
+function ip_sync_location(href){
+	var next = (href === '#home')
+		? (location.pathname + location.search || '/')
+		: href;
+	var here = location.pathname + location.search + location.hash;
+	var want = (href === '#home')
+		? (location.pathname + location.search)
+		: (location.pathname + location.search + href);
+	if(here === want){
+		return;
+	}
+	if(history.pushState){
+		history.pushState(null, '', next);
+		return;
+	}
+	if(location.hash !== href){
+		location.hash = href;
+	}
+}
+function ip_history_navigation(){
+	function apply(){
+		ip_goto(ip_href_from_location(), { updateHash: false });
+	}
+	window.addEventListener('popstate', apply);
+	window.addEventListener('hashchange', apply);
+}
+
 // -------------   PAGE TRANSITION    ------------------
-function ip_goto(href){
+function ip_goto(href, opts){
+	opts = opts || {};
 	if(!href){
 		return false;
 	}
@@ -81,13 +125,16 @@ function ip_goto(href){
 		ip_remove_classes(s, allAnim);
 	});
 	// Only the section being left animates out; the rest are already hidden.
-	if(current && current !== target){
+	// Deep-link landings skip enter/exit so the hashed section is already there.
+	if(!opts.instant && current && current !== target){
 		current.classList.add('animated');
 		ip_add_classes(current, exit);
 	}
 	parents.forEach(function(li){ li.classList.add('active'); });
-	target.classList.add('animated');
-	ip_add_classes(target, enter);
+	if(!opts.instant){
+		target.classList.add('animated');
+		ip_add_classes(target, enter);
+	}
 	sections.forEach(function(s){
 		s.classList.add('hidden');
 		s.classList.remove('active');
@@ -97,6 +144,9 @@ function ip_goto(href){
 	target.scrollTop = 0;
 	if(href !== '#home'){
 		ip_qr_close();
+	}
+	if(opts.updateHash !== false){
+		ip_sync_location(href);
 	}
 	// Defer so focus wins over the menu link that initiated navigation.
 	var focusToken = ++ip_section_focus_token;

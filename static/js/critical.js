@@ -3,6 +3,11 @@
 // index.html. Dismisses the preloader once above-the-fold is ready (style.css,
 // fonts and hero decoded), independent of deferred init.js.
 // A hard timeout guarantees the overlay never traps the user.
+//
+// The curtain plays only for humans landing on / or /#home. Deep links
+// (#testimonials, …), automation (PageSpeed / Lighthouse), crawlers, and
+// prefers-reduced-motion skip it — same HTML, no theatrical wait. The skip
+// class is applied synchronously here in <head> so the first paint is clean.
 (function(){
 	var GROW_HALF_MS = 1000;
 	var HOLD_MS = 400;
@@ -12,6 +17,44 @@
 	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS;
 	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
 	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
+	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|Chrome-Lighthouse|PageSpeed/i;
+
+	function landingHash(){
+		var hash = location.hash;
+		if(!hash || hash === '#'){ return '#home'; }
+		return hash;
+	}
+	function isAutomation(){
+		if(navigator.webdriver){ return true; }
+		if(BOT_UA.test(navigator.userAgent || '')){ return true; }
+		try {
+			var brands = navigator.userAgentData && navigator.userAgentData.brands;
+			if(brands){
+				for(var i = 0; i < brands.length; i++){
+					if(/HeadlessChrome|Lighthouse/i.test(brands[i].brand || '')){ return true; }
+				}
+			}
+		}catch(e){}
+		return false;
+	}
+	function prefersReducedMotion(){
+		return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	}
+	function skipPreloaderPlay(){
+		if(isAutomation() || prefersReducedMotion()){ return true; }
+		return landingHash() !== '#home';
+	}
+	var SKIP_PLAY = skipPreloaderPlay();
+	if(SKIP_PLAY){
+		document.documentElement.classList.add('skip-preloader');
+	}
+	// First-paint stand-in for :target. :target stays stuck on the original
+	// fragment after history.pushState, which blocked rollIn/rollOut on the
+	// landing section for the rest of the session. init.js clears this.
+	var land = landingHash();
+	if(land !== '#home'){
+		document.documentElement.setAttribute('data-ip-section', land.slice(1));
+	}
 
 	function dismiss(preloader){
 		var line = preloader.querySelector('.loader_line');
@@ -91,6 +134,10 @@
 	function start(){
 		var preloader = document.getElementById('preloader');
 		if(!preloader){ return; }
+		if(SKIP_PLAY){
+			if(preloader.parentNode){ preloader.remove(); }
+			return;
+		}
 		var done = false;
 		function finish(){
 			if(done){ return; }

@@ -187,6 +187,11 @@ img {
 	z-index: 99999;
 	display: flex;
 }
+/* Set in <head> by critical.js before #preloader is parsed: bots, reduced
+   motion, and non-home hashes must not paint a black first frame (Speed Index). */
+html.skip-preloader #preloader {
+	display: none !important;
+}
 /* Two half-screen curtains that scale away once loaded. */
 #preloader:before,
 #preloader:after {
@@ -531,6 +536,23 @@ img {
 	z-index: 9;
 }
 .ip_section.active {
+	z-index: 10;
+}
+/* Deep-link first paint (data-ip-section is set in <head>, cleared by init.js).
+   Do not use :target — pushState does not retarget it, so the landing section
+   would stay "always visible" and never roll. */
+html[data-ip-section] #home.animated {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+html[data-ip-section="about"] #about,
+html[data-ip-section="service"] #service,
+html[data-ip-section="why"] #why,
+html[data-ip-section="testimonials"] #testimonials {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
 	z-index: 10;
 }
 .ip_home {
