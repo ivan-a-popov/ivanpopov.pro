@@ -620,6 +620,64 @@ html,
 	.ip_title--right > :is(span, h2):after{margin-left: 0; margin-right: 20px;}
 }
 
+.ip_teaser__body{
+	--ip-teaser-lines: 6;
+	position: relative;
+	overflow: hidden;
+	max-height: calc(var(--ip-teaser-lines) * 1.7em);
+	transition: max-height .45s ease;
+}
+@supports (max-height: 1lh){
+	.ip_teaser__body{ max-height: calc(var(--ip-teaser-lines) * 1lh); }
+}
+@media (min-width: 768px){
+	.ip_teaser__body{ --ip-teaser-lines: 4; }
+}
+.ip_teaser__body::after{
+	content: "";
+	position: absolute;
+	inset: auto 0 0;
+	height: 3em;
+	background: linear-gradient(to bottom, transparent, var(--bg-color));
+	pointer-events: none;
+	transition: opacity .3s ease;
+}
+.ip_teaser.is-open .ip_teaser__body{ max-height: none; }
+.ip_teaser.is-open .ip_teaser__body::after{ opacity: 0; }
+.ip_teaser.is-static .ip_teaser__body{ max-height: none; }
+.ip_teaser.is-static .ip_teaser__body::after,
+.ip_teaser.is-static .ip_teaser__more{ display: none; }
+.ip_teaser__more{
+	display: inline-block;
+	margin: 8px 0 28px;
+	padding: 0;
+	border: 0;
+	background: none;
+	font: inherit;
+	font-weight: 500;
+	color: var(--text-main);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
+	cursor: pointer;
+	transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.ip_teaser__more:hover{
+	color: var(--accent);
+	text-decoration-color: transparent;
+}
+.ip_teaser__more:focus{
+	outline: none;
+}
+.ip_teaser__more:focus-visible{
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce){
+	.ip_teaser__body, .ip_teaser__body::after{ transition: none; }
+}
+
 /* PARTNERS (about) */
 .ip_partners{
 	list-style: none;

@@ -37,6 +37,7 @@ ip_ready(function(){
 	ip_swipe_navigation();
 	ip_keyboard_navigation();
 	ip_service_popup();
+	ip_teasers();
 	ip_qr_popup();
 	ip_cursor();
 	ip_testimonials_snap();
@@ -623,6 +624,147 @@ function ip_qr_popup(){
 	}
 }
 
+// -------------  WHY TEASERS  -------------------
+function ip_teasers(){
+	var teasers = ip_all('.ip_teaser');
+	if(!teasers.length){
+		return;
+	}
+	var DURATION = 450;
+	var reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+	function prefersReduce(){
+		return reduceMq.matches;
+	}
+	function collapsedMaxHeight(){
+		if(typeof CSS !== 'undefined' && CSS.supports && CSS.supports('max-height', '1lh')){
+			return 'calc(var(--ip-teaser-lines) * 1lh)';
+		}
+		return 'calc(var(--ip-teaser-lines) * 1.7em)';
+	}
+	function afterHeightTransition(body, done){
+		var finished = false;
+		function finish(e){
+			if(e && e.propertyName && e.propertyName !== 'max-height'){
+				return;
+			}
+			if(finished){
+				return;
+			}
+			finished = true;
+			body.removeEventListener('transitionend', finish);
+			done();
+		}
+		body.addEventListener('transitionend', finish);
+		window.setTimeout(finish, DURATION + 80);
+	}
+	function scrollSectionToTitle(teaser){
+		var section = teaser.closest('.ip_section');
+		var title = teaser.querySelector('.ip_title');
+		if(!section || !title){
+			return;
+		}
+		var sRect = section.getBoundingClientRect();
+		var tRect = title.getBoundingClientRect();
+		if(tRect.top >= sRect.top){
+			return;
+		}
+		var next = section.scrollTop + (tRect.top - sRect.top);
+		section.scrollTo({
+			top: Math.max(0, next),
+			behavior: prefersReduce() ? 'auto' : 'smooth'
+		});
+	}
+	function applyChrome(teaser, open){
+		var btn = teaser.querySelector('.ip_teaser__more');
+		var label = btn && btn.querySelector('.ip_teaser__more-label');
+		teaser.classList.toggle('is-open', open);
+		if(btn){
+			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+			if(label){
+				label.textContent = open
+					? (btn.getAttribute('data-label-open') || 'Свернуть')
+					: (btn.getAttribute('data-label-closed') || 'Развернуть');
+			}
+		}
+	}
+	function setExpanded(teaser, open){
+		if(teaser.classList.contains('is-animating')){
+			return;
+		}
+		var body = teaser.querySelector('.ip_teaser__body');
+		if(!body){
+			return;
+		}
+		if(prefersReduce()){
+			applyChrome(teaser, open);
+			body.style.maxHeight = open ? 'none' : '';
+			if(!open){
+				scrollSectionToTitle(teaser);
+			}
+			return;
+		}
+		teaser.classList.add('is-animating');
+		if(open){
+			body.style.maxHeight = body.scrollHeight + 'px';
+			applyChrome(teaser, true);
+			afterHeightTransition(body, function(){
+				body.style.maxHeight = 'none';
+				teaser.classList.remove('is-animating');
+			});
+			return;
+		}
+		body.style.maxHeight = body.scrollHeight + 'px';
+		void body.offsetHeight;
+		applyChrome(teaser, false);
+		body.style.maxHeight = collapsedMaxHeight();
+		scrollSectionToTitle(teaser);
+		afterHeightTransition(body, function(){
+			body.style.maxHeight = '';
+			teaser.classList.remove('is-animating');
+		});
+	}
+	function sync(teaser){
+		if(teaser.classList.contains('is-open') || teaser.classList.contains('is-animating')){
+			return;
+		}
+		var body = teaser.querySelector('.ip_teaser__body');
+		if(!body){
+			return;
+		}
+		teaser.classList.remove('is-static');
+		body.style.maxHeight = '';
+		void body.offsetHeight;
+		if(body.scrollHeight <= body.clientHeight + 1){
+			teaser.classList.add('is-static');
+		}
+	}
+	teasers.forEach(function(teaser){
+		var btn = teaser.querySelector('.ip_teaser__more');
+		if(btn){
+			var label = btn.querySelector('.ip_teaser__more-label');
+			if(!btn.getAttribute('data-label-closed')){
+				btn.setAttribute('data-label-closed', (label && label.textContent.trim()) || 'Развернуть');
+			}
+			btn.addEventListener('click', function(){
+				setExpanded(teaser, !teaser.classList.contains('is-open'));
+			});
+		}
+		sync(teaser);
+	});
+	var resizeTimer = null;
+	window.addEventListener('resize', function(){
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(function(){
+			teasers.forEach(sync);
+		}, 150);
+	});
+	if(document.fonts && document.fonts.ready){
+		document.fonts.ready.then(function(){
+			teasers.forEach(sync);
+		});
+	}
+}
+
 // ------------------   CURSOR    ----------------------
 function ip_cursor(){
 	var myCursor = ip_one('.mouse-cursor');
@@ -634,7 +776,7 @@ function ip_cursor(){
 	if(!inner || !outer){
 		return;
 	}
-	var hoverSelector = 'a';
+	var hoverSelector = 'a, button';
 	var freeze = false;
 	window.addEventListener('mousemove', function(s){
 		if(!freeze){
