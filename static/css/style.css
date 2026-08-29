@@ -349,7 +349,9 @@ html,
 	--ip-home-rule-width: clamp(40px, calc(25px + 2.5vw), 70px);
 	--ip-home-rule-height: clamp(3px, calc(2px + 0.15vw), 5px);
 	--ip-home-headline-gap: clamp(24px, calc(12px + 1.4vw), 35px);
-	padding: 14px 20px 0;
+	/* Room below the 42px icons so the 1.4 open-scale cannot paint past the overlay. */
+	--ip-home-copy-pad-bottom: 20px;
+	padding: 14px 20px var(--ip-home-copy-pad-bottom);
 }
 .ip_home_name{
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
@@ -372,7 +374,7 @@ html,
 .ip_headline_tagline{
 	margin-top: 8px;
 	margin-bottom: var(--ip-home-headline-gap);
-	font-size: 1.375rem;
+	font-size: 1.2rem;
 	font-weight: 600;
 	color: var(--text-main);
 	--ip-tagline-shimmer-peak: color-mix(in srgb, var(--text-main) 6%, #fff 94%);
@@ -437,6 +439,9 @@ html,
 .ip_home_social a.ip_qr_open--active{
 	opacity: 1;
 	transform: scale(1.4);
+}
+#home.ip_qr_shown .ip_home_social{
+	visibility: hidden;
 }
 /* The QR glyph (qr.svg) is a raster of black modules on transparent — an
    <img>, so it can't inherit currentColor. Invert it in dark mode. */
@@ -515,16 +520,18 @@ html,
 		display: none;
 	}
 	.ip_home_copy{
-		padding: 0 20px;
+		padding: 0 20px var(--ip-home-copy-pad-bottom);
 	}
 }
 @media (min-width: 1024px){
 	.ip_home_copy{
-		padding: 0 0 0 50px;
+		padding: 0 0 var(--ip-home-copy-pad-bottom) 50px;
 	}
-	.ip_headline,
-	.ip_headline_tagline{
+	.ip_headline{
 		font-size: 1.4375rem;
+	}
+	.ip_headline_tagline{
+		font-size: 1.25rem;
 	}
 	.ip_qr_panel__close{
 		width: 44px;
