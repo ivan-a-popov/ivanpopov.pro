@@ -37,11 +37,12 @@ ip_ready(function(){
 	ip_swipe_navigation();
 	ip_keyboard_navigation();
 	ip_service_popup();
-	ip_teasers();
 	ip_qr_popup();
 	ip_cursor();
-	ip_testimonials_snap();
 	ip_animated_headline();
+	// Teaser measure + testimonials clones force layout. Run them when that
+	// section is actually shown, not on every home-page load (Lighthouse TBT).
+	ip_enhance_section(ip_href_from_location());
 });
 
 function ip_href_from_location(){
@@ -149,6 +150,7 @@ function ip_goto(href, opts){
 	if(opts.updateHash !== false){
 		ip_sync_location(href);
 	}
+	ip_enhance_section(href);
 	// Defer so focus wins over the menu link that initiated navigation.
 	var focusToken = ++ip_section_focus_token;
 	setTimeout(function(){
@@ -226,6 +228,13 @@ function ip_navigate_section(step, linkSelector, hrefOpts){
 	}
 	ip_goto(order[nextIndex]);
 	return true;
+}
+function ip_enhance_section(href){
+	if(href === '#whyme'){
+		ip_teasers();
+	}else if(href === '#testimonials'){
+		ip_testimonials_snap();
+	}
 }
 function ip_page_transition(){
 	ip_all('.transition_link a').forEach(function(link){
@@ -627,9 +636,10 @@ function ip_qr_popup(){
 // -------------  WHY TEASERS  -------------------
 function ip_teasers(){
 	var teasers = ip_all('.ip_teaser');
-	if(!teasers.length){
+	if(!teasers.length || teasers[0].hasAttribute('data-ip-teasers')){
 		return;
 	}
+	teasers[0].setAttribute('data-ip-teasers', '');
 	var DURATION = 450;
 	var tokens = new WeakMap();
 	var reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -838,9 +848,10 @@ function ip_testimonials_snap(){
 		return;
 	}
 	var list = ip_one('.testimonials .testimonials-snap');
-	if(!list){
+	if(!list || list.classList.contains('is-enhanced')){
 		return;
 	}
+	list.classList.add('is-enhanced');
 	var items = list.querySelectorAll(':scope > li');
 	if(items.length < 2){
 		return;
