@@ -654,16 +654,17 @@ html[data-ip-section="testimonials"] #testimonials {
 	object-position: center 55%;
 }
 
-.ip_home .content {
+.ip_home_copy {
+	position: relative;
 	--ip-home-name-gap: clamp(16px, calc(16px + 1.2vw), 30px);
-	--ip-home-line-gap: clamp(16px, calc(18px + 1.2vw), 30px);
-	--ip-home-line-width: clamp(40px, calc(25px + 2.5vw), 70px);
-	--ip-home-line-height: clamp(3px, calc(2px + 0.15vw), 5px);
-	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
+	--ip-home-rule-gap: clamp(16px, calc(18px + 1.2vw), 30px);
+	--ip-home-rule-width: clamp(40px, calc(25px + 2.5vw), 70px);
+	--ip-home-rule-height: clamp(3px, calc(2px + 0.15vw), 5px);
+	--ip-home-headline-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 	padding: 14px 20px 0;
 }
 
-.ip_home .name {
+.ip_home_name {
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
 	font-weight: 650;
 	text-transform: uppercase;
@@ -673,34 +674,40 @@ html[data-ip-section="testimonials"] #testimonials {
 	line-height: 1.2;
 }
 
-.ip_home .line {
+.ip_home_rule {
 	display: inline-block;
-	width: var(--ip-home-line-width);
-	height: var(--ip-home-line-height);
+	width: var(--ip-home-rule-width);
+	height: var(--ip-home-rule-height);
 	background-color: var(--text-sub);
-	margin-bottom: var(--ip-home-line-gap);
+	margin-bottom: var(--ip-home-rule-gap);
 }
 
-.ip_home .job {
-	margin-bottom: var(--ip-home-job-gap);
+.ip_headline,
+.ip_headline_tagline {
 	font-size: 1.375rem;
 	color: var(--text-main);
 	font-family: Onest, "Onest Fallback", sans-serif;
 	line-height: 1.2;
 }
 
-/* Animated headline: duplicated from style.css. Without these rules the six
+.ip_headline {
+	font-weight: inherit;
+}
+
+/* Animated headline: duplicated from style.css. Without these rules the
    phrases paint stacked (and reflow again if init.js starts the width
    animation before style.css applies) — Lighthouse reported that collapse as
    a ~0.93 full-viewport CLS on .ip_all_wrap. */
-.cd-words-wrapper {
+.ip_headline_words {
 	display: inline-block;
 	position: relative;
+	overflow: hidden;
+	padding: .2em 0;
 	text-align: left;
 	vertical-align: top;
 }
 
-.cd-words-wrapper b {
+.ip_headline_words b {
 	display: inline-block;
 	position: absolute;
 	left: 0;
@@ -709,28 +716,18 @@ html[data-ip-section="testimonials"] #testimonials {
 	opacity: 0;
 }
 
-.cd-words-wrapper b.is-visible {
+.ip_headline_words b.is-visible {
 	position: relative;
 	opacity: 1;
 }
 
-.cd-headline.clip span {
-	display: inline-block;
-	padding: .2em 0;
-}
-
-.cd-headline.clip .cd-words-wrapper {
-	overflow: hidden;
-	vertical-align: top;
-}
-
-.ip_home .job b {
+.ip_headline b {
 	font-weight: 600;
 }
 
-.ip_home .job .blc {
-	display: block;
+.ip_headline_tagline {
 	margin-top: 8px;
+	margin-bottom: var(--ip-home-headline-gap);
 	font-weight: 600;
 }
 
@@ -854,7 +851,7 @@ html[data-ip-section="testimonials"] #testimonials {
 		object-position: center 40%;
 	}
 
-	.ip_home .content {
+	.ip_home_copy {
 		padding-top: 20px;
 	}
 }
@@ -908,7 +905,7 @@ html[data-ip-section="testimonials"] #testimonials {
 		display: none;
 	}
 
-	.ip_home .content {
+	.ip_home_copy {
 		padding: 0 20px;
 	}
 }
@@ -938,11 +935,12 @@ html[data-ip-section="testimonials"] #testimonials {
 		padding-right: calc(var(--ip-menu-padding-inline) + var(--ip-menu-scale-bleed));
 	}
 
-	.ip_home .content {
+	.ip_home_copy {
 		padding: 0 0 0 50px;
 	}
 
-	.ip_home .job {
+	.ip_headline,
+	.ip_headline_tagline {
 		font-size: 1.4375rem;
 	}
 }

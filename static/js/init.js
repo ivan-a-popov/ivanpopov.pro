@@ -1022,23 +1022,31 @@ function ip_testimonials_snap(){
 }
 
 // ---------------   ANIMATED HEADLINE   ---------------
+function ip_mark_headline_word(word, on){
+	word.classList.toggle('is-visible', on);
+	word.classList.toggle('is-hidden', !on);
+	if(on){
+		word.removeAttribute('aria-hidden');
+		return;
+	}
+	word.setAttribute('aria-hidden', 'true');
+}
 function ip_animated_headline(){
 	var startDelay = 1600;           // hold the first phrase, then start
 	var revealDuration = 850;        // type / erase width animation duration
-	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ blc shimmer)
+	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ tagline shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	// Automation (class from critical.js): keep the first phrase static so the
 	// Lighthouse filmstrip stops changing — perpetual rotation taxes Speed Index.
 	var freeze = document.documentElement.classList.contains('ip-automation');
-	ip_all('.cd-headline.clip').forEach(function(headline){
-		var wrapper = headline.querySelector('.cd-words-wrapper');
+	ip_all('.ip_headline').forEach(function(headline){
+		var wrapper = headline.querySelector('.ip_headline_words');
 		if(!wrapper){ return; }
 		var words = [...wrapper.querySelectorAll('b')];
 		if(words.length < 2){ return; }
 		var visible = wrapper.querySelector('.is-visible') || words[0];
 		words.forEach(function(w){
-			w.classList.toggle('is-visible', w === visible);
-			w.classList.toggle('is-hidden', w !== visible);
+			ip_mark_headline_word(w, w === visible);
 		});
 		if(freeze){ return; }
 		function takeNext(word){
@@ -1046,10 +1054,8 @@ function ip_animated_headline(){
 			return words[(i + 1) % words.length];
 		}
 		function switchWord(oldWord, newWord){
-			oldWord.classList.remove('is-visible');
-			oldWord.classList.add('is-hidden');
-			newWord.classList.remove('is-hidden');
-			newWord.classList.add('is-visible');
+			ip_mark_headline_word(oldWord, false);
+			ip_mark_headline_word(newWord, true);
 		}
 		window.setTimeout(function(){
 			if(reduce){
@@ -1084,16 +1090,18 @@ function ip_animated_headline(){
 					showWord(nextWord);
 				});
 			}
-			var blc = headline.querySelector('.blc');
-			function triggerBlcShimmer(){
-				if(!blc){ return; }
-				blc.classList.remove('is-shimmer');
-				void blc.offsetWidth;
-				blc.classList.add('is-shimmer');
+			var tagline = headline.parentElement
+				? headline.parentElement.querySelector('.ip_headline_tagline')
+				: null;
+			function triggerTaglineShimmer(){
+				if(!tagline){ return; }
+				tagline.classList.remove('is-shimmer');
+				void tagline.offsetWidth;
+				tagline.classList.add('is-shimmer');
 			}
 			function showWord(word){
 				animateWidth(word.offsetWidth + 10, function(){
-					triggerBlcShimmer();
+					triggerTaglineShimmer();
 					window.setTimeout(function(){ hideWord(word); }, revealAnimationDelay);
 				}, 'linear');
 			}

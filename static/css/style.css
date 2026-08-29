@@ -134,14 +134,16 @@ h1, h2, h3, h4, h5, h6 {
 .rollOutBack {
   animation-name: rollOutBack;
 }
-/*	Animated headline (clip effect) */
-.cd-words-wrapper {
+/*	HOME HEADLINE (clip rotation) */
+.ip_headline_words {
   display: inline-block;
   position: relative;
+  overflow: hidden;
+  padding: .2em 0;
   text-align: left;
   vertical-align: top;
 }
-.cd-words-wrapper b {
+.ip_headline_words b {
   display: inline-block;
   position: absolute;
   left: 0;
@@ -149,19 +151,11 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   opacity: 0;
 }
-.cd-words-wrapper b.is-visible {
+.ip_headline_words b.is-visible {
   position: relative;
   opacity: 1;
 }
-.cd-headline.clip span {
-  display: inline-block;
-  padding: .2em 0;
-}
-.cd-headline.clip .cd-words-wrapper {
-  overflow: hidden;
-  vertical-align: top;
-}
-.cd-headline.clip .cd-words-wrapper::after {
+.ip_headline_words::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -346,63 +340,64 @@ html,
 	object-fit: cover;
 	object-position: center 55%;
 }
-.ip_home .content{
-	/* Fluid gaps around the name/line/job stack — scale with viewport. */
+.ip_home_copy{
+	/* Containing block for the QR overlay (covers name + headline + social). */
+	position: relative;
+	/* Fluid gaps around the name / rule / headline — scale with viewport. */
 	--ip-home-name-gap: clamp(16px, calc(16px + 1.2vw), 30px);
-	--ip-home-line-gap: clamp(16px, calc(18px + 1.2vw), 30px);
-	--ip-home-line-width: clamp(40px, calc(25px + 2.5vw), 70px);
-	--ip-home-line-height: clamp(3px, calc(2px + 0.15vw), 5px);
-	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
+	--ip-home-rule-gap: clamp(16px, calc(18px + 1.2vw), 30px);
+	--ip-home-rule-width: clamp(40px, calc(25px + 2.5vw), 70px);
+	--ip-home-rule-height: clamp(3px, calc(2px + 0.15vw), 5px);
+	--ip-home-headline-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 	padding: 14px 20px 0;
 }
-.ip_home_stack{
-	position: relative;
-}
-.ip_home .name{
+.ip_home_name{
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
 	font-weight: 550;
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
 }
-.ip_home .line{
+.ip_home_rule{
 	display: inline-block;
-	width: var(--ip-home-line-width);
-	height: var(--ip-home-line-height);
+	width: var(--ip-home-rule-width);
+	height: var(--ip-home-rule-height);
 	background-color: var(--text-sub);
-	margin-bottom: var(--ip-home-line-gap);
+	margin-bottom: var(--ip-home-rule-gap);
 }
-.ip_home .job{
-	margin-bottom: var(--ip-home-job-gap);
+.ip_headline{
 	font-size: 1.375rem;
+	font-weight: inherit;
 	color: var(--text-main);
 }
-.ip_home .job .blc{
-	display: block;
+.ip_headline_tagline{
 	margin-top: 8px;
+	margin-bottom: var(--ip-home-headline-gap);
+	font-size: 1.375rem;
 	font-weight: 600;
-	--blc-shimmer-peak: color-mix(in srgb, var(--text-main) 6%, #fff 94%);
-	--blc-shimmer-shoulder: color-mix(in srgb, var(--text-main) 35%, #fff 65%);
+	color: var(--text-main);
+	--ip-tagline-shimmer-peak: color-mix(in srgb, var(--text-main) 6%, #fff 94%);
+	--ip-tagline-shimmer-shoulder: color-mix(in srgb, var(--text-main) 35%, #fff 65%);
 }
 @media (prefers-color-scheme: dark){
-	.ip_home .job .blc{
-		--blc-shimmer-peak: #fff;
-		--blc-shimmer-shoulder: color-mix(in srgb, var(--text-main) 12%, #fff 88%);
+	.ip_headline_tagline{
+		--ip-tagline-shimmer-peak: #fff;
+		--ip-tagline-shimmer-shoulder: color-mix(in srgb, var(--text-main) 12%, #fff 88%);
 	}
 }
 /* Left-to-right gleam on “с человеческим лицом” during each clip hold (see init.js). */
-@keyframes ip-blc-shimmer{
+@keyframes ip-tagline-shimmer{
 	0%{ background-position: 130% center; }
 	100%{ background-position: -30% center; }
 }
 @media (prefers-reduced-motion: no-preference){
-	.ip_home .job .blc.is-shimmer{
+	.ip_headline_tagline.is-shimmer{
 		background-image: linear-gradient(
 			90deg,
 			var(--text-main) 0%,
 			var(--text-main) 32%,
-			var(--blc-shimmer-shoulder) 42%,
-			var(--blc-shimmer-peak) 50%,
-			var(--blc-shimmer-shoulder) 58%,
+			var(--ip-tagline-shimmer-shoulder) 42%,
+			var(--ip-tagline-shimmer-peak) 50%,
+			var(--ip-tagline-shimmer-shoulder) 58%,
 			var(--text-main) 68%,
 			var(--text-main) 100%
 		);
@@ -411,10 +406,10 @@ html,
 		-webkit-background-clip: text;
 		color: transparent;
 		-webkit-text-fill-color: transparent;
-		animation: ip-blc-shimmer 2000ms ease-out 1;
+		animation: ip-tagline-shimmer 2000ms ease-out 1;
 	}
 }
-.ip_home .job b{
+.ip_headline b{
 	font-weight: 650;
 }
 .ip_home_social{
@@ -504,7 +499,7 @@ html,
 		aspect-ratio: 1 / 1;
 		object-position: center 40%;
 	}
-	.ip_home .content{
+	.ip_home_copy{
 		padding-top: 20px;
 	}
 }
@@ -519,15 +514,16 @@ html,
 	.ip_home_photo{
 		display: none;
 	}
-	.ip_home .content{
+	.ip_home_copy{
 		padding: 0 20px;
 	}
 }
 @media (min-width: 1024px){
-	.ip_home .content{
+	.ip_home_copy{
 		padding: 0 0 0 50px;
 	}
-	.ip_home .job{
+	.ip_headline,
+	.ip_headline_tagline{
 		font-size: 1.4375rem;
 	}
 	.ip_qr_panel__close{
