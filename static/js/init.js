@@ -645,7 +645,7 @@ function ip_teasers(){
 		if(typeof CSS !== 'undefined' && CSS.supports && CSS.supports('max-height', '1lh')){
 			return 'calc(var(--ip-teaser-lines) * 1lh)';
 		}
-		return 'calc(var(--ip-teaser-lines) * 1.7em)';
+		return 'calc(var(--ip-teaser-lines) * var(--ip-teaser-lh, 1.8em))';
 	}
 	function afterHeightTransition(teaser, body, token, done){
 		var finished = false;

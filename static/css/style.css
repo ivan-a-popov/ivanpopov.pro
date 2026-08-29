@@ -272,7 +272,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .ip_section .section_inner{
 	position: relative;
-	padding: 20px 20px 0;
+	padding: clamp(24px, 2.5vw, 40px) clamp(20px, 2.8vw, 40px) 0;
 }
 /* Phones/tablets: room below the last line for fixed swipe dots + home indicator. */
 @media (max-width: 1023px){
@@ -533,6 +533,10 @@ html,
 /* overflow:hidden clips the 5000px title rule drawn by :after below. */
 .ip_title{
 	overflow: hidden;
+	margin-bottom: 0.4em;
+}
+.ip_info{
+	line-height: 1.8;
 }
 /* span and h2 are interchangeable here: inline-block is what anchors the rule
    below at the end of the text, and font-size/line-height undo the h1-h6 base. */
@@ -569,18 +573,22 @@ html,
 }
 /* Single column on phones, two columns from 768px. */
 .ip_info .wrapper {
-	margin-top: 20px;
+	margin-top: 0.55em;
 }
 .ip_info .left{
-	margin-bottom: 10px;
+	margin-bottom: 0.75em;
 }
 .ip_info .left p,
 .ip_info .right p {
-	margin-bottom: 15px;
+	margin-bottom: 1.2em;
+	letter-spacing: 0.012em;
 }
 .ip_info .left p:last-child,
 .ip_info .right p:last-child {
-	margin-bottom: 25px;
+	margin-bottom: 0;
+}
+.ip_info > .wrapper + .ip_title{
+	margin-top: clamp(1.75rem, 3vw, 2.5rem);
 }
 .ip_section p a,
 .ip_modalbox p a {
@@ -601,10 +609,13 @@ html,
 	.ip_info .wrapper{
 		display: flex;
 		justify-content: space-between;
+		gap: clamp(28px, 4vw, 56px);
 	}
 	.ip_info .left,
 	.ip_info .right{
-		width: 46%;
+		width: auto;
+		flex: 1 1 0;
+		min-width: 0;
 	}
 	.ip_info .left{
 		margin-bottom: 0;
@@ -620,11 +631,18 @@ html,
 	.ip_title--right > :is(span, h2):after{margin-left: 0; margin-right: 20px;}
 }
 
+.ip_teaser + .ip_teaser{
+	margin-top: clamp(1.75rem, 3.4vw, 2.75rem);
+}
+.ip_teaser .wrapper{
+	margin-top: 0.2em;
+}
 .ip_teaser__body{
 	--ip-teaser-lines: 6;
+	--ip-teaser-lh: 1.8em;
 	position: relative;
 	overflow: hidden;
-	max-height: calc(var(--ip-teaser-lines) * 1.7em);
+	max-height: calc(var(--ip-teaser-lines) * var(--ip-teaser-lh));
 	transition: max-height .45s ease;
 }
 @supports (max-height: 1lh){
@@ -663,7 +681,7 @@ html,
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 8px 12px;
-	margin: 20px 0 25px;
+	margin: 1.5em 0 2em;
 	padding: 0;
 }
 .partner-card{
@@ -746,7 +764,7 @@ html,
 .testimonials .testimonial-quote{
 	position: relative;
 	border: 2px solid var(--quote-border);
-	padding: 15px;
+	padding: 20px;
 	margin-bottom: 30px;
 }
 .testimonials .testimonial-quote:before{
@@ -1074,8 +1092,9 @@ html,
 	padding-top: 20px;
 }
 .ip_modalbox .service_popup_informations .descriptions p{
-	margin-bottom: 15px;
+	margin-bottom: 1.2em;
 	margin-right: 10px;
+	letter-spacing: 0.012em;
 }
 /* Partner popup: no hero photo. Theme-colored header + CTA. */
 .ip_modalbox.ip_modalbox--partner .box_inner{
