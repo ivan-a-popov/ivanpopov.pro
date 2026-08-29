@@ -517,7 +517,7 @@ html.skip-preloader #preloader {
 	}
 
 	.ip_header .menu ul li:not(.active) a:hover b {
-		font-weight: 600;
+		font-weight: 550;
 	}
 
 	.ip_header .menu ul li:not(.active) a:hover .ip_menu_sub {
@@ -688,7 +688,7 @@ html[data-ip-section="testimonials"] #testimonials {
 
 .ip_home .name {
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
-	font-weight: 550;
+	font-weight: 650;
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
 	font-family: Onest, "Onest Fallback", sans-serif;
