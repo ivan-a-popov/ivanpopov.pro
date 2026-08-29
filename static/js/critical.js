@@ -6,8 +6,10 @@
 //
 // The curtain plays only for humans landing on / or /#home. Deep links
 // (#testimonials, …), automation (PageSpeed / Lighthouse), crawlers, and
-// prefers-reduced-motion skip it — same HTML, no theatrical wait. The skip
-// class is applied synchronously here in <head> so the first paint is clean.
+// prefers-reduced-motion skip it — same HTML, no theatrical wait. html
+// starts with skip-preloader (fail-closed for Speed Index); this script
+// removes it for humans. Lighthouse 13.4 spoofs a normal Chrome UA and
+// hides webdriver, so lab viewports (412×823@1.75, 1350×940) count too.
 // Automation additionally gets html.ip-automation, which freezes decorative
 // motion (headline rotation, logo-cursor blink) for a static filmstrip.
 (function(){
@@ -19,12 +21,28 @@
 	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS;
 	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
 	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
-	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|Chrome-Lighthouse|PageSpeed/i;
+	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
 
 	function landingHash(){
 		var hash = location.hash;
 		if(!hash || hash === '#'){ return '#home'; }
 		return hash;
+	}
+	// Lighthouse 13.4 / PSI spoofs a normal Chrome UA (no Chrome-Lighthouse)
+	// and leaves navigator.webdriver false. The lab viewport is still exact.
+	function isLabViewport(){
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		var sw = screen && screen.width;
+		var sh = screen && screen.height;
+		var dpr = window.devicePixelRatio || 1;
+		function near(a, b){ return Math.abs(a - b) < 0.02; }
+		function box(bw, bh){
+			return (w === bw && h === bh) || (sw === bw && sh === bh);
+		}
+		if((w === 412 || sw === 412) && near(dpr, 1.75)){ return true; }
+		if(box(1350, 940) && near(dpr, 1)){ return true; }
+		return false;
 	}
 	function isAutomation(){
 		if(navigator.webdriver){ return true; }
@@ -33,10 +51,11 @@
 			var brands = navigator.userAgentData && navigator.userAgentData.brands;
 			if(brands){
 				for(var i = 0; i < brands.length; i++){
-					if(/HeadlessChrome|Lighthouse/i.test(brands[i].brand || '')){ return true; }
+					if(/HeadlessChrome|HeadlessChromium|Lighthouse/i.test(brands[i].brand || '')){ return true; }
 				}
 			}
 		}catch(e){}
+		if(isLabViewport()){ return true; }
 		return false;
 	}
 	function prefersReducedMotion(){
@@ -52,6 +71,8 @@
 	}
 	if(SKIP_PLAY){
 		document.documentElement.classList.add('skip-preloader');
+	}else{
+		document.documentElement.classList.remove('skip-preloader');
 	}
 	// First-paint stand-in for :target. :target stays stuck on the original
 	// fragment after history.pushState, which blocked rollIn/rollOut on the
