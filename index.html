@@ -88,7 +88,7 @@
 	</noscript>
 	<link rel="preload" href="static/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="static/fonts/onest/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
-	<link rel="preload" href="static/img/about/ip-foto-mobile.webp" as="image" media="(max-width: 639px)"
+	<link rel="preload" href="static/img/about/ip-foto-mobile.webp" as="image" media="(max-width: 639.98px)"
 		fetchpriority="high">
 	<link rel="preload" href="static/img/about/ip-foto.webp" as="image" media="(min-width: 640px)" fetchpriority="high">
 	<!-- STYLES -->
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', start);
 					  Media queries pair with the preloads in <head> and the 640px
 					  CSS breakpoint; real photo stays the fallback src. -->
 					<picture>
-						<source media="(max-width: 639px)"
+						<source media="(max-width: 639.98px)"
 							srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 						<img class="author_photo" id="author_photo_img" src="static/img/about/ip-foto.webp" alt="" width="610"
 							height="825" decoding="async" fetchpriority="high">
