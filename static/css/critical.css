@@ -341,11 +341,11 @@ html.skip-preloader #preloader {
 	height: 100dvh;
 	max-width: var(--ip-layout-max);
 	margin-inline: auto;
-	/* The --ip-col-* column split consumed by .author_image / .main_content
-	   below is defined in critical.css together with the other layout vars.
-	   Portrait hidden on phones, widens through the breakpoints. */
-	--ip-col-left: 0%;
-	--ip-col-right: 100%;
+	/* Desktop-first column split so the LCP portrait has a real box without
+	   waiting on a min-width query (Lantern's pessimistic graph ignores those).
+	   Phones override to 0/100 in the max-width: 639px block. */
+	--ip-col-left: 36%;
+	--ip-col-right: 64%;
 	--ip-layout-max: 1880px;
 	--ip-bar-height: 48px;
 	--ip-footer-height: calc(7px + .5vw);
@@ -574,22 +574,24 @@ html.skip-preloader #preloader {
 .ip_mainpart .author_image {
 	position: absolute;
 	top: 0;
+	left: 0;
+	bottom: 0;
 	width: var(--ip-col-left);
-	height: 0;
+	height: auto;
 	z-index: 15;
 	overflow: hidden;
-	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
 }
 
 .ip_mainpart .author_image .author_image_inner {
 	position: absolute;
 	inset: 0;
 	width: 100%;
-	height: 0;
+	height: auto;
 	overflow: hidden;
-	opacity: 0;
+	opacity: 1;
 }
 
 .ip_mainpart .author_image .author_image_inner .author_photo {
@@ -598,10 +600,10 @@ html.skip-preloader #preloader {
 	inset: 0;
 	display: block;
 	width: 100%;
-	height: 0;
+	height: 100%;
 	object-fit: cover;
 	object-position: center;
-	opacity: 0;
+	opacity: 1;
 	pointer-events: none;
 	user-select: none;
 }
@@ -827,6 +829,24 @@ html[data-ip-section="testimonials"] #testimonials {
 }
 
 @media (max-width: 639px) {
+	.ip_all_wrap {
+		--ip-col-left: 0%;
+		--ip-col-right: 100%;
+	}
+
+	.ip_mainpart .author_image {
+		height: 0;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	.ip_mainpart .author_image .author_image_inner,
+	.ip_mainpart .author_image .author_image_inner .author_photo {
+		height: 0;
+		opacity: 0;
+	}
+
 	.ip_footer {
 		justify-content: center;
 	}
@@ -866,8 +886,8 @@ html[data-ip-section="testimonials"] #testimonials {
 
 @media (min-width: 640px) {
 	.ip_all_wrap {
-		/* Column split consumed by .author_image / .main_content.
-		  Portrait hidden on phones, widens through the breakpoints. */
+		/* Same split as the default; restated so later breakpoints can tweak
+		   menu gap without losing the columns. */
 		--ip-col-left: 36%;
 		--ip-col-right: 64%;
 		--ip-menu-gap: clamp(10px, 1.4vw, 28px);
@@ -900,29 +920,6 @@ html[data-ip-section="testimonials"] #testimonials {
 
 	.ip_header .menu ul li a {
 		font-size: 1rem;
-	}
-
-	.ip_mainpart .author_image {
-		top: 0;
-		left: 0;
-		bottom: 0;
-		height: auto;
-		opacity: 1;
-		visibility: visible;
-		pointer-events: auto;
-	}
-
-	.ip_mainpart .author_image .author_image_inner,
-	.ip_mainpart .author_image .author_image_inner .author_photo {
-		opacity: 1;
-	}
-
-	.ip_mainpart .author_image .author_image_inner {
-		height: auto;
-	}
-
-	.ip_mainpart .author_image .author_image_inner .author_photo {
-		height: 100%;
 	}
 
 	.ip_home {
