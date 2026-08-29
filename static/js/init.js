@@ -31,7 +31,11 @@ ip_ready(function(){
 	ip_mark_touch_device();
 	ip_apply_landing_section();
 	ip_init_section_focus();
-	ip_build_swipe_nav();
+	// Dots are display:none on desktop; inserting them still dirties layout
+	// before the headline/focus reads (Forced reflow on 1350px Lighthouse).
+	if(ip_one('.ip_all_wrap.has-touch')){
+		ip_build_swipe_nav();
+	}
 	ip_page_transition();
 	ip_history_navigation();
 	ip_swipe_navigation();
@@ -186,7 +190,9 @@ function ip_init_section_focus(){
 			section.setAttribute('tabindex', '-1');
 		}
 	});
-	ip_focus_section(ip_active_section());
+	// Don't focus() on first load. focus() flushes the whole desktop
+	// two-column tree (author photo + menu) and is the remaining
+	// Forced-reflow source after teasers/snap were deferred.
 }
 // Shared by swipe + keyboard section navigation.
 var IP_NAV_LINKS_HEADER = '.ip_header .menu .transition_link a';
@@ -796,39 +802,45 @@ function ip_teasers(){
 
 // ------------------   CURSOR    ----------------------
 function ip_cursor(){
-	var myCursor = ip_one('.mouse-cursor');
-	if(!myCursor){
+	if(document.documentElement.classList.contains('ip-automation')){
 		return;
 	}
-	var inner = ip_one('.cursor-inner');
-	var outer = ip_one('.cursor-outer');
-	if(!inner || !outer){
+	if(!window.matchMedia('(hover: hover) and (pointer: fine)').matches){
 		return;
 	}
-	var hoverSelector = 'a, button, .ip_teaser:not(.is-static)';
-	var freeze = false;
-	window.addEventListener('mousemove', function(s){
-		if(!freeze){
-			outer.style.transform = 'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
-		}
-		inner.style.transform = 'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
-	});
-	document.body.addEventListener('mouseover', function(e){
-		if(e.target.closest && e.target.closest(hoverSelector)){
-			inner.classList.add('cursor-hover');
-			outer.classList.add('cursor-hover');
-		}
-	});
-	document.body.addEventListener('mouseout', function(e){
-		var matched = e.target.closest && e.target.closest(hoverSelector);
-		if(!matched){
+	function bind(){
+		window.removeEventListener('pointermove', bind);
+		var inner = ip_one('.cursor-inner');
+		var outer = ip_one('.cursor-outer');
+		if(!inner || !outer){
 			return;
 		}
-		inner.classList.remove('cursor-hover');
-		outer.classList.remove('cursor-hover');
-	});
-	inner.style.visibility = 'visible';
-	outer.style.visibility = 'visible';
+		var hoverSelector = 'a, button, .ip_teaser:not(.is-static)';
+		var freeze = false;
+		window.addEventListener('mousemove', function(s){
+			if(!freeze){
+				outer.style.transform = 'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
+			}
+			inner.style.transform = 'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
+		});
+		document.body.addEventListener('mouseover', function(e){
+			if(e.target.closest && e.target.closest(hoverSelector)){
+				inner.classList.add('cursor-hover');
+				outer.classList.add('cursor-hover');
+			}
+		});
+		document.body.addEventListener('mouseout', function(e){
+			var matched = e.target.closest && e.target.closest(hoverSelector);
+			if(!matched){
+				return;
+			}
+			inner.classList.remove('cursor-hover');
+			outer.classList.remove('cursor-hover');
+		});
+		inner.style.visibility = 'visible';
+		outer.style.visibility = 'visible';
+	}
+	window.addEventListener('pointermove', bind, { once: true, passive: true });
 }
 
 
@@ -893,11 +905,7 @@ function ip_testimonials_snap(){
 		// Instant reposition: bypass CSS scroll-behavior:smooth so the loop wrap
 		// is invisible. Scroll the track only — scrollIntoView() would also move
 		// the ancestor .ip_section (overflow-y: scroll) and break layout.
-		var prev = list.style.scrollBehavior;
-		list.style.scrollBehavior = 'auto';
-		list.scrollLeft = slide.offsetLeft;
-		void list.offsetWidth;
-		list.style.scrollBehavior = prev;
+		list.scrollTo({ left: slide.offsetLeft, behavior: 'instant' });
 		currentDom = domIndex;
 	}
 	function scrollToDom(domIndex){
@@ -1015,7 +1023,7 @@ function ip_testimonials_snap(){
 
 // ---------------   ANIMATED HEADLINE   ---------------
 function ip_animated_headline(){
-	var animationDelay = 1200;       // initial wait before the first erase
+	var startDelay = 1600;           // hold the first phrase, then start
 	var revealDuration = 850;        // type / erase width animation duration
 	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ blc shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1043,53 +1051,54 @@ function ip_animated_headline(){
 			newWord.classList.remove('is-hidden');
 			newWord.classList.add('is-visible');
 		}
-		// Reduced motion: skip the width typing, just swap phrases on a timer.
-		if(reduce){
-			wrapper.style.width = 'auto';
-			var idx = words.indexOf(visible);
-			window.setInterval(function(){
-				var cur = words[idx];
-				idx = (idx + 1) % words.length;
-				switchWord(cur, words[idx]);
-			}, animationDelay + revealAnimationDelay + revealDuration);
-			return;
-		}
-		function animateWidth(px, done, timingFn){
-			wrapper.style.transition = 'width ' + revealDuration + 'ms ' + (timingFn || 'ease');
-			void wrapper.offsetWidth; // reflow so the transition runs from current width
-			wrapper.style.width = px + 'px';
-			var finished = false;
-			function onEnd(e){
-				if(e && e.propertyName && e.propertyName !== 'width'){ return; }
-				if(finished){ return; }
-				finished = true;
-				wrapper.removeEventListener('transitionend', onEnd);
-				done();
+		window.setTimeout(function(){
+			if(reduce){
+				wrapper.style.width = 'auto';
+				var idx = words.indexOf(visible);
+				window.setInterval(function(){
+					var cur = words[idx];
+					idx = (idx + 1) % words.length;
+					switchWord(cur, words[idx]);
+				}, startDelay + revealAnimationDelay + revealDuration);
+				return;
 			}
-			wrapper.addEventListener('transitionend', onEnd);
-			window.setTimeout(onEnd, revealDuration + 80); // fallback if no transitionend
-		}
-		function hideWord(word){
-			var nextWord = takeNext(word);
-			animateWidth(2, function(){
-				switchWord(word, nextWord);
-				showWord(nextWord);
-			});
-		}
-		var blc = headline.querySelector('.blc');
-		function triggerBlcShimmer(){
-			if(!blc){ return; }
-			blc.classList.remove('is-shimmer');
-			void blc.offsetWidth; // restart CSS animation each hold
-			blc.classList.add('is-shimmer');
-		}
-		function showWord(word){
-			animateWidth(word.offsetWidth + 10, function(){
-				triggerBlcShimmer();
-				window.setTimeout(function(){ hideWord(word); }, revealAnimationDelay);
-			}, 'linear');
-		}
-		wrapper.style.width = (visible.offsetWidth + 10) + 'px';
-		window.setTimeout(function(){ hideWord(visible); }, animationDelay);
+			function animateWidth(px, done, timingFn){
+				wrapper.style.transition = 'width ' + revealDuration + 'ms ' + (timingFn || 'ease');
+				void wrapper.offsetWidth;
+				wrapper.style.width = px + 'px';
+				var finished = false;
+				function onEnd(e){
+					if(e && e.propertyName && e.propertyName !== 'width'){ return; }
+					if(finished){ return; }
+					finished = true;
+					wrapper.removeEventListener('transitionend', onEnd);
+					done();
+				}
+				wrapper.addEventListener('transitionend', onEnd);
+				window.setTimeout(onEnd, revealDuration + 80);
+			}
+			function hideWord(word){
+				var nextWord = takeNext(word);
+				animateWidth(2, function(){
+					switchWord(word, nextWord);
+					showWord(nextWord);
+				});
+			}
+			var blc = headline.querySelector('.blc');
+			function triggerBlcShimmer(){
+				if(!blc){ return; }
+				blc.classList.remove('is-shimmer');
+				void blc.offsetWidth;
+				blc.classList.add('is-shimmer');
+			}
+			function showWord(word){
+				animateWidth(word.offsetWidth + 10, function(){
+					triggerBlcShimmer();
+					window.setTimeout(function(){ hideWord(word); }, revealAnimationDelay);
+				}, 'linear');
+			}
+			wrapper.style.width = (visible.offsetWidth + 10) + 'px';
+			hideWord(visible);
+		}, startDelay);
 	});
 }
