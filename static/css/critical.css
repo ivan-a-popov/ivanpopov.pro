@@ -262,9 +262,10 @@ html.skip-preloader #preloader {
 }
 
 /* Preloader timing (keep in sync with critical.js):
-   half-grow 1000ms → hold 400ms → blink 1350ms → full-grow 500ms → peel 500ms
-   Box stays 250px (overflow clips the dim sweep); full-grow uses scaleY so CLS
-   stays zero and ::after never paints at the viewport top. */
+   half-grow 1000ms, then full-grow 500ms + peel 500ms once ATF is ready.
+   Hold 400ms + blink 1350ms (lineround delay 1400ms) only fill time if fonts
+   or hero are still in flight — they must not gate the peel. Box stays 250px
+   (overflow clips the dim sweep); full-grow uses scaleY so CLS stays zero. */
 #preloader .loader_line {
 	margin: auto;
 	width: 1px;
@@ -317,6 +318,11 @@ html.skip-preloader #preloader {
 	opacity: 0;
 	/* Set by critical.js dismiss() to viewport/box ratio before .preloaded lands. */
 	transform: scaleY(var(--loader-scale-full, 1));
+}
+
+/* Cancel a pending dim sweep so it cannot flash during the peel. */
+#preloader.preloaded .loader_line:after {
+	animation: none;
 }
 
 #preloader.preloaded:before,

@@ -12,13 +12,11 @@
 // motion (headline rotation, logo-cursor blink) for a static filmstrip.
 (function(){
 	var GROW_HALF_MS = 1000;
-	var HOLD_MS = 400;
-	var BLINK_MS = 1350;
 	var GROW_FULL_MS = 500;
 	var PEEL_MS = 500;
-	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS;
 	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
-	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
+	// Hard cap: grow + peel + the fonts.ready race. Do not wait out hold/blink.
+	var FALLBACK_MS = GROW_HALF_MS + DISMISS_MS + 2500;
 	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|Chrome-Lighthouse|PageSpeed/i;
 
 	function landingHash(){
@@ -119,8 +117,9 @@
 			});
 		}));
 	}
-	// half-grow → hold → blink; dismiss triggers full-grow then peel (see critical.css).
-	function whenLineSequenceReady(){
+	// Black beat is the half-grow only. Hold/blink may still play on a slow
+	// connection while we wait for fonts/hero; they must not delay the peel.
+	function whenLineGrown(){
 		return new Promise(function(resolve){
 			var line = document.querySelector('#preloader .loader_line');
 			if(!line){ resolve(); return; }
@@ -131,9 +130,9 @@
 				resolve();
 			}
 			line.addEventListener('animationend', function(e){
-				if(e.animationName === 'lineround'){ finish(); }
+				if(e.animationName === 'lineheight'){ finish(); }
 			});
-			setTimeout(finish, SEQUENCE_MS);
+			setTimeout(finish, GROW_HALF_MS);
 		});
 	}
 	function start(){
@@ -153,7 +152,7 @@
 		Promise.all([
 			whenStylesReady().then(whenHeroReady),
 			whenFontsReady(),
-			whenLineSequenceReady()
+			whenLineGrown()
 		]).then(function(){
 			clearTimeout(fallback);
 			requestAnimationFrame(finish);
