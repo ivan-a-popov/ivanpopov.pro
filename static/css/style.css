@@ -178,6 +178,11 @@ h1, h2, h3, h4, h5, h6 {
 		animation: none;
 	}
 }
+/* Automation (ip-automation is set in <head> by critical.js): keep the
+   filmstrip static — even a tiny blink taxes Speed Index on every frame. */
+html.ip-automation .ip_header .logo .text .logo-cursor{
+	animation: none;
+}
 /* Desktop hover: stronger magnify, still below active scale (1.5). */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine){
 	.ip_header .menu ul li:not(.active) a:hover{

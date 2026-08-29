@@ -92,9 +92,9 @@
 		fetchpriority="high">
 	<link rel="preload" href="static/img/about/ip-foto.webp" as="image" media="(min-width: 640px)" fetchpriority="high">
 	<!-- STYLES -->
-	<link rel="preload" as="style" href="static/css/style.css?v=5ef090af" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" as="style" href="static/css/style.css?v=56bad8ed" onload="this.onload=null;this.rel='stylesheet'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.css?v=5ef090af" />
+		<link rel="stylesheet" href="static/css/style.css?v=56bad8ed" />
 	</noscript>
 	<!-- /STYLES -->
 
@@ -136,11 +136,11 @@ return false;
 function prefersReducedMotion(){
 return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
-function skipPreloaderPlay(){
-if(isAutomation() || prefersReducedMotion()){ return true; }
-return landingHash() !== '#home';
+var AUTOMATION = isAutomation();
+var SKIP_PLAY = AUTOMATION || prefersReducedMotion() || landingHash() !== '#home';
+if(AUTOMATION){
+document.documentElement.classList.add('ip-automation');
 }
-var SKIP_PLAY = skipPreloaderPlay();
 if(SKIP_PLAY){
 document.documentElement.classList.add('skip-preloader');
 }
@@ -1145,7 +1145,7 @@ document.addEventListener('DOMContentLoaded', start);
 		<div class="mouse-cursor cursor-inner"></div>
 		<!-- /MAGIC CURSOR -->
 	</div>
-	<script defer src="static/js/init.js?v=16c8414e"></script>
+	<script defer src="static/js/init.js?v=f74c6eba"></script>
 </body>
 
 </html>

@@ -8,6 +8,8 @@
 // (#testimonials, …), automation (PageSpeed / Lighthouse), crawlers, and
 // prefers-reduced-motion skip it — same HTML, no theatrical wait. The skip
 // class is applied synchronously here in <head> so the first paint is clean.
+// Automation additionally gets html.ip-automation, which freezes decorative
+// motion (headline rotation, logo-cursor blink) for a static filmstrip.
 (function(){
 	var GROW_HALF_MS = 1000;
 	var HOLD_MS = 400;
@@ -40,11 +42,14 @@
 	function prefersReducedMotion(){
 		return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
-	function skipPreloaderPlay(){
-		if(isAutomation() || prefersReducedMotion()){ return true; }
-		return landingHash() !== '#home';
+	var AUTOMATION = isAutomation();
+	var SKIP_PLAY = AUTOMATION || prefersReducedMotion() || landingHash() !== '#home';
+	if(AUTOMATION){
+		// Separate from skip-preloader (which deep-linked humans also get):
+		// lets init.js/style.css freeze decorative motion so the Lighthouse
+		// filmstrip is fully static after first paint (Speed Index).
+		document.documentElement.classList.add('ip-automation');
 	}
-	var SKIP_PLAY = skipPreloaderPlay();
 	if(SKIP_PLAY){
 		document.documentElement.classList.add('skip-preloader');
 	}

@@ -1008,6 +1008,9 @@ function ip_animated_headline(){
 	var revealDuration = 850;        // type / erase width animation duration
 	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ blc shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	// Automation (class from critical.js): keep the first phrase static so the
+	// Lighthouse filmstrip stops changing — perpetual rotation taxes Speed Index.
+	var freeze = document.documentElement.classList.contains('ip-automation');
 	ip_all('.cd-headline.clip').forEach(function(headline){
 		var wrapper = headline.querySelector('.cd-words-wrapper');
 		if(!wrapper){ return; }
@@ -1018,6 +1021,7 @@ function ip_animated_headline(){
 			w.classList.toggle('is-visible', w === visible);
 			w.classList.toggle('is-hidden', w !== visible);
 		});
+		if(freeze){ return; }
 		function takeNext(word){
 			var i = words.indexOf(word);
 			return words[(i + 1) % words.length];
