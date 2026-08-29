@@ -645,32 +645,11 @@ html,
 .ip_teaser.is-open .ip_teaser__body{ max-height: none; }
 .ip_teaser.is-open .ip_teaser__body::after{ opacity: 0; }
 .ip_teaser.is-static .ip_teaser__body{ max-height: none; }
-.ip_teaser.is-static .ip_teaser__body::after,
-.ip_teaser.is-static .ip_teaser__more{ display: none; }
-.ip_teaser__more{
-	display: inline-block;
-	margin: 8px 0 28px;
-	padding: 0;
-	border: 0;
-	background: none;
-	font: inherit;
-	font-weight: 500;
-	color: var(--text-main);
-	text-decoration: underline;
-	text-decoration-color: var(--accent);
-	text-underline-offset: 3px;
-	text-decoration-thickness: 1px;
-	cursor: pointer;
-	transition: color 0.2s ease, text-decoration-color 0.2s ease;
-}
-.ip_teaser__more:hover{
-	color: var(--accent);
-	text-decoration-color: transparent;
-}
-.ip_teaser__more:focus{
+.ip_teaser.is-static .ip_teaser__body::after{ display: none; }
+.ip_teaser:not(.is-static):focus{
 	outline: none;
 }
-.ip_teaser__more:focus-visible{
+.ip_teaser:not(.is-static):focus-visible{
 	outline: 2px solid var(--accent);
 	outline-offset: 3px;
 }

@@ -63,7 +63,7 @@
   do NOT edit it by hand, edit critical.css and re-run the script. -->
 	<!-- CRITICAL CSS -->
 <style>
-:root{color-scheme:light dark;--bg-color:#fff;--text-main:#333;--text-sub:#7d7789;--text-muted:#666;--logo-color:#000;--accent:#333;--rule-color:#7d7789;--card-border:#b9b8c3;--card-hover-bg:#333;--card-hover-summary:#aaa;--on-accent:#fff;--quote-border:#E5EDF4;--quote-fill:#f6fbff;--caret-color:#999;--cursor-invert:#fff;--overlay:rgba(0,0,0,.8);--preloader-bg:#000;--preloader-line:#fff;--preloader-line-dim:#777}@media (prefers-color-scheme:dark){:root{--bg-color:#131516;--text-main:#a09c96;--text-sub:#7a7267;--text-muted:#868077;--logo-color:#bab8b6;--accent:#a09c96;--rule-color:#4d5356;--card-border:#353a3c;--card-hover-bg:#1e2222;--card-hover-summary:#8e8a82;--on-accent:#bab8b6;--quote-border:#353a3c;--quote-fill:#131516;--caret-color:#868077;--cursor-invert:#bab8b6;--preloader-line:#bab8b6;--preloader-line-dim:#484e51}}@font-face{font-family:"Onest";font-style:normal;font-weight:300 800;font-display:swap;src:url("static/fonts/onest/onest-cyrillic-ext.woff2") format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Onest";font-style:normal;font-weight:300 800;font-display:swap;src:url("static/fonts/onest/onest-cyrillic.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Onest";font-style:normal;font-weight:300 800;font-display:swap;src:url("static/fonts/onest/onest-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Onest";font-style:normal;font-weight:300 800;font-display:swap;src:url("static/fonts/onest/onest-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Onest Fallback";font-style:normal;font-weight:300 500;src:local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:104.5%;ascent-override:92.8%;descent-override:29.2%;line-gap-override:0%}@font-face{font-family:"Onest Fallback";font-style:normal;font-weight:501 800;src:local("Arial Bold"),local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:100%;ascent-override:97%;descent-override:30.5%;line-gap-override:0%}html{overflow-x:hidden;background-color:var(--bg-color);scrollbar-gutter:stable}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;font-size:clamp(1rem,0.95rem + 0.2vw,1.125rem);line-height:1.7;overflow-wrap:break-word;font-weight:450;color:var(--text-sub)}h1,h2,h3,h4,h5,h6,p,ul,ol,li{margin:0;padding:0}img{vertical-align:middle;max-width:100%}.ip_modalbox{position:fixed;inset:0;z-index:20;opacity:0;visibility:hidden;pointer-events:none}.mouse-cursor{display:none;position:fixed;left:0;top:0;pointer-events:none;visibility:hidden}#preloader{position:fixed;left:0;top:0;height:100vh;width:100%;z-index:99999;display:flex}html.skip-preloader #preloader{display:none !important}#preloader:before,#preloader:after{content:'';position:absolute;left:0;top:0;width:50%;height:100%;z-index:-1;background-color:var(--preloader-bg);transform-origin:left center}#preloader:after{left:auto;right:0;transform-origin:right center}#preloader .loader_line{margin:auto;width:1px;height:250px;position:relative;overflow:hidden;transition:transform 500ms ease 0s,opacity 0s linear 500ms}#preloader .loader_line:before{content:'';position:absolute;left:0;top:50%;width:1px;height:0;transform:translateY(-50%);background-color:var(--preloader-line);animation:lineheight 1000ms ease-in-out 0s forwards}#preloader .loader_line:after{content:'';position:absolute;left:0;top:0;width:1px;height:100%;background-color:var(--preloader-line-dim);transform:translateY(-100%);animation:lineround 1350ms linear 1400ms 1 forwards}@keyframes lineheight{100%{height:100%}}@keyframes lineround{100%{transform:translateY(200%)}}#preloader.preloaded .loader_line{opacity:0;transform:scaleY(var(--loader-scale-full,1))}#preloader.preloaded:before,#preloader.preloaded:after{animation:preloadedzero 500ms ease-in-out 500ms forwards}@keyframes preloadedzero{100%{transform:scaleX(0)}}.ip_all_wrap{position:relative;width:100%;min-height:100vh;min-height:100dvh;height:100vh;height:100dvh;max-width:var(--ip-layout-max);margin-inline:auto;--ip-col-left:0%;--ip-col-right:100%;--ip-layout-max:1880px;--ip-bar-height:48px;--ip-footer-height:calc(7px + .5vw);--ip-footer-font-size:calc(6px + .45vw);--ip-logo-font-size:clamp(1rem,1.5em,2rem);--ip-logo-padding-left:.9vw;--ip-logo-menu-gap:1px;--ip-menu-gap:clamp(6px,calc(5px + .85vw),42px);--ip-menu-padding-inline:clamp(8px,calc(4px + .5vw),64px);--ip-menu-link-padding:clamp(2px,0.35vw,8px);--ip-menu-scale-bleed:clamp(8px,calc(6px + 0.45vw),22px)}.ip_all_wrap,.ip_all_wrap *{box-sizing:border-box}.ip_header{position:fixed;top:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-bar-height);line-height:var(--ip-bar-height);background:var(--bg-color);z-index:10;display:flex;align-items:center;column-gap:var(--ip-logo-menu-gap);overflow:visible}.ip_header .logo{display:none;flex:0 0 auto}.ip_header .logo .text{text-decoration:none;color:var(--logo-color);font-family:Consolas,monospace;font-size:var(--ip-logo-font-size);font-weight:800;line-height:var(--ip-bar-height);padding-left:var(--ip-logo-padding-left);white-space:nowrap;word-spacing:-0.3em}.ip_header .menu{position:relative;flex:1 1 auto;min-width:0;overflow:visible;display:flex}.ip_header .menu ul{margin:0;list-style:none;display:flex;flex-wrap:nowrap;align-items:center;width:100%;justify-content:space-around;gap:var(--ip-menu-gap)}.ip_header .menu ul li{margin:0;flex:0 0 auto;overflow:visible}.ip_header .menu ul li:first-child a{transform-origin:left bottom}.ip_header .menu ul li:last-child a{transform-origin:right bottom}.ip_header .menu ul li a{text-decoration:none;text-transform:uppercase;color:var(--text-main);font-family:Onest,"Onest Fallback",sans-serif;line-height:1;padding-inline:var(--ip-menu-link-padding);position:relative;display:inline-grid;justify-items:center;transform:translateY(0) scale(1);transform-origin:center bottom;transition:transform .32s cubic-bezier(.33,1,.68,1)}.ip_header .menu ul li a b{position:relative;display:inline-block;line-height:1}.ip_header .menu ul li a:hover b{font-weight:600}.ip_header .menu ul li .ip_menu_sub{position:absolute;left:50%;top:100%;transform:translateX(-50%);transform-origin:top center;text-align:center;font-weight:500;line-height:1;letter-spacing:.5px;text-transform:lowercase;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .22s ease}.ip_header .menu ul li.active a{transform:translateY(-4px) scale(1.2);z-index:2}.ip_header .menu ul li.active a b{font-weight:700}.ip_header .menu ul li.active .ip_menu_sub{opacity:1;font-weight:600}@media (min-width:640px) and (max-width:1023px){.ip_header .menu ul li.active a{transform:translateY(-6px) scale(1.3)}}@media (min-width:1024px){.ip_header .menu ul li.active a{transform:translateY(-8px) scale(1.5)}}@media (hover:hover){.ip_header .menu ul li:not(.active) a:hover{transform:translateY(-3px) scale(1.08);z-index:1}.ip_header .menu ul li:not(.active) a:hover b{font-weight:600}.ip_header .menu ul li:not(.active) a:hover .ip_menu_sub{opacity:1;font-weight:500}}.ip_footer{position:fixed;bottom:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-footer-height);background:var(--bg-color);z-index:20;line-height:var(--ip-footer-height);font-size:var(--ip-footer-font-size);display:flex;align-items:center;justify-content:center;padding:.9em}.ip_footer .copyhuy p{margin:0;color:var(--text-main);font-family:Onest,"Onest Fallback",sans-serif;text-align:center}.ip_footer .copyhuy__mark{display:inline-block;width:1em;height:1em;margin-inline-end:0.2em;vertical-align:-0.15em;fill:var(--text-main)}.ip_mainpart{position:absolute;inset:var(--ip-bar-height) 0 var(--ip-footer-height) .5em;overflow:hidden;visibility:visible}.ip_mainpart .author_image{position:absolute;top:0;width:var(--ip-col-left);height:0;z-index:15;overflow:hidden;opacity:0;visibility:hidden;pointer-events:none}.ip_mainpart .author_image .author_image_inner{position:absolute;inset:0;width:100%;height:0;overflow:hidden;opacity:0}.ip_mainpart .author_image .author_image_inner .author_photo{position:absolute;z-index:2;inset:0;display:block;width:100%;height:0;object-fit:cover;object-position:center;opacity:0;pointer-events:none;user-select:none}.ip_mainpart .main_content{position:absolute;top:0;right:0;bottom:0;width:var(--ip-col-right)}.ip_section{position:absolute;inset:0;overflow:hidden auto;opacity:0;visibility:hidden;pointer-events:none;z-index:8}.ip_section.animated,.ip_section.active{opacity:1;visibility:visible;pointer-events:auto;z-index:9}.ip_section.active{z-index:10}html[data-ip-section] #home.animated{opacity:0;visibility:hidden;pointer-events:none}html[data-ip-section="about"] #about,html[data-ip-section="service"] #service,html[data-ip-section="why"] #why,html[data-ip-section="testimonials"] #testimonials{opacity:1;visibility:visible;pointer-events:auto;z-index:10}.ip_home{position:relative;min-height:100%;display:flex;flex-direction:column}.ip_home_photo{display:block;width:100%;padding:0 20px}.ip_home_photo img{display:block;width:100%;height:auto;aspect-ratio:1 / 0.82;object-fit:cover;object-position:center 55%}.ip_home .content{--ip-home-name-gap:clamp(16px,calc(16px + 1.2vw),30px);--ip-home-line-gap:clamp(16px,calc(18px + 1.2vw),30px);--ip-home-line-width:clamp(40px,calc(25px + 2.5vw),70px);--ip-home-line-height:clamp(3px,calc(2px + 0.15vw),5px);--ip-home-job-gap:clamp(24px,calc(12px + 1.4vw),35px);padding:14px 20px 0}.ip_home .name{font-size:clamp(24px,calc(20px + 2vw),42px);font-weight:550;text-transform:uppercase;margin-bottom:var(--ip-home-name-gap);font-family:Onest,"Onest Fallback",sans-serif;color:var(--text-main);line-height:1.2}.ip_home .line{display:inline-block;width:var(--ip-home-line-width);height:var(--ip-home-line-height);background-color:var(--text-sub);margin-bottom:var(--ip-home-line-gap)}.ip_home .job{margin-bottom:var(--ip-home-job-gap);font-size:1.375rem;color:var(--text-main);font-family:Onest,"Onest Fallback",sans-serif;line-height:1.2}.cd-words-wrapper{display:inline-block;position:relative;text-align:left;vertical-align:top}.cd-words-wrapper b{display:inline-block;position:absolute;left:0;top:0;white-space:nowrap;opacity:0}.cd-words-wrapper b.is-visible{position:relative;opacity:1}.cd-headline.clip span{display:inline-block;padding:.2em 0}.cd-headline.clip .cd-words-wrapper{overflow:hidden;vertical-align:top}.ip_home .job b{font-weight:650}.ip_home .job .blc{display:block;margin-top:8px;font-weight:600}.ip_home_social a{display:flex;align-items:center;justify-content:center;opacity:.88}.ip_swipe_nav{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:14;padding:8px 14px}.ip_swipe_nav ul{list-style:none;display:flex;align-items:center}.ip_swipe_nav ul li{display:flex;align-items:center;justify-content:center;padding:7px}.ip_swipe_nav ul li .dot{display:block;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.55)}@media (prefers-color-scheme:dark){.ip_swipe_nav ul li .dot{background:rgba(0,0,0,0.55)}}@media (min-width:1024px){.ip_swipe_nav{display:none}}.ip_all_wrap.has-touch .ip_swipe_nav{display:block}.ip_home_social{display:flex;flex-direction:row;align-items:center;gap:22px}.ip_home_social img{width:42px;height:42px;display:block}@media (max-width:639px){.ip_footer{justify-content:center}.ip_header .menu ul{justify-content:space-between;padding-left:calc(clamp(8px,3vw,16px) + var(--ip-menu-scale-bleed));padding-right:calc(clamp(8px,3vw,16px) + var(--ip-menu-scale-bleed));gap:clamp(2px,1.2vw,8px)}.ip_header .menu ul li a{font-size:clamp(.62rem,2.75vw,.85rem)}.ip_header .menu ul li.active .ip_menu_sub{font-size:clamp(.5rem,2.2vw,.7rem)}@media (hover:hover){.ip_header .menu ul li:not(.active) a:hover{transform:translateY(-2px) scale(1.05)}}}@media (min-width:480px){.ip_home_photo img{aspect-ratio:1 / 1;object-position:center 40%}.ip_home .content{padding-top:20px}}@media (min-width:640px){.ip_all_wrap{--ip-col-left:36%;--ip-col-right:64%;--ip-menu-gap:clamp(10px,1.4vw,28px)}.ip_footer{justify-content:flex-start}.ip_header{display:grid;grid-template-columns:var(--ip-col-left) minmax(0,var(--ip-col-right));column-gap:0}.ip_header .logo{display:block;min-width:0}.ip_header .menu{grid-column:2}.ip_header .menu ul{justify-content:space-between;padding-left:calc(clamp(12px,2vw,32px) + var(--ip-menu-scale-bleed));padding-right:calc(clamp(12px,2vw,32px) + var(--ip-menu-scale-bleed))}.ip_header .menu ul li a{font-size:1rem}.ip_mainpart .author_image{top:0;left:0;bottom:0;height:auto;opacity:1;visibility:visible;pointer-events:auto}.ip_mainpart .author_image .author_image_inner,.ip_mainpart .author_image .author_image_inner .author_photo{opacity:1}.ip_mainpart .author_image .author_image_inner{height:auto}.ip_mainpart .author_image .author_image_inner .author_photo{height:100%}.ip_home{height:100%;min-height:0;flex-direction:row;align-items:center}.ip_home_photo{display:none}.ip_home .content{padding:0 20px}}@media (min-width:640px) and (max-width:1023px){.ip_all_wrap{--ip-menu-gap:clamp(6px,1vw,16px)}}@media (min-width:768px){.ip_all_wrap{--ip-col-left:36%;--ip-col-right:64%;--ip-menu-gap:clamp(16px,2vw,40px)}}@media (min-width:1024px){.ip_all_wrap{--ip-menu-gap:clamp(20px,2.5vw,52px)}.ip_header .menu ul{padding-right:calc(var(--ip-menu-padding-inline) + var(--ip-menu-scale-bleed))}.ip_home .content{padding:0 0 0 50px}.ip_home .job{font-size:1.4375rem}}
+:root{color-scheme:light dark;--bg-color:#fff;--text-main:#333;--text-sub:#7d7789;--text-muted:#666;--logo-color:#000;--accent:#333;--rule-color:#7d7789;--card-border:#b9b8c3;--card-hover-bg:#333;--card-hover-summary:#aaa;--on-accent:#fff;--quote-border:#E5EDF4;--quote-fill:#f6fbff;--caret-color:#999;--cursor-invert:#fff;--overlay:rgba(0,0,0,.8);--preloader-bg:#000;--preloader-line:#fff;--preloader-line-dim:#777}@media (prefers-color-scheme:dark){:root{--bg-color:#131516;--text-main:#a09c96;--text-sub:#7a7267;--text-muted:#868077;--logo-color:#bab8b6;--accent:#a09c96;--rule-color:#4d5356;--card-border:#353a3c;--card-hover-bg:#1e2222;--card-hover-summary:#8e8a82;--on-accent:#bab8b6;--quote-border:#353a3c;--quote-fill:#131516;--caret-color:#868077;--cursor-invert:#bab8b6;--preloader-line:#bab8b6;--preloader-line-dim:#484e51}}@font-face{font-family:"Onest";font-style:normal;font-weight:300 800;font-display:swap;src:url("static/fonts/onest/onest-cyrillic-ext.woff2") format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Onest";font-style:normal;font-weight:300 800;font-display:swap;src:url("static/fonts/onest/onest-cyrillic.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Onest";font-style:normal;font-weight:300 800;font-display:swap;src:url("static/fonts/onest/onest-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Onest";font-style:normal;font-weight:300 800;font-display:swap;src:url("static/fonts/onest/onest-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Onest Fallback";font-style:normal;font-weight:300 500;src:local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:104.5%;ascent-override:92.8%;descent-override:29.2%;line-gap-override:0%}@font-face{font-family:"Onest Fallback";font-style:normal;font-weight:501 800;src:local("Arial Bold"),local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:100%;ascent-override:97%;descent-override:30.5%;line-gap-override:0%}html{overflow-x:hidden;background-color:var(--bg-color);scrollbar-gutter:stable}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;font-size:clamp(1rem,0.95rem + 0.2vw,1.125rem);line-height:1.7;overflow-wrap:break-word;font-weight:450;color:var(--text-sub)}h1,h2,h3,h4,h5,h6,p,ul,ol,li{margin:0;padding:0}img{vertical-align:middle;max-width:100%}.ip_modalbox{position:fixed;inset:0;z-index:20;opacity:0;visibility:hidden;pointer-events:none}.mouse-cursor{display:none;position:fixed;left:0;top:0;pointer-events:none;visibility:hidden}#preloader{position:fixed;left:0;top:0;height:100vh;width:100%;z-index:99999;display:flex}html.skip-preloader #preloader{display:none !important}#preloader:before,#preloader:after{content:'';position:absolute;left:0;top:0;width:50%;height:100%;z-index:-1;background-color:var(--preloader-bg);transform-origin:left center}#preloader:after{left:auto;right:0;transform-origin:right center}#preloader .loader_line{margin:auto;width:1px;height:250px;position:relative;overflow:hidden;transition:transform 500ms ease 0s,opacity 0s linear 500ms}#preloader .loader_line:before{content:'';position:absolute;left:0;top:50%;width:1px;height:0;transform:translateY(-50%);background-color:var(--preloader-line);animation:lineheight 1000ms ease-in-out 0s forwards}#preloader .loader_line:after{content:'';position:absolute;left:0;top:0;width:1px;height:100%;background-color:var(--preloader-line-dim);transform:translateY(-100%);animation:lineround 1350ms linear 1400ms 1 forwards}@keyframes lineheight{100%{height:100%}}@keyframes lineround{100%{transform:translateY(200%)}}#preloader.preloaded .loader_line{opacity:0;transform:scaleY(var(--loader-scale-full,1))}#preloader.preloaded:before,#preloader.preloaded:after{animation:preloadedzero 500ms ease-in-out 500ms forwards}@keyframes preloadedzero{100%{transform:scaleX(0)}}.ip_all_wrap{position:relative;width:100%;min-height:100vh;min-height:100dvh;height:100vh;height:100dvh;max-width:var(--ip-layout-max);margin-inline:auto;--ip-col-left:0%;--ip-col-right:100%;--ip-layout-max:1880px;--ip-bar-height:48px;--ip-footer-height:calc(7px + .5vw);--ip-footer-font-size:calc(6px + .45vw);--ip-logo-font-size:clamp(1rem,1.5em,2rem);--ip-logo-padding-left:.9vw;--ip-logo-menu-gap:1px;--ip-menu-gap:clamp(6px,calc(5px + .85vw),42px);--ip-menu-padding-inline:clamp(8px,calc(4px + .5vw),64px);--ip-menu-link-padding:clamp(2px,0.35vw,8px);--ip-menu-scale-bleed:clamp(8px,calc(6px + 0.45vw),22px)}.ip_all_wrap,.ip_all_wrap *{box-sizing:border-box}.ip_header{position:fixed;top:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-bar-height);line-height:var(--ip-bar-height);background:var(--bg-color);z-index:10;display:flex;align-items:center;column-gap:var(--ip-logo-menu-gap);overflow:visible}.ip_header .logo{display:none;flex:0 0 auto}.ip_header .logo .text{text-decoration:none;color:var(--logo-color);font-family:Consolas,monospace;font-size:var(--ip-logo-font-size);font-weight:800;line-height:var(--ip-bar-height);padding-left:var(--ip-logo-padding-left);white-space:nowrap;word-spacing:-0.3em}.ip_header .menu{position:relative;flex:1 1 auto;min-width:0;overflow:visible;display:flex}.ip_header .menu ul{margin:0;list-style:none;display:flex;flex-wrap:nowrap;align-items:center;width:100%;justify-content:space-around;gap:var(--ip-menu-gap)}.ip_header .menu ul li{margin:0;flex:0 0 auto;overflow:visible}.ip_header .menu ul li:first-child a{transform-origin:left bottom}.ip_header .menu ul li:last-child a{transform-origin:right bottom}.ip_header .menu ul li a{text-decoration:none;text-transform:uppercase;color:var(--text-main);font-family:Onest,"Onest Fallback",sans-serif;line-height:1;padding-inline:var(--ip-menu-link-padding);position:relative;display:inline-grid;justify-items:center;transform:translateY(0) scale(1);transform-origin:center bottom;transition:transform .32s cubic-bezier(.33,1,.68,1)}.ip_header .menu ul li a b{position:relative;display:inline-block;line-height:1}.ip_header .menu ul li a:hover b{font-weight:600}.ip_header .menu ul li .ip_menu_sub{position:absolute;left:50%;top:100%;transform:translateX(-50%);transform-origin:top center;text-align:center;font-weight:500;line-height:1;letter-spacing:.5px;text-transform:lowercase;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .22s ease}.ip_header .menu ul li.active a{transform:translateY(-4px) scale(1.2);z-index:2}.ip_header .menu ul li.active a b{font-weight:700}.ip_header .menu ul li.active .ip_menu_sub{opacity:1;font-weight:600}@media (min-width:640px) and (max-width:1023px){.ip_header .menu ul li.active a{transform:translateY(-6px) scale(1.3)}}@media (min-width:1024px){.ip_header .menu ul li.active a{transform:translateY(-8px) scale(1.5)}}@media (hover:hover){.ip_header .menu ul li:not(.active) a:hover{transform:translateY(-3px) scale(1.08);z-index:1}.ip_header .menu ul li:not(.active) a:hover b{font-weight:600}.ip_header .menu ul li:not(.active) a:hover .ip_menu_sub{opacity:1;font-weight:500}}.ip_footer{position:fixed;bottom:0;left:0;right:0;max-width:var(--ip-layout-max);margin-inline:auto;height:var(--ip-footer-height);background:var(--bg-color);z-index:20;line-height:var(--ip-footer-height);font-size:var(--ip-footer-font-size);display:flex;align-items:center;justify-content:center;padding:.9em}.ip_footer .copyhuy p{margin:0;color:var(--text-main);font-family:Onest,"Onest Fallback",sans-serif;text-align:center}.ip_footer .copyhuy__mark{display:inline-block;width:1em;height:1em;margin-inline-end:0.2em;vertical-align:-0.15em;fill:var(--text-main)}.ip_mainpart{position:absolute;inset:var(--ip-bar-height) 0 var(--ip-footer-height) .5em;overflow:hidden;visibility:visible}.ip_mainpart .author_image{position:absolute;top:0;width:var(--ip-col-left);height:0;z-index:15;overflow:hidden;opacity:0;visibility:hidden;pointer-events:none}.ip_mainpart .author_image .author_image_inner{position:absolute;inset:0;width:100%;height:0;overflow:hidden;opacity:0}.ip_mainpart .author_image .author_image_inner .author_photo{position:absolute;z-index:2;inset:0;display:block;width:100%;height:0;object-fit:cover;object-position:center;opacity:0;pointer-events:none;user-select:none}.ip_mainpart .main_content{position:absolute;top:0;right:0;bottom:0;width:var(--ip-col-right)}.ip_section{position:absolute;inset:0;overflow:hidden auto;opacity:0;visibility:hidden;pointer-events:none;z-index:8}.ip_section.animated,.ip_section.active{opacity:1;visibility:visible;pointer-events:auto;z-index:9}.ip_section.active{z-index:10}html[data-ip-section] #home.animated{opacity:0;visibility:hidden;pointer-events:none}html[data-ip-section="about"] #about,html[data-ip-section="service"] #service,html[data-ip-section="whyme"] #whyme,html[data-ip-section="testimonials"] #testimonials{opacity:1;visibility:visible;pointer-events:auto;z-index:10}.ip_home{position:relative;min-height:100%;display:flex;flex-direction:column}.ip_home_photo{display:block;width:100%;padding:0 20px}.ip_home_photo img{display:block;width:100%;height:auto;aspect-ratio:1 / 0.82;object-fit:cover;object-position:center 55%}.ip_home .content{--ip-home-name-gap:clamp(16px,calc(16px + 1.2vw),30px);--ip-home-line-gap:clamp(16px,calc(18px + 1.2vw),30px);--ip-home-line-width:clamp(40px,calc(25px + 2.5vw),70px);--ip-home-line-height:clamp(3px,calc(2px + 0.15vw),5px);--ip-home-job-gap:clamp(24px,calc(12px + 1.4vw),35px);padding:14px 20px 0}.ip_home .name{font-size:clamp(24px,calc(20px + 2vw),42px);font-weight:550;text-transform:uppercase;margin-bottom:var(--ip-home-name-gap);font-family:Onest,"Onest Fallback",sans-serif;color:var(--text-main);line-height:1.2}.ip_home .line{display:inline-block;width:var(--ip-home-line-width);height:var(--ip-home-line-height);background-color:var(--text-sub);margin-bottom:var(--ip-home-line-gap)}.ip_home .job{margin-bottom:var(--ip-home-job-gap);font-size:1.375rem;color:var(--text-main);font-family:Onest,"Onest Fallback",sans-serif;line-height:1.2}.cd-words-wrapper{display:inline-block;position:relative;text-align:left;vertical-align:top}.cd-words-wrapper b{display:inline-block;position:absolute;left:0;top:0;white-space:nowrap;opacity:0}.cd-words-wrapper b.is-visible{position:relative;opacity:1}.cd-headline.clip span{display:inline-block;padding:.2em 0}.cd-headline.clip .cd-words-wrapper{overflow:hidden;vertical-align:top}.ip_home .job b{font-weight:650}.ip_home .job .blc{display:block;margin-top:8px;font-weight:600}.ip_home_social a{display:flex;align-items:center;justify-content:center;opacity:.88}.ip_swipe_nav{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:14;padding:8px 14px}.ip_swipe_nav ul{list-style:none;display:flex;align-items:center}.ip_swipe_nav ul li{display:flex;align-items:center;justify-content:center;padding:7px}.ip_swipe_nav ul li .dot{display:block;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.55)}@media (prefers-color-scheme:dark){.ip_swipe_nav ul li .dot{background:rgba(0,0,0,0.55)}}@media (min-width:1024px){.ip_swipe_nav{display:none}}.ip_all_wrap.has-touch .ip_swipe_nav{display:block}.ip_home_social{display:flex;flex-direction:row;align-items:center;gap:22px}.ip_home_social img{width:42px;height:42px;display:block}@media (max-width:639px){.ip_footer{justify-content:center}.ip_header .menu ul{justify-content:space-between;padding-left:calc(clamp(8px,3vw,16px) + var(--ip-menu-scale-bleed));padding-right:calc(clamp(8px,3vw,16px) + var(--ip-menu-scale-bleed));gap:clamp(2px,1.2vw,8px)}.ip_header .menu ul li a{font-size:clamp(.62rem,2.75vw,.85rem)}.ip_header .menu ul li.active .ip_menu_sub{font-size:clamp(.5rem,2.2vw,.7rem)}@media (hover:hover){.ip_header .menu ul li:not(.active) a:hover{transform:translateY(-2px) scale(1.05)}}}@media (min-width:480px){.ip_home_photo img{aspect-ratio:1 / 1;object-position:center 40%}.ip_home .content{padding-top:20px}}@media (min-width:640px){.ip_all_wrap{--ip-col-left:36%;--ip-col-right:64%;--ip-menu-gap:clamp(10px,1.4vw,28px)}.ip_footer{justify-content:flex-start}.ip_header{display:grid;grid-template-columns:var(--ip-col-left) minmax(0,var(--ip-col-right));column-gap:0}.ip_header .logo{display:block;min-width:0}.ip_header .menu{grid-column:2}.ip_header .menu ul{justify-content:space-between;padding-left:calc(clamp(12px,2vw,32px) + var(--ip-menu-scale-bleed));padding-right:calc(clamp(12px,2vw,32px) + var(--ip-menu-scale-bleed))}.ip_header .menu ul li a{font-size:1rem}.ip_mainpart .author_image{top:0;left:0;bottom:0;height:auto;opacity:1;visibility:visible;pointer-events:auto}.ip_mainpart .author_image .author_image_inner,.ip_mainpart .author_image .author_image_inner .author_photo{opacity:1}.ip_mainpart .author_image .author_image_inner{height:auto}.ip_mainpart .author_image .author_image_inner .author_photo{height:100%}.ip_home{height:100%;min-height:0;flex-direction:row;align-items:center}.ip_home_photo{display:none}.ip_home .content{padding:0 20px}}@media (min-width:640px) and (max-width:1023px){.ip_all_wrap{--ip-menu-gap:clamp(6px,1vw,16px)}}@media (min-width:768px){.ip_all_wrap{--ip-col-left:36%;--ip-col-right:64%;--ip-menu-gap:clamp(16px,2vw,40px)}}@media (min-width:1024px){.ip_all_wrap{--ip-menu-gap:clamp(20px,2.5vw,52px)}.ip_header .menu ul{padding-right:calc(var(--ip-menu-padding-inline) + var(--ip-menu-scale-bleed))}.ip_home .content{padding:0 0 0 50px}.ip_home .job{font-size:1.4375rem}}
 </style>
 	<!-- /CRITICAL CSS -->
 	<!-- If JS is disabled the loader is never dismissed, so hide it and show content. -->
@@ -81,8 +81,7 @@
 				max-height: none !important
 			}
 
-			.ip_teaser__body::after,
-			.ip_teaser__more {
+			.ip_teaser__body::after {
 				display: none !important
 			}
 		</style>
@@ -93,9 +92,9 @@
 		fetchpriority="high">
 	<link rel="preload" href="static/img/about/ip-foto.webp" as="image" media="(min-width: 640px)" fetchpriority="high">
 	<!-- STYLES -->
-	<link rel="preload" as="style" href="static/css/style.css?v=3b83c22d" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" as="style" href="static/css/style.css?v=feaad52f" onload="this.onload=null;this.rel='stylesheet'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.css?v=3b83c22d" />
+		<link rel="stylesheet" href="static/css/style.css?v=feaad52f" />
 	</noscript>
 	<!-- /STYLES -->
 
@@ -277,7 +276,7 @@ document.addEventListener('DOMContentLoaded', start);
 					<li class="active"><a href="#home"><b>Кто</b><span class="ip_menu_sub">такой</span></a></li>
 					<li><a href="#about"><b>Что</b><span class="ip_menu_sub">делаю</span></a></li>
 					<li><a href="#service"><b>Зачем</b><span class="ip_menu_sub">обращаются</span></a></li>
-					<li><a href="#why"><b>Почему</b><span class="ip_menu_sub">ко мне</span></a></li>
+					<li><a href="#whyme"><b>Почему</b><span class="ip_menu_sub">ко мне</span></a></li>
 					<li><a href="#testimonials"><b>Как</b><span class="ip_menu_sub">успехи</span></a></li>
 				</ul>
 			</div>
@@ -309,8 +308,8 @@ document.addEventListener('DOMContentLoaded', start);
 							<picture>
 								<source media="(min-width: 640px)"
 									srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-								<img src="static/img/about/ip-foto-mobile.webp" alt="" width="600" height="600" decoding="async"
-									fetchpriority="high">
+								<img src="static/img/about/ip-foto-mobile.webp" alt="Ivan Popov" width="600" height="600"
+									decoding="async" fetchpriority="high">
 							</picture>
 						</div>
 						<div class="content">
@@ -319,13 +318,14 @@ document.addEventListener('DOMContentLoaded', start);
 								<span class="line"></span>
 								<div class="job">
 									<span class="cd-headline clip">
-										<h2><span class="cd-words-wrapper">
-												<b class="is-visible">Сложная разработка</b>
-												<b>Системный дизайн</b>
-												<b>Аудит процессов</b>
-												<b>AI-трансформация</b>
-												<b>Кибербезопасность</b>
-											</span></h2>
+										<span class="cd-words-wrapper">
+											<h2><b class="is-visible">Сложная разработка</b></h2>
+											<h2><b>Системный дизайн</b>
+												<h2>
+													<h2><b>Аудит процессов</b></h2>
+													<h2><b>AI-трансформация</b></h2>
+													<h2><b>Кибербезопасность</b></h2>
+										</span>
 										<span class="blc">с человеческим лицом</span>
 									</span>
 								</div>
@@ -370,7 +370,8 @@ document.addEventListener('DOMContentLoaded', start);
 								</div>
 								<div class="right">
 									<p>Закрываю не только технические вопросы — фокусируюсь прежде всего на бизнес-смыслах, измеримой
-										ценности, ROI. Любая технология должна работать на общий результат. Если что-то не приносит денег
+										ценности, ROI.</p>
+									<p>Любая технология должна работать на общий результат. Если что-то не приносит денег
 										(или другой понятной пользы), значит, от этого нужно или отказаться, или пересмотреть подход.</p>
 								</div>
 							</div>
@@ -380,17 +381,29 @@ document.addEventListener('DOMContentLoaded', start);
 							<ul class="ip_partners" aria-label="Партнёрские сервисы">
 								<li>
 									<div class="partner-card" data-partner-title="RetailCRM">
-										<img class="partner-card__logo" src="static/img/partners/retailcrm.svg" alt="" width="180" height="32" decoding="async">
+										<img class="partner-card__logo" src="static/img/partners/retailcrm.svg" alt="" width="180"
+											height="32" decoding="async">
 										<a class="ip_full_link" href="#" aria-label="RetailCRM — подробнее"></a>
 										<div class="partner_hidden_details" hidden>
 											<div class="service_popup_informations">
 												<div class="descriptions">
-													<p>RetailCRM — Партнёр №1, во всех смыслах. Вспоминаю момент много лет назад, когда ребята вывели на рынок свой продукт. То было время, когда конференция Амо собирала "Олимпийский", 1С начала вкладываться в разработку и продвижение Б24, и вступать в конкуренцию с "первой отечественной CRM" и "желтым гигантом" казалось абсолютным безумием.</p> 
-													<p>Но они это сделали, и вот — 10 лет не прошло, и тон рынку задают уже они. И я знаю, почему. Эти люди просто горят своим продуктом. Любят то, что делают, и поэтому делают это хорошо. Как и все топовые профи, которых мы так уважаем.</p> 
-													<p>Как один из старейших интеграторов, я предлагаю как внедрение "с нуля под ключ", так перезапуск "недоделанной" или "испорченной" системы: бизнес-процессы, комплексная настройка, все интеграции, включая API, и другая кастомная разработка.</p>
+													<p>RetailCRM — Партнёр №1, во всех смыслах. Вспоминаю момент много лет назад, когда ребята
+														вывели на рынок свой продукт. То было время, когда конференция Амо собирала "Олимпийский",
+														1С начала вкладываться в разработку и продвижение Б24, и вступать в конкуренцию с "первой
+														отечественной CRM" и "желтым гигантом" казалось абсолютным безумием.</p>
+													<p>Но они это сделали, и вот — 10 лет не прошло, и тон рынку задают уже они. И я знаю, почему.
+														Эти люди просто горят своим продуктом. Любят то, что делают, и поэтому делают это хорошо.
+														Как и все топовые профи, которых мы так уважаем.</p>
+													<p>Как один из старейших интеграторов, я предлагаю как внедрение "с нуля под ключ", так
+														перезапуск "недоделанной" или "испорченной" системы: бизнес-процессы, комплексная настройка,
+														все интеграции, включая API, и другая кастомная разработка.</p>
 													<p class="partner-popup__cta">
-														<a href="https://www.retailcrm.ru/?partner=RCI-6A699F0D" target="_blank" rel="noopener sponsored"><span class="partner-popup__cta-text">Топовая CRM для интернет-торговли и ритейла</span><span class="partner-popup__star" aria-hidden="true">*</span></a>
-														<small class="partner-popup__note">*по мнению автора; сайт партнёра откроется в новой вкладке</small>
+														<a href="https://www.retailcrm.ru/?partner=RCI-6A699F0D" target="_blank"
+															rel="noopener sponsored"><span class="partner-popup__cta-text">Топовая CRM для
+																интернет-торговли и ритейла</span><span class="partner-popup__star"
+																aria-hidden="true">*</span></a>
+														<small class="partner-popup__note">*по мнению автора; сайт партнёра откроется в новой
+															вкладке</small>
 													</p>
 												</div>
 											</div>
@@ -399,14 +412,21 @@ document.addEventListener('DOMContentLoaded', start);
 								</li>
 								<li>
 									<div class="partner-card" data-partner-title="МойСклад">
-										<img class="partner-card__logo" src="static/img/partners/moysklad.svg" alt="" width="152" height="24" decoding="async">
+										<img class="partner-card__logo" src="static/img/partners/moysklad.svg" alt="" width="152"
+											height="24" decoding="async">
 										<a class="ip_full_link" href="#" aria-label="МойСклад — подробнее"></a>
 										<div class="partner_hidden_details" hidden>
 											<div class="service_popup_informations">
 												<div class="descriptions">
-													<p>Облачный учёт: как 1С, только проще и дружелюбнее. Закрывает все потребности среднестатистического бизнеса "из коробки": складской и управленческий учет, воронка продаж с автоматическими сценариями, управление заказами, контрагентами, и даже производством. Для розницы есть свое кассовое ПО. Прекрасно интегрируется с сайтом и RetailCRM, для нетипового функционала есть АПИ. Сотрудничаем с 2019-го года; смело рекомендую.</p>
+													<p>Облачный учёт: как 1С, только проще и дружелюбнее. Закрывает все потребности
+														среднестатистического бизнеса "из коробки": складской и управленческий учет, воронка продаж
+														с автоматическими сценариями, управление заказами, контрагентами, и даже производством. Для
+														розницы есть свое кассовое ПО. Прекрасно интегрируется с сайтом и RetailCRM, для нетипового
+														функционала есть АПИ. Сотрудничаем с 2019-го года; смело рекомендую.</p>
 													<p class="partner-popup__cta">
-														<a href="https://www.moysklad.ru/?p=2019-960" target="_blank" rel="noopener sponsored"><span class="partner-popup__cta-text">Убедиться</span><span class="partner-popup__star" aria-hidden="true">*</span></a>
+														<a href="https://www.moysklad.ru/?p=2019-960" target="_blank" rel="noopener sponsored"><span
+																class="partner-popup__cta-text">Убедиться</span><span class="partner-popup__star"
+																aria-hidden="true">*</span></a>
 														<small class="partner-popup__note">*сайт партнёра откроется в новой вкладке</small>
 													</p>
 												</div>
@@ -416,14 +436,18 @@ document.addEventListener('DOMContentLoaded', start);
 								</li>
 								<li>
 									<div class="partner-card" data-partner-title="Timeweb Cloud">
-										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/timeweb-cloud.svg" alt="" width="190" height="28" decoding="async">
+										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/timeweb-cloud.svg"
+											alt="" width="190" height="28" decoding="async">
 										<a class="ip_full_link" href="#" aria-label="Timeweb Cloud"></a>
 										<div class="partner_hidden_details" hidden>
 											<div class="service_popup_informations">
 												<div class="descriptions">
-													<p>Облачная инфраструктура: серверы, сети, хранилище, контейнеры. От простого хостинга до серверов с GPU для облачных AI-нагрузок.</p>
+													<p>Облачная инфраструктура: серверы, сети, хранилище, контейнеры. От простого хостинга до
+														серверов с GPU для облачных AI-нагрузок.</p>
 													<p class="partner-popup__cta">
-														<a href="https://cloud.timeweb.com/?i=102911" target="_blank" rel="noopener sponsored"><span class="partner-popup__cta-text">Приобщиться</span><span class="partner-popup__star" aria-hidden="true">*</span></a>
+														<a href="https://cloud.timeweb.com/?i=102911" target="_blank" rel="noopener sponsored"><span
+																class="partner-popup__cta-text">Приобщиться</span><span class="partner-popup__star"
+																aria-hidden="true">*</span></a>
 														<small class="partner-popup__note">*сайт партнёра откроется в новой вкладке</small>
 													</p>
 												</div>
@@ -433,14 +457,19 @@ document.addEventListener('DOMContentLoaded', start);
 								</li>
 								<li>
 									<div class="partner-card" data-partner-title="Scloud">
-										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/scloud.svg" alt="" width="84" height="56" decoding="async">
+										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/scloud.svg" alt=""
+											width="84" height="56" decoding="async">
 										<a class="ip_full_link" href="#" aria-label="Scloud — подробнее"></a>
 										<div class="partner_hidden_details" hidden>
 											<div class="service_popup_informations">
 												<div class="descriptions">
-													<p>1С в облаке без собственного сервера, штатного админа и возни с лицензиями. <b>Все</b> редакции и форматы —.от толстого клиента до полноценного удаленного ПК. Если вы вдруг ищете какую-нибудь ТиС или ЗиК на 10-й версии платформы, то вам точно сюда.</p>
+													<p>1С в облаке без собственного сервера, штатного админа и возни с лицензиями. <b>Все</b>
+														редакции и форматы —.от толстого клиента до полноценного удаленного ПК. Если вы вдруг ищете
+														какую-нибудь ТиС или ЗиК на 10-й версии платформы, то вам точно сюда.</p>
 													<p class="partner-popup__cta">
-														<a href="https://scloud.ru/?ref=zA707" target="_blank" rel="noopener sponsored"><span class="partner-popup__cta-text">Удивиться</span><span class="partner-popup__star" aria-hidden="true">*</span></a>
+														<a href="https://scloud.ru/?ref=zA707" target="_blank" rel="noopener sponsored"><span
+																class="partner-popup__cta-text">Удивиться</span><span class="partner-popup__star"
+																aria-hidden="true">*</span></a>
 														<small class="partner-popup__note">*сайт партнёра откроется в новой вкладке</small>
 													</p>
 												</div>
@@ -450,14 +479,19 @@ document.addEventListener('DOMContentLoaded', start);
 								</li>
 								<li>
 									<div class="partner-card" data-partner-title="Т (Банк и Бизнес)">
-										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/tbank.svg" alt="" width="95" height="34" decoding="async">
+										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/tbank.svg" alt=""
+											width="95" height="34" decoding="async">
 										<a class="ip_full_link" href="#" aria-label="Т-Банк · Т-Бизнес — подробнее"></a>
 										<div class="partner_hidden_details" hidden>
 											<div class="service_popup_informations">
 												<div class="descriptions">
-													<p>Ну чТо ТуТ сказаТь. Раньше было луТше. Но ИТ-сервисы у них и сейчас Трушные. Так, предпринимаТелям сТоиТ рассмоТреТь продукТы Т-Бизнес: эквайринг, кассовое обслуживание, расчёТный счёТ и другие сервисы для ИП и ООО.</p>
+													<p>Ну чТо ТуТ сказаТь. Раньше было луТше. Но ИТ-сервисы у них и сейчас Трушные. Так,
+														предпринимаТелям сТоиТ рассмоТреТь продукТы Т-Бизнес: эквайринг, кассовое обслуживание,
+														расчёТный счёТ и другие сервисы для ИП и ООО.</p>
 													<p class="partner-popup__cta">
-														<a href="https://www.tbank.ru/business/partnership/all-products?utm_medium=ptr.act&amp;utm_campaign=sme.partners&amp;utm_source=partner_rko_a_sme&amp;agentId=5-C3N13GSZ&amp;agentSsoId=e2d8c3e3-50c4-4fca-952d-0e2b9155d9c9&amp;partnerId=5-3I1998DU3" target="_blank" rel="noopener sponsored"><span class="partner-popup__cta-text">Серьезный бизнес</span><span class="partner-popup__star" aria-hidden="true">*</span></a>
+														<a href="https://www.tbank.ru/business/partnership/all-products?utm_medium=ptr.act&amp;utm_campaign=sme.partners&amp;utm_source=partner_rko_a_sme&amp;agentId=5-C3N13GSZ&amp;agentSsoId=e2d8c3e3-50c4-4fca-952d-0e2b9155d9c9&amp;partnerId=5-3I1998DU3"
+															target="_blank" rel="noopener sponsored"><span class="partner-popup__cta-text">Серьезный
+																бизнес</span><span class="partner-popup__star" aria-hidden="true">*</span></a>
 														<small class="partner-popup__note">*сайт партнёра откроется в новой вкладке</small>
 													</p>
 												</div>
@@ -497,19 +531,23 @@ document.addEventListener('DOMContentLoaded', start);
 													<div class="descriptions">
 														<p>Подрядчик только что разработал вам приложение, и вы хотите проверить, хорошо ли сделана
 															работа? На сайте постоянно какие-то сбои, или же сайт работает нормально, но почему-то "не
-															продаёт"? ИТ-служба наводит терминологический туман и раздувает бюджеты вместо того, чтобы упрощать
+															продаёт"? ИТ-служба наводит терминологический туман и раздувает бюджеты вместо того, чтобы
+															упрощать
 															операционку и увеличивать прибыль? А может, у вас есть крутая бизнес-идея, но вы не
-															уверены, возможно ли технически реализовать её с приемлемым бюджетом, и из-за того откладываете в долгий ящик?</p>
+															уверены, возможно ли технически реализовать её с приемлемым бюджетом, и из-за того
+															откладываете в долгий ящик?</p>
 														<p>Любой из перечисленных пунктов — уже хороший повод обратиться к независимой экспертизе. А
 															если вы отметили про себя два и более пункта — медлить уже нельзя. Напишите мне. Обсудим
 															проблемы, проведём бизнес- и системную аналитику и расчёты по проекту. Изучим сайт и
-															инфраструктуру, проверим на предмет ошибок и недочётов, определим важнейшие метрики. 
-															Наметим точки роста, разработаем дорожную карту с планами на ближайшую, средне- и долгосрочную
+															инфраструктуру, проверим на предмет ошибок и недочётов, определим важнейшие метрики.
+															Наметим точки роста, разработаем дорожную карту с планами на ближайшую, средне- и
+															долгосрочную
 															перспективу.</p>
 														<p>Путь, который вы собираетесь пройти, скорее всего кто-то уже проходил до вас. Принимал
 															неправильные решения, спотыкался и падал, терял деньги и время. Не стоит повторять чужие
 															ошибки — лучше использовать чужой опыт. Обратитесь к незаинтересованному профессионалу —
-															"свежий взгляд наметанным глазом" наверняка будет полезен. В моей практике есть эпизод: часовая
+															"свежий взгляд наметанным глазом" наверняка будет полезен. В моей практике есть эпизод:
+															часовая
 															встреча, которая сэкономила несколько десятков миллионов реальных денег.</p>
 													</div>
 												</div>
@@ -518,8 +556,8 @@ document.addEventListener('DOMContentLoaded', start);
 									</li>
 									<li>
 										<div class="service-card">
-											<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="60"
-												height="60" aria-hidden="true">
+											<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="60" height="60"
+												aria-hidden="true">
 												<path fill-rule="evenodd"
 													d="M12 1.25 3.5 5V11.15C3.5 16.27 7.05 21.05 12 22.25 16.95 21.05 20.5 16.27 20.5 11.15V5ZM12 3.35 5.35 6.35V11.15C5.35 15.15 8.05 18.85 12 19.95 15.95 18.85 18.65 15.15 18.65 11.15V6.35ZM12 7.85 8.77 9.28V11.62C8.77 13.56 10.12 15.38 12 15.83 13.88 15.38 15.23 13.56 15.23 11.62V9.28Z" />
 											</svg>
@@ -532,25 +570,48 @@ document.addEventListener('DOMContentLoaded', start);
 											<div class="service_hidden_details">
 												<div class="service_popup_informations">
 													<div class="descriptions">
-														<p>«Да ну, какие взломы, кому мы нужны, у нас же обычный магазин», — возможно, самая дорогая фраза за всю историю бизнеса.</p>
-														<p>Видите ли, дело в том, что вас никто специально не выбирает. Это бизнес, там давно всё автоматизировано и поставлено на поток: скрипты методично перебирают диапазоны адресов,
-															находят необновлённый софт, в нём — известные уязвимости, а дальше... Если повезёт, могут сообщить об опасной находке 
-															и вежливо предложить свою помощь в устранении бреши за разумное вознаграждение. А могут и не попросить и не сообщить, а взять и зашифровать все данные, например.
-															А потом потребовать выкуп за расшифровку, причем как правило уже в неразумных размерах.</p>
-														<p>Вместо шифровальщика может быть майнер, бэкдор или ботнет-хук. Или просто тихая выгрузка базы клиентов. Что, кстати, может быть хуже всего: майнер проявится через месяц по счетам за
-															хостинг, о шифровальщике почти мгновенно известят вопли в офисных чатах, а вот про утечку клиентской базы, к примеру, узнают обычно последними, и чаще всего из новостей.</p>
+														<p>«Да ну, какие взломы, кому мы нужны, у нас же обычный магазин», — возможно, самая дорогая
+															фраза за всю историю бизнеса.</p>
+														<p>Видите ли, дело в том, что вас никто специально не выбирает. Это бизнес, там давно всё
+															автоматизировано и поставлено на поток: скрипты методично перебирают диапазоны адресов,
+															находят необновлённый софт, в нём — известные уязвимости, а дальше... Если повезёт, могут
+															сообщить об опасной находке
+															и вежливо предложить свою помощь в устранении бреши за разумное вознаграждение. А могут и
+															не попросить и не сообщить, а взять и зашифровать все данные, например.
+															А потом потребовать выкуп за расшифровку, причем как правило уже в неразумных размерах.
+														</p>
+														<p>Вместо шифровальщика может быть майнер, бэкдор или ботнет-хук. Или просто тихая выгрузка
+															базы клиентов. Что, кстати, может быть хуже всего: майнер проявится через месяц по счетам
+															за
+															хостинг, о шифровальщике почти мгновенно известят вопли в офисных чатах, а вот про утечку
+															клиентской базы, к примеру, узнают обычно последними, и чаще всего из новостей.</p>
 														<p>Мне доводилось разбирать последствия таких историй, и знаете, выводы довольно скучные.
-															Эффектных взломов, которые показывают в кино, в реальности почти не бывает. Бывает сотрудник, который ушёл полгода назад, но затаил обиду и АПИ-ключ. 
-															Бывает админ разгильдяй, раздающий подрядчикам ssh-ключи и забывающий их отзывать. Бывают, наконец, просто недобросовестные люди со странными наклонностями: подглядеть, стащить, что нельзя стащить — поломать...
-														  И это я перечислил самые интересные случаи. А обычно всё ещё банальнее: обновление, которое собирались поставить «на следующей
-															неделе» в позапрошлом году. Торчащий наружу порт, про который забыли или не вовсе знали. И почти всегда найдется сотрудник с паролем qwerty123 и его товарищ, открывающий все письма про наследство от нигерийского дядюшки.</p>
-														<p>Резервное копирование — это отдельная тема. Нет, бэкапы конечно же есть у всех, сейчас это просто норма приличия. Но вот на мой вопрос, тестировали ли хоть раз восстановление из этих бэкапов, уверенно отвечают лишь единицы.
-														  А между тем бэкап, из которого ни разу не восстанавливались, — это не бэкап, а лотерея. Убаюкивающая иллюзия и возможный прямой убыток в итоге.</p>
-														<p>Сразу оговорюсь: я не "белый хакер" и не притворяюсь им. Пентест — отдельная профессия, со своей спецификой и массой нюансов, 
-															из-за которых она часто находится глубоко в серой зоне. "Белые шапки" безусловно достойны всяческого уважения, но я занимаюсь другим — операционной
-															безопасностью, DevSecOps. Именно теми вещами, примеры которых я привожу выше, и через которые чаще всего ломают в реальной жизни, а не в редких кейсах с конференций DefCon. 
-															И что самое интересное, эти простые вещи по факту являются причиной 95% всех кибер-инцидентов. 
-															А это значит, что простой чекап и следование элементарным регламентам перемещает ваш бизнес в топ-5% самых защищённых компаний. И нанимать для этого крутого хакера совсем не обязательно.</p>
+															Эффектных взломов, которые показывают в кино, в реальности почти не бывает. Бывает
+															сотрудник, который ушёл полгода назад, но затаил обиду и АПИ-ключ.
+															Бывает админ разгильдяй, раздающий подрядчикам ssh-ключи и забывающий их отзывать. Бывают,
+															наконец, просто недобросовестные люди со странными наклонностями: подглядеть, стащить, что
+															нельзя стащить — поломать...
+															И это я перечислил самые интересные случаи. А обычно всё ещё банальнее: обновление,
+															которое собирались поставить «на следующей
+															неделе» в позапрошлом году. Торчащий наружу порт, про который забыли или не вовсе знали. И
+															почти всегда найдется сотрудник с паролем qwerty123 и его товарищ, открывающий все письма
+															про наследство от нигерийского дядюшки.</p>
+														<p>Резервное копирование — это отдельная тема. Нет, бэкапы конечно же есть у всех, сейчас
+															это просто норма приличия. Но вот на мой вопрос, тестировали ли хоть раз восстановление из
+															этих бэкапов, уверенно отвечают лишь единицы.
+															А между тем бэкап, из которого ни разу не восстанавливались, — это не бэкап, а лотерея.
+															Убаюкивающая иллюзия и возможный прямой убыток в итоге.</p>
+														<p>Сразу оговорюсь: я не "белый хакер" и не притворяюсь им. Пентест — отдельная профессия,
+															со своей спецификой и массой нюансов,
+															из-за которых она часто находится глубоко в серой зоне. "Белые шапки" безусловно достойны
+															всяческого уважения, но я занимаюсь другим — операционной
+															безопасностью, DevSecOps. Именно теми вещами, примеры которых я привожу выше, и через
+															которые чаще всего ломают в реальной жизни, а не в редких кейсах с конференций DefCon.
+															И что самое интересное, эти простые вещи по факту являются причиной 95% всех
+															кибер-инцидентов.
+															А это значит, что простой чекап и следование элементарным регламентам перемещает ваш
+															бизнес в топ-5% самых защищённых компаний. И нанимать для этого крутого хакера совсем не
+															обязательно.</p>
 													</div>
 												</div>
 											</div>
@@ -612,13 +673,17 @@ document.addEventListener('DOMContentLoaded', start);
 															действительно ли в приложении есть проблема с утечкой памяти, или провайдер просто хочет
 															получать с вас побольше?</p>
 														<p>Моя первая специализация — системный администратор. Для меня решение "залить проблему
-															деньгами" путём покупки дополнительных мощностей — это вообще не решение. Точнее, в некоторых
-															случаях оно оправдано и тоже возможно, но обычно мы всё же не решаем проблему "в лоб". Гораздо
+															деньгами" путём покупки дополнительных мощностей — это вообще не решение. Точнее, в
+															некоторых
+															случаях оно оправдано и тоже возможно, но обычно мы всё же не решаем проблему "в лоб".
+															Гораздо
 															интереснее разобраться в причинах перегрузки и оптимизировать использование уже имеющихся
 															ресурсов.</p>
-														<p>Имея опыт запуска и эксплуатации систем самого разного масштаба — от одностраничных сайтов на
+														<p>Имея опыт запуска и эксплуатации систем самого разного масштаба — от одностраничных
+															сайтов на
 															виртуальном хостинге до cloud-native приложений в распределённых кластерах Kubernetes и
-															Virtuozzo, — я профессионально подберу, настрою, помогу поддерживать наиболее подходящее <b>в вашем</b> случае
+															Virtuozzo, — я профессионально подберу, настрою, помогу поддерживать наиболее подходящее
+															<b>в вашем</b> случае
 															решение.</p>
 													</div>
 												</div>
@@ -654,11 +719,14 @@ document.addEventListener('DOMContentLoaded', start);
 															работает с такими неопределенностями, в ходе анализа приводя их к понятной обеим сторонам
 															системе.</p>
 														<p>Ведь самое главное не в том, какая CMS, фреймворк или технология выбраны, а в том
-															<b>как</b> они выбраны. Сейчас поясню.</p>
+															<b>как</b> они выбраны. Сейчас поясню.
+														</p>
 														<p>Работая в екоме, я не раз наблюдал грустную картину: подрядчик всеми правдами и
 															неправдами навязывает клиенту своё "любимое" решение, которое по факту часто просто
-															единственное, которое он умеет. Как говорится, всё гвозди, коль молоток в руке. Особенно грустно
-															становится, если это решение ещё и не совсем подходит (или совсем не подходит) для этого конкретного проекта.</p>
+															единственное, которое он умеет. Как говорится, всё гвозди, коль молоток в руке. Особенно
+															грустно
+															становится, если это решение ещё и не совсем подходит (или совсем не подходит) для этого
+															конкретного проекта.</p>
 														<p>Хороший аналитик обязательно сначала выслушает (зачастую — допросит) бизнес, вникнет
 															его задачи, поймёт проблемы, и только после этого будет предлагать какие-то решения.
 															(Да-да, настоящий профессионал скорее всего предложит вам как минимум два варианта, указав
@@ -710,96 +778,152 @@ document.addEventListener('DOMContentLoaded', start);
 				</div>
 				<!-- /SERVICE -->
 				<!-- WHY ME -->
-				<div class="ip_section" id="why">
+				<div class="ip_section" id="whyme">
 					<div class="section_inner">
 						<div class="ip_info">
 							<article class="ip_teaser">
 								<div class="ip_title">
 									<h2>Опыт</h2>
 								</div>
-								<div class="ip_teaser__body" id="why-experience-body">
+								<div class="ip_teaser__body" id="whyme-experience-body">
 									<div class="wrapper">
 										<div class="left">
-											<p>Программированием я занимаюсь примерно с 1990-го года, с 1996-го делаю это плюс-минус осознанно. Уже в 2001-м начинаю осваивать
+											<p>Программированием я занимаюсь примерно с 1990-го года, с 1996-го делаю это плюс-минус
+												осознанно. Уже в 2001-м начинаю осваивать
 												Линукс и зарабатывать в сфере обслуживания ПК.</p>
 											<p>В 2008-м запустил интернет-магазин <a
 													href="https://web.archive.org/web/20081223060451/http://vladdepo.ru/" target="_blank"
 													rel="noopener">vladdepo.ru</a> (он же <a href="http://depolamp.ru" target="_blank"
-													rel="noopener">depolamp.ru</a>). В дальнейшем интернет-магазинов было много, а роли разные — от
+													rel="noopener">depolamp.ru</a>). В дальнейшем интернет-магазинов было много, а роли разные —
+												от
 												рядового менеджера до IT-директора.</p>
 											<p>C 2019 года внедряю <a href="https://www.retailcrm.ru/?partner=RCI-6A699F0D" target="_blank"
 													rel="noopener">RetailCRM</a> и <a href="https://www.moysklad.ru/?p=2019-960" target="_blank"
-													rel="noopener">МойСклад</a> в качестве партнера-интегратора — помогаю с анализом, настройкой и оптимизацией
+													rel="noopener">МойСклад</a> в качестве партнера-интегратора — помогаю с анализом, настройкой и
+												оптимизацией
 												бизнес-процессов, интеграцией внутренних и внешних систем, созданием собственных API и другой
 												кастомной разработкой.</p>
-											<p>Работаю со всеми платформами, кроме Apple (там есть существенные оговорки по поводу Apple Store). Берусь за самые сложные случаи: "по
+											<p>Работаю со всеми платформами, кроме Apple (там есть существенные оговорки по поводу Apple
+												Store). Берусь за самые сложные случаи: "по
 												сарафану" ко мне часто приходят после того, как другие отказались либо не справились.</p>
 										</div>
 										<div class="right">
-											<p>За 20 лет в отрасли я уже забыл, сколько языков программирования, фреймворков, технологий освоил. Но
+											<p>За 20 лет в отрасли я уже забыл, сколько языков программирования, фреймворков, технологий
+												освоил. Но
 												кое-что уже не забудется. Оно навсегда со мной.</p>
-											<p>Что же это? В жарком горниле рабочих будней, под давлением жестких дедлайнов и напором требовательных клиентов
-												появилась редкая ценность — опыт. Не стаж, не выслуга лет — практические знания, полученные путём решения реальных проблем
+											<p>Что же это? В жарком горниле рабочих будней, под давлением жестких дедлайнов и напором
+												требовательных клиентов
+												появилась редкая ценность — опыт. Не стаж, не выслуга лет — практические знания, полученные
+												путём решения реальных проблем
 												бизнеса в ежедневном режиме на протяжении многих лет.</p>
 											<p>За эти годы правда довелось вникать в самые разнообразные задачи и решать порой такие
 												экзотические проблемы, с какими многие инженеры не сталкиваются и за всю жизнь.</p>
 											<p>Поэтому сегодня я уверенно говорю: поставить передо мной нерешаемую задачу у бизнеса уже
-												вряд ли получится. У вас есть такая на примете? Приходите. Если задача окажется действительно интересной,
+												вряд ли получится. У вас есть такая на примете? Приходите. Если задача окажется действительно
+												интересной,
 												сделаем вам специальную скидку 🙃</p>
 										</div>
 									</div>
 								</div>
-								<button type="button" class="ip_teaser__more"
-										aria-expanded="false" aria-controls="why-experience-body"
-										data-label-open="Свернуть">
-									<span class="ip_teaser__more-label">Развернуть</span>
-								</button>
+							</article>
+							<article class="ip_teaser">
+								<div class="ip_title ip_title--right">
+									<h2>Качество</h2>
+								</div>
+								<div class="ip_teaser__body" id="whyme-quality-body">
+									<div class="wrapper">
+										<div class="left">
+											<p>Текст появится здесь. Качество — как я довожу работу до состояния, за которое не стыдно через год.</p>
+											<p>Текст появится здесь. Левая колонка, второй абзац-заглушка. Нужен, чтобы тизер сжимался так же, как соседние статьи, пока нет финального текста.</p>
+											<p>Текст появится здесь. Левая колонка, третий абзац-заглушка про критерии «достаточно хорошо» и отказ от декоративного усложнения.</p>
+											<p>Текст появится здесь. Левая колонка, четвёртый абзац-заглушка.</p>
+										</div>
+										<div class="right">
+											<p>Текст появится здесь. Правая колонка, первый абзац-заглушка: проверяю результат сам, а не сдаю «как получилось».</p>
+											<p>Текст появится здесь. Правая колонка, второй абзац-заглушка.</p>
+											<p>Текст появится здесь. Правая колонка, третий абзац-заглушка.</p>
+											<p>Текст появится здесь. Правая колонка, четвёртый абзац-заглушка.</p>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="ip_teaser">
+								<div class="ip_title">
+									<h2>Надёжность</h2>
+								</div>
+								<div class="ip_teaser__body" id="whyme-reliability-body">
+									<div class="wrapper">
+										<div class="left">
+											<p>Текст появится здесь. Надёжность — почему со мной можно иметь дело на длинной дистанции:
+												обещания совпадают с результатом, а не с презентацией.</p>
+											<p>Текст появится здесь. Левая колонка, второй абзац-заглушка. Нужен, чтобы тизер сжимался так же,
+												как соседние статьи, пока нет финального текста.</p>
+											<p>Текст появится здесь. Левая колонка, третий абзац-заглушка про ответственность за сроки,
+												последствия решений и то, что остаётся после запуска.</p>
+											<p>Текст появится здесь. Левая колонка, четвёртый абзац-заглушка.</p>
+										</div>
+										<div class="right">
+											<p>Текст появится здесь. Правая колонка, первый абзац-заглушка: не исчезаю после внедрения, довожу
+												до рабочего контура.</p>
+											<p>Текст появится здесь. Правая колонка, второй абзац-заглушка.</p>
+											<p>Текст появится здесь. Правая колонка, третий абзац-заглушка.</p>
+											<p>Текст появится здесь. Правая колонка, четвёртый абзац-заглушка.</p>
+										</div>
+									</div>
+								</div>
 							</article>
 							<article class="ip_teaser">
 								<div class="ip_title ip_title--right">
 									<h2>Суперсила</h2>
 								</div>
-								<div class="ip_teaser__body" id="why-superpower-body">
+								<div class="ip_teaser__body" id="whyme-superpower-body">
 									<div class="wrapper">
 										<div class="left">
 											<p>Менеджеры и инженеры говорят на разных языках и часто с трудом понимают друг друга, — это
 												противоречие вошло уже в анекдоты.</p>
-											<p>И действительно: в реальной жизни технические и бизнес-задачи лежат в разных плоскостях, "физики и лирики"
+											<p>И действительно: в реальной жизни технические и бизнес-задачи лежат в разных плоскостях,
+												"физики и лирики"
 												мыслят по-разному, действуют в разных системах координат, иногда как будто и вправду живут в
 												разных мирах.</p>
-											<p>С 2008 года, c того самого первого сайта, я всё время работал в этой "точке напряжения", на стыке двух миров. 
-											  Причём работал с разных сторон: сначала как руководитель интернет-проектов (то есть, заказчик IT-решений), затем
-												как руководитель направления в веб-агентстве (то есть, со стороны подрядчика), сейчас — как независимый
+											<p>С 2008 года, c того самого первого сайта, я всё время работал в этой "точке напряжения", на
+												стыке двух миров.
+												Причём работал с разных сторон: сначала как руководитель интернет-проектов (то есть, заказчик
+												IT-решений), затем
+												как руководитель направления в веб-агентстве (то есть, со стороны подрядчика), сейчас — как
+												независимый
 												бизнес-консультант и технический эксперт (посередине).</p>
 											<p>Это даёт мне "суперсилу" — понимать обе стороны и говорить с каждой из них на "родном" языке,
 												объединяя миры.</p>
-											<p>Может показаться что сейчас, в эпоху больших языковых моделей, ИИ-агентов и AI-сервисов, 
-												эта "сверхспособность" утратит свою ценность. Однако я убежден, что всё ровно наоборот. Именно человеческое внимание, 
+											<p>Может показаться что сейчас, в эпоху больших языковых моделей, ИИ-агентов и AI-сервисов,
+												эта "сверхспособность" утратит свою ценность. Однако я убежден, что всё ровно наоборот. Именно
+												человеческое внимание,
 												понимание и опыт приобретают особую ценность в эпоху тотального доминирования ИИ.</p>
 										</div>
 										<div class="right">
-											<p>Я уверен: скоро мы будем доплачивать именно за человеческое исполнение (а многие уже это делают).
-												Будет сгенерированный доступный "ширпотреб", и премиальный сгенерированный контент, но вещи, сделанные людьми, будут цениться выше.
-												Поэтому я стараюсь не терять навыков. И каждое русское слово на этом сайте написано кожано-костяными руками, 
+											<p>Я уверен: скоро мы будем доплачивать именно за человеческое исполнение (а многие уже это
+												делают).
+												Будет сгенерированный доступный "ширпотреб", и премиальный сгенерированный контент, но вещи,
+												сделанные людьми, будут цениться выше.
+												Поэтому я стараюсь не терять навыков. И каждое русское слово на этом сайте написано
+												кожано-костяными руками,
 												и за каждую строчку своего кода я отвечаю лично.</p>
-											<p>Пока что ни одна модель не ощущает реальной боли бизнеса, не предвидит "человеческих" последствий
+											<p>Пока что ни одна модель не ощущает реальной боли бизнеса, не предвидит "человеческих"
+												последствий
 												технических решений, не разглядит за сухим описанием бизнес-процессов — людей и отношения между
-												ними. Слышали историю про уборщицу тётю Валю, которая остановила завод? А про бульдозериста дядю Васю,
+												ними. Слышали историю про уборщицу тётю Валю, которая остановила завод? А про бульдозериста дядю
+												Васю,
 												перебившего новейшую оптику? Ковшом. На спор. Ну вот, а вы говорите — AGI...</p>
 											<p>А человеческий подход — он и результат даёт человеческий. В идеале такой, который работает для
-												людей и на реальную пользу делу, а не ради галочки в отчёте о внедрении или красивого слайда про AI
-												в презентации.</p> 
+												людей и на реальную пользу делу, а не ради галочки в отчёте о внедрении или красивого слайда про
+												AI
+												в презентации.</p>
 											<p>Реальность такова,что заказчики — представители и даже владельцы бизнеса — часто сами не
-												понимают, что происходит у них в хозяйстве. А ведь прежде чем делегировать что-то ИИ, желательно в этом разобраться самостоятельно.
+												понимают, что происходит у них в хозяйстве. А ведь прежде чем делегировать что-то ИИ, желательно
+												в этом разобраться самостоятельно.
 												Пусть базово, но хотя бы основы "своим умом" понять.</p>
 										</div>
 									</div>
 								</div>
-								<button type="button" class="ip_teaser__more"
-										aria-expanded="false" aria-controls="why-superpower-body"
-										data-label-open="Свернуть">
-									<span class="ip_teaser__more-label">Развернуть</span>
-								</button>
 							</article>
 						</div>
 					</div>
@@ -1034,7 +1158,7 @@ document.addEventListener('DOMContentLoaded', start);
 		<div class="mouse-cursor cursor-inner"></div>
 		<!-- /MAGIC CURSOR -->
 	</div>
-	<script defer src="static/js/init.js?v=97484b10"></script>
+	<script defer src="static/js/init.js?v=0f94c977"></script>
 </body>
 
 </html>

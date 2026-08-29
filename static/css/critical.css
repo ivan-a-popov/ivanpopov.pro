@@ -21,47 +21,75 @@
 */
 :root {
 	color-scheme: light dark;
-	--bg-color: #fff;              /* page, header/footer, modals, QR panel */
-	--text-main: #333;            /* headings, nav, strong copy */
-	--text-sub: #7d7789;          /* body copy */
-	--text-muted: #666;           /* secondary controls (QR close icon) */
-	--logo-color: #000;           /* wordmark */
-	--accent: #333;              /* decorative line + magic cursor dot */
-	--rule-color: #7d7789;        /* section-title trailing rule */
-	--card-border: #b9b8c3;       /* service card outline */
-	--card-hover-bg: #333;        /* service card hover fill (kept dark both themes) */
-	--card-hover-summary: #aaa;   /* summary text on the hover fill */
-	--on-accent: #fff;            /* text/icons on top of dark accent fills */
-	--quote-border: #E5EDF4;      /* testimonial bubble border + tail + quotes */
-	--quote-fill: #f6fbff;        /* testimonial tail inner triangle (bubble interior) */
-	--caret-color: #999;          /* headline caret + QR close border */
-	--cursor-invert: #fff;        /* magic cursor over dark surfaces */
-	--overlay: rgba(0, 0, 0, .8); /* modal backdrop */
+	--bg-color: #fff;
+	/* page, header/footer, modals, QR panel */
+	--text-main: #333;
+	/* headings, nav, strong copy */
+	--text-sub: #7d7789;
+	/* body copy */
+	--text-muted: #666;
+	/* secondary controls (QR close icon) */
+	--logo-color: #000;
+	/* wordmark */
+	--accent: #333;
+	/* decorative line + magic cursor dot */
+	--rule-color: #7d7789;
+	/* section-title trailing rule */
+	--card-border: #b9b8c3;
+	/* service card outline */
+	--card-hover-bg: #333;
+	/* service card hover fill (kept dark both themes) */
+	--card-hover-summary: #aaa;
+	/* summary text on the hover fill */
+	--on-accent: #fff;
+	/* text/icons on top of dark accent fills */
+	--quote-border: #E5EDF4;
+	/* testimonial bubble border + tail + quotes */
+	--quote-fill: #f6fbff;
+	/* testimonial tail inner triangle (bubble interior) */
+	--caret-color: #999;
+	/* headline caret + QR close border */
+	--cursor-invert: #fff;
+	/* magic cursor over dark surfaces */
+	--overlay: rgba(0, 0, 0, .8);
+	/* modal backdrop */
 	/* Both themes: #000 is darker than the dark page bg, so the curtain peel
 	   stays visible. --overlay is also theme-invariant. */
-	--preloader-bg: #000;         /* loader curtains */
-	--preloader-line: #fff;       /* loader growing line */
-	--preloader-line-dim: #777;   /* loader dim sweep */
+	--preloader-bg: #000;
+	/* loader curtains */
+	--preloader-line: #fff;
+	/* loader growing line */
+	--preloader-line-dim: #777;
+	/* loader dim sweep */
 }
+
 @media (prefers-color-scheme: dark) {
 	:root {
 		--bg-color: #131516;
-		--text-main: #a09c96;         /* headings/nav — darkreader #333 */
-		--text-sub: #7a7267;          /* body + popup copy — darkreader #7d7789 */
-		--text-muted: #868077;        /* secondary controls — darkreader #666 */
-		--logo-color: #bab8b6;        /* wordmark — darkreader neutral text */
+		--text-main: #a09c96;
+		/* headings/nav — darkreader #333 */
+		--text-sub: #7a7267;
+		/* body + popup copy — darkreader #7d7789 */
+		--text-muted: #868077;
+		/* secondary controls — darkreader #666 */
+		--logo-color: #bab8b6;
+		/* wordmark — darkreader neutral text */
 		--accent: #a09c96;
 		--rule-color: #4d5356;
-		--card-border: #353a3c;       /* darkreader #b9b8c3 border */
-		--card-hover-bg: #1e2222;     /* darkreader #333 fill */
+		--card-border: #353a3c;
+		/* darkreader #b9b8c3 border */
+		--card-hover-bg: #1e2222;
+		/* darkreader #333 fill */
 		--card-hover-summary: #8e8a82;
 		--on-accent: #bab8b6;
 		--quote-border: #353a3c;
-		--quote-fill: #131516;        /* matches --bg-color so the tail reads as a hole */
+		--quote-fill: #131516;
+		/* matches --bg-color so the tail reads as a hole */
 		--caret-color: #868077;
 		--cursor-invert: #bab8b6;
 		--preloader-line: #bab8b6;
-		--preloader-line-dim: #484e51; /* darkreader #777 */
+		--preloader-line-dim: #484e51;
+		/* darkreader #777 */
 	}
 }
 
@@ -78,6 +106,7 @@
 	src: url("static/fonts/onest/onest-cyrillic-ext.woff2") format("woff2");
 	unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
+
 @font-face {
 	font-family: "Onest";
 	font-style: normal;
@@ -86,6 +115,7 @@
 	src: url("static/fonts/onest/onest-cyrillic.woff2") format("woff2");
 	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
+
 @font-face {
 	font-family: "Onest";
 	font-style: normal;
@@ -94,6 +124,7 @@
 	src: url("static/fonts/onest/onest-latin-ext.woff2") format("woff2");
 	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
+
 @font-face {
 	font-family: "Onest";
 	font-style: normal;
@@ -102,6 +133,7 @@
 	src: url("static/fonts/onest/onest-latin.woff2") format("woff2");
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
 /* Metric-matched local fallback: while Onest is in flight (or if it never
    arrives), Arial/Liberation Sans renders at Onest's advance widths and
    vertical metrics, so the swap moves nothing (the header is always visible
@@ -118,6 +150,7 @@
 	descent-override: 29.2%;
 	line-gap-override: 0%;
 }
+
 @font-face {
 	font-family: "Onest Fallback";
 	font-style: normal;
@@ -137,6 +170,7 @@ html {
 	   there shifts the whole shell when the stylesheet arrives. */
 	scrollbar-gutter: stable;
 }
+
 body {
 	margin: 0;
 	/* Body typography duplicated from style.css: inline elements on the home
@@ -149,16 +183,28 @@ body {
 	font-weight: 450;
 	color: var(--text-sub);
 }
+
 /* Same reset as style.css — UA heading/list margins must never exist on first
    paint, or the whole home column jumps up when style.css lands (CLS). */
-h1, h2, h3, h4, h5, h6, p, ul, ol, li {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li {
 	margin: 0;
 	padding: 0;
 }
+
 img {
 	vertical-align: middle;
 	max-width: 100%;
 }
+
 /* Out of flow from first paint (full chrome lives in style.css). */
 .ip_modalbox {
 	position: fixed;
@@ -168,6 +214,7 @@ img {
 	visibility: hidden;
 	pointer-events: none;
 }
+
 .mouse-cursor {
 	display: none;
 	position: fixed;
@@ -187,11 +234,13 @@ img {
 	z-index: 99999;
 	display: flex;
 }
+
 /* Set in <head> by critical.js before #preloader is parsed: bots, reduced
    motion, and non-home hashes must not paint a black first frame (Speed Index). */
 html.skip-preloader #preloader {
 	display: none !important;
 }
+
 /* Two half-screen curtains that scale away once loaded. */
 #preloader:before,
 #preloader:after {
@@ -205,11 +254,13 @@ html.skip-preloader #preloader {
 	background-color: var(--preloader-bg);
 	transform-origin: left center;
 }
+
 #preloader:after {
 	left: auto;
 	right: 0;
 	transform-origin: right center;
 }
+
 /* Preloader timing (keep in sync with critical.js):
    half-grow 1000ms → hold 400ms → blink 1350ms → full-grow 500ms → peel 500ms
    Box stays 250px (overflow clips the dim sweep); full-grow uses scaleY so CLS
@@ -224,6 +275,7 @@ html.skip-preloader #preloader {
 	overflow: hidden;
 	transition: transform 500ms ease 0s, opacity 0s linear 500ms;
 }
+
 #preloader .loader_line:before {
 	content: '';
 	position: absolute;
@@ -235,6 +287,7 @@ html.skip-preloader #preloader {
 	background-color: var(--preloader-line);
 	animation: lineheight 1000ms ease-in-out 0s forwards;
 }
+
 #preloader .loader_line:after {
 	content: '';
 	position: absolute;
@@ -246,24 +299,35 @@ html.skip-preloader #preloader {
 	transform: translateY(-100%);
 	animation: lineround 1350ms linear 1400ms 1 forwards;
 }
+
 /* 0% frames fall back to the elements' base styles. */
 @keyframes lineheight {
-	100% { height: 100%; }
+	100% {
+		height: 100%;
+	}
 }
+
 @keyframes lineround {
-	100% { transform: translateY(200%); }
+	100% {
+		transform: translateY(200%);
+	}
 }
+
 #preloader.preloaded .loader_line {
 	opacity: 0;
 	/* Set by critical.js dismiss() to viewport/box ratio before .preloaded lands. */
 	transform: scaleY(var(--loader-scale-full, 1));
 }
+
 #preloader.preloaded:before,
 #preloader.preloaded:after {
 	animation: preloadedzero 500ms ease-in-out 500ms forwards;
 }
+
 @keyframes preloadedzero {
-	100% { transform: scaleX(0); }
+	100% {
+		transform: scaleX(0);
+	}
 }
 
 /* LAYOUT SHELL — wrapper variables, fixed header and footer */
@@ -298,10 +362,12 @@ html.skip-preloader #preloader {
 	/* Room for active/hover scale (up to 1.5) + sub-labels wider than main word. */
 	--ip-menu-scale-bleed: clamp(8px, calc(6px + 0.45vw), 22px);
 }
+
 .ip_all_wrap,
 .ip_all_wrap * {
 	box-sizing: border-box;
 }
+
 .ip_header {
 	position: fixed;
 	top: 0;
@@ -318,10 +384,12 @@ html.skip-preloader #preloader {
 	column-gap: var(--ip-logo-menu-gap);
 	overflow: visible;
 }
+
 .ip_header .logo {
 	display: none;
 	flex: 0 0 auto;
 }
+
 .ip_header .logo .text {
 	text-decoration: none;
 	color: var(--logo-color);
@@ -336,6 +404,7 @@ html.skip-preloader #preloader {
 	white-space: nowrap;
 	word-spacing: -0.3em;
 }
+
 .ip_header .menu {
 	position: relative;
 	flex: 1 1 auto;
@@ -343,6 +412,7 @@ html.skip-preloader #preloader {
 	overflow: visible;
 	display: flex;
 }
+
 .ip_header .menu ul {
 	margin: 0;
 	list-style: none;
@@ -353,18 +423,22 @@ html.skip-preloader #preloader {
 	justify-content: space-around;
 	gap: var(--ip-menu-gap);
 }
+
 .ip_header .menu ul li {
 	margin: 0;
 	flex: 0 0 auto;
 	overflow: visible;
 }
+
 /* Edge items scale inward so html{overflow-x:hidden} does not clip them. */
 .ip_header .menu ul li:first-child a {
 	transform-origin: left bottom;
 }
+
 .ip_header .menu ul li:last-child a {
 	transform-origin: right bottom;
 }
+
 .ip_header .menu ul li a {
 	text-decoration: none;
 	text-transform: uppercase;
@@ -379,14 +453,17 @@ html.skip-preloader #preloader {
 	transform-origin: center bottom;
 	transition: transform .32s cubic-bezier(.33, 1, .68, 1);
 }
+
 .ip_header .menu ul li a b {
 	position: relative;
 	display: inline-block;
 	line-height: 1;
 }
+
 .ip_header .menu ul li a:hover b {
 	font-weight: 600;
 }
+
 .ip_header .menu ul li .ip_menu_sub {
 	position: absolute;
 	left: 50%;
@@ -403,42 +480,52 @@ html.skip-preloader #preloader {
 	pointer-events: none;
 	transition: opacity .22s ease;
 }
+
 /* Magnify the whole link (main + sub) — lens sits on the active item. */
 .ip_header .menu ul li.active a {
 	transform: translateY(-4px) scale(1.2);
 	z-index: 2;
 }
+
 .ip_header .menu ul li.active a b {
 	font-weight: 700;
 }
+
 .ip_header .menu ul li.active .ip_menu_sub {
 	opacity: 1;
 	font-weight: 600;
 }
+
 @media (min-width: 640px) and (max-width: 1023px) {
 	.ip_header .menu ul li.active a {
 		transform: translateY(-6px) scale(1.3);
 	}
 }
+
 @media (min-width: 1024px) {
 	.ip_header .menu ul li.active a {
 		transform: translateY(-8px) scale(1.5);
 	}
 }
+
 @media (hover: hover) {
+
 	/* Hover magnifies less than active; sub inherits link scale. */
 	.ip_header .menu ul li:not(.active) a:hover {
 		transform: translateY(-3px) scale(1.08);
 		z-index: 1;
 	}
+
 	.ip_header .menu ul li:not(.active) a:hover b {
 		font-weight: 600;
 	}
+
 	.ip_header .menu ul li:not(.active) a:hover .ip_menu_sub {
 		opacity: 1;
 		font-weight: 500;
 	}
 }
+
 .ip_footer {
 	position: fixed;
 	bottom: 0;
@@ -456,12 +543,14 @@ html.skip-preloader #preloader {
 	justify-content: center;
 	padding: .9em;
 }
+
 .ip_footer .copyhuy p {
 	margin: 0;
 	color: var(--text-main);
 	font-family: Onest, "Onest Fallback", sans-serif;
 	text-align: center;
 }
+
 /* Filled mark from copyhuy.svg — 1em + currentColor keep it in step with footer type/theme. */
 .ip_footer .copyhuy__mark {
 	display: inline-block;
@@ -471,6 +560,7 @@ html.skip-preloader #preloader {
 	vertical-align: -0.15em;
 	fill: var(--text-main);
 }
+
 /* ATF main shell — must match style.css box model so async CSS cannot restack.
    Keep it rendered from first paint: toggling visibility on this full-viewport
    subtree is itself reported by Lighthouse as a large layout shift. */
@@ -480,6 +570,7 @@ html.skip-preloader #preloader {
 	overflow: hidden;
 	visibility: visible;
 }
+
 .ip_mainpart .author_image {
 	position: absolute;
 	top: 0;
@@ -491,6 +582,7 @@ html.skip-preloader #preloader {
 	visibility: hidden;
 	pointer-events: none;
 }
+
 .ip_mainpart .author_image .author_image_inner {
 	position: absolute;
 	inset: 0;
@@ -499,6 +591,7 @@ html.skip-preloader #preloader {
 	overflow: hidden;
 	opacity: 0;
 }
+
 .ip_mainpart .author_image .author_image_inner .author_photo {
 	position: absolute;
 	z-index: 2;
@@ -512,6 +605,7 @@ html.skip-preloader #preloader {
 	pointer-events: none;
 	user-select: none;
 }
+
 .ip_mainpart .main_content {
 	position: absolute;
 	top: 0;
@@ -519,6 +613,7 @@ html.skip-preloader #preloader {
 	bottom: 0;
 	width: var(--ip-col-right);
 }
+
 .ip_section {
 	position: absolute;
 	inset: 0;
@@ -528,6 +623,7 @@ html.skip-preloader #preloader {
 	pointer-events: none;
 	z-index: 8;
 }
+
 .ip_section.animated,
 .ip_section.active {
 	opacity: 1;
@@ -535,9 +631,11 @@ html.skip-preloader #preloader {
 	pointer-events: auto;
 	z-index: 9;
 }
+
 .ip_section.active {
 	z-index: 10;
 }
+
 /* Deep-link first paint (data-ip-section is set in <head>, cleared by init.js).
    Do not use :target — pushState does not retarget it, so the landing section
    would stay "always visible" and never roll. */
@@ -546,26 +644,30 @@ html[data-ip-section] #home.animated {
 	visibility: hidden;
 	pointer-events: none;
 }
+
 html[data-ip-section="about"] #about,
 html[data-ip-section="service"] #service,
-html[data-ip-section="why"] #why,
+html[data-ip-section="whyme"] #whyme,
 html[data-ip-section="testimonials"] #testimonials {
 	opacity: 1;
 	visibility: visible;
 	pointer-events: auto;
 	z-index: 10;
 }
+
 .ip_home {
 	position: relative;
 	min-height: 100%;
 	display: flex;
 	flex-direction: column;
 }
+
 .ip_home_photo {
 	display: block;
 	width: 100%;
 	padding: 0 20px;
 }
+
 .ip_home_photo img {
 	display: block;
 	width: 100%;
@@ -574,6 +676,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	object-fit: cover;
 	object-position: center 55%;
 }
+
 .ip_home .content {
 	--ip-home-name-gap: clamp(16px, calc(16px + 1.2vw), 30px);
 	--ip-home-line-gap: clamp(16px, calc(18px + 1.2vw), 30px);
@@ -582,6 +685,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	--ip-home-job-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 	padding: 14px 20px 0;
 }
+
 .ip_home .name {
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
 	font-weight: 550;
@@ -591,6 +695,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	color: var(--text-main);
 	line-height: 1.2;
 }
+
 .ip_home .line {
 	display: inline-block;
 	width: var(--ip-home-line-width);
@@ -598,6 +703,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	background-color: var(--text-sub);
 	margin-bottom: var(--ip-home-line-gap);
 }
+
 .ip_home .job {
 	margin-bottom: var(--ip-home-job-gap);
 	font-size: 1.375rem;
@@ -605,6 +711,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	font-family: Onest, "Onest Fallback", sans-serif;
 	line-height: 1.2;
 }
+
 /* Animated headline: duplicated from style.css. Without these rules the six
    phrases paint stacked (and reflow again if init.js starts the width
    animation before style.css applies) — Lighthouse reported that collapse as
@@ -615,6 +722,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	text-align: left;
 	vertical-align: top;
 }
+
 .cd-words-wrapper b {
 	display: inline-block;
 	position: absolute;
@@ -623,32 +731,39 @@ html[data-ip-section="testimonials"] #testimonials {
 	white-space: nowrap;
 	opacity: 0;
 }
+
 .cd-words-wrapper b.is-visible {
 	position: relative;
 	opacity: 1;
 }
+
 .cd-headline.clip span {
 	display: inline-block;
 	padding: .2em 0;
 }
+
 .cd-headline.clip .cd-words-wrapper {
 	overflow: hidden;
 	vertical-align: top;
 }
+
 .ip_home .job b {
 	font-weight: 650;
 }
+
 .ip_home .job .blc {
 	display: block;
 	margin-top: 8px;
 	font-weight: 600;
 }
+
 .ip_home_social a {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	opacity: .88;
 }
+
 /* init.js (deferred) may insert the swipe dots before async style.css applies;
    keep them out of flow from the start so they never paint in-flow at the top
    of the wrapper and then jump (CLS). Full look lives in style.css. */
@@ -660,17 +775,20 @@ html[data-ip-section="testimonials"] #testimonials {
 	z-index: 14;
 	padding: 8px 14px;
 }
+
 .ip_swipe_nav ul {
 	list-style: none;
 	display: flex;
 	align-items: center;
 }
+
 .ip_swipe_nav ul li {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 7px;
 }
+
 .ip_swipe_nav ul li .dot {
 	display: block;
 	width: 7px;
@@ -678,59 +796,74 @@ html[data-ip-section="testimonials"] #testimonials {
 	border-radius: 50%;
 	background: rgba(255, 255, 255, 0.55);
 }
+
 @media (prefers-color-scheme: dark) {
 	.ip_swipe_nav ul li .dot {
 		background: rgba(0, 0, 0, 0.55);
 	}
 }
+
 @media (min-width: 1024px) {
-	.ip_swipe_nav { display: none; }
+	.ip_swipe_nav {
+		display: none;
+	}
 }
+
 .ip_all_wrap.has-touch .ip_swipe_nav {
 	display: block;
 }
+
 .ip_home_social {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	gap: 22px;
 }
+
 .ip_home_social img {
 	width: 42px;
 	height: 42px;
 	display: block;
 }
+
 @media (max-width: 639px) {
-  .ip_footer {
+	.ip_footer {
 		justify-content: center;
 	}
+
 	.ip_header .menu ul {
 		justify-content: space-between;
 		padding-left: calc(clamp(8px, 3vw, 16px) + var(--ip-menu-scale-bleed));
 		padding-right: calc(clamp(8px, 3vw, 16px) + var(--ip-menu-scale-bleed));
 		gap: clamp(2px, 1.2vw, 8px);
 	}
+
 	.ip_header .menu ul li a {
 		font-size: clamp(.62rem, 2.75vw, .85rem);
 	}
+
 	.ip_header .menu ul li.active .ip_menu_sub {
 		font-size: clamp(.5rem, 2.2vw, .7rem);
 	}
+
 	@media (hover: hover) {
 		.ip_header .menu ul li:not(.active) a:hover {
 			transform: translateY(-2px) scale(1.05);
 		}
 	}
 }
+
 @media (min-width: 480px) {
 	.ip_home_photo img {
 		aspect-ratio: 1 / 1;
 		object-position: center 40%;
 	}
+
 	.ip_home .content {
 		padding-top: 20px;
 	}
 }
+
 @media (min-width: 640px) {
 	.ip_all_wrap {
 		/* Column split consumed by .author_image / .main_content.
@@ -739,29 +872,36 @@ html[data-ip-section="testimonials"] #testimonials {
 		--ip-col-right: 64%;
 		--ip-menu-gap: clamp(10px, 1.4vw, 28px);
 	}
+
 	.ip_footer {
-	  justify-content: flex-start;
-  }
+		justify-content: flex-start;
+	}
+
 	.ip_header {
 		display: grid;
 		grid-template-columns: var(--ip-col-left) minmax(0, var(--ip-col-right));
 		column-gap: 0;
 	}
+
 	.ip_header .logo {
 		display: block;
 		min-width: 0;
 	}
+
 	.ip_header .menu {
 		grid-column: 2;
 	}
+
 	.ip_header .menu ul {
 		justify-content: space-between;
 		padding-left: calc(clamp(12px, 2vw, 32px) + var(--ip-menu-scale-bleed));
 		padding-right: calc(clamp(12px, 2vw, 32px) + var(--ip-menu-scale-bleed));
 	}
+
 	.ip_header .menu ul li a {
 		font-size: 1rem;
 	}
+
 	.ip_mainpart .author_image {
 		top: 0;
 		left: 0;
@@ -771,35 +911,43 @@ html[data-ip-section="testimonials"] #testimonials {
 		visibility: visible;
 		pointer-events: auto;
 	}
+
 	.ip_mainpart .author_image .author_image_inner,
 	.ip_mainpart .author_image .author_image_inner .author_photo {
 		opacity: 1;
 	}
+
 	.ip_mainpart .author_image .author_image_inner {
 		height: auto;
 	}
+
 	.ip_mainpart .author_image .author_image_inner .author_photo {
 		height: 100%;
 	}
+
 	.ip_home {
 		height: 100%;
 		min-height: 0;
 		flex-direction: row;
 		align-items: center;
 	}
+
 	.ip_home_photo {
 		display: none;
 	}
+
 	.ip_home .content {
 		padding: 0 20px;
 	}
 }
+
 /* Tablet: active sub slightly smaller than desktop; hover stays below active. */
 @media (min-width: 640px) and (max-width: 1023px) {
 	.ip_all_wrap {
 		--ip-menu-gap: clamp(6px, 1vw, 16px);
 	}
 }
+
 @media (min-width: 768px) {
 	.ip_all_wrap {
 		--ip-col-left: 36%;
@@ -807,17 +955,21 @@ html[data-ip-section="testimonials"] #testimonials {
 		--ip-menu-gap: clamp(16px, 2vw, 40px);
 	}
 }
+
 @media (min-width: 1024px) {
 	.ip_all_wrap {
 		--ip-menu-gap: clamp(20px, 2.5vw, 52px);
 	}
+
 	/* Content-edge alignment + scale bleed so magnified last item is not clipped. */
 	.ip_header .menu ul {
 		padding-right: calc(var(--ip-menu-padding-inline) + var(--ip-menu-scale-bleed));
 	}
+
 	.ip_home .content {
 		padding: 0 0 0 50px;
 	}
+
 	.ip_home .job {
 		font-size: 1.4375rem;
 	}
