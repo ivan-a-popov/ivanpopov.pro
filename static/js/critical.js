@@ -101,8 +101,8 @@
 		if(!document.fonts || !document.fonts.load){ return Promise.resolve(); }
 		var faces = Promise.all([
 			document.fonts.load('550 1em Onest', 'Иван Попов'),
-			document.fonts.load('700 1em Onest', 'Кто такой'),
-			document.fonts.load('650 1em Onest', 'AI')
+			document.fonts.load('650 1em Onest', 'Кто такой'),
+			document.fonts.load('600 1em Onest', 'AI')
 		]).catch(function(){});
 		return Promise.race([
 			faces,
