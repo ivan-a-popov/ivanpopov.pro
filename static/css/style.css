@@ -1,8 +1,17 @@
 @charset "utf-8";
 /* FONTS */
-/* Onest @font-face rules moved to critical.css (inlined in <head>) together
-   with the metric-matched "Onest Fallback" face — registering them before
-   first paint is what keeps the font swap CLS-free. */
+/* Cyrillic Onest + Fallback stay in critical.css. Latin subsets are
+   intentionally unregistered: footer digits and a few English titles
+   (Ecommerce, DevOps) would pull onest-latin.woff2 onto the document
+   critical path. Those glyphs use metric-matched "Onest Fallback". */
+@font-face {
+	font-family: "Onest";
+	font-style: normal;
+	font-weight: 300 800;
+	font-display: optional;
+	src: url("../fonts/onest/onest-cyrillic-ext.woff2") format("woff2");
+	unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
 
 /* RESET + BASE */
 /* html/body zeroing and box-sizing live in critical.css (inlined in the HTML). */
