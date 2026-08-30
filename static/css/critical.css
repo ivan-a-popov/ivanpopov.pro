@@ -20,13 +20,13 @@
 :root {
 	color-scheme: light dark;
 	--bg-color: #fff;
-	/* page, header/footer, modals, QR panel */
+	/* page, header/footer, modals */
 	--text-main: #333;
 	/* headings, nav, strong copy */
 	--text-sub: #7d7789;
 	/* body copy */
 	--text-muted: #666;
-	/* secondary controls (QR close icon) */
+	/* secondary controls */
 	--logo-color: #000;
 	/* wordmark */
 	--accent: #333;
@@ -46,7 +46,7 @@
 	--quote-fill: #f6fbff;
 	/* testimonial tail inner triangle (bubble interior) */
 	--caret-color: #999;
-	/* headline caret + QR close border */
+	/* headline caret */
 	--cursor-invert: #fff;
 	/* magic cursor over dark surfaces */
 	--overlay: rgba(0, 0, 0, .8);
@@ -662,7 +662,6 @@ html[data-ip-section="testimonials"] #testimonials {
 }
 
 .ip_home_copy {
-	position: relative;
 	--ip-home-name-gap: clamp(16px, calc(16px + 1.2vw), 30px);
 	--ip-home-rule-gap: clamp(16px, calc(18px + 1.2vw), 30px);
 	--ip-home-rule-width: clamp(40px, calc(25px + 2.5vw), 70px);

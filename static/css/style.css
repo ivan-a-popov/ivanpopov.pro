@@ -344,15 +344,12 @@ html,
 	object-position: center 55%;
 }
 .ip_home_copy{
-	/* Containing block for the QR overlay (covers name + headline + social). */
-	position: relative;
 	/* Fluid gaps around the name / rule / headline — scale with viewport. */
 	--ip-home-name-gap: clamp(16px, calc(16px + 1.2vw), 30px);
 	--ip-home-rule-gap: clamp(16px, calc(18px + 1.2vw), 30px);
 	--ip-home-rule-width: clamp(40px, calc(25px + 2.5vw), 70px);
 	--ip-home-rule-height: clamp(3px, calc(2px + 0.15vw), 5px);
 	--ip-home-headline-gap: clamp(24px, calc(12px + 1.4vw), 35px);
-	/* Room below the 42px icons so the 1.4 open-scale cannot paint past the overlay. */
 	--ip-home-copy-pad-bottom: 20px;
 	padding: 14px 20px var(--ip-home-copy-pad-bottom);
 }
@@ -439,13 +436,6 @@ html,
 	height: 42px;
 	display: block;
 }
-.ip_home_social a.ip_qr_open--active{
-	opacity: 1;
-	transform: scale(1.4);
-}
-#home.ip_qr_shown .ip_home_social{
-	visibility: hidden;
-}
 /* The QR glyph (qr.svg) is a raster of black modules on transparent — an
    <img>, so it can't inherit currentColor. Invert it in dark mode. */
 @media (prefers-color-scheme: dark){
@@ -453,54 +443,8 @@ html,
 		filter: invert(1);
 	}
 }
-.ip_qr_panel{
+.qr_hidden_details{
 	display: none;
-	position: absolute;
-	inset: 0;
-	z-index: 2;
-	padding: 5px;
-	background: var(--bg-color);
-}
-/* Receives programmatic focus (tabindex="-1") when opened. */
-.ip_qr_panel:focus{
-	outline: none;
-}
-#home.ip_qr_shown .ip_qr_panel{
-	display: flex;
-	flex-direction: column;
-}
-.ip_qr_panel__close{
-	position: absolute;
-	top: 0;
-	right: calc(var(--ip-col-right) / 2 - 78px);
-	z-index: 2;
-	display: block;
-	width: 40px;
-	height: 40px;
-	padding-left: 2px;
-	border: 2px solid var(--caret-color);
-	border-radius: 10px;
-	background: var(--bg-color);
-	color: var(--text-muted);
-	cursor: pointer;
-	transition: border-radius .3s ease, background-color .3s ease;
-	line-height: 1;
-	font-size: 1rem;
-}
-.ip_qr_panel__close:hover{
-	border-radius: 100%;
-	background: var(--bg-color);
-}
-.ip_qr_panel__close i{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-}
-.ip_qr_panel__code{
-	display: block;
-	width: min(220px, 58vw);
-	height: auto;
 }
 @media (min-width: 480px){
 	.ip_home_photo img{
@@ -535,10 +479,6 @@ html,
 	}
 	.ip_headline_tagline{
 		font-size: 1.25rem;
-	}
-	.ip_qr_panel__close{
-		width: 44px;
-		height: 44px;
 	}
 }
 
@@ -600,7 +540,8 @@ html,
 .ip_info .right p:last-child {
 	margin-bottom: 0;
 }
-.ip_info > .wrapper + .ip_title{
+.ip_info > .wrapper + .ip_title,
+.ip_info > .ip_teaser + .ip_title{
 	margin-top: clamp(1.75rem, 3vw, 2.5rem);
 }
 .ip_section p a,
@@ -655,14 +596,17 @@ html,
 	--ip-teaser-lh: 1.8em;
 	position: relative;
 	overflow: hidden;
-	max-height: calc(var(--ip-teaser-lines) * var(--ip-teaser-lh));
+	max-height: var(--ip-teaser-collapsed, calc(var(--ip-teaser-lines) * var(--ip-teaser-lh)));
 	transition: max-height .45s ease;
 }
 @supports (max-height: 1lh){
-	.ip_teaser__body{ max-height: calc(var(--ip-teaser-lines) * 1lh); }
+	.ip_teaser__body{ max-height: var(--ip-teaser-collapsed, calc(var(--ip-teaser-lines) * 1lh)); }
 }
+/* Generous fallback before JS measures first paragraph + 2 peek lines. */
+.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 9; }
 @media (min-width: 768px){
 	.ip_teaser__body{ --ip-teaser-lines: 4; }
+	.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 6; }
 }
 .ip_teaser__body::after{
 	content: "";
@@ -1109,21 +1053,26 @@ html,
 	margin-right: 10px;
 	letter-spacing: 0.012em;
 }
-/* Partner popup: no hero photo. Theme-colored header + CTA. */
-.ip_modalbox.ip_modalbox--partner .box_inner{
+/* Compact popups (partner + QR): no hero photo, height follows content. */
+.ip_modalbox.ip_modalbox--partner .box_inner,
+.ip_modalbox.ip_modalbox--qr .box_inner{
 	bottom: auto;
 	height: fit-content;
 	max-height: calc(100% - 10px - var(--ip-footer-height));
 }
-.ip_modalbox.ip_modalbox--partner .description_wrap{
+.ip_modalbox.ip_modalbox--partner .description_wrap,
+.ip_modalbox.ip_modalbox--qr .description_wrap{
 	height: auto;
 	max-height: inherit;
 }
 .ip_modalbox.ip_modalbox--partner .service_popup_informations,
-.ip_modalbox.ip_modalbox--partner .service_popup_informations .descriptions{
+.ip_modalbox.ip_modalbox--partner .service_popup_informations .descriptions,
+.ip_modalbox.ip_modalbox--qr .service_popup_informations,
+.ip_modalbox.ip_modalbox--qr .service_popup_informations .descriptions{
 	flex: 0 1 auto;
 }
-.ip_modalbox .partner-popup{
+.ip_modalbox .partner-popup,
+.ip_modalbox .qr-popup{
 	flex-shrink: 0;
 	width: 100%;
 	position: relative;
@@ -1131,6 +1080,8 @@ html,
 	align-items: center;
 	gap: 16px;
 	padding: 8px 72px 16px 0;
+}
+.ip_modalbox .partner-popup{
 	border-bottom: 1px solid var(--card-border);
 }
 .ip_modalbox .partner-popup__logo{
@@ -1146,24 +1097,43 @@ html,
 	border: 1px solid var(--card-border);
 	box-sizing: content-box;
 }
-.ip_modalbox .partner-popup__title{
+.ip_modalbox .partner-popup__title,
+.ip_modalbox .qr-popup__title{
 	min-width: 0;
 	flex: 1;
 }
-.ip_modalbox .partner-popup__title h3{
+.ip_modalbox .partner-popup__title h3,
+.ip_modalbox .qr-popup__title h3{
 	font-size: 1.25rem;
 	color: var(--text-main);
 	text-shadow: none;
 }
-.ip_modalbox .partner-popup .service-popup__close a{
+.ip_modalbox .partner-popup .service-popup__close a,
+.ip_modalbox .qr-popup .service-popup__close a{
 	color: var(--text-main);
 	border-color: var(--card-border);
 	background: transparent;
 }
-.ip_modalbox .partner-popup .service-popup__close a:hover{
+.ip_modalbox .partner-popup .service-popup__close a:hover,
+.ip_modalbox .qr-popup .service-popup__close a:hover{
 	background: var(--card-hover-bg);
 	color: var(--on-accent);
 	border-color: var(--card-hover-bg);
+}
+.ip_modalbox .qr-popup__code{
+	display: block;
+	width: min(320px, 100%);
+	height: auto;
+	margin: 4px auto 0;
+	background: #fff;
+	border-radius: 8px;
+}
+.ip_modalbox .service_popup_informations .descriptions .qr-popup__hint{
+	text-align: center;
+	margin: 16px 0 0;
+	color: var(--text-muted);
+	font-size: 0.9rem;
+	line-height: 1.45;
 }
 .ip_modalbox .partner-popup__cta{
 	margin-top: 8px;
@@ -1199,6 +1169,10 @@ html,
 	font-weight: 400;
 }
 @media (min-width: 1024px){
+	.ip_modalbox.ip_modalbox--qr .box_inner{
+		top: var(--ip-qr-top, 10px);
+		max-height: calc(100% - var(--ip-qr-top, 10px) - var(--ip-footer-height));
+	}
 	.ip_modalbox .box_inner{
 		width: min(520px, calc(100vw - 40px));
 		max-width: calc(100vw - 40px);
@@ -1207,7 +1181,8 @@ html,
 	.ip_modalbox .service_popup_informations .service-popup__title h3{
 		font-size: 1.375rem;
 	}
-	.ip_modalbox .partner-popup__title h3{
+	.ip_modalbox .partner-popup__title h3,
+	.ip_modalbox .qr-popup__title h3{
 		font-size: 1.375rem;
 	}
 	.ip_modalbox .partner-popup__logo{
