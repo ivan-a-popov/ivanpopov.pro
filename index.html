@@ -72,7 +72,7 @@
 	<!-- Inline critical CSS: the preloader paints on first render (FCP); the
   header/footer + above-the-fold main shell are stable before async style.css
   (CLS). Main content renders behind the fixed opaque preloader from first paint.
-  The block below is generated from static/css/critical.css by stamp-cache.sh —
+  The block below is generated from static/css/critical.css by minify.py —
   do NOT edit it by hand, edit critical.css and re-run the script. -->
 	<!-- CRITICAL CSS -->
 <style>
@@ -100,178 +100,21 @@
 		</style>
 	</noscript>
 	<link rel="preload" href="static/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-	<!-- STYLES -->
-	<link rel="preload" as="style" href="static/css/style.css?v=c59ccd88" fetchpriority="low"
+	<!-- STYLES (style.min.css is generated from style.css by minify.py) -->
+	<link rel="preload" as="style" href="static/css/style.min.css?v=61b21551" fetchpriority="low"
 		onload="this.onload=null;this.rel='stylesheet'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.css?v=c59ccd88" />
+		<link rel="stylesheet" href="static/css/style.min.css?v=61b21551" />
 	</noscript>
 	<!-- /STYLES -->
 
 	<!-- Critical inline JS: dismisses the preloader once the above-the-fold is
   ready, so it never waits on the deferred init.js request. The block below is
-  generated from static/js/critical.js by stamp-cache.sh — do NOT edit it by
-  hand, edit critical.js and re-run /stamp-cache.sh. -->
+  generated from static/js/critical.js by minify.py — do NOT edit it by
+  hand, edit critical.js and re-run minify.py. -->
 	<!-- CRITICAL JS -->
 <script>
-"use strict";
-(function(){
-var GROW_HALF_MS = 1000;
-var HOLD_MS = 400;
-var BLINK_MS = 1350;
-var GROW_FULL_MS = 500;
-var PEEL_MS = 500;
-var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS;
-var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
-var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
-var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
-function landingHash(){
-var hash = location.hash;
-if(!hash || hash === '#'){ return '#home'; }
-return hash;
-}
-function isLabViewport(){
-var w = window.innerWidth;
-var h = window.innerHeight;
-var sw = screen && screen.width;
-var sh = screen && screen.height;
-var dpr = window.devicePixelRatio || 1;
-function near(a, b){ return Math.abs(a - b) < 0.02; }
-function box(bw, bh){
-return (w === bw && h === bh) || (sw === bw && sh === bh);
-}
-if((w === 412 || sw === 412) && near(dpr, 1.75)){ return true; }
-if(box(1350, 940) && near(dpr, 1)){ return true; }
-return false;
-}
-function isAutomation(){
-if(navigator.webdriver){ return true; }
-if(BOT_UA.test(navigator.userAgent || '')){ return true; }
-try {
-var brands = navigator.userAgentData && navigator.userAgentData.brands;
-if(brands){
-for(var i = 0; i < brands.length; i++){
-if(/HeadlessChrome|HeadlessChromium|Lighthouse/i.test(brands[i].brand || '')){ return true; }
-}
-}
-}catch(e){}
-if(isLabViewport()){ return true; }
-return false;
-}
-function prefersReducedMotion(){
-return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-var AUTOMATION = isAutomation();
-var SKIP_PLAY = AUTOMATION || prefersReducedMotion() || landingHash() !== '#home';
-if(AUTOMATION){
-document.documentElement.classList.add('ip-automation');
-}
-if(SKIP_PLAY){
-document.documentElement.classList.add('skip-preloader');
-}else{
-document.documentElement.classList.remove('skip-preloader');
-}
-var land = landingHash();
-if(land !== '#home'){
-document.documentElement.setAttribute('data-ip-section', land.slice(1));
-}
-function dismiss(preloader){
-var line = preloader.querySelector('.loader_line');
-if(line){
-var boxH = line.offsetHeight || 250;
-var viewH = preloader.clientHeight || window.innerHeight;
-line.style.setProperty('--loader-scale-full', String(viewH / boxH));
-}
-preloader.classList.add('preloaded');
-setTimeout(function(){
-if(preloader.parentNode){ preloader.remove(); }
-}, DISMISS_MS);
-}
-function stylesApplied(){
-return getComputedStyle(document.documentElement)
-.getPropertyValue('--ip-styles-ready').trim() === '1';
-}
-function whenStylesReady(){
-return new Promise(function(resolve){
-function settle(){
-requestAnimationFrame(function(){
-requestAnimationFrame(function(){
-resolve();
-});
-});
-}
-(function poll(){
-if(stylesApplied()){ settle(); return; }
-setTimeout(poll, 50);
-})();
-});
-}
-function whenFontsReady(){
-if(!document.fonts || !document.fonts.load){ return Promise.resolve(); }
-var faces = Promise.all([
-document.fonts.load('650 1em Onest', 'Иван Попов'),
-document.fonts.load('650 1em Onest', 'Кто такой')
-]).catch(function(){});
-return Promise.race([
-faces,
-new Promise(function(resolve){ setTimeout(resolve, 2500); })
-]);
-}
-function whenHeroReady(){
-var imgs = [].slice.call(document.querySelectorAll('#author_photo_img, #home .ip_home_photo img'));
-return Promise.all(imgs.map(function(img){
-return new Promise(function(resolve){
-if(img.complete){ resolve(); return; }
-img.addEventListener('load', resolve, { once: true });
-img.addEventListener('error', resolve, { once: true });
-});
-}));
-}
-function whenLineSequenceReady(){
-return new Promise(function(resolve){
-var line = document.querySelector('#preloader .loader_line');
-if(!line){ resolve(); return; }
-var settled = false;
-function finish(){
-if(settled){ return; }
-settled = true;
-resolve();
-}
-line.addEventListener('animationend', function(e){
-if(e.animationName === 'lineround'){ finish(); }
-});
-setTimeout(finish, SEQUENCE_MS);
-});
-}
-function start(){
-var preloader = document.getElementById('preloader');
-if(!preloader){ return; }
-if(SKIP_PLAY){
-if(preloader.parentNode){ preloader.remove(); }
-return;
-}
-var done = false;
-function finish(){
-if(done){ return; }
-done = true;
-dismiss(preloader);
-}
-var fallback = setTimeout(finish, FALLBACK_MS);
-Promise.all([
-whenStylesReady().then(whenHeroReady),
-whenFontsReady(),
-whenLineSequenceReady()
-]).then(function(){
-clearTimeout(fallback);
-requestAnimationFrame(finish);
-});
-}
-if(document.readyState !== 'loading'){
-start();
-}else{
-document.addEventListener('DOMContentLoaded', start);
-}
-})();
+"use strict";(function(){var GROW_HALF_MS=1000;var HOLD_MS=400;var BLINK_MS=1350;var GROW_FULL_MS=500;var PEEL_MS=500;var SEQUENCE_MS=GROW_HALF_MS+HOLD_MS+BLINK_MS;var DISMISS_MS=GROW_FULL_MS+PEEL_MS;var FALLBACK_MS=SEQUENCE_MS+DISMISS_MS+1000;var BOT_UA=/Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;function landingHash(){var hash=location.hash;if(!hash||hash==='#'){return'#home';}return hash;}function isLabViewport(){var w=window.innerWidth;var h=window.innerHeight;var sw=screen&&screen.width;var sh=screen&&screen.height;var dpr=window.devicePixelRatio||1;function near(a,b){return Math.abs(a-b)<0.02;}function box(bw,bh){return(w===bw&&h===bh)||(sw===bw&&sh===bh);}if((w===412||sw===412)&&near(dpr,1.75)){return true;}if(box(1350,940)&&near(dpr,1)){return true;}return false;}function isAutomation(){if(navigator.webdriver){return true;}if(BOT_UA.test(navigator.userAgent||'')){return true;}try{var brands=navigator.userAgentData&&navigator.userAgentData.brands;if(brands){for(var i=0;i<brands.length;i++){if(/HeadlessChrome|HeadlessChromium|Lighthouse/i.test(brands[i].brand||'')){return true;}}}}catch(e){}if(isLabViewport()){return true;}return false;}function prefersReducedMotion(){return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;}var AUTOMATION=isAutomation();var SKIP_PLAY=AUTOMATION||prefersReducedMotion()||landingHash()!=='#home';if(AUTOMATION){document.documentElement.classList.add('ip-automation');}if(SKIP_PLAY){document.documentElement.classList.add('skip-preloader');}else{document.documentElement.classList.remove('skip-preloader');}var land=landingHash();if(land!=='#home'){document.documentElement.setAttribute('data-ip-section',land.slice(1));}function dismiss(preloader){var line=preloader.querySelector('.loader_line');if(line){var boxH=line.offsetHeight||250;var viewH=preloader.clientHeight||window.innerHeight;line.style.setProperty('--loader-scale-full',String(viewH/boxH));}preloader.classList.add('preloaded');setTimeout(function(){if(preloader.parentNode){preloader.remove();}},DISMISS_MS);}function stylesApplied(){return getComputedStyle(document.documentElement).getPropertyValue('--ip-styles-ready').trim()==='1';}function whenStylesReady(){return new Promise(function(resolve){function settle(){requestAnimationFrame(function(){requestAnimationFrame(function(){resolve();});});}(function poll(){if(stylesApplied()){settle();return;}setTimeout(poll,50);})();});}function whenFontsReady(){if(!document.fonts||!document.fonts.load){return Promise.resolve();}var faces=Promise.all([document.fonts.load('650 1em Onest','Иван Попов'),document.fonts.load('650 1em Onest','Кто такой')]).catch(function(){});return Promise.race([faces,new Promise(function(resolve){setTimeout(resolve,2500);})]);}function whenHeroReady(){var imgs=[].slice.call(document.querySelectorAll('#author_photo_img, #home .ip_home_photo img'));return Promise.all(imgs.map(function(img){return new Promise(function(resolve){if(img.complete){resolve();return;}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});});}));}function whenLineSequenceReady(){return new Promise(function(resolve){var line=document.querySelector('#preloader .loader_line');if(!line){resolve();return;}var settled=false;function finish(){if(settled){return;}settled=true;resolve();}line.addEventListener('animationend',function(e){if(e.animationName==='lineround'){finish();}});setTimeout(finish,SEQUENCE_MS);});}function start(){var preloader=document.getElementById('preloader');if(!preloader){return;}if(SKIP_PLAY){if(preloader.parentNode){preloader.remove();}return;}var done=false;function finish(){if(done){return;}done=true;dismiss(preloader);}var fallback=setTimeout(finish,FALLBACK_MS);Promise.all([whenStylesReady().then(whenHeroReady),whenFontsReady(),whenLineSequenceReady()]).then(function(){clearTimeout(fallback);requestAnimationFrame(finish);});}if(document.readyState!=='loading'){start();}else{document.addEventListener('DOMContentLoaded',start);}})();
 </script>
 	<!-- /CRITICAL JS -->
 </head>
@@ -1166,7 +1009,8 @@ document.addEventListener('DOMContentLoaded', start);
 		<div class="mouse-cursor cursor-inner"></div>
 		<!-- /MAGIC CURSOR -->
 	</div>
-	<script defer src="static/js/init.js?v=5c03edd9"></script>
+	<!-- init.min.js is generated from init.js by minify.py -->
+	<script defer src="static/js/init.min.js?v=0d79dc0a"></script>
 </body>
 
 </html>

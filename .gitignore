@@ -4,3 +4,5 @@
 temp/
 *.md
 !README.md
+__pycache__/
+*.pyc

@@ -1,5 +1,5 @@
 /*	CRITICAL CSS — source of the inline <style> block in index.html.
-	stamp-cache.sh minifies this file and injects it between the
+	minify.py minifies this file and injects it between the
 	"CRITICAL CSS" markers there, so edit HERE and re-run the script.
 
 	First paint before async style.css:
@@ -10,8 +10,6 @@
 	- modal/cursors out of flow; scrollbar-gutter reserved from frame one.
 	.ip_mainpart uses its final geometry from the first paint. The fixed,
 	opaque preloader covers it while style.css, fonts and hero images settle.
-	Note: avoid a trailing "**" + "/" comment ending — the sed minifier
-	in stamp-cache.sh does not handle that edge case.
 */
 
 /* THEME TOKENS */

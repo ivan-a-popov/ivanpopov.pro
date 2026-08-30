@@ -1,5 +1,5 @@
 "use strict";
-// Critical, inlined by stamp-cache.sh between the CRITICAL JS markers in
+// Critical, inlined by minify.py between the CRITICAL JS markers in
 // index.html. Dismisses the preloader once above-the-fold is ready (style.css,
 // fonts and hero decoded), independent of deferred init.js.
 // A hard timeout guarantees the overlay never traps the user.
