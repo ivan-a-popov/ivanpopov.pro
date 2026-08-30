@@ -417,6 +417,7 @@ html.skip-preloader #preloader {
 	/* Idle sits between body mute and the wordmark so Manrope still reads on phones. */
 	color: color-mix(in srgb, var(--logo-color) 78%, var(--text-sub));
 	font-family: Manrope, "Manrope Fallback", sans-serif;
+	font-weight: 700;
 	line-height: 1;
 	letter-spacing: .02em;
 	padding-inline: var(--ip-menu-link-padding);
@@ -432,7 +433,7 @@ html.skip-preloader #preloader {
 	position: relative;
 	display: inline-block;
 	line-height: 1;
-	font-weight: 700;
+	font-weight: inherit;
 }
 
 .ip_header .menu ul li .ip_menu_sub {
@@ -443,7 +444,7 @@ html.skip-preloader #preloader {
 	transform-origin: top center;
 	text-align: center;
 	font-size: var(--ip-menu-sub-size);
-	font-weight: 600;
+	font-weight: inherit;
 	line-height: 1;
 	letter-spacing: .04em;
 	text-transform: lowercase;
@@ -458,15 +459,11 @@ html.skip-preloader #preloader {
 	transform: translateY(-4px) scale(1.2);
 	z-index: 2;
 	color: var(--logo-color);
-}
-
-.ip_header .menu ul li.active a b {
 	font-weight: 800;
 }
 
 .ip_header .menu ul li.active .ip_menu_sub {
 	opacity: 1;
-	font-weight: 750;
 }
 
 @media (min-width: 640px) and (max-width: 1023px) {
@@ -489,17 +486,12 @@ html.skip-preloader #preloader {
 		transform: translateY(-3px) scale(1.08);
 		z-index: 1;
 		color: var(--logo-color);
-	}
-
-	.ip_header .menu ul li:not(.active) a:hover b,
-	.ip_header .menu ul li:not(.active) a:focus-visible b {
 		font-weight: 750;
 	}
 
 	.ip_header .menu ul li:not(.active) a:hover .ip_menu_sub,
 	.ip_header .menu ul li:not(.active) a:focus-visible .ip_menu_sub {
 		opacity: 1;
-		font-weight: 650;
 	}
 }
 
