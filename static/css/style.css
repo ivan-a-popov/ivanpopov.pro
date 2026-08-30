@@ -1054,23 +1054,22 @@ html,
 	margin-right: 10px;
 	letter-spacing: 0.012em;
 }
-/* Compact popups (partner + QR): no hero photo, height follows content. */
+/* Compact popups (partner + QR): height follows content; article scrolls when taller than the viewport. */
 .ip_modalbox.ip_modalbox--partner .box_inner,
 .ip_modalbox.ip_modalbox--qr .box_inner{
 	bottom: auto;
+	display: flex;
+	flex-direction: column;
 	height: fit-content;
 	max-height: calc(100% - 10px - var(--ip-footer-height));
+	overflow: hidden;
 }
 .ip_modalbox.ip_modalbox--partner .description_wrap,
 .ip_modalbox.ip_modalbox--qr .description_wrap{
+	flex: 1 1 auto;
 	height: auto;
-	max-height: inherit;
-}
-.ip_modalbox.ip_modalbox--partner .service_popup_informations,
-.ip_modalbox.ip_modalbox--partner .service_popup_informations .descriptions,
-.ip_modalbox.ip_modalbox--qr .service_popup_informations,
-.ip_modalbox.ip_modalbox--qr .service_popup_informations .descriptions{
-	flex: 0 1 auto;
+	max-height: none;
+	min-height: 0;
 }
 .ip_modalbox .partner-popup,
 .ip_modalbox .qr-popup{
