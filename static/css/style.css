@@ -629,8 +629,43 @@ html,
 	outline: 2px solid var(--accent);
 	outline-offset: 3px;
 }
+.ip_all_wrap:not([data-magic-cursor="show"]) .ip_teaser:not(.is-static){
+	cursor: pointer;
+}
+/* Chevron after the heading — accordion affordance without extra chrome. */
+.ip_teaser:not(.is-static) .ip_title > :is(span, h2){
+	padding-right: 1.45em;
+}
+.ip_teaser:not(.is-static) .ip_title > :is(span, h2)::before{
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 0.15em;
+	width: 0.52em;
+	height: 0.52em;
+	margin-top: -0.38em;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg);
+	opacity: 0.55;
+	transition: transform .3s ease, opacity .3s ease, margin-top .3s ease;
+}
+.ip_teaser.is-open .ip_title > :is(span, h2)::before{
+	transform: rotate(225deg);
+	margin-top: -0.12em;
+	opacity: 0.85;
+}
+.ip_teaser:not(.is-static) .ip_title--right > :is(span, h2){
+	padding-right: 0;
+	padding-left: 1.45em;
+}
+.ip_teaser:not(.is-static) .ip_title--right > :is(span, h2)::before{
+	right: auto;
+	left: 0.15em;
+}
 @media (prefers-reduced-motion: reduce){
 	.ip_teaser__body, .ip_teaser__body::after{ transition: none; }
+	.ip_teaser:not(.is-static) .ip_title > :is(span, h2)::before{ transition: none; }
 }
 
 /* PARTNERS (about) */
@@ -687,16 +722,35 @@ html,
 }
 @media (min-width: 640px){
 	.ip_partners{
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 16px 20px;
+	}
+	.ip_partners > li{
+		grid-column: span 2;
+	}
+	.ip_partners > li:nth-child(4){
+		grid-column: 2 / span 2;
+	}
+	.ip_partners > li:nth-child(5){
+		grid-column: 4 / span 2;
+	}
+	.partner-card{
+		min-height: 96px;
+	}
+	.partner-card__logo{
+		height: 48px;
 	}
 }
 @media (min-width: 1024px){
 	.ip_partners{
-		grid-template-columns: repeat(5, minmax(0, 1fr));
-		gap: 12px;
+		gap: 22px 32px;
 	}
 	.partner-card{
-		min-height: 80px;
+		min-height: 116px;
+		padding: 22px 18px;
+	}
+	.partner-card__logo{
+		height: 58px;
 	}
 }
 @media (prefers-reduced-motion: reduce){
@@ -1069,6 +1123,20 @@ html,
 	max-height: calc(100% - 10px - var(--ip-footer-height));
 	overflow: hidden;
 }
+/* QR is centered on the home copy block and at least as large as that block. */
+.ip_modalbox.ip_modalbox--qr .box_inner{
+	top: var(--ip-qr-top, 50%);
+	left: var(--ip-qr-left, 50%);
+	width: max(var(--ip-qr-min-w, 0px), min(22.5rem, calc(100vw - 16px)));
+	min-height: var(--ip-qr-min-h, 0);
+	height: auto;
+	max-width: calc(100vw - 16px);
+	max-height: calc(100% - 16px - var(--ip-footer-height));
+	transform: translate3d(-50%, calc(-50% - 20px), 0);
+}
+.ip_modalbox.opened.ip_modalbox--qr .box_inner{
+	transform: translate3d(-50%, -50%, 0);
+}
 .ip_modalbox.ip_modalbox--partner .box_inner{
 	width: min(40rem, calc(100vw - 16px));
 }
@@ -1142,6 +1210,28 @@ html,
 	color: var(--on-accent);
 	border-color: var(--card-hover-bg);
 }
+.ip_modalbox.ip_modalbox--qr .qr-popup{
+	padding: 0 56px 4px 0;
+}
+.ip_modalbox.ip_modalbox--qr .description_wrap{
+	height: 100%;
+	min-height: 0;
+	padding: 14px 16px 16px;
+}
+.ip_modalbox.ip_modalbox--qr .service_popup_informations{
+	height: 100%;
+	min-height: 0;
+}
+.ip_modalbox.ip_modalbox--qr .service_popup_informations .descriptions{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: hidden;
+	padding-top: 8px;
+}
 .ip_modalbox .qr-popup__code{
 	display: block;
 	width: min(320px, 100%);
@@ -1149,6 +1239,12 @@ html,
 	margin: 4px auto 0;
 	background: #fff;
 	border-radius: 8px;
+}
+.ip_modalbox.ip_modalbox--qr .qr-popup__code{
+	width: min(280px, 100%);
+	max-width: min(280px, 100%);
+	max-height: min(280px, 52vh);
+	flex: 0 1 auto;
 }
 .ip_modalbox .service_popup_informations .descriptions .qr-popup__hint{
 	text-align: center;
@@ -1191,15 +1287,14 @@ html,
 	font-weight: 400;
 }
 @media (min-width: 1024px){
-	.ip_modalbox.ip_modalbox--qr .box_inner{
-		top: var(--ip-qr-top, 10px);
-		max-height: calc(100% - var(--ip-qr-top, 10px) - var(--ip-footer-height));
-	}
 	.ip_modalbox .box_inner{
 		width: min(520px, calc(100vw - 40px));
 		max-width: calc(100vw - 40px);
 	}
 	.ip_modalbox .description_wrap{padding: 30px;}
+	.ip_modalbox.ip_modalbox--qr .description_wrap{
+		padding: 16px 18px 18px;
+	}
 	.ip_modalbox .service_popup_informations .service-popup__title h3{
 		font-size: 1.375rem;
 	}

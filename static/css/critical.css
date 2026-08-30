@@ -654,6 +654,13 @@ html[data-ip-section="testimonials"] #testimonials {
 .ip_teaser.is-static .ip_teaser__body {
 	max-height: none;
 }
+.ip_teaser:not(.is-static) .ip_title > :is(span, h2) {
+	padding-right: 1.45em;
+}
+.ip_teaser:not(.is-static) .ip_title--right > :is(span, h2) {
+	padding-right: 0;
+	padding-left: 1.45em;
+}
 
 .ip_home {
 	position: relative;

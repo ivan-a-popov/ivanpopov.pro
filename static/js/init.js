@@ -442,26 +442,50 @@ function ip_service_popup() {
 	var serviceCards = ip_all('.ip_service .service-card');
 	var boxInner = modalBox.querySelector('.box_inner');
 	var popupFocusTimer = null;
-	var qrPinMq = window.matchMedia('(min-width: 1024px)');
 	var qrPinTimer = null;
 	function unpinQrPopup() {
-		modalBox.style.removeProperty('--ip-qr-top');
+		['--ip-qr-top', '--ip-qr-left', '--ip-qr-min-w', '--ip-qr-min-h'].forEach(function (prop) {
+			modalBox.style.removeProperty(prop);
+		});
 	}
 	function pinQrPopup() {
-		if (!modalBox.classList.contains('ip_modalbox--qr') || !qrPinMq.matches) {
+		if (!modalBox.classList.contains('ip_modalbox--qr')) {
 			unpinQrPopup();
 			return;
 		}
-		var rule = ip_one('#home .ip_home_rule');
-		if (!rule) {
+		var copy = ip_one('#home .ip_home_copy');
+		if (!copy) {
 			unpinQrPopup();
 			return;
 		}
-		var top = Math.round(rule.getBoundingClientRect().top);
-		if (top < 10) {
-			top = 10;
+		var rect = copy.getBoundingClientRect();
+		if (rect.width < 1 || rect.height < 1) {
+			unpinQrPopup();
+			return;
 		}
-		modalBox.style.setProperty('--ip-qr-top', top + 'px');
+		var cx = rect.left + rect.width / 2;
+		var cy = rect.top + rect.height / 2;
+		var footer = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ip-footer-height')) || 0;
+		var maxBottom = window.innerHeight - footer - 8;
+		var box = boxInner ? boxInner.getBoundingClientRect() : null;
+		var halfW = box && box.width > 1 ? box.width / 2 : Math.max(rect.width, 360) / 2;
+		var halfH = box && box.height > 1 ? box.height / 2 : Math.max(rect.height, 280) / 2;
+		if (cy - halfH < 8) {
+			cy = 8 + halfH;
+		}
+		if (cy + halfH > maxBottom) {
+			cy = Math.max(8 + halfH, maxBottom - halfH);
+		}
+		if (cx - halfW < 8) {
+			cx = 8 + halfW;
+		}
+		if (cx + halfW > window.innerWidth - 8) {
+			cx = Math.max(8 + halfW, window.innerWidth - 8 - halfW);
+		}
+		modalBox.style.setProperty('--ip-qr-top', Math.round(cy) + 'px');
+		modalBox.style.setProperty('--ip-qr-left', Math.round(cx) + 'px');
+		modalBox.style.setProperty('--ip-qr-min-w', Math.round(rect.width) + 'px');
+		modalBox.style.setProperty('--ip-qr-min-h', Math.round(rect.height) + 'px');
 	}
 	if (descWrap && !descWrap.hasAttribute('tabindex')) {
 		descWrap.setAttribute('tabindex', '-1');
@@ -604,6 +628,10 @@ function ip_service_popup() {
 					infos.insertAdjacentHTML('afterbegin', '<div class="service-popup"><img class="service-popup__image" src="' + elImage + '" alt="" width="640" height="320" /><div class="service-popup__title"><h3>' + title + '</h3></div>' + closeHtml + '</div>');
 				}
 			}
+			if (qr) {
+				pinQrPopup();
+				requestAnimationFrame(pinQrPopup);
+			}
 			schedulePopupFocus();
 		});
 	});
@@ -620,11 +648,6 @@ function ip_service_popup() {
 		}
 		clearTimeout(qrPinTimer);
 		qrPinTimer = setTimeout(pinQrPopup, 100);
-	});
-	qrPinMq.addEventListener('change', function () {
-		if (modalBox.classList.contains('opened')) {
-			pinQrPopup();
-		}
 	});
 }
 
