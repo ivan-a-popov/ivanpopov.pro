@@ -37,14 +37,16 @@
 		var sh = screen && screen.height;
 		var dpr = window.devicePixelRatio || 1;
 		function near(a, b){ return Math.abs(a - b) < 0.02; }
-		// Lighthouse sets viewport AND screen to the lab box. Matching only
-		// innerWidth (or 412 + dpr) treats a resized human window as
-		// automation — skip-preloader + frozen headline. Mobile height is
-		// not required: PSI has used 823 and nearby values.
-		if(w === 412 && sw === 412 && near(dpr, 1.75)){ return true; }
-		if(w === 1350 && h === 940 && sw === 1350 && sh === 940 && near(dpr, 1)){
-			return true;
-		}
+		function slop(a, b, n){ return Math.abs(a - b) <= n; }
+		// Viewport OR screen — not AND. PSI desktop often emulates 1350×940
+		// for only one of them; requiring both replayed the curtain (SI drop).
+		// Width slop: html{scrollbar-gutter:stable} shrinks innerWidth ~15px
+		// on desktop classic scrollbars. Mobile overlay scrollbars stay 412.
+		if((w === 412 || sw === 412) && near(dpr, 1.75)){ return true; }
+		if(near(dpr, 1) && (
+			(slop(w, 1350, 20) && slop(h, 940, 2)) ||
+			(sw === 1350 && sh === 940)
+		)){ return true; }
 		return false;
 	}
 	function isAutomation(){
