@@ -233,7 +233,33 @@ function ip_navigate_section(step, linkSelector, hrefOpts) {
 }
 function ip_enhance_section(href) {
 	if (href === '#about' || href === '#whyme') {
-		ip_teasers();
+		ip_teasers({ reset: true });
+		var section = ip_one(href);
+		if (section) {
+			var settled = false;
+			function settle() {
+				if (settled) {
+					return;
+				}
+				settled = true;
+				section.removeEventListener('animationend', onEnterEnd);
+				ip_teasers();
+			}
+			function onEnterEnd(e) {
+				if (e.target !== section) {
+					return;
+				}
+				settle();
+			}
+			if (section.classList.contains('animated')) {
+				section.addEventListener('animationend', onEnterEnd);
+				window.setTimeout(settle, 1300);
+			} else {
+				window.requestAnimationFrame(function () {
+					ip_teasers();
+				});
+			}
+		}
 	} else if (href === '#testimonials') {
 		ip_testimonials_snap();
 	}
@@ -603,7 +629,8 @@ function ip_service_popup() {
 }
 
 // -------------  WHY TEASERS  -------------------
-function ip_teasers() {
+function ip_teasers(opts) {
+	opts = opts || {};
 	var teasers = ip_all('.ip_teaser');
 	if (!teasers.length) {
 		return;
@@ -645,20 +672,28 @@ function ip_teasers() {
 		if (!paras.length) {
 			return null;
 		}
-		var bodyTop = body.getBoundingClientRect().top;
-		var bottom = 0;
+		// Layout sizes only — getBoundingClientRect is inflated during rollIn's
+		// 3D transform and made the preview look fully expanded.
+		var extraTop = parseFloat(getComputedStyle(body).paddingTop) || 0;
+		var wrap = body.querySelector('.wrapper');
+		if (wrap) {
+			extraTop += parseFloat(getComputedStyle(wrap).marginTop) || 0;
+			extraTop += parseFloat(getComputedStyle(wrap).paddingTop) || 0;
+		}
+		var firstH = 0;
+		var peek = 0;
 		for (var i = 0; i < paras.length; i++) {
 			var p = paras[i];
-			var rect = p.getBoundingClientRect();
-			if (rect.height < 1) {
+			if (p.offsetHeight < 1) {
 				return null;
 			}
 			var cs = getComputedStyle(p);
 			var mb = parseFloat(cs.marginBottom) || 0;
 			var lh = parseFloat(cs.lineHeight) || 0;
-			bottom = Math.max(bottom, rect.bottom - bodyTop + mb + (2 * lh));
+			firstH = Math.max(firstH, p.offsetHeight);
+			peek = Math.max(peek, mb + (2 * lh));
 		}
-		return Math.ceil(bottom);
+		return Math.ceil(extraTop + firstH + peek);
 	}
 	function applyPreviewVar(teaser, body) {
 		var measured = measurePreviewCollapsed(teaser);
@@ -772,9 +807,18 @@ function ip_teasers() {
 			return;
 		}
 		teaser.classList.remove('is-static');
+		var prevTransition = body.style.transition;
+		body.style.transition = 'none';
 		applyPreviewVar(teaser, body);
 		body.style.maxHeight = '';
 		void body.offsetHeight;
+		body.style.transition = prevTransition;
+		var clip = getComputedStyle(body).maxHeight;
+		if (!clip || clip === 'none') {
+			teaser.setAttribute('tabindex', '0');
+			teaser.setAttribute('aria-expanded', 'false');
+			return;
+		}
 		if (body.scrollHeight <= body.clientHeight + 1) {
 			teaser.classList.add('is-static');
 			teaser.removeAttribute('tabindex');
@@ -785,6 +829,16 @@ function ip_teasers() {
 		teaser.setAttribute('aria-expanded', 'false');
 	}
 	teasers.forEach(function (teaser) {
+		if (opts.reset) {
+			var section = teaser.closest('.ip_section');
+			if (section && section.classList.contains('active')) {
+				teaser.classList.remove('is-open', 'is-animating');
+				var resetBody = teaser.querySelector('.ip_teaser__body');
+				if (resetBody) {
+					resetBody.style.maxHeight = '';
+				}
+			}
+		}
 		if (!teaser.hasAttribute('data-ip-teaser-bound')) {
 			teaser.setAttribute('data-ip-teaser-bound', '');
 			teaser.addEventListener('click', function (e) {
@@ -823,6 +877,12 @@ function ip_teasers() {
 		});
 		if (document.fonts && document.fonts.ready) {
 			document.fonts.ready.then(function () {
+				ip_all('.ip_teaser').forEach(sync);
+			});
+		}
+		var styleLink = document.querySelector('link[href*="style.min.css"]');
+		if (styleLink && styleLink.rel !== 'stylesheet') {
+			styleLink.addEventListener('load', function () {
 				ip_all('.ip_teaser').forEach(sync);
 			});
 		}

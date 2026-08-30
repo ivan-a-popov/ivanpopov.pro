@@ -639,6 +639,26 @@ html[data-ip-section="testimonials"] #testimonials {
 	content-visibility: visible;
 }
 
+/* Fold teasers before async style.css so about/whyme never flash full copy. */
+.ip_teaser__body {
+	--ip-teaser-lines: 6;
+	--ip-teaser-lh: 1.8em;
+	position: relative;
+	overflow: hidden;
+	max-height: var(--ip-teaser-collapsed, calc(var(--ip-teaser-lines) * var(--ip-teaser-lh)));
+}
+.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body {
+	--ip-teaser-lines: 6;
+}
+@media (min-width: 768px) {
+	.ip_teaser__body { --ip-teaser-lines: 4; }
+	.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body { --ip-teaser-lines: 5; }
+}
+.ip_teaser.is-open .ip_teaser__body,
+.ip_teaser.is-static .ip_teaser__body {
+	max-height: none;
+}
+
 .ip_home {
 	position: relative;
 	min-height: 100%;

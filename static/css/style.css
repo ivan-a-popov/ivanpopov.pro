@@ -602,11 +602,11 @@ html,
 @supports (max-height: 1lh){
 	.ip_teaser__body{ max-height: var(--ip-teaser-collapsed, calc(var(--ip-teaser-lines) * 1lh)); }
 }
-/* Generous fallback before JS measures first paragraph + 2 peek lines. */
-.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 9; }
+/* Conservative clip before JS measures first paragraph + 2 peek lines. */
+.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 6; }
 @media (min-width: 768px){
 	.ip_teaser__body{ --ip-teaser-lines: 4; }
-	.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 6; }
+	.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 5; }
 }
 .ip_teaser__body::after{
 	content: "";
