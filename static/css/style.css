@@ -644,11 +644,17 @@ html,
 }
 .partner-card{
 	position: relative;
+	z-index: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	min-height: 72px;
 	padding: 14px 10px;
+	overflow: visible;
+}
+.partner-card:hover,
+.partner-card:focus-within{
+	z-index: 1;
 }
 .partner-card__logo{
 	display: block;
@@ -656,28 +662,23 @@ html,
 	max-width: 100%;
 	height: 36px;
 	object-fit: contain;
-	filter: grayscale(1);
-	transition: filter .25s ease;
+	transform: scale(1);
+	transform-origin: center;
+	transition: transform .25s ease;
 }
-.partner-card:hover .partner-card__logo,
 .partner-card:focus-within .partner-card__logo{
-	filter: none;
+	transform: scale(1.15);
+}
+@media (hover: hover) and (pointer: fine){
+	.partner-card:hover .partner-card__logo{
+		transform: scale(1.15);
+	}
 }
 .partner_hidden_details{
 	display: none;
 }
 @media (prefers-color-scheme: dark){
-	.partner-card__logo{
-		filter: grayscale(1) brightness(1.35);
-	}
 	.partner-card__logo--ink{
-		filter: grayscale(1) invert(1);
-	}
-	.partner-card:hover .partner-card__logo,
-	.partner-card:focus-within .partner-card__logo,
-	.partner-card:hover .partner-card__logo--ink,
-	.partner-card:focus-within .partner-card__logo--ink{
-		filter: none;
 		background: #fff;
 		padding: 6px 10px;
 		border-radius: 8px;
@@ -701,6 +702,10 @@ html,
 @media (prefers-reduced-motion: reduce){
 	.partner-card__logo{
 		transition: none;
+	}
+	.partner-card:hover .partner-card__logo,
+	.partner-card:focus-within .partner-card__logo{
+		transform: none;
 	}
 }
 
@@ -1063,6 +1068,23 @@ html,
 	height: fit-content;
 	max-height: calc(100% - 10px - var(--ip-footer-height));
 	overflow: hidden;
+}
+.ip_modalbox.ip_modalbox--partner .box_inner{
+	width: min(40rem, calc(100vw - 16px));
+}
+@media (min-width: 640px){
+	.ip_modalbox.ip_modalbox--partner{
+		position: absolute;
+	}
+	.ip_modalbox.ip_modalbox--partner .box_inner{
+		left: calc(var(--ip-col-left) + clamp(20px, 2.8vw, 40px));
+		width: min(40rem, calc(var(--ip-col-right) - 2 * clamp(20px, 2.8vw, 40px)));
+		max-width: calc(100% - var(--ip-col-left) - clamp(20px, 2.8vw, 40px));
+		transform: translateY(-20px);
+	}
+	.ip_modalbox.opened.ip_modalbox--partner .box_inner{
+		transform: translateY(0);
+	}
 }
 .ip_modalbox.ip_modalbox--partner .description_wrap,
 .ip_modalbox.ip_modalbox--qr .description_wrap{
