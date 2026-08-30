@@ -325,9 +325,9 @@ html.skip-preloader #preloader {
 	--ip-logo-font-size: clamp(1rem, 1.5em, 2rem);
 	--ip-logo-padding-left: .9vw;
 	--ip-logo-menu-gap: 1px;
-	/* Sub-label size is its OWN knob in root-relative rem (never em) so it stays
-	   capped — and scales with the user's font size — while the active main word
-	   grows via font-size:1.2em/1.5em. */
+	/* Sub-label is a rem knob (never em) so it stays a caption. The whole <a>
+	   scales — hover below active — so the sub grows with the lens. */
+	--ip-menu-sub-size: clamp(.52rem, 1.9vw, .68rem);
 	--ip-menu-gap: clamp(6px, calc(5px + .85vw), 42px);
 	--ip-menu-padding-inline: clamp(8px, calc(4px + .5vw), 64px);
 	--ip-menu-link-padding: clamp(2px, 0.35vw, 8px);
@@ -414,27 +414,25 @@ html.skip-preloader #preloader {
 .ip_header .menu ul li a {
 	text-decoration: none;
 	text-transform: uppercase;
-	color: var(--text-main);
+	/* Idle sits between body mute and the wordmark so Manrope still reads on phones. */
+	color: color-mix(in srgb, var(--logo-color) 78%, var(--text-sub));
 	font-family: Manrope, "Manrope Fallback", sans-serif;
 	line-height: 1;
+	letter-spacing: .02em;
 	padding-inline: var(--ip-menu-link-padding);
 	position: relative;
 	display: inline-grid;
 	justify-items: center;
 	transform: translateY(0) scale(1);
 	transform-origin: center bottom;
-	transition: transform .32s cubic-bezier(.33, 1, .68, 1);
+	transition: transform .32s cubic-bezier(.33, 1, .68, 1), color .2s ease;
 }
 
 .ip_header .menu ul li a b {
 	position: relative;
 	display: inline-block;
 	line-height: 1;
-	font-weight: 550;
-}
-
-.ip_header .menu ul li a:hover b {
-	font-weight: 650;
+	font-weight: 700;
 }
 
 .ip_header .menu ul li .ip_menu_sub {
@@ -444,9 +442,10 @@ html.skip-preloader #preloader {
 	transform: translateX(-50%);
 	transform-origin: top center;
 	text-align: center;
-	font-weight: 550;
+	font-size: var(--ip-menu-sub-size);
+	font-weight: 600;
 	line-height: 1;
-	letter-spacing: .5px;
+	letter-spacing: .04em;
 	text-transform: lowercase;
 	white-space: nowrap;
 	opacity: 0;
@@ -458,15 +457,16 @@ html.skip-preloader #preloader {
 .ip_header .menu ul li.active a {
 	transform: translateY(-4px) scale(1.2);
 	z-index: 2;
+	color: var(--logo-color);
 }
 
 .ip_header .menu ul li.active a b {
-	font-weight: 750;
+	font-weight: 800;
 }
 
 .ip_header .menu ul li.active .ip_menu_sub {
 	opacity: 1;
-	font-weight: 700;
+	font-weight: 750;
 }
 
 @media (min-width: 640px) and (max-width: 1023px) {
@@ -483,19 +483,23 @@ html.skip-preloader #preloader {
 
 @media (hover: hover) {
 
-	/* Hover magnifies less than active; sub inherits link scale. */
-	.ip_header .menu ul li:not(.active) a:hover {
+	/* Hover magnifies less than active; shared rem sub then inherits that scale. */
+	.ip_header .menu ul li:not(.active) a:hover,
+	.ip_header .menu ul li:not(.active) a:focus-visible {
 		transform: translateY(-3px) scale(1.08);
 		z-index: 1;
+		color: var(--logo-color);
 	}
 
-	.ip_header .menu ul li:not(.active) a:hover b {
-		font-weight: 650;
+	.ip_header .menu ul li:not(.active) a:hover b,
+	.ip_header .menu ul li:not(.active) a:focus-visible b {
+		font-weight: 750;
 	}
 
-	.ip_header .menu ul li:not(.active) a:hover .ip_menu_sub {
+	.ip_header .menu ul li:not(.active) a:hover .ip_menu_sub,
+	.ip_header .menu ul li:not(.active) a:focus-visible .ip_menu_sub {
 		opacity: 1;
-		font-weight: 600;
+		font-weight: 650;
 	}
 }
 
@@ -870,15 +874,12 @@ html[data-ip-section="testimonials"] #testimonials {
 	}
 
 	.ip_header .menu ul li a {
-		font-size: clamp(.62rem, 2.75vw, .85rem);
-	}
-
-	.ip_header .menu ul li.active .ip_menu_sub {
-		font-size: clamp(.5rem, 2.2vw, .7rem);
+		font-size: clamp(.8rem, 3.6vw, 1rem);
 	}
 
 	@media (hover: hover) {
-		.ip_header .menu ul li:not(.active) a:hover {
+		.ip_header .menu ul li:not(.active) a:hover,
+		.ip_header .menu ul li:not(.active) a:focus-visible {
 			transform: translateY(-1px) scale(1.05);
 		}
 	}
@@ -930,7 +931,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	}
 
 	.ip_header .menu ul li a {
-		font-size: 1rem;
+		font-size: 1.0625rem;
 	}
 
 	.ip_home {
