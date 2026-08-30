@@ -447,7 +447,6 @@ html.skip-preloader #preloader {
 	font-weight: inherit;
 	line-height: 1;
 	letter-spacing: .04em;
-	text-transform: lowercase;
 	white-space: nowrap;
 	opacity: 0;
 	pointer-events: none;
