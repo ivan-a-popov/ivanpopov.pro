@@ -120,14 +120,14 @@
 			})();
 		});
 	}
-	// Onest faces are registered by the inline critical CSS, so loads can be
+	// Manrope faces are registered by the inline critical CSS, so loads can be
 	// kicked off right away. Only the first-screen Cyrillic strings — Latin
-	// Onest is not preloaded (it would outrank the LCP photo on HTTP/1.1).
+	// Manrope is not preloaded (it would outrank the LCP photo on HTTP/1.1).
 	function whenFontsReady(){
 		if(!document.fonts || !document.fonts.load){ return Promise.resolve(); }
 		var faces = Promise.all([
-			document.fonts.load('650 1em Onest', 'Иван Попов'),
-			document.fonts.load('650 1em Onest', 'Кто такой')
+			document.fonts.load('650 1em Manrope', 'Иван Попов'),
+			document.fonts.load('650 1em Manrope', 'Кто такой')
 		]).catch(function(){});
 		return Promise.race([
 			faces,

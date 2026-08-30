@@ -1,15 +1,15 @@
 @charset "utf-8";
 /* FONTS */
-/* Cyrillic Onest + Fallback stay in critical.css. Latin subsets are
+/* Cyrillic Manrope + Fallback stay in critical.css. Latin subsets are
    intentionally unregistered: footer digits and a few English titles
-   (Ecommerce, DevOps) would pull onest-latin.woff2 onto the document
-   critical path. Those glyphs use metric-matched "Onest Fallback". */
+   (Ecommerce, DevOps) would pull a latin woff2 onto the document
+   critical path. Those glyphs use metric-matched "Manrope Fallback". */
 @font-face {
-	font-family: "Onest";
+	font-family: "Manrope";
 	font-style: normal;
-	font-weight: 300 800;
+	font-weight: 200 800;
 	font-display: optional;
-	src: url("../fonts/onest/onest-cyrillic-ext.woff2") format("woff2");
+	src: url("../fonts/manrope/manrope-cyrillic-ext.woff2") format("woff2");
 	unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
@@ -43,7 +43,7 @@ svg {
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
 	line-height: 1.2;
-	font-family: Onest, "Onest Fallback", sans-serif;
+	font-family: Manrope, "Manrope Fallback", sans-serif;
 	color: var(--text-main);
 }
 /* Desktop: native pointer replaced by the magic cursor. */
@@ -556,7 +556,7 @@ html,
 .ip_title > :is(span, h2){
 	display: inline-block;
 	position: relative;
-	font-family: Onest, "Onest Fallback", sans-serif;
+	font-family: Manrope, "Manrope Fallback", sans-serif;
 	color: var(--text-main);
 	text-transform: uppercase;
 	font-weight: 700;
