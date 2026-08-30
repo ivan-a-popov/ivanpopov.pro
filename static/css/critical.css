@@ -597,6 +597,10 @@ html.skip-preloader #preloader {
 	visibility: hidden;
 	pointer-events: none;
 	z-index: 8;
+	/* Absolute inset:0 sections are "in viewport", so loading=lazy on
+	   partner/client images still fires and steals the LCP connection.
+	   content-visibility:hidden keeps those requests off the first load. */
+	content-visibility: hidden;
 }
 
 .ip_section.animated,
@@ -605,6 +609,7 @@ html.skip-preloader #preloader {
 	visibility: visible;
 	pointer-events: auto;
 	z-index: 9;
+	content-visibility: visible;
 }
 
 .ip_section.active {
@@ -618,6 +623,7 @@ html[data-ip-section] #home.animated {
 	opacity: 0;
 	visibility: hidden;
 	pointer-events: none;
+	content-visibility: hidden;
 }
 
 html[data-ip-section="about"] #about,
@@ -628,6 +634,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	visibility: visible;
 	pointer-events: auto;
 	z-index: 10;
+	content-visibility: visible;
 }
 
 .ip_home {
@@ -720,8 +727,19 @@ html[data-ip-section="testimonials"] #testimonials {
 	opacity: 1;
 }
 
+.ip_headline_words::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	right: 0;
+	width: 2px;
+	height: 70%;
+	transform: translateY(-50%);
+	background-color: var(--caret-color);
+}
+
 .ip_headline b {
-	font-weight: 600;
+	font-weight: 650;
 }
 
 .ip_headline_tagline {

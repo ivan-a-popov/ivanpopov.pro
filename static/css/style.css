@@ -252,6 +252,7 @@ html.ip-automation .ip_header .logo .text .logo-cursor{
 	visibility: hidden;
 	pointer-events: none;
 	z-index: 8;
+	content-visibility: hidden;
 	/* Defer visibility:hidden so rollOut (1.2s) stays painted while exiting. */
 	transition: visibility 0s linear 1.2s;
 	/* Touch: vertical panning only, no scroll chaining. */
@@ -263,12 +264,14 @@ html.ip-automation .ip_header .logo .text .logo-cursor{
 	visibility: visible;
 	pointer-events: auto;
 	z-index: 9;
+	content-visibility: visible;
 }
 .ip_section.active {
 	opacity: 1;
 	visibility: visible;
 	pointer-events: auto;
 	z-index: 10;
+	content-visibility: visible;
 	transition: visibility 0s linear 0s;
 }
 .ip_section.hidden {
@@ -355,7 +358,7 @@ html,
 }
 .ip_home_name{
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
-	font-weight: 550;
+	font-weight: 650;
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
 }
