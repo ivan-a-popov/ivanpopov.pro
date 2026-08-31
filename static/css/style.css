@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   mask-size: contain;
 }
 .icon-cancel:before {
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z'/%3E%3C/svg%3E");
 }
 /* Closing quote (icon-quote-right) is the opening glyph rotated 180deg. */
 .icon-quote-left:before,
@@ -1129,9 +1129,14 @@ html,
 }
 .ip_modalbox .service_popup_informations .service-popup__close a i{
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+}
+.ip_modalbox .service_popup_informations .service-popup__close a i:before{
+	vertical-align: 0;
 }
 .ip_modalbox .service_popup_informations .descriptions{
 	flex: 1;
@@ -1242,7 +1247,14 @@ html,
 	border-color: var(--card-hover-bg);
 }
 .ip_modalbox.ip_modalbox--qr .qr-popup{
-	padding: 0 56px 4px 0;
+	padding: 4px 56px 14px 0;
+	min-height: 52px;
+	box-sizing: border-box;
+	border-bottom: 1px solid var(--card-border);
+	align-items: center;
+}
+.ip_modalbox.ip_modalbox--qr .qr-popup .service-popup__close{
+	padding: 4px;
 }
 .ip_modalbox.ip_modalbox--qr .description_wrap{
 	height: 100%;
@@ -1261,7 +1273,7 @@ html,
 	flex: 1 1 auto;
 	min-height: 0;
 	overflow: hidden;
-	padding-top: 8px;
+	padding-top: 16px;
 }
 .ip_modalbox .qr-popup__code{
 	display: block;
