@@ -101,17 +101,19 @@
 	font-family: "Manrope";
 	font-style: normal;
 	font-weight: 200 800;
-	font-display: swap;
+	/* optional: no swap after the first ~100 ms, so a late Manrope
+	   download cannot shift the nav (PSI "layout shift culprits").
+	   Cached/fast loads still apply the face before first paint. */
+	font-display: optional;
 	src: url("static/fonts/manrope/manrope-cyrillic.woff2") format("woff2");
 	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
-/* Metric-matched local fallback: while Manrope is in flight (or if it
-   never arrives), Arial/Liberation Sans renders at Manrope's advance
-   widths and vertical metrics, so the swap moves nothing (the header
-   is always visible and cannot be gated by critical.js). Overrides
-   from font data: Manrope asc 2132 / desc 600 per 2000 UPM; uppercase
-   Cyrillic avg advance vs Arial ≈ 0.957 (regular) / 0.974 (bold). */
+/* Metric-matched local fallback: Manrope uses font-display: optional, so
+   Slow 4G (and first visits that miss the ~100 ms window) keep this face.
+   Advance/vertical metrics match so a cached-font first paint still
+   aligns. Overrides from font data: Manrope asc 2132 / desc 600 per
+   2000 UPM; uppercase Cyrillic avg vs Arial ≈ 0.957 / 0.974 (bold). */
 @font-face {
 	font-family: "Manrope Fallback";
 	font-style: normal;
@@ -398,8 +400,12 @@ html.skip-preloader #preloader {
 
 .ip_header .menu ul li {
 	margin: 0;
-	flex: 0 0 auto;
+	/* Equal columns so a font metric miss cannot resize the chip
+	   (ЗАЧЕМ / ПОЧЕМУ were the remaining 0.000 CLS culprits). */
+	flex: 1 1 0;
+	min-width: 0;
 	overflow: visible;
+	text-align: center;
 }
 
 /* Edge items scale inward so html{overflow-x:hidden} does not clip them. */
@@ -424,6 +430,7 @@ html.skip-preloader #preloader {
 	position: relative;
 	display: inline-grid;
 	justify-items: center;
+	width: 100%;
 	transform: translateY(0) scale(1);
 	transform-origin: center bottom;
 	transition: transform .32s cubic-bezier(.33, 1, .68, 1), color .2s ease;

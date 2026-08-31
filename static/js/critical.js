@@ -127,8 +127,8 @@
 		});
 	}
 	// Manrope faces are registered by the inline critical CSS, so loads can be
-	// kicked off right away. Only the first-screen Cyrillic strings — Latin
-	// Manrope is not preloaded (it would outrank the LCP photo on HTTP/1.1).
+	// kicked off right away. The woff2 is not <link rel=preload>'d: on
+	// HTTP/1.1 that request is High and shares the LCP photo's connection.
 	function whenFontsReady(){
 		if(!document.fonts || !document.fonts.load){ return Promise.resolve(); }
 		var faces = Promise.all([
