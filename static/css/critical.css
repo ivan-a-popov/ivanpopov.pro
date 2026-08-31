@@ -400,12 +400,8 @@ html.skip-preloader #preloader {
 
 .ip_header .menu ul li {
 	margin: 0;
-	/* Equal columns so a font metric miss cannot resize the chip
-	   (ЗАЧЕМ / ПОЧЕМУ were the remaining 0.000 CLS culprits). */
-	flex: 1 1 0;
-	min-width: 0;
+	flex: 0 0 auto;
 	overflow: visible;
-	text-align: center;
 }
 
 /* Edge items scale inward so html{overflow-x:hidden} does not clip them. */
@@ -430,7 +426,6 @@ html.skip-preloader #preloader {
 	position: relative;
 	display: inline-grid;
 	justify-items: center;
-	width: 100%;
 	transform: translateY(0) scale(1);
 	transform-origin: center bottom;
 	transition: transform .32s cubic-bezier(.33, 1, .68, 1), color .2s ease;
