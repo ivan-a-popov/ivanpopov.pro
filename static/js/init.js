@@ -297,7 +297,7 @@ function ip_page_transition() {
 // Mirrors the CSS 1023px breakpoint where stacked/mobile content layout
 // takes over from the desktop two-column layout.
 function ip_is_mobile_layout() {
-	return window.matchMedia('(max-width: 1024px)').matches;
+	return window.matchMedia('(max-width: 1023px)').matches;
 }
 function ip_is_touch_device() {
 	return window.matchMedia('(hover: none), (pointer: coarse)').matches;
