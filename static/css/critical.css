@@ -23,8 +23,8 @@
 	/* page, header/footer, modals */
 	--text-main: #333;
 	/* headings, nav, strong copy */
-	--text-sub: #7d7789;
-	/* body copy */
+	--text-sub: #757089;
+	/* body copy — ≥4.5:1 on --bg-color (WCAG AA) */
 	--text-muted: #666;
 	/* secondary controls */
 	--logo-color: #000;
@@ -66,8 +66,8 @@
 		--bg-color: #131516;
 		--text-main: #a09c96;
 		/* headings/nav — darkreader #333 */
-		--text-sub: #7a7267;
-		/* body + popup copy — darkreader #7d7789 */
+		--text-sub: #8a8276;
+		/* body + popup copy — ≥4.5:1 on --bg-color (WCAG AA) */
 		--text-muted: #868077;
 		/* secondary controls — darkreader #666 */
 		--logo-color: #bab8b6;
