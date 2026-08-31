@@ -1378,7 +1378,7 @@ body.ip_light_cursor .mouse-cursor.cursor-outer.cursor-hover{
   opacity: 0.75;
   border-color: var(--cursor-invert);
 }
-@media (min-width: 920px){
+@media (min-width: 1024px){
 	.mouse-cursor{display: block;}
 }
 
