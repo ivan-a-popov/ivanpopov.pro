@@ -437,10 +437,11 @@ html,
 	height: 42px;
 	display: block;
 }
-/* The QR glyph (qr.svg) is a raster of black modules on transparent — an
-   <img>, so it can't inherit currentColor. Invert it in dark mode. */
+/* QR and mail glyphs are dark fills on transparent — <img>, so they
+   can't inherit currentColor. Invert them in dark mode. */
 @media (prefers-color-scheme: dark){
-	.ip_home_social a.ip_qr_open img{
+	.ip_home_social a.ip_qr_open img,
+	.ip_home_social a.ip_mail img{
 		filter: invert(1);
 	}
 }
