@@ -19,6 +19,23 @@ function ip_all(selector, context) {
 function ip_one(selector, context) {
 	return (context || document).querySelector(selector);
 }
+// Resolve "#about" → the .ip_section node. Rejects selector-like hashes so
+// location.hash is never fed to querySelector (invalid fragments throw and
+// would abort ip_ready).
+function ip_section_from_href(href) {
+	if (!href || href.charAt(0) !== '#') {
+		return null;
+	}
+	var id = href.slice(1);
+	if (!id || !/^[A-Za-z][\w-]*$/.test(id)) {
+		return null;
+	}
+	var el = document.getElementById(id);
+	if (!el || !el.classList.contains('ip_section')) {
+		return null;
+	}
+	return el;
+}
 function ip_add_classes(el, str) {
 	if (!el || !str) { return; }
 	str.split(/\s+/).forEach(function (c) { if (c) { el.classList.add(c); } });
@@ -53,7 +70,8 @@ function ip_href_from_location() {
 	if (!hash || hash === '#') {
 		return '#home';
 	}
-	return hash;
+	var el = ip_section_from_href(hash);
+	return el ? ('#' + el.id) : '#home';
 }
 function ip_apply_landing_section() {
 	var href = ip_href_from_location();
@@ -95,10 +113,11 @@ function ip_goto(href, opts) {
 	if (!href) {
 		return false;
 	}
-	var target = ip_one(href);
+	var target = ip_section_from_href(href);
 	if (!target) {
 		return false;
 	}
+	href = '#' + target.id;
 	var sections = ip_all('.ip_section');
 	var allLi = ip_all('.transition_link li');
 	var wrapper = ip_one('.ip_all_wrap');
@@ -234,7 +253,7 @@ function ip_navigate_section(step, linkSelector, hrefOpts) {
 function ip_enhance_section(href) {
 	if (href === '#about' || href === '#whyme') {
 		ip_teasers({ reset: true });
-		var section = ip_one(href);
+		var section = ip_section_from_href(href);
 		if (section) {
 			var settled = false;
 			function settle() {
@@ -302,7 +321,7 @@ function ip_build_swipe_nav() {
 	var dots = '';
 	links.forEach(function (a, i) {
 		var href = a.getAttribute('href');
-		var targetEl = href ? ip_one(href) : null;
+		var targetEl = href ? ip_section_from_href(href) : null;
 		var active = (targetEl && targetEl.classList.contains('active')) || (i === 0 && !hasActiveSection);
 		// Dots are decorative position indicators, not touch targets: no anchor.
 		dots += '<li class="' + (active ? 'active' : '') + '" data-href="' + href + '"><span class="dot"></span></li>';

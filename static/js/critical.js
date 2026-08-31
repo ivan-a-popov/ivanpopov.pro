@@ -23,10 +23,16 @@
 	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
 	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
 
+	// Keep in sync with html[data-ip-section=…] in critical.css. Unknown or
+	// selector-like hashes must not set the attr: html[data-ip-section] hides
+	// #home, and a throw in init.js would leave a blank first paint.
+	var SECTION_IDS = { home: 1, about: 1, service: 1, whyme: 1, testimonials: 1 };
 	function landingHash(){
 		var hash = location.hash;
 		if(!hash || hash === '#'){ return '#home'; }
-		return hash;
+		var id = hash.charAt(0) === '#' ? hash.slice(1) : hash;
+		if(!SECTION_IDS[id]){ return '#home'; }
+		return '#' + id;
 	}
 	// Lighthouse 13.4 / PSI spoofs a normal Chrome UA (no Chrome-Lighthouse)
 	// and leaves navigator.webdriver false. The lab viewport is still exact.
