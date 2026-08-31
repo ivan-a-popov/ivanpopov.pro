@@ -918,16 +918,19 @@ function ip_teasers(opts) {
 		body.style.transition = prevTransition;
 		var clip = getComputedStyle(body).maxHeight;
 		if (!clip || clip === 'none') {
+			teaser.setAttribute('role', 'button');
 			teaser.setAttribute('tabindex', '0');
 			teaser.setAttribute('aria-expanded', 'false');
 			return;
 		}
 		if (body.scrollHeight <= body.clientHeight + 1) {
 			teaser.classList.add('is-static');
+			teaser.removeAttribute('role');
 			teaser.removeAttribute('tabindex');
 			teaser.removeAttribute('aria-expanded');
 			return;
 		}
+		teaser.setAttribute('role', 'button');
 		teaser.setAttribute('tabindex', '0');
 		teaser.setAttribute('aria-expanded', 'false');
 	}
