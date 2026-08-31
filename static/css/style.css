@@ -456,6 +456,37 @@ html,
 		padding-top: 20px;
 	}
 }
+/* 480–639px × short height: the square photo would fill the viewport. */
+@media (max-width: 639px) and (max-height: 720px){
+	.ip_home{
+		height: 100%;
+		min-height: 0;
+	}
+	.ip_home_photo{
+		flex: 1 1 0;
+		min-height: 0;
+		max-height: 36dvh;
+	}
+	.ip_home_photo picture{
+		display: block;
+		height: 100%;
+	}
+	.ip_home_photo img{
+		height: 100%;
+		max-height: 100%;
+		width: 100%;
+		aspect-ratio: auto;
+		object-fit: cover;
+	}
+	.ip_home_copy{
+		flex: 0 0 auto;
+		--ip-home-name-gap: 8px;
+		--ip-home-rule-gap: 8px;
+		--ip-home-headline-gap: 10px;
+		--ip-home-copy-pad-bottom: 8px;
+		padding-top: 8px;
+	}
+}
 /* 640px+: side portrait replaces the stacked photo; content centers vertically. */
 @media (min-width: 640px){
 	.ip_home{
