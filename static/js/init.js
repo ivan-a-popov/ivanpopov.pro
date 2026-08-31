@@ -509,6 +509,29 @@ function ip_service_popup() {
 	if (descWrap && !descWrap.hasAttribute('tabindex')) {
 		descWrap.setAttribute('tabindex', '-1');
 	}
+	function setChromeInert(on) {
+		['.ip_header', '.ip_mainpart', '.ip_footer'].forEach(function (sel) {
+			var el = ip_one(sel);
+			if (!el) {
+				return;
+			}
+			if (on) {
+				el.setAttribute('inert', '');
+			} else {
+				el.removeAttribute('inert');
+			}
+		});
+	}
+	function popupTabbables() {
+		var root = boxInner || modalBox;
+		return ip_all('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])', root).filter(function (el) {
+			if (el.hasAttribute('disabled') || el.getAttribute('aria-hidden') === 'true') {
+				return false;
+			}
+			var style = getComputedStyle(el);
+			return style.visibility !== 'hidden' && style.display !== 'none';
+		});
+	}
 	function setLightCursor(on) {
 		document.body.classList.toggle('ip_light_cursor', !!on);
 	}
@@ -578,7 +601,11 @@ function ip_service_popup() {
 		ip_section_focus_token++;
 		unpinQrPopup();
 		modalBox.classList.remove('opened', 'ip_modalbox--partner', 'ip_modalbox--qr');
+		modalBox.removeAttribute('role');
 		modalBox.removeAttribute('aria-modal');
+		modalBox.removeAttribute('aria-labelledby');
+		modalBox.setAttribute('aria-hidden', 'true');
+		setChromeInert(false);
 		setLightCursor(false);
 		if (descWrap) {
 			descWrap.innerHTML = '';
@@ -624,7 +651,10 @@ function ip_service_popup() {
 				unpinQrPopup();
 			}
 			modalBox.classList.add('opened');
+			modalBox.setAttribute('role', 'dialog');
 			modalBox.setAttribute('aria-modal', 'true');
+			modalBox.removeAttribute('aria-hidden');
+			setChromeInert(true);
 			setLightCursor(true);
 			if (descWrap) {
 				descWrap.innerHTML = content;
@@ -646,6 +676,11 @@ function ip_service_popup() {
 					var title = titleEl ? titleEl.innerHTML : '';
 					infos.insertAdjacentHTML('afterbegin', '<div class="service-popup"><img class="service-popup__image" src="' + elImage + '" alt="" width="640" height="320" /><div class="service-popup__title"><h3>' + title + '</h3></div>' + closeHtml + '</div>');
 				}
+				var heading = infos.querySelector('h3');
+				if (heading) {
+					heading.id = 'ip-modal-title';
+					modalBox.setAttribute('aria-labelledby', 'ip-modal-title');
+				}
 			}
 			if (qr) {
 				pinQrPopup();
@@ -659,6 +694,32 @@ function ip_service_popup() {
 		if (closeLink) {
 			e.preventDefault();
 			closePopupModal();
+		}
+	});
+	document.addEventListener('keydown', function (e) {
+		if (e.key !== 'Tab' || !modalBox.classList.contains('opened')) {
+			return;
+		}
+		var list = popupTabbables();
+		if (!list.length) {
+			e.preventDefault();
+			if (descWrap) {
+				descWrap.focus({ preventScroll: true });
+			}
+			return;
+		}
+		var first = list[0];
+		var last = list[list.length - 1];
+		var active = document.activeElement;
+		var inside = modalBox.contains(active);
+		if (e.shiftKey) {
+			if (!inside || active === first || active === descWrap) {
+				e.preventDefault();
+				last.focus();
+			}
+		} else if (!inside || active === last) {
+			e.preventDefault();
+			first.focus();
 		}
 	});
 	window.addEventListener('resize', function () {
