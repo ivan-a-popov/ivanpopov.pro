@@ -723,6 +723,12 @@ html,
 .partner-card:focus-within{
 	z-index: 1;
 }
+.partner-card > picture{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 100%;
+}
 .partner-card__logo{
 	display: block;
 	width: auto;
@@ -743,14 +749,6 @@ html,
 }
 .partner_hidden_details{
 	display: none;
-}
-@media (prefers-color-scheme: dark){
-	.partner-card__logo--ink{
-		background: #fff;
-		padding: 6px 10px;
-		border-radius: 8px;
-		box-sizing: content-box;
-	}
 }
 @media (min-width: 640px){
 	.ip_partners{
