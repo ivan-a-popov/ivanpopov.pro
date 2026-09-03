@@ -101,10 +101,10 @@
 	<!-- STYLES (style.min.css is generated from style.css by minify.py).
 	  media=print keeps this off the HTTP/1.1 High bucket so it does not
 	  share the LCP photo's connection; onload promotes it to all. -->
-	<link rel="stylesheet" href="static/css/style.min.css?v=455fd869" media="print" fetchpriority="low"
+	<link rel="stylesheet" href="static/css/style.min.css?v=8f322cee" media="print" fetchpriority="low"
 		onload="this.onload=null;this.media='all'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.min.css?v=455fd869" />
+		<link rel="stylesheet" href="static/css/style.min.css?v=8f322cee" />
 	</noscript>
 	<!-- /STYLES -->
 
@@ -263,8 +263,12 @@
 							<ul class="ip_partners" aria-label="Партнёрские сервисы">
 								<li>
 									<div class="partner-card" data-partner-title="Retail CRM">
-										<img class="partner-card__logo" src="static/img/partners/retailcrm.svg" alt="" width="180"
-											height="32" decoding="async" loading="lazy">
+										<picture>
+											<source srcset="static/img/partners/retailcrm-dark.svg"
+												media="(prefers-color-scheme: dark)">
+											<img class="partner-card__logo" src="static/img/partners/retailcrm.svg" alt="" width="180"
+												height="32" decoding="async" loading="lazy">
+										</picture>
 										<a class="ip_full_link" href="#" aria-label="RetailCRM — подробнее"></a>
 										<template class="partner_hidden_details">
 											<div class="service_popup_informations">
@@ -301,8 +305,12 @@
 								</li>
 								<li>
 									<div class="partner-card" data-partner-title="Мой Склад">
-										<img class="partner-card__logo" src="static/img/partners/moysklad.svg" alt="" width="152"
-											height="24" decoding="async" loading="lazy">
+										<picture>
+											<source srcset="static/img/partners/moysklad-dark.svg"
+												media="(prefers-color-scheme: dark)">
+											<img class="partner-card__logo" src="static/img/partners/moysklad.svg" alt="" width="152"
+												height="24" decoding="async" loading="lazy">
+										</picture>
 										<a class="ip_full_link" href="#" aria-label="МойСклад — подробнее"></a>
 										<template class="partner_hidden_details">
 											<div class="service_popup_informations">
@@ -325,8 +333,12 @@
 								</li>
 								<li>
 									<div class="partner-card" data-partner-title="Timeweb Cloud">
-										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/timeweb-cloud.svg"
-											alt="" width="190" height="28" decoding="async" loading="lazy">
+										<picture>
+											<source srcset="static/img/partners/timeweb-cloud-dark.svg"
+												media="(prefers-color-scheme: dark)">
+											<img class="partner-card__logo" src="static/img/partners/timeweb-cloud.svg" alt="" width="190"
+												height="28" decoding="async" loading="lazy">
+										</picture>
 										<a class="ip_full_link" href="#" aria-label="Timeweb Cloud"></a>
 										<template class="partner_hidden_details">
 											<div class="service_popup_informations">
@@ -346,8 +358,12 @@
 								</li>
 								<li>
 									<div class="partner-card" data-partner-title="Scloud">
-										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/scloud.svg" alt=""
-											width="84" height="56" decoding="async" loading="lazy">
+										<picture>
+											<source srcset="static/img/partners/scloud-dark.svg"
+												media="(prefers-color-scheme: dark)">
+											<img class="partner-card__logo" src="static/img/partners/scloud.svg" alt="" width="84"
+												height="56" decoding="async" loading="lazy">
+										</picture>
 										<a class="ip_full_link" href="#" aria-label="Scloud — подробнее"></a>
 										<template class="partner_hidden_details">
 											<div class="service_popup_informations">
@@ -368,8 +384,12 @@
 								</li>
 								<li>
 									<div class="partner-card" data-partner-title="Т (Банк и Бизнес)">
-										<img class="partner-card__logo partner-card__logo--ink" src="static/img/partners/tbank.svg" alt=""
-											width="95" height="34" decoding="async" loading="lazy">
+										<picture>
+											<source srcset="static/img/partners/tbank-dark.svg"
+												media="(prefers-color-scheme: dark)">
+											<img class="partner-card__logo" src="static/img/partners/tbank.svg" alt="" width="95"
+												height="34" decoding="async" loading="lazy">
+										</picture>
 										<a class="ip_full_link" href="#" aria-label="Т-Банк · Т-Бизнес — подробнее"></a>
 										<template class="partner_hidden_details">
 											<div class="service_popup_informations">
