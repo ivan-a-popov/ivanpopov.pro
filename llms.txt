@@ -24,7 +24,7 @@ Key facts:
 
 ## Services
 
-- [Services](https://ivanpopov.pro/#service): Six offers in one section — Expertise (independent analytics/audits, feasibility, roadmaps); E-commerce (CRM, WMS, marketplace/logistics, omnichannel); Development (apps, APIs, AI workflows chosen after understanding the business); DevOps (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity); Security (operational security of servers, access, backups, and personal data — not pentesting); Support (ongoing IT outsourcing under contract)
+- [Services](https://ivanpopov.pro/#service): Six offers in one section — Expertise (independent analytics/audits, feasibility, roadmaps); AI (LLM, RAG, agents and automation built on real business tasks, with data access, integrations, hallucination control and security handled end to end); Security (operational security of servers, access, backups, and personal data); E-commerce (CRM, WMS, marketplace/logistics, omnichannel); DevOps and Support (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity; ongoing IT outsourcing under contract); Development (sites, apps, APIs — concrete choices after understanding the business demands)
 
 ## Contact
 
