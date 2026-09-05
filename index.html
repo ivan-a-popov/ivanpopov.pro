@@ -26,19 +26,26 @@
 	<meta property="og:url" content="https://ivanpopov.pro/" />
 	<meta property="og:title" content="Иван Попов, IT-эксперт" />
 	<meta property="og:description" content="Локальный AI ⬩ Кибербез ⬩ Сложная разработка" />
-	<!-- nginx swaps this image (and width/height) for the WhatsApp crawler UA;
-	  see the og_share_image map + sub_filter in nginx.conf -->
-	<meta property="og:image" content="https://ivanpopov.pro/static/img/about/og-cover-1200x630.jpg" />
+	<!-- Images are served from GitHub so crawlers that cannot fetch this
+	  origin (Telegram media DCs) still get a preview. Wide cover first for
+	  Facebook / X / LinkedIn; square second for WhatsApp / Telegram, which
+	  crop a 1200x630 source and cut the head off. -->
+	<meta property="og:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-cover-1200x630.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Иван Попов, IT-эксперт" />
+	<meta property="og:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image-square.jpg" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content="600" />
+	<meta property="og:image:height" content="600" />
 	<meta property="og:image:alt" content="Иван Попов, IT-эксперт" />
 
 	<!-- Twitter / X (falls back to OG if a tag is omitted) -->
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Иван Попов, IT-эксперт">
 	<meta name="twitter:description" content="Локальный AI ⬩ Кибербез ⬩ Сложная разработка">
-	<meta name="twitter:image" content="https://ivanpopov.pro/static/img/about/og-cover-1200x630.jpg">
+	<meta name="twitter:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-cover-1200x630.jpg">
 	<meta name="twitter:image:alt" content="Иван Попов, IT-эксперт">
 
 	<!-- JSON-LD: Google / Bing rich results (not link-preview cards) -->
@@ -53,7 +60,7 @@
 	"jobTitle": "IT-эксперт",
 	"description": "DevSecOps: серверная инфраструктура и безопасность. E-commerce: аудит и консалтинг. AI: local inference, RAG, MCP.",
 	"url": "https://ivanpopov.pro/",
-	"image": "https://ivanpopov.pro/static/img/about/og-image-square.jpg",
+	"image": "https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image-square.jpg",
 	"email": "me@ivanpopov.pro",
 	"sameAs": [
 		"https://t.me/ivanpopovpro",
@@ -194,12 +201,12 @@
 							</h2>
 							<p class="ip_headline_tagline">с человеческим лицом</p>
 							<div class="ip_home_social" aria-label="Ссылки для связи">
-								<a href="https://t.me/ivan_a_popov" target="_blank" rel="noopener noreferrer"
+								<a href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer"
 									aria-label="Написать в Telegram">
 									<img src="static/img/social/tg.svg" alt="" width="40" height="40" decoding="async"
 										fetchpriority="low">
 								</a>
-								<a href="https://vk.com/ivan_a_popov" target="_blank" rel="noopener noreferrer"
+								<a href="https://vk.com/ivanpopovpro" target="_blank" rel="noopener noreferrer"
 									aria-label="Написать во ВКонтакте">
 									<img src="static/img/social/vk.svg" alt="" width="40" height="40" decoding="async"
 										fetchpriority="low">
