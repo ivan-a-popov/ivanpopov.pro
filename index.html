@@ -27,28 +27,23 @@
 	<meta property="og:title" content="Иван Попов, IT-эксперт" />
 	<meta property="og:description" content="Локальный AI ⬩ Кибербез ⬩ Сложная разработка" />
 	<!-- Images from GitHub: Telegram media DCs cannot fetch this origin.
-	  Portrait first — Facebook composes site name / title / description
-	  beside the photo (not a 1.91:1 cover with baked-in text). Width and
-	  height let the first share render without waiting on the image fetch:
+	  Default (first) is the 630×1200 portrait — Facebook composes site
+	  name / title / description beside it. Width/height so the first share
+	  can render without waiting on the image fetch:
 	  https://developers.facebook.com/documentation/sharing/webmasters/faq.md
-	  Square second for WhatsApp / Telegram, which square-crop a tall source. -->
+	  Telegram ignores twitter:image; nginx swaps this first URL to
+	  og-image-square.jpg for TelegramBot (WhatsApp keeps the portrait). -->
 	<meta property="og:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="630" />
 	<meta property="og:image:height" content="1200" />
 	<meta property="og:image:alt" content="Иван Попов, IT-эксперт" />
-	<meta property="og:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image-square.jpg" />
-	<meta property="og:image:type" content="image/jpeg" />
-	<meta property="og:image:width" content="600" />
-	<meta property="og:image:height" content="600" />
-	<meta property="og:image:alt" content="Иван Попов, IT-эксперт" />
 
-	<!-- Twitter / X: summary (thumbnail + live text), not summary_large_image,
-	  which would crop the 630×1200 portrait to ~2:1. -->
+	<!-- Twitter / X: summary + square (1:1 thumbnail beside live text). -->
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="Иван Попов, IT-эксперт">
 	<meta name="twitter:description" content="Локальный AI ⬩ Кибербез ⬩ Сложная разработка">
-	<meta name="twitter:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image.jpg">
+	<meta name="twitter:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image-square.jpg">
 	<meta name="twitter:image:alt" content="Иван Попов, IT-эксперт">
 
 	<!-- JSON-LD: Google / Bing rich results (not link-preview cards) -->
