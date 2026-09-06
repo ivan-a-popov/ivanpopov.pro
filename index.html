@@ -31,8 +31,9 @@
 	  name / title / description beside it. Width/height so the first share
 	  can render without waiting on the image fetch:
 	  https://developers.facebook.com/documentation/sharing/webmasters/faq.md
-	  Telegram ignores twitter:image; nginx swaps this first URL to
-	  og-image-square.jpg for TelegramBot (WhatsApp keeps the portrait). -->
+	  Telegram/WhatsApp ignore twitter:image; nginx swaps this first URL
+	  to og-image-square.jpg for those crawlers (tall sources get a
+	  center crop that cuts the head off). -->
 	<meta property="og:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="630" />
