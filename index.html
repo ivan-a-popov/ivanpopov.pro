@@ -26,14 +26,16 @@
 	<meta property="og:url" content="https://ivanpopov.pro/" />
 	<meta property="og:title" content="Иван Попов, IT-эксперт" />
 	<meta property="og:description" content="Локальный AI ⬩ Кибербез ⬩ Сложная разработка" />
-	<!-- Images are served from GitHub so crawlers that cannot fetch this
-	  origin (Telegram media DCs) still get a preview. Wide cover first for
-	  Facebook / X / LinkedIn; square second for WhatsApp / Telegram, which
-	  crop a 1200x630 source and cut the head off. -->
-	<meta property="og:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-cover-1200x630.jpg" />
+	<!-- Images from GitHub: Telegram media DCs cannot fetch this origin.
+	  Portrait first — Facebook composes site name / title / description
+	  beside the photo (not a 1.91:1 cover with baked-in text). Width and
+	  height let the first share render without waiting on the image fetch:
+	  https://developers.facebook.com/documentation/sharing/webmasters/faq.md
+	  Square second for WhatsApp / Telegram, which square-crop a tall source. -->
+	<meta property="og:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
+	<meta property="og:image:width" content="630" />
+	<meta property="og:image:height" content="1200" />
 	<meta property="og:image:alt" content="Иван Попов, IT-эксперт" />
 	<meta property="og:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image-square.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
@@ -41,11 +43,12 @@
 	<meta property="og:image:height" content="600" />
 	<meta property="og:image:alt" content="Иван Попов, IT-эксперт" />
 
-	<!-- Twitter / X (falls back to OG if a tag is omitted) -->
-	<meta name="twitter:card" content="summary_large_image">
+	<!-- Twitter / X: summary (thumbnail + live text), not summary_large_image,
+	  which would crop the 630×1200 portrait to ~2:1. -->
+	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="Иван Попов, IT-эксперт">
 	<meta name="twitter:description" content="Локальный AI ⬩ Кибербез ⬩ Сложная разработка">
-	<meta name="twitter:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-cover-1200x630.jpg">
+	<meta name="twitter:image" content="https://raw.githubusercontent.com/ivan-a-popov/ivanpopov.pro/master/static/img/about/og-image.jpg">
 	<meta name="twitter:image:alt" content="Иван Попов, IT-эксперт">
 
 	<!-- JSON-LD: Google / Bing rich results (not link-preview cards) -->
