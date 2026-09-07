@@ -794,7 +794,7 @@ function ip_teasers(opts) {
 			var mb = parseFloat(cs.marginBottom) || 0;
 			var lh = parseFloat(cs.lineHeight) || 0;
 			firstH = Math.max(firstH, p.offsetHeight);
-			peek = Math.max(peek, mb + (2 * lh));
+			peek = Math.max(peek, mb + (3 * lh));
 		}
 		return Math.ceil(extraTop + firstH + peek);
 	}

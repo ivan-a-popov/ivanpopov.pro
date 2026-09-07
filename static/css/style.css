@@ -635,20 +635,33 @@ html,
 @supports (max-height: 1lh){
 	.ip_teaser__body{ max-height: var(--ip-teaser-collapsed, calc(var(--ip-teaser-lines) * 1lh)); }
 }
-/* Conservative clip before JS measures first paragraph + 2 peek lines. */
-.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 6; }
+/* Conservative clip before JS measures first paragraph + 3 peek lines. */
+.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 7; }
 @media (min-width: 768px){
 	.ip_teaser__body{ --ip-teaser-lines: 4; }
-	.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 5; }
+	.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 6; }
 }
 .ip_teaser__body::after{
 	content: "";
 	position: absolute;
 	inset: auto 0 0;
-	height: 3em;
-	background: linear-gradient(to bottom, transparent, var(--bg-color));
+	/* ~3 lines: fade begins earlier than a 1-line veil and eases out. */
+	height: 5em;
 	pointer-events: none;
 	transition: opacity .3s ease;
+	/* Mix against transparent in srgb so the veil stays --bg-color, not black. */
+	background: linear-gradient(
+		to bottom,
+		color-mix(in srgb, var(--bg-color) 0%, transparent) 0%,
+		color-mix(in srgb, var(--bg-color) 22%, transparent) 32%,
+		color-mix(in srgb, var(--bg-color) 55%, transparent) 58%,
+		color-mix(in srgb, var(--bg-color) 88%, transparent) 82%,
+		var(--bg-color) 94%,
+		var(--bg-color) 100%
+	);
+}
+@supports (height: 1lh){
+	.ip_teaser__body::after{ height: 2.5lh; }
 }
 .ip_teaser.is-open .ip_teaser__body{ max-height: none; }
 .ip_teaser.is-open .ip_teaser__body::after{ opacity: 0; }
