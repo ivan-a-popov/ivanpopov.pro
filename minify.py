@@ -428,19 +428,41 @@ def _inject(html: str, start: str, end: str, open_tag: str, close_tag: str, body
     return f"{html[: i + len(start)]}\n{open_tag}\n{body}\n{close_tag}\n\t{html[j:]}"
 
 
-_ASSET_RE = re.compile(r'(?:href|src)="(static/[^"?]+\.(?:css|js))')
+_ASSET_RE = re.compile(
+    r'(?:href|src)="(static/[^"?]+\.(?:css|js))'
+    r'|(?<![/\w])(static/img/[^"?#\s>]+)'
+)
 
 
 def _stamp(html: str) -> str:
-    assets = sorted(set(_ASSET_RE.findall(html)))
+    assets = sorted({part for groups in _ASSET_RE.findall(html) for part in groups if part})
+    stamps: dict[str, str] = {}
     for asset in assets:
         path = Path(asset)
         if not path.is_file():
             print(f"skip (missing): {asset}", file=sys.stderr)
             continue
         digest = hashlib.md5(path.read_bytes()).hexdigest()[:8]
-        html = re.sub(re.escape(asset) + r"(?:\?v=[0-9a-f]+)?", f"{asset}?v={digest}", html)
+        stamps[asset] = digest
+        html = re.sub(
+            r"(?<![/\w])" + re.escape(asset) + r"(?:\?v=[0-9a-f]+)?",
+            f"{asset}?v={digest}",
+            html,
+        )
         print(f"stamped {asset} -> ?v={digest}")
+    nginx_path = Path("nginx.conf")
+    if stamps and nginx_path.is_file():
+        nginx = nginx_path.read_text(encoding="utf-8")
+        updated = nginx
+        for asset, digest in stamps.items():
+            updated = re.sub(
+                re.escape("/" + asset) + r"(?:\?v=[0-9a-f]+)?",
+                f"/{asset}?v={digest}",
+                updated,
+            )
+        if updated != nginx:
+            nginx_path.write_text(updated, encoding="utf-8")
+            print(f"stamped {nginx_path}")
     return html
 
 

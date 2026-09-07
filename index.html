@@ -9,9 +9,9 @@
 	  the preload scanner would then fetch the 19KB portrait on phones before
 	  <picture> picks the gif. media keeps art-direction. Breakpoint = 640px.
 	  nginx also sends these as Link headers so the request can start at TTFB. -->
-	<link rel="preload" as="image" fetchpriority="high" href="static/img/about/ip-foto-mobile.webp"
+	<link rel="preload" as="image" fetchpriority="high" href="static/img/about/ip-foto-mobile.webp?v=18b455cd"
 		media="(max-width: 639px)">
-	<link rel="preload" as="image" fetchpriority="high" href="static/img/about/ip-foto.webp" media="(min-width: 640px)">
+	<link rel="preload" as="image" fetchpriority="high" href="static/img/about/ip-foto.webp?v=49ecc3b6" media="(min-width: 640px)">
 	<title>Иван Попов ⬩ IT-эксперт</title>
 	<meta name="description" content="DevSecOps, локальный AI, кибербезопасность. 20 лет IT в екоме.">
 	<meta name="author" content="Иван Попов">
@@ -167,7 +167,7 @@
 					<picture>
 						<source media="(max-width: 639px)"
 							srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-						<img class="author_photo" id="author_photo_img" src="static/img/about/ip-foto.webp" alt="" width="610"
+						<img class="author_photo" id="author_photo_img" src="static/img/about/ip-foto.webp?v=49ecc3b6" alt="" width="610"
 							height="825" fetchpriority="high">
 					</picture>
 				</div>
@@ -182,7 +182,7 @@
 							<picture>
 								<source media="(min-width: 640px)"
 									srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-								<img src="static/img/about/ip-foto-mobile.webp" alt="Ivan Popov" width="600" height="600"
+								<img src="static/img/about/ip-foto-mobile.webp?v=18b455cd" alt="Ivan Popov" width="600" height="600"
 									fetchpriority="high">
 							</picture>
 						</div>
@@ -202,27 +202,27 @@
 							<div class="ip_home_social" aria-label="Ссылки для связи">
 								<a href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer"
 									aria-label="Написать в Telegram">
-									<img src="static/img/social/tg.svg" alt="" width="40" height="40" decoding="async"
+									<img src="static/img/social/tg.svg?v=cd064d44" alt="" width="40" height="40" decoding="async"
 										fetchpriority="low">
 								</a>
 								<a href="https://vk.com/ivanpopovpro" target="_blank" rel="noopener noreferrer"
 									aria-label="Написать во ВКонтакте">
-									<img src="static/img/social/vk.svg" alt="" width="40" height="40" decoding="async"
+									<img src="static/img/social/vk.svg?v=5941614a" alt="" width="40" height="40" decoding="async"
 										fetchpriority="low">
 								</a>
 								<a href="mailto:me@ivanpopov.pro" class="ip_mail" aria-label="Написать письмо">
-									<img src="static/img/social/mail.svg" alt="" width="40" height="40" decoding="async"
+									<img src="static/img/social/mail.svg?v=9cb2ec4f" alt="" width="40" height="40" decoding="async"
 										fetchpriority="low">
 								</a>
 								<a href="#" class="ip_qr_open" aria-label="QR-код — визитка">
-									<img src="static/img/social/qr.svg" alt="" width="40" height="40" decoding="async"
+									<img src="static/img/social/qr.svg?v=e874d10b" alt="" width="40" height="40" decoding="async"
 										fetchpriority="low">
 								</a>
 							</div>
 							<template class="qr_hidden_details">
 								<div class="service_popup_informations">
 									<div class="descriptions">
-										<img class="qr-popup__code" src="static/img/social/qr-vcard.svg" alt="" width="280" height="280"
+										<img class="qr-popup__code" src="static/img/social/qr-vcard.svg?v=395e2e35" alt="" width="280" height="280"
 											decoding="async">
 										<p class="qr-popup__hint">Используйте камеру телефона</p>
 									</div>
@@ -268,9 +268,9 @@
 								<li>
 									<div class="partner-card" data-partner-title="Retail CRM">
 										<picture>
-											<source srcset="static/img/partners/retailcrm-dark.svg"
+											<source srcset="static/img/partners/retailcrm-dark.svg?v=6f8ece62"
 												media="(prefers-color-scheme: dark)">
-											<img class="partner-card__logo" src="static/img/partners/retailcrm.svg" alt="" width="180"
+											<img class="partner-card__logo" src="static/img/partners/retailcrm.svg?v=5a464a67" alt="" width="180"
 												height="32" decoding="async" loading="lazy">
 										</picture>
 										<a class="ip_full_link" href="#" aria-label="RetailCRM — подробнее"></a>
@@ -309,9 +309,9 @@
 								<li>
 									<div class="partner-card" data-partner-title="Мой Склад">
 										<picture>
-											<source srcset="static/img/partners/moysklad-dark.svg"
+											<source srcset="static/img/partners/moysklad-dark.svg?v=c0191bdc"
 												media="(prefers-color-scheme: dark)">
-											<img class="partner-card__logo" src="static/img/partners/moysklad.svg" alt="" width="152"
+											<img class="partner-card__logo" src="static/img/partners/moysklad.svg?v=b3801bde" alt="" width="152"
 												height="24" decoding="async" loading="lazy">
 										</picture>
 										<a class="ip_full_link" href="#" aria-label="МойСклад — подробнее"></a>
@@ -337,9 +337,9 @@
 								<li>
 									<div class="partner-card" data-partner-title="Timeweb Cloud">
 										<picture>
-											<source srcset="static/img/partners/timeweb-cloud-dark.svg"
+											<source srcset="static/img/partners/timeweb-cloud-dark.svg?v=3b678517"
 												media="(prefers-color-scheme: dark)">
-											<img class="partner-card__logo" src="static/img/partners/timeweb-cloud.svg" alt="" width="190"
+											<img class="partner-card__logo" src="static/img/partners/timeweb-cloud.svg?v=51f8cf43" alt="" width="190"
 												height="28" decoding="async" loading="lazy">
 										</picture>
 										<a class="ip_full_link" href="#" aria-label="Timeweb Cloud"></a>
@@ -362,9 +362,9 @@
 								<li>
 									<div class="partner-card" data-partner-title="Scloud">
 										<picture>
-											<source srcset="static/img/partners/scloud-dark.svg"
+											<source srcset="static/img/partners/scloud-dark.svg?v=9ed4b42a"
 												media="(prefers-color-scheme: dark)">
-											<img class="partner-card__logo" src="static/img/partners/scloud.svg" alt="" width="84"
+											<img class="partner-card__logo" src="static/img/partners/scloud.svg?v=9d445942" alt="" width="84"
 												height="56" decoding="async" loading="lazy">
 										</picture>
 										<a class="ip_full_link" href="#" aria-label="Scloud — подробнее"></a>
@@ -388,9 +388,9 @@
 								<li>
 									<div class="partner-card" data-partner-title="Т Бизнес">
 										<picture>
-											<source srcset="static/img/partners/tbank-dark.svg"
+											<source srcset="static/img/partners/tbank-dark.svg?v=82fe7a80"
 												media="(prefers-color-scheme: dark)">
-											<img class="partner-card__logo" src="static/img/partners/tbank.svg" alt="" width="95"
+											<img class="partner-card__logo" src="static/img/partners/tbank.svg?v=4d3b42c6" alt="" width="95"
 												height="34" decoding="async" loading="lazy">
 										</picture>
 										<a class="ip_full_link" href="#" aria-label="Т-Банк · Т-Бизнес — подробнее"></a>
@@ -435,7 +435,7 @@
 											<p class="service-card__summary">Аналитика, аудит, консалтинг</p>
 											<a class="ip_full_link" href="#" aria-label="Экспертиза — подробнее"></a>
 											<!-- Modalbox Info -->
-											<img class="popup_service_image" data-popup-img="static/img/service/web.webp" alt="" width="640"
+											<img class="popup_service_image" data-popup-img="static/img/service/web.webp?v=217628a5" alt="" width="640"
 												height="320" />
 											<template class="service_hidden_details">
 												<div class="service_popup_informations">
@@ -480,7 +480,7 @@
 											<p class="service-card__summary">Локальный запуск, MCP, RAG</p>
 											<a class="ip_full_link" href="#" aria-label="AI — подробнее"></a>
 											<!-- Modalbox Info -->
-											<img class="popup_service_image" data-popup-img="static/img/service/sysadmin.webp" alt=""
+											<img class="popup_service_image" data-popup-img="static/img/service/sysadmin.webp?v=04595002" alt=""
 												width="640" height="320" />
 											<template class="service_hidden_details">
 												<div class="service_popup_informations">
@@ -523,7 +523,7 @@
 											<p class="service-card__summary">Настройки, процессы, регламенты</p>
 											<a class="ip_full_link" href="#" aria-label="Безопасность — подробнее"></a>
 											<!-- Modalbox Info -->
-											<img class="popup_service_image" data-popup-img="static/img/service/security.webp?v=2" alt=""
+											<img class="popup_service_image" data-popup-img="static/img/service/security.webp?v=f131dfd5" alt=""
 												width="640" height="320" />
 											<template class="service_hidden_details">
 												<div class="service_popup_informations">
@@ -581,7 +581,7 @@
 											<p class="service-card__summary">CRM, WMS, интеграции</p>
 											<a class="ip_full_link" href="#" aria-label="Ecommerce — подробнее"></a>
 											<!-- Modalbox Info -->
-											<img class="popup_service_image" data-popup-img="static/img/service/support.webp" alt=""
+											<img class="popup_service_image" data-popup-img="static/img/service/support.webp?v=847bf6db" alt=""
 												width="640" height="320" />
 											<template class="service_hidden_details">
 												<div class="service_popup_informations">
@@ -614,7 +614,7 @@
 											<p class="service-card__summary">Серверы, поддержка, IT-аутсорс</p>
 											<a class="ip_full_link" href="#" aria-label="DevOps и поддержка — подробнее"></a>
 											<!-- Modalbox Info -->
-											<img class="popup_service_image" data-popup-img="static/img/service/server.webp" alt=""
+											<img class="popup_service_image" data-popup-img="static/img/service/server.webp?v=d7c05517" alt=""
 												width="640" height="320" />
 											<template class="service_hidden_details">
 												<div class="service_popup_informations">
@@ -669,7 +669,7 @@
 											<p class="service-card__summary">Сайты, приложения, API</p>
 											<a class="ip_full_link" href="#" aria-label="Разработка — подробнее"></a>
 											<!-- Modalbox Info -->
-											<img class="popup_service_image" data-popup-img="static/img/service/expert.webp" alt=""
+											<img class="popup_service_image" data-popup-img="static/img/service/expert.webp?v=0e564cf2" alt=""
 												width="640" height="320" />
 											<template class="service_hidden_details">
 												<div class="service_popup_informations">
@@ -894,7 +894,7 @@
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
 														<img class="main testimonial-author__avatar" loading="lazy"
-															src="static/img/clients/ukfed.webp" alt="Сергей Гурьянов" width="60" height="60" />
+															src="static/img/clients/ukfed.webp?v=61a337cf" alt="Сергей Гурьянов" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Сергей Гурьянов</h3>
@@ -916,7 +916,7 @@
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
 														<img class="main testimonial-author__avatar" loading="lazy"
-															src="static/img/clients/amalfi.webp" alt="Эрман Ольга Михайловна" width="60"
+															src="static/img/clients/amalfi.webp?v=43c21e45" alt="Эрман Ольга Михайловна" width="60"
 															height="60" />
 													</div>
 													<div class="info">
@@ -936,7 +936,7 @@
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
 														<img class="main testimonial-author__avatar" loading="lazy"
-															src="static/img/clients/vsem-korobok.webp" alt="Илья Воробьев" width="60" height="60" />
+															src="static/img/clients/vsem-korobok.webp?v=869024b5" alt="Илья Воробьев" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Илья Воробьев</h3>
@@ -963,7 +963,7 @@
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
 														<img class="main testimonial-author__avatar" loading="lazy"
-															src="static/img/clients/ipoint.webp" alt="Попов Александр" width="60" height="60" />
+															src="static/img/clients/ipoint.webp?v=3008c08f" alt="Попов Александр" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Попов Александр</h3>
@@ -987,7 +987,7 @@
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
 														<img class="main testimonial-author__avatar" loading="lazy"
-															src="static/img/clients/gm-light.webp" alt="Екатерина Шрайбер" width="60" height="60" />
+															src="static/img/clients/gm-light.webp?v=54d55094" alt="Екатерина Шрайбер" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Екатерина Шрайбер</h3>
@@ -1009,7 +1009,7 @@
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
 														<img class="main testimonial-author__avatar" loading="lazy"
-															src="static/img/clients/filters-market.webp" alt="Валентин Воробьев" width="60"
+															src="static/img/clients/filters-market.webp?v=d1de8049" alt="Валентин Воробьев" width="60"
 															height="60" />
 													</div>
 													<div class="info">
@@ -1038,7 +1038,7 @@
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
 														<img class="main testimonial-author__avatar" loading="lazy"
-															src="static/img/clients/ruketo.webp" alt="Сергей Федоров" width="60" height="60" />
+															src="static/img/clients/ruketo.webp?v=7e6192b9" alt="Сергей Федоров" width="60" height="60" />
 													</div>
 													<div class="info">
 														<h3>Сергей Федоров</h3>
@@ -1066,7 +1066,7 @@
 												<div class="details testimonial-author">
 													<div class="image testimonial-author__image">
 														<img class="main testimonial-author__avatar" loading="lazy"
-															src="static/img/clients/dtk-pharm.webp" alt="Александр Арсентьев" width="60"
+															src="static/img/clients/dtk-pharm.webp?v=6f538b3a" alt="Александр Арсентьев" width="60"
 															height="60" />
 													</div>
 													<div class="info">
