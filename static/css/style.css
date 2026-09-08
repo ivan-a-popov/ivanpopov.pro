@@ -573,6 +573,14 @@ html,
 .ip_info .right p:last-child {
 	margin-bottom: 0;
 }
+/* Long-read scan accents: same voice as headings, not extra "importance".
+   <b> (not <strong>): attention without SR stress. Color does the work;
+   600 sits between body 450 and title 700. */
+.ip_info .wrapper p b,
+.ip_modalbox .descriptions p b {
+	color: var(--text-main);
+	font-weight: 600;
+}
 .ip_info > .wrapper + .ip_title,
 .ip_info > .ip_teaser + .ip_title{
 	margin-top: clamp(1.75rem, 3vw, 2.5rem);
