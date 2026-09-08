@@ -1,6 +1,7 @@
 .*
 !.gitignore
 !.github/
+!docs/.nojekyll
 temp/
 *.md
 !README.md
