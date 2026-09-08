@@ -34,4 +34,4 @@ Key facts:
 
 ## Optional
 
-- [Open Graph image](https://ivanpopov.pro/static/img/about/og-image-new.jpg): 960×1440 (2:3) portrait used for all link previews
+- [Open Graph image](https://ivanpopov.pro/static/img/about/og-image-new.jpg): 1200×1200 square used for all link previews
