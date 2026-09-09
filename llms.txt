@@ -34,4 +34,4 @@ Key facts:
 
 ## Optional
 
-- [Open Graph image](https://ivanpopov.pro/static/img/about/og-image.jpg): 630×1200 portrait (face on the vertical center) for WhatsApp / Telegram / Facebook; X uses the [1200×1200](https://ivanpopov.pro/static/img/about/og-image-new.jpg)
+- [Open Graph image](https://ivanpopov.pro/static/img/about/og-image-wide-bw.jpg): 1200x630 portrait (face on the horisontal center) for WhatsApp / Telegram / Facebook; X uses the [600×600](https://ivanpopov.pro/static/img/about/og-image-square.jpg)
