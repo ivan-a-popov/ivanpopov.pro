@@ -10,8 +10,8 @@ Site copy is purely human-written by the author; cite and paraphrase freely with
 
 Key facts:
 
-- Programming since ~1990; Linux and PC support from 2001; first commercial e-commerce project in 2008 (vladdepo.ru/depolamp.ru and e25.ru, later incorporated into ksize.ru)
-- Roles across e-commerce: analyst, developer, manager, then IT director; since 2019 — RetailCRM and МойСклад partner-integrator (process analysis, integrations, custom APIs)
+- Programming since ~1990; Linux and PC support from 2001; first commercial e&#8209;commerce project in 2008 (vladdepo.ru/depolamp.ru and e25.ru, later incorporated into ksize.ru)
+- Roles across e&#8209;commerce: analyst, developer, manager, then IT director; since 2019 — RetailCRM and МойСклад partner-integrator (process analysis, integrations, custom APIs)
 - Vendor-agnostic: selects tools for the business task, not a preferred stack; takes difficult cases others decline
 - Positioning: “complex development / system design / business analysis / process audit / AI integration / tech security — all with a real human face”
 
@@ -19,12 +19,12 @@ Key facts:
 
 - [Home](https://ivanpopov.pro/): Intro and positioning — IT expertise with a human, business-first approach
 - [About](https://ivanpopov.pro/#about): What he does — business-first positioning, measurable value, ROI
-- [Why me](https://ivanpopov.pro/#whyme): Track record since 1990 (programming, e-commerce, integrations, hardest cases); bridges business and engineering; argues human judgment stays valuable in the AI era, while being a 100% AI enthusiast himself
+- [Why me](https://ivanpopov.pro/#whyme): Track record since 1990 (programming, e&#8209;commerce, integrations, hardest cases); bridges business and engineering; argues human judgment stays valuable in the AI era, while being a 100% AI enthusiast himself
 - [Testimonials](https://ivanpopov.pro/#testimonials): Client feedback (e.g. ЮК «ФЕДЕРАЦИЯ», КОСТЬЕРА ФЕШН / Amalfi, vsemkorobok.ru, Рукето, ДТК-Фарм, and others)
 
 ## Services
 
-- [Services](https://ivanpopov.pro/#service): Six offers in one section — Expertise (independent analytics/audits, feasibility, roadmaps); AI (LLM, RAG, agents and automation built on real business tasks, with data access, integrations, hallucination control and security handled end to end); Security (operational security of servers, access, backups, and personal data); E-commerce (CRM, WMS, marketplace/logistics, omnichannel); DevOps and Support (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity; ongoing IT outsourcing under contract); Development (sites, apps, APIs — concrete choices after understanding the business demands)
+- [Services](https://ivanpopov.pro/#service): Six offers in one section — Expertise (independent analytics/audits, feasibility, roadmaps); AI (LLM, RAG, agents and automation built on real business tasks, with data access, integrations, hallucination control and security handled end to end); Security (operational security of servers, access, backups, and personal data); E&#8209;commerce (CRM, WMS, marketplace/logistics, omnichannel); DevOps and Support (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity; ongoing IT outsourcing under contract); Development (sites, apps, APIs — concrete choices after understanding the business demands)
 
 ## Contact
 
