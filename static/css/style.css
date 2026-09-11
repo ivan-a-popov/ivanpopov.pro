@@ -306,7 +306,7 @@ html,
 	scrollbar-width: thin;
 	scrollbar-color: rgba(153, 153, 153, 0.65) transparent;
 }
-@media (max-width: 639px){
+@media (width < 640px){
 	.ip_mainpart .author_image{
 		height: 0;
 		opacity: 0;
@@ -457,8 +457,8 @@ html,
 		padding-top: 20px;
 	}
 }
-/* 480–639px × short height: the square photo would fill the viewport. */
-@media (max-width: 639px) and (max-height: 720px){
+/* <640px × short height: the square photo would fill the viewport. */
+@media (width < 640px) and (max-height: 720px){
 	.ip_home{
 		height: 100%;
 		min-height: 0;
@@ -489,7 +489,7 @@ html,
 	}
 }
 /* 640px+: side portrait replaces the stacked photo; content centers vertically. */
-@media (min-width: 640px){
+@media (width >= 640px){
 	.ip_home{
 		height: 100%;
 		min-height: 0;
@@ -771,7 +771,7 @@ html,
 .partner_hidden_details{
 	display: none;
 }
-@media (min-width: 640px){
+@media (width >= 640px){
 	.ip_partners{
 		grid-template-columns: repeat(6, minmax(0, 1fr));
 		gap: 16px 20px;
@@ -1196,7 +1196,7 @@ html,
 .ip_modalbox.ip_modalbox--partner .box_inner{
 	width: min(40rem, calc(100vw - 16px));
 }
-@media (min-width: 640px){
+@media (width >= 640px){
 	.ip_modalbox.ip_modalbox--partner{
 		position: absolute;
 	}
