@@ -814,7 +814,7 @@ html,
 	}
 }
 
-/* TESTIMONIALS */
+/* TESTIMONIALS — stacked list on every viewport (same as the phone layout). */
 .testimonials .list ul{
 	margin: 10px;
 	list-style-type: none;
@@ -822,12 +822,9 @@ html,
 .testimonials .list ul li{
 	margin: 0 0 75px;
 }
-/* Loop clones exist only for the carousel; never show them stacked. */
-.testimonials .list ul.testimonials-snap > li.is-clone{
-	display: none;
-}
 .testimonials .testimonial-card{
 	position: relative;
+	padding-top: 10px;
 }
 .testimonials .testimonial-quote{
 	position: relative;
@@ -893,68 +890,20 @@ html,
 }
 .testimonials .testimonial-author .info{
 	padding-left: 20px;
+	min-width: 0;
 }
-.testimonials .testimonial-author .info h3{
+.testimonials .testimonial-author .info span{
+	display: block;
+	font-size: .875rem;
+}
+.testimonials .testimonial-author .info span:first-child{
 	font-size: 1rem;
 	margin-bottom: 2px;
 	font-weight: 600;
-}
-.testimonials .testimonial-author .info span{
-	font-size: .875rem;
+	color: var(--text-main);
 }
 @media (min-width: 1024px){
 	.testimonials .testimonial-quote{padding: 30px;}
-}
-/* Horizontal scroll-snap carousel. */
-@media (min-width: 1024px) and (min-height: 921px),
-	   (min-width: 1024px) and (hover: hover) and (pointer: fine){
-	.testimonials .list ul.testimonials-snap{
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
-		gap: 30px;
-		width: 100%;
-		max-width: 100%;
-		overflow-x: auto;
-		scroll-snap-type: x mandatory;
-		scroll-behavior: smooth;
-		touch-action: pan-x;
-		overscroll-behavior-x: contain;
-		cursor: grab;
-		scrollbar-width: none;
-	}
-	.testimonials .list ul.testimonials-snap.is-dragging{
-		cursor: grabbing;
-		scroll-snap-type: none;
-		user-select: none;
-	}
-	.testimonials .list ul.testimonials-snap:active{
-		cursor: grabbing;
-	}
-	.testimonials .list ul.testimonials-snap > li{
-		flex: 0 0 calc((100% - 30px) / 2);
-		min-width: 0;
-		/* Track spacing comes from the flex gap; extra margins would clip card 2's right border. */
-		margin: 0;
-		scroll-snap-align: start;
-		scroll-snap-stop: always;
-	}
-	.testimonials .list ul.testimonials-snap > li.is-clone{
-		display: block;
-	}
-	.testimonials .list ul.testimonials-snap > li .testimonial-card{
-		width: 100%;
-		height: 100%;
-		overflow: visible;
-		padding-top: 10px;
-		padding-bottom: 30px;
-	}
-	.testimonials .list ul.testimonials-snap > li .testimonial-quote{
-		overflow: visible;
-	}
-	.testimonials .list ul.testimonials-snap > li .testimonial-quote i{
-		z-index: 2;
-	}
 }
 
 /*	SERVICES */

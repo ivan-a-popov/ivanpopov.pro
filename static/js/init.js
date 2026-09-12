@@ -60,8 +60,8 @@ ip_ready(function () {
 	ip_service_popup();
 	ip_cursor();
 	ip_animated_headline();
-	// Teaser measure + testimonials clones force layout. Run them when that
-	// section is actually shown, not on every home-page load (Lighthouse TBT).
+	// Teaser measure forces layout. Run it when that section is actually
+	// shown, not on every home-page load (Lighthouse TBT).
 	ip_enhance_section(ip_href_from_location());
 });
 
@@ -207,7 +207,7 @@ function ip_init_section_focus() {
 	});
 	// Don't focus() on first load. focus() flushes the whole desktop
 	// two-column tree (author photo + menu) and is the remaining
-	// Forced-reflow source after teasers/snap were deferred.
+	// Forced-reflow source after teasers were deferred.
 }
 // Shared by swipe + keyboard section navigation.
 var IP_NAV_LINKS_HEADER = '.ip_header .menu .transition_link a';
@@ -279,8 +279,6 @@ function ip_enhance_section(href) {
 				});
 			}
 		}
-	} else if (href === '#testimonials') {
-		ip_testimonials_snap();
 	}
 }
 function ip_page_transition() {
@@ -294,11 +292,6 @@ function ip_page_transition() {
 }
 
 // -----------   SWIPE NAVIGATION (MOBILE)   -----------
-// Mirrors the CSS 1023px breakpoint where stacked/mobile content layout
-// takes over from the desktop two-column layout.
-function ip_is_mobile_layout() {
-	return window.matchMedia('(max-width: 1023px)').matches;
-}
 function ip_is_touch_device() {
 	return window.matchMedia('(hover: none), (pointer: coarse)').matches;
 }
@@ -1038,183 +1031,6 @@ function ip_cursor() {
 	window.addEventListener('pointermove', bind, { once: true, passive: true });
 }
 
-
-// ------------   TESTIMONIALS SCROLL-SNAP   -----------
-function ip_use_vertical_testimonials_layout() {
-	// Keep the desktop snap carousel only when there is enough vertical room.
-	// On short viewports (including some high-DPI phones/tablets reported as
-	// wide CSS widths), switch testimonials to the vertical list variant.
-	if (ip_is_mobile_layout()) {
-		return true;
-	}
-	return window.matchMedia('(max-height: 920px)').matches && ip_is_touch_device();
-}
-function ip_testimonials_snap() {
-	// Horizontal snap + autoplay are desktop-only; mobile uses a vertical list (CSS).
-	if (ip_use_vertical_testimonials_layout()) {
-		return;
-	}
-	var list = ip_one('.testimonials .testimonials-snap');
-	if (!list || list.classList.contains('is-enhanced')) {
-		return;
-	}
-	list.classList.add('is-enhanced');
-	var items = list.querySelectorAll(':scope > li');
-	if (items.length < 2) {
-		return;
-	}
-	var realItems = [...items];
-	var realCount = realItems.length;
-	// Build an infinite track: a full copy of every card on each side of the
-	// originals. The three copies are identical, so re-centering into the middle
-	// (real) copy is an invisible instant jump — autoplay and manual scroll then
-	// loop seamlessly in both directions
-	var leadFrag = document.createDocumentFragment();
-	var trailFrag = document.createDocumentFragment();
-	realItems.forEach(function (li) {
-		var before = li.cloneNode(true);
-		var after = li.cloneNode(true);
-		before.classList.add('is-clone');
-		after.classList.add('is-clone');
-		before.setAttribute('aria-hidden', 'true');
-		after.setAttribute('aria-hidden', 'true');
-		leadFrag.appendChild(before);
-		trailFrag.appendChild(after);
-	});
-	list.insertBefore(leadFrag, realItems[0]);
-	list.appendChild(trailFrag);
-	var slides = [...list.querySelectorAll(':scope > li')];
-	var firstRealDom = realCount;          // real cards occupy [realCount .. 2*realCount-1]
-	var currentDom = firstRealDom;
-	var paused = false;
-	var timer = null;
-	var scrollEndTimer = null;
-	var dragging = false;
-	var dragStartX = 0;
-	var dragScrollLeft = 0;
-	function jumpTo(domIndex) {
-		var slide = slides[domIndex];
-		if (!slide) {
-			return;
-		}
-		// Instant reposition: bypass CSS scroll-behavior:smooth so the loop wrap
-		// is invisible. Scroll the track only — scrollIntoView() would also move
-		// the ancestor .ip_section (overflow-y: scroll) and break layout.
-		list.scrollTo({ left: slide.offsetLeft, behavior: 'instant' });
-		currentDom = domIndex;
-	}
-	function scrollToDom(domIndex) {
-		var slide = slides[domIndex];
-		if (!slide) {
-			return;
-		}
-		list.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
-	}
-	function isLastActive() {
-		var last = ip_one('#testimonials');
-		return last && last.classList.contains('active');
-	}
-	function scheduleAutoplay() {
-		if (timer) {
-			clearInterval(timer);
-		}
-		timer = setInterval(function () {
-			if (paused || !isLastActive()) {
-				return;
-			}
-			currentDom += 1;
-			// Past the trail copy (e.g. section was hidden before scroll re-centered).
-			if (currentDom >= slides.length) {
-				currentDom = firstRealDom + realCount;
-			}
-			scrollToDom(currentDom);
-		}, 5000);
-	}
-	jumpTo(firstRealDom);
-	requestAnimationFrame(function () { jumpTo(firstRealDom); });
-	list.addEventListener('mouseenter', function () {
-		paused = true;
-	});
-	list.addEventListener('mouseleave', function () {
-		if (!dragging) {
-			paused = false;
-		}
-	});
-	list.addEventListener('touchstart', function () {
-		paused = true;
-	}, { passive: true });
-	list.addEventListener('touchend', function () {
-		paused = false;
-	}, { passive: true });
-	// Click-drag and trackpad horizontal scroll: stop propagation on the track so
-	// the section's own scroll container does not hijack the horizontal gesture.
-	function onDragMove(e) {
-		if (!dragging) {
-			return;
-		}
-		e.preventDefault();
-		e.stopPropagation();
-		list.scrollLeft = dragScrollLeft - (e.clientX - dragStartX);
-	}
-	function endDrag() {
-		if (!dragging) {
-			return;
-		}
-		dragging = false;
-		list.classList.remove('is-dragging');
-		paused = false;
-		window.removeEventListener('mousemove', onDragMove);
-		window.removeEventListener('mouseup', endDrag);
-	}
-	list.addEventListener('mousedown', function (e) {
-		if (e.button !== 0) {
-			return;
-		}
-		dragging = true;
-		paused = true;
-		dragStartX = e.clientX;
-		dragScrollLeft = list.scrollLeft;
-		list.classList.add('is-dragging');
-		e.preventDefault();
-		e.stopPropagation();
-		window.addEventListener('mousemove', onDragMove);
-		window.addEventListener('mouseup', endDrag);
-	});
-	list.addEventListener('wheel', function (e) {
-		if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-			e.stopPropagation();
-		}
-	}, { passive: true });
-	list.addEventListener('touchmove', function (e) {
-		e.stopPropagation();
-	}, { passive: true });
-	list.addEventListener('scroll', function () {
-		if (scrollEndTimer) {
-			clearTimeout(scrollEndTimer);
-		}
-		scrollEndTimer = setTimeout(function () {
-			var scrollLeft = list.scrollLeft;
-			var nearest = 0;
-			var bestDistance = Infinity;
-			for (var i = 0; i < slides.length; i++) {
-				var distance = Math.abs(slides[i].offsetLeft - scrollLeft);
-				if (distance < bestDistance) {
-					bestDistance = distance;
-					nearest = i;
-				}
-			}
-			currentDom = nearest;
-			// Settled on a clone copy → re-center into the identical real card.
-			if (currentDom < firstRealDom) {
-				jumpTo(currentDom + realCount);
-			} else if (currentDom >= firstRealDom + realCount) {
-				jumpTo(currentDom - realCount);
-			}
-		}, 140);
-	}, { passive: true });
-
-	scheduleAutoplay();
-}
 
 // ---------------   ANIMATED HEADLINE   ---------------
 function ip_mark_headline_word(word, on) {
