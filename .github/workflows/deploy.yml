@@ -16,4 +16,13 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: /home/ipopov/sites/deploy.sh
+          script: |
+            set -euo pipefail
+            # HTTPS www→apex 301 needs a www SAN. Issue it before nginx -t
+            # loads the vhost that points at this lineage.
+            if ! sudo test -s /etc/letsencrypt/live/www.ivanpopov.pro/fullchain.pem; then
+              sudo certbot certonly --nginx -d www.ivanpopov.pro \
+                --non-interactive --agree-tos --keep-until-expiring \
+                -m me@ivanpopov.pro
+            fi
+            /home/ipopov/sites/deploy.sh
