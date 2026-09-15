@@ -114,10 +114,10 @@
 	<!-- STYLES (style.min.css is generated from style.css by minify.py).
 	  media=print keeps this off the HTTP/1.1 High bucket so it does not
 	  share the LCP photo's connection; onload promotes it to all. -->
-	<link rel="stylesheet" href="static/css/style.min.css?v=348cecf7" media="print" fetchpriority="low"
+	<link rel="stylesheet" href="static/css/style.min.css?v=6b56e1db" media="print" fetchpriority="low"
 		onload="this.onload=null;this.media='all'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.min.css?v=348cecf7" />
+		<link rel="stylesheet" href="static/css/style.min.css?v=6b56e1db" />
 	</noscript>
 	<!-- /STYLES -->
 
@@ -901,11 +901,12 @@
 				</div>
 				<button type="button" class="ip_contact_dock__toggle" aria-expanded="true"
 					aria-controls="ip-contact-dock-actions" aria-label="Свернуть">
-					<svg class="ip_contact_dock__envelope" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-						<rect x="3.2" y="6.2" width="17.6" height="12.2" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.55"/>
-						<path d="m4 7.6 7.3 5.4c.4.3.9.3 1.3 0L20 7.6" fill="none" stroke="currentColor" stroke-width="1.55"
-							stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
+					<span class="ip_contact_dock__envelope" aria-hidden="true">
+						<img class="ip_contact_dock__envelope-face" src="static/img/assets/Envelope-face.jpg?v=2bcdfde0"
+							alt="" width="237" height="164" decoding="async" fetchpriority="low">
+						<img class="ip_contact_dock__envelope-back" src="static/img/assets/Envelope-back.jpg?v=44bdc386"
+							alt="" width="238" height="169" decoding="async" fetchpriority="low">
+					</span>
 				</button>
 			</div>
 		</nav>
