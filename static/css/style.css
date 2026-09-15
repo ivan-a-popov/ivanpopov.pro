@@ -453,7 +453,7 @@ html,
 .ip_contact_dock{
 	--ip-paper: #efe6d0;
 	--ip-paper-ink: #1a1510;
-	--ip-dock-fold: .72s cubic-bezier(.4, 0, .2, 1);
+	--ip-dock-fold: 1.6s cubic-bezier(.45, .05, .55, .95);
 	position: absolute;
 	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
 	width: auto;
@@ -490,31 +490,38 @@ html.ip-off-home .ip_contact_dock{
 	background: transparent;
 	border: 1px solid transparent;
 	box-shadow: none;
+	backdrop-filter: blur(0);
+	-webkit-backdrop-filter: blur(0);
 	transition:
 		background var(--ip-dock-fold),
 		box-shadow var(--ip-dock-fold),
 		padding var(--ip-dock-fold),
-		border-color var(--ip-dock-fold);
+		border-color var(--ip-dock-fold),
+		backdrop-filter var(--ip-dock-fold),
+		-webkit-backdrop-filter var(--ip-dock-fold);
 }
 .ip_contact_dock.is-open .ip_contact_dock__bar{
 	padding: 4px 4px 4px 6px;
-	background: color-mix(in srgb, var(--ip-paper) 58%, transparent);
-	border: 1px solid color-mix(in srgb, var(--ip-paper-ink) 8%, transparent);
-	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--ip-paper) 22%, transparent),
-		0 8px 22px color-mix(in srgb, #000 12%, transparent);
+	background: color-mix(in srgb, var(--ip-paper) 18%, transparent);
+	border: 1px solid color-mix(in srgb, var(--ip-paper) 28%, transparent);
+	box-shadow: none;
+	backdrop-filter: blur(14px) saturate(1.05);
+	-webkit-backdrop-filter: blur(14px) saturate(1.05);
 }
 .ip_contact_dock__actions{
 	display: grid;
 	grid-template-columns: 0fr;
 	opacity: 0;
 	transition:
-		grid-template-columns var(--ip-dock-fold),
-		opacity .55s cubic-bezier(.4, 0, .2, 1);
+		grid-template-columns 1.6s cubic-bezier(.45, .05, .55, .95),
+		opacity 1.5s cubic-bezier(.62, 0, .82, 1);
 }
 .ip_contact_dock.is-open .ip_contact_dock__actions{
 	grid-template-columns: 1fr;
 	opacity: 1;
+	transition:
+		grid-template-columns 1s cubic-bezier(.22, .61, .36, 1),
+		opacity .45s ease;
 }
 .ip_contact_dock__actions-inner{
 	min-width: 0;
@@ -603,6 +610,12 @@ html.ip-off-home .ip_contact_dock{
 	width: 22px;
 	height: 22px;
 	display: block;
+}
+@media (prefers-color-scheme: dark){
+	.ip_contact_dock__actions a.ip_mail img,
+	.ip_contact_dock__actions a[href*="vk.com"] img{
+		filter: invert(1);
+	}
 }
 @media (hover: hover){
 	.ip_contact_dock__actions a:hover{
