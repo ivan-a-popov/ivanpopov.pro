@@ -58,6 +58,7 @@ ip_ready(function () {
 	ip_swipe_navigation();
 	ip_keyboard_navigation();
 	ip_service_popup();
+	ip_contact_dock_bind();
 	ip_cursor();
 	ip_animated_headline();
 	// Teaser measure forces layout. Run it when that section is actually
@@ -166,6 +167,7 @@ function ip_goto(href, opts) {
 	target.classList.remove('hidden');
 	target.classList.add('active');
 	target.scrollTop = 0;
+	ip_contact_dock_on_section(href);
 	if (opts.updateHash !== false) {
 		ip_sync_location(href);
 	}
@@ -443,13 +445,102 @@ function ip_keyboard_navigation() {
 	});
 }
 
+// -------------  CONTACT DOCK (off-home envelope)  ---------------
+var ip_dock_fold_timer = null;
+var IP_DOCK_NOTICE_MS = 1800;
+
+function ip_contact_dock_el() {
+	return ip_one('.ip_contact_dock');
+}
+function ip_contact_dock_clear_timer() {
+	if (ip_dock_fold_timer) {
+		clearTimeout(ip_dock_fold_timer);
+		ip_dock_fold_timer = null;
+	}
+}
+function ip_contact_dock_set_open(open) {
+	var dock = ip_contact_dock_el();
+	if (!dock) {
+		return;
+	}
+	var toggle = ip_one('.ip_contact_dock__toggle', dock);
+	var actions = ip_one('.ip_contact_dock__actions', dock);
+	dock.classList.toggle('is-open', open);
+	if (toggle) {
+		toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+		toggle.setAttribute('aria-label', open ? 'Свернуть' : 'Написать');
+	}
+	if (actions) {
+		if (open) {
+			actions.removeAttribute('inert');
+			actions.setAttribute('aria-hidden', 'false');
+		} else {
+			actions.setAttribute('inert', '');
+			actions.setAttribute('aria-hidden', 'true');
+		}
+	}
+}
+function ip_contact_dock_notice() {
+	ip_contact_dock_clear_timer();
+	ip_contact_dock_set_open(true);
+	ip_dock_fold_timer = setTimeout(function () {
+		ip_dock_fold_timer = null;
+		ip_contact_dock_set_open(false);
+	}, IP_DOCK_NOTICE_MS);
+}
+function ip_contact_dock_on_section(href) {
+	var offHome = href !== '#home';
+	var wasOff = document.documentElement.classList.contains('ip-off-home');
+	document.documentElement.classList.toggle('ip-off-home', offHome);
+	if (offHome && !wasOff) {
+		ip_contact_dock_notice();
+		return;
+	}
+	if (!offHome) {
+		ip_contact_dock_clear_timer();
+		ip_contact_dock_set_open(false);
+	}
+}
+function ip_contact_dock_bind() {
+	var dock = ip_contact_dock_el();
+	if (!dock) {
+		return;
+	}
+	var toggle = ip_one('.ip_contact_dock__toggle', dock);
+	if (toggle) {
+		toggle.addEventListener('click', function (e) {
+			e.preventDefault();
+			ip_contact_dock_clear_timer();
+			ip_contact_dock_set_open(!dock.classList.contains('is-open'));
+		});
+	}
+	dock.addEventListener('pointerenter', ip_contact_dock_clear_timer);
+	document.addEventListener('keydown', function (e) {
+		if (e.key !== 'Escape') {
+			return;
+		}
+		if (ip_one('.ip_modalbox.opened')) {
+			return;
+		}
+		if (!dock.classList.contains('is-open')) {
+			return;
+		}
+		ip_contact_dock_clear_timer();
+		ip_contact_dock_set_open(false);
+	});
+	if (!document.documentElement.classList.contains('ip-off-home')
+		&& !document.documentElement.hasAttribute('data-ip-section')) {
+		ip_contact_dock_set_open(false);
+	}
+}
+
 // -------------  SERVICE / PARTNER / QR POPUP  -------------------
 function ip_service_popup() {
 	var modalBox = ip_one('.ip_modalbox');
 	if (!modalBox) {
 		return;
 	}
-	var buttons = ip_all('.ip_service .ip_full_link, .ip_partners .ip_full_link, .ip_home_social .ip_qr_open');
+	var buttons = ip_all('.ip_service .ip_full_link, .ip_partners .ip_full_link, .ip_qr_open');
 	var descWrap = modalBox.querySelector('.description_wrap');
 	var serviceCards = ip_all('.ip_service .service-card');
 	var boxInner = modalBox.querySelector('.box_inner');
@@ -503,7 +594,7 @@ function ip_service_popup() {
 		descWrap.setAttribute('tabindex', '-1');
 	}
 	function setChromeInert(on) {
-		['.ip_header', '.ip_mainpart', '.ip_footer'].forEach(function (sel) {
+		['.ip_header', '.ip_mainpart', '.ip_footer', '.ip_contact_dock'].forEach(function (sel) {
 			var el = ip_one(sel);
 			if (!el) {
 				return;
@@ -631,14 +722,14 @@ function ip_service_popup() {
 			var parent = partner || (!qr && button.closest('.service-card'));
 			if (!qr && !parent) { return; }
 			var detailsEl = qr
-				? ip_one('.qr_hidden_details', button.closest('.ip_home_copy'))
+				? ip_one('.qr_hidden_details')
 				: parent.querySelector(partner ? '.partner_hidden_details' : '.service_hidden_details');
 			var content = detailsEl ? detailsEl.innerHTML : '';
 			ip_modal_return_focus = button;
 			ip_section_focus_token++;
 			modalBox.classList.toggle('ip_modalbox--partner', !!partner);
 			modalBox.classList.toggle('ip_modalbox--qr', !!qr);
-			if (qr) {
+			if (qr && button.closest('.ip_home_social')) {
 				pinQrPopup();
 			} else {
 				unpinQrPopup();

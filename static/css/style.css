@@ -445,6 +445,177 @@ html,
 		filter: invert(1);
 	}
 }
+
+/* Persistent contact dock — chrome, not in-flow. Hidden on #home (icons
+   already sit in the copy). Visible when another section is .active, and
+   on deep-link first paint via html[data-ip-section]. Cream paper + left
+   pointer rhyme the IP. tile and an old envelope flap. */
+.ip_contact_dock{
+	--ip-paper: #efe6d0;
+	--ip-paper-ink: #1a1510;
+	position: absolute;
+	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
+	width: auto;
+	height: auto;
+	overflow: visible;
+	z-index: 16;
+	pointer-events: none;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .28s ease, visibility 0s linear .28s;
+}
+html[data-ip-section] .ip_contact_dock,
+html.ip-off-home .ip_contact_dock{
+	opacity: 1;
+	visibility: visible;
+	transition: opacity .28s ease, visibility 0s linear 0s;
+}
+.ip_all_wrap:has(.ip_modalbox.opened) .ip_contact_dock{
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .2s ease, visibility 0s linear .2s;
+}
+.ip_contact_dock__bar{
+	pointer-events: auto;
+	position: absolute;
+	right: 12px;
+	bottom: 12px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0;
+	padding: 0;
+	border-radius: 999px;
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	transition: background .28s ease, box-shadow .28s ease, padding .28s ease;
+}
+.ip_contact_dock.is-open .ip_contact_dock__bar{
+	padding: 4px 4px 4px 6px;
+	background: color-mix(in srgb, var(--ip-paper) 94%, var(--bg-color));
+	border: 1px solid color-mix(in srgb, var(--ip-paper-ink) 12%, var(--ip-paper));
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--ip-paper) 40%, transparent),
+		0 10px 28px color-mix(in srgb, #000 18%, transparent);
+}
+.ip_contact_dock__actions{
+	display: grid;
+	grid-template-columns: 0fr;
+	opacity: 0;
+	transition: grid-template-columns .32s cubic-bezier(.33,1,.68,1), opacity .2s ease;
+}
+.ip_contact_dock.is-open .ip_contact_dock__actions{
+	grid-template-columns: 1fr;
+	opacity: 1;
+}
+.ip_contact_dock__actions-inner{
+	min-width: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.ip_contact_dock__actions a,
+.ip_contact_dock__toggle{
+	width: 44px;
+	height: 44px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: transparent;
+	transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+}
+.ip_contact_dock__actions a{
+	opacity: .92;
+	flex: 0 0 44px;
+}
+.ip_contact_dock__toggle{
+	position: relative;
+	flex: 0 0 48px;
+	width: 48px;
+	height: 48px;
+	margin: 0;
+	padding: 0;
+	border: 1px solid color-mix(in srgb, var(--ip-paper-ink) 12%, var(--ip-paper));
+	background: var(--ip-paper);
+	color: var(--ip-paper-ink);
+	cursor: pointer;
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--ip-paper) 55%, transparent),
+		0 8px 22px color-mix(in srgb, #000 20%, transparent);
+	overflow: visible;
+	z-index: 1;
+}
+.ip_contact_dock.is-open .ip_contact_dock__toggle{
+	border-color: transparent;
+	box-shadow: none;
+}
+/* Envelope flap / speech tail pointing left — the old letter's V, rotated. */
+.ip_contact_dock__toggle::before{
+	content: '';
+	position: absolute;
+	left: -1px;
+	top: 50%;
+	width: 11px;
+	height: 11px;
+	background: var(--ip-paper);
+	border-left: 1px solid color-mix(in srgb, var(--ip-paper-ink) 12%, var(--ip-paper));
+	border-bottom: 1px solid color-mix(in srgb, var(--ip-paper-ink) 12%, var(--ip-paper));
+	transform: translate(-42%, -50%) rotate(45deg);
+	border-radius: 1px;
+	z-index: -1;
+	transition: opacity .2s ease, transform .2s ease;
+}
+.ip_contact_dock.is-open .ip_contact_dock__toggle::before{
+	opacity: 0;
+	transform: translate(-20%, -50%) rotate(45deg);
+}
+.ip_contact_dock__envelope{
+	width: 22px;
+	height: 22px;
+	display: block;
+	pointer-events: none;
+	fill: none;
+}
+.ip_contact_dock__actions a:focus-visible,
+.ip_contact_dock__toggle:focus-visible{
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+	opacity: 1;
+}
+.ip_contact_dock__actions img{
+	width: 22px;
+	height: 22px;
+	display: block;
+}
+@media (hover: hover){
+	.ip_contact_dock__actions a:hover{
+		transform: scale(1.12);
+		opacity: 1;
+	}
+	.ip_contact_dock:not(.is-open) .ip_contact_dock__toggle:hover{
+		transform: scale(1.06);
+	}
+}
+@media (prefers-reduced-motion: reduce){
+	.ip_contact_dock,
+	html.ip-off-home .ip_contact_dock,
+	.ip_all_wrap:has(.ip_modalbox.opened) .ip_contact_dock,
+	.ip_contact_dock__bar,
+	.ip_contact_dock__actions,
+	.ip_contact_dock__actions a,
+	.ip_contact_dock__toggle,
+	.ip_contact_dock__toggle::before{
+		transition: none;
+	}
+	.ip_contact_dock__actions a:hover,
+	.ip_contact_dock:not(.is-open) .ip_contact_dock__toggle:hover{
+		transform: none;
+	}
+}
 .qr_hidden_details{
 	display: none;
 }

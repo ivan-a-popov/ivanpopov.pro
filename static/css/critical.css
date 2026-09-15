@@ -886,6 +886,21 @@ html[data-ip-section="testimonials"] #testimonials {
 	display: block;
 }
 
+/* Off-home contact dock: lock out of flow before async style.css (same
+   reason as .ip_swipe_nav). Full placement/look lives in style.css. */
+.ip_contact_dock {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	z-index: 16;
+}
+
 .ip_home_social {
 	display: flex;
 	flex-direction: row;
