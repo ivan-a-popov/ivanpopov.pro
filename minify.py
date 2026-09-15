@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minify CSS/JS, inject critical assets into index.html, and cache-bust.
+"""Minify CSS/JS and cache-bust asset references in index.html.
 
 CSS: drop comments, collapse whitespace, strip spaces around { } ; : , >
 while leaving calc()/clamp() +/- spaces and quoted urls intact.
@@ -10,7 +10,7 @@ newline in the source would have triggered ASI. No renaming.
 
 Run with no arguments from the site root (or any cwd — the script cds to
 its own directory). Edit the sources (critical.*, style.css, init.js),
-not the generated index.html blocks or *.min.* files.
+not the *.min.* files.
 """
 from __future__ import annotations
 
@@ -420,14 +420,6 @@ def _require(path: Path) -> Path:
     return path
 
 
-def _inject(html: str, start: str, end: str, open_tag: str, close_tag: str, body: str) -> str:
-    i = html.find(start)
-    j = html.find(end)
-    if i < 0 or j < 0 or j < i:
-        raise SystemExit(f"error: {start} / {end} markers not found in index.html")
-    return f"{html[: i + len(start)]}\n{open_tag}\n{body}\n{close_tag}\n\t{html[j:]}"
-
-
 _ASSET_RE = re.compile(
     r'(?:href|src)="(static/[^"?]+\.(?:css|js))'
     r'|(?<![/\w])(static/img/[^"?#\s>]+)'
@@ -466,32 +458,41 @@ def _stamp(html: str) -> str:
     return html
 
 
+_CSS_SOURCES = (
+    Path("static/css/critical.css"),
+    Path("static/css/style.css"),
+)
+_JS_SOURCES = (
+    Path("static/js/critical.js"),
+    Path("static/js/init.js"),
+)
+
+
+def _min_path(path: Path) -> Path:
+    return path.with_name(f"{path.stem}.min{path.suffix}")
+
+
 def build() -> None:
     html_path = _require(Path("index.html"))
-    critical_css = _require(Path("static/css/critical.css"))
-    critical_js = _require(Path("static/js/critical.js"))
-    style = _require(Path("static/css/style.css"))
-    init = _require(Path("static/js/init.js"))
-    style_min = Path("static/css/style.min.css")
-    init_min = Path("static/js/init.min.js")
+    for src in (*_CSS_SOURCES, *_JS_SOURCES):
+        _require(src)
 
-    min_css = minify_css(critical_css.read_text(encoding="utf-8"))
-    min_js = minify_js_checked(critical_js)
-    min_init = minify_js_checked(init)
+    for src in _CSS_SOURCES:
+        dest = _min_path(src)
+        dest.write_text(minify_css(src.read_text(encoding="utf-8")) + "\n", encoding="utf-8")
+        print(f"wrote {dest} ({dest.stat().st_size} bytes)")
+    for src in _JS_SOURCES:
+        dest = _min_path(src)
+        dest.write_text(minify_js_checked(src) + "\n", encoding="utf-8")
+        print(f"wrote {dest} ({dest.stat().st_size} bytes)")
 
     html = html_path.read_text(encoding="utf-8")
-    html = _inject(html, "<!-- CRITICAL CSS -->", "<!-- /CRITICAL CSS -->", "<style>", "</style>", min_css)
-    print(f"injected {critical_css} into {html_path} ({len(min_css.encode())} bytes minified)")
-    html = _inject(html, "<!-- CRITICAL JS -->", "<!-- /CRITICAL JS -->", "<script>", "</script>", min_js)
-    print(f"injected {critical_js} into {html_path} ({len(min_js.encode())} bytes minified)")
-
-    style_min.write_text(minify_css(style.read_text(encoding="utf-8")) + "\n", encoding="utf-8")
-    init_min.write_text(min_init + "\n", encoding="utf-8")
-    print(f"wrote {style_min} ({style_min.stat().st_size} bytes)")
-    print(f"wrote {init_min} ({init_min.stat().st_size} bytes)")
-
-    html = html.replace('href="static/css/style.css', 'href="static/css/style.min.css')
-    html = html.replace('src="static/js/init.js', 'src="static/js/init.min.js')
+    for src in _CSS_SOURCES:
+        dest = _min_path(src)
+        html = html.replace(f'href="{src.as_posix()}', f'href="{dest.as_posix()}')
+    for src in _JS_SOURCES:
+        dest = _min_path(src)
+        html = html.replace(f'src="{src.as_posix()}', f'src="{dest.as_posix()}')
     html_path.write_text(_stamp(html), encoding="utf-8")
 
 

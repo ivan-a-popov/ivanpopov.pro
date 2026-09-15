@@ -1,6 +1,5 @@
-/*	CRITICAL CSS — source of the inline <style> block in index.html.
-	minify.py minifies this file and injects it between the
-	"CRITICAL CSS" markers there, so edit HERE and re-run the script.
+/*	CRITICAL CSS — minify.py writes critical.min.css; index.html loads it
+	as a blocking stylesheet. Edit HERE and re-run the script.
 
 	First paint before async style.css:
 	- preloader (FCP);
@@ -13,9 +12,9 @@
 */
 
 /* THEME TOKENS */
-/* Single source of truth for colors. Defined here (inlined in <head>) so the
-   shell, preloader and page background paint in the correct scheme on first
-   render — before the async style.css arrives (no theme flash, no CLS). 
+/* Single source of truth for colors. Defined here so the shell, preloader
+   and page background paint in the correct scheme on first render — before
+   the async style.css arrives (no theme flash, no CLS). 
 */
 :root {
 	color-scheme: light dark;
@@ -95,8 +94,8 @@
 /* Only the first-screen Cyrillic face is registered here. Latin stays
    unregistered and cyrillic-ext lives in async style.css — inlining
    extra @font-face rules would let footer digits / English titles pull
-   a latin woff2 onto the document critical path. URLs are
-   document-relative because this file is inlined. */
+   a latin woff2 onto the document critical path. URLs are relative to
+   this stylesheet. */
 @font-face {
 	font-family: "Manrope";
 	font-style: normal;
@@ -105,7 +104,7 @@
 	   download cannot shift the nav (PSI "layout shift culprits").
 	   Cached/fast loads still apply the face before first paint. */
 	font-display: optional;
-	src: url("static/fonts/manrope/manrope-cyrillic.woff2") format("woff2");
+	src: url("../fonts/manrope/manrope-cyrillic.woff2") format("woff2");
 	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 

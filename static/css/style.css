@@ -14,7 +14,7 @@
 }
 
 /* RESET + BASE */
-/* html/body zeroing and box-sizing live in critical.css (inlined in the HTML). */
+/* html/body zeroing and box-sizing live in critical.css. */
 h1, h2, h3, h4, h5, h6, p, ul, ol, li {
 	margin: 0;
 	padding: 0;

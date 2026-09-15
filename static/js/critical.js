@@ -1,7 +1,8 @@
 "use strict";
-// Critical, inlined by minify.py between the CRITICAL JS markers in
-// index.html. Dismisses the preloader once above-the-fold is ready (style.css,
-// fonts and hero decoded), independent of deferred init.js.
+// Critical head script. minify.py writes critical.min.js; index.html loads
+// it as a blocking <script> so skip-preloader is decided before #preloader.
+// Dismisses the preloader once above-the-fold is ready (style.css, fonts
+// and hero decoded), independent of deferred init.js.
 // A hard timeout guarantees the overlay never traps the user.
 //
 // The curtain plays only for humans landing on / or /#home. Deep links
@@ -126,7 +127,7 @@
 			})();
 		});
 	}
-	// Manrope faces are registered by the inline critical CSS, so loads can be
+	// Manrope faces are registered by critical.css, so loads can be
 	// kicked off right away. The woff2 is not <link rel=preload>'d: on
 	// HTTP/1.1 that request is High and shares the LCP photo's connection.
 	function whenFontsReady(){
