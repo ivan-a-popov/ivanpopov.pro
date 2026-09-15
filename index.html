@@ -6,8 +6,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 	<!-- LCP photos first, before the inline CSS/JSON-LD. href-only (no
-	  imagesrcset/imagesizes): those attributes must match the <img> srcset/sizes
-	  or Chrome leaves the preload unused. The <img> tags cannot carry srcset —
+	  imagesrcset/imagesizes: those attributes must match the <img> srcset/sizes
+	  or Chrome leaves the preload unused). The <img> tags cannot carry srcset —
 	  the preload scanner would then fetch the 19KB portrait on phones before
 	  <picture> picks the gif. media keeps art-direction. Breakpoint = 640px
 	  as width < 640 / width >= 640 so a fractional viewport cannot miss both.
