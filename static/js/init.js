@@ -446,16 +446,31 @@ function ip_keyboard_navigation() {
 }
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
-var ip_dock_fold_timer = null;
-var IP_DOCK_NOTICE_MS = 1800;
+var ip_dock_nudge_timer = null;
+var ip_dock_nudge_wait = null;
+// Beat after rollIn/rollInBack so the cue is not the last frame of the page.
+var IP_DOCK_NUDGE_AFTER_MS = 120;
+// Matches .animated { animation-duration: 1.2s } — fallback if animationend misses.
+var IP_SECTION_ROLL_MS = 1200;
+// Dock fade-in when there is no roll (deep-link instant land).
+var IP_DOCK_FADE_MS = 280;
 
 function ip_contact_dock_el() {
 	return ip_one('.ip_contact_dock');
 }
-function ip_contact_dock_clear_timer() {
-	if (ip_dock_fold_timer) {
-		clearTimeout(ip_dock_fold_timer);
-		ip_dock_fold_timer = null;
+function ip_contact_dock_clear_nudge() {
+	if (ip_dock_nudge_timer) {
+		clearTimeout(ip_dock_nudge_timer);
+		ip_dock_nudge_timer = null;
+	}
+	if (ip_dock_nudge_wait) {
+		ip_dock_nudge_wait.section.removeEventListener('animationend', ip_dock_nudge_wait.onEnd);
+		ip_dock_nudge_wait = null;
+	}
+	var dock = ip_contact_dock_el();
+	var toggle = dock && ip_one('.ip_contact_dock__toggle', dock);
+	if (toggle) {
+		toggle.classList.remove('is-nudge');
 	}
 }
 function ip_contact_dock_set_open(open) {
@@ -465,6 +480,9 @@ function ip_contact_dock_set_open(open) {
 	}
 	var toggle = ip_one('.ip_contact_dock__toggle', dock);
 	var actions = ip_one('.ip_contact_dock__actions', dock);
+	if (open) {
+		ip_contact_dock_clear_nudge();
+	}
 	dock.classList.toggle('is-open', open);
 	if (toggle) {
 		toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -480,26 +498,78 @@ function ip_contact_dock_set_open(open) {
 		}
 	}
 }
-function ip_contact_dock_notice() {
-	ip_contact_dock_clear_timer();
-	ip_contact_dock_set_open(true);
-	ip_dock_fold_timer = setTimeout(function () {
-		ip_dock_fold_timer = null;
-		ip_contact_dock_set_open(false);
-	}, IP_DOCK_NOTICE_MS);
+function ip_contact_dock_nudge() {
+	var dock = ip_contact_dock_el();
+	if (!dock || dock.classList.contains('is-open')) {
+		return;
+	}
+	if (ip_one('.ip_modalbox.opened')) {
+		return;
+	}
+	if (document.documentElement.classList.contains('ip-automation')) {
+		return;
+	}
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		return;
+	}
+	var toggle = ip_one('.ip_contact_dock__toggle', dock);
+	if (!toggle) {
+		return;
+	}
+	toggle.classList.remove('is-nudge');
+	void toggle.offsetWidth;
+	toggle.classList.add('is-nudge');
+}
+function ip_contact_dock_schedule_nudge(section) {
+	var done = false;
+	function fire() {
+		if (done) {
+			return;
+		}
+		done = true;
+		if (ip_dock_nudge_wait) {
+			ip_dock_nudge_wait.section.removeEventListener('animationend', ip_dock_nudge_wait.onEnd);
+			ip_dock_nudge_wait = null;
+		}
+		if (ip_dock_nudge_timer) {
+			clearTimeout(ip_dock_nudge_timer);
+			ip_dock_nudge_timer = null;
+		}
+		ip_dock_nudge_timer = setTimeout(function () {
+			ip_dock_nudge_timer = null;
+			ip_contact_dock_nudge();
+		}, IP_DOCK_NUDGE_AFTER_MS);
+	}
+	function onEnd(e) {
+		if (e.target !== section) {
+			return;
+		}
+		if (String(e.animationName).indexOf('rollIn') !== 0) {
+			return;
+		}
+		fire();
+	}
+	var rolling = section && section.classList.contains('animated');
+	if (!rolling) {
+		ip_dock_nudge_timer = setTimeout(function () {
+			ip_dock_nudge_timer = null;
+			ip_contact_dock_nudge();
+		}, IP_DOCK_FADE_MS);
+		return;
+	}
+	ip_dock_nudge_wait = { section: section, onEnd: onEnd };
+	section.addEventListener('animationend', onEnd);
+	ip_dock_nudge_timer = setTimeout(fire, IP_SECTION_ROLL_MS + 50);
 }
 function ip_contact_dock_on_section(href) {
 	var offHome = href !== '#home';
-	var wasOff = document.documentElement.classList.contains('ip-off-home');
 	document.documentElement.classList.toggle('ip-off-home', offHome);
-	if (offHome && !wasOff) {
-		ip_contact_dock_notice();
+	ip_contact_dock_clear_nudge();
+	if (!offHome) {
+		ip_contact_dock_set_open(false);
 		return;
 	}
-	if (!offHome) {
-		ip_contact_dock_clear_timer();
-		ip_contact_dock_set_open(false);
-	}
+	ip_contact_dock_schedule_nudge(ip_section_from_href(href));
 }
 function ip_contact_dock_bind() {
 	var dock = ip_contact_dock_el();
@@ -510,11 +580,16 @@ function ip_contact_dock_bind() {
 	if (toggle) {
 		toggle.addEventListener('click', function (e) {
 			e.preventDefault();
-			ip_contact_dock_clear_timer();
+			ip_contact_dock_clear_nudge();
 			ip_contact_dock_set_open(!dock.classList.contains('is-open'));
 		});
+		toggle.addEventListener('animationend', function (e) {
+			if (e.animationName === 'ip-dock-nudge') {
+				toggle.classList.remove('is-nudge');
+			}
+		});
 	}
-	dock.addEventListener('pointerenter', ip_contact_dock_clear_timer);
+	dock.addEventListener('pointerenter', ip_contact_dock_clear_nudge);
 	document.addEventListener('keydown', function (e) {
 		if (e.key !== 'Escape') {
 			return;
@@ -525,11 +600,9 @@ function ip_contact_dock_bind() {
 		if (!dock.classList.contains('is-open')) {
 			return;
 		}
-		ip_contact_dock_clear_timer();
 		ip_contact_dock_set_open(false);
 	});
-	if (!document.documentElement.classList.contains('ip-off-home')
-		&& !document.documentElement.hasAttribute('data-ip-section')) {
+	if (!document.documentElement.classList.contains('ip-off-home')) {
 		ip_contact_dock_set_open(false);
 	}
 }

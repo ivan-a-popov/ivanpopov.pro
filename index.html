@@ -105,10 +105,10 @@
 	<!-- STYLES (style.min.css is generated from style.css by minify.py).
 	  media=print keeps this off the HTTP/1.1 High bucket so it does not
 	  share the LCP photo's connection; onload promotes it to all. -->
-	<link rel="stylesheet" href="static/css/style.min.css?v=244cc188" media="print" fetchpriority="low"
+	<link rel="stylesheet" href="static/css/style.min.css?v=1bfcf344" media="print" fetchpriority="low"
 		onload="this.onload=null;this.media='all'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.min.css?v=244cc188" />
+		<link rel="stylesheet" href="static/css/style.min.css?v=1bfcf344" />
 	</noscript>
 	<!-- /STYLES -->
 
@@ -866,9 +866,9 @@
 			<!-- /MAIN_CONTENT -->
 		</div>
 		<!-- /MAINPART -->
-		<nav class="ip_contact_dock is-open" aria-label="Написать">
+		<nav class="ip_contact_dock" aria-label="Написать">
 			<div class="ip_contact_dock__bar">
-				<div class="ip_contact_dock__actions" id="ip-contact-dock-actions">
+				<div class="ip_contact_dock__actions" id="ip-contact-dock-actions" inert aria-hidden="true">
 					<div class="ip_contact_dock__actions-inner">
 						<a href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer"
 							aria-label="Написать в Telegram">
@@ -886,8 +886,8 @@
 						</a>
 					</div>
 				</div>
-				<button type="button" class="ip_contact_dock__toggle" aria-expanded="true"
-					aria-controls="ip-contact-dock-actions" aria-label="Свернуть">
+				<button type="button" class="ip_contact_dock__toggle" aria-expanded="false"
+					aria-controls="ip-contact-dock-actions" aria-label="Написать">
 					<span class="ip_contact_dock__envelope" aria-hidden="true">
 						<img class="ip_contact_dock__envelope-face" src="static/img/assets/konvert-arrow-left.jpg?v=95ba7d42"
 							alt="" width="190" height="131" decoding="async" fetchpriority="low">
@@ -917,6 +917,6 @@
 		<!-- /MAGIC CURSOR -->
 	</div>
 	<!-- init.min.js is generated from init.js by minify.py -->
-	<script defer src="static/js/init.min.js?v=f2b435cc"></script>
+	<script defer src="static/js/init.min.js?v=4445b079"></script>
 </body>
 </html>
