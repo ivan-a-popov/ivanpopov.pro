@@ -826,6 +826,7 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	margin-top: clamp(1.75rem, 3vw, 2.5rem);
 }
 .ip_section p a,
+.ip_section .testimonial-author .info a,
 .ip_modalbox p a {
 	color: var(--text-main);
 	text-decoration: underline;
@@ -836,6 +837,7 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 .ip_section p a:hover,
+.ip_section .testimonial-author .info a:hover,
 .ip_modalbox p a:hover {
 	color: var(--accent);
 	text-decoration-color: transparent;
