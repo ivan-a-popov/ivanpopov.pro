@@ -986,11 +986,24 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 .partner-card:focus-within{
 	z-index: 1;
 }
-.partner-card > picture{
+.partner-card > picture,
+.partner-card__lockup{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	max-width: 100%;
+}
+.partner-card__lockup{
+	gap: 8px;
+}
+.partner-card__mark{
+	display: block;
+	width: auto;
+	height: 30px;
+	flex-shrink: 0;
+}
+.partner-card__lockup .partner-card__logo{
+	max-width: calc(100% - 38px);
 }
 .partner-card__logo{
 	display: block;
@@ -998,16 +1011,27 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	max-width: 100%;
 	height: 36px;
 	object-fit: contain;
+}
+.partner-card__logo,
+.partner-card__lockup{
 	transform: scale(1);
 	transform-origin: center;
 	transition: transform .25s ease;
 }
-.partner-card:focus-within .partner-card__logo{
+.partner-card:focus-within .partner-card__logo,
+.partner-card:focus-within .partner-card__lockup{
 	transform: scale(1.15);
 }
+.partner-card:focus-within .partner-card__lockup .partner-card__logo{
+	transform: none;
+}
 @media (hover: hover) and (pointer: fine){
-	.partner-card:hover .partner-card__logo{
+	.partner-card:hover .partner-card__logo,
+	.partner-card:hover .partner-card__lockup{
 		transform: scale(1.15);
+	}
+	.partner-card:hover .partner-card__lockup .partner-card__logo{
+		transform: none;
 	}
 }
 .partner_hidden_details{
@@ -1033,8 +1057,17 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	.partner-card{
 		min-height: 96px;
 	}
+	.partner-card__lockup{
+		gap: 10px;
+	}
+	.partner-card__mark{
+		height: 40px;
+	}
 	.partner-card__logo{
 		height: 48px;
+	}
+	.partner-card__lockup .partner-card__logo{
+		max-width: calc(100% - 50px);
 	}
 }
 @media (min-width: 1024px){
@@ -1045,16 +1078,28 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 		min-height: 116px;
 		padding: 22px 18px;
 	}
+	.partner-card__lockup{
+		gap: 12px;
+	}
+	.partner-card__mark{
+		height: 48px;
+	}
 	.partner-card__logo{
 		height: 58px;
 	}
+	.partner-card__lockup .partner-card__logo{
+		max-width: calc(100% - 60px);
+	}
 }
 @media (prefers-reduced-motion: reduce){
-	.partner-card__logo{
+	.partner-card__logo,
+	.partner-card__lockup{
 		transition: none;
 	}
 	.partner-card:hover .partner-card__logo,
-	.partner-card:focus-within .partner-card__logo{
+	.partner-card:hover .partner-card__lockup,
+	.partner-card:focus-within .partner-card__logo,
+	.partner-card:focus-within .partner-card__lockup{
 		transform: none;
 	}
 }

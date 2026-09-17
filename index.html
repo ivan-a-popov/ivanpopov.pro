@@ -105,10 +105,10 @@
 	<!-- STYLES (style.min.css is generated from style.css by minify.py).
 	  media=print keeps this off the HTTP/1.1 High bucket so it does not
 	  share the LCP photo's connection; onload promotes it to all. -->
-	<link rel="stylesheet" href="static/css/style.min.css?v=f893f054" media="print" fetchpriority="low"
+	<link rel="stylesheet" href="static/css/style.min.css?v=df343941" media="print" fetchpriority="low"
 		onload="this.onload=null;this.media='all'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.min.css?v=f893f054" />
+		<link rel="stylesheet" href="static/css/style.min.css?v=df343941" />
 	</noscript>
 	<!-- /STYLES -->
 
@@ -393,12 +393,16 @@
 								<li>
 									<div class="partner-card" data-partner-title="Точка Банк"
 										data-partner-popup-logo="static/img/partners/tochka-mark.svg?v=39123087">
-										<picture>
-											<source srcset="static/img/partners/tochka-dark.svg?v=da667c8d"
-												media="(prefers-color-scheme: dark)">
-											<img class="partner-card__logo" src="static/img/partners/tochka.svg?v=1326a53e" alt="" width="154"
-												height="60" decoding="async" loading="lazy">
-										</picture>
+										<div class="partner-card__lockup">
+											<img class="partner-card__mark" src="static/img/partners/tochka-mark.svg?v=39123087" alt=""
+												width="40" height="40" decoding="async" loading="lazy">
+											<picture>
+												<source srcset="static/img/partners/tochka-dark.svg?v=da667c8d"
+													media="(prefers-color-scheme: dark)">
+												<img class="partner-card__logo" src="static/img/partners/tochka.svg?v=1326a53e" alt=""
+													width="154" height="60" decoding="async" loading="lazy">
+											</picture>
+										</div>
 										<a class="ip_full_link" href="#" aria-label="Точка Банк — подробнее"></a>
 										<template class="partner_hidden_details">
 											<div class="service_popup_informations">
