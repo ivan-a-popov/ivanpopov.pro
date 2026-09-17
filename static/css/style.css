@@ -1021,11 +1021,14 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	.ip_partners > li{
 		grid-column: span 2;
 	}
-	.ip_partners > li:nth-child(4){
+	.ip_partners > li:nth-last-child(2):nth-child(3n + 1){
 		grid-column: 2 / span 2;
 	}
-	.ip_partners > li:nth-child(5){
+	.ip_partners > li:last-child:nth-child(3n + 2){
 		grid-column: 4 / span 2;
+	}
+	.ip_partners > li:last-child:nth-child(3n + 1){
+		grid-column: 3 / span 2;
 	}
 	.partner-card{
 		min-height: 96px;
