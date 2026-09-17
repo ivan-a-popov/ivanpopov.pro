@@ -105,10 +105,10 @@
 	<!-- STYLES (style.min.css is generated from style.css by minify.py).
 	  media=print keeps this off the HTTP/1.1 High bucket so it does not
 	  share the LCP photo's connection; onload promotes it to all. -->
-	<link rel="stylesheet" href="static/css/style.min.css?v=cfd7eac3" media="print" fetchpriority="low"
+	<link rel="stylesheet" href="static/css/style.min.css?v=f893f054" media="print" fetchpriority="low"
 		onload="this.onload=null;this.media='all'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.min.css?v=cfd7eac3" />
+		<link rel="stylesheet" href="static/css/style.min.css?v=f893f054" />
 	</noscript>
 	<!-- /STYLES -->
 
@@ -391,7 +391,8 @@
 									</div>
 								</li>
 								<li>
-									<div class="partner-card" data-partner-title="Точка Банк">
+									<div class="partner-card" data-partner-title="Точка Банк"
+										data-partner-popup-logo="static/img/partners/tochka-mark.svg?v=39123087">
 										<picture>
 											<source srcset="static/img/partners/tochka-dark.svg?v=da667c8d"
 												media="(prefers-color-scheme: dark)">
@@ -430,6 +431,31 @@
 													<p>Новым рекламодателям — <b>промокод на 6&nbsp;000&nbsp;₽ на первую кампанию</b>: заполните форму, ответьте на звонок менеджера и получите бонус.</p>
 													<p class="partner-popup__cta">
 														<a href="https://yandex.ru/project/direct/partners" target="_blank"
+															rel="noopener sponsored"><span class="partner-popup__cta-text">Получить промокод</span><span
+																class="partner-popup__star" aria-hidden="true">*</span></a>
+														<small class="partner-popup__note">*сайт партнёра откроется в новой вкладке</small>
+													</p>
+												</div>
+											</div>
+										</template>
+									</div>
+								</li>
+								<li>
+									<div class="partner-card" data-partner-title="Яндекс Бизнес">
+										<picture>
+											<source srcset="static/img/partners/yandex-business-dark.svg?v=66470895"
+												media="(prefers-color-scheme: dark)">
+											<img class="partner-card__logo" src="static/img/partners/yandex-business.svg?v=86ed8827" alt=""
+												width="196" height="38" decoding="async" loading="lazy">
+										</picture>
+										<a class="ip_full_link" href="#" aria-label="Яндекс Бизнес — подробнее"></a>
+										<template class="partner_hidden_details">
+											<div class="service_popup_informations">
+												<div class="descriptions">
+													<p>Яндекс Бизнес — сервис для предпринимателей, которые хотят, чтобы продвижение работало само. Расскажите о деле — сервис сам настроит кампанию и предложит бюджет. Объявления появятся в Картах, Поиске, «Организациях в поиске» и на 55&nbsp;000+ сайтов Рекламной сети. Компанию можно добавить бесплатно: вы появитесь в Картах и Поиске.</p>
+													<p>Новым клиентам — <b>промокод на 6&nbsp;000&nbsp;₽ на первую кампанию</b> (от 15&nbsp;000&nbsp;₽ и 90 дней): заполните форму, ответьте на звонок менеджера и получите бонус.</p>
+													<p class="partner-popup__cta">
+														<a href="https://business.yandex.ru/partners_offers/" target="_blank"
 															rel="noopener sponsored"><span class="partner-popup__cta-text">Получить промокод</span><span
 																class="partner-popup__star" aria-hidden="true">*</span></a>
 														<small class="partner-popup__note">*сайт партнёра откроется в новой вкладке</small>
@@ -987,6 +1013,6 @@
 		<!-- /MAGIC CURSOR -->
 	</div>
 	<!-- init.min.js is generated from init.js by minify.py -->
-	<script defer src="static/js/init.min.js?v=4445b079"></script>
+	<script defer src="static/js/init.min.js?v=5120d57b"></script>
 </body>
 </html>

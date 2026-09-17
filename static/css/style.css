@@ -1437,6 +1437,15 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	border: 1px solid var(--card-border);
 	box-sizing: content-box;
 }
+.ip_modalbox .partner-popup__logo--mark{
+	width: 48px;
+	height: 48px;
+	max-width: none;
+	padding: 0;
+	background: transparent;
+	border: none;
+	border-radius: 12px;
+}
 .ip_modalbox .partner-popup__title,
 .ip_modalbox .qr-popup__title{
 	min-width: 0;
@@ -1561,6 +1570,10 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	}
 	.ip_modalbox .partner-popup__logo{
 		height: 44px;
+	}
+	.ip_modalbox .partner-popup__logo--mark{
+		width: 52px;
+		height: 52px;
 	}
 	.ip_modalbox .service_popup_informations .service-popup__close a{
 		width: 40px;

@@ -823,9 +823,11 @@ function ip_service_popup() {
 					infos.insertAdjacentHTML('afterbegin', '<div class="qr-popup"><div class="qr-popup__title"><h3>vCard</h3></div>' + closeHtml + '</div>');
 				} else if (partner) {
 					var logoEl = parent.querySelector('.partner-card__logo');
-					var logoSrc = logoEl ? (logoEl.getAttribute('src') || '') : '';
+					var popupLogo = parent.getAttribute('data-partner-popup-logo') || '';
+					var logoSrc = popupLogo || (logoEl ? (logoEl.getAttribute('src') || '') : '');
+					var logoClass = 'partner-popup__logo' + (popupLogo ? ' partner-popup__logo--mark' : '');
 					var title = parent.getAttribute('data-partner-title') || '';
-					infos.insertAdjacentHTML('afterbegin', '<div class="partner-popup"><img class="partner-popup__logo" src="' + logoSrc + '" alt="" /><div class="partner-popup__title"><h3>' + title + '</h3></div>' + closeHtml + '</div>');
+					infos.insertAdjacentHTML('afterbegin', '<div class="partner-popup"><img class="' + logoClass + '" src="' + logoSrc + '" alt="" /><div class="partner-popup__title"><h3>' + title + '</h3></div>' + closeHtml + '</div>');
 				} else {
 					var popupImg = parent.querySelector('.popup_service_image');
 					var elImage = (popupImg && (popupImg.getAttribute('data-popup-img') || popupImg.getAttribute('src'))) || '';
