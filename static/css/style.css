@@ -36,6 +36,12 @@ body {
 	overflow-wrap: break-word;
 	font-weight: 450;
 	color: var(--text-sub);
+	/* Sections/teasers/modals are tabindex-focusable; a click otherwise
+	   plants a blinking insertion caret in the copy. */
+	caret-color: transparent;
+}
+input, textarea, [contenteditable="true"] {
+	caret-color: auto;
 }
 svg {
 	fill: currentcolor;
@@ -283,6 +289,7 @@ html.ip-automation .ip_header .logo .text .logo-cursor{
 }
 .ip_section:focus {
 	outline: none;
+	caret-color: transparent;
 }
 .ip_section .section_inner{
 	position: relative;
@@ -919,6 +926,7 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 .ip_teaser.is-static .ip_teaser__body::after{ display: none; }
 .ip_teaser:not(.is-static):focus{
 	outline: none;
+	caret-color: transparent;
 }
 .ip_teaser:not(.is-static):focus-visible{
 	outline: 2px solid var(--accent);
@@ -1327,6 +1335,7 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 }
 .ip_modalbox .description_wrap:focus {
 	outline: none;
+	caret-color: transparent;
 }
 .ip_modalbox .service_popup_informations .service-popup{
 	flex-shrink: 0;
