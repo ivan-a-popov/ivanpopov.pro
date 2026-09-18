@@ -1256,6 +1256,16 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 .ip_service .service-card:hover .service-card__summary{
 	color: var(--card-hover-summary);
 }
+.ip_service .service-card__more{
+	margin-top: 18px;
+	font-size: 0.95rem;
+	color: var(--text-main);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
+.ip_service .service-card:hover .service-card__more{
+	color: var(--on-accent);
+}
 /* Data containers only — content is copied into the popup by JS. */
 .ip_service .popup_service_image,
 .ip_service .service_hidden_details{

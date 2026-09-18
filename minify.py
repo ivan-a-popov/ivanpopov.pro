@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minify CSS/JS and cache-bust asset references in index.html.
+"""Minify CSS/JS and cache-bust asset references in HTML pages.
 
 CSS: drop comments, collapse whitespace, strip spaces around { } ; : , >
 while leaving calc()/clamp() +/- spaces and quoted urls intact.
@@ -9,8 +9,9 @@ tokens with spaces only when needed, and insert a semicolon where a
 newline in the source would have triggered ASI. No renaming.
 
 Run with no arguments from the site root (or any cwd — the script cds to
-its own directory). Edit the sources (critical.*, style.css, init.js),
-not the *.min.* files.
+its own directory). Edit the sources (critical.*, style.css, landing.css,
+init.js), not the *.min.* files. Stamps root index.html and every
+*/index.html landing. Understands both static/... and /static/... hrefs.
 """
 from __future__ import annotations
 
@@ -421,8 +422,8 @@ def _require(path: Path) -> Path:
 
 
 _ASSET_RE = re.compile(
-    r'(?:href|src)="(static/[^"?]+\.(?:css|js))'
-    r'|(?<![/\w])(static/img/[^"?#\s>]+)'
+    r'(?:href|src)="(/?static/[^"?]+\.(?:css|js))'
+    r'|(?:href|src|srcset|data-popup-img|data-partner-popup-logo)="(/?static/img/[^"?#\s>]+)'
 )
 
 
@@ -430,15 +431,17 @@ def _stamp(html: str) -> str:
     assets = sorted({part for groups in _ASSET_RE.findall(html) for part in groups if part})
     stamps: dict[str, str] = {}
     for asset in assets:
-        path = Path(asset)
+        path = Path(asset.lstrip("/"))
         if not path.is_file():
             print(f"skip (missing): {asset}", file=sys.stderr)
             continue
         digest = hashlib.md5(path.read_bytes()).hexdigest()[:8]
         stamps[asset] = digest
         html = re.sub(
-            r"(?<![/\w])" + re.escape(asset) + r"(?:\?v=[0-9a-f]+)?",
-            f"{asset}?v={digest}",
+            r'((?:href|src|srcset|data-popup-img|data-partner-popup-logo)=")'
+            + re.escape(asset)
+            + r'(?:\?v=[0-9a-f]+)?"',
+            rf'\1{asset}?v={digest}"',
             html,
         )
         print(f"stamped {asset} -> ?v={digest}")
@@ -447,9 +450,10 @@ def _stamp(html: str) -> str:
         nginx = nginx_path.read_text(encoding="utf-8")
         updated = nginx
         for asset, digest in stamps.items():
+            nginx_asset = asset if asset.startswith("/") else "/" + asset
             updated = re.sub(
-                re.escape("/" + asset) + r"(?:\?v=[0-9a-f]+)?",
-                f"/{asset}?v={digest}",
+                re.escape(nginx_asset) + r"(?:\?v=[0-9a-f]+)?",
+                f"{nginx_asset}?v={digest}",
                 updated,
             )
         if updated != nginx:
@@ -461,6 +465,7 @@ def _stamp(html: str) -> str:
 _CSS_SOURCES = (
     Path("static/css/critical.css"),
     Path("static/css/style.css"),
+    Path("static/css/landing.css"),
 )
 _JS_SOURCES = (
     Path("static/js/critical.js"),
@@ -472,8 +477,30 @@ def _min_path(path: Path) -> Path:
     return path.with_name(f"{path.stem}.min{path.suffix}")
 
 
+def _html_files() -> list[Path]:
+    files = [Path("index.html")]
+    files.extend(sorted(p for p in Path(".").glob("*/index.html") if p.is_file()))
+    return files
+
+
+def _rewrite_min_refs(html: str) -> str:
+    for src in _CSS_SOURCES:
+        dest = _min_path(src)
+        rel = src.as_posix()
+        minrel = dest.as_posix()
+        html = html.replace(f'href="{rel}"', f'href="{minrel}"')
+        html = html.replace(f'href="/{rel}"', f'href="/{minrel}"')
+    for src in _JS_SOURCES:
+        dest = _min_path(src)
+        rel = src.as_posix()
+        minrel = dest.as_posix()
+        html = html.replace(f'src="{rel}"', f'src="{minrel}"')
+        html = html.replace(f'src="/{rel}"', f'src="/{minrel}"')
+    return html
+
+
 def build() -> None:
-    html_path = _require(Path("index.html"))
+    html_paths = [_require(p) for p in _html_files()]
     for src in (*_CSS_SOURCES, *_JS_SOURCES):
         _require(src)
 
@@ -486,14 +513,10 @@ def build() -> None:
         dest.write_text(minify_js_checked(src) + "\n", encoding="utf-8")
         print(f"wrote {dest} ({dest.stat().st_size} bytes)")
 
-    html = html_path.read_text(encoding="utf-8")
-    for src in _CSS_SOURCES:
-        dest = _min_path(src)
-        html = html.replace(f'href="{src.as_posix()}', f'href="{dest.as_posix()}')
-    for src in _JS_SOURCES:
-        dest = _min_path(src)
-        html = html.replace(f'src="{src.as_posix()}', f'src="{dest.as_posix()}')
-    html_path.write_text(_stamp(html), encoding="utf-8")
+    for html_path in html_paths:
+        html = _rewrite_min_refs(html_path.read_text(encoding="utf-8"))
+        html_path.write_text(_stamp(html), encoding="utf-8")
+        print(f"stamped {html_path}")
 
 
 def main() -> None:

@@ -789,6 +789,10 @@ function ip_service_popup() {
 	});
 	buttons.forEach(function (button) {
 		button.addEventListener('click', function (e) {
+			var href = button.getAttribute('href') || '';
+			if (!button.classList.contains('ip_qr_open') && href && href !== '#' && href.charAt(0) !== '#') {
+				return;
+			}
 			e.preventDefault();
 			var qr = button.classList.contains('ip_qr_open');
 			var partner = !qr && button.closest('.partner-card');
