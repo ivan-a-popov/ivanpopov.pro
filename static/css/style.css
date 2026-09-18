@@ -1256,16 +1256,6 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 .ip_service .service-card:hover .service-card__summary{
 	color: var(--card-hover-summary);
 }
-.ip_service .service-card__more{
-	margin-top: 18px;
-	font-size: 0.95rem;
-	color: var(--text-main);
-	text-decoration: underline;
-	text-underline-offset: 0.2em;
-}
-.ip_service .service-card:hover .service-card__more{
-	color: var(--on-accent);
-}
 /* Data containers only — content is copied into the popup by JS. */
 .ip_service .popup_service_image,
 .ip_service .service_hidden_details{
@@ -1426,6 +1416,14 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	margin-bottom: 1.2em;
 	margin-right: 10px;
 	letter-spacing: 0.012em;
+}
+.ip_modalbox .service_popup_informations .descriptions .service-popup__more a{
+	color: var(--text-main);
+	font-weight: 600;
+	text-underline-offset: 0.2em;
+}
+.ip_modalbox .service_popup_informations .descriptions .service-popup__more a:hover{
+	color: var(--text-muted);
 }
 /* Compact popups (partner + QR): height follows content; article scrolls when taller than the viewport. */
 .ip_modalbox.ip_modalbox--partner .box_inner,
