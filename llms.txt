@@ -24,12 +24,15 @@ Key facts:
 
 ## Services
 
-- [Services](https://ivanpopov.pro/#service): Six offers in one section — Expertise (independent analytics/audits, feasibility, roadmaps); AI (LLM, RAG, agents and automation built on real business tasks, with data access, integrations, hallucination control and security handled end to end); Security (operational security of servers, access, backups, and personal data); E&#8209;commerce (CRM, WMS, marketplace/logistics, omnichannel); DevOps and Support (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity; ongoing IT outsourcing under contract); Development (sites, apps, APIs — concrete choices after understanding the business demands)
+- [Services](https://ivanpopov.pro/#service): Six offers in one section — Expertise (independent analytics/audits, feasibility, roadmaps); AI (LLM, RAG, agents and automation built on real business tasks, with data access, integrations, hallucination control and security handled end to end); Security (operational security of servers, access, backups, and personal data); E‑commerce (CRM, WMS, marketplace/logistics, omnichannel, IT outsourcing and shop development); DevOps and Support (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity; ongoing IT outsourcing under contract); Development (sites, apps, APIs — concrete choices after understanding the business demands)
+- [Security](https://ivanpopov.pro/security/): Operational security landing — express check, full security audit, incident response
+- [Audit](https://ivanpopov.pro/audit/): Independent IT audit landing — express and full audit, written report (Expertise card)
+- [E-commerce](https://ivanpopov.pro/ecommerce/): IT-аутсорс and e-shop development landing — retainers, projects, promotion/omnichannel
 
 ## Contact
 
-- [Telegram](https://t.me/ivan_a_popov): Primary contact channel
-- [VKontakte](https://vk.com/ivan_a_popov): Alternative contact channel
+- [Telegram](https://t.me/ivanpopovpro): Primary contact channel
+- [VKontakte](https://vk.com/ivanpopovpro): Alternative contact channel
 - [Official site](https://ivanpopov.pro/): Landing page with QR vCard
 
 ## Optional
