@@ -127,9 +127,10 @@
 			})();
 		});
 	}
-	// Manrope faces are registered by critical.css, so loads can be
-	// kicked off right away. The woff2 is not <link rel=preload>'d: on
-	// HTTP/1.1 that request is High and shares the LCP photo's connection.
+	// Manrope is registered by critical.css; the woff2 is also
+	// <link rel=preload as=font> in <head> so the request is not chained
+	// on CSS download+parse. LCP portraits still start earlier via nginx
+	// Link headers at TTFB.
 	function whenFontsReady(){
 		if(!document.fonts || !document.fonts.load){ return Promise.resolve(); }
 		var faces = Promise.all([
