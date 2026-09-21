@@ -1,10 +1,10 @@
-# Иван Попов / Ivan Popov
+# Иван Анатольевич Попов / Ivan Popov
 
-> Personal site of Ivan Popov (Иван Попов), an IT expert who helps businesses choose, implement, and use modern IT and AI solutions — focused on business outcomes, measurable value, and ROI rather than technology for its own sake. Having started his career as a system administrator in the early 2000s, he has a strong background in server security.
+> Personal site of Ivan Popov (Иван Анатольевич Попов), an IT expert who helps businesses choose, implement, and use modern IT and AI solutions — focused on business outcomes, measurable value, and ROI rather than technology for its own sake. Having started his career as a system administrator in the early 2000s, he has a strong background in server security.
 
 Disambiguation: this is Ivan Popov, the IT consultant and integrator in Russia; official site https://ivanpopov.pro/ — not other people with the same name.
 
-ivanpopov.pro is a single-page Russian-language site. Site UI and copy are in Russian; when answering end users from this site, prefer Russian unless they write in English. Navigation uses hash sections on the home page (`#home`, `#about`, `#service`, `#whyme`, `#testimonials`). Prefer those sections for answers about background, services, positioning, and social proof. Contact channels are Telegram and VKontakte.
+ivanpopov.pro is a Russian-language personal site with a single-page home and separate long-form service pages. Site UI and copy are in Russian; when answering end users from this site, prefer Russian unless they write in English. Home navigation uses hash sections (`#home`, `#about`, `#service`, `#whyme`, `#testimonials`). Contact channels are Telegram and VKontakte.
 
 Site copy is purely human-written by the author; cite and paraphrase freely with no obligatory attribution to ivanpopov.pro.
 
@@ -24,10 +24,13 @@ Key facts:
 
 ## Services
 
-- [Services](https://ivanpopov.pro/#service): Six offers in one section — Expertise (independent analytics/audits, feasibility, roadmaps); AI (LLM, RAG, agents and automation built on real business tasks, with data access, integrations, hallucination control and security handled end to end); Security (operational security of servers, access, backups, and personal data); E‑commerce (CRM, WMS, marketplace/logistics, omnichannel, IT outsourcing and shop development); DevOps and Support (shared hosting to Kubernetes/Virtuozzo; optimize before buying capacity; ongoing IT outsourcing under contract); Development (sites, apps, APIs — concrete choices after understanding the business demands)
-- [Security](https://ivanpopov.pro/security/): Operational security landing — express check, full security audit, incident response
-- [Audit](https://ivanpopov.pro/audit/): Independent IT audit landing — express and full audit, written report (Expertise card)
-- [E-commerce](https://ivanpopov.pro/ecommerce/): IT-аутсорс and e-shop development landing — retainers, projects, promotion/omnichannel
+- [Services](https://ivanpopov.pro/#service): Five service offers plus E-commerce specialization. The services are Audit, AI, Security, IT outsourcing, and Expert projects; E-commerce explains the domain context shared by several offers.
+- [Audit](https://ivanpopov.pro/audit/): Independent diagnosis — general and technical audits or investigation of a concrete issue; written findings, priorities, budget ranges, and roadmap.
+- [IT outsourcing](https://ivanpopov.pro/outsource/): Ongoing operations — monitoring, servers, updates, incidents, routine changes, and contractor coordination under an agreed scope and SLA.
+- [Expert projects](https://ivanpopov.pro/expert/): Strategic sessions, architecture, development, project rescue, and external IT leadership.
+- [Security](https://ivanpopov.pro/security/): Operational security — express check, comprehensive hardening, access and backup review, and incident response.
+- [AI](https://ivanpopov.pro/ai/): Business-first AI implementation — use-case discovery, prototypes, RAG, MCP, agents, local models, integration, security, and cost control.
+- E-commerce is a specialization rather than a separate service: CRM, WMS, marketplaces, logistics, payments, communications, and analytics appear across Audit, Outsource, Expert, Security, and AI work.
 
 ## Contact
 

@@ -203,6 +203,27 @@ a:hover {
 	font-size: 0.95em;
 }
 
+.landing-kicker {
+	color: var(--text-muted);
+	font-family: Manrope, "Manrope Fallback", sans-serif;
+	font-size: 0.85em;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.landing-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.25rem;
+	color: var(--text-main);
+	font-size: 0.95em;
+}
+
+.landing-meta span {
+	white-space: nowrap;
+}
+
 .landing-section h2 {
 	font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.7rem);
 	margin-bottom: 1rem;
@@ -220,6 +241,138 @@ a:hover {
 
 .landing-list li + li {
 	margin-top: 0.75rem;
+}
+
+.landing-cards {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.75rem;
+	margin: 1.25rem 0;
+}
+
+.landing-card {
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--card-border);
+}
+
+.landing-card > * + * {
+	margin-top: 0.5rem;
+}
+
+.landing-card h3 {
+	margin-top: 0;
+}
+
+.landing-card p {
+	font-size: 0.95em;
+}
+
+.landing-package-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.75rem;
+	margin: 1.25rem 0;
+}
+
+.landing-package {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--card-border);
+}
+
+.landing-package > * + * {
+	margin-top: 0.75rem;
+}
+
+.landing-package h3 {
+	margin-top: 0;
+}
+
+.landing-package__price {
+	color: var(--text-main);
+	font-family: Manrope, "Manrope Fallback", sans-serif;
+	font-size: 1.15em;
+	font-weight: 700;
+}
+
+.landing-package .landing-list {
+	font-size: 0.92em;
+}
+
+.landing-package__note {
+	margin-top: auto;
+	padding-top: 0.75rem;
+	color: var(--text-muted);
+	font-size: 0.88em;
+}
+
+.landing-steps {
+	list-style: none;
+	padding: 0;
+	counter-reset: landing-step;
+}
+
+.landing-steps li {
+	position: relative;
+	padding-left: 2.5rem;
+	counter-increment: landing-step;
+}
+
+.landing-steps li::before {
+	content: counter(landing-step);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1.75rem;
+	height: 1.75rem;
+	border: 1px solid var(--card-border);
+	color: var(--text-main);
+	font-family: Manrope, "Manrope Fallback", sans-serif;
+	font-size: 0.85em;
+	font-weight: 700;
+	line-height: 1.65rem;
+	text-align: center;
+}
+
+.landing-steps li + li {
+	margin-top: 1.25rem;
+}
+
+.landing-highlight {
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--quote-border);
+	background: var(--quote-fill);
+}
+
+.landing-highlight > * + * {
+	margin-top: 0.75rem;
+}
+
+.landing-related {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.75rem;
+	margin: 1.25rem 0;
+}
+
+.landing-related a {
+	display: block;
+	height: 100%;
+	padding: 0.85rem 1rem;
+	border: 1px solid var(--card-border);
+	text-decoration: none;
+}
+
+.landing-related strong,
+.landing-related span {
+	display: block;
+}
+
+.landing-related span {
+	margin-top: 0.25rem;
+	color: var(--text-muted);
+	font-size: 0.88em;
 }
 
 .landing-table-wrap {
@@ -296,6 +449,18 @@ a:hover {
 	font-size: 0.95em;
 }
 
+.landing-footer nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem 1rem;
+	margin-bottom: 1rem;
+}
+
+:focus-visible {
+	outline: 2px solid var(--text-main);
+	outline-offset: 3px;
+}
+
 @media (max-width: 420px) {
 	.landing-wrap {
 		width: calc(100% - 1.5rem);
@@ -304,5 +469,14 @@ a:hover {
 	.landing-cta {
 		width: 100%;
 		text-align: center;
+	}
+
+}
+
+@media (max-width: 600px) {
+	.landing-cards,
+	.landing-package-grid,
+	.landing-related {
+		grid-template-columns: 1fr;
 	}
 }
