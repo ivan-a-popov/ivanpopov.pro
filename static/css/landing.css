@@ -270,6 +270,20 @@ a:hover {
 	font-size: 0.95em;
 }
 
+.landing-alert {
+	margin: 1.5rem 0;
+	padding: 1rem 1.1rem;
+	border-left: 3px solid #d97706;
+	border-top: 1px solid var(--quote-border);
+	border-right: 1px solid var(--quote-border);
+	border-bottom: 1px solid var(--quote-border);
+	background: var(--quote-fill);
+}
+
+.landing-alert p + p {
+	margin-top: 0.75rem;
+}
+
 .landing-faq h3 {
 	margin-top: 1.5rem;
 }
