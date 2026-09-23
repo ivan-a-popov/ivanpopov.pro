@@ -281,6 +281,10 @@ a:hover {
 	border: 1px solid var(--card-border);
 }
 
+.landing-package:last-child:nth-child(odd) {
+	grid-column: 1 / -1;
+}
+
 .landing-package > * + * {
 	margin-top: 0.75rem;
 }
