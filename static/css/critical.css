@@ -159,7 +159,7 @@ body {
 
 /* Same reset as style.css — UA heading/list margins must never exist on first
    paint, or the whole home column jumps up when style.css lands (CLS). */
-/* h1,
+h1,
 h2,
 h3,
 h4,
@@ -171,7 +171,7 @@ ol,
 li {
 	margin: 0;
 	padding: 0;
-} */
+}
 
 img {
 	vertical-align: middle;
@@ -325,7 +325,7 @@ html.skip-preloader #preloader {
 	--ip-bar-height: 48px;
 	--ip-footer-height: calc(7px + .5vw);
 	--ip-footer-font-size: calc(6px + .45vw);
-	--ip-logo-font-size: clamp(1rem, 2vw, 2rem);
+	--ip-logo-font-size: clamp(1rem, 2.5vw, 2rem);
 	--ip-logo-padding-left: .9vw;
 	--ip-logo-menu-gap: 1px;
 	/* Sub-label is a rem knob (never em) so it stays a caption. The whole <a>
