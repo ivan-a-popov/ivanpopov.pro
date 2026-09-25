@@ -325,7 +325,7 @@ html.skip-preloader #preloader {
 	--ip-bar-height: 48px;
 	--ip-footer-height: calc(7px + .5vw);
 	--ip-footer-font-size: calc(6px + .45vw);
-	--ip-logo-font-size: clamp(1rem, 1.5rem, 2rem);
+	--ip-logo-font-size: clamp(1rem, 2vw, 2rem);
 	--ip-logo-padding-left: .9vw;
 	--ip-logo-menu-gap: 1px;
 	/* Sub-label is a rem knob (never em) so it stays a caption. The whole <a>
