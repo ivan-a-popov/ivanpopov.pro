@@ -446,32 +446,61 @@ function ip_keyboard_navigation() {
 }
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
-var ip_dock_nudge_timer = null;
-var ip_dock_nudge_wait = null;
-// Beat after rollIn/rollInBack so the cue is not the last frame of the page.
-var IP_DOCK_NUDGE_AFTER_MS = 120;
+// Section change: the dock dims while the page rolls (is-transit) and settles
+// when the new section lands. Once the reader reaches the end of the section,
+// the first contact peeks out beside the envelope (is-peek), once per visit.
+var ip_dock_land = null;
+var ip_dock_watch = null;
+var ip_dock_peek_timer = null;
+// The reader already found the dock on this page; no peek until the next one.
+var ip_dock_quiet = false;
 // Matches .animated { animation-duration: 1.2s } — fallback if animationend misses.
 var IP_SECTION_ROLL_MS = 1200;
 // Dock fade-in when there is no roll (deep-link instant land).
 var IP_DOCK_FADE_MS = 280;
+// Time at the end of a section before the peek: short once the reader has
+// scrolled there, long when the section fits the viewport and never scrolls.
+var IP_DOCK_PEEK_AFTER_SCROLL_MS = 1200;
+var IP_DOCK_PEEK_AFTER_IDLE_MS = 8000;
+// Unfold (.6s in style.css) plus hold; the fold back is the closed-state transition.
+var IP_DOCK_PEEK_HOLD_MS = 1600;
+// Sub-pixel scrollTop and the last block's bottom margin.
+var IP_DOCK_END_SLACK_PX = 24;
 
 function ip_contact_dock_el() {
 	return ip_one('.ip_contact_dock');
 }
-function ip_contact_dock_clear_nudge() {
-	if (ip_dock_nudge_timer) {
-		clearTimeout(ip_dock_nudge_timer);
-		ip_dock_nudge_timer = null;
+function ip_contact_dock_unland() {
+	if (!ip_dock_land) {
+		return;
 	}
-	if (ip_dock_nudge_wait) {
-		ip_dock_nudge_wait.section.removeEventListener('animationend', ip_dock_nudge_wait.onEnd);
-		ip_dock_nudge_wait = null;
+	if (ip_dock_land.onEnd) {
+		ip_dock_land.section.removeEventListener('animationend', ip_dock_land.onEnd);
+	}
+	clearTimeout(ip_dock_land.timer);
+	ip_dock_land = null;
+}
+function ip_contact_dock_unwatch() {
+	if (!ip_dock_watch) {
+		return;
+	}
+	ip_dock_watch.section.removeEventListener('scroll', ip_dock_watch.onScroll);
+	clearTimeout(ip_dock_watch.timer);
+	ip_dock_watch = null;
+}
+function ip_contact_dock_unpeek() {
+	if (ip_dock_peek_timer) {
+		clearTimeout(ip_dock_peek_timer);
+		ip_dock_peek_timer = null;
 	}
 	var dock = ip_contact_dock_el();
-	var toggle = dock && ip_one('.ip_contact_dock__toggle', dock);
-	if (toggle) {
-		toggle.classList.remove('is-nudge');
+	if (dock) {
+		dock.classList.remove('is-peek');
 	}
+}
+function ip_contact_dock_hush() {
+	ip_dock_quiet = true;
+	ip_contact_dock_unwatch();
 }
 function ip_contact_dock_set_open(open) {
 	var dock = ip_contact_dock_el();
@@ -481,7 +510,8 @@ function ip_contact_dock_set_open(open) {
 	var toggle = ip_one('.ip_contact_dock__toggle', dock);
 	var actions = ip_one('.ip_contact_dock__actions', dock);
 	if (open) {
-		ip_contact_dock_clear_nudge();
+		ip_contact_dock_hush();
+		ip_contact_dock_unpeek();
 	}
 	dock.classList.toggle('is-open', open);
 	if (toggle) {
@@ -498,9 +528,9 @@ function ip_contact_dock_set_open(open) {
 		}
 	}
 }
-function ip_contact_dock_nudge() {
+function ip_contact_dock_peek() {
 	var dock = ip_contact_dock_el();
-	if (!dock || dock.classList.contains('is-open')) {
+	if (!dock || dock.classList.contains('is-open') || dock.classList.contains('is-peek')) {
 		return;
 	}
 	if (ip_one('.ip_modalbox.opened')) {
@@ -512,84 +542,131 @@ function ip_contact_dock_nudge() {
 	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 		return;
 	}
-	var toggle = ip_one('.ip_contact_dock__toggle', dock);
-	if (!toggle) {
+	dock.classList.add('is-peek');
+	ip_dock_peek_timer = setTimeout(ip_contact_dock_unpeek, IP_DOCK_PEEK_HOLD_MS);
+}
+function ip_contact_dock_watch(section) {
+	ip_contact_dock_unwatch();
+	if (ip_dock_quiet) {
 		return;
 	}
-	toggle.classList.remove('is-nudge');
-	void toggle.offsetWidth;
-	toggle.classList.add('is-nudge');
-}
-function ip_contact_dock_schedule_nudge(section) {
-	var done = false;
-	function fire() {
-		if (done) {
+	var scrolled = false;
+	function atEnd() {
+		return section.scrollTop + section.clientHeight >= section.scrollHeight - IP_DOCK_END_SLACK_PX;
+	}
+	function arm() {
+		clearTimeout(watch.timer);
+		watch.timer = null;
+		if (document.hidden || !atEnd()) {
 			return;
 		}
-		done = true;
-		if (ip_dock_nudge_wait) {
-			ip_dock_nudge_wait.section.removeEventListener('animationend', ip_dock_nudge_wait.onEnd);
-			ip_dock_nudge_wait = null;
+		watch.timer = setTimeout(fire, scrolled ? IP_DOCK_PEEK_AFTER_SCROLL_MS : IP_DOCK_PEEK_AFTER_IDLE_MS);
+	}
+	function fire() {
+		watch.timer = null;
+		// Late images or enhanced blocks can push the end away after arming.
+		if (!atEnd()) {
+			return;
 		}
-		if (ip_dock_nudge_timer) {
-			clearTimeout(ip_dock_nudge_timer);
-			ip_dock_nudge_timer = null;
-		}
-		ip_dock_nudge_timer = setTimeout(function () {
-			ip_dock_nudge_timer = null;
-			ip_contact_dock_nudge();
-		}, IP_DOCK_NUDGE_AFTER_MS);
+		ip_contact_dock_unwatch();
+		ip_contact_dock_peek();
+	}
+	function onScroll() {
+		scrolled = true;
+		arm();
+	}
+	var watch = { section: section, onScroll: onScroll, arm: arm, timer: null };
+	ip_dock_watch = watch;
+	section.addEventListener('scroll', onScroll, { passive: true });
+	arm();
+}
+function ip_contact_dock_land(section) {
+	var dock = ip_contact_dock_el();
+	if (!dock || !section) {
+		return;
+	}
+	var rolling = section.classList.contains('animated');
+	function settle() {
+		ip_contact_dock_unland();
+		dock.classList.remove('is-transit');
+		ip_contact_dock_watch(section);
 	}
 	function onEnd(e) {
-		if (e.target !== section) {
-			return;
+		if (e.target === section && String(e.animationName).indexOf('rollIn') === 0) {
+			settle();
 		}
-		if (String(e.animationName).indexOf('rollIn') !== 0) {
-			return;
-		}
-		fire();
 	}
-	var rolling = section && section.classList.contains('animated');
-	if (!rolling) {
-		ip_dock_nudge_timer = setTimeout(function () {
-			ip_dock_nudge_timer = null;
-			ip_contact_dock_nudge();
-		}, IP_DOCK_FADE_MS);
-		return;
+	dock.classList.toggle('is-transit', rolling);
+	ip_dock_land = {
+		section: section,
+		onEnd: rolling ? onEnd : null,
+		timer: setTimeout(settle, rolling ? IP_SECTION_ROLL_MS + 50 : IP_DOCK_FADE_MS)
+	};
+	if (rolling) {
+		section.addEventListener('animationend', onEnd);
 	}
-	ip_dock_nudge_wait = { section: section, onEnd: onEnd };
-	section.addEventListener('animationend', onEnd);
-	ip_dock_nudge_timer = setTimeout(fire, IP_SECTION_ROLL_MS + 50);
 }
 function ip_contact_dock_on_section(href) {
 	var offHome = href !== '#home';
 	document.documentElement.classList.toggle('ip-off-home', offHome);
-	ip_contact_dock_clear_nudge();
+	ip_contact_dock_unland();
+	ip_contact_dock_unwatch();
+	ip_contact_dock_unpeek();
+	ip_dock_quiet = false;
 	if (!offHome) {
+		var dock = ip_contact_dock_el();
+		if (dock) {
+			dock.classList.remove('is-transit');
+		}
 		ip_contact_dock_set_open(false);
 		return;
 	}
-	ip_contact_dock_schedule_nudge(ip_section_from_href(href));
+	ip_contact_dock_land(ip_section_from_href(href));
 }
 function ip_contact_dock_bind() {
 	var dock = ip_contact_dock_el();
 	if (!dock) {
 		return;
 	}
+	var bar = ip_one('.ip_contact_dock__bar', dock);
 	var toggle = ip_one('.ip_contact_dock__toggle', dock);
 	if (toggle) {
 		toggle.addEventListener('click', function (e) {
 			e.preventDefault();
-			ip_contact_dock_clear_nudge();
 			ip_contact_dock_set_open(!dock.classList.contains('is-open'));
 		});
-		toggle.addEventListener('animationend', function (e) {
-			if (e.animationName === 'ip-dock-nudge') {
-				toggle.classList.remove('is-nudge');
+	}
+	// Peeked icons stay inert, so a tap on them lands on the bar: open the dock.
+	if (bar) {
+		bar.addEventListener('click', function (e) {
+			if (!dock.classList.contains('is-peek')) {
+				return;
 			}
+			if (toggle && toggle.contains(e.target)) {
+				return;
+			}
+			ip_contact_dock_set_open(true);
 		});
 	}
-	dock.addEventListener('pointerenter', ip_contact_dock_clear_nudge);
+	// Mouse hover holds a peek open until the pointer leaves. Touch fires
+	// pointerleave right after pointerup, before click, so it keeps the timer.
+	dock.addEventListener('pointerenter', function (e) {
+		ip_contact_dock_hush();
+		if (e.pointerType === 'mouse' && ip_dock_peek_timer) {
+			clearTimeout(ip_dock_peek_timer);
+			ip_dock_peek_timer = null;
+		}
+	});
+	dock.addEventListener('pointerleave', function (e) {
+		if (e.pointerType === 'mouse' && dock.classList.contains('is-peek')) {
+			ip_contact_dock_unpeek();
+		}
+	});
+	document.addEventListener('visibilitychange', function () {
+		if (ip_dock_watch) {
+			ip_dock_watch.arm();
+		}
+	});
 	document.addEventListener('keydown', function (e) {
 		if (e.key !== 'Escape') {
 			return;

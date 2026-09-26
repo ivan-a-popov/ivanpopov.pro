@@ -450,7 +450,9 @@ html,
    already sit in the copy). Visible when another section is .active, and
    on deep-link first paint via html[data-ip-section]. Folded tap target is
    the envelope face; open state turns it to the reverse. A page change
-   nudges the folded envelope instead of auto-expanding. */
+   dims the dock while the section rolls (is-transit) and settles it as the
+   page lands; reaching the end of a section peeks the first contact out
+   (is-peek) instead of auto-expanding. */
 .ip_contact_dock{
 	--ip-paper: #efe6d0;
 	--ip-paper-ink: #1a1510;
@@ -493,15 +495,32 @@ html.ip-off-home .ip_contact_dock{
 	box-shadow: none;
 	backdrop-filter: blur(0);
 	-webkit-backdrop-filter: blur(0);
+	transform-origin: 100% 100%;
 	transition:
 		background var(--ip-dock-fold),
 		box-shadow var(--ip-dock-fold),
 		padding var(--ip-dock-fold),
 		border-color var(--ip-dock-fold),
 		backdrop-filter var(--ip-dock-fold),
-		-webkit-backdrop-filter var(--ip-dock-fold);
+		-webkit-backdrop-filter var(--ip-dock-fold),
+		opacity .5s cubic-bezier(.22, .61, .36, 1),
+		transform .7s cubic-bezier(.34, 1.4, .64, 1);
 }
-.ip_contact_dock.is-open .ip_contact_dock__bar{
+.ip_contact_dock.is-transit .ip_contact_dock__bar{
+	opacity: .35;
+	transform: translateY(8px) scale(.94);
+	transition:
+		background var(--ip-dock-fold),
+		box-shadow var(--ip-dock-fold),
+		padding var(--ip-dock-fold),
+		border-color var(--ip-dock-fold),
+		backdrop-filter var(--ip-dock-fold),
+		-webkit-backdrop-filter var(--ip-dock-fold),
+		opacity .3s ease,
+		transform .3s ease;
+}
+.ip_contact_dock.is-open .ip_contact_dock__bar,
+.ip_contact_dock.is-peek .ip_contact_dock__bar{
 	padding: 4px 4px 4px 6px;
 	background: color-mix(in srgb, var(--ip-paper) 18%, transparent);
 	border: 1px solid color-mix(in srgb, var(--ip-paper) 28%, transparent);
@@ -524,12 +543,33 @@ html.ip-off-home .ip_contact_dock{
 		grid-template-columns 1s cubic-bezier(.22, .61, .36, 1),
 		opacity .45s ease;
 }
+.ip_contact_dock.is-peek .ip_contact_dock__actions{
+	grid-template-columns: 1fr;
+	opacity: 1;
+	transition:
+		grid-template-columns .6s cubic-bezier(.22, .61, .36, 1),
+		opacity .35s ease;
+}
+/* The 1fr track sizes to this box, so max-width caps a peek at the first
+   icon. The cap is numeric (none is not interpolable) and equals the full
+   strip — three 44px contacts; raise it when adding one — so peek-to-open
+   grows smoothly. After a peek it holds through the 1.6s fold, or the track
+   would jump to full width mid-fold. */
 .ip_contact_dock__actions-inner{
 	min-width: 0;
+	max-width: calc(3 * 44px);
 	overflow: hidden;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	transition: max-width 0s linear 1.6s;
+}
+.ip_contact_dock.is-peek .ip_contact_dock__actions-inner{
+	max-width: 44px;
+	transition: none;
+}
+.ip_contact_dock.is-open .ip_contact_dock__actions-inner{
+	transition: max-width 1s cubic-bezier(.22, .61, .36, 1);
 }
 .ip_contact_dock__actions a,
 .ip_contact_dock__toggle{
@@ -566,41 +606,6 @@ html.ip-off-home .ip_contact_dock{
 	transform-origin: 50% 80%;
 	transition:
 		transform .28s cubic-bezier(.4, 0, .2, 1),
-		box-shadow var(--ip-dock-fold),
-		border-color var(--ip-dock-fold);
-}
-/* One-shot page-change cue: a brightness blink, then a short paper wiggle. */
-@keyframes ip-dock-nudge{
-	0%{
-		transform: rotate(0deg) scale(1);
-		filter: brightness(1);
-	}
-	14%{
-		transform: rotate(0deg) scale(1.05);
-		filter: brightness(1.18);
-	}
-	32%{
-		transform: rotate(-5deg) scale(1.06);
-		filter: brightness(1.04);
-	}
-	50%{
-		transform: rotate(4deg) scale(1.03);
-		filter: brightness(1);
-	}
-	68%{
-		transform: rotate(-2deg) scale(1.01);
-	}
-	84%{
-		transform: rotate(.8deg) scale(1);
-	}
-	100%{
-		transform: rotate(0deg) scale(1);
-		filter: brightness(1);
-	}
-}
-.ip_contact_dock__toggle.is-nudge{
-	animation: ip-dock-nudge .85s cubic-bezier(.36, .07, .19, .97);
-	transition:
 		box-shadow var(--ip-dock-fold),
 		border-color var(--ip-dock-fold);
 }
@@ -659,7 +664,7 @@ html.ip-off-home .ip_contact_dock{
 		transform: scale(1.12);
 		opacity: 1;
 	}
-	.ip_contact_dock:not(.is-open) .ip_contact_dock__toggle:not(.is-nudge):hover{
+	.ip_contact_dock:not(.is-open) .ip_contact_dock__toggle:hover{
 		transform: scale(1.05);
 	}
 }
@@ -674,16 +679,18 @@ html.ip-off-home .ip_contact_dock{
 	.ip_contact_dock__envelope img{
 		transition: none;
 	}
-	.ip_contact_dock__toggle.is-nudge{
-		animation: none;
+	.ip_contact_dock.is-transit .ip_contact_dock__bar{
+		opacity: 1;
+		transform: none;
 	}
 	.ip_contact_dock__actions a:hover,
 	.ip_contact_dock:not(.is-open) .ip_contact_dock__toggle:hover{
 		transform: none;
 	}
 }
-html.ip-automation .ip_contact_dock__toggle.is-nudge{
-	animation: none;
+html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
+	opacity: 1;
+	transform: none;
 }
 .qr_hidden_details{
 	display: none;
