@@ -1207,16 +1207,22 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	flex-wrap: wrap;
 	gap: 5px;
 }
-/* 1-up on phones → 2-up from 768px → 3-up on extra-wide screens. */
+/* 1-up on phones, 2-up from 768px. Each li is a size container so the card
+   internals scale with the card's own width, whatever the column count. */
 .ip_service .service_list ul li{
 	width: 100%;
+	container-type: inline-size;
 }
+/* --u is 1px on a 340px-wide card; every inner size is a multiple of it, so
+   the card keeps its proportions. The clamp stops cards from turning cramped
+   on narrow 2-up rows or oversized on wide screens. */
 .ip_service .service-card{
+	--u: clamp(.8px, .294cqi, 1.15px);
 	width: 100%;
 	height: 100%;
 	position: relative;
 	border: 1px solid var(--card-border);
-	padding: 70px 30px 63px;
+	padding: calc(60 * var(--u)) calc(28 * var(--u)) calc(54 * var(--u));
 	text-align: center;
 }
 /* Keep card titles/summaries on natural word boundaries despite the
@@ -1229,19 +1235,22 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	background-color: var(--card-hover-bg);
 }
 .ip_service .service-card .svg{
-	width: 60px;
-	height: 60px;
+	width: calc(60 * var(--u));
+	height: calc(60 * var(--u));
 	color: var(--text-main);
-	margin-bottom: 27px;
+	margin-bottom: calc(24 * var(--u));
 }
 .ip_service .service-card:hover .svg{
 	color: var(--on-accent);
 }
 .ip_service .service-card .title{
 	font-weight: 500;
-	font-size: 1.5rem;
+	font-size: calc(24 * var(--u));
 	color: var(--text-main);
-	margin-bottom: 15px;
+	margin-bottom: calc(14 * var(--u));
+}
+.ip_service .service-card .service-card__summary{
+	font-size: max(.875rem, calc(16 * var(--u)));
 }
 .ip_service .service-card:hover .title{
 	color: var(--on-accent);
@@ -1258,17 +1267,10 @@ html.ip-automation .ip_contact_dock__toggle.is-nudge{
 	.ip_service .service_list ul li{
 		width: calc(50% - 2.5px);
 	}
-}
-/* Extra-wide: 3-up cards for better line lengths inside the content column. */
-@media (min-width: 1700px){
-	.ip_service .service_list ul li{
-		width: calc((100% - 10px) / 3);
-	}
+	/* A card is ~277u tall, so three 2-up rows take ~830u; the dvh term keeps
+	   them inside the viewport below the header/footer (~140px) when possible. */
 	.ip_service .service-card{
-		padding: 56px 28px 50px;
-	}
-	.ip_service .service-card .title{
-		font-size: 1.375rem;
+		--u: clamp(.8px, min(.294cqi, (100dvh - 140px) / 830), 1.15px);
 	}
 }
 
