@@ -259,6 +259,11 @@ a:hover {
 	margin-top: 0.5rem;
 }
 
+.landing-card:last-child:nth-child(odd),
+.landing-related a:last-child:nth-child(odd) {
+	grid-column: 1 / -1;
+}
+
 .landing-card h3 {
 	margin-top: 0;
 }
