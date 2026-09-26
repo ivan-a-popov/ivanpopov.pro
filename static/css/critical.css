@@ -343,7 +343,9 @@ html.skip-preloader #preloader {
 	--ip-logo-font-size: clamp(1rem, min(3.5vw, var(--ip-bar-height) * .6), 2rem);
 	--ip-logo-padding-left: .9vw;
 	--ip-logo-menu-gap: 1px;
-	--ip-menu-gap: clamp(6px, calc(5px + .85vw), 42px);
+	/* Floor only: the menu is space-between, so items sit further apart
+	   than this unless the row gets tight. */
+	--ip-menu-gap: clamp(20px, 2.5vw, 52px);
 	--ip-menu-padding-inline: clamp(8px, calc(4px + .5vw), 64px);
 	--ip-menu-link-padding: clamp(2px, 0.35vw, 8px);
 	/* Room for active/hover scale (up to 1.5) + sub-labels wider than main word. */
@@ -938,6 +940,7 @@ html[data-ip-section="testimonials"] #testimonials {
 		--ip-menu-font-size: clamp(.8rem, 3.6vw, 1rem);
 		--ip-menu-active-scale: 1.2;
 		--ip-menu-hover-scale: 1.05;
+		--ip-menu-gap: clamp(2px, 1.2vw, 8px);
 	}
 
 	.ip_mainpart .author_image {
@@ -982,7 +985,6 @@ html[data-ip-section="testimonials"] #testimonials {
 		justify-content: space-between;
 		padding-left: calc(24px + 8px);
 		padding-right: calc(clamp(8px, 3vw, 16px) + var(--ip-menu-scale-bleed));
-		gap: clamp(2px, 1.2vw, 8px);
 	}
 }
 
@@ -1034,14 +1036,6 @@ html[data-ip-section="testimonials"] #testimonials {
 }
 
 @media (width >= 640px) {
-	.ip_all_wrap {
-		/* Same split as the default; restated so later breakpoints can tweak
-		   menu gap without losing the columns. */
-		--ip-col-left: 36%;
-		--ip-col-right: 64%;
-		--ip-menu-gap: clamp(10px, 1.4vw, 28px);
-	}
-
 	.ip_footer {
 		justify-content: flex-start;
 	}
@@ -1112,19 +1106,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	}
 }
 
-@media (min-width: 768px) {
-	.ip_all_wrap {
-		--ip-col-left: 36%;
-		--ip-col-right: 64%;
-		--ip-menu-gap: clamp(16px, 2vw, 40px);
-	}
-}
-
 @media (min-width: 1024px) {
-	.ip_all_wrap {
-		--ip-menu-gap: clamp(20px, 2.5vw, 52px);
-	}
-
 	/* Content-edge alignment + scale bleed so magnified last item is not clipped. */
 	.ip_header .menu ul {
 		padding-right: calc(var(--ip-menu-padding-inline) + var(--ip-menu-scale-bleed));
