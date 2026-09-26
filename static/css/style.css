@@ -192,13 +192,6 @@ h1, h2, h3, h4, h5, h6 {
 html.ip-automation .ip_header .logo .text .logo-cursor{
 	animation: none;
 }
-/* Desktop hover: stronger magnify, still below active scale (1.5). */
-@media (min-width: 1024px) and (hover: hover) and (pointer: fine){
-	.ip_header .menu ul li:not(.active) a:hover,
-	.ip_header .menu ul li:not(.active) a:focus-visible{
-		transform: translateY(-6px) scale(1.2);
-	}
-}
 
 /*	MAINPART + SECTIONS */
 /* The full ATF shell, including visible .ip_mainpart geometry, lives in
