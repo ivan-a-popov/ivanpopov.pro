@@ -322,10 +322,10 @@ html.skip-preloader #preloader {
 	--ip-col-left: 36%;
 	--ip-col-right: 64%;
 	--ip-layout-max: 1880px;
-	--ip-bar-height: 48px;
+	--ip-bar-height: clamp(1rem, 2.5vw, 2rem);
 	--ip-footer-height: calc(7px + .5vw);
 	--ip-footer-font-size: calc(6px + .45vw);
-	--ip-logo-font-size: clamp(1rem, 2.5vw, 2rem);
+	--ip-logo-font-size: clamp(1rem, 3.5vw, 2rem);
 	--ip-logo-padding-left: .9vw;
 	--ip-logo-menu-gap: 1px;
 	/* Sub-label is a rem knob (never em) so it stays a caption. The whole <a>
@@ -366,7 +366,6 @@ html.skip-preloader #preloader {
 	align-items: center;
 	height: var(--ip-bar-height);
 	margin: 0;
-	font-size: inherit;
 	font-weight: inherit;
 	font-family: inherit;
 	line-height: inherit;
@@ -1073,7 +1072,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	}
 
 	.ip_header .menu ul li a {
-		font-size: 1.0625rem;
+		font-size: 0.9625rem;
 	}
 
 	.ip_home {
