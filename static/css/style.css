@@ -449,7 +449,7 @@ html,
 /* Persistent contact dock — chrome, not in-flow. Hidden on #home (icons
    already sit in the copy). Visible when another section is .active, and
    on deep-link first paint via html[data-ip-section]. Folded tap target is
-   the envelope face; open state turns it to the reverse. A page change
+   the envelope. A page change
    dims the dock while the section rolls (is-transit) and settles it as the
    page lands; reaching the end of a section peeks the first contact out
    (is-peek) instead of auto-expanding. */
@@ -628,19 +628,6 @@ html.ip-off-home .ip_contact_dock{
 	max-width: none;
 	object-fit: cover;
 	object-position: center;
-	transition: opacity var(--ip-dock-fold);
-}
-.ip_contact_dock__envelope-face{
-	opacity: 1;
-}
-.ip_contact_dock__envelope-back{
-	opacity: 0;
-}
-.ip_contact_dock.is-open .ip_contact_dock__envelope-face{
-	opacity: 0;
-}
-.ip_contact_dock.is-open .ip_contact_dock__envelope-back{
-	opacity: 1;
 }
 .ip_contact_dock__actions a:focus-visible,
 .ip_contact_dock__toggle:focus-visible{
@@ -675,8 +662,7 @@ html.ip-off-home .ip_contact_dock{
 	.ip_contact_dock__bar,
 	.ip_contact_dock__actions,
 	.ip_contact_dock__actions a,
-	.ip_contact_dock__toggle,
-	.ip_contact_dock__envelope img{
+	.ip_contact_dock__toggle{
 		transition: none;
 	}
 	.ip_contact_dock.is-transit .ip_contact_dock__bar{
