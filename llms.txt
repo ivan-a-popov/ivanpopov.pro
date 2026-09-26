@@ -24,13 +24,14 @@ Key facts:
 
 ## Services
 
-- [Services](https://ivanpopov.pro/#service): Five service offers plus E-commerce specialization. The services are Audit, AI, Security, IT outsourcing, and Expert projects; E-commerce explains the domain context shared by several offers.
+- [Services](https://ivanpopov.pro/#service): Six service offers: Audit, AI, Security, IT outsourcing, Expert projects, and CRM and inventory (RetailCRM / МойСклад). E-commerce is also the domain context shared by several offers.
 - [Audit](https://ivanpopov.pro/audit/): Independent diagnosis — general and technical audits or investigation of a concrete issue; written findings, priorities, budget ranges, and roadmap.
 - [IT outsourcing](https://ivanpopov.pro/outsource/): Ongoing operations — monitoring, servers, updates, incidents, routine changes, and contractor coordination under an agreed scope and SLA.
 - [Expert projects](https://ivanpopov.pro/expert/): Strategic sessions, architecture, development, project rescue, and external IT leadership.
 - [Security](https://ivanpopov.pro/security/): Operational security — express check, comprehensive hardening, access and backup review, and incident response.
 - [AI](https://ivanpopov.pro/ai/): Business-first AI implementation — use-case discovery, prototypes, RAG, MCP, agents, local models, integration, security, and cost control.
-- E-commerce is a specialization rather than a separate service: CRM, WMS, marketplaces, logistics, payments, communications, and analytics appear across Audit, Outsource, Expert, Security, and AI work.
+- [CRM and inventory](https://ivanpopov.pro/ecommerce/): RetailCRM and МойСклад implementation from scratch or relaunch of a broken setup; integrations with the website, marketplaces, delivery, telephony, and payments; custom API development.
+- E-commerce is a specialization across offers: CRM, WMS, marketplaces, logistics, payments, communications, and analytics appear across Audit, Outsource, Expert, Security, AI, and CRM work.
 
 ## Contact
 
