@@ -614,9 +614,10 @@ html.ip-off-home .ip_contact_dock{
 	width: 44px;
 	height: 44px;
 	flex: 0 0 44px;
+	padding: 6px;
 	border-radius: 50%;
 	opacity: .92;
-	transition: transform .2s ease, opacity .2s ease;
+	transition: opacity .2s ease;
 }
 .ip_contact_dock__toggle{
 	position: relative;
@@ -664,11 +665,12 @@ html.ip-off-home .ip_contact_dock{
 	outline-offset: 2px;
 	opacity: 1;
 }
-/* Fill the 44px hit target. viewBox scales the glyph; no px size on the SVG. */
+/* Inset in the 44px slot so neighbors keep a gap. viewBox scales the glyph. */
 .ip_contact_dock__actions a img{
 	width: 100%;
 	height: 100%;
 	display: block;
+	transition: transform .2s ease;
 }
 @media (prefers-color-scheme: dark){
 	.ip_contact_dock__actions a.ip_mail img{
@@ -677,8 +679,10 @@ html.ip-off-home .ip_contact_dock{
 }
 @media (hover: hover){
 	.ip_contact_dock__actions a:hover{
-		transform: scale(1.12);
 		opacity: 1;
+	}
+	.ip_contact_dock__actions a:hover img{
+		transform: scale(1.2);
 	}
 }
 @media (prefers-reduced-motion: reduce){
@@ -695,7 +699,8 @@ html.ip-off-home .ip_contact_dock{
 		opacity: 1;
 		transform: none;
 	}
-	.ip_contact_dock__actions a:hover{
+	.ip_contact_dock__actions a:hover,
+	.ip_contact_dock__actions a:hover img{
 		transform: none;
 	}
 }
