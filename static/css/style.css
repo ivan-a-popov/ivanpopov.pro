@@ -670,8 +670,7 @@ html.ip-off-home .ip_contact_dock{
 	display: block;
 }
 @media (prefers-color-scheme: dark){
-	.ip_contact_dock__actions a.ip_mail img,
-	.ip_contact_dock__actions a[href*="vk.com"] img{
+	.ip_contact_dock__actions a.ip_mail img{
 		filter: invert(1);
 	}
 }
