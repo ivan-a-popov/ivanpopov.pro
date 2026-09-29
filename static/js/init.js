@@ -373,7 +373,9 @@ function ip_swipe_navigation() {
 
 // ------------   KEYBOARD NAVIGATION    ---------------
 // Arrow Left/Right step through sections. Up/Down scroll the active section
-// when focus is outside it (e.g. on a menu link). Escape closes the popup.
+// when focus is outside it (e.g. on a menu link). Space matches Enter:
+// activate the focused control, and do not page-scroll the section.
+// Escape closes the popup.
 function ip_keyboard_navigation() {
 	var modalBox = ip_one('.ip_modalbox');
 	var headerHrefOpts = { activeLink: '.transition_link li.active a' };
@@ -399,6 +401,24 @@ function ip_keyboard_navigation() {
 		return tag === 'input' || tag === 'textarea' || tag === 'select' || el.isContentEditable;
 	}
 
+	// Real buttons (and similar inputs) already fire click on Space, same as Enter.
+	function spaceActivatesNatively(el) {
+		if (!el || !el.tagName) {
+			return false;
+		}
+		var tag = el.tagName.toLowerCase();
+		if (tag === 'button' || tag === 'summary') {
+			return true;
+		}
+		if (tag !== 'input') {
+			return false;
+		}
+		var type = (el.type || '').toLowerCase();
+		return type === 'button' || type === 'submit' || type === 'reset'
+			|| type === 'checkbox' || type === 'radio' || type === 'file'
+			|| type === 'image' || type === 'color' || type === 'range';
+	}
+
 	document.addEventListener('keydown', function (e) {
 		var key = e.key;
 		if (key === 'Escape') {
@@ -409,6 +429,23 @@ function ip_keyboard_navigation() {
 		}
 		// Leave typing and modified shortcuts (Ctrl/Cmd/Alt) untouched.
 		if (isTypingTarget(e.target) || e.ctrlKey || e.metaKey || e.altKey) {
+			return;
+		}
+		// Teasers already map Space to Enter. Other focused links should too,
+		// and a focused section must not jump a page (Enter does not scroll it).
+		if (key === ' ' || key === 'Spacebar') {
+			if (spaceActivatesNatively(e.target) || e.defaultPrevented) {
+				return;
+			}
+			var link = e.target.closest && e.target.closest('a[href]');
+			var modalOpen = modalBox && modalBox.classList.contains('opened');
+			if (!link && modalOpen) {
+				return;
+			}
+			e.preventDefault();
+			if (link && !e.repeat) {
+				link.click();
+			}
 			return;
 		}
 		// Section navigation is suspended while a popup is open.
