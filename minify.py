@@ -424,6 +424,7 @@ def _require(path: Path) -> Path:
 _ASSET_RE = re.compile(
     r'(?:href|src)="(/?static/[^"?]+\.(?:css|js))'
     r'|(?:href|src|srcset|data-popup-img|data-partner-popup-logo)="(/?static/img/[^"?#\s>]+)'
+    r'|href="(/?favicon\.ico)"'
 )
 
 
