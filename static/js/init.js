@@ -498,12 +498,10 @@ var ip_dock_hover = false;
 var IP_SECTION_ROLL_MS = 1200;
 // Dock fade-in when there is no roll (deep-link instant land).
 var IP_DOCK_FADE_MS = 280;
-// Unattended open, counted from the start of the unfold (1s of the hover
-// open in style.css; the demo open is slower). Fold is the closed-state
-// transition. Demo dwell stays about the same fully-open pause as hover.
+// Unattended open, counted from the start of the unfold. Fold is the
+// closed-state transition.
 var IP_DOCK_HOLD_MS = 3000;
 var IP_DOCK_DEMO_DELAY_MS = 500;
-var IP_DOCK_DEMO_HOLD_MS = 3600;
 var ip_dock_demo_timer = null;
 
 function ip_contact_dock_el() {
@@ -546,7 +544,7 @@ function ip_contact_dock_fold_if_idle() {
 	ip_contact_dock_set_open(false);
 }
 // Hover and the demo share this. A pinned open is left alone.
-function ip_contact_dock_schedule_fold(holdMs) {
+function ip_contact_dock_schedule_fold() {
 	ip_contact_dock_clear_fold();
 	if (ip_dock_pinned || ip_dock_hover) {
 		return;
@@ -555,7 +553,7 @@ function ip_contact_dock_schedule_fold(holdMs) {
 	if (!dock || !dock.classList.contains('is-open')) {
 		return;
 	}
-	ip_dock_fold_timer = setTimeout(ip_contact_dock_fold_if_idle, holdMs || IP_DOCK_HOLD_MS);
+	ip_dock_fold_timer = setTimeout(ip_contact_dock_fold_if_idle, IP_DOCK_HOLD_MS);
 }
 function ip_contact_dock_cancel_demo() {
 	if (ip_dock_demo_timer) {
@@ -631,7 +629,7 @@ function ip_contact_dock_reveal(demo) {
 	dock.classList.toggle('is-demo', !!demo);
 	ip_contact_dock_set_open(true, false);
 	if (!ip_dock_hover) {
-		ip_contact_dock_schedule_fold(demo ? IP_DOCK_DEMO_HOLD_MS : IP_DOCK_HOLD_MS);
+		ip_contact_dock_schedule_fold();
 	}
 }
 function ip_contact_dock_land(section) {
