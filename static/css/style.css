@@ -543,6 +543,12 @@ html.ip-off-home .ip_contact_dock{
 		grid-template-columns 1s cubic-bezier(.22, .61, .36, 1),
 		opacity .45s ease;
 }
+/* Unattended demo after a popup or subsection closes. Slower than hover. */
+.ip_contact_dock.is-demo.is-open .ip_contact_dock__actions{
+	transition:
+		grid-template-columns 1.55s cubic-bezier(.33, .12, .24, 1),
+		opacity .85s ease;
+}
 /* min-width: 0 lets the 0fr track collapse. Three 44px contacts; the track
    grows to that content when the strip opens. */
 .ip_contact_dock__actions-inner{
@@ -648,6 +654,9 @@ html.ip-off-home .ip_contact_dock{
 	.ip_contact_dock.is-transit .ip_contact_dock__bar{
 		opacity: 1;
 		transform: none;
+	}
+	.ip_contact_dock.is-demo.is-open .ip_contact_dock__actions{
+		transition: none;
 	}
 	.ip_contact_dock__actions a:hover,
 	.ip_contact_dock__actions a:hover img{

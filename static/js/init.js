@@ -484,7 +484,7 @@ function ip_keyboard_navigation() {
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
 // Section change: the dock dims while the page rolls (is-transit) and settles
-// when the new section lands. The strip opens when a popup closes or a
+// when the new section lands. The strip opens 500ms after a popup closes or a
 // subsection collapses back to closed — not when one subsection replaces
 // another, and not when the reader reaches the end of a section. Hover
 // opens the full strip too. A click on the envelope pins it open.
@@ -498,9 +498,13 @@ var ip_dock_hover = false;
 var IP_SECTION_ROLL_MS = 1200;
 // Dock fade-in when there is no roll (deep-link instant land).
 var IP_DOCK_FADE_MS = 280;
-// Unattended open, counted from the start of the unfold (1s of that is the
-// open animation in style.css). Fold is the closed-state transition.
+// Unattended open, counted from the start of the unfold (1s of the hover
+// open in style.css; the demo open is slower). Fold is the closed-state
+// transition. Demo dwell stays about the same fully-open pause as hover.
 var IP_DOCK_HOLD_MS = 3000;
+var IP_DOCK_DEMO_DELAY_MS = 500;
+var IP_DOCK_DEMO_HOLD_MS = 3600;
+var ip_dock_demo_timer = null;
 
 function ip_contact_dock_el() {
 	return ip_one('.ip_contact_dock');
@@ -542,7 +546,7 @@ function ip_contact_dock_fold_if_idle() {
 	ip_contact_dock_set_open(false);
 }
 // Hover and the demo share this. A pinned open is left alone.
-function ip_contact_dock_schedule_fold() {
+function ip_contact_dock_schedule_fold(holdMs) {
 	ip_contact_dock_clear_fold();
 	if (ip_dock_pinned || ip_dock_hover) {
 		return;
@@ -551,7 +555,32 @@ function ip_contact_dock_schedule_fold() {
 	if (!dock || !dock.classList.contains('is-open')) {
 		return;
 	}
-	ip_dock_fold_timer = setTimeout(ip_contact_dock_fold_if_idle, IP_DOCK_HOLD_MS);
+	ip_dock_fold_timer = setTimeout(ip_contact_dock_fold_if_idle, holdMs || IP_DOCK_HOLD_MS);
+}
+function ip_contact_dock_cancel_demo() {
+	if (ip_dock_demo_timer) {
+		clearTimeout(ip_dock_demo_timer);
+		ip_dock_demo_timer = null;
+	}
+}
+// After a popup or a subsection finishes closing. Hover and a click still
+// open immediately; this only delays the unattended strip.
+function ip_contact_dock_schedule_demo() {
+	ip_contact_dock_cancel_demo();
+	if (!document.documentElement.classList.contains('ip-off-home')) {
+		return;
+	}
+	ip_dock_demo_timer = setTimeout(function () {
+		ip_dock_demo_timer = null;
+		if (ip_one('.ip_modalbox.opened')) {
+			return;
+		}
+		var section = ip_one('.ip_section.active');
+		if (section && section.querySelector('.ip_teaser.is-open')) {
+			return;
+		}
+		ip_contact_dock_reveal(true);
+	}, IP_DOCK_DEMO_DELAY_MS);
 }
 function ip_contact_dock_set_open(open, pin) {
 	var dock = ip_contact_dock_el();
@@ -562,6 +591,7 @@ function ip_contact_dock_set_open(open, pin) {
 	var actions = ip_one('.ip_contact_dock__actions', dock);
 	if (!open) {
 		ip_dock_pinned = false;
+		dock.classList.remove('is-demo');
 		ip_contact_dock_clear_fold();
 	} else if (pin) {
 		ip_dock_pinned = true;
@@ -583,7 +613,8 @@ function ip_contact_dock_set_open(open, pin) {
 	}
 }
 // Full strip, then fold unless the pointer is already on it or it is pinned.
-function ip_contact_dock_reveal() {
+// demo: slower open (is-demo) used after a popup or subsection closes.
+function ip_contact_dock_reveal(demo) {
 	var dock = ip_contact_dock_el();
 	if (!document.documentElement.classList.contains('ip-off-home')) {
 		return;
@@ -597,9 +628,10 @@ function ip_contact_dock_reveal() {
 	if (!ip_contact_dock_motion_ok()) {
 		return;
 	}
+	dock.classList.toggle('is-demo', !!demo);
 	ip_contact_dock_set_open(true, false);
 	if (!ip_dock_hover) {
-		ip_contact_dock_schedule_fold();
+		ip_contact_dock_schedule_fold(demo ? IP_DOCK_DEMO_HOLD_MS : IP_DOCK_HOLD_MS);
 	}
 }
 function ip_contact_dock_land(section) {
@@ -635,6 +667,7 @@ function ip_contact_dock_land(section) {
 function ip_contact_dock_on_section(href) {
 	var offHome = href !== '#home';
 	document.documentElement.classList.toggle('ip-off-home', offHome);
+	ip_contact_dock_cancel_demo();
 	ip_contact_dock_unland();
 	if (!ip_dock_pinned) {
 		ip_contact_dock_set_open(false);
@@ -658,6 +691,7 @@ function ip_contact_dock_bind() {
 	if (toggle) {
 		toggle.addEventListener('click', function (e) {
 			e.preventDefault();
+			ip_contact_dock_cancel_demo();
 			if (dock.classList.contains('is-open')) {
 				ip_contact_dock_set_open(false);
 			} else {
@@ -672,6 +706,7 @@ function ip_contact_dock_bind() {
 			return;
 		}
 		ip_dock_hover = true;
+		ip_contact_dock_cancel_demo();
 		ip_contact_dock_clear_fold();
 		ip_contact_dock_reveal();
 	});
@@ -888,7 +923,7 @@ function ip_service_popup() {
 			}
 			// After this keydown, so Escape that closed the popup does not
 			// also fold the strip it just opened.
-			ip_contact_dock_reveal();
+			ip_contact_dock_schedule_demo();
 		}, 0);
 	}
 	serviceCards.forEach(function (card) {
@@ -925,6 +960,7 @@ function ip_service_popup() {
 			} else {
 				unpinQrPopup();
 			}
+			ip_contact_dock_cancel_demo();
 			modalBox.classList.add('opened');
 			modalBox.setAttribute('role', 'dialog');
 			modalBox.setAttribute('aria-modal', 'true');
@@ -1249,8 +1285,10 @@ function ip_teasers(opts) {
 					}
 				}
 				setExpanded(teaser, willOpen, { scroll: !willOpen });
-				if (!willOpen) {
-					ip_contact_dock_reveal();
+				if (willOpen) {
+					ip_contact_dock_cancel_demo();
+				} else {
+					ip_contact_dock_schedule_demo();
 				}
 			});
 			teaser.addEventListener('keydown', function (e) {
