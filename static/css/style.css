@@ -449,9 +449,9 @@ html,
 /* Persistent contact dock — chrome, not in-flow. Hidden on #home (icons
    already sit in the copy). Visible when another section is .active, and
    on deep-link first paint via html[data-ip-section]. Folded tap target is
-   the envelope. Any expand (hover, testimonials at the end, or a popup
-   close / subsection collapse elsewhere) opens the full strip; an
-   unattended expand folds itself. A click on the envelope
+   the envelope. Any expand (hover, a popup close, or a subsection
+   collapse) opens the full strip; an unattended expand folds itself.
+   A click on the envelope
    stays open until the reader closes it. A page change dims the dock while
    the section rolls (is-transit) and settles it as the page lands. */
 .ip_contact_dock{

@@ -484,12 +484,11 @@ function ip_keyboard_navigation() {
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
 // Section change: the dock dims while the page rolls (is-transit) and settles
-// when the new section lands. Testimonials demo when the reader arrives at
-// the end. Every other section demos when a popup closes or a subsection
-// collapses back to closed — not when one subsection replaces another.
-// Hover opens the full strip too. A click on the envelope pins it open.
+// when the new section lands. The strip opens when a popup closes or a
+// subsection collapses back to closed — not when one subsection replaces
+// another, and not when the reader reaches the end of a section. Hover
+// opens the full strip too. A click on the envelope pins it open.
 var ip_dock_land = null;
-var ip_dock_watch = null;
 var ip_dock_fold_timer = null;
 // Envelope click. Stays open across section changes; hover and the demo do not.
 var ip_dock_pinned = false;
@@ -499,16 +498,9 @@ var ip_dock_hover = false;
 var IP_SECTION_ROLL_MS = 1200;
 // Dock fade-in when there is no roll (deep-link instant land).
 var IP_DOCK_FADE_MS = 280;
-// Pause at the end of a section before the demo. Short once the reader has
-// scrolled there. Shorter still when the section fits and the end is already
-// on screen — there is no "arrived at the bottom" moment to wait for.
-var IP_DOCK_DEMO_AFTER_SCROLL_MS = 1200;
-var IP_DOCK_DEMO_AFTER_IDLE_MS = 2000;
 // Unattended open, counted from the start of the unfold (1s of that is the
 // open animation in style.css). Fold is the closed-state transition.
 var IP_DOCK_HOLD_MS = 3000;
-// Sub-pixel scrollTop and the last block's bottom margin.
-var IP_DOCK_END_SLACK_PX = 24;
 
 function ip_contact_dock_el() {
 	return ip_one('.ip_contact_dock');
@@ -522,14 +514,6 @@ function ip_contact_dock_unland() {
 	}
 	clearTimeout(ip_dock_land.timer);
 	ip_dock_land = null;
-}
-function ip_contact_dock_unwatch() {
-	if (!ip_dock_watch) {
-		return;
-	}
-	ip_dock_watch.section.removeEventListener('scroll', ip_dock_watch.onScroll);
-	clearTimeout(ip_dock_watch.timer);
-	ip_dock_watch = null;
 }
 function ip_contact_dock_motion_ok() {
 	if (document.documentElement.classList.contains('ip-automation')) {
@@ -618,51 +602,6 @@ function ip_contact_dock_reveal() {
 		ip_contact_dock_schedule_fold();
 	}
 }
-function ip_contact_dock_watch(section) {
-	ip_contact_dock_unwatch();
-	function atEnd() {
-		return section.scrollTop + section.clientHeight >= section.scrollHeight - IP_DOCK_END_SLACK_PX;
-	}
-	// arrived stays set while they remain at the end, so the demo plays on
-	// arrival and not again until they scroll away and come back.
-	function arm() {
-		var pending = !!watch.timer;
-		clearTimeout(watch.timer);
-		watch.timer = null;
-		if (!atEnd()) {
-			watch.arrived = false;
-			return;
-		}
-		if (document.hidden) {
-			if (pending) {
-				watch.arrived = false;
-			}
-			return;
-		}
-		if (watch.arrived) {
-			return;
-		}
-		watch.arrived = true;
-		watch.timer = setTimeout(fire, watch.scrolled ? IP_DOCK_DEMO_AFTER_SCROLL_MS : IP_DOCK_DEMO_AFTER_IDLE_MS);
-	}
-	function fire() {
-		watch.timer = null;
-		// Late images or enhanced blocks can push the end away after arming.
-		if (!atEnd()) {
-			watch.arrived = false;
-			return;
-		}
-		ip_contact_dock_reveal();
-	}
-	function onScroll() {
-		watch.scrolled = true;
-		arm();
-	}
-	var watch = { section: section, onScroll: onScroll, arm: arm, timer: null, scrolled: false, arrived: false };
-	ip_dock_watch = watch;
-	section.addEventListener('scroll', onScroll, { passive: true });
-	arm();
-}
 function ip_contact_dock_land(section) {
 	var dock = ip_contact_dock_el();
 	if (!dock || !section) {
@@ -672,9 +611,6 @@ function ip_contact_dock_land(section) {
 	function settle() {
 		ip_contact_dock_unland();
 		dock.classList.remove('is-transit');
-		if (section.id === 'testimonials') {
-			ip_contact_dock_watch(section);
-		}
 		// Sticky :hover after a tap must not count. Only a real mouse hold.
 		if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && dock.matches(':hover')) {
 			ip_dock_hover = true;
@@ -700,7 +636,6 @@ function ip_contact_dock_on_section(href) {
 	var offHome = href !== '#home';
 	document.documentElement.classList.toggle('ip-off-home', offHome);
 	ip_contact_dock_unland();
-	ip_contact_dock_unwatch();
 	if (!ip_dock_pinned) {
 		ip_contact_dock_set_open(false);
 	}
@@ -765,11 +700,6 @@ function ip_contact_dock_bind() {
 			}
 			ip_contact_dock_schedule_fold();
 		}, 0);
-	});
-	document.addEventListener('visibilitychange', function () {
-		if (ip_dock_watch) {
-			ip_dock_watch.arm();
-		}
 	});
 	document.addEventListener('keydown', function (e) {
 		if (e.key !== 'Escape') {
