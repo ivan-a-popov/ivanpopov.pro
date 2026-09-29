@@ -486,14 +486,16 @@ function ip_keyboard_navigation() {
 // Section change: the dock dims while the page rolls (is-transit) and settles
 // when the new section lands. The strip opens 500ms after a popup closes or a
 // subsection collapses back to closed — not when one subsection replaces
-// another, and not when the reader reaches the end of a section. Hover
-// opens the full strip too. A click on the envelope pins it open.
+// another, and not when the reader reaches the end of a section. Hover and a
+// tap on the envelope open it the same way. Nothing keeps it open: it holds
+// while the pointer is on it or a contact link has focus, otherwise it folds.
 var ip_dock_land = null;
 var ip_dock_fold_timer = null;
-// Envelope click. Stays open across section changes; hover and the demo do not.
-var ip_dock_pinned = false;
 // Mouse is over the dock. The hold timer does not run while this is set.
 var ip_dock_hover = false;
+// Tab moved focus. A pointer tap also focuses a link, and that must not
+// hold the strip open after the finger is gone.
+var ip_dock_keynav = false;
 // Matches .animated { animation-duration: 1.2s } — fallback if animationend misses.
 var IP_SECTION_ROLL_MS = 1200;
 // Dock fade-in when there is no roll (deep-link instant land).
@@ -531,22 +533,25 @@ function ip_contact_dock_clear_fold() {
 }
 function ip_contact_dock_fold_if_idle() {
 	ip_dock_fold_timer = null;
-	if (ip_dock_pinned || ip_dock_hover) {
+	if (ip_dock_hover) {
 		return;
 	}
 	var dock = ip_contact_dock_el();
 	if (!dock || !dock.classList.contains('is-open')) {
 		return;
 	}
-	if (dock.contains(document.activeElement)) {
+	// Keyboard focus on a contact link holds the strip. The envelope button
+	// stays focused after a tap, and a tapped link does too — neither holds.
+	var actions = ip_one('.ip_contact_dock__actions', dock);
+	if (ip_dock_keynav && actions && actions.contains(document.activeElement)) {
 		return;
 	}
 	ip_contact_dock_set_open(false);
 }
-// Hover and the demo share this. A pinned open is left alone.
+// Hover, a tap, and the demo share this. A pointer on the dock holds it.
 function ip_contact_dock_schedule_fold() {
 	ip_contact_dock_clear_fold();
-	if (ip_dock_pinned || ip_dock_hover) {
+	if (ip_dock_hover) {
 		return;
 	}
 	var dock = ip_contact_dock_el();
@@ -580,7 +585,7 @@ function ip_contact_dock_schedule_demo() {
 		ip_contact_dock_reveal(true);
 	}, IP_DOCK_DEMO_DELAY_MS);
 }
-function ip_contact_dock_set_open(open, pin) {
+function ip_contact_dock_set_open(open) {
 	var dock = ip_contact_dock_el();
 	if (!dock) {
 		return;
@@ -588,11 +593,7 @@ function ip_contact_dock_set_open(open, pin) {
 	var toggle = ip_one('.ip_contact_dock__toggle', dock);
 	var actions = ip_one('.ip_contact_dock__actions', dock);
 	if (!open) {
-		ip_dock_pinned = false;
 		dock.classList.remove('is-demo');
-		ip_contact_dock_clear_fold();
-	} else if (pin) {
-		ip_dock_pinned = true;
 		ip_contact_dock_clear_fold();
 	}
 	dock.classList.toggle('is-open', open);
@@ -610,14 +611,14 @@ function ip_contact_dock_set_open(open, pin) {
 		}
 	}
 }
-// Full strip, then fold unless the pointer is already on it or it is pinned.
+// Full strip, then fold unless the pointer is already on it.
 // demo: slower open (is-demo) used after a popup or subsection closes.
 function ip_contact_dock_reveal(demo) {
 	var dock = ip_contact_dock_el();
 	if (!document.documentElement.classList.contains('ip-off-home')) {
 		return;
 	}
-	if (!dock || ip_dock_pinned || dock.classList.contains('is-open') || dock.classList.contains('is-transit')) {
+	if (!dock || dock.classList.contains('is-open') || dock.classList.contains('is-transit')) {
 		return;
 	}
 	if (ip_one('.ip_modalbox.opened')) {
@@ -627,7 +628,7 @@ function ip_contact_dock_reveal(demo) {
 		return;
 	}
 	dock.classList.toggle('is-demo', !!demo);
-	ip_contact_dock_set_open(true, false);
+	ip_contact_dock_set_open(true);
 	if (!ip_dock_hover) {
 		ip_contact_dock_schedule_fold();
 	}
@@ -667,15 +668,12 @@ function ip_contact_dock_on_section(href) {
 	document.documentElement.classList.toggle('ip-off-home', offHome);
 	ip_contact_dock_cancel_demo();
 	ip_contact_dock_unland();
-	if (!ip_dock_pinned) {
-		ip_contact_dock_set_open(false);
-	}
+	ip_contact_dock_set_open(false);
 	if (!offHome) {
 		var dock = ip_contact_dock_el();
 		if (dock) {
 			dock.classList.remove('is-transit');
 		}
-		ip_contact_dock_set_open(false);
 		return;
 	}
 	ip_contact_dock_land(ip_section_from_href(href));
@@ -693,7 +691,9 @@ function ip_contact_dock_bind() {
 			if (dock.classList.contains('is-open')) {
 				ip_contact_dock_set_open(false);
 			} else {
-				ip_contact_dock_set_open(true, true);
+				dock.classList.remove('is-demo');
+				ip_contact_dock_set_open(true);
+				ip_contact_dock_schedule_fold();
 			}
 		});
 	}
@@ -715,9 +715,10 @@ function ip_contact_dock_bind() {
 		ip_dock_hover = false;
 		ip_contact_dock_schedule_fold();
 	});
-	// A slow tap shouldn't lose the strip under the finger. Click (pin or
+	// A slow tap shouldn't lose the strip under the finger. Click (open or
 	// close) runs after pointerup and clears this if it needs to.
 	dock.addEventListener('pointerdown', function () {
+		ip_dock_keynav = false;
 		ip_contact_dock_clear_fold();
 	});
 	dock.addEventListener('pointerup', function () {
@@ -728,13 +729,17 @@ function ip_contact_dock_bind() {
 	});
 	dock.addEventListener('focusout', function () {
 		setTimeout(function () {
-			if (dock.contains(document.activeElement)) {
+			var actions = ip_one('.ip_contact_dock__actions', dock);
+			if (ip_dock_keynav && actions && actions.contains(document.activeElement)) {
 				return;
 			}
 			ip_contact_dock_schedule_fold();
 		}, 0);
 	});
 	document.addEventListener('keydown', function (e) {
+		if (e.key === 'Tab') {
+			ip_dock_keynav = true;
+		}
 		if (e.key !== 'Escape') {
 			return;
 		}
