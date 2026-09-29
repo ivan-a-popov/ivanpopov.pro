@@ -1193,7 +1193,8 @@ function ip_teasers(opts) {
 			teaser.setAttribute('aria-expanded', open ? 'true' : 'false');
 		}
 	}
-	function setExpanded(teaser, open) {
+	function setExpanded(teaser, open, behavior) {
+		behavior = behavior || {};
 		var body = teaser.querySelector('.ip_teaser__body');
 		if (!body) {
 			return;
@@ -1206,7 +1207,7 @@ function ip_teasers(opts) {
 			}
 			body.style.maxHeight = open ? 'none' : '';
 			teaser.classList.remove('is-animating');
-			if (!open) {
+			if (!open && behavior.scroll) {
 				scrollSectionToTitle(teaser);
 			}
 			return;
@@ -1226,7 +1227,9 @@ function ip_teasers(opts) {
 		applyChrome(teaser, false);
 		applyPreviewVar(teaser, body);
 		body.style.maxHeight = collapsedMaxHeight(teaser);
-		scrollSectionToTitle(teaser);
+		if (behavior.scroll) {
+			scrollSectionToTitle(teaser);
+		}
 		afterHeightTransition(teaser, body, token, function () {
 			body.style.maxHeight = '';
 			teaser.classList.remove('is-animating');
@@ -1295,7 +1298,18 @@ function ip_teasers(opts) {
 				if (hasTextSelection()) {
 					return;
 				}
-				setExpanded(teaser, !teaser.classList.contains('is-open'));
+				var willOpen = !teaser.classList.contains('is-open');
+				if (willOpen) {
+					var whyme = teaser.closest('#whyme');
+					if (whyme) {
+						whyme.querySelectorAll('.ip_teaser.is-open').forEach(function (other) {
+							if (other !== teaser) {
+								setExpanded(other, false);
+							}
+						});
+					}
+				}
+				setExpanded(teaser, willOpen, { scroll: !willOpen });
 			});
 			teaser.addEventListener('keydown', function (e) {
 				if (e.key !== 'Enter' && e.key !== ' ') {
