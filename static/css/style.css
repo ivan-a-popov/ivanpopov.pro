@@ -1059,16 +1059,15 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 		transform: none;
 	}
 }
-/* Hover/focus hint. Sits in the padding under the logo; the link stays the hit target. */
-.partner-card::after{
+/* "Открыть описание" — hover/focus with a pointer, always visible on touch.
+   The overlay link stays the hit target. */
+.partner-card::after,
+.ip_service .service-card .service-card__summary::after{
 	content: "Открыть описание";
 	position: absolute;
 	z-index: 6;
 	left: 50%;
-	top: calc(50% + var(--partner-logo-h) / 2 + 5px);
 	transform: translateX(-50%);
-	padding: 0 4px;
-	background: var(--bg-color);
 	font-family: Manrope, "Manrope Fallback", sans-serif;
 	font-size: 11px;
 	font-weight: 600;
@@ -1079,17 +1078,35 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	pointer-events: none;
 	opacity: 0;
 }
+.partner-card::after{
+	top: calc(50% + var(--partner-logo-h) / 2 + 5px);
+	padding: 0 4px;
+	background: var(--bg-color);
+}
+.ip_service .service-card .service-card__summary{
+	position: relative;
+}
+.ip_service .service-card .service-card__summary::after{
+	top: calc(100% + 8px);
+}
+.ip_service .service-card:hover .service-card__summary::after{
+	color: var(--card-hover-summary);
+}
 @media (hover: hover) and (pointer: fine){
-	.partner-card::after{
+	.partner-card::after,
+	.ip_service .service-card .service-card__summary::after{
 		transition: opacity .2s ease;
 	}
 	.partner-card:hover::after,
-	.partner-card:focus-within::after{
+	.partner-card:focus-within::after,
+	.ip_service .service-card:hover .service-card__summary::after,
+	.ip_service .service-card:focus-within .service-card__summary::after{
 		opacity: 1;
 	}
 }
 @media (hover: none){
-	.partner-card::after{
+	.partner-card::after,
+	.ip_service .service-card .service-card__summary::after{
 		opacity: 1;
 	}
 }
@@ -1159,6 +1176,7 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 }
 @media (prefers-reduced-motion: reduce){
 	.partner-card::after,
+	.ip_service .service-card .service-card__summary::after,
 	.partner-card__logo,
 	.partner-card__lockup{
 		transition: none;
