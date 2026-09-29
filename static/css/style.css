@@ -997,6 +997,7 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	padding: 0;
 }
 .partner-card{
+	--partner-logo-h: 36px;
 	position: relative;
 	z-index: 0;
 	display: flex;
@@ -1058,6 +1059,45 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 		transform: none;
 	}
 }
+/* Hover/focus hint. Sits in the padding under the logo; the link stays the hit target. */
+.partner-card::after{
+	content: "Открыть описание";
+	position: absolute;
+	z-index: 6;
+	left: 50%;
+	top: calc(50% + var(--partner-logo-h) / 2 + 5px);
+	transform: translateX(-50%);
+	padding: 0 4px;
+	background: var(--bg-color);
+	font-family: Manrope, "Manrope Fallback", sans-serif;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.03em;
+	line-height: 1.2;
+	color: var(--text-muted);
+	white-space: nowrap;
+	pointer-events: none;
+	opacity: 0;
+}
+@media (hover: hover) and (pointer: fine){
+	.partner-card::after{
+		transition: opacity .2s ease;
+	}
+	.partner-card:hover::after,
+	.partner-card:focus-within::after{
+		opacity: 1;
+	}
+}
+@media (hover: none){
+	.partner-card::after{
+		opacity: 1;
+	}
+}
+@media (hover: none) and (width < 640px){
+	.partner-card{
+		min-height: 92px;
+	}
+}
 .partner_hidden_details{
 	display: none;
 }
@@ -1079,6 +1119,7 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 		grid-column: 3 / span 2;
 	}
 	.partner-card{
+		--partner-logo-h: 48px;
 		min-height: 96px;
 	}
 	.partner-card__lockup{
@@ -1099,6 +1140,7 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 		gap: 22px 32px;
 	}
 	.partner-card{
+		--partner-logo-h: 58px;
 		min-height: 116px;
 		padding: 22px 18px;
 	}
@@ -1116,6 +1158,7 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	}
 }
 @media (prefers-reduced-motion: reduce){
+	.partner-card::after,
 	.partner-card__logo,
 	.partner-card__lockup{
 		transition: none;
