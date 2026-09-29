@@ -449,15 +449,14 @@ html,
 /* Persistent contact dock — chrome, not in-flow. Hidden on #home (icons
    already sit in the copy). Visible when another section is .active, and
    on deep-link first paint via html[data-ip-section]. Folded tap target is
-   the envelope. Hover (is-hint) unfolds just the first contact; open shows
-   the full strip. A page change dims the dock while the section rolls
-   (is-transit) and settles it as the page lands; reaching the end of a
-   section peeks that same first contact (is-peek) instead of auto-expanding. */
+   the envelope. Any expand (hover, or the end-of-section demo) opens the
+   full strip; an unattended expand folds itself. A click on the envelope
+   stays open until the reader closes it. A page change dims the dock while
+   the section rolls (is-transit) and settles it as the page lands. */
 .ip_contact_dock{
 	--ip-paper: #efe6d0;
 	--ip-paper-ink: #1a1510;
 	--ip-dock-fold: 1.6s cubic-bezier(.45, .05, .55, .95);
-	--ip-dock-hint: .4s cubic-bezier(.22, .61, .36, 1);
 	position: absolute;
 	inset: var(--ip-bar-height) 0 var(--ip-footer-height) .5em;
 	width: auto;
@@ -520,29 +519,13 @@ html.ip-off-home .ip_contact_dock{
 		opacity .3s ease,
 		transform .3s ease;
 }
-.ip_contact_dock.is-open .ip_contact_dock__bar,
-.ip_contact_dock.is-peek .ip_contact_dock__bar,
-.ip_contact_dock.is-hint .ip_contact_dock__bar{
+.ip_contact_dock.is-open .ip_contact_dock__bar{
 	padding: 4px 4px 4px 6px;
 	background: color-mix(in srgb, var(--ip-paper) 18%, transparent);
 	border: 1px solid color-mix(in srgb, var(--ip-paper) 28%, transparent);
 	box-shadow: none;
 	backdrop-filter: blur(14px) saturate(1.05);
 	-webkit-backdrop-filter: blur(14px) saturate(1.05);
-}
-/* Hover in and out are both the short hint timing. The closed bar keeps the
-   slow fold so opening and closing the full strip stay as they are. */
-.ip_contact_dock.is-hint .ip_contact_dock__bar,
-.ip_contact_dock.is-hint-out .ip_contact_dock__bar{
-	transition:
-		background var(--ip-dock-hint),
-		box-shadow var(--ip-dock-hint),
-		padding var(--ip-dock-hint),
-		border-color var(--ip-dock-hint),
-		backdrop-filter var(--ip-dock-hint),
-		-webkit-backdrop-filter var(--ip-dock-hint),
-		opacity .5s cubic-bezier(.22, .61, .36, 1),
-		transform .7s cubic-bezier(.34, 1.4, .64, 1);
 }
 .ip_contact_dock__actions{
 	display: grid;
@@ -559,48 +542,14 @@ html.ip-off-home .ip_contact_dock{
 		grid-template-columns 1s cubic-bezier(.22, .61, .36, 1),
 		opacity .45s ease;
 }
-.ip_contact_dock.is-peek .ip_contact_dock__actions,
-.ip_contact_dock.is-hint .ip_contact_dock__actions{
-	grid-template-columns: 1fr;
-	opacity: 1;
-}
-.ip_contact_dock.is-peek .ip_contact_dock__actions{
-	transition:
-		grid-template-columns .6s cubic-bezier(.22, .61, .36, 1),
-		opacity .35s ease;
-}
-.ip_contact_dock.is-hint .ip_contact_dock__actions,
-.ip_contact_dock.is-hint-out .ip_contact_dock__actions{
-	transition:
-		grid-template-columns var(--ip-dock-hint),
-		opacity .28s ease;
-}
-/* The 1fr track sizes to this box, so max-width caps a peek at the first
-   icon. The cap is numeric (none is not interpolable) and equals the full
-   strip — three 44px contacts; raise it when adding one — so peek-to-open
-   grows smoothly. After a peek it holds through the 1.6s fold, or the track
-   would jump to full width mid-fold. */
+/* min-width: 0 lets the 0fr track collapse. Three 44px contacts; the track
+   grows to that content when the strip opens. */
 .ip_contact_dock__actions-inner{
 	min-width: 0;
-	max-width: calc(3 * 44px);
 	overflow: hidden;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	transition: max-width 0s linear 1.6s;
-}
-.ip_contact_dock.is-peek .ip_contact_dock__actions-inner,
-.ip_contact_dock.is-hint .ip_contact_dock__actions-inner{
-	max-width: 44px;
-	transition: none;
-}
-/* Hold the one-icon cap for the hint fold, or max-width snaps to the full
-   strip and the collapsing track flashes the other contacts. */
-.ip_contact_dock.is-hint-out .ip_contact_dock__actions-inner{
-	transition: max-width 0s linear .4s;
-}
-.ip_contact_dock.is-open .ip_contact_dock__actions-inner{
-	transition: max-width 1s cubic-bezier(.22, .61, .36, 1);
 }
 .ip_contact_dock__actions a,
 .ip_contact_dock__toggle{

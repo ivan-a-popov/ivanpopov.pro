@@ -484,26 +484,30 @@ function ip_keyboard_navigation() {
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
 // Section change: the dock dims while the page rolls (is-transit) and settles
-// when the new section lands. Once the reader reaches the end of the section,
-// the first contact peeks out beside the envelope (is-peek), once per visit.
+// when the new section lands. The first time the reader reaches the end of a
+// section, the strip opens fully, then folds if they don't use it. Hover does
+// the same full open. A click on the envelope pins it open.
 var ip_dock_land = null;
 var ip_dock_watch = null;
-var ip_dock_peek_timer = null;
-var ip_dock_hint_timer = null;
-// The reader already found the dock on this page; no peek until the next one.
+var ip_dock_fold_timer = null;
+// Demo already played, or the reader already opened the dock, this visit.
 var ip_dock_quiet = false;
+// Envelope click. Stays open across section changes; hover and the demo do not.
+var ip_dock_pinned = false;
+// Mouse is over the dock. The hold timer does not run while this is set.
+var ip_dock_hover = false;
 // Matches .animated { animation-duration: 1.2s } — fallback if animationend misses.
 var IP_SECTION_ROLL_MS = 1200;
 // Dock fade-in when there is no roll (deep-link instant land).
 var IP_DOCK_FADE_MS = 280;
-// Time at the end of a section before the peek: short once the reader has
-// scrolled there, long when the section fits the viewport and never scrolls.
-var IP_DOCK_PEEK_AFTER_SCROLL_MS = 1200;
-var IP_DOCK_PEEK_AFTER_IDLE_MS = 8000;
-// Unfold (.6s in style.css) plus hold; the fold back is the closed-state transition.
-var IP_DOCK_PEEK_HOLD_MS = 1600;
-// Matches --ip-dock-hint (.4s) so the class outlives the hover fold.
-var IP_DOCK_HINT_MS = 500;
+// Pause at the end of a section before the demo. Short once the reader has
+// scrolled there. Shorter still when the section fits and the end is already
+// on screen — there is no "arrived at the bottom" moment to wait for.
+var IP_DOCK_DEMO_AFTER_SCROLL_MS = 1200;
+var IP_DOCK_DEMO_AFTER_IDLE_MS = 2000;
+// Unattended open, counted from the start of the unfold (1s of that is the
+// open animation in style.css). Fold is the closed-state transition.
+var IP_DOCK_HOLD_MS = 3000;
 // Sub-pixel scrollTop and the last block's bottom margin.
 var IP_DOCK_END_SLACK_PX = 24;
 
@@ -528,82 +532,64 @@ function ip_contact_dock_unwatch() {
 	clearTimeout(ip_dock_watch.timer);
 	ip_dock_watch = null;
 }
-function ip_contact_dock_unpeek() {
-	if (ip_dock_peek_timer) {
-		clearTimeout(ip_dock_peek_timer);
-		ip_dock_peek_timer = null;
-	}
-	var dock = ip_contact_dock_el();
-	if (dock) {
-		dock.classList.remove('is-peek');
-	}
-}
 function ip_contact_dock_hush() {
 	ip_dock_quiet = true;
 	ip_contact_dock_unwatch();
 }
-function ip_contact_dock_clear_hint() {
-	if (ip_dock_hint_timer) {
-		clearTimeout(ip_dock_hint_timer);
-		ip_dock_hint_timer = null;
-	}
-	var dock = ip_contact_dock_el();
-	if (dock) {
-		dock.classList.remove('is-hint', 'is-hint-out');
-	}
-}
-// Mouse hover unfolds the first contact (is-hint). Leave plays the short
-// fold (is-hint-out); the closed-state 1.6s fold is for peek and full close.
-function ip_contact_dock_hint(on) {
-	var dock = ip_contact_dock_el();
-	if (!dock) {
-		return;
-	}
-	if (ip_dock_hint_timer) {
-		clearTimeout(ip_dock_hint_timer);
-		ip_dock_hint_timer = null;
-	}
-	if (!on) {
-		if (!dock.classList.contains('is-hint')) {
-			return;
-		}
-		dock.classList.remove('is-hint');
-		if (dock.classList.contains('is-open') || dock.classList.contains('is-peek')) {
-			return;
-		}
-		dock.classList.add('is-hint-out');
-		ip_dock_hint_timer = setTimeout(function () {
-			ip_dock_hint_timer = null;
-			dock.classList.remove('is-hint-out');
-		}, IP_DOCK_HINT_MS);
-		return;
-	}
-	if (dock.classList.contains('is-open') || dock.classList.contains('is-peek') || dock.classList.contains('is-transit')) {
-		return;
-	}
+function ip_contact_dock_motion_ok() {
 	if (document.documentElement.classList.contains('ip-automation')) {
-		return;
+		return false;
 	}
-	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-		return;
-	}
-	if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-		return;
-	}
-	dock.classList.remove('is-hint-out');
-	dock.classList.add('is-hint');
+	return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
-function ip_contact_dock_set_open(open) {
+function ip_contact_dock_clear_fold() {
+	if (ip_dock_fold_timer) {
+		clearTimeout(ip_dock_fold_timer);
+		ip_dock_fold_timer = null;
+	}
+}
+function ip_contact_dock_fold_if_idle() {
+	ip_dock_fold_timer = null;
+	if (ip_dock_pinned || ip_dock_hover) {
+		return;
+	}
+	var dock = ip_contact_dock_el();
+	if (!dock || !dock.classList.contains('is-open')) {
+		return;
+	}
+	if (dock.contains(document.activeElement)) {
+		return;
+	}
+	ip_contact_dock_set_open(false);
+}
+// Hover and the demo share this. A pinned open is left alone.
+function ip_contact_dock_schedule_fold() {
+	ip_contact_dock_clear_fold();
+	if (ip_dock_pinned || ip_dock_hover) {
+		return;
+	}
+	var dock = ip_contact_dock_el();
+	if (!dock || !dock.classList.contains('is-open')) {
+		return;
+	}
+	ip_dock_fold_timer = setTimeout(ip_contact_dock_fold_if_idle, IP_DOCK_HOLD_MS);
+}
+function ip_contact_dock_set_open(open, pin) {
 	var dock = ip_contact_dock_el();
 	if (!dock) {
 		return;
 	}
 	var toggle = ip_one('.ip_contact_dock__toggle', dock);
 	var actions = ip_one('.ip_contact_dock__actions', dock);
-	if (open) {
+	if (!open) {
+		ip_dock_pinned = false;
+		ip_contact_dock_clear_fold();
+	} else {
 		ip_contact_dock_hush();
-		ip_contact_dock_unpeek();
-		ip_contact_dock_clear_hint();
+		if (pin) {
+			ip_dock_pinned = true;
+			ip_contact_dock_clear_fold();
+		}
 	}
 	dock.classList.toggle('is-open', open);
 	if (toggle) {
@@ -620,22 +606,22 @@ function ip_contact_dock_set_open(open) {
 		}
 	}
 }
-function ip_contact_dock_peek() {
+// Full strip, then fold unless the pointer is already on it or it is pinned.
+function ip_contact_dock_reveal() {
 	var dock = ip_contact_dock_el();
-	if (!dock || dock.classList.contains('is-open') || dock.classList.contains('is-peek')) {
+	if (!dock || ip_dock_pinned || dock.classList.contains('is-open') || dock.classList.contains('is-transit')) {
 		return;
 	}
 	if (ip_one('.ip_modalbox.opened')) {
 		return;
 	}
-	if (document.documentElement.classList.contains('ip-automation')) {
+	if (!ip_contact_dock_motion_ok()) {
 		return;
 	}
-	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-		return;
+	ip_contact_dock_set_open(true, false);
+	if (!ip_dock_hover) {
+		ip_contact_dock_schedule_fold();
 	}
-	dock.classList.add('is-peek');
-	ip_dock_peek_timer = setTimeout(ip_contact_dock_unpeek, IP_DOCK_PEEK_HOLD_MS);
 }
 function ip_contact_dock_watch(section) {
 	ip_contact_dock_unwatch();
@@ -652,7 +638,7 @@ function ip_contact_dock_watch(section) {
 		if (document.hidden || !atEnd()) {
 			return;
 		}
-		watch.timer = setTimeout(fire, scrolled ? IP_DOCK_PEEK_AFTER_SCROLL_MS : IP_DOCK_PEEK_AFTER_IDLE_MS);
+		watch.timer = setTimeout(fire, scrolled ? IP_DOCK_DEMO_AFTER_SCROLL_MS : IP_DOCK_DEMO_AFTER_IDLE_MS);
 	}
 	function fire() {
 		watch.timer = null;
@@ -661,7 +647,7 @@ function ip_contact_dock_watch(section) {
 			return;
 		}
 		ip_contact_dock_unwatch();
-		ip_contact_dock_peek();
+		ip_contact_dock_reveal();
 	}
 	function onScroll() {
 		scrolled = true;
@@ -682,8 +668,10 @@ function ip_contact_dock_land(section) {
 		ip_contact_dock_unland();
 		dock.classList.remove('is-transit');
 		ip_contact_dock_watch(section);
-		if (dock.matches(':hover')) {
-			ip_contact_dock_hint(true);
+		// Sticky :hover after a tap must not count. Only a real mouse hold.
+		if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && dock.matches(':hover')) {
+			ip_dock_hover = true;
+			ip_contact_dock_reveal();
 		}
 	}
 	function onEnd(e) {
@@ -706,9 +694,10 @@ function ip_contact_dock_on_section(href) {
 	document.documentElement.classList.toggle('ip-off-home', offHome);
 	ip_contact_dock_unland();
 	ip_contact_dock_unwatch();
-	ip_contact_dock_unpeek();
-	ip_contact_dock_clear_hint();
-	ip_dock_quiet = false;
+	// One demo per visit. A hover or an earlier open already set quiet.
+	if (!ip_dock_pinned) {
+		ip_contact_dock_set_open(false);
+	}
 	if (!offHome) {
 		var dock = ip_contact_dock_el();
 		if (dock) {
@@ -724,53 +713,52 @@ function ip_contact_dock_bind() {
 	if (!dock) {
 		return;
 	}
-	var bar = ip_one('.ip_contact_dock__bar', dock);
 	var toggle = ip_one('.ip_contact_dock__toggle', dock);
 	if (toggle) {
 		toggle.addEventListener('click', function (e) {
 			e.preventDefault();
-			ip_contact_dock_set_open(!dock.classList.contains('is-open'));
+			if (dock.classList.contains('is-open')) {
+				ip_contact_dock_set_open(false);
+			} else {
+				ip_contact_dock_set_open(true, true);
+			}
 		});
 	}
-	// Peeked or hovered icons stay inert, so a tap on them lands on the bar.
-	if (bar) {
-		bar.addEventListener('click', function (e) {
-			if (!dock.classList.contains('is-peek') && !dock.classList.contains('is-hint')) {
-				return;
-			}
-			if (toggle && toggle.contains(e.target)) {
-				return;
-			}
-			ip_contact_dock_set_open(true);
-		});
-	}
-	// Mouse hover unfolds the first contact, and holds a peek until leave.
-	// Touch fires pointerleave right after pointerup, before click, so it
-	// keeps the peek timer and never takes the hint.
+	// Mouse hover opens the full strip and holds it. Touch fires pointerleave
+	// right after pointerup, before click, so it never takes this path.
 	dock.addEventListener('pointerenter', function (e) {
-		ip_contact_dock_hush();
 		if (e.pointerType !== 'mouse') {
 			return;
 		}
-		if (ip_dock_peek_timer) {
-			clearTimeout(ip_dock_peek_timer);
-			ip_dock_peek_timer = null;
-		}
-		ip_contact_dock_hint(true);
+		ip_dock_hover = true;
+		ip_contact_dock_clear_fold();
+		ip_contact_dock_reveal();
 	});
 	dock.addEventListener('pointerleave', function (e) {
 		if (e.pointerType !== 'mouse') {
 			return;
 		}
-		var peeking = dock.classList.contains('is-peek');
-		if (peeking) {
-			ip_contact_dock_unpeek();
-		}
-		if (!peeking) {
-			ip_contact_dock_hint(false);
-		} else {
-			dock.classList.remove('is-hint', 'is-hint-out');
-		}
+		ip_dock_hover = false;
+		ip_contact_dock_schedule_fold();
+	});
+	// A slow tap shouldn't lose the strip under the finger. Click (pin or
+	// close) runs after pointerup and clears this if it needs to.
+	dock.addEventListener('pointerdown', function () {
+		ip_contact_dock_clear_fold();
+	});
+	dock.addEventListener('pointerup', function () {
+		ip_contact_dock_schedule_fold();
+	});
+	dock.addEventListener('pointercancel', function () {
+		ip_contact_dock_schedule_fold();
+	});
+	dock.addEventListener('focusout', function () {
+		setTimeout(function () {
+			if (dock.contains(document.activeElement)) {
+				return;
+			}
+			ip_contact_dock_schedule_fold();
+		}, 0);
 	});
 	document.addEventListener('visibilitychange', function () {
 		if (ip_dock_watch) {
