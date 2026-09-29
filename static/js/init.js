@@ -500,7 +500,7 @@ var IP_SECTION_ROLL_MS = 1200;
 var IP_DOCK_FADE_MS = 280;
 // Unattended open, counted from the start of the unfold. Fold is the
 // closed-state transition.
-var IP_DOCK_HOLD_MS = 3000;
+var IP_DOCK_HOLD_MS = 2500;
 var IP_DOCK_DEMO_DELAY_MS = 500;
 var ip_dock_demo_timer = null;
 
