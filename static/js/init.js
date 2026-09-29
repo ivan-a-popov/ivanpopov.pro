@@ -484,14 +484,13 @@ function ip_keyboard_navigation() {
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
 // Section change: the dock dims while the page rolls (is-transit) and settles
-// when the new section lands. The first time the reader reaches the end of a
-// section, the strip opens fully, then folds if they don't use it. Hover does
+// when the new section lands. Each time the reader arrives at the end of a
+// section, the strip opens fully, then folds if they don't use it. Sitting
+// at the end does not repeat it; scrolling away and back does. Hover does
 // the same full open. A click on the envelope pins it open.
 var ip_dock_land = null;
 var ip_dock_watch = null;
 var ip_dock_fold_timer = null;
-// Demo already played, or the reader already opened the dock, this visit.
-var ip_dock_quiet = false;
 // Envelope click. Stays open across section changes; hover and the demo do not.
 var ip_dock_pinned = false;
 // Mouse is over the dock. The hold timer does not run while this is set.
@@ -531,10 +530,6 @@ function ip_contact_dock_unwatch() {
 	ip_dock_watch.section.removeEventListener('scroll', ip_dock_watch.onScroll);
 	clearTimeout(ip_dock_watch.timer);
 	ip_dock_watch = null;
-}
-function ip_contact_dock_hush() {
-	ip_dock_quiet = true;
-	ip_contact_dock_unwatch();
 }
 function ip_contact_dock_motion_ok() {
 	if (document.documentElement.classList.contains('ip-automation')) {
@@ -584,12 +579,9 @@ function ip_contact_dock_set_open(open, pin) {
 	if (!open) {
 		ip_dock_pinned = false;
 		ip_contact_dock_clear_fold();
-	} else {
-		ip_contact_dock_hush();
-		if (pin) {
-			ip_dock_pinned = true;
-			ip_contact_dock_clear_fold();
-		}
+	} else if (pin) {
+		ip_dock_pinned = true;
+		ip_contact_dock_clear_fold();
 	}
 	dock.classList.toggle('is-open', open);
 	if (toggle) {
@@ -625,35 +617,45 @@ function ip_contact_dock_reveal() {
 }
 function ip_contact_dock_watch(section) {
 	ip_contact_dock_unwatch();
-	if (ip_dock_quiet) {
-		return;
-	}
-	var scrolled = false;
 	function atEnd() {
 		return section.scrollTop + section.clientHeight >= section.scrollHeight - IP_DOCK_END_SLACK_PX;
 	}
+	// arrived stays set while they remain at the end, so the demo plays on
+	// arrival and not again until they scroll away and come back.
 	function arm() {
+		var pending = !!watch.timer;
 		clearTimeout(watch.timer);
 		watch.timer = null;
-		if (document.hidden || !atEnd()) {
+		if (!atEnd()) {
+			watch.arrived = false;
 			return;
 		}
-		watch.timer = setTimeout(fire, scrolled ? IP_DOCK_DEMO_AFTER_SCROLL_MS : IP_DOCK_DEMO_AFTER_IDLE_MS);
+		if (document.hidden) {
+			if (pending) {
+				watch.arrived = false;
+			}
+			return;
+		}
+		if (watch.arrived) {
+			return;
+		}
+		watch.arrived = true;
+		watch.timer = setTimeout(fire, watch.scrolled ? IP_DOCK_DEMO_AFTER_SCROLL_MS : IP_DOCK_DEMO_AFTER_IDLE_MS);
 	}
 	function fire() {
 		watch.timer = null;
 		// Late images or enhanced blocks can push the end away after arming.
 		if (!atEnd()) {
+			watch.arrived = false;
 			return;
 		}
-		ip_contact_dock_unwatch();
 		ip_contact_dock_reveal();
 	}
 	function onScroll() {
-		scrolled = true;
+		watch.scrolled = true;
 		arm();
 	}
-	var watch = { section: section, onScroll: onScroll, arm: arm, timer: null };
+	var watch = { section: section, onScroll: onScroll, arm: arm, timer: null, scrolled: false, arrived: false };
 	ip_dock_watch = watch;
 	section.addEventListener('scroll', onScroll, { passive: true });
 	arm();
@@ -694,7 +696,6 @@ function ip_contact_dock_on_section(href) {
 	document.documentElement.classList.toggle('ip-off-home', offHome);
 	ip_contact_dock_unland();
 	ip_contact_dock_unwatch();
-	// One demo per visit. A hover or an earlier open already set quiet.
 	if (!ip_dock_pinned) {
 		ip_contact_dock_set_open(false);
 	}
