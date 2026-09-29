@@ -484,10 +484,10 @@ function ip_keyboard_navigation() {
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
 // Section change: the dock dims while the page rolls (is-transit) and settles
-// when the new section lands. Each time the reader arrives at the end of a
-// section, the strip opens fully, then folds if they don't use it. Sitting
-// at the end does not repeat it; scrolling away and back does. Hover does
-// the same full open. A click on the envelope pins it open.
+// when the new section lands. Testimonials demo when the reader arrives at
+// the end. Every other section demos when a popup closes or a subsection
+// collapses back to closed — not when one subsection replaces another.
+// Hover opens the full strip too. A click on the envelope pins it open.
 var ip_dock_land = null;
 var ip_dock_watch = null;
 var ip_dock_fold_timer = null;
@@ -601,6 +601,9 @@ function ip_contact_dock_set_open(open, pin) {
 // Full strip, then fold unless the pointer is already on it or it is pinned.
 function ip_contact_dock_reveal() {
 	var dock = ip_contact_dock_el();
+	if (!document.documentElement.classList.contains('ip-off-home')) {
+		return;
+	}
 	if (!dock || ip_dock_pinned || dock.classList.contains('is-open') || dock.classList.contains('is-transit')) {
 		return;
 	}
@@ -669,7 +672,9 @@ function ip_contact_dock_land(section) {
 	function settle() {
 		ip_contact_dock_unland();
 		dock.classList.remove('is-transit');
-		ip_contact_dock_watch(section);
+		if (section.id === 'testimonials') {
+			ip_contact_dock_watch(section);
+		}
 		// Sticky :hover after a tap must not count. Only a real mouse hold.
 		if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && dock.matches(':hover')) {
 			ip_dock_hover = true;
@@ -948,9 +953,12 @@ function ip_service_popup() {
 		setTimeout(function () {
 			if (restore && document.contains(restore)) {
 				restore.focus();
-				return;
+			} else {
+				ip_focus_section(ip_active_section());
 			}
-			ip_focus_section(ip_active_section());
+			// After this keydown, so Escape that closed the popup does not
+			// also fold the strip it just opened.
+			ip_contact_dock_reveal();
 		}, 0);
 	}
 	serviceCards.forEach(function (card) {
@@ -1311,6 +1319,9 @@ function ip_teasers(opts) {
 					}
 				}
 				setExpanded(teaser, willOpen, { scroll: !willOpen });
+				if (!willOpen) {
+					ip_contact_dock_reveal();
+				}
 			});
 			teaser.addEventListener('keydown', function (e) {
 				if (e.key !== 'Enter' && e.key !== ' ') {
