@@ -987,7 +987,7 @@ function ip_service_popup() {
 				if (qr) {
 					infos.insertAdjacentHTML('afterbegin', '<div class="qr-popup"><div class="qr-popup__title"><h3>vCard</h3></div>' + closeHtml + '</div>');
 				} else if (price) {
-					infos.insertAdjacentHTML('afterbegin', '<div class="price-popup"><div class="price-popup__title"><h3>Стоимость работы</h3></div>' + closeHtml + '</div>');
+					infos.insertAdjacentHTML('afterbegin', '<div class="price-popup"><div class="price-popup__title"><h3>Прейскурант</h3></div>' + closeHtml + '</div>');
 				} else if (partner) {
 					var logoEl = parent.querySelector('.partner-card__logo');
 					var popupLogo = parent.getAttribute('data-partner-popup-logo') || '';

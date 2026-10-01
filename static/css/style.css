@@ -1589,9 +1589,12 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	border-bottom: 1px solid var(--card-border);
 	align-items: center;
 }
+/* Centered on the title, which sits 5px above the header's middle (4px top vs 14px bottom padding). */
 .ip_modalbox.ip_modalbox--qr .qr-popup .service-popup__close,
 .ip_modalbox.ip_modalbox--price .price-popup .service-popup__close{
-	padding: 4px;
+	top: calc(50% - 5px);
+	padding: 0 4px;
+	transform: translateY(-50%);
 }
 .ip_modalbox.ip_modalbox--qr .description_wrap,
 .ip_modalbox.ip_modalbox--price .description_wrap{
@@ -1640,16 +1643,13 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	padding-top: 16px;
 	overscroll-behavior: contain;
 }
-.ip_modalbox.ip_modalbox--price .descriptions .price-popup__rate,
-.ip_modalbox.ip_modalbox--price .descriptions .price-popup__row{
+.ip_modalbox.ip_modalbox--price .descriptions .price-popup__rate{
 	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
 	justify-content: space-between;
 	gap: 2px 16px;
 	margin: 0;
-}
-.ip_modalbox.ip_modalbox--price .descriptions .price-popup__rate{
 	padding-bottom: 16px;
 	border-bottom: 1px solid var(--card-border);
 }
@@ -1673,6 +1673,10 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	padding: 0;
 }
 .ip_modalbox .price-popup__package{
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: baseline;
+	gap: 4px 16px;
 	padding: 14px 0;
 	border-bottom: 1px solid var(--card-border);
 }
@@ -1680,11 +1684,36 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	padding-bottom: 0;
 	border-bottom: none;
 }
-.ip_modalbox.ip_modalbox--price .descriptions .price-popup__terms{
-	margin: 4px 0 0;
-	color: var(--text-muted);
+.ip_modalbox .price-popup__package .price-popup__amount,
+.ip_modalbox .price-popup__saving{
+	justify-self: end;
+	text-align: right;
+}
+.ip_modalbox .price-popup__terms,
+.ip_modalbox .price-popup__saving{
 	font-size: 0.875rem;
 	line-height: 1.45;
+}
+.ip_modalbox .price-popup__terms{
+	color: var(--text-muted);
+}
+.ip_modalbox .price-popup__terms span + span::before{
+	content: " · ";
+}
+/* Below this width the terms no longer fit beside the saving on one line. */
+@media (width < 480px){
+	.ip_modalbox .price-popup__terms span{
+		display: block;
+	}
+	.ip_modalbox .price-popup__terms span + span::before{
+		content: none;
+	}
+}
+.ip_modalbox .price-popup__saving{
+	color: var(--text-main);
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
 }
 .ip_modalbox .partner-popup__cta{
 	margin-top: 8px;
