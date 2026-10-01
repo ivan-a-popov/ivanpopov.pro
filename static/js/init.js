@@ -756,36 +756,39 @@ function ip_contact_dock_bind() {
 	}
 }
 
-// -------------  SERVICE / PARTNER / QR POPUP  -------------------
+// -------------  SERVICE / PARTNER / QR / PRICE POPUP  -------------------
 function ip_service_popup() {
 	var modalBox = ip_one('.ip_modalbox');
 	if (!modalBox) {
 		return;
 	}
-	var buttons = ip_all('.ip_service .ip_full_link, .ip_partners .ip_full_link, .ip_qr_open');
+	var buttons = ip_all('.ip_service .ip_full_link, .ip_partners .ip_full_link, .ip_qr_open, .ip_price_open');
 	var descWrap = modalBox.querySelector('.description_wrap');
 	var serviceCards = ip_all('.ip_service .service-card');
 	var boxInner = modalBox.querySelector('.box_inner');
 	var popupFocusTimer = null;
-	var qrPinTimer = null;
-	function unpinQrPopup() {
-		['--ip-qr-top', '--ip-qr-left', '--ip-qr-min-w', '--ip-qr-min-h'].forEach(function (prop) {
+	var homePinTimer = null;
+	function isHomePopup() {
+		return modalBox.classList.contains('ip_modalbox--qr') || modalBox.classList.contains('ip_modalbox--price');
+	}
+	function unpinHomePopup() {
+		['--ip-pin-top', '--ip-pin-left', '--ip-pin-min-w', '--ip-pin-min-h'].forEach(function (prop) {
 			modalBox.style.removeProperty(prop);
 		});
 	}
-	function pinQrPopup() {
-		if (!modalBox.classList.contains('ip_modalbox--qr')) {
-			unpinQrPopup();
+	function pinHomePopup() {
+		if (!isHomePopup()) {
+			unpinHomePopup();
 			return;
 		}
 		var copy = ip_one('#home .ip_home_copy');
 		if (!copy) {
-			unpinQrPopup();
+			unpinHomePopup();
 			return;
 		}
 		var rect = copy.getBoundingClientRect();
 		if (rect.width < 1 || rect.height < 1) {
-			unpinQrPopup();
+			unpinHomePopup();
 			return;
 		}
 		var cx = rect.left + rect.width / 2;
@@ -807,10 +810,10 @@ function ip_service_popup() {
 		if (cx + halfW > window.innerWidth - 8) {
 			cx = Math.max(8 + halfW, window.innerWidth - 8 - halfW);
 		}
-		modalBox.style.setProperty('--ip-qr-top', Math.round(cy) + 'px');
-		modalBox.style.setProperty('--ip-qr-left', Math.round(cx) + 'px');
-		modalBox.style.setProperty('--ip-qr-min-w', Math.round(rect.width) + 'px');
-		modalBox.style.setProperty('--ip-qr-min-h', Math.round(rect.height) + 'px');
+		modalBox.style.setProperty('--ip-pin-top', Math.round(cy) + 'px');
+		modalBox.style.setProperty('--ip-pin-left', Math.round(cx) + 'px');
+		modalBox.style.setProperty('--ip-pin-min-w', Math.round(rect.width) + 'px');
+		modalBox.style.setProperty('--ip-pin-min-h', Math.round(rect.height) + 'px');
 	}
 	if (descWrap && !descWrap.hasAttribute('tabindex')) {
 		descWrap.setAttribute('tabindex', '-1');
@@ -905,8 +908,8 @@ function ip_service_popup() {
 	function closePopupModal() {
 		clearPopupFocusTimer();
 		ip_section_focus_token++;
-		unpinQrPopup();
-		modalBox.classList.remove('opened', 'ip_modalbox--partner', 'ip_modalbox--qr');
+		unpinHomePopup();
+		modalBox.classList.remove('opened', 'ip_modalbox--partner', 'ip_modalbox--qr', 'ip_modalbox--price');
 		modalBox.removeAttribute('role');
 		modalBox.removeAttribute('aria-modal');
 		modalBox.removeAttribute('aria-labelledby');
@@ -942,26 +945,31 @@ function ip_service_popup() {
 	buttons.forEach(function (button) {
 		button.addEventListener('click', function (e) {
 			var href = button.getAttribute('href') || '';
-			if (!button.classList.contains('ip_qr_open') && href && href !== '#' && href.charAt(0) !== '#') {
+			var qr = button.classList.contains('ip_qr_open');
+			var price = button.classList.contains('ip_price_open');
+			var home = qr || price;
+			if (!home && href && href !== '#' && href.charAt(0) !== '#') {
 				return;
 			}
 			e.preventDefault();
-			var qr = button.classList.contains('ip_qr_open');
-			var partner = !qr && button.closest('.partner-card');
-			var parent = partner || (!qr && button.closest('.service-card'));
-			if (!qr && !parent) { return; }
+			var partner = !home && button.closest('.partner-card');
+			var parent = partner || (!home && button.closest('.service-card'));
+			if (!home && !parent) { return; }
 			var detailsEl = qr
 				? ip_one('.qr_hidden_details')
-				: parent.querySelector(partner ? '.partner_hidden_details' : '.service_hidden_details');
+				: price
+					? ip_one('.price_hidden_details')
+					: parent.querySelector(partner ? '.partner_hidden_details' : '.service_hidden_details');
 			var content = detailsEl ? detailsEl.innerHTML : '';
 			ip_modal_return_focus = button;
 			ip_section_focus_token++;
 			modalBox.classList.toggle('ip_modalbox--partner', !!partner);
-			modalBox.classList.toggle('ip_modalbox--qr', !!qr);
-			if (qr && button.closest('.ip_home_social')) {
-				pinQrPopup();
+			modalBox.classList.toggle('ip_modalbox--qr', qr);
+			modalBox.classList.toggle('ip_modalbox--price', price);
+			if (home && button.closest('.ip_home_social')) {
+				pinHomePopup();
 			} else {
-				unpinQrPopup();
+				unpinHomePopup();
 			}
 			ip_contact_dock_cancel_demo();
 			modalBox.classList.add('opened');
@@ -978,6 +986,8 @@ function ip_service_popup() {
 				var closeHtml = '<div class="service-popup__close"><a href="#" aria-label="Закрыть"><i class="icon-cancel"></i></a></div>';
 				if (qr) {
 					infos.insertAdjacentHTML('afterbegin', '<div class="qr-popup"><div class="qr-popup__title"><h3>vCard</h3></div>' + closeHtml + '</div>');
+				} else if (price) {
+					infos.insertAdjacentHTML('afterbegin', '<div class="price-popup"><div class="price-popup__title"><h3>Стоимость работы</h3></div>' + closeHtml + '</div>');
 				} else if (partner) {
 					var logoEl = parent.querySelector('.partner-card__logo');
 					var popupLogo = parent.getAttribute('data-partner-popup-logo') || '';
@@ -998,9 +1008,9 @@ function ip_service_popup() {
 					modalBox.setAttribute('aria-labelledby', 'ip-modal-title');
 				}
 			}
-			if (qr) {
-				pinQrPopup();
-				requestAnimationFrame(pinQrPopup);
+			if (home) {
+				pinHomePopup();
+				requestAnimationFrame(pinHomePopup);
 			}
 			schedulePopupFocus();
 		});
@@ -1039,11 +1049,11 @@ function ip_service_popup() {
 		}
 	});
 	window.addEventListener('resize', function () {
-		if (!modalBox.classList.contains('opened') || !modalBox.classList.contains('ip_modalbox--qr')) {
+		if (!modalBox.classList.contains('opened') || !isHomePopup()) {
 			return;
 		}
-		clearTimeout(qrPinTimer);
-		qrPinTimer = setTimeout(pinQrPopup, 100);
+		clearTimeout(homePinTimer);
+		homePinTimer = setTimeout(pinHomePopup, 100);
 	});
 }
 

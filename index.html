@@ -120,10 +120,10 @@
 	  (Lowest on HTTP/1.1) so it does not share the LCP photo's connection;
 	  onload promotes it to all. A body <link rel=stylesheet> would delay
 	  apply until the parser reaches it. -->
-	<link rel="stylesheet" href="static/css/style.min.css?v=e71d22fd" media="print" fetchpriority="low"
+	<link rel="stylesheet" href="static/css/style.min.css?v=021fcb70" media="print" fetchpriority="low"
 		onload="this.onload=null;this.media='all'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.min.css?v=e71d22fd" />
+		<link rel="stylesheet" href="static/css/style.min.css?v=021fcb70" />
 	</noscript>
 	<!-- /STYLES -->
 </head>
@@ -238,6 +238,10 @@
 									<img src="static/img/social/qr.svg?v=e874d10b" alt="" width="40" height="40" decoding="async"
 										fetchpriority="low">
 								</a>
+								<a href="#" class="ip_price_open" aria-label="Посмотреть стоимость работы">
+									<img src="static/img/social/price.svg?v=06daf9e9" alt="" width="40" height="40" decoding="async"
+										fetchpriority="low">
+								</a>
 							</div>
 							<template class="qr_hidden_details">
 								<div class="service_popup_informations">
@@ -245,6 +249,39 @@
 										<img class="qr-popup__code" src="static/img/social/qr-vcard.svg?v=395e2e35" alt="" width="280"
 											height="280" decoding="async">
 										<p class="qr-popup__hint">Используйте камеру телефона</p>
+									</div>
+								</div>
+							</template>
+							<template class="price_hidden_details">
+								<div class="service_popup_informations">
+									<div class="descriptions">
+										<p class="price-popup__rate">
+											<span class="price-popup__label">Стандартная ставка</span>
+											<span class="price-popup__amount">6&nbsp;000&nbsp;₽/час</span>
+										</p>
+										<ul class="price-popup__packages">
+											<li class="price-popup__package">
+												<p class="price-popup__row">
+													<span class="price-popup__hours">20&nbsp;часов</span>
+													<span class="price-popup__amount">100&nbsp;000&nbsp;₽</span>
+												</p>
+												<p class="price-popup__terms">Предоплата · <b>Экономия&nbsp;20&nbsp;000&nbsp;₽</b> · Срок&nbsp;действия:&nbsp;1&nbsp;месяц</p>
+											</li>
+											<li class="price-popup__package">
+												<p class="price-popup__row">
+													<span class="price-popup__hours">60&nbsp;часов</span>
+													<span class="price-popup__amount">250&nbsp;000&nbsp;₽</span>
+												</p>
+												<p class="price-popup__terms">Предоплата · <b>Экономия&nbsp;110&nbsp;000&nbsp;₽</b> · Срок&nbsp;действия:&nbsp;2&nbsp;месяца</p>
+											</li>
+											<li class="price-popup__package">
+												<p class="price-popup__row">
+													<span class="price-popup__hours">100&nbsp;часов</span>
+													<span class="price-popup__amount">400&nbsp;000&nbsp;₽</span>
+												</p>
+												<p class="price-popup__terms">Предоплата · <b>Экономия&nbsp;200&nbsp;000&nbsp;₽</b> · Срок&nbsp;действия:&nbsp;3&nbsp;месяца</p>
+											</li>
+										</ul>
 									</div>
 								</div>
 							</template>
@@ -1034,6 +1071,6 @@
 		<!-- /MAGIC CURSOR -->
 	</div>
 	<!-- init.min.js is generated from init.js by minify.py -->
-	<script defer src="static/js/init.min.js?v=c417d362"></script>
+	<script defer src="static/js/init.min.js?v=141552b6"></script>
 </body>
 </html>
