@@ -1697,20 +1697,11 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 .ip_modalbox .price-popup__terms{
 	color: var(--text-muted);
 }
-.ip_modalbox .price-popup__terms span + span::before{
-	content: " · ";
-}
-/* Below this width the terms no longer fit beside the saving on one line. */
-@media (width < 480px){
-	.ip_modalbox .price-popup__terms span{
-		display: block;
-	}
-	.ip_modalbox .price-popup__terms span + span::before{
-		content: none;
-	}
-}
 .ip_modalbox .price-popup__saving{
-	color: var(--text-main);
+	padding: 1px 10px;
+	border-radius: 999px;
+	background: var(--card-hover-bg);
+	color: var(--on-accent);
 	font-weight: 600;
 	font-variant-numeric: tabular-nums;
 	white-space: nowrap;
@@ -1732,7 +1723,8 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 .ip_modalbox .partner-popup__cta a:hover .partner-popup__cta-text{
 	text-decoration-color: transparent;
 }
-.ip_modalbox .partner-popup__star{
+.ip_modalbox .partner-popup__star,
+.ip_modalbox .price-popup__star{
 	color: inherit;
 	font-size: 0.7em;
 	line-height: 0;
@@ -1740,7 +1732,8 @@ html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	margin-left: 0.15em;
 	text-decoration: none;
 }
-.ip_modalbox .partner-popup__note{
+.ip_modalbox .partner-popup__note,
+.ip_modalbox .price-popup__note{
 	display: block;
 	margin-top: 10px;
 	color: var(--text-muted);
