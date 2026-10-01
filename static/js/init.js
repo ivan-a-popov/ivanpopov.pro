@@ -529,11 +529,14 @@ function ip_contact_dock_end_summon(dock) {
 	if (!dock || !dock.classList.contains('is-summon')) {
 		return;
 	}
+	// is-concealed snaps the shell hidden with no transition. Flush that
+	// style before dropping the class: a pre-paint removal lets the bar's
+	// resting transition run from the tucked size back to full size, so the
+	// envelope flashes in again for a moment.
 	dock.classList.add('is-concealed');
 	dock.classList.remove('is-summon', 'is-summon-ready', 'is-summon-in');
-	requestAnimationFrame(function () {
-		dock.classList.remove('is-concealed');
-	});
+	void dock.offsetWidth;
+	dock.classList.remove('is-concealed');
 }
 // Hold the envelope at the corner until the price card has landed, then
 // grow it into place. Reduced motion and automation skip the wait.

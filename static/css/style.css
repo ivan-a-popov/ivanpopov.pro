@@ -491,13 +491,17 @@ html.ip-off-home .ip_contact_dock{
 	z-index: 31;
 	transition: none;
 }
-/* Snap the shell away after the exit scale, so the bar cannot spring
-   back to full size while the parent fades. */
+/* Snap the shell away after the exit scale. transition: none has to win
+   here, including over the home/off-home show rules, or the bar's resting
+   spring plays on the way out and the envelope flashes back. */
+html:not(.ip-off-home) .ip_contact_dock.is-concealed,
+html.ip-off-home .ip_contact_dock.is-concealed,
 .ip_contact_dock.is-concealed,
 .ip_contact_dock.is-concealed .ip_contact_dock__bar{
 	opacity: 0;
 	visibility: hidden;
 	transform: none;
+	pointer-events: none;
 	transition: none;
 }
 .ip_contact_dock__bar{
