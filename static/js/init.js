@@ -507,12 +507,73 @@ var IP_DOCK_FADE_MS = 280;
 var IP_DOCK_HOLD_MS = 2500;
 var IP_DOCK_DEMO_DELAY_MS = 500;
 var ip_dock_demo_timer = null;
+// Price card is .3s delayed then moves for .3s, so it has landed at 600ms.
+// The envelope follows a little after that, then scales out on close.
+var IP_DOCK_PRICE_ARRIVE_MS = 760;
+var IP_DOCK_PRICE_EXIT_MS = 260;
+var ip_dock_summon_timer = null;
 
 function ip_contact_dock_el() {
 	return ip_one('.ip_contact_dock');
 }
 function ip_price_popup_open() {
 	return !!ip_one('.ip_modalbox.opened.ip_modalbox--price');
+}
+function ip_contact_dock_clear_summon() {
+	if (ip_dock_summon_timer) {
+		clearTimeout(ip_dock_summon_timer);
+		ip_dock_summon_timer = null;
+	}
+}
+function ip_contact_dock_end_summon(dock) {
+	if (!dock || !dock.classList.contains('is-summon')) {
+		return;
+	}
+	dock.classList.add('is-concealed');
+	dock.classList.remove('is-summon', 'is-summon-ready', 'is-summon-in');
+	requestAnimationFrame(function () {
+		dock.classList.remove('is-concealed');
+	});
+}
+// Hold the envelope at the corner until the price card has landed, then
+// grow it into place. Reduced motion and automation skip the wait.
+function ip_contact_dock_summon_price() {
+	var dock = ip_contact_dock_el();
+	if (!dock) {
+		return;
+	}
+	ip_contact_dock_clear_summon();
+	dock.classList.remove('is-concealed', 'is-summon-in', 'is-summon-ready');
+	dock.classList.add('is-summon');
+	if (!ip_contact_dock_motion_ok()) {
+		dock.classList.add('is-summon-ready', 'is-summon-in');
+		return;
+	}
+	void dock.offsetWidth;
+	dock.classList.add('is-summon-ready');
+	ip_dock_summon_timer = setTimeout(function () {
+		ip_dock_summon_timer = null;
+		if (!ip_price_popup_open()) {
+			return;
+		}
+		dock.classList.add('is-summon-in');
+	}, IP_DOCK_PRICE_ARRIVE_MS);
+}
+function ip_contact_dock_dismiss_price() {
+	var dock = ip_contact_dock_el();
+	ip_contact_dock_clear_summon();
+	if (!dock || !dock.classList.contains('is-summon')) {
+		return;
+	}
+	if (!ip_contact_dock_motion_ok() || !dock.classList.contains('is-summon-in')) {
+		ip_contact_dock_end_summon(dock);
+		return;
+	}
+	dock.classList.remove('is-summon-in');
+	ip_dock_summon_timer = setTimeout(function () {
+		ip_dock_summon_timer = null;
+		ip_contact_dock_end_summon(dock);
+	}, IP_DOCK_PRICE_EXIT_MS);
 }
 function ip_contact_dock_unland() {
 	if (!ip_dock_land) {
@@ -673,6 +734,8 @@ function ip_contact_dock_on_section(href) {
 	var offHome = href !== '#home';
 	document.documentElement.classList.toggle('ip-off-home', offHome);
 	ip_contact_dock_cancel_demo();
+	ip_contact_dock_clear_summon();
+	ip_contact_dock_end_summon(ip_contact_dock_el());
 	ip_contact_dock_unland();
 	ip_contact_dock_set_open(false);
 	if (!offHome) {
@@ -850,6 +913,9 @@ function ip_service_popup() {
 		if (!dock) {
 			return [];
 		}
+		if (dock.classList.contains('is-summon') && !dock.classList.contains('is-summon-in')) {
+			return [];
+		}
 		return ip_all('a[href], button:not([disabled])', dock).filter(function (el) {
 			if (el.closest('[inert]')) {
 				return false;
@@ -939,8 +1005,12 @@ function ip_service_popup() {
 	function closePopupModal() {
 		clearPopupFocusTimer();
 		ip_section_focus_token++;
+		var wasPrice = modalBox.classList.contains('ip_modalbox--price');
 		unpinHomePopup();
 		modalBox.classList.remove('opened', 'ip_modalbox--partner', 'ip_modalbox--qr', 'ip_modalbox--price');
+		if (wasPrice) {
+			ip_contact_dock_dismiss_price();
+		}
 		modalBox.removeAttribute('role');
 		modalBox.removeAttribute('aria-modal');
 		modalBox.removeAttribute('aria-labelledby');
@@ -1047,6 +1117,9 @@ function ip_service_popup() {
 			if (home) {
 				pinHomePopup();
 				requestAnimationFrame(pinHomePopup);
+			}
+			if (price) {
+				ip_contact_dock_summon_price();
 			}
 			schedulePopupFocus();
 		});

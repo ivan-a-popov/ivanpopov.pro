@@ -481,13 +481,24 @@ html.ip-off-home .ip_contact_dock{
 	transition: opacity .2s ease, visibility 0s linear .2s;
 }
 /* Price list covers the home contact row, so the dock stands in and
-   paints above the modal (z-index 30). The bar still takes the hits;
-   the rest of the dock stays pointer-events: none. */
-.ip_all_wrap:has(.ip_modalbox.opened.ip_modalbox--price) .ip_contact_dock{
+   paints above the modal (z-index 30). The shell is shown at once; the
+   envelope itself stays scaled down until .is-summon-in (after the card
+   has landed). The bar still takes the hits once it has arrived. */
+.ip_all_wrap:has(.ip_modalbox.opened.ip_modalbox--price) .ip_contact_dock,
+.ip_contact_dock.is-summon{
 	opacity: 1;
 	visibility: visible;
 	z-index: 31;
-	transition: opacity .28s ease, visibility 0s linear 0s;
+	transition: none;
+}
+/* Snap the shell away after the exit scale, so the bar cannot spring
+   back to full size while the parent fades. */
+.ip_contact_dock.is-concealed,
+.ip_contact_dock.is-concealed .ip_contact_dock__bar{
+	opacity: 0;
+	visibility: hidden;
+	transform: none;
+	transition: none;
 }
 .ip_contact_dock__bar{
 	pointer-events: auto;
@@ -515,6 +526,41 @@ html.ip-off-home .ip_contact_dock{
 		-webkit-backdrop-filter var(--ip-dock-fold),
 		opacity .5s cubic-bezier(.22, .61, .36, 1),
 		transform .7s cubic-bezier(.34, 1.4, .64, 1);
+}
+/* Home price list: envelope grows from the corner once the card has
+   landed, and shrinks back as the popup closes. is-summon without
+   is-summon-ready paints the small state with no transition, so the
+   first frame does not play the exit curve. */
+.ip_contact_dock.is-summon .ip_contact_dock__bar{
+	opacity: 0;
+	transform: translateY(12px) scale(.58);
+	pointer-events: none;
+	transition: none;
+}
+.ip_contact_dock.is-summon.is-summon-ready .ip_contact_dock__bar{
+	transition:
+		background var(--ip-dock-fold),
+		box-shadow var(--ip-dock-fold),
+		padding var(--ip-dock-fold),
+		border-color var(--ip-dock-fold),
+		backdrop-filter var(--ip-dock-fold),
+		-webkit-backdrop-filter var(--ip-dock-fold),
+		opacity .24s ease,
+		transform .24s cubic-bezier(.4, 0, .7, .3);
+}
+.ip_contact_dock.is-summon.is-summon-ready.is-summon-in .ip_contact_dock__bar{
+	opacity: 1;
+	transform: none;
+	pointer-events: auto;
+	transition:
+		background var(--ip-dock-fold),
+		box-shadow var(--ip-dock-fold),
+		padding var(--ip-dock-fold),
+		border-color var(--ip-dock-fold),
+		backdrop-filter var(--ip-dock-fold),
+		-webkit-backdrop-filter var(--ip-dock-fold),
+		opacity .75s ease,
+		transform 1s cubic-bezier(.16, 1.08, .32, 1);
 }
 .ip_contact_dock.is-transit .ip_contact_dock__bar{
 	opacity: .35;
@@ -655,6 +701,11 @@ html.ip-off-home .ip_contact_dock{
 	html.ip-off-home .ip_contact_dock,
 	.ip_all_wrap:has(.ip_modalbox.opened) .ip_contact_dock,
 	.ip_all_wrap:has(.ip_modalbox.opened.ip_modalbox--price) .ip_contact_dock,
+	.ip_contact_dock.is-summon,
+	.ip_contact_dock.is-summon .ip_contact_dock__bar,
+	.ip_contact_dock.is-summon.is-summon-ready .ip_contact_dock__bar,
+	.ip_contact_dock.is-summon.is-summon-in .ip_contact_dock__bar,
+	.ip_contact_dock.is-summon.is-summon-ready.is-summon-in .ip_contact_dock__bar,
 	.ip_contact_dock__bar,
 	.ip_contact_dock__actions,
 	.ip_contact_dock__actions a,
@@ -673,9 +724,11 @@ html.ip-off-home .ip_contact_dock{
 		transform: none;
 	}
 }
-html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar{
+html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar,
+html.ip-automation .ip_contact_dock.is-summon .ip_contact_dock__bar{
 	opacity: 1;
 	transform: none;
+	pointer-events: auto;
 }
 .qr_hidden_details{
 	display: none;
