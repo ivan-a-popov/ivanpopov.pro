@@ -483,12 +483,14 @@ function ip_keyboard_navigation() {
 }
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
-// Section change: the dock dims while the page rolls (is-transit) and settles
-// when the new section lands. The strip opens 500ms after a popup closes or a
-// subsection collapses back to closed — not when one subsection replaces
-// another, and not when the reader reaches the end of a section. Hover and a
-// tap on the envelope open it the same way. Nothing keeps it open: it holds
-// while the pointer is on it or a contact link has focus, otherwise it folds.
+// Hidden on #home, where the contact icons sit in the copy — except while
+// the price popup covers that row. Section change: the dock dims while the
+// page rolls (is-transit) and settles when the new section lands. The strip
+// opens 500ms after a popup closes or a subsection collapses back to closed
+// — not when one subsection replaces another, and not when the reader
+// reaches the end of a section. Hover and a tap on the envelope open it the
+// same way. Nothing keeps it open: it holds while the pointer is on it or a
+// contact link has focus, otherwise it folds.
 var ip_dock_land = null;
 var ip_dock_fold_timer = null;
 // Mouse is over the dock. The hold timer does not run while this is set.
@@ -508,6 +510,9 @@ var ip_dock_demo_timer = null;
 
 function ip_contact_dock_el() {
 	return ip_one('.ip_contact_dock');
+}
+function ip_price_popup_open() {
+	return !!ip_one('.ip_modalbox.opened.ip_modalbox--price');
 }
 function ip_contact_dock_unland() {
 	if (!ip_dock_land) {
@@ -615,13 +620,14 @@ function ip_contact_dock_set_open(open) {
 // demo: slower open (is-demo) used after a popup or subsection closes.
 function ip_contact_dock_reveal(demo) {
 	var dock = ip_contact_dock_el();
-	if (!document.documentElement.classList.contains('ip-off-home')) {
+	var priceHome = ip_price_popup_open();
+	if (!document.documentElement.classList.contains('ip-off-home') && !priceHome) {
 		return;
 	}
 	if (!dock || dock.classList.contains('is-open') || dock.classList.contains('is-transit')) {
 		return;
 	}
-	if (ip_one('.ip_modalbox.opened')) {
+	if (ip_one('.ip_modalbox.opened') && !priceHome) {
 		return;
 	}
 	if (!ip_contact_dock_motion_ok()) {
@@ -819,9 +825,14 @@ function ip_service_popup() {
 		descWrap.setAttribute('tabindex', '-1');
 	}
 	function setChromeInert(on) {
+		var keepDock = on && modalBox.classList.contains('ip_modalbox--price');
 		['.ip_header', '.ip_mainpart', '.ip_footer', '.ip_contact_dock'].forEach(function (sel) {
 			var el = ip_one(sel);
 			if (!el) {
+				return;
+			}
+			if (keepDock && sel === '.ip_contact_dock') {
+				el.removeAttribute('inert');
 				return;
 			}
 			if (on) {
@@ -829,6 +840,26 @@ function ip_service_popup() {
 			} else {
 				el.removeAttribute('inert');
 			}
+		});
+	}
+	function dockTabbables() {
+		if (!modalBox.classList.contains('ip_modalbox--price')) {
+			return [];
+		}
+		var dock = ip_contact_dock_el();
+		if (!dock) {
+			return [];
+		}
+		return ip_all('a[href], button:not([disabled])', dock).filter(function (el) {
+			if (el.closest('[inert]')) {
+				return false;
+			}
+			var hidden = el.closest('[aria-hidden="true"]');
+			if (hidden && dock.contains(hidden)) {
+				return false;
+			}
+			var style = getComputedStyle(el);
+			return style.visibility !== 'hidden' && style.display !== 'none';
 		});
 	}
 	function popupTabbables() {
@@ -928,8 +959,13 @@ function ip_service_popup() {
 				ip_focus_section(ip_active_section());
 			}
 			// After this keydown, so Escape that closed the popup does not
-			// also fold the strip it just opened.
-			ip_contact_dock_schedule_demo();
+			// also fold the strip it just opened. On #home the dock only
+			// stands in for the price list, so fold it with the popup.
+			if (document.documentElement.classList.contains('ip-off-home')) {
+				ip_contact_dock_schedule_demo();
+			} else {
+				ip_contact_dock_set_open(false);
+			}
 		}, 0);
 	}
 	serviceCards.forEach(function (card) {
@@ -1026,7 +1062,7 @@ function ip_service_popup() {
 		if (e.key !== 'Tab' || !modalBox.classList.contains('opened')) {
 			return;
 		}
-		var list = popupTabbables();
+		var list = popupTabbables().concat(dockTabbables());
 		if (!list.length) {
 			e.preventDefault();
 			if (descWrap) {
@@ -1037,7 +1073,8 @@ function ip_service_popup() {
 		var first = list[0];
 		var last = list[list.length - 1];
 		var active = document.activeElement;
-		var inside = modalBox.contains(active);
+		var dock = ip_contact_dock_el();
+		var inside = modalBox.contains(active) || (dock && modalBox.classList.contains('ip_modalbox--price') && dock.contains(active));
 		if (e.shiftKey) {
 			if (!inside || active === first || active === descWrap) {
 				e.preventDefault();

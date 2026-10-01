@@ -448,12 +448,12 @@ html,
 }
 
 /* Persistent contact dock — chrome, not in-flow. Hidden on #home (icons
-   already sit in the copy). Visible when another section is .active, and
-   on deep-link first paint via html[data-ip-section]. Folded tap target is
-   the envelope. Any expand (hover, a tap, a popup close, or a subsection
-   collapse) opens the full strip; an unattended expand folds itself.
-   A page change dims the dock while
-   the section rolls (is-transit) and settles it as the page lands. */
+   already sit in the copy), except while the price popup covers those
+   icons. Visible when another section is .active, and on deep-link first
+   paint via html[data-ip-section]. Folded tap target is the envelope. Any
+   expand (hover, a tap, a popup close, or a subsection collapse) opens the
+   full strip; an unattended expand folds itself. A page change dims the
+   dock while the section rolls (is-transit) and settles it as the page lands. */
 .ip_contact_dock{
 	--ip-paper: #efe6d0;
 	--ip-paper-ink: #1a1510;
@@ -479,6 +479,15 @@ html.ip-off-home .ip_contact_dock{
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity .2s ease, visibility 0s linear .2s;
+}
+/* Price list covers the home contact row, so the dock stands in and
+   paints above the modal (z-index 30). The bar still takes the hits;
+   the rest of the dock stays pointer-events: none. */
+.ip_all_wrap:has(.ip_modalbox.opened.ip_modalbox--price) .ip_contact_dock{
+	opacity: 1;
+	visibility: visible;
+	z-index: 31;
+	transition: opacity .28s ease, visibility 0s linear 0s;
 }
 .ip_contact_dock__bar{
 	pointer-events: auto;
@@ -645,6 +654,7 @@ html.ip-off-home .ip_contact_dock{
 	.ip_contact_dock,
 	html.ip-off-home .ip_contact_dock,
 	.ip_all_wrap:has(.ip_modalbox.opened) .ip_contact_dock,
+	.ip_all_wrap:has(.ip_modalbox.opened.ip_modalbox--price) .ip_contact_dock,
 	.ip_contact_dock__bar,
 	.ip_contact_dock__actions,
 	.ip_contact_dock__actions a,
