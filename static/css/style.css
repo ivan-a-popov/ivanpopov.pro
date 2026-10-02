@@ -172,27 +172,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--caret-color);
 }
 
-/* HEADER */
-.ip_header .logo .text .logo-cursor{
-	margin-left: 1px;
-	font-weight: 500;
-	animation: logo-cursor-blink 1.2s step-end infinite;
-}
-@keyframes logo-cursor-blink{
-	0%, 100%{ opacity: 1; }
-	50%{ opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce){
-	.ip_header .logo .text .logo-cursor{
-		animation: none;
-	}
-}
-/* Automation (ip-automation is set in <head> by critical.js): keep the
-   filmstrip static — even a tiny blink taxes Speed Index on every frame. */
-html.ip-automation .ip_header .logo .text .logo-cursor{
-	animation: none;
-}
-
 /*	MAINPART + SECTIONS */
 /* The full ATF shell, including visible .ip_mainpart geometry, lives in
    critical.css. It renders behind the fixed opaque preloader from first paint;

@@ -12,7 +12,7 @@
 // removes it for humans. Lighthouse 13.4 spoofs a normal Chrome UA and
 // hides webdriver, so lab viewports (412×823@1.75, 1350×940) count too.
 // Automation additionally gets html.ip-automation, which freezes decorative
-// motion (headline rotation, logo-cursor blink) for a static filmstrip.
+// motion (headline rotation) for a static filmstrip.
 (function(){
 	var GROW_HALF_MS = 1000;
 	var HOLD_MS = 400;

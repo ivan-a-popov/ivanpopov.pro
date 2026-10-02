@@ -93,7 +93,7 @@
 	<!-- CRITICAL CSS (critical.min.css is generated from critical.css by minify.py).
 	  Blocking stylesheet: preloader paints on first render (FCP); header/footer
 	  + above-the-fold main shell are stable before async style.css (CLS). -->
-	<link rel="stylesheet" href="static/css/critical.min.css?v=9519b1c9">
+	<link rel="stylesheet" href="static/css/critical.min.css?v=bc4a64cd">
 	<!-- If JS is disabled the loader is never dismissed, so hide it and show content. -->
 	<noscript>
 		<style>
@@ -123,10 +123,10 @@
 	  (Lowest on HTTP/1.1) so it does not share the LCP photo's connection;
 	  onload promotes it to all. A body <link rel=stylesheet> would delay
 	  apply until the parser reaches it. -->
-	<link rel="stylesheet" href="static/css/style.min.css?v=4b6f23d3" media="print" fetchpriority="low"
+	<link rel="stylesheet" href="static/css/style.min.css?v=ececa292" media="print" fetchpriority="low"
 		onload="this.onload=null;this.media='all'">
 	<noscript>
-		<link rel="stylesheet" href="static/css/style.min.css?v=4b6f23d3" />
+		<link rel="stylesheet" href="static/css/style.min.css?v=ececa292" />
 	</noscript>
 	<!-- /STYLES -->
 </head>
@@ -150,14 +150,10 @@
 		<div class="ip_header">
 			<h1 class="logo">
 				<a class="text" href="/">
-					<!-- Phones: IP. tag on a neutral square (same file in both themes).
-					  Desktop: 1x1 gif so the preload scanner does not fetch the image on the LCP path. -->
-					<picture>
-						<source media="(width < 640px)" srcset="static/img/assets/ip-dot.svg?v=c075da02">
-						<img class="logo-mark" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-							alt="" width="96" height="96" decoding="async" fetchpriority="low">
-					</picture>
-					<span class="logo-label">Ivan Popov. Pro</span><span class="logo-cursor" aria-hidden="true">|</span>
+					<!-- Phones: "IP." mark alone. Desktop: mark + wordmark. -->
+					<img class="logo-mark" src="static/img/assets/ip-dot.svg?v=c075da02"
+						alt="" width="96" height="96" decoding="async" fetchpriority="low">
+					<span class="logo-label">Ivan&nbsp;Popov.&nbsp;Pro.</span>
 				</a>
 			</h1>
 			<div class="menu">
