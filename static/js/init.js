@@ -1491,7 +1491,6 @@ function ip_cursor() {
 	window.addEventListener('pointermove', bind, { once: true, passive: true });
 }
 
-
 // ---------------   ANIMATED HEADLINE   ---------------
 function ip_mark_headline_word(word, on) {
 	word.classList.toggle('is-visible', on);

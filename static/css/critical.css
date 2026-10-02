@@ -279,7 +279,7 @@ html.skip-preloader #preloader {
 	   viewports, which Firefox reports at a “640px” window. */
 	--ip-col-left: 36%;
 	--ip-col-right: 64%;
-	--ip-layout-max: 1880px;
+	--ip-layout-max: 1680px;
 	--ip-footer-height: calc(7px + .5vw);
 	--ip-footer-font-size: calc(6px + .45vw);
 	/* Header sizing chain: menu type -> bar height -> logo type. The bar must
@@ -298,7 +298,7 @@ html.skip-preloader #preloader {
 	--ip-bar-height: max(44px, calc(var(--ip-menu-active-scale) * (var(--ip-menu-font-size) + var(--ip-menu-sub-size)) + 2 * var(--ip-bar-pad-block)));
 	/* Wordmark sets in menu type so it does not compete with the nav; the
 	   mark carries the brand and scales with the bar. */
-	--ip-logo-font-size: calc(var(--ip-menu-font-size) + .1vw);
+	--ip-logo-font-size: calc(var(--ip-menu-font-size) + .25vw);
 	--ip-logo-mark-size: calc(var(--ip-bar-height) * .8);
 	--ip-logo-mark-gap: .25rem;
 	--ip-logo-padding-left: .9vw;
