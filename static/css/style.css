@@ -1770,6 +1770,19 @@ html.ip-automation .ip_contact_dock.is-summon .ip_contact_dock__bar{
 	line-height: 1.35;
 	font-weight: 400;
 }
+.ip_modalbox .price-popup__note{
+	margin-top: 34px;
+	font-size: 0.625rem;
+	line-height: 1.45;
+}
+.ip_modalbox .price-popup__note::before{
+	content: '';
+	display: block;
+	width: 2.25rem;
+	margin-bottom: 10px;
+	border-top: 1px solid var(--text-muted);
+	opacity: .55;
+}
 @media (min-width: 1024px){
 	.ip_modalbox .box_inner{
 		width: min(520px, calc(100vw - 40px));
