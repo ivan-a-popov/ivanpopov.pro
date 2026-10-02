@@ -1,8 +1,8 @@
 "use strict";
 // Critical head script. minify.py writes critical.min.js; index.html loads
 // it as a blocking <script> so skip-preloader is decided before #preloader.
-// Dismisses the preloader once above-the-fold is ready (style.css, fonts
-// and hero decoded), independent of deferred init.js.
+// Dismisses the preloader once above-the-fold is ready (style.css and
+// hero decoded), independent of deferred init.js.
 // A hard timeout guarantees the overlay never traps the user.
 //
 // The curtain plays only for humans landing on / or /#home. Deep links
@@ -127,21 +127,6 @@
 			})();
 		});
 	}
-	// Manrope is registered by critical.css; the woff2 is also
-	// <link rel=preload as=font> in <head> so the request is not chained
-	// on CSS download+parse. LCP portraits still start earlier via nginx
-	// Link headers at TTFB.
-	function whenFontsReady(){
-		if(!document.fonts || !document.fonts.load){ return Promise.resolve(); }
-		var faces = Promise.all([
-			document.fonts.load('650 1em Manrope', 'Иван Попов'),
-			document.fonts.load('650 1em Manrope', 'Кто такой')
-		]).catch(function(){});
-		return Promise.race([
-			faces,
-			new Promise(function(resolve){ setTimeout(resolve, 2500); })
-		]);
-	}
 	function whenHeroReady(){
 		var imgs = [].slice.call(document.querySelectorAll('#author_photo_img, #home .ip_home_photo img'));
 		return Promise.all(imgs.map(function(img){
@@ -185,7 +170,6 @@
 		var fallback = setTimeout(finish, FALLBACK_MS);
 		Promise.all([
 			whenStylesReady().then(whenHeroReady),
-			whenFontsReady(),
 			whenLineSequenceReady()
 		]).then(function(){
 			clearTimeout(fallback);

@@ -1,18 +1,4 @@
 @charset "utf-8";
-/* FONTS */
-/* Cyrillic Manrope + Fallback stay in critical.css. Latin subsets are
-   intentionally unregistered: footer digits and a few English titles
-   (Ecommerce, DevOps) would pull a latin woff2 onto the document
-   critical path. Those glyphs use metric-matched "Manrope Fallback". */
-@font-face {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 200 800;
-	font-display: optional;
-	src: url("../fonts/manrope/manrope-cyrillic-ext.woff2") format("woff2");
-	unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
 /* RESET + BASE */
 /* html/body zeroing and box-sizing live in critical.css. */
 h1, h2, h3, h4, h5, h6, p, ul, ol, li {
@@ -49,7 +35,6 @@ svg {
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
 	line-height: 1.2;
-	font-family: Manrope, "Manrope Fallback", sans-serif;
 	color: var(--text-main);
 }
 /* Desktop: native pointer replaced by the magic cursor. */
@@ -797,7 +782,6 @@ html.ip-automation .ip_contact_dock.is-summon .ip_contact_dock__bar{
 .ip_title > :is(span, h2){
 	display: inline-block;
 	position: relative;
-	font-family: Manrope, "Manrope Fallback", sans-serif;
 	color: var(--text-main);
 	text-transform: uppercase;
 	font-weight: 700;
@@ -1073,7 +1057,6 @@ html.ip-automation .ip_contact_dock.is-summon .ip_contact_dock__bar{
 	z-index: 6;
 	left: 50%;
 	transform: translateX(-50%);
-	font-family: Manrope, "Manrope Fallback", sans-serif;
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.03em;

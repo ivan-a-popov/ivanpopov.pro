@@ -1439,11 +1439,6 @@ function ip_teasers(opts) {
 				ip_all('.ip_teaser').forEach(sync);
 			}, 150);
 		});
-		if (document.fonts && document.fonts.ready) {
-			document.fonts.ready.then(function () {
-				ip_all('.ip_teaser').forEach(sync);
-			});
-		}
 		var styleLink = document.querySelector('link[href*="style.min.css"]');
 		if (styleLink && styleLink.rel !== 'stylesheet') {
 			styleLink.addEventListener('load', function () {

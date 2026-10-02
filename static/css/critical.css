@@ -90,51 +90,6 @@
 	}
 }
 
-/* FONTS */
-/* Only the first-screen Cyrillic face is registered here. Latin stays
-   unregistered and cyrillic-ext lives in async style.css — inlining
-   extra @font-face rules would let footer digits / English titles pull
-   a latin woff2 onto the document critical path. URLs are relative to
-   this stylesheet. */
-@font-face {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 200 800;
-	/* optional: no swap after the first ~100 ms, so a late Manrope
-	   download cannot shift the nav (PSI "layout shift culprits").
-	   Cached/fast loads still apply the face before first paint. */
-	font-display: optional;
-	src: url("../fonts/manrope/manrope-cyrillic.woff2") format("woff2");
-	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-
-/* Metric-matched local fallback: Manrope uses font-display: optional, so
-   Slow 4G (and first visits that miss the ~100 ms window) keep this face.
-   Advance/vertical metrics match so a cached-font first paint still
-   aligns. Overrides from font data: Manrope asc 2132 / desc 600 per
-   2000 UPM; uppercase Cyrillic avg vs Arial ≈ 0.957 / 0.974 (bold). */
-@font-face {
-	font-family: "Manrope Fallback";
-	font-style: normal;
-	font-weight: 200 500;
-	src: local("Arial"), local("Roboto"), local("Helvetica Neue");
-	size-adjust: 95.7%;
-	ascent-override: 111.4%;
-	descent-override: 31.4%;
-	line-gap-override: 0%;
-}
-
-@font-face {
-	font-family: "Manrope Fallback";
-	font-style: normal;
-	font-weight: 501 800;
-	src: local("Arial Bold"), local("Arial"), local("Roboto"), local("Helvetica Neue");
-	size-adjust: 97.4%;
-	ascent-override: 109.4%;
-	descent-override: 30.8%;
-	line-gap-override: 0%;
-}
-
 /* BASE */
 html {
 	overflow-x: hidden;
@@ -392,7 +347,6 @@ html.skip-preloader #preloader {
 .ip_header .logo .text {
 	text-decoration: none;
 	color: var(--logo-color);
-	font-family: Manrope, "Manrope Fallback", sans-serif;
 	font-size: var(--ip-logo-font-size);
 	font-weight: 600;
 	line-height: var(--ip-bar-height);
@@ -474,9 +428,8 @@ html.skip-preloader #preloader {
 .ip_header .menu ul li a {
 	text-decoration: none;
 	text-transform: uppercase;
-	/* Idle sits between body mute and the wordmark so Manrope still reads on phones. */
+	/* Idle sits between body mute and the wordmark so it still reads on phones. */
 	color: color-mix(in srgb, var(--logo-color) 78%, var(--text-sub));
-	font-family: Manrope, "Manrope Fallback", sans-serif;
 	font-size: var(--ip-menu-font-size);
 	font-weight: 700;
 	line-height: 1;
@@ -578,9 +531,6 @@ html.skip-preloader #preloader {
 .ip_footer .copyhuy p {
 	margin: 0;
 	color: var(--text-main);
-	/* Fallback only: INN digits would otherwise pull a latin woff2
-	   (U+0030-0039) as a document-critical request. Metrics match Manrope. */
-	font-family: "Manrope Fallback", sans-serif;
 	text-align: center;
 }
 
@@ -771,7 +721,6 @@ html[data-ip-section="testimonials"] #testimonials {
 	font-weight: 650;
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
-	font-family: Manrope, "Manrope Fallback", sans-serif;
 	color: var(--text-main);
 	line-height: 1.2;
 }
@@ -787,7 +736,6 @@ html[data-ip-section="testimonials"] #testimonials {
 .ip_headline,
 .ip_headline_tagline {
 	color: var(--text-main);
-	font-family: Manrope, "Manrope Fallback", sans-serif;
 	line-height: 1.2;
 }
 
