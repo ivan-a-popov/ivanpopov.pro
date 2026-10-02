@@ -1718,20 +1718,17 @@ html.ip-automation .ip_contact_dock.is-summon .ip_contact_dock__bar{
 	justify-self: end;
 	text-align: right;
 }
-.ip_modalbox .price-popup__terms,
-.ip_modalbox .price-popup__saving{
+.ip_modalbox .price-popup__terms{
 	font-size: 0.875rem;
 	line-height: 1.45;
-}
-.ip_modalbox .price-popup__terms{
 	color: var(--text-muted);
 }
 .ip_modalbox .price-popup__saving{
-	padding: 1px 10px;
-	border-radius: 999px;
-	background: var(--card-hover-bg);
-	color: var(--on-accent);
-	font-weight: 600;
+	color: var(--price-saving);
+	font-size: 0.75rem;
+	line-height: 1.45;
+	font-weight: 650;
+	letter-spacing: 0.015em;
 	font-variant-numeric: tabular-nums;
 	white-space: nowrap;
 }

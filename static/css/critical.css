@@ -30,6 +30,8 @@
 	/* wordmark */
 	--accent: #333;
 	/* decorative line + magic cursor dot */
+	--price-saving: #b42318;
+	/* small editorial accent in the price list */
 	--rule-color: #7d7789;
 	/* section-title trailing rule */
 	--card-border: #b9b8c3;
@@ -72,6 +74,7 @@
 		--logo-color: #bab8b6;
 		/* wordmark — darkreader neutral text */
 		--accent: #a09c96;
+		--price-saving: #ff766f;
 		--rule-color: #4d5356;
 		--card-border: #353a3c;
 		/* darkreader #b9b8c3 border */
