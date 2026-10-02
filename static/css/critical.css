@@ -298,9 +298,9 @@ html.skip-preloader #preloader {
 	--ip-bar-height: max(44px, calc(var(--ip-menu-active-scale) * (var(--ip-menu-font-size) + var(--ip-menu-sub-size)) + 2 * var(--ip-bar-pad-block)));
 	/* Wordmark sets in menu type so it does not compete with the nav; the
 	   mark carries the brand and scales with the bar. */
-	--ip-logo-font-size: var(--ip-menu-font-size);
-	--ip-logo-mark-size: calc(var(--ip-bar-height) * .64);
-	--ip-logo-mark-gap: .5rem;
+	--ip-logo-font-size: calc(var(--ip-menu-font-size) + .1vw);
+	--ip-logo-mark-size: calc(var(--ip-bar-height) * .8);
+	--ip-logo-mark-gap: .25rem;
 	--ip-logo-padding-left: .9vw;
 	--ip-logo-menu-gap: 1px;
 	/* Floor only: the menu is space-between, so items sit further apart
