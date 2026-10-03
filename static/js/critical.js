@@ -25,10 +25,10 @@
 			var v = parseFloat(cs.getPropertyValue(name));
 			return v >= 0 ? v : 0;
 		}
-		// half-grow → hold → blink; dismiss then runs full-grow → peel.
+		// half-grow → blink; dismiss then runs full-grow → peel.
 		SEQUENCE_MS = ms('--preloader-grow-half-ms') + ms('--preloader-blink-ms');
 		DISMISS_MS = ms('--preloader-grow-full-ms') + ms('--preloader-peel-ms');
-		FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 100;
+		FALLBACK_MS = SEQUENCE_MS + DISMISS_MS;
 	}
 	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
 
