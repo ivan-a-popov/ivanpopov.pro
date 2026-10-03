@@ -1,5 +1,5 @@
-/*	CRITICAL CSS — minify.py writes critical.min.css; index.html loads it
-	as a blocking stylesheet. Edit HERE and re-run the script.
+/*	CRITICAL CSS — minify.py inlines it into index.html (between the INLINE
+	markers) as a blocking <style>. Edit HERE and re-run the script.
 
 	First paint before async style.css:
 	- preloader (FCP);

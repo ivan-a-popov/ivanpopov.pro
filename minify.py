@@ -12,6 +12,11 @@ Run with no arguments from the site root (or any cwd — the script cds to
 its own directory). Edit the sources (critical.*, style.css, landing.css,
 init.js), not the *.min.* files. Stamps root index.html and every
 */index.html landing. Understands both static/... and /static/... hrefs.
+
+critical.css and critical.js are not written to *.min.* files: index.html embeds
+their minified text between <!-- INLINE:<path> --> and <!-- /INLINE:<path> -->
+markers (as <style> / <script>). Everything between the markers is replaced
+on every run; the markers themselves are the only thing to keep.
 """
 from __future__ import annotations
 
@@ -464,18 +469,36 @@ def _stamp(html: str) -> str:
 
 
 _CSS_SOURCES = (
-    Path("static/css/critical.css"),
     Path("static/css/style.css"),
     Path("static/css/landing.css"),
 )
 _JS_SOURCES = (
-    Path("static/js/critical.js"),
     Path("static/js/init.js"),
+)
+# Minified and embedded into index.html instead of being linked.
+_INLINE_CSS = (Path("static/css/critical.css"),)
+_INLINE_JS = (Path("static/js/critical.js"),)
+_INLINE_RE = re.compile(
+    r"([ \t]*)<!-- INLINE:(?P<name>[^\s>]+) -->.*?<!-- /INLINE:(?P=name) -->",
+    re.S,
 )
 
 
 def _min_path(path: Path) -> Path:
     return path.with_name(f"{path.stem}.min{path.suffix}")
+
+
+def _inline_block(src: Path, mini: str, indent: str) -> str:
+    """Wrap minified text in <style>/<script>; refuse content that would end it early."""
+    tag = "style" if src.suffix == ".css" else "script"
+    if f"</{tag}" in mini.lower() or "<!--" in mini:
+        raise SystemExit(f"{src}: contains '</{tag}' or '<!--', cannot inline safely")
+    name = src.as_posix()
+    return (
+        f"{indent}<!-- INLINE:{name} -->\n"
+        f"{indent}<{tag}>{mini}</{tag}>\n"
+        f"{indent}<!-- /INLINE:{name} -->"
+    )
 
 
 def _html_files() -> list[Path]:
@@ -502,8 +525,16 @@ def _rewrite_min_refs(html: str) -> str:
 
 def build() -> None:
     html_paths = [_require(p) for p in _html_files()]
-    for src in (*_CSS_SOURCES, *_JS_SOURCES):
+    for src in (*_CSS_SOURCES, *_JS_SOURCES, *_INLINE_CSS, *_INLINE_JS):
         _require(src)
+
+    inline: dict[str, tuple[Path, str]] = {}
+    for src in _INLINE_CSS:
+        inline[src.as_posix()] = (src, minify_css(src.read_text(encoding="utf-8")))
+    for src in _INLINE_JS:
+        inline[src.as_posix()] = (src, minify_js_checked(src))
+    for name, (_, mini) in inline.items():
+        print(f"minified {name} ({len(mini)} bytes, inlined)")
 
     for src in _CSS_SOURCES:
         dest = _min_path(src)
@@ -515,8 +546,29 @@ def build() -> None:
         print(f"wrote {dest} ({dest.stat().st_size} bytes)")
 
     for html_path in html_paths:
-        html = _rewrite_min_refs(html_path.read_text(encoding="utf-8"))
-        html_path.write_text(_stamp(html), encoding="utf-8")
+        html = html_path.read_text(encoding="utf-8")
+        # Mask inlined blocks so _stamp() only touches real references, never
+        # src="static/img/..." strings that live inside the embedded code.
+        found: dict[str, str] = {}
+
+        def mask(m: re.Match) -> str:
+            found[m["name"]] = m[1]
+            return f"{m[1]}<!--@@INLINE:{m['name']}@@-->"
+
+        html = _INLINE_RE.sub(mask, html)
+        html = _stamp(_rewrite_min_refs(html))
+        if html_path == Path("index.html"):
+            missing = set(inline) - set(found)
+            if missing:
+                raise SystemExit(f"{html_path}: missing INLINE markers for {sorted(missing)}")
+        for name, indent in found.items():
+            if name not in inline:
+                raise SystemExit(f"{html_path}: unknown INLINE marker {name}")
+            src, mini = inline[name]
+            html = html.replace(
+                f"{indent}<!--@@INLINE:{name}@@-->", _inline_block(src, mini, indent)
+            )
+        html_path.write_text(html, encoding="utf-8")
         print(f"stamped {html_path}")
 
 

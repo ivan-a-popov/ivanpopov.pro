@@ -1,6 +1,7 @@
 "use strict";
-// Critical head script. minify.py writes critical.min.js; index.html loads
-// it as a blocking <script> so skip-preloader is decided before #preloader.
+// Critical head script. minify.py inlines it into index.html (between the
+// INLINE markers) as a blocking <script> so skip-preloader is decided before
+// #preloader.
 // Dismisses the preloader once above-the-fold is ready (style.css and
 // hero decoded), independent of deferred init.js.
 // A hard timeout guarantees the overlay never traps the user.
