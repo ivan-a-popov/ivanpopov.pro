@@ -5,23 +5,24 @@
 // hero decoded), independent of deferred init.js.
 // A hard timeout guarantees the overlay never traps the user.
 //
-// The curtain plays only for humans landing on / or /#home. Deep links
-// (#testimonials, …), automation (PageSpeed / Lighthouse), crawlers, and
-// prefers-reduced-motion skip it — same HTML, no theatrical wait. html
-// starts with skip-preloader (fail-closed for Speed Index); this script
-// removes it for humans. Lighthouse 13.4 spoofs a normal Chrome UA and
-// hides webdriver, so lab viewports (412×823@1.75, 1350×940) count too.
+// The curtain plays once per tab session, for humans landing on / or
+// /#home. Later visits in the session, deep links (#testimonials, …),
+// self-identified automation and crawlers, and prefers-reduced-motion skip
+// it — same HTML, no theatrical wait. html starts with skip-preloader
+// (fail-closed); this script removes it when the curtain should play.
 // Automation additionally gets html.ip-automation, which freezes decorative
-// motion (headline rotation) for a static filmstrip.
+// motion (headline rotation, contact dock, cursor).
 (function(){
-	var GROW_HALF_MS = 1000;
-	var HOLD_MS = 400;
-	var BLINK_MS = 1350;
-	var GROW_FULL_MS = 500;
-	var PEEL_MS = 500;
+	var GROW_HALF_MS = 450;
+	var HOLD_MS = 100;
+	var BLINK_MS = 450;
+	var GROW_FULL_MS = 250;
+	var PEEL_DELAY_MS = 150;
+	var PEEL_MS = 350;
 	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS;
-	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
+	var DISMISS_MS = Math.max(GROW_FULL_MS, PEEL_DELAY_MS + PEEL_MS);
 	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
+	var SEEN_KEY = 'ip_preloader_seen';
 	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
 
 	// Keep in sync with html[data-ip-section=…] in critical.css. Unknown or
@@ -35,27 +36,6 @@
 		if(!SECTION_IDS[id]){ return '#home'; }
 		return '#' + id;
 	}
-	// Lighthouse 13.4 / PSI spoofs a normal Chrome UA (no Chrome-Lighthouse)
-	// and leaves navigator.webdriver false. The lab viewport is still exact.
-	function isLabViewport(){
-		var w = window.innerWidth;
-		var h = window.innerHeight;
-		var sw = screen && screen.width;
-		var sh = screen && screen.height;
-		var dpr = window.devicePixelRatio || 1;
-		function near(a, b){ return Math.abs(a - b) < 0.02; }
-		function slop(a, b, n){ return Math.abs(a - b) <= n; }
-		// Viewport OR screen — not AND. PSI desktop often emulates 1350×940
-		// for only one of them; requiring both replayed the curtain (SI drop).
-		// Width slop: html{scrollbar-gutter:stable} shrinks innerWidth ~15px
-		// on desktop classic scrollbars. Mobile overlay scrollbars stay 412.
-		if((w === 412 || sw === 412) && near(dpr, 1.75)){ return true; }
-		if(near(dpr, 1) && (
-			(slop(w, 1350, 20) && slop(h, 940, 2)) ||
-			(sw === 1350 && sh === 940)
-		)){ return true; }
-		return false;
-	}
 	function isAutomation(){
 		if(navigator.webdriver){ return true; }
 		if(BOT_UA.test(navigator.userAgent || '')){ return true; }
@@ -67,14 +47,23 @@
 				}
 			}
 		}catch(e){}
-		if(isLabViewport()){ return true; }
 		return false;
 	}
 	function prefersReducedMotion(){
 		return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
+	// Blocked or throwing storage counts as seen: skipping is the safe side.
+	function claimFirstPlay(){
+		try {
+			if(sessionStorage.getItem(SEEN_KEY) === '1'){ return false; }
+			sessionStorage.setItem(SEEN_KEY, '1');
+			return true;
+		}catch(e){
+			return false;
+		}
+	}
 	var AUTOMATION = isAutomation();
-	var SKIP_PLAY = AUTOMATION || prefersReducedMotion() || landingHash() !== '#home';
+	var SKIP_PLAY = AUTOMATION || prefersReducedMotion() || landingHash() !== '#home' || !claimFirstPlay();
 	if(AUTOMATION){
 		// Separate from skip-preloader (which deep-linked humans also get):
 		// lets init.js/style.css freeze decorative motion so the Lighthouse
