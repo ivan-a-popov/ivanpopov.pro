@@ -10,7 +10,6 @@ img {
 	max-width: 100%;
 }
 html {
-	scrollbar-gutter: stable;
 	/* Sentinel for critical.js: set only once this stylesheet applies. */
 	--ip-styles-ready: 1;
 }

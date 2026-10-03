@@ -6,7 +6,7 @@
 	- fixed header/footer + layout variables;
 	- above-the-fold main shell (sections absolute, home, columns) so style.css
 	  cannot restack the page under Slow 4G (CLS ~0.9 on .ip_all_wrap);
-	- modal/cursors out of flow; scrollbar-gutter reserved from frame one.
+	- modal/cursors out of flow.
 	.ip_mainpart uses its final geometry from the first paint. The fixed,
 	opaque preloader covers it while style.css, fonts and hero images settle.
 */
@@ -105,9 +105,6 @@
 html {
 	overflow-x: hidden;
 	background-color: var(--bg-color);
-	/* Reserve gutter before async style.css — otherwise html{scrollbar-gutter}
-	   there shifts the whole shell when the stylesheet arrives. */
-	scrollbar-gutter: stable;
 }
 
 body {
