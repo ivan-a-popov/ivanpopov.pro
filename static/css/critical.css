@@ -65,7 +65,6 @@
 	   without unit handling; CSS multiplies by 1ms. Sequence:
 	   half-grow → hold → blink → full-grow → peel. */
 	--preloader-grow-half-ms: 1000;
-	--preloader-hold-ms: 400;
 	--preloader-blink-ms: 1350;
 	--preloader-grow-full-ms: 500;
 	--preloader-peel-ms: 500;
@@ -239,7 +238,7 @@ html.skip-preloader #preloader {
 	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
 	animation: lineround calc(var(--preloader-blink-ms) * 1ms) linear
-		calc((var(--preloader-grow-half-ms) + var(--preloader-hold-ms)) * 1ms) 1 forwards;
+		calc(var(--preloader-grow-half-ms) * 1ms) 1 forwards;
 }
 
 /* 0% frames fall back to the elements' base styles. */
