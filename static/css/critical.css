@@ -201,7 +201,7 @@ html.skip-preloader #preloader {
 }
 
 /* Preloader timing comes from the --preloader-*-ms variables in :root
-   (critical.js reads the same ones): half-grow → hold → blink → full-grow → peel.
+   (critical.js reads the same ones): half-grow → blink → full-grow → peel.
    Box stays 250px (overflow clips the dim sweep); full-grow uses scaleY so CLS
    stays zero and ::after never paints at the viewport top. */
 #preloader .loader_line {
@@ -212,8 +212,10 @@ html.skip-preloader #preloader {
 	/* Load-bearing: the parked dim sweep (translateY(-100%) before the
 	   animation, translateY(200%) after it) is hidden by this clip alone. */
 	overflow: hidden;
+	/* Opacity uses 1ms, not 0s: a zero-duration effect has "unsupported timing
+	   parameters" and Lighthouse reports it as a non-composited animation. */
 	transition: transform calc(var(--preloader-grow-full-ms) * 1ms) ease 0s,
-		opacity 0s linear calc(var(--preloader-grow-full-ms) * 1ms);
+		opacity 1ms linear calc(var(--preloader-grow-full-ms) * 1ms);
 }
 
 #preloader .loader_line:before {
