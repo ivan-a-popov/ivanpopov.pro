@@ -6,11 +6,11 @@
 // hero decoded), independent of deferred init.js.
 // A hard timeout guarantees the overlay never traps the user.
 //
-// The curtain plays once per tab session, for humans landing on / or
-// /#home. Later visits in the session, deep links (#testimonials, …),
-// self-identified automation and crawlers, and prefers-reduced-motion skip
-// it — same HTML, no theatrical wait. html starts with skip-preloader
-// (fail-closed); this script removes it when the curtain should play.
+// The curtain plays only for humans landing on / or /#home. Deep links
+// (#testimonials, …), self-identified automation and crawlers, and
+// prefers-reduced-motion skip it — same HTML, no theatrical wait. html
+// starts with skip-preloader (fail-closed); this script removes it when
+// the curtain should play.
 // Automation additionally gets html.ip-automation, which freezes decorative
 // motion (headline rotation, contact dock, cursor).
 (function(){
@@ -22,7 +22,6 @@
 	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS;
 	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
 	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
-	var SEEN_KEY = 'ip_preloader_seen';
 	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
 
 	// Keep in sync with html[data-ip-section=…] in critical.css. Unknown or
@@ -52,18 +51,8 @@
 	function prefersReducedMotion(){
 		return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
-	// Blocked or throwing storage counts as seen: skipping is the safe side.
-	function claimFirstPlay(){
-		try {
-			if(sessionStorage.getItem(SEEN_KEY) === '1'){ return false; }
-			sessionStorage.setItem(SEEN_KEY, '1');
-			return true;
-		}catch(e){
-			return false;
-		}
-	}
 	var AUTOMATION = isAutomation();
-	var SKIP_PLAY = AUTOMATION || prefersReducedMotion() || landingHash() !== '#home' || !claimFirstPlay();
+	var SKIP_PLAY = AUTOMATION || prefersReducedMotion() || landingHash() !== '#home';
 	if(AUTOMATION){
 		// Separate from skip-preloader (which deep-linked humans also get):
 		// lets init.js/style.css freeze decorative motion so the Lighthouse
