@@ -7,12 +7,9 @@
 // A hard timeout guarantees the overlay never traps the user.
 //
 // The curtain plays only for humans landing on / or /#home. Deep links
-// (#testimonials, …), self-identified automation and crawlers, and
-// prefers-reduced-motion skip it — same HTML, no theatrical wait. html
-// starts with skip-preloader (fail-closed); this script removes it when
-// the curtain should play.
-// Automation additionally gets html.ip-automation, which freezes decorative
-// motion (headline rotation, contact dock, cursor).
+// (#testimonials, …) and prefers-reduced-motion skip it — same HTML, no
+// theatrical wait. html starts with skip-preloader (fail-closed); this
+// script removes it when the curtain should play.
 (function(){
 	// Preloader timing lives in critical.css (:root --preloader-*-ms, unitless
 	// milliseconds). Read lazily by start() so skipped runs pay nothing.
@@ -30,7 +27,6 @@
 		DISMISS_MS = ms('--preloader-grow-full-ms') + ms('--preloader-peel-ms');
 		FALLBACK_MS = SEQUENCE_MS + DISMISS_MS;
 	}
-	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
 
 	// Keep in sync with html[data-ip-section=…] in critical.css. Unknown or
 	// selector-like hashes must not set the attr: html[data-ip-section] hides
@@ -43,30 +39,10 @@
 		if(!SECTION_IDS[id]){ return '#home'; }
 		return '#' + id;
 	}
-	function isAutomation(){
-		if(navigator.webdriver){ return true; }
-		if(BOT_UA.test(navigator.userAgent || '')){ return true; }
-		try {
-			var brands = navigator.userAgentData && navigator.userAgentData.brands;
-			if(brands){
-				for(var i = 0; i < brands.length; i++){
-					if(/HeadlessChrome|HeadlessChromium|Lighthouse/i.test(brands[i].brand || '')){ return true; }
-				}
-			}
-		}catch(e){}
-		return false;
-	}
 	function prefersReducedMotion(){
 		return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
-	var AUTOMATION = isAutomation();
-	var SKIP_PLAY = AUTOMATION || prefersReducedMotion() || landingHash() !== '#home';
-	if(AUTOMATION){
-		// Separate from skip-preloader (which deep-linked humans also get):
-		// lets init.js/style.css freeze decorative motion so the Lighthouse
-		// filmstrip is fully static after first paint (Speed Index).
-		document.documentElement.classList.add('ip-automation');
-	}
+	var SKIP_PLAY = prefersReducedMotion() || landingHash() !== '#home';
 	if(SKIP_PLAY){
 		document.documentElement.classList.add('skip-preloader');
 	}else{

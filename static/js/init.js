@@ -539,7 +539,7 @@ function ip_contact_dock_end_summon(dock) {
 	dock.classList.remove('is-concealed');
 }
 // Hold the envelope at the corner until the price card has landed, then
-// grow it into place. Reduced motion and automation skip the wait.
+// grow it into place. Reduced motion skips the wait.
 function ip_contact_dock_summon_price() {
 	var dock = ip_contact_dock_el();
 	if (!dock) {
@@ -589,9 +589,6 @@ function ip_contact_dock_unland() {
 	ip_dock_land = null;
 }
 function ip_contact_dock_motion_ok() {
-	if (document.documentElement.classList.contains('ip-automation')) {
-		return false;
-	}
 	return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 function ip_contact_dock_clear_fold() {
@@ -1450,9 +1447,6 @@ function ip_teasers(opts) {
 
 // ------------------   CURSOR    ----------------------
 function ip_cursor() {
-	if (document.documentElement.classList.contains('ip-automation')) {
-		return;
-	}
 	if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
 		return;
 	}
@@ -1506,9 +1500,6 @@ function ip_animated_headline() {
 	var revealDuration = 850;        // type / erase width animation duration
 	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ tagline shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	// Automation (class from critical.js): keep the first phrase static so the
-	// Lighthouse filmstrip stops changing — perpetual rotation taxes Speed Index.
-	var freeze = document.documentElement.classList.contains('ip-automation');
 	ip_all('.ip_headline').forEach(function (headline) {
 		var wrapper = headline.querySelector('.ip_headline_words');
 		if (!wrapper) { return; }
@@ -1518,7 +1509,6 @@ function ip_animated_headline() {
 		words.forEach(function (w) {
 			ip_mark_headline_word(w, w === visible);
 		});
-		if (freeze) { return; }
 		function takeNext(word) {
 			var i = words.indexOf(word);
 			return words[(i + 1) % words.length];

@@ -692,12 +692,6 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 		transform: none;
 	}
 }
-html.ip-automation .ip_contact_dock.is-transit .ip_contact_dock__bar,
-html.ip-automation .ip_contact_dock.is-summon .ip_contact_dock__bar{
-	opacity: 1;
-	transform: none;
-	pointer-events: auto;
-}
 .qr_hidden_details{
 	display: none;
 }
