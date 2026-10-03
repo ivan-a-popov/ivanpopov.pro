@@ -14,14 +14,13 @@
 // Automation additionally gets html.ip-automation, which freezes decorative
 // motion (headline rotation, contact dock, cursor).
 (function(){
-	var GROW_HALF_MS = 450;
-	var HOLD_MS = 100;
-	var BLINK_MS = 450;
-	var GROW_FULL_MS = 250;
-	var PEEL_DELAY_MS = 150;
-	var PEEL_MS = 350;
+	var GROW_HALF_MS = 1000;
+	var HOLD_MS = 400;
+	var BLINK_MS = 1350;
+	var GROW_FULL_MS = 500;
+	var PEEL_MS = 500;
 	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS;
-	var DISMISS_MS = Math.max(GROW_FULL_MS, PEEL_DELAY_MS + PEEL_MS);
+	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
 	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
 	var SEEN_KEY = 'ip_preloader_seen';
 	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
