@@ -63,9 +63,9 @@
 	/* Preloader timing: single source of truth, shared with critical.js (which
 	   reads these via getComputedStyle). Unitless milliseconds so JS parses them
 	   without unit handling; CSS multiplies by 1ms. Sequence:
-	   half-grow → hold → blink → full-grow → peel. */
-	--preloader-grow-half-ms: 1000;
-	--preloader-blink-ms: 1350;
+	   half-grow → blink → full-grow → peel. */
+	--preloader-grow-half-ms: 750;
+	--preloader-blink-ms: 750;
 	--preloader-grow-full-ms: 500;
 	--preloader-peel-ms: 500;
 }
