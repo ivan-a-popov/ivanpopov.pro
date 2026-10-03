@@ -14,14 +14,22 @@
 // Automation additionally gets html.ip-automation, which freezes decorative
 // motion (headline rotation, contact dock, cursor).
 (function(){
-	var GROW_HALF_MS = 1000;
-	var HOLD_MS = 400;
-	var BLINK_MS = 1350;
-	var GROW_FULL_MS = 500;
-	var PEEL_MS = 500;
-	var SEQUENCE_MS = GROW_HALF_MS + HOLD_MS + BLINK_MS;
-	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
-	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
+	// Preloader timing lives in critical.css (:root --preloader-*-ms, unitless
+	// milliseconds). Read lazily by start() so skipped runs pay nothing.
+	var SEQUENCE_MS = 0;
+	var DISMISS_MS = 0;
+	var FALLBACK_MS = 0;
+	function readTimings(){
+		var cs = getComputedStyle(document.documentElement);
+		function ms(name){
+			var v = parseFloat(cs.getPropertyValue(name));
+			return v >= 0 ? v : 0;
+		}
+		// half-grow → hold → blink; dismiss then runs full-grow → peel.
+		SEQUENCE_MS = ms('--preloader-grow-half-ms') + ms('--preloader-hold-ms') + ms('--preloader-blink-ms');
+		DISMISS_MS = ms('--preloader-grow-full-ms') + ms('--preloader-peel-ms');
+		FALLBACK_MS = SEQUENCE_MS + DISMISS_MS + 1000;
+	}
 	var BOT_UA = /Googlebot|AdsBot-Google|bingbot|Yandex(Bot|Images)|DuckDuckBot|Baiduspider|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|Applebot|GPTBot|ChatGPT-User|ClaudeBot|CCBot|Bytespider|Amazonbot|HeadlessChrome|HeadlessChromium|Chrome-Lighthouse|PageSpeed/i;
 
 	// Keep in sync with html[data-ip-section=…] in critical.css. Unknown or
@@ -139,6 +147,7 @@
 			if(preloader.parentNode){ preloader.remove(); }
 			return;
 		}
+		readTimings();
 		var done = false;
 		function finish(){
 			if(done){ return; }

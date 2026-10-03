@@ -60,6 +60,15 @@
 	/* loader growing line */
 	--preloader-line-dim: #777;
 	/* loader dim sweep */
+	/* Preloader timing: single source of truth, shared with critical.js (which
+	   reads these via getComputedStyle). Unitless milliseconds so JS parses them
+	   without unit handling; CSS multiplies by 1ms. Sequence:
+	   half-grow → hold → blink → full-grow → peel. */
+	--preloader-grow-half-ms: 1000;
+	--preloader-hold-ms: 400;
+	--preloader-blink-ms: 1350;
+	--preloader-grow-full-ms: 500;
+	--preloader-peel-ms: 500;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -192,8 +201,8 @@ html.skip-preloader #preloader {
 	transform-origin: right center;
 }
 
-/* Preloader timing (keep in sync with critical.js):
-   half-grow 1000ms → hold 400ms → blink 1350ms → full-grow 500ms → peel 500ms
+/* Preloader timing comes from the --preloader-*-ms variables in :root
+   (critical.js reads the same ones): half-grow → hold → blink → full-grow → peel.
    Box stays 250px (overflow clips the dim sweep); full-grow uses scaleY so CLS
    stays zero and ::after never paints at the viewport top. */
 #preloader .loader_line {
@@ -204,7 +213,8 @@ html.skip-preloader #preloader {
 	/* Load-bearing: the parked dim sweep (translateY(-100%) before the
 	   animation, translateY(200%) after it) is hidden by this clip alone. */
 	overflow: hidden;
-	transition: transform 500ms ease 0s, opacity 0s linear 500ms;
+	transition: transform calc(var(--preloader-grow-full-ms) * 1ms) ease 0s,
+		opacity 0s linear calc(var(--preloader-grow-full-ms) * 1ms);
 }
 
 #preloader .loader_line:before {
@@ -216,7 +226,7 @@ html.skip-preloader #preloader {
 	height: 0;
 	transform: translateY(-50%);
 	background-color: var(--preloader-line);
-	animation: lineheight 1000ms ease-in-out 0s forwards;
+	animation: lineheight calc(var(--preloader-grow-half-ms) * 1ms) ease-in-out 0s forwards;
 }
 
 #preloader .loader_line:after {
@@ -228,7 +238,8 @@ html.skip-preloader #preloader {
 	height: 100%;
 	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
-	animation: lineround 1350ms linear 1400ms 1 forwards;
+	animation: lineround calc(var(--preloader-blink-ms) * 1ms) linear
+		calc((var(--preloader-grow-half-ms) + var(--preloader-hold-ms)) * 1ms) 1 forwards;
 }
 
 /* 0% frames fall back to the elements' base styles. */
@@ -252,7 +263,8 @@ html.skip-preloader #preloader {
 
 #preloader.preloaded:before,
 #preloader.preloaded:after {
-	animation: preloadedzero 500ms ease-in-out 500ms forwards;
+	animation: preloadedzero calc(var(--preloader-peel-ms) * 1ms) ease-in-out
+		calc(var(--preloader-grow-full-ms) * 1ms) forwards;
 }
 
 @keyframes preloadedzero {
