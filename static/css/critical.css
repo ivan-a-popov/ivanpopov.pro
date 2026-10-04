@@ -349,7 +349,7 @@ html.skip-preloader #preloader {
 	display: flex;
 	align-items: center;
 	height: var(--ip-bar-height);
-	margin: 1vw;
+	margin: 0;
 }
 
 .ip_header .logo .text {
@@ -404,7 +404,7 @@ html.skip-preloader #preloader {
 	flex-wrap: nowrap;
 	align-items: center;
 	width: 100%;
-	justify-content: space-around;
+	justify-content: space-between;
 	gap: var(--ip-menu-gap);
 }
 
@@ -440,7 +440,7 @@ html.skip-preloader #preloader {
 	   lift re-centres word + sub on the bar midline for the current scale
 	   (1em = the link's font-size). */
 	--ip-menu-scale: 1;
-	--ip-menu-lift: calc((1em + var(--ip-menu-scale) * (var(--ip-menu-sub-size) - 1em)) / -2);
+	--ip-menu-lift: calc((1em + var(--ip-menu-scale) * (var(--ip-menu-sub-size) - 1em)) / -1);
 	transform: translateY(0) scale(1);
 	transform-origin: center bottom;
 	transition: transform .32s cubic-bezier(.33, 1, .68, 1), color .2s ease;
@@ -933,7 +933,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	.ip_all_wrap {
 		--ip-col-left: 0%;
 		--ip-col-right: 100%;
-		--ip-menu-font-size: clamp(.8rem, 3.6vw, 1rem);
+		--ip-menu-font-size: clamp(.7rem, 3.6vw, 1rem);
 		--ip-menu-active-scale: 1.2;
 		--ip-menu-hover-scale: 1.1;
 		--ip-menu-gap: clamp(2px, 1.2vw, 8px);
