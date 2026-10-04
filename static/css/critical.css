@@ -255,8 +255,7 @@ html.skip-preloader #preloader {
 
 #preloader.preloaded .loader_line {
 	opacity: 0;
-	/* Set by critical.js dismiss() to viewport/box ratio before .preloaded lands. */
-	transform: scaleY(var(--loader-scale-full, 1));
+	transform: scaleY(4);
 }
 
 #preloader.preloaded:before,

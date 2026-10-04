@@ -57,12 +57,6 @@
 	}
 
 	function dismiss(preloader){
-		var line = preloader.querySelector('.loader_line');
-		if(line){
-			var boxH = line.offsetHeight || 250;
-			var viewH = preloader.clientHeight || window.innerHeight;
-			line.style.setProperty('--loader-scale-full', String(viewH / boxH));
-		}
 		preloader.classList.add('preloaded');
 		setTimeout(function(){
 			if(preloader.parentNode){ preloader.remove(); }
