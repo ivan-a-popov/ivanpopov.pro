@@ -129,7 +129,7 @@ h2 {
   overflow: hidden;
   padding: .2em 0;
   text-align: left;
-  vertical-align: top;
+  vertical-align: baseline;
 }
 .ip_headline_words b {
   display: inline-block;
@@ -150,7 +150,6 @@ h2 {
   right: 0;
   width: 2px;
   height: 70%;
-  transform: translateY(-50%);
   background-color: var(--caret-color);
 }
 

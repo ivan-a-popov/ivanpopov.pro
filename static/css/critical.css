@@ -113,7 +113,7 @@ body {
 	   screen (e.g. the .line span) sit in line boxes sized by these metrics,
 	   so they must match from first paint or content below them shifts. */
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-	font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+	font-size: clamp(0.9rem, 0.75rem + 0.2vw, 1rem);
 	line-height: 1.7;
 	overflow-wrap: break-word;
 	font-weight: 450;
@@ -201,7 +201,7 @@ html.skip-preloader #preloader {
 #preloader .loader_line {
 	margin: auto;
 	width: 1px;
-	height: 250px;
+	height: 25vh;
 	position: relative;
 	/* Load-bearing: the parked dim sweep (translateY(-100%) before the
 	   animation, translateY(200%) after it) is hidden by this clip alone. */
@@ -761,7 +761,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	--ip-home-rule-height: clamp(3px, calc(2px + 0.15vw), 5px);
 	--ip-home-headline-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 	--ip-home-copy-pad-bottom: 20px;
-	padding: 14px 20px var(--ip-home-copy-pad-bottom);
+	padding: var(--ip-home-copy-pad-bottom);
 }
 
 .ip_home_name {
