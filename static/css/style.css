@@ -1228,7 +1228,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	flex-wrap: wrap;
 	gap: 5px;
 }
-/* 1-up on phones, 2-up from 768px. Each li is a size container so the card
+/* 1-up below 1024px, 2-up from there. Each li is a size container so the card
    internals scale with the card's own width, whatever the column count. */
 .ip_service .service_list ul li{
 	width: 100%;
@@ -1284,7 +1284,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 .ip_service .service_hidden_details{
 	display: none;
 }
-@media (min-width: 768px){
+@media (width >= 1024px){
 	.ip_service .service_list ul li{
 		width: calc(50% - 2.5px);
 	}
