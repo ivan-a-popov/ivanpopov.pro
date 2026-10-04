@@ -1437,7 +1437,7 @@ function ip_teasers(opts) {
 			}, 150);
 		});
 		var styleLink = document.querySelector('link[href*="style.min.css"]');
-		if (styleLink && styleLink.rel !== 'stylesheet') {
+		if (styleLink) {
 			styleLink.addEventListener('load', function () {
 				ip_all('.ip_teaser').forEach(sync);
 			});
@@ -1496,7 +1496,7 @@ function ip_mark_headline_word(word, on) {
 	word.setAttribute('aria-hidden', 'true');
 }
 function ip_animated_headline() {
-	var startDelay = 1600;           // hold the first phrase, then start
+	var startDelay = 1800;           // hold the first phrase, then start
 	var revealDuration = 850;        // type / erase width animation duration
 	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ tagline shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
