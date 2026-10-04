@@ -767,9 +767,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	overflow: hidden;
 	margin-bottom: 0.4em;
 }
-.ip_info{
-	line-height: 1.8;
-}
+/* .ip_info line-height, the two-column layout and the teaser fold live in critical.css. */
 /* span and h2 are interchangeable here: inline-block is what anchors the rule
    below at the end of the text, and font-size/line-height undo the h1-h6 base. */
 .ip_title > :is(span, h2){
@@ -802,12 +800,8 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	margin-left: 0;
 	margin-right: 30px;
 }
-/* Single column on phones, two columns from 768px. */
 .ip_info .wrapper {
 	margin-top: 0.55em;
-}
-.ip_info .left{
-	margin-bottom: 0.75em;
 }
 .ip_info .left p,
 .ip_info .right p {
@@ -847,22 +841,6 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	color: var(--accent);
 	text-decoration-color: transparent;
 }
-@media (min-width: 768px){
-	.ip_info .wrapper{
-		display: flex;
-		justify-content: space-between;
-		gap: clamp(28px, 4vw, 56px);
-	}
-	.ip_info .left,
-	.ip_info .right{
-		width: auto;
-		flex: 1 1 0;
-		min-width: 0;
-	}
-	.ip_info .left{
-		margin-bottom: 0;
-	}
-}
 @media (min-width: 1024px){
 	/* Pull the title row (word + clipped hairline) off both column edges. */
 	.ip_title{
@@ -879,29 +857,17 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 .ip_teaser .wrapper{
 	margin-top: 0.2em;
 }
-.ip_teaser__body{
-	--ip-teaser-lines: 6;
-	--ip-teaser-lh: 1.8em;
-	position: relative;
-	overflow: hidden;
-	max-height: var(--ip-teaser-collapsed, calc(var(--ip-teaser-lines) * var(--ip-teaser-lh)));
-	transition: max-height .45s ease;
+/* Teaser fold geometry is in critical.css; here: motion and the fade. */
+.ip_fold,
+.ip_fold--narrow{
+	transition: grid-template-rows .45s ease;
 }
-@supports (max-height: 1lh){
-	.ip_teaser__body{ max-height: var(--ip-teaser-collapsed, calc(var(--ip-teaser-lines) * 1lh)); }
-}
-/* Conservative clip before JS measures first paragraph + 3 peek lines. */
-.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 7; }
-@media (min-width: 768px){
-	.ip_teaser__body{ --ip-teaser-lines: 4; }
-	.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body{ --ip-teaser-lines: 6; }
-}
-.ip_teaser__body::after{
+.ip_fold > .ip_fold__clip::after{
 	content: "";
 	position: absolute;
 	inset: auto 0 0;
 	/* ~3 lines: fade begins earlier than a 1-line veil and eases out. */
-	height: 5em;
+	height: 2.5lh;
 	pointer-events: none;
 	transition: opacity .3s ease;
 	/* Mix against transparent in srgb so the veil stays --bg-color, not black. */
@@ -915,29 +881,21 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 		var(--bg-color) 100%
 	);
 }
-@supports (height: 1lh){
-	.ip_teaser__body::after{ height: 2.5lh; }
-}
-.ip_teaser.is-open .ip_teaser__body{ max-height: none; }
-.ip_teaser.is-open .ip_teaser__body::after{ opacity: 0; }
-.ip_teaser.is-static .ip_teaser__body{ max-height: none; }
-.ip_teaser.is-static .ip_teaser__body::after{ display: none; }
-.ip_teaser:not(.is-static):focus{
+.ip_teaser.is-open .ip_fold > .ip_fold__clip::after{ opacity: 0; }
+.ip_teaser:focus{
 	outline: none;
 	caret-color: transparent;
 }
-.ip_teaser:not(.is-static):focus-visible{
+.ip_teaser:focus-visible{
 	outline: 2px solid var(--accent);
 	outline-offset: 3px;
 }
-.ip_all_wrap:not([data-magic-cursor="show"]) .ip_teaser:not(.is-static){
+.ip_all_wrap:not([data-magic-cursor="show"]) .ip_teaser{
 	cursor: pointer;
 }
-/* Chevron after the heading — accordion affordance without extra chrome. */
-.ip_teaser:not(.is-static) .ip_title > :is(span, h2){
-	padding-right: 1.45em;
-}
-.ip_teaser:not(.is-static) .ip_title > :is(span, h2)::before{
+/* Chevron after the heading — accordion affordance without extra chrome.
+   (Heading padding for it is in critical.css.) */
+.ip_teaser .ip_title > :is(span, h2)::before{
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -956,17 +914,15 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	margin-top: -0.12em;
 	opacity: 0.85;
 }
-.ip_teaser:not(.is-static) .ip_title--right > :is(span, h2){
-	padding-right: 0;
-	padding-left: 1.45em;
-}
-.ip_teaser:not(.is-static) .ip_title--right > :is(span, h2)::before{
+.ip_teaser .ip_title--right > :is(span, h2)::before{
 	right: auto;
 	left: 0.15em;
 }
 @media (prefers-reduced-motion: reduce){
-	.ip_teaser__body, .ip_teaser__body::after{ transition: none; }
-	.ip_teaser:not(.is-static) .ip_title > :is(span, h2)::before{ transition: none; }
+	.ip_fold,
+	.ip_fold--narrow,
+	.ip_fold > .ip_fold__clip::after{ transition: none; }
+	.ip_teaser .ip_title > :is(span, h2)::before{ transition: none; }
 }
 
 /* PARTNERS (about) */

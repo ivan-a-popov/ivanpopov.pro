@@ -660,39 +660,93 @@ html[data-ip-section="testimonials"] #testimonials {
 	content-visibility: visible;
 }
 
-/* Fold teasers before async style.css so about/whyme never flash full copy. */
-.ip_teaser__body {
-	--ip-teaser-lines: 6;
-	--ip-teaser-lh: 1.8em;
-	position: relative;
-	overflow: hidden;
-	max-height: var(--ip-teaser-collapsed, calc(var(--ip-teaser-lines) * var(--ip-teaser-lh)));
+/* TEASERS (about / whyme). Everything that decides how tall a folded teaser
+   is lives here, so async style.css can never change it (no flash of full
+   copy, no jump when the stylesheet lands). No JS measuring either:
+
+   .ip_fold          one-track grid: 0fr folded, 1fr once the teaser .is-open.
+   .ip_fold__clip    its only child; min-height (--ip-peek) keeps that much
+                     visible while the track is 0fr, overflow hides the rest.
+   .ip_fold--narrow  same, but folds to nothing and only below 768px.
+
+   style.css adds the transition and the fade. */
+.ip_info {
+	/* `lh` below resolves against this. */
+	line-height: 1.8;
 }
 
-.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body {
-	--ip-teaser-lines: 6;
+.ip_info .left {
+	margin-bottom: 0.75em;
+}
+
+/* Single column on phones, two columns from 768px. */
+@media (min-width: 768px) {
+	.ip_info .wrapper {
+		display: flex;
+		justify-content: space-between;
+		gap: clamp(28px, 4vw, 56px);
+	}
+
+	.ip_info .left,
+	.ip_info .right {
+		width: auto;
+		flex: 1 1 0;
+		min-width: 0;
+	}
+
+	.ip_info .left {
+		margin-bottom: 0;
+	}
+}
+
+.ip_fold {
+	display: grid;
+	grid-template-rows: 0fr;
+}
+
+.ip_teaser.is-open .ip_fold {
+	grid-template-rows: 1fr;
+}
+
+.ip_fold__clip {
+	position: relative;
+	overflow: hidden;
+	min-height: var(--ip-peek, 0px);
+}
+
+/* Whole-body fold (whyme): a fixed number of lines. */
+.ip_fold--lines {
+	--ip-peek: 6lh;
+}
+
+/* Lead fold (about): sits right after the first paragraph of a column and
+   shows three lines of what follows. */
+.ip_fold--lead {
+	--ip-peek: 3lh;
 }
 
 @media (min-width: 768px) {
-	.ip_teaser__body {
-		--ip-teaser-lines: 4;
-	}
-
-	.ip_teaser[data-ip-preview="first-p"] .ip_teaser__body {
-		--ip-teaser-lines: 5;
+	.ip_fold--lines {
+		--ip-peek: 4lh;
 	}
 }
 
-.ip_teaser.is-open .ip_teaser__body,
-.ip_teaser.is-static .ip_teaser__body {
-	max-height: none;
+@media (max-width: 767.98px) {
+	.ip_fold--narrow {
+		display: grid;
+		grid-template-rows: 0fr;
+	}
+
+	.ip_teaser.is-open .ip_fold--narrow {
+		grid-template-rows: 1fr;
+	}
 }
 
-.ip_teaser:not(.is-static) .ip_title> :is(span, h2) {
+.ip_teaser .ip_title> :is(span, h2) {
 	padding-right: 1.45em;
 }
 
-.ip_teaser:not(.is-static) .ip_title--right> :is(span, h2) {
+.ip_teaser .ip_title--right> :is(span, h2) {
 	padding-right: 0;
 	padding-left: 1.45em;
 }

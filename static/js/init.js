@@ -61,9 +61,7 @@ ip_ready(function () {
 	ip_contact_dock_bind();
 	ip_cursor();
 	ip_animated_headline();
-	// Teaser measure forces layout. Run it when that section is actually
-	// shown, not on every home-page load (Lighthouse TBT).
-	ip_enhance_section(ip_href_from_location());
+	ip_teasers();
 });
 
 function ip_href_from_location() {
@@ -171,7 +169,7 @@ function ip_goto(href, opts) {
 	if (opts.updateHash !== false) {
 		ip_sync_location(href);
 	}
-	ip_enhance_section(href);
+	ip_close_teasers(href);
 	// Defer so focus wins over the menu link that initiated navigation.
 	var focusToken = ++ip_section_focus_token;
 	setTimeout(function () {
@@ -251,37 +249,6 @@ function ip_navigate_section(step, linkSelector, hrefOpts) {
 	}
 	ip_goto(order[nextIndex]);
 	return true;
-}
-function ip_enhance_section(href) {
-	if (href === '#about' || href === '#whyme') {
-		ip_teasers({ reset: true });
-		var section = ip_section_from_href(href);
-		if (section) {
-			var settled = false;
-			function settle() {
-				if (settled) {
-					return;
-				}
-				settled = true;
-				section.removeEventListener('animationend', onEnterEnd);
-				ip_teasers();
-			}
-			function onEnterEnd(e) {
-				if (e.target !== section) {
-					return;
-				}
-				settle();
-			}
-			if (section.classList.contains('animated')) {
-				section.addEventListener('animationend', onEnterEnd);
-				window.setTimeout(settle, 1300);
-			} else {
-				window.requestAnimationFrame(function () {
-					ip_teasers();
-				});
-			}
-		}
-	}
 }
 function ip_page_transition() {
 	ip_all('.transition_link a').forEach(function (link) {
@@ -1167,282 +1134,80 @@ function ip_service_popup() {
 	});
 }
 
-// -------------  WHY TEASERS  -------------------
-function ip_teasers(opts) {
-	opts = opts || {};
-	var teasers = ip_all('.ip_teaser');
-	if (!teasers.length) {
+// -------------  TEASERS  -------------------
+// Folding is pure CSS (.ip_fold, see "TEASERS" in critical.css): a teaser is
+// folded until it has .is-open. This only toggles that class and keeps ARIA,
+// single-open (whyme) and scroll-back in sync. Nothing here measures layout.
+function ip_teaser_set(teaser, open) {
+	teaser.classList.toggle('is-open', open);
+	teaser.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function ip_teaser_scroll_to_title(teaser) {
+	var section = teaser.closest('.ip_section');
+	var title = teaser.querySelector('.ip_title');
+	if (!section || !title) {
 		return;
 	}
-	var DURATION = 450;
-	var tokens = ip_teasers._tokens || (ip_teasers._tokens = new WeakMap());
-	var reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
-	function prefersReduce() {
-		return reduceMq.matches;
+	var sRect = section.getBoundingClientRect();
+	var tRect = title.getBoundingClientRect();
+	if (tRect.top >= sRect.top) {
+		return;
 	}
-	function nextToken(teaser) {
-		var n = (tokens.get(teaser) || 0) + 1;
-		tokens.set(teaser, n);
-		return n;
-	}
-	function isLaidOut(el) {
-		return el.getClientRects().length > 0 && el.offsetHeight > 0;
-	}
-	function measurePreviewCollapsed(teaser) {
-		if (teaser.getAttribute('data-ip-preview') !== 'first-p') {
-			return null;
-		}
-		var body = teaser.querySelector('.ip_teaser__body');
-		if (!body || !isLaidOut(body)) {
-			return null;
-		}
-		var twoCol = window.matchMedia('(min-width: 768px)').matches;
-		var paras = [];
-		var leftP = body.querySelector('.left > p');
-		var rightP = body.querySelector('.right > p');
-		if (twoCol) {
-			if (leftP) { paras.push(leftP); }
-			if (rightP) { paras.push(rightP); }
-		} else if (leftP) {
-			paras.push(leftP);
-		} else if (rightP) {
-			paras.push(rightP);
-		}
-		if (!paras.length) {
-			return null;
-		}
-		// Layout sizes only — getBoundingClientRect is inflated during rollIn's
-		// 3D transform and made the preview look fully expanded.
-		var extraTop = parseFloat(getComputedStyle(body).paddingTop) || 0;
-		var wrap = body.querySelector('.wrapper');
-		if (wrap) {
-			extraTop += parseFloat(getComputedStyle(wrap).marginTop) || 0;
-			extraTop += parseFloat(getComputedStyle(wrap).paddingTop) || 0;
-		}
-		var firstH = 0;
-		var peek = 0;
-		for (var i = 0; i < paras.length; i++) {
-			var p = paras[i];
-			if (p.offsetHeight < 1) {
-				return null;
-			}
-			var cs = getComputedStyle(p);
-			var mb = parseFloat(cs.marginBottom) || 0;
-			var lh = parseFloat(cs.lineHeight) || 0;
-			firstH = Math.max(firstH, p.offsetHeight);
-			peek = Math.max(peek, mb + (3 * lh));
-		}
-		return Math.ceil(extraTop + firstH + peek);
-	}
-	function applyPreviewVar(teaser, body) {
-		var measured = measurePreviewCollapsed(teaser);
-		if (measured != null) {
-			body.style.setProperty('--ip-teaser-collapsed', measured + 'px');
-			return;
-		}
-		body.style.removeProperty('--ip-teaser-collapsed');
-	}
-	function collapsedMaxHeight(teaser) {
-		var measured = measurePreviewCollapsed(teaser);
-		if (measured != null) {
-			return measured + 'px';
-		}
-		if (typeof CSS !== 'undefined' && CSS.supports && CSS.supports('max-height', '1lh')) {
-			return 'calc(var(--ip-teaser-lines) * 1lh)';
-		}
-		return 'calc(var(--ip-teaser-lines) * var(--ip-teaser-lh, 1.8em))';
-	}
-	function afterHeightTransition(teaser, body, token, done) {
-		var finished = false;
-		function finish(e) {
-			if (e && e.propertyName && e.propertyName !== 'max-height') {
-				return;
-			}
-			if (finished || tokens.get(teaser) !== token) {
-				return;
-			}
-			finished = true;
-			body.removeEventListener('transitionend', finish);
-			done();
-		}
-		body.addEventListener('transitionend', finish);
-		window.setTimeout(finish, DURATION + 80);
-	}
-	function scrollSectionToTitle(teaser) {
-		var section = teaser.closest('.ip_section');
-		var title = teaser.querySelector('.ip_title');
-		if (!section || !title) {
-			return;
-		}
-		var sRect = section.getBoundingClientRect();
-		var tRect = title.getBoundingClientRect();
-		if (tRect.top >= sRect.top) {
-			return;
-		}
-		var next = section.scrollTop + (tRect.top - sRect.top);
-		section.scrollTo({
-			top: Math.max(0, next),
-			behavior: prefersReduce() ? 'auto' : 'smooth'
-		});
-	}
-	function applyChrome(teaser, open) {
-		teaser.classList.toggle('is-open', open);
-		if (teaser.hasAttribute('aria-expanded') || !teaser.classList.contains('is-static')) {
-			teaser.setAttribute('aria-expanded', open ? 'true' : 'false');
-		}
-	}
-	function setExpanded(teaser, open, behavior) {
-		behavior = behavior || {};
-		var body = teaser.querySelector('.ip_teaser__body');
-		if (!body) {
-			return;
-		}
-		var token = nextToken(teaser);
-		if (prefersReduce()) {
-			applyChrome(teaser, open);
-			if (!open) {
-				applyPreviewVar(teaser, body);
-			}
-			body.style.maxHeight = open ? 'none' : '';
-			teaser.classList.remove('is-animating');
-			if (!open && behavior.scroll) {
-				scrollSectionToTitle(teaser);
-			}
-			return;
-		}
-		teaser.classList.add('is-animating');
-		if (open) {
-			body.style.maxHeight = body.scrollHeight + 'px';
-			applyChrome(teaser, true);
-			afterHeightTransition(teaser, body, token, function () {
-				body.style.maxHeight = 'none';
-				teaser.classList.remove('is-animating');
-			});
-			return;
-		}
-		body.style.maxHeight = body.scrollHeight + 'px';
-		void body.offsetHeight;
-		applyChrome(teaser, false);
-		applyPreviewVar(teaser, body);
-		body.style.maxHeight = collapsedMaxHeight(teaser);
-		if (behavior.scroll) {
-			scrollSectionToTitle(teaser);
-		}
-		afterHeightTransition(teaser, body, token, function () {
-			body.style.maxHeight = '';
-			teaser.classList.remove('is-animating');
-		});
-	}
-	function hasTextSelection() {
-		var sel = window.getSelection && window.getSelection();
-		return !!(sel && String(sel));
-	}
-	function sync(teaser) {
-		if (teaser.classList.contains('is-open') || teaser.classList.contains('is-animating')) {
-			return;
-		}
-		var body = teaser.querySelector('.ip_teaser__body');
-		if (!body) {
-			return;
-		}
-		if (!isLaidOut(teaser)) {
-			return;
-		}
-		teaser.classList.remove('is-static');
-		var prevTransition = body.style.transition;
-		body.style.transition = 'none';
-		applyPreviewVar(teaser, body);
-		body.style.maxHeight = '';
-		void body.offsetHeight;
-		body.style.transition = prevTransition;
-		var clip = getComputedStyle(body).maxHeight;
-		if (!clip || clip === 'none') {
-			teaser.setAttribute('role', 'button');
-			teaser.setAttribute('tabindex', '0');
-			teaser.setAttribute('aria-expanded', 'false');
-			return;
-		}
-		if (body.scrollHeight <= body.clientHeight + 1) {
-			teaser.classList.add('is-static');
-			teaser.removeAttribute('role');
-			teaser.removeAttribute('tabindex');
-			teaser.removeAttribute('aria-expanded');
-			return;
-		}
+	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	section.scrollTo({
+		top: Math.max(0, section.scrollTop + (tRect.top - sRect.top)),
+		behavior: reduce ? 'auto' : 'smooth'
+	});
+}
+function ip_teasers() {
+	ip_all('.ip_teaser').forEach(function (teaser) {
 		teaser.setAttribute('role', 'button');
 		teaser.setAttribute('tabindex', '0');
 		teaser.setAttribute('aria-expanded', 'false');
-	}
-	teasers.forEach(function (teaser) {
-		if (opts.reset) {
-			var section = teaser.closest('.ip_section');
-			if (section && section.classList.contains('active')) {
-				teaser.classList.remove('is-open', 'is-animating');
-				var resetBody = teaser.querySelector('.ip_teaser__body');
-				if (resetBody) {
-					resetBody.style.maxHeight = '';
+		teaser.addEventListener('click', function (e) {
+			if (e.target.closest('a')) {
+				return;
+			}
+			var sel = window.getSelection && window.getSelection();
+			if (sel && String(sel)) {
+				return;
+			}
+			var willOpen = !teaser.classList.contains('is-open');
+			if (willOpen) {
+				var whyme = teaser.closest('#whyme');
+				if (whyme) {
+					ip_all('.ip_teaser.is-open', whyme).forEach(function (other) {
+						ip_teaser_set(other, false);
+					});
 				}
 			}
-		}
-		if (!teaser.hasAttribute('data-ip-teaser-bound')) {
-			teaser.setAttribute('data-ip-teaser-bound', '');
-			teaser.addEventListener('click', function (e) {
-				if (teaser.classList.contains('is-static')) {
-					return;
-				}
-				if (e.target.closest && e.target.closest('a')) {
-					return;
-				}
-				if (hasTextSelection()) {
-					return;
-				}
-				var willOpen = !teaser.classList.contains('is-open');
-				if (willOpen) {
-					var whyme = teaser.closest('#whyme');
-					if (whyme) {
-						whyme.querySelectorAll('.ip_teaser.is-open').forEach(function (other) {
-							if (other !== teaser) {
-								setExpanded(other, false);
-							}
-						});
-					}
-				}
-				setExpanded(teaser, willOpen, { scroll: !willOpen });
-				if (willOpen) {
-					ip_contact_dock_cancel_demo();
-				} else {
-					ip_contact_dock_schedule_demo();
-				}
-			});
-			teaser.addEventListener('keydown', function (e) {
-				if (e.key !== 'Enter' && e.key !== ' ') {
-					return;
-				}
-				if (teaser.classList.contains('is-static')) {
-					return;
-				}
-				e.preventDefault();
-				teaser.click();
-			});
-		}
-		sync(teaser);
-	});
-	if (!ip_teasers._resizeBound) {
-		ip_teasers._resizeBound = true;
-		var resizeTimer = null;
-		window.addEventListener('resize', function () {
-			clearTimeout(resizeTimer);
-			resizeTimer = setTimeout(function () {
-				ip_all('.ip_teaser').forEach(sync);
-			}, 150);
+			ip_teaser_set(teaser, willOpen);
+			if (willOpen) {
+				ip_contact_dock_cancel_demo();
+			} else {
+				ip_teaser_scroll_to_title(teaser);
+				ip_contact_dock_schedule_demo();
+			}
 		});
-		var styleLink = document.querySelector('link[href*="style.min.css"]');
-		if (styleLink) {
-			styleLink.addEventListener('load', function () {
-				ip_all('.ip_teaser').forEach(sync);
-			});
-		}
+		teaser.addEventListener('keydown', function (e) {
+			// Links inside keep their own Enter / Space.
+			if (e.target !== teaser || (e.key !== 'Enter' && e.key !== ' ')) {
+				return;
+			}
+			e.preventDefault();
+			teaser.click();
+		});
+	});
+}
+// Entering about / whyme: start with every teaser folded.
+function ip_close_teasers(href) {
+	var section = (href === '#about' || href === '#whyme') ? ip_section_from_href(href) : null;
+	if (!section) {
+		return;
 	}
+	ip_all('.ip_teaser.is-open', section).forEach(function (teaser) {
+		ip_teaser_set(teaser, false);
+	});
 }
 
 // ------------------   CURSOR    ----------------------
@@ -1457,7 +1222,7 @@ function ip_cursor() {
 		if (!inner || !outer) {
 			return;
 		}
-		var hoverSelector = 'a, button, .ip_teaser:not(.is-static)';
+		var hoverSelector = 'a, button, .ip_teaser';
 		var freeze = false;
 		window.addEventListener('mousemove', function (s) {
 			if (!freeze) {
