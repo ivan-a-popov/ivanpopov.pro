@@ -16,8 +16,7 @@ html {
 body {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 	/* Fluid body copy: 16px on phones/laptops, ~18px near the layout cap. */
-	font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
-	line-height: normal;
+	line-height: 1.2;
 	overflow-wrap: break-word;
 	font-weight: 450;
 	color: var(--text-sub);
@@ -795,7 +794,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	left: auto;
 	right: 100%;
 	margin-left: 0;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 .ip_info .wrapper {
 	margin-top: 0.55em;
@@ -845,7 +844,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	}
 	.ip_title > :is(span, h2){letter-spacing: 3px;}
 	.ip_title > :is(span, h2):after{margin-left: 20px;}
-	.ip_title--right > :is(span, h2):after{margin-left: 0; margin-right: 20px;}
+	.ip_title--right > :is(span, h2):after{margin-left: 0; margin-right: 10px;}
 }
 
 .ip_teaser + .ip_teaser{
