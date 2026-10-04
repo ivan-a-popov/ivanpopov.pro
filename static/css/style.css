@@ -775,7 +775,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	color: var(--text-main);
 	text-transform: uppercase;
 	font-weight: 600;
-	letter-spacing: 4px;
+	letter-spacing: 2px;
 }
 .ip_title > :is(span, h2):after{
 	position: absolute;
