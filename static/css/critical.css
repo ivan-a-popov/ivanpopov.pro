@@ -655,7 +655,7 @@ html[data-ip-section="testimonials"] #testimonials {
    style.css adds the transition and the fade. */
 .ip_info {
 	/* `lh` below resolves against this. */
-	line-height: 1.8;
+	line-height: normal;
 }
 
 .ip_info .left {
