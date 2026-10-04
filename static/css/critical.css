@@ -328,7 +328,6 @@ html.skip-preloader #preloader {
 }
 
 .ip_header {
-	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -1042,7 +1041,7 @@ html[data-ip-section="testimonials"] #testimonials {
 	}
 
 	.ip_header .logo-label {
-		position: static;
+		position: relative;
 		width: auto;
 		height: auto;
 		overflow: visible;
