@@ -393,7 +393,7 @@ html.skip-preloader #preloader {
 	flex: 1 1 auto;
 	min-width: 0;
 	overflow: visible;
-	display: flex;
+	display: contents;
 	line-height: 1;
 }
 
@@ -467,7 +467,6 @@ html.skip-preloader #preloader {
 	transform-origin: top center;
 	text-align: center;
 	font-size: var(--ip-menu-sub-size);
-	font-weight: inherit;
 	line-height: 1;
 	white-space: nowrap;
 	opacity: 0;
