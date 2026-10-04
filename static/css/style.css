@@ -1278,7 +1278,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 }
 @media (width >= 1024px){
 	.ip_service .service_list ul li{
-		width: calc(50% - 2.5px);
+		width: calc(50% - 5px);
 	}
 	/* A card is ~277u tall, so three 2-up rows take ~830u; the dvh term keeps
 	   them inside the viewport below the header/footer (~140px) when possible. */
