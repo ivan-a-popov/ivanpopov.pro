@@ -360,7 +360,7 @@ html.skip-preloader #preloader {
 	text-decoration: none;
 	color: var(--logo-color);
 	font-size: var(--ip-logo-font-size);
-	font-weight: 600;
+	font-weight: 750;
 	line-height: var(--ip-bar-height);
 	padding-left: var(--ip-logo-padding-left);
 	/* Wordmark is a single line, always: body{overflow-wrap:break-word} would
@@ -443,7 +443,7 @@ html.skip-preloader #preloader {
 	/* Idle sits between body mute and the wordmark so it still reads on phones. */
 	color: color-mix(in srgb, var(--logo-color) 78%, var(--text-sub));
 	font-size: var(--ip-menu-font-size);
-	font-weight: 700;
+	font-weight: 600;
 	line-height: 1;
 	letter-spacing: .02em;
 	padding-inline: var(--ip-menu-link-padding);
@@ -497,7 +497,7 @@ html.skip-preloader #preloader {
 	transform: translateY(var(--ip-menu-lift)) scale(var(--ip-menu-scale));
 	z-index: 2;
 	color: var(--logo-color);
-	font-weight: 800;
+	font-weight: 750;
 }
 
 .ip_header .menu ul li.active .ip_menu_sub {
@@ -513,7 +513,7 @@ html.skip-preloader #preloader {
 		transform: translateY(var(--ip-menu-lift)) scale(var(--ip-menu-scale));
 		z-index: 1;
 		color: var(--logo-color);
-		font-weight: 750;
+		font-weight: 700;
 	}
 
 	.ip_header .menu ul li:not(.active) a:hover .ip_menu_sub,
@@ -784,7 +784,7 @@ html[data-ip-section="testimonials"] #testimonials {
 
 .ip_home_name {
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
-	font-weight: 650;
+	font-weight: 600;
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
 	color: var(--text-main);
@@ -949,7 +949,7 @@ html[data-ip-section="testimonials"] #testimonials {
 		--ip-col-right: 100%;
 		--ip-menu-font-size: clamp(.8rem, 3.6vw, 1rem);
 		--ip-menu-active-scale: 1.2;
-		--ip-menu-hover-scale: 1.05;
+		--ip-menu-hover-scale: 1.1;
 		--ip-menu-gap: clamp(2px, 1.2vw, 8px);
 	}
 
@@ -1100,17 +1100,22 @@ html[data-ip-section="testimonials"] #testimonials {
 	.ip_all_wrap {
 		--ip-menu-gap: clamp(6px, 1vw, 16px);
 		--ip-menu-active-scale: 1.3;
+		--ip-menu-hover-scale: 1.1;
 	}
 }
 
 /* Desktop mouse: stronger hover magnify, still below active. */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
 	.ip_all_wrap {
-		--ip-menu-hover-scale: 1.2;
+		--ip-menu-hover-scale: 1.3;
 	}
 }
 
 @media (min-width: 1024px) {
+	.ip_all_wrap {
+			--ip-menu-active-scale: 1.5;
+		}
+
 	/* Content-edge alignment + scale bleed so magnified last item is not clipped. */
 	.ip_header .menu ul {
 		padding-right: calc(var(--ip-menu-padding-inline) + var(--ip-menu-scale-bleed));
