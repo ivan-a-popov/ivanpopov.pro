@@ -1214,9 +1214,6 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 }
 
 /*	SERVICES */
-.ip_service{
-	margin-bottom: 70px;
-}
 .ip_service .service_list ul{
 	list-style-type: none;
 	display: flex;
