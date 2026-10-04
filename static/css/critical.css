@@ -667,7 +667,7 @@ html[data-ip-section="testimonials"] #testimonials {
    .ip_fold          one-track grid: 0fr folded, 1fr once the teaser .is-open.
    .ip_fold__clip    its only child; min-height (--ip-peek) keeps that much
                      visible while the track is 0fr, overflow hides the rest.
-   .ip_fold--narrow  same, but folds to nothing and only below 768px.
+   .ip_fold--narrow  same, but folds to nothing and only below 1024px.
 
    style.css adds the transition and the fade. */
 .ip_info {
@@ -679,8 +679,8 @@ html[data-ip-section="testimonials"] #testimonials {
 	margin-bottom: 0.75em;
 }
 
-/* Single column on phones, two columns from 768px. */
-@media (min-width: 768px) {
+/* Single column below 1024px, two columns from there. */
+@media (width >= 1024px) {
 	.ip_info .wrapper {
 		display: flex;
 		justify-content: space-between;
@@ -725,13 +725,13 @@ html[data-ip-section="testimonials"] #testimonials {
 	--ip-peek: 3lh;
 }
 
-@media (min-width: 768px) {
+@media (width >= 1024px) {
 	.ip_fold--lines {
 		--ip-peek: 4lh;
 	}
 }
 
-@media (max-width: 767.98px) {
+@media (width < 1024px) {
 	.ip_fold--narrow {
 		display: grid;
 		grid-template-rows: 0fr;
