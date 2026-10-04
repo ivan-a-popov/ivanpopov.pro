@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* RESET + BASE */
 /* html/body zeroing and box-sizing live in critical.css. */
-h1, h2, h3, h4, h5, h6, p, ul, ol, li {
+h1, h2, h3, p, ul, ol, li {
 	margin: 0;
 	padding: 0;
 }
@@ -31,8 +31,8 @@ input, textarea, [contenteditable="true"] {
 svg {
 	fill: currentcolor;
 }
-h1, h2, h3, h4, h5, h6 {
-	font-weight: 700;
+h1 {
+	font-weight: 750;
 	line-height: 1.2;
 	color: var(--text-main);
 }
@@ -775,7 +775,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	position: relative;
 	color: var(--text-main);
 	text-transform: uppercase;
-	font-weight: 700;
+	font-weight: 600;
 	letter-spacing: 4px;
 	font-size: inherit;
 	line-height: inherit;
@@ -798,7 +798,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	left: auto;
 	right: 100%;
 	margin-left: 0;
-	margin-right: 30px;
+	margin-right: 20px;
 }
 .ip_info .wrapper {
 	margin-top: 0.55em;
@@ -818,7 +818,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 .ip_info .wrapper p b,
 .ip_modalbox .descriptions p b {
 	color: var(--text-main);
-	font-weight: 600;
+	font-weight: 650;
 }
 .ip_info > .wrapper + .ip_title,
 .ip_info > .ip_teaser + .ip_title{

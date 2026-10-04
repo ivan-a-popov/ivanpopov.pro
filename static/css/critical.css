@@ -125,9 +125,6 @@ body {
 h1,
 h2,
 h3,
-h4,
-h5,
-h6,
 p,
 ul,
 ol,
@@ -281,6 +278,7 @@ html.skip-preloader #preloader {
 	height: 100dvh;
 	max-width: var(--ip-layout-max);
 	margin-inline: auto;
+	font-weight: 450;
 	/* Desktop-first column split so the LCP portrait has a real box without
 	   waiting on a min-width query (Lantern's pessimistic graph ignores those).
 	   Phones override to 0/100 below 640px. Use width < 640 / width >= 640
@@ -301,7 +299,7 @@ html.skip-preloader #preloader {
 	/* Sub-label is a rem knob (never em) so it stays a caption. The whole <a>
 	   scales — hover below active — so the sub grows with the lens. */
 	--ip-menu-sub-size: clamp(.52rem, 1.9vw, .68rem);
-	--ip-menu-active-scale: 1.5;
+	--ip-menu-active-scale: 1.2;
 	--ip-menu-hover-scale: 1.08;
 	--ip-bar-pad-block: 4px;
 	--ip-bar-height: max(44px, calc(var(--ip-menu-active-scale) * (var(--ip-menu-font-size) + var(--ip-menu-sub-size)) + 2 * var(--ip-bar-pad-block)));
@@ -320,6 +318,9 @@ html.skip-preloader #preloader {
 	/* Room for active/hover scale (up to 1.5) + sub-labels wider than main word. */
 	--ip-menu-scale-bleed: clamp(8px, calc(6px + 0.45vw), 22px);
 }
+
+
+.ip_all_wrap b { font-weight: 600;} 
 
 .ip_all_wrap,
 .ip_all_wrap * {
@@ -349,11 +350,6 @@ html.skip-preloader #preloader {
 	align-items: center;
 	height: var(--ip-bar-height);
 	margin: 0;
-	font-size: inherit;
-	font-weight: inherit;
-	font-family: inherit;
-	line-height: inherit;
-	color: inherit;
 }
 
 .ip_header .logo .text {
@@ -418,16 +414,6 @@ html.skip-preloader #preloader {
 	overflow: visible;
 }
 
-/* Keep nav h2s out of the UA heading box (1.5em / block) so the bar
-   geometry stays the existing a { inline-grid } layout. */
-.ip_header .menu ul li h2 {
-	display: inline;
-	font-size: inherit;
-	font-weight: inherit;
-	line-height: inherit;
-	color: inherit;
-}
-
 /* Edge items scale inward so html{overflow-x:hidden} does not clip them. */
 .ip_header .menu ul li:first-child a {
 	transform-origin: left bottom;
@@ -471,7 +457,7 @@ html.skip-preloader #preloader {
 	position: relative;
 	display: inline-block;
 	line-height: 1;
-	font-weight: inherit;
+	font-weight: 650;
 }
 
 .ip_header .menu ul li .ip_menu_sub {
