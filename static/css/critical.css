@@ -308,7 +308,7 @@ html.skip-preloader #preloader {
 	--ip-logo-font-size: calc(var(--ip-menu-font-size) + .25vw);
 	--ip-logo-mark-size: calc(var(--ip-bar-height) * .8);
 	--ip-logo-mark-gap: .25rem;
-	--ip-logo-padding-left: .9vw;
+	--ip-logo-padding-left: 1vw;
 	--ip-logo-menu-gap: 1px;
 	/* Floor only: the menu is space-between, so items sit further apart
 	   than this unless the row gets tight. */
@@ -349,7 +349,7 @@ html.skip-preloader #preloader {
 	display: flex;
 	align-items: center;
 	height: var(--ip-bar-height);
-	margin: 0;
+	margin: 1vw;
 }
 
 .ip_header .logo .text {
