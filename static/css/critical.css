@@ -224,7 +224,7 @@ html.skip-preloader #preloader {
 	height: 0;
 	transform: translateY(-50%);
 	background-color: var(--preloader-line);
-	animation: lineheight calc(var(--preloader-grow-half-ms) * 1ms) ease-in-out 0s forwards;
+	animation: calc(var(--preloader-grow-half-ms) * 1ms) ease-in-out forwards lineheight;
 }
 
 #preloader .loader_line:after {
@@ -236,8 +236,8 @@ html.skip-preloader #preloader {
 	height: 100%;
 	background-color: var(--preloader-line-dim);
 	transform: translateY(-100%);
-	animation: lineround calc(var(--preloader-blink-ms) * 1ms) linear
-		calc(var(--preloader-grow-half-ms) * 1ms) 1 forwards;
+	animation: calc(var(--preloader-blink-ms) * 1ms) linear
+		calc(var(--preloader-grow-half-ms) * 1ms) 1 forwards lineround;
 }
 
 /* 0% frames fall back to the elements' base styles. */
@@ -261,8 +261,8 @@ html.skip-preloader #preloader {
 
 #preloader.preloaded:before,
 #preloader.preloaded:after {
-	animation: preloadedzero calc(var(--preloader-peel-ms) * 1ms) ease-in-out
-		calc(var(--preloader-grow-full-ms) * 1ms) forwards;
+	animation: calc(var(--preloader-peel-ms) * 1ms) ease-in-out
+		calc(var(--preloader-grow-full-ms) * 1ms) forwards preloadedzero;
 }
 
 @keyframes preloadedzero {
