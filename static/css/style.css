@@ -314,7 +314,7 @@ html,
 	--ip-home-rule-height: clamp(3px, calc(2px + 0.15vw), 5px);
 	--ip-home-headline-gap: clamp(24px, calc(12px + 1.4vw), 35px);
 	--ip-home-copy-pad-bottom: 20px;
-	padding: 14px 20px var(--ip-home-copy-pad-bottom);
+	padding: var(--ip-home-copy-pad-bottom);
 }
 .ip_home_name{
 	font-size: clamp(24px, calc(20px + 2vw), 42px);
