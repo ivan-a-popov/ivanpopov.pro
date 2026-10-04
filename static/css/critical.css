@@ -793,7 +793,7 @@ html[data-ip-section="testimonials"] #testimonials {
 
 .ip_headline {
 	font-size: 1.375rem;
-	font-weight: inherit;
+	font-weight: 600;
 }
 
 /* Animated headline: duplicated from style.css. Without these rules the

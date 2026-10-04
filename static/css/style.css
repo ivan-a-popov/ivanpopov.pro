@@ -36,6 +36,9 @@ h1 {
 	line-height: 1.2;
 	color: var(--text-main);
 }
+h2 {
+	font-weight: 700;
+}
 /* Desktop: native pointer replaced by the magic cursor. */
 @media (min-width: 1024px){
 	.ip_all_wrap[data-magic-cursor="show"],
