@@ -767,7 +767,6 @@ html[data-ip-section="testimonials"] #testimonials {
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
 	color: var(--text-main);
-	line-height: 1.2;
 }
 
 .ip_home_rule {

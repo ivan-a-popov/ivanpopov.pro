@@ -319,6 +319,7 @@ html,
 	font-weight: 650;
 	text-transform: uppercase;
 	margin-bottom: var(--ip-home-name-gap);
+	color: var(--text-main);
 }
 .ip_home_rule{
 	display: inline-block;
