@@ -62,8 +62,9 @@
 	/* loader dim sweep */
 	/* Preloader timing: single source of truth, shared with critical.js (which
 	   reads these via getComputedStyle). Unitless milliseconds so JS parses them
-	   without unit handling; CSS multiplies by 1ms. Sequence:
-	   half-grow → blink → full-grow → peel. */
+	   without unit handling; CSS multiplies by 1ms. The line (half-grow →
+	   blink) plays only until the hero and style.css are ready; it is not a
+	   minimum black screen. Peel starts as soon as .preloaded is set. */
 	--preloader-grow-half-ms: 750;
 	--preloader-blink-ms: 750;
 	--preloader-grow-full-ms: 500;
@@ -196,8 +197,12 @@ html.skip-preloader #preloader {
 
 /* Preloader timing comes from the --preloader-*-ms variables in :root
    (critical.js reads the same ones): half-grow → blink → full-grow → peel.
-   Box stays 250px (overflow clips the dim sweep); full-grow uses scaleY so CLS
-   stays zero and ::after never paints at the viewport top. */
+   The line box stays 25vh (overflow clips the dim sweep). Every motion is
+   transform/opacity only. Animating height here is main-thread layout:
+   Lighthouse mobile (4× CPU) stretches that into Speed Index — PSI scored
+   SI 4.0s and performance 98 while desktop, unthrottled, stayed at 100.
+   Full-grow uses scaleY so CLS stays zero and ::after never paints at the
+   viewport top. */
 #preloader .loader_line {
 	margin: auto;
 	width: 1px;
@@ -218,9 +223,10 @@ html.skip-preloader #preloader {
 	left: 0;
 	top: 50%;
 	width: 1px;
-	height: 0;
-	transform: translateY(-50%);
+	height: 100%;
 	background-color: var(--preloader-line);
+	transform: translateY(-50%) scaleY(0);
+	transform-origin: center center;
 	animation: calc(var(--preloader-grow-half-ms) * 1ms) ease-in-out forwards lineheight;
 }
 
@@ -240,7 +246,7 @@ html.skip-preloader #preloader {
 /* 0% frames fall back to the elements' base styles. */
 @keyframes lineheight {
 	100% {
-		height: 100%;
+		transform: translateY(-50%) scaleY(1);
 	}
 }
 
@@ -255,10 +261,11 @@ html.skip-preloader #preloader {
 	transform: scaleY(4);
 }
 
+/* No grow-full delay: that was a full-black hold after the hero had already
+   painted, and Speed Index on both desktop and mobile was the curtain. */
 #preloader.preloaded:before,
 #preloader.preloaded:after {
-	animation: calc(var(--preloader-peel-ms) * 1ms) ease-in-out
-		calc(var(--preloader-grow-full-ms) * 1ms) forwards preloadedzero;
+	animation: calc(var(--preloader-peel-ms) * 1ms) ease-in-out 0s forwards preloadedzero;
 }
 
 @keyframes preloadedzero {

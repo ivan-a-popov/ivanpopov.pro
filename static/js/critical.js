@@ -13,19 +13,23 @@
 (function(){
 	// Preloader timing lives in critical.css (:root --preloader-*-ms, unitless
 	// milliseconds). Read lazily by start() so skipped runs pay nothing.
-	var SEQUENCE_MS = 0;
+	// The line animation is not a minimum cover. PSI (Lighthouse 13.5) had
+	// LCP at 0.3s desktop / 1.2s mobile while Speed Index sat at 1.6s / 4.0s
+	// — the only points off 100 on both — because this script also waited out
+	// half-grow + blink before peeling. Shrinking those variables used to
+	// shrink the fallback too, so the curtain opened before style.css and the
+	// hero and Speed Index got worse.
 	var DISMISS_MS = 0;
-	var FALLBACK_MS = 0;
+	var FALLBACK_MS = 5000;
 	function readTimings(){
 		var cs = getComputedStyle(document.documentElement);
 		function ms(name){
 			var v = parseFloat(cs.getPropertyValue(name));
 			return v >= 0 ? v : 0;
 		}
-		// half-grow → blink; dismiss then runs full-grow → peel.
-		SEQUENCE_MS = ms('--preloader-grow-half-ms') + ms('--preloader-blink-ms');
-		DISMISS_MS = ms('--preloader-grow-full-ms') + ms('--preloader-peel-ms');
-		FALLBACK_MS = SEQUENCE_MS + DISMISS_MS;
+		// .preloaded peels immediately. Keep the node until the peel and the
+		// line fade have both finished.
+		DISMISS_MS = Math.max(ms('--preloader-grow-full-ms'), ms('--preloader-peel-ms'));
 	}
 
 	// Keep in sync with html[data-ip-section=…] in critical.css. Unknown or
@@ -93,23 +97,6 @@
 			});
 		}));
 	}
-	// half-grow → hold → blink; dismiss triggers full-grow then peel (see critical.css).
-	function whenLineSequenceReady(){
-		return new Promise(function(resolve){
-			var line = document.querySelector('#preloader .loader_line');
-			if(!line){ resolve(); return; }
-			var settled = false;
-			function finish(){
-				if(settled){ return; }
-				settled = true;
-				resolve();
-			}
-			line.addEventListener('animationend', function(e){
-				if(e.animationName === 'lineround'){ finish(); }
-			});
-			setTimeout(finish, SEQUENCE_MS);
-		});
-	}
 	function start(){
 		var preloader = document.getElementById('preloader');
 		if(!preloader){ return; }
@@ -125,10 +112,7 @@
 			dismiss(preloader);
 		}
 		var fallback = setTimeout(finish, FALLBACK_MS);
-		Promise.all([
-			whenStylesReady().then(whenHeroReady),
-			whenLineSequenceReady()
-		]).then(function(){
+		whenStylesReady().then(whenHeroReady).then(function(){
 			clearTimeout(fallback);
 			requestAnimationFrame(finish);
 		});
