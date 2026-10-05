@@ -2,8 +2,8 @@
 // Critical head script. minify.py inlines it into index.html (between the
 // INLINE markers) as a blocking <script> so skip-preloader is decided before
 // #preloader.
-// Dismisses the preloader once the line has blinked and the page under the
-// curtain is ready (style.css and hero decoded), independent of init.js.
+// Dismisses the preloader once the line has blinked and the hero has decoded,
+// independent of init.js. Page CSS is already inlined in <head>.
 // .preloaded starts full-grow; the peel is delayed by that same duration.
 // A hard timeout guarantees the overlay never traps the user.
 //
@@ -12,12 +12,12 @@
 // theatrical wait. html starts with skip-preloader (fail-closed); this
 // script removes it when the curtain should play.
 (function(){
-	// Preloader timing lives in critical.css (:root --preloader-*-ms, unitless
+	// Preloader timing lives in style.css (:root --preloader-*-ms, unitless
 	// milliseconds). Read lazily by start() so skipped runs pay nothing.
-	// Choreography is fixed: half-grow → blink → full-grow → peel. Content
-	// (style.css and the hero) loads under the curtain; .preloaded is added
-	// only once that and the blink are both done, and the peel waits out
-	// full-grow so the line and the curtains stay in step.
+	// Choreography is fixed: half-grow → blink → full-grow → peel. The hero
+	// decodes under the curtain; .preloaded is added only once that and the
+	// blink are both done, and the peel waits out full-grow so the line and
+	// the curtains stay in step.
 	var SEQUENCE_MS = 0;
 	var DISMISS_MS = 0;
 	var FALLBACK_MS = 0;
@@ -32,7 +32,7 @@
 		FALLBACK_MS = SEQUENCE_MS + DISMISS_MS;
 	}
 
-	// Keep in sync with html[data-ip-section=…] in critical.css. Unknown or
+	// Keep in sync with html[data-ip-section=…] in style.css. Unknown or
 	// selector-like hashes must not set the attr: html[data-ip-section] hides
 	// #home, and a throw in init.js would leave a blank first paint.
 	var SECTION_IDS = { home: 1, about: 1, service: 1, whyme: 1, testimonials: 1 };
@@ -66,27 +66,6 @@
 			if(preloader.parentNode){ preloader.remove(); }
 		}, DISMISS_MS);
 	}
-	function stylesApplied(){
-		return getComputedStyle(document.documentElement)
-			.getPropertyValue('--ip-styles-ready').trim() === '1';
-	}
-	function whenStylesReady(){
-		// Wait for async style.css (sentinel), then let its layout settle behind
-		// the fixed opaque preloader before the curtains open.
-		return new Promise(function(resolve){
-			function settle(){
-				requestAnimationFrame(function(){
-					requestAnimationFrame(function(){
-						resolve();
-					});
-				});
-			}
-			(function poll(){
-				if(stylesApplied()){ settle(); return; }
-				setTimeout(poll, 50);
-			})();
-		});
-	}
 	function whenHeroReady(){
 		var imgs = [].slice.call(document.querySelectorAll('#author_photo_img, #home .ip_home_photo img'));
 		return Promise.all(imgs.map(function(img){
@@ -98,7 +77,7 @@
 		}));
 	}
 	// half-grow → blink; .preloaded then runs full-grow, and the peel starts
-	// after that (see critical.css).
+	// after that (see style.css).
 	function whenLineSequenceReady(){
 		return new Promise(function(resolve){
 			var line = document.querySelector('#preloader .loader_line');
@@ -131,7 +110,7 @@
 		}
 		var fallback = setTimeout(finish, FALLBACK_MS);
 		Promise.all([
-			whenStylesReady().then(whenHeroReady),
+			whenHeroReady(),
 			whenLineSequenceReady()
 		]).then(function(){
 			clearTimeout(fallback);

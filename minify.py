@@ -9,11 +9,11 @@ tokens with spaces only when needed, and insert a semicolon where a
 newline in the source would have triggered ASI. No renaming.
 
 Run with no arguments from the site root (or any cwd — the script cds to
-its own directory). Edit the sources (critical.*, style.css, landing.css,
+its own directory). Edit the sources (style.css, landing.css, critical.js,
 init.js), not the *.min.* files. Stamps root index.html and every
 */index.html landing. Understands both static/... and /static/... hrefs.
 
-critical.css and critical.js are not written to *.min.* files: index.html embeds
+style.css and critical.js are not written to *.min.* files: index.html embeds
 their minified text between <!-- INLINE:<path> --> and <!-- /INLINE:<path> -->
 markers (as <style> / <script>). Everything between the markers is replaced
 on every run; the markers themselves are the only thing to keep.
@@ -469,14 +469,13 @@ def _stamp(html: str) -> str:
 
 
 _CSS_SOURCES = (
-    Path("static/css/style.css"),
     Path("static/css/landing.css"),
 )
 _JS_SOURCES = (
     Path("static/js/init.js"),
 )
 # Minified and embedded into index.html instead of being linked.
-_INLINE_CSS = (Path("static/css/critical.css"),)
+_INLINE_CSS = (Path("static/css/style.css"),)
 _INLINE_JS = (Path("static/js/critical.js"),)
 _INLINE_RE = re.compile(
     r"([ \t]*)<!-- INLINE:(?P<name>[^\s>]+) -->.*?<!-- /INLINE:(?P=name) -->",

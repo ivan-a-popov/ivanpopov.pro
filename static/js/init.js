@@ -1135,7 +1135,7 @@ function ip_service_popup() {
 }
 
 // -------------  TEASERS  -------------------
-// Folding is pure CSS (.ip_fold, see "TEASERS" in critical.css): a teaser is
+// Folding is pure CSS (.ip_fold, see "TEASERS" in style.css): a teaser is
 // folded until it has .is-open. This only toggles that class and keeps ARIA,
 // single-open (whyme) and scroll-back in sync. Nothing here measures layout.
 function ip_teaser_set(teaser, open) {
