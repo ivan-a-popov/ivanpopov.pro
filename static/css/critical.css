@@ -62,9 +62,9 @@
 	/* loader dim sweep */
 	/* Preloader timing: single source of truth, shared with critical.js (which
 	   reads these via getComputedStyle). Unitless milliseconds so JS parses them
-	   without unit handling; CSS multiplies by 1ms. The line (half-grow →
-	   blink) plays only until the hero and style.css are ready; it is not a
-	   minimum black screen. Peel starts as soon as .preloaded is set. */
+	   without unit handling; CSS multiplies by 1ms. Sequence, kept in step
+	   with critical.js: half-grow → blink, then (once the page under the
+	   curtain is ready) full-grow → peel. */
 	--preloader-grow-half-ms: 750;
 	--preloader-blink-ms: 750;
 	--preloader-grow-full-ms: 500;
@@ -197,12 +197,9 @@ html.skip-preloader #preloader {
 
 /* Preloader timing comes from the --preloader-*-ms variables in :root
    (critical.js reads the same ones): half-grow → blink → full-grow → peel.
-   The line box stays 25vh (overflow clips the dim sweep). Every motion is
-   transform/opacity only. Animating height here is main-thread layout:
-   Lighthouse mobile (4× CPU) stretches that into Speed Index — PSI scored
-   SI 4.0s and performance 98 while desktop, unthrottled, stayed at 100.
-   Full-grow uses scaleY so CLS stays zero and ::after never paints at the
-   viewport top. */
+   The line box stays 25vh (overflow clips the dim sweep). Half-grow and
+   full-grow are scaleY (not height) so the sweep stays composited and CLS
+   stays zero. ::after is clipped here so it never paints at the viewport top. */
 #preloader .loader_line {
 	margin: auto;
 	width: 1px;
@@ -261,11 +258,10 @@ html.skip-preloader #preloader {
 	transform: scaleY(4);
 }
 
-/* No grow-full delay: that was a full-black hold after the hero had already
-   painted, and Speed Index on both desktop and mobile was the curtain. */
 #preloader.preloaded:before,
 #preloader.preloaded:after {
-	animation: calc(var(--preloader-peel-ms) * 1ms) ease-in-out 0s forwards preloadedzero;
+	animation: calc(var(--preloader-peel-ms) * 1ms) ease-in-out
+		calc(var(--preloader-grow-full-ms) * 1ms) forwards preloadedzero;
 }
 
 @keyframes preloadedzero {

@@ -2,8 +2,9 @@
 // Critical head script. minify.py inlines it into index.html (between the
 // INLINE markers) as a blocking <script> so skip-preloader is decided before
 // #preloader.
-// Dismisses the preloader once above-the-fold is ready (style.css and
-// hero decoded), independent of deferred init.js.
+// Dismisses the preloader once the line has blinked and the page under the
+// curtain is ready (style.css and hero decoded), independent of init.js.
+// .preloaded starts full-grow; the peel is delayed by that same duration.
 // A hard timeout guarantees the overlay never traps the user.
 //
 // The curtain plays only for humans landing on / or /#home. Deep links
@@ -13,23 +14,22 @@
 (function(){
 	// Preloader timing lives in critical.css (:root --preloader-*-ms, unitless
 	// milliseconds). Read lazily by start() so skipped runs pay nothing.
-	// The line animation is not a minimum cover. PSI (Lighthouse 13.5) had
-	// LCP at 0.3s desktop / 1.2s mobile while Speed Index sat at 1.6s / 4.0s
-	// — the only points off 100 on both — because this script also waited out
-	// half-grow + blink before peeling. Shrinking those variables used to
-	// shrink the fallback too, so the curtain opened before style.css and the
-	// hero and Speed Index got worse.
+	// Choreography is fixed: half-grow → blink → full-grow → peel. Content
+	// (style.css and the hero) loads under the curtain; .preloaded is added
+	// only once that and the blink are both done, and the peel waits out
+	// full-grow so the line and the curtains stay in step.
+	var SEQUENCE_MS = 0;
 	var DISMISS_MS = 0;
-	var FALLBACK_MS = 5000;
+	var FALLBACK_MS = 0;
 	function readTimings(){
 		var cs = getComputedStyle(document.documentElement);
 		function ms(name){
 			var v = parseFloat(cs.getPropertyValue(name));
 			return v >= 0 ? v : 0;
 		}
-		// .preloaded peels immediately. Keep the node until the peel and the
-		// line fade have both finished.
-		DISMISS_MS = Math.max(ms('--preloader-grow-full-ms'), ms('--preloader-peel-ms'));
+		SEQUENCE_MS = ms('--preloader-grow-half-ms') + ms('--preloader-blink-ms');
+		DISMISS_MS = ms('--preloader-grow-full-ms') + ms('--preloader-peel-ms');
+		FALLBACK_MS = SEQUENCE_MS + DISMISS_MS;
 	}
 
 	// Keep in sync with html[data-ip-section=…] in critical.css. Unknown or
@@ -97,6 +97,24 @@
 			});
 		}));
 	}
+	// half-grow → blink; .preloaded then runs full-grow, and the peel starts
+	// after that (see critical.css).
+	function whenLineSequenceReady(){
+		return new Promise(function(resolve){
+			var line = document.querySelector('#preloader .loader_line');
+			if(!line){ resolve(); return; }
+			var settled = false;
+			function finish(){
+				if(settled){ return; }
+				settled = true;
+				resolve();
+			}
+			line.addEventListener('animationend', function(e){
+				if(e.animationName === 'lineround'){ finish(); }
+			});
+			setTimeout(finish, SEQUENCE_MS);
+		});
+	}
 	function start(){
 		var preloader = document.getElementById('preloader');
 		if(!preloader){ return; }
@@ -112,7 +130,10 @@
 			dismiss(preloader);
 		}
 		var fallback = setTimeout(finish, FALLBACK_MS);
-		whenStylesReady().then(whenHeroReady).then(function(){
+		Promise.all([
+			whenStylesReady().then(whenHeroReady),
+			whenLineSequenceReady()
+		]).then(function(){
 			clearTimeout(fallback);
 			requestAnimationFrame(finish);
 		});
