@@ -159,7 +159,7 @@ h2 {
 }
 
 /* Set in <head> by critical.js before #preloader is parsed: bots, reduced
-   motion, and non-home hashes must not paint a black first frame (Speed Index). */
+   motion, and non-home hashes must not paint a black first frame  */
 html.skip-preloader #preloader {
 	display: none !important;
 }
