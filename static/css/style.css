@@ -1230,6 +1230,14 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 		box-shadow var(--ip-dock-fold),
 		border-color var(--ip-dock-fold);
 }
+/* Same 96:69 envelope, two-thirds on phones so it doesn't dominate the corner. */
+@media (width < 768px){
+	.ip_contact_dock__toggle{
+		flex-basis: 64px;
+		width: 64px;
+		height: 46px;
+	}
+}
 .ip_contact_dock.is-open .ip_contact_dock__toggle{
 	border-color: color-mix(in srgb, var(--ip-paper-ink) 10%, var(--ip-paper));
 	box-shadow: 0 1px 2px color-mix(in srgb, #000 12%, transparent);
