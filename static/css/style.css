@@ -329,7 +329,7 @@ html.skip-preloader #preloader {
 	line-height: var(--ip-bar-height);
 	background: var(--bg-color);
 	z-index: 10;
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	column-gap: var(--ip-logo-menu-gap);
 	overflow: visible;
@@ -337,7 +337,7 @@ html.skip-preloader #preloader {
 
 .ip_header .logo {
 	flex: 0 0 auto;
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	height: var(--ip-bar-height);
 	margin: 0;
@@ -345,6 +345,7 @@ html.skip-preloader #preloader {
 
 .ip_header .logo .text {
 	text-decoration: none;
+	box-sizing: content-box;
 	color: var(--logo-color);
 	font-size: var(--ip-logo-font-size);
 	font-weight: 750;
@@ -353,7 +354,7 @@ html.skip-preloader #preloader {
 	/* Wordmark is a single line, always: body{overflow-wrap:break-word} would
 	   otherwise split it mid-word in the narrow 36% column (iPad portrait). */
 	white-space: nowrap;
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	gap: var(--ip-logo-mark-gap);
 	height: 100%;
