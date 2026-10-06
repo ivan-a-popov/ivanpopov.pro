@@ -1326,7 +1326,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 @media (min-width: 480px){
 	.ip_home_photo img{
 		aspect-ratio: 1 / 1;
-		object-position: center 40%;
+		object-position: center;
 	}
 	.ip_home_copy{
 		padding-top: 20px;
