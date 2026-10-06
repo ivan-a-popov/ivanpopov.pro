@@ -1261,7 +1261,7 @@ function ip_mark_headline_word(word, on) {
 	word.setAttribute('aria-hidden', 'true');
 }
 function ip_animated_headline() {
-	var startDelay = 3200;           // hold the first phrase, then start
+	var startDelay = 3500;           // hold the first phrase, then start
 	var revealDuration = 850;        // type / erase width animation duration
 	var revealAnimationDelay = 1100;  // hold while phrase is fully shown (+ tagline shimmer)
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
