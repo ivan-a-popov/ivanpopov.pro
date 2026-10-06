@@ -141,7 +141,7 @@ h2 {
 }
 
 /* Desktop: native pointer replaced by the magic cursor. */
-@media (min-width: 1024px){
+@media (min-width: 768px){
 	.ip_all_wrap[data-magic-cursor="show"],
 	.ip_all_wrap[data-magic-cursor="show"] *{
 		cursor: none !important;
@@ -292,8 +292,8 @@ html.skip-preloader #preloader {
 	/* Sub-label is a rem knob (never em) so it stays a caption. The whole <a>
 	   scales — hover below active — so the sub grows with the lens. */
 	--ip-menu-sub-size: clamp(.52rem, 1.9vw, .68rem);
-	--ip-menu-active-scale: 1.2;
-	--ip-menu-hover-scale: 1.08;
+	--ip-menu-active-scale: 1.4;
+	--ip-menu-hover-scale: 1.2;
 	--ip-bar-pad-block: 2px;
 	--ip-bar-height: max(42px, calc(var(--ip-menu-active-scale) * (var(--ip-menu-font-size) + var(--ip-menu-sub-size)) +  var(--ip-bar-pad-block)));
 	/* Wordmark sets in menu type so it does not compete with the nav; the
@@ -305,7 +305,7 @@ html.skip-preloader #preloader {
 	--ip-logo-menu-gap: 1px;
 	/* Floor only: the menu is space-between, so items sit further apart
 	   than this unless the row gets tight. */
-	--ip-menu-gap: clamp(20px, 2.5vw, 52px);
+	--ip-menu-gap: clamp(20px, 5vw, 52px);
 	--ip-menu-padding-inline: clamp(8px, calc(4px + .5vw), 14px);
 	--ip-menu-link-padding: clamp(2px, 0.35vw, 8px);
 	/* Room for active/hover scale (up to 1.5) + sub-labels wider than main word. */
@@ -392,7 +392,7 @@ html.skip-preloader #preloader {
 	margin: 0;
 	list-style: none;
 	display: flex;
-	flex-wrap: nowrap;
+	flex-shrink: 1;
 	align-items: center;
 	width: 100%;
 	justify-content: space-between;
@@ -541,7 +541,6 @@ html.skip-preloader #preloader {
 		--ip-menu-font-size: clamp(.7rem, 3.6vw, 1rem);
 		--ip-menu-active-scale: 1.2;
 		--ip-menu-hover-scale: 1.1;
-		--ip-menu-gap: clamp(2px, 1.1vw, 8px);
 	}
 
 	.ip_header {
@@ -1361,7 +1360,6 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 		--ip-home-rule-gap: 8px;
 		--ip-home-headline-gap: 10px;
 		--ip-home-copy-pad-bottom: 8px;
-		padding-top: 8px;
 	}
 }
 /* 640px+: side portrait replaces the stacked photo; content centers vertically. */
