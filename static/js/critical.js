@@ -12,25 +12,21 @@
 // theatrical wait. html starts with skip-preloader (fail-closed); this
 // script removes it when the curtain should play.
 (function(){
-	// Preloader timing lives in style.css (:root --preloader-*-ms, unitless
-	// milliseconds). Read lazily by start() so skipped runs pay nothing.
+	// Preloader timing matches :root --preloader-*-ms in style.css (unitless
+	// milliseconds). minify.py refuses to build if the two copies drift.
+	// Do not read these with getComputedStyle: on DOMContentLoaded that
+	// flushes layout for the whole page (PageSpeed forced reflow).
 	// Choreography is fixed: half-grow → blink → full-grow → peel. The hero
 	// decodes under the curtain; .preloaded is added only once that and the
 	// blink are both done, and the peel waits out full-grow so the line and
 	// the curtains stay in step.
-	var SEQUENCE_MS = 0;
-	var DISMISS_MS = 0;
-	var FALLBACK_MS = 0;
-	function readTimings(){
-		var cs = getComputedStyle(document.documentElement);
-		function ms(name){
-			var v = parseFloat(cs.getPropertyValue(name));
-			return v >= 0 ? v : 0;
-		}
-		SEQUENCE_MS = ms('--preloader-grow-half-ms') + ms('--preloader-blink-ms');
-		DISMISS_MS = ms('--preloader-grow-full-ms') + ms('--preloader-peel-ms');
-		FALLBACK_MS = SEQUENCE_MS + DISMISS_MS;
-	}
+	var GROW_HALF_MS = 750;
+	var BLINK_MS = 750;
+	var GROW_FULL_MS = 500;
+	var PEEL_MS = 500;
+	var SEQUENCE_MS = GROW_HALF_MS + BLINK_MS;
+	var DISMISS_MS = GROW_FULL_MS + PEEL_MS;
+	var FALLBACK_MS = SEQUENCE_MS + DISMISS_MS;
 
 	// Keep in sync with html[data-ip-section=…] in style.css. Unknown or
 	// selector-like hashes must not set the attr: html[data-ip-section] hides
@@ -101,7 +97,6 @@
 			if(preloader.parentNode){ preloader.remove(); }
 			return;
 		}
-		readTimings();
 		var done = false;
 		function finish(){
 			if(done){ return; }

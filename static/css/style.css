@@ -48,11 +48,12 @@
 	/* loader growing line */
 	--preloader-line-dim: #777;
 	/* loader dim sweep */
-	/* Preloader timing: single source of truth, shared with critical.js (which
-	   reads these via getComputedStyle). Unitless milliseconds so JS parses them
-	   without unit handling; CSS multiplies by 1ms. Sequence, kept in step
-	   with critical.js: half-grow → blink, then (once the page under the
-	   curtain is ready) full-grow → peel. */
+	/* Preloader timing, unitless milliseconds (CSS multiplies by 1ms).
+	   critical.js copies these as GROW_HALF_MS / BLINK_MS / GROW_FULL_MS /
+	   PEEL_MS; minify.py fails the build if they drift. Not read back via
+	   getComputedStyle — that flushed layout on DOMContentLoaded.
+	   Sequence, kept in step with critical.js: half-grow → blink, then
+	   (once the page under the curtain is ready) full-grow → peel. */
 	--preloader-grow-half-ms: 750;
 	--preloader-blink-ms: 750;
 	--preloader-grow-full-ms: 500;
@@ -185,7 +186,7 @@ html.skip-preloader #preloader {
 }
 
 /* Preloader timing comes from the --preloader-*-ms variables in :root
-   (critical.js reads the same ones): half-grow → blink → full-grow → peel.
+   (the same numbers as critical.js): half-grow → blink → full-grow → peel.
    The line box stays 25vh (overflow clips the dim sweep). Half-grow and
    full-grow are scaleY (not height) so the sweep stays composited and CLS
    stays zero. ::after is clipped here so it never paints at the viewport top. */
@@ -1201,9 +1202,9 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	-webkit-tap-highlight-color: transparent;
 }
 .ip_contact_dock__actions a{
-	width: 44px;
-	height: 44px;
-	flex: 0 0 44px;
+	width: 48px;
+	height: 48px;
+	flex: 0 0 48px;
 	padding: 6px;
 	border-radius: 50%;
 	opacity: .92;
@@ -1211,9 +1212,9 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 }
 .ip_contact_dock__toggle{
 	position: relative;
-	flex: 0 0 58px;
-	width: 58px;
-	height: 40px;
+	flex: 0 0 96px;
+	width: 96px;
+	height: 69px;
 	margin: 0;
 	padding: 0;
 	border: 1px solid color-mix(in srgb, var(--ip-paper-ink) 14%, var(--ip-paper));
@@ -1255,7 +1256,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	outline-offset: 2px;
 	opacity: 1;
 }
-/* Inset in the 44px slot so neighbors keep a gap. viewBox scales the glyph. */
+/* Inset in the larger slot so neighbors keep a gap. viewBox scales the glyph. */
 .ip_contact_dock__actions a img{
 	width: 100%;
 	height: 100%;

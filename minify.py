@@ -522,7 +522,33 @@ def _rewrite_min_refs(html: str) -> str:
     return html
 
 
+# critical.js cannot read these with getComputedStyle (forced reflow).
+# The names are the CSS custom property and the JS constant that must match.
+_PRELOADER_TIMING = (
+    ("--preloader-grow-half-ms", "GROW_HALF_MS"),
+    ("--preloader-blink-ms", "BLINK_MS"),
+    ("--preloader-grow-full-ms", "GROW_FULL_MS"),
+    ("--preloader-peel-ms", "PEEL_MS"),
+)
+
+
+def _check_preloader_timings() -> None:
+    css = Path("static/css/style.css").read_text(encoding="utf-8")
+    js = Path("static/js/critical.js").read_text(encoding="utf-8")
+    for css_name, js_name in _PRELOADER_TIMING:
+        css_m = re.search(rf"{re.escape(css_name)}\s*:\s*(\d+)\s*;", css)
+        js_m = re.search(rf"\b{js_name}\s*=\s*(\d+)\s*;", js)
+        css_v = css_m.group(1) if css_m else None
+        js_v = js_m.group(1) if js_m else None
+        if css_v is None or css_v != js_v:
+            raise SystemExit(
+                f"preloader timing drift: {css_name}={css_v or 'missing'} in style.css, "
+                f"{js_name}={js_v or 'missing'} in critical.js"
+            )
+
+
 def build() -> None:
+    _check_preloader_timings()
     html_paths = [_require(p) for p in _html_files()]
     for src in (*_CSS_SOURCES, *_JS_SOURCES, *_INLINE_CSS, *_INLINE_JS):
         _require(src)
