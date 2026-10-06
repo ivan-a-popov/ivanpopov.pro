@@ -270,7 +270,6 @@ html.skip-preloader #preloader {
 	height: 100vh;
 	height: 100dvh;
 	max-width: var(--ip-layout-max);
-	margin-inline: auto;
 	font-weight: 450;
 	/* Desktop-first column split so the LCP portrait has a real box without
 	   waiting on a min-width query (Lantern's pessimistic graph ignores those).
@@ -302,14 +301,12 @@ html.skip-preloader #preloader {
 	--ip-logo-mark-size: calc(var(--ip-bar-height) * .8);
 	--ip-logo-mark-gap: .25rem;
 	--ip-logo-padding-left: 1vw;
-	--ip-logo-menu-gap: 1px;
+	--ip-logo-menu-gap: 5px;
 	/* Floor only: the menu is space-between, so items sit further apart
 	   than this unless the row gets tight. */
-	--ip-menu-gap: clamp(20px, 5vw, 52px);
-	--ip-menu-padding-inline: clamp(8px, calc(4px + .5vw), 14px);
-	--ip-menu-link-padding: clamp(2px, 0.35vw, 8px);
+	--ip-menu-link-padding: clamp(4px, 5vw, 8px);
 	/* Room for active/hover scale (up to 1.5) + sub-labels wider than main word. */
-	--ip-menu-scale-bleed: clamp(8px, calc(6px + 0.45vw), 22px);
+	--ip-menu-scale-bleed: clamp(8px, calc(6px + 0.45vw), 15px);
 }
 
 
@@ -350,7 +347,6 @@ html.skip-preloader #preloader {
 	font-size: var(--ip-logo-font-size);
 	font-weight: 750;
 	line-height: var(--ip-bar-height);
-	padding-left: var(--ip-logo-padding-left);
 	/* Wordmark is a single line, always: body{overflow-wrap:break-word} would
 	   otherwise split it mid-word in the narrow 36% column (iPad portrait). */
 	white-space: nowrap;
@@ -396,7 +392,6 @@ html.skip-preloader #preloader {
 	align-items: center;
 	width: 100%;
 	justify-content: space-between;
-	gap: var(--ip-menu-gap);
 }
 
 .ip_header .menu ul li {
@@ -422,7 +417,6 @@ html.skip-preloader #preloader {
 	font-size: var(--ip-menu-font-size);
 	font-weight: 600;
 	line-height: 1;
-	padding-inline: var(--ip-menu-link-padding);
 	position: relative;
 	display: inline-grid;
 	justify-items: center;
@@ -561,22 +555,10 @@ html.skip-preloader #preloader {
 		height: auto;
 	}
 
-	.ip_header .logo .text {
-		height: auto;
-		padding: 0;
-		line-height: 0;
-	}
-
-	.ip_header .logo-mark {
-		width: 24px;
-		height: 24px;
-		object-fit: cover;
-	}
-
 	.ip_header .menu ul {
-		justify-content: space-between;
-		padding-left: calc(24px + 8px);
-		padding-right: calc(clamp(8px, 3vw, 16px) + var(--ip-menu-scale-bleed));
+		justify-content: space-evenly;
+		padding-left: calc(clamp(8px, 3vw, 16px) + var(--ip-menu-scale-bleed));
+		padding-right: var(--ip-menu-scale-bleed);
 	}
 }
 
@@ -611,14 +593,13 @@ html.skip-preloader #preloader {
 	.ip_header .menu ul {
 		justify-content: space-between;
 		padding-left: calc(clamp(12px, 2vw, 32px) + var(--ip-menu-scale-bleed));
-		padding-right: calc(clamp(12px, 2vw, 32px) + var(--ip-menu-scale-bleed));
+		padding-right: var(--ip-menu-scale-bleed);
 	}
 }
 
 /* Tablet: active sub slightly smaller than desktop; hover stays below active. */
 @media (width >= 640px) and (width < 1024px) {
 	.ip_all_wrap {
-		--ip-menu-gap: clamp(6px, 1vw, 16px);
 		--ip-menu-active-scale: 1.3;
 		--ip-menu-hover-scale: 1.1;
 	}
@@ -638,7 +619,7 @@ html.skip-preloader #preloader {
 
 	/* Content-edge alignment + scale bleed so magnified last item is not clipped. */
 	.ip_header .menu ul {
-		padding-right: calc(var(--ip-menu-padding-inline) + var(--ip-menu-scale-bleed));
+		padding-left: var(--ip-menu-scale-bleed);
 	}
 }
 
@@ -1393,7 +1374,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 /* overflow:hidden clips the 5000px title rule drawn by :after below. */
 .ip_title{
 	overflow: hidden;
-	margin-bottom: 0.4em;
+	margin-bottom: 0.6em;
 }
 /* span and h2 are interchangeable here: inline-block is what anchors the rule
    below at the end of the text, and font-size/line-height undo the h1-h6 base. */
