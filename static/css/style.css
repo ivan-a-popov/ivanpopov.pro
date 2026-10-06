@@ -553,10 +553,19 @@ html.skip-preloader #preloader {
 		height: auto;
 	}
 
+	/* Mark is out of flow, so a shared end-gap parks the first item on it
+	   while the same gap sits unused on the right. Reserve the mark, then
+	   let space-between spend the spare width inside the row. */
 	.ip_header .menu ul {
-		justify-content: space-evenly;
-		padding-left: calc(clamp(8px, 3vw, 16px) + var(--ip-menu-scale-bleed));
+		justify-content: space-between;
+		padding-left: calc(var(--ip-logo-mark-size) + var(--ip-logo-menu-gap));
 		padding-right: var(--ip-menu-scale-bleed);
+	}
+
+	/* A centered caption hangs back onto the mark; grow it into the row. */
+	.ip_header .menu ul li:first-child .ip_menu_sub {
+		left: 0;
+		transform: none;
 	}
 }
 
