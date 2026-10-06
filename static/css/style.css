@@ -530,7 +530,10 @@ html.skip-preloader #preloader {
 }
 
 
-/* Phones: columns collapse, logo mark sits in the corner, menu fills the bar. */
+/* Phones: columns collapse, logo mark sits in the corner, menu fills the bar.
+   inline-flex shrink-wraps to the link row, so space-between never sees the
+   spare width and the items sit on the left. A definite bar width lets the
+   floor gap grow into the row. */
 @media (width < 640px) {
 	.ip_all_wrap {
 		--ip-col-left: 0%;
@@ -539,6 +542,11 @@ html.skip-preloader #preloader {
 		--ip-menu-active-scale: 1.2;
 		--ip-menu-hover-scale: 1.1;
 		--ip-menu-gap: clamp(2px, 1.1vw, 8px);
+	}
+
+	.ip_header {
+		display: flex;
+		width: 100%;
 	}
 
 	.ip_footer {
