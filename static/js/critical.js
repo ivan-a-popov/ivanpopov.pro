@@ -20,8 +20,8 @@
 	// decodes under the curtain; .preloaded is added only once that and the
 	// blink are both done, and the peel waits out full-grow so the line and
 	// the curtains stay in step.
-	var GROW_HALF_MS = 750;
-	var BLINK_MS = 750;
+	var GROW_HALF_MS = 500;
+	var BLINK_MS = 500;
 	var GROW_FULL_MS = 500;
 	var PEEL_MS = 500;
 	var SEQUENCE_MS = GROW_HALF_MS + BLINK_MS;

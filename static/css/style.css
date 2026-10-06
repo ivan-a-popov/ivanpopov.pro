@@ -54,8 +54,8 @@
 	   getComputedStyle — that flushed layout on DOMContentLoaded.
 	   Sequence, kept in step with critical.js: half-grow → blink, then
 	   (once the page under the curtain is ready) full-grow → peel. */
-	--preloader-grow-half-ms: 750;
-	--preloader-blink-ms: 750;
+	--preloader-grow-half-ms: 500;
+	--preloader-blink-ms: 500;
 	--preloader-grow-full-ms: 500;
 	--preloader-peel-ms: 500;
 }
