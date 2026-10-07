@@ -1161,7 +1161,7 @@ function ip_teaser_scroll_to_title(teaser) {
 }
 function ip_teasers() {
 	ip_all('.ip_teaser').forEach(function (teaser) {
-		teaser.setAttribute('role', 'tabpanel');
+		teaser.setAttribute('role', 'article');
 		teaser.setAttribute('tabindex', '0');
 		teaser.setAttribute('aria-expanded', 'false');
 		teaser.addEventListener('click', function (e) {

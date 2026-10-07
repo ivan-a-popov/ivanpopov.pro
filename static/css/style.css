@@ -278,12 +278,12 @@ html.skip-preloader #preloader {
 	   viewports, which Firefox reports at a “640px” window. */
 	--ip-col-left: 36%;
 	--ip-col-right: 64%;
-	--ip-layout-max: 1680px;
+	--ip-layout-max: 1580px;
 	--ip-footer-height: calc(12px + .5vw);
 	--ip-footer-font-size: calc(6px + .45vw);
-	/* Header sizing chain: menu type -> bar height -> logo type. The bar must
+	/* Header sizing chain: bar height -> logo mark size. The bar must
 	   hold the magnified active item (word + sub-label) plus a little air, and
-	   never drop below a 44px touch row. Override these knobs on .ip_all_wrap
+	   never drop below a 42px touch row. Override these knobs on .ip_all_wrap
 	   only: a descendant override would not reach --ip-bar-height, which
 	   .ip_mainpart and .ip_contact_dock also read. No em here — it would
 	   resolve against each consumer's font-size. */
@@ -298,7 +298,7 @@ html.skip-preloader #preloader {
 	/* Wordmark sets in menu type so it does not compete with the nav; the
 	   mark carries the brand and scales with the bar. */
 	--ip-logo-font-size: calc(var(--ip-menu-font-size) + .5vw);
-	--ip-logo-mark-size: calc(var(--ip-bar-height) * .8);
+	--ip-logo-mark-size: var(--ip-bar-height);
 	--ip-logo-mark-gap: .25rem;
 	--ip-logo-padding-left: 0.5em;
 	--ip-logo-menu-gap: 5px;
@@ -418,7 +418,7 @@ html.skip-preloader #preloader {
 	line-height: 1;
 	position: relative;
 	display: inline-grid;
-	justify-items: center;
+	justify-items: baseline;
 	/* Scaling from the bottom edge grows the word up and the sub down; this
 	   lift re-centres word + sub on the bar midline for the current scale */
 	--ip-menu-scale: 1;
