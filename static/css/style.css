@@ -374,8 +374,8 @@ html.skip-preloader #preloader {
 	white-space: nowrap;
 }
 
-/* line-height 1: each link box is exactly its word, centred in the bar, so
-   the lens math below starts from the bar's midline, not a strut baseline. */
+/* Each link reserves the caption line under the word. Centering that box
+   lifts the idle word; the scale origin is the seam between the two lines. */
 .ip_header .menu {
 	position: relative;
 	flex: 1 1 auto;
@@ -399,13 +399,21 @@ html.skip-preloader #preloader {
 	overflow: visible;
 }
 
-/* Edge items scale inward so html{overflow-x:hidden} does not clip them. */
+/* Shrink-wrap the link. A heading line box would add a baseline gap and
+   drop the seam below the bar midline. */
+.ip_header .menu ul li h2 {
+	display: flex;
+	line-height: 1;
+}
+
+/* Edge items scale inward so html{overflow-x:hidden} does not clip them.
+   Vertical origin stays on the seam (see --ip-menu-seam). */
 .ip_header .menu ul li:first-child a {
-	transform-origin: left bottom;
+	transform-origin: left var(--ip-menu-seam);
 }
 
 .ip_header .menu ul li:last-child a {
-	transform-origin: right bottom;
+	transform-origin: right var(--ip-menu-seam);
 }
 
 .ip_header .menu ul li a {
@@ -418,21 +426,27 @@ html.skip-preloader #preloader {
 	line-height: 1;
 	position: relative;
 	display: inline-grid;
+	grid-template-rows: 1em;
+	align-items: end;
 	justify-items: baseline;
-	/* Scaling from the bottom edge grows the word up and the sub down; this
-	   lift re-centres word + sub on the bar midline for the current scale */
+	/* The invisible sub line is part of the box, so flex centering parks the
+	   idle word half a caption above the bar midline. Scale origin is that
+	   seam: the word grows up, the caption grows down. */
 	--ip-menu-scale: 1;
-	--ip-menu-lift: calc((1em + var(--ip-menu-scale) * (var(--ip-menu-sub-size) - 1em)) / -0.8);
-	transform: translateY(0) scale(1.1);
-	transform-origin: center bottom;
+	/* Length, not em: the caption inherits this and would resolve 1em against
+	   its own smaller font, pulling the sub up into the word. */
+	--ip-menu-seam: var(--ip-menu-font-size);
+	padding-bottom: var(--ip-menu-sub-size);
+	transform: scale(var(--ip-menu-scale));
+	transform-origin: center var(--ip-menu-seam);
 	transition: transform .32s cubic-bezier(.33, 1, .68, 1), color .2s ease;
 }
 
-/* Tap target spans the full bar height, not just the cap height. */
+/* Tap target spans the full bar height, centred on this link. */
 .ip_header .menu ul li a::before {
 	content: '';
 	position: absolute;
-	inset: calc((1em - var(--ip-bar-height)) / 2) 0;
+	inset: calc((100% - var(--ip-bar-height)) / 2) 0;
 }
 
 .ip_header .menu ul li a b {
@@ -445,7 +459,7 @@ html.skip-preloader #preloader {
 .ip_header .menu ul li .ip_menu_sub {
 	position: absolute;
 	left: 50%;
-	top: 100%;
+	top: var(--ip-menu-seam);
 	transform: translateX(-50%);
 	transform-origin: top center;
 	text-align: center;
@@ -460,7 +474,6 @@ html.skip-preloader #preloader {
 /* Magnify the whole link (main + sub) — lens sits on the active item. */
 .ip_header .menu ul li.active a {
 	--ip-menu-scale: var(--ip-menu-active-scale);
-	transform: translateY(var(--ip-menu-lift)) scale(var(--ip-menu-scale));
 	z-index: 2;
 	color: var(--logo-color);
 	font-weight: 750;
@@ -476,7 +489,6 @@ html.skip-preloader #preloader {
 	.ip_header .menu ul li:not(.active) a:hover,
 	.ip_header .menu ul li:not(.active) a:focus-visible {
 		--ip-menu-scale: var(--ip-menu-hover-scale);
-		transform: translateY(var(--ip-menu-lift)) scale(var(--ip-menu-scale));
 		z-index: 1;
 		color: var(--logo-color);
 		font-weight: 700;
