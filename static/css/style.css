@@ -647,6 +647,11 @@ html.skip-preloader #preloader {
 	.ip_all_wrap {
 		--ip-menu-hover-scale: 1.3;
 		--ip-menu-active-scale: 1.5;
+		/* The >=640 rule keeps a small fraction of the bar. On a wide screen
+		   the mark grows with the viewport and stops at the 69px asset. */
+		--ip-logo-mark-size: clamp(42px, 4.8vw, 69px);
+		/* Bar follows the mark, otherwise the square is clipped at the top. */
+		--ip-bar-height: max(var(--ip-logo-mark-size), calc(var(--ip-menu-active-scale) * (var(--ip-menu-font-size) + var(--ip-menu-sub-size)) + var(--ip-bar-pad-block)));
 	}
 
 	/* Content-edge alignment + scale bleed so magnified last item is not clipped. */
