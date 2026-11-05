@@ -24,26 +24,56 @@
 	<meta property="og:image:height" content="630">
 	<meta property="og:image:alt" content="Иван Попов">
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="AI для бизнеса ИП Попов">
+	<meta name="twitter:title" content="AI для бизнеса — ИП Попов">
 	<meta name="twitter:description"
 		content="LLM, RAG, MCP и агенты для реальных бизнес-задач, а не для слайда в отчете.">
 	<meta name="twitter:image" content="https://ivanpopov.pro/static/img/about/og-image-olive-good.jpg">
 	<meta name="twitter:image:alt" content="Иван Попов">
-	<link rel="stylesheet" href="/static/css/landing.min.css?v=bd6a2812">
+	<link rel="stylesheet" href="/static/css/landing.min.css?v=07a39be1">
 </head>
 
 <body>
 	<div class="landing-wrap">
 		<header class="landing-header">
-			<a href="/">
-				<img src="/static/img/assets/ip-dot.svg?v=c075da02" alt="" width="40" height="40" decoding="async">
+			<a class="landing-header__brand" href="/">
+				<img src="/static/img/assets/ip-dot.svg?v=c075da02" alt="" width="38" height="38" decoding="async">
 				<span>Ivan Popov. Pro.</span>
 			</a>
+			<nav class="landing-header__nav" aria-label="Услуги">
+				<a href="/audit/">Аудит</a>
+				<a href="/ai/" aria-current="page">AI</a>
+				<a href="/security/">Безопасность</a>
+				<a href="/ecommerce/">E-commerce</a>
+				<a href="/outsource/">Аутсорс</a>
+				<a href="/expert/">Проекты</a>
+			</nav>
 		</header>
 		<main>
+			<div class="landing-banner">
+				<img class="landing-banner__img" src="/static/img/service/sysadmin.webp?v=04595002" alt="" width="640"
+					height="320" fetchpriority="high">
+				<div class="landing-banner__overlay">
+					<div class="landing-banner__top">
+						<span class="landing-banner__badge">
+							<svg class="landing-banner__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+								aria-hidden="true" overflow="visible">
+								<g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+									<path
+										d="M11.6 1.3C12.26 7.24 16.66 11.64 22.6 12.3 16.66 12.96 12.26 17.36 11.6 23.3 10.94 17.36 6.54 12.96 0.6 12.3 6.54 11.64 10.94 7.24 11.6 1.3Z" />
+									<path
+										d="M18.8 0.7C19.07 3.13 20.87 4.93 23.3 5.2 20.87 5.47 19.07 7.27 18.8 9.7 18.53 7.27 16.73 5.47 14.3 5.2 16.73 4.93 18.53 3.13 18.8 0.7Z" />
+									<path
+										d="M19.4 15.35C19.6 17.16 20.94 18.5 22.75 18.7 20.94 18.9 19.6 20.24 19.4 22.05 19.2 20.24 17.86 18.9 16.05 18.7 17.86 18.5 19.2 17.16 19.4 15.35Z" />
+								</g>
+							</svg>
+							Внедрение AI · Локальный запуск, MCP, RAG
+						</span>
+					</div>
+					<h1 class="landing-banner__title">AI там, где он действительно окупается</h1>
+				</div>
+			</div>
+
 			<section class="landing-section landing-hero">
-				<p class="landing-kicker">Внедрение AI</p>
-				<h1>AI там, где он действительно окупается</h1>
 				<p class="landing-hero__lead">Нахожу процессы, где модель сэкономит время или деньги, проверяю идею на ваших
 					данных и только потом встраиваю в работу. Если задачу дешевле решить без AI — так и скажу.</p>
 				<p class="landing-hero__action">
@@ -61,7 +91,7 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>«Нам нужен AI» — хорошее начало, но ещё не задача</h2>
+				<h2>«Нам нужен AI» — ещё не задача</h2>
 				<p>Желание использовать новую технологию нормально. Проблема начинается, когда само внедрение становится целью:
 					освоить бюджет, поставить отметку в отчёте или добавить красивый слайд в презентацию.</p>
 				<p>Шанс на успех гораздо выше, когда за AI стоят конкретные действия и боль бизнеса. Принять первое сообщение,
@@ -164,8 +194,10 @@
 				<h2>Цена и формат</h2>
 				<div class="landing-package-grid">
 					<article class="landing-package">
-						<h3>Разбор, стратегия, прототип</h3>
-						<p class="landing-package__price">6 000 ₽/час</p>
+						<div class="landing-package__head">
+							<h3>Разбор, стратегия, прототип</h3>
+							<p class="landing-package__price">6 000 ₽/час</p>
+						</div>
 						<ul class="landing-list">
 							<li>Анализ процесса и данных</li>
 							<li>Выбор подхода и модели</li>
@@ -176,8 +208,10 @@
 							стоит ли пробовать AI и во что обойдётся проверка. Объём следующего этапа определяем до старта.</p>
 					</article>
 					<article class="landing-package">
-						<h3>Интеграция и эксплуатация</h3>
-						<p class="landing-package__price">Оценка после прототипа</p>
+						<div class="landing-package__head">
+							<h3>Интеграция и эксплуатация</h3>
+							<p class="landing-package__price">По оценке</p>
+						</div>
 						<ul class="landing-list">
 							<li>Интеграции с рабочими системами</li>
 							<li>Права, безопасность и журналирование</li>
@@ -193,7 +227,7 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>Риски, о которых нужно договориться заранее</h2>
+				<h2>Риски</h2>
 				<ul class="landing-list">
 					<li><strong>Галлюцинации.</strong> Модель может уверенно ошибаться. Нужны источники, проверки, ограничения и
 						передача спорных случаев человеку.</li>
@@ -206,15 +240,6 @@
 					<li><strong>Контроль действий.</strong> Агент не получает неограниченный доступ к CRM или деньгам.
 						Инструменты, права и подтверждения проектируются отдельно.</li>
 				</ul>
-			</section>
-
-			<section class="landing-section">
-				<h2>Почему я</h2>
-				<p>Я не только работаю с моделями. За плечами системное администрирование, разработка, интеграции,
-					бизнес-анализ, электронная коммерция и IT-безопасность. Поэтому могу оценить AI не в изоляции, а вместе с
-					данными, процессом, инфраструктурой и людьми, которые будут пользоваться результатом.</p>
-				<p>С 2022 года внедряю AI сначала в собственную работу, затем в клиентские процессы. Мне интересен не эффект
-					демонстрации, а момент, когда инструмент стабильно приносит пользу в обычный рабочий день.</p>
 			</section>
 
 			<section class="landing-section landing-faq">
@@ -235,40 +260,49 @@
 
 			<section class="landing-section">
 				<h2>С чего начать</h2>
-				<p>Опишите один повторяющийся процесс: кто его выполняет, какие данные использует, сколько времени занимает и
-					где чаще всего возникает проблема. Этого достаточно, чтобы начать предметный разговор.</p>
-				<p class="landing-hero__action">
-					<a class="landing-cta" href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">Обсудить
-						AI-задачу</a>
-				</p>
-				<p class="landing-note">Или <a
-						href="mailto:me@ivanpopov.pro?subject=AI-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0">напишите письмо</a> с темой
-					«AI-задача».</p>
-			</section>
-
-			<section class="landing-section">
-				<h2>Смежные задачи</h2>
-				<nav class="landing-related" aria-label="Другие услуги">
-					<a href="/audit/"><strong>Аудит</strong><span>Разобраться в процессах и выбрать приоритет</span></a>
-					<a href="/expert/"><strong>Экспертный проект</strong><span>Спроектировать и провести сложное
-							изменение</span></a>
-					<a href="/outsource/"><strong>IT-аутсорс</strong><span>Передать систему в постоянную эксплуатацию</span></a>
-					<a href="/security/"><strong>Безопасность</strong><span>Проверить инфраструктуру и доступ к данным</span></a>
-					<a href="/ecommerce/"><strong>CRM и учёт</strong><span>Навести порядок в заказах, остатках и
-							обменах</span></a>
-				</nav>
+				<div class="landing-author-card">
+					<img class="landing-author-card__photo" src="/static/img/about/ip-foto-mobile.webp?v=18b455cd"
+						alt="Иван Попов" width="112" height="112" loading="lazy" decoding="async">
+					<div class="landing-author-card__body">
+						<p><strong>Иван Попов</strong> — с 2022 года внедряю AI в собственные и клиентские процессы, опираясь на 20+ лет опыта в Linux, разработке, интеграциях и безопасности. Опишите один повторяющийся процесс: кто его выполняет, какие данные использует и сколько времени занимает — этого достаточно для предметного разговора.</p>
+						<div class="landing-social" aria-label="Ссылки для связи">
+							<a href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">
+								<img src="/static/img/social/tg.svg?v=d3b80a19" alt="" width="34" height="34" decoding="async">
+								<span>Telegram</span>
+							</a>
+							<a href="https://vk.com/ivanpopovpro" target="_blank" rel="noopener noreferrer">
+								<img src="/static/img/social/vk.svg?v=82b84296" alt="" width="34" height="34" decoding="async">
+								<span>VK</span>
+							</a>
+							<a href="mailto:me@ivanpopov.pro?subject=AI-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0" class="ip_mail">
+								<img src="/static/img/social/mail.svg?v=9cb2ec4f" alt="" width="34" height="34" decoding="async">
+								<span>me@ivanpopov.pro</span>
+							</a>
+						</div>
+					</div>
+				</div>
 			</section>
 		</main>
 		<footer class="landing-footer">
-			<nav aria-label="Услуги">
+			<div class="copyhuy">
+				<p><a href="https://copyhuy.net/" target="_blank" aria-label="Копихуй"><svg class="copyhuy__mark"
+							xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 468" width="1em" height="1em" aria-hidden="true"
+							focusable="false">
+							<path fill-rule="evenodd"
+								d="M235 10 A222 222 0 1 1 235 454 A222 222 0 1 1 235 10 Z M235 47 A185 185 0 1 0 235 417 A185 185 0 1 0 235 47 Z" />
+							<path d="M83.4 229 A124 124 0 0 0 324.4 277.3 L285.3 264.4 A83 83 0 0 1 124.6 229 Z" />
+							<path d="M151.3 264 A128 128 0 0 1 388.5 190.4 L351.7 211.9 A85 85 0 0 0 194.5 264 Z" />
+						</svg></a>ИП Попов Иван Анатольевич ИНН 250105290350</p>
+			</div>
+			<nav aria-label="Навигация">
+				<a href="/">Главная</a>
 				<a href="/audit/">Аудит</a>
-				<a href="/outsource/">IT-аутсорс</a>
-				<a href="/expert/">Экспертные проекты</a>
-				<a href="/security/">Безопасность</a>
 				<a href="/ai/">AI</a>
-				<a href="/ecommerce/">CRM и учёт</a>
+				<a href="/security/">Безопасность</a>
+				<a href="/ecommerce/">E-commerce</a>
+				<a href="/outsource/">Аутсорс</a>
+				<a href="/expert/">Проекты</a>
 			</nav>
-			<p><a href="/">Обо мне лично</a></p>
 		</footer>
 	</div>
 </body>

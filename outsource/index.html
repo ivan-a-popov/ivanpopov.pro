@@ -28,21 +28,47 @@
 	<meta name="twitter:description" content="Постоянное IT-сопровождение с одним ответственным специалистом.">
 	<meta name="twitter:image" content="https://ivanpopov.pro/static/img/about/og-image-olive-good.jpg">
 	<meta name="twitter:image:alt" content="Иван Попов">
-	<link rel="stylesheet" href="/static/css/landing.min.css?v=bd6a2812">
+	<link rel="stylesheet" href="/static/css/landing.min.css?v=07a39be1">
 </head>
 
 <body>
 	<div class="landing-wrap">
 		<header class="landing-header">
-			<a href="/">
-				<img src="/static/img/assets/ip-dot.svg?v=c075da02" alt="" width="40" height="40" decoding="async">
+			<a class="landing-header__brand" href="/">
+				<img src="/static/img/assets/ip-dot.svg?v=c075da02" alt="" width="38" height="38" decoding="async">
 				<span>Ivan Popov. Pro.</span>
 			</a>
+			<nav class="landing-header__nav" aria-label="Услуги">
+				<a href="/audit/">Аудит</a>
+				<a href="/ai/">AI</a>
+				<a href="/security/">Безопасность</a>
+				<a href="/ecommerce/">E-commerce</a>
+				<a href="/outsource/" aria-current="page">Аутсорс</a>
+				<a href="/expert/">Проекты</a>
+			</nav>
 		</header>
 		<main>
+			<div class="landing-banner">
+				<img class="landing-banner__img" src="/static/img/service/server.webp?v=d7c05517" alt="" width="640"
+					height="320" fetchpriority="high">
+				<div class="landing-banner__overlay">
+					<div class="landing-banner__top">
+						<span class="landing-banner__badge">
+							<svg class="landing-banner__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.961 511.961"
+								aria-hidden="true">
+								<path
+									d="m489.965 120.063c0-5.77-3.31-11.028-8.512-13.524l-218.984-105.064c-4.102-1.967-8.875-1.967-12.977 0l-218.985 105.064c-5.202 2.496-8.511 7.755-8.511 13.524l-.003 271.834c0 5.77 3.31 11.028 8.512 13.524l218.989 105.065c2.051.983 4.27 1.475 6.488 1.475 2.219 0 4.438-.492 6.488-1.475l218.989-105.065c5.202-2.496 8.512-7.755 8.512-13.524zm-233.984 360.262-203.989-97.868.003-252.953 203.985-97.867 203.984 97.867.004 252.953z" />
+								<path
+									d="m417.299 146.915-154.83-74.284c-4.102-1.967-8.875-1.967-12.977 0l-154.832 74.284c-5.202 2.496-8.511 7.755-8.511 13.525l-.002 191.081c0 5.77 3.31 11.028 8.512 13.524l154.833 74.285c2.051.983 4.27 1.476 6.488 1.476 2.219 0 4.438-.492 6.488-1.476l154.833-74.285c5.202-2.496 8.512-7.755 8.512-13.524l-.003-191.081c.001-5.77-3.308-11.028-8.511-13.525zm-161.318-44.122 120.156 57.648-120.156 57.647-120.156-57.647zm-139.832 81.483 124.832 59.89v157.808l-124.833-59.893zm154.832 217.697v-157.808l124.831-59.89.002 157.805z" />
+							</svg>
+							Постоянное сопровождение · DevOps и инфраструктура
+						</span>
+					</div>
+					<h1 class="landing-banner__title">IT-аутсорс без вечного «это не к нам»</h1>
+				</div>
+			</div>
+
 			<section class="landing-section landing-hero">
-				<p class="landing-kicker">Постоянное сопровождение</p>
-				<h1>IT-аутсорс без вечного «это не к нам»</h1>
 				<p class="landing-hero__lead">Беру на себя ежедневную работу IT: серверы, мониторинг, обновления, аварии,
 					доработки и подрядчиков. У бизнеса появляется один ответственный, который видит систему целиком.</p>
 				<p class="landing-hero__action">
@@ -60,7 +86,7 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>Когда IT уже требует отдельного хозяина</h2>
+				<h2>Когда IT требует отдельного хозяина</h2>
 				<div class="landing-cards">
 					<article class="landing-card">
 						<h3>Подрядчики кивают друг на друга</h3>
@@ -136,8 +162,10 @@
 					устроена система и кто за что отвечает.</p>
 				<div class="landing-package-grid">
 					<article class="landing-package">
-						<h3>Контроль</h3>
-						<p class="landing-package__price">80 000 ₽/месяц</p>
+						<div class="landing-package__head">
+							<h3>Контроль</h3>
+							<p class="landing-package__price">80 000 ₽/мес</p>
+						</div>
 						<ul class="landing-list">
 							<li>Мониторинг критичных систем</li>
 							<li>Реакция на аварии по SLA</li>
@@ -148,8 +176,10 @@
 							контроль.</p>
 					</article>
 					<article class="landing-package">
-						<h3>Функция</h3>
-						<p class="landing-package__price">160 000 ₽/месяц</p>
+						<div class="landing-package__head">
+							<h3>Функция</h3>
+							<p class="landing-package__price">160 000 ₽/мес</p>
+						</div>
 						<ul class="landing-list">
 							<li>Всё из тарифа «Контроль»</li>
 							<li>20 часов разработки и интеграций</li>
@@ -167,32 +197,23 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>Кому подходит</h2>
-				<ul class="landing-list">
-					<li>Систем уже несколько: сайт, CRM, склад, маркетплейсы, логистика, телефония, серверы</li>
-					<li>Остановка продаж или работы сотрудников приносит ощутимый убыток</li>
-					<li>Штатного IT-специалиста нет или ему нужен опытный партнёр на сложной стороне системы</li>
-					<li>Подрядчики есть, но некому управлять их общей работой</li>
-					<li>Вы хотите заранее знать границы, цену и порядок реакции на проблемы</li>
-				</ul>
-				<h3>Не подходит, если</h3>
-				<ul class="landing-list">
-					<li>Нужна одна мелкая задача — разовый исполнитель будет дешевле</li>
-					<li>Нужна круглосуточная смена дежурных: я не изображаю из себя большой сервисный центр</li>
-					<li>Все изменения должны делаться без вопросов и согласования рисков</li>
-				</ul>
-			</section>
-
-			<section class="landing-section">
-				<h2>Практика электронной коммерции</h2>
-				<p>В e-commerce я с 2008 года: собственный магазин, разработка, управление проектами и роль IT-директора. С 2019
-					года — партнёр-интегратор RetailCRM и МойСклад. Знаю не только серверную сторону, но и то, что происходит с
-					заказом между рекламой, сайтом, CRM, складом, оплатой и доставкой.</p>
-				<blockquote class="landing-quote">
-					<p>Реализовали API-интеграцию сайта на InSales с фулфилмент-оператором. Остались довольны успешностью и
-						оперативностью выполнения задачи — дело происходило в новогодние праздники!</p>
-					<footer><strong>Ольга Эрман</strong> — генеральный директор ООО «Костьера Фешн»</footer>
-				</blockquote>
+				<h2>Отзывы</h2>
+				<div class="landing-testimonial">
+					<blockquote class="landing-quote">
+						<i class="icon-quote-left"></i>
+						<i class="icon-quote-right"></i>
+						<p>Иван – настоящий профессионал своего дела! Наше сотрудничество длится уже не первый год, и за это время было успешно реализовано множество задач различной сложности – от интеграций до оптимизации серверной части. Отдельно хочу отметить ответственный подход к вопросам безопасности и стабильности работы нашей инфраструктуры.</p>
+					</blockquote>
+					<div class="landing-testimonial__author">
+						<img class="landing-testimonial__avatar" src="/static/img/clients/ruketo.webp?v=7e6192b9"
+							alt="Сергей Федоров" width="56" height="56" loading="lazy" decoding="async">
+						<div class="landing-testimonial__info">
+							<span>Сергей Федоров</span>
+							<span>коммерческий директор ООО «<a href="https://ruketo.ru" target="_blank"
+									rel="noopener noreferrer">Рукето</a>»</span>
+						</div>
+					</div>
+				</div>
 			</section>
 
 			<section class="landing-section landing-faq">
@@ -213,41 +234,50 @@
 
 			<section class="landing-section">
 				<h2>С чего начать</h2>
-				<p>Напишите, какие системы у вас работают, кто сейчас их поддерживает и что чаще всего требует внимания. Я задам
-					уточняющие вопросы и предложу формат: сопровождение, предварительный аудит или отдельный экспертный проект.
-				</p>
-				<p class="landing-hero__action">
-					<a class="landing-cta" href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">Обсудить
-						сопровождение</a>
-				</p>
-				<p class="landing-note">Или <a
-						href="mailto:me@ivanpopov.pro?subject=IT-%D0%B0%D1%83%D1%82%D1%81%D0%BE%D1%80%D1%81">напишите письмо</a> с
-					темой «IT-аутсорс».</p>
-			</section>
-
-			<section class="landing-section">
-				<h2>Смежные задачи</h2>
-				<nav class="landing-related" aria-label="Другие услуги">
-					<a href="/audit/"><strong>Аудит</strong><span>Понять состояние системы до обслуживания</span></a>
-					<a href="/expert/"><strong>Экспертный проект</strong><span>Спроектировать и провести крупное
-							изменение</span></a>
-					<a href="/security/"><strong>Безопасность</strong><span>Проверить доступы, серверы и бэкапы</span></a>
-					<a href="/ai/"><strong>AI</strong><span>Автоматизировать конкретный бизнес-процесс</span></a>
-					<a href="/ecommerce/"><strong>CRM и учёт</strong><span>Внедрить CRM и склад до передачи на
-							сопровождение</span></a>
-				</nav>
+				<div class="landing-author-card">
+					<img class="landing-author-card__photo" src="/static/img/about/ip-foto-mobile.webp?v=18b455cd"
+						alt="Иван Попов" width="112" height="112" loading="lazy" decoding="async">
+					<div class="landing-author-card__body">
+						<p><strong>Иван Попов</strong> — начинал с администрирования Linux и сетей, прошёл путь до управления распределённой инфраструктурой и IT-директора в e-commerce. Напишите, какие системы у вас работают и кто их сейчас поддерживает — обсудим формат сопровождения.</p>
+						<div class="landing-social" aria-label="Ссылки для связи">
+							<a href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">
+								<img src="/static/img/social/tg.svg?v=d3b80a19" alt="" width="34" height="34" decoding="async">
+								<span>Telegram</span>
+							</a>
+							<a href="https://vk.com/ivanpopovpro" target="_blank" rel="noopener noreferrer">
+								<img src="/static/img/social/vk.svg?v=82b84296" alt="" width="34" height="34" decoding="async">
+								<span>VK</span>
+							</a>
+							<a href="mailto:me@ivanpopov.pro?subject=IT-%D0%B0%D1%83%D1%82%D1%81%D0%BE%D1%80%D1%81"
+								class="ip_mail">
+								<img src="/static/img/social/mail.svg?v=9cb2ec4f" alt="" width="34" height="34" decoding="async">
+								<span>me@ivanpopov.pro</span>
+							</a>
+						</div>
+					</div>
+				</div>
 			</section>
 		</main>
 		<footer class="landing-footer">
-			<nav aria-label="Услуги">
+			<div class="copyhuy">
+				<p><a href="https://copyhuy.net/" target="_blank" aria-label="Копихуй"><svg class="copyhuy__mark"
+							xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 468" width="1em" height="1em" aria-hidden="true"
+							focusable="false">
+							<path fill-rule="evenodd"
+								d="M235 10 A222 222 0 1 1 235 454 A222 222 0 1 1 235 10 Z M235 47 A185 185 0 1 0 235 417 A185 185 0 1 0 235 47 Z" />
+							<path d="M83.4 229 A124 124 0 0 0 324.4 277.3 L285.3 264.4 A83 83 0 0 1 124.6 229 Z" />
+							<path d="M151.3 264 A128 128 0 0 1 388.5 190.4 L351.7 211.9 A85 85 0 0 0 194.5 264 Z" />
+						</svg></a>ИП Попов Иван Анатольевич ИНН 250105290350</p>
+			</div>
+			<nav aria-label="Навигация">
+				<a href="/">Главная</a>
 				<a href="/audit/">Аудит</a>
-				<a href="/outsource/">IT-аутсорс</a>
-				<a href="/expert/">Экспертные проекты</a>
-				<a href="/security/">Безопасность</a>
 				<a href="/ai/">AI</a>
-				<a href="/ecommerce/">CRM и учёт</a>
+				<a href="/security/">Безопасность</a>
+				<a href="/ecommerce/">E-commerce</a>
+				<a href="/outsource/">Аутсорс</a>
+				<a href="/expert/">Проекты</a>
 			</nav>
-			<p><a href="/">Обо мне лично</a></p>
 		</footer>
 	</div>
 </body>

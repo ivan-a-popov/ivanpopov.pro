@@ -29,21 +29,47 @@
 		content="Независимый аудит IT. Экспресс-чекап за 3–5 дней, аудит с дорожной картой или диагностика конкретной проблемы.">
 	<meta name="twitter:image" content="https://ivanpopov.pro/static/img/about/og-image-olive-good.jpg">
 	<meta name="twitter:image:alt" content="Иван Попов">
-	<link rel="stylesheet" href="/static/css/landing.min.css?v=bd6a2812">
+	<link rel="stylesheet" href="/static/css/landing.min.css?v=07a39be1">
 </head>
 
 <body>
 	<div class="landing-wrap">
 		<header class="landing-header">
-			<a href="/">
-				<img src="/static/img/assets/ip-dot.svg?v=c075da02" alt="" width="40" height="40" decoding="async">
+			<a class="landing-header__brand" href="/">
+				<img src="/static/img/assets/ip-dot.svg?v=c075da02" alt="" width="38" height="38" decoding="async">
 				<span>Ivan Popov. Pro.</span>
 			</a>
+			<nav class="landing-header__nav" aria-label="Услуги">
+				<a href="/audit/" aria-current="page">Аудит</a>
+				<a href="/ai/">AI</a>
+				<a href="/security/">Безопасность</a>
+				<a href="/ecommerce/">E-commerce</a>
+				<a href="/outsource/">Аутсорс</a>
+				<a href="/expert/">Проекты</a>
+			</nav>
 		</header>
 		<main>
+			<div class="landing-banner">
+				<img class="landing-banner__img" src="/static/img/service/web.webp?v=217628a5" alt="" width="640"
+					height="320" fetchpriority="high">
+				<div class="landing-banner__overlay">
+					<div class="landing-banner__top">
+						<span class="landing-banner__badge">
+							<svg class="landing-banner__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"
+								aria-hidden="true">
+								<path d="M182.52 146.2h585.14v402.28h73.15V73.06H109.38v877.71h402.28v-73.14H182.52z" />
+								<path
+									d="M255.67 219.34h438.86v73.14H255.67zM255.67 365.63h365.71v73.14H255.67zM255.67 511.91H475.1v73.14H255.67zM731.02 585.06c-100.99 0-182.86 81.87-182.86 182.86s81.87 182.86 182.86 182.86 182.86-81.87 182.86-182.86-81.87-182.86-182.86-182.86z m0 292.57c-60.5 0-109.71-49.22-109.71-109.71 0-60.5 49.22-109.71 109.71-109.71 60.5 0 109.71 49.22 109.71 109.71 0 60.49-49.22 109.71-109.71 109.71z" />
+								<path d="M717.88 777.65l-42.55-38.13-36.61 40.86 84.02 75.27 102.98-118.47-41.39-36z" />
+							</svg>
+							Независимая экспертиза · Аналитика и аудит
+						</span>
+					</div>
+					<h1 class="landing-banner__title">IT-аудит: где риск, где переплата и что делать первым</h1>
+				</div>
+			</div>
+
 			<section class="landing-section landing-hero">
-				<p class="landing-kicker">Независимый аудит</p>
-				<h1>IT-аудит: где риск, где переплата и что делать первым</h1>
 				<p class="landing-hero__lead">Разбираюсь в инфраструктуре, интеграциях, процессах и счетах подрядчиков. На
 					выходе — письменный отчёт: что происходит, где выше риск сбоя и что исправлять в первую очередь.</p>
 				<p class="landing-hero__action">
@@ -76,7 +102,7 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>Три задачи, с которыми приходят на аудит</h2>
+				<h2>Три задачи, с которыми приходят</h2>
 				<div class="landing-cards">
 					<article class="landing-card">
 						<h3>Общая картина</h3>
@@ -117,52 +143,56 @@
 				<p>Если после аудита переходим на <a href="/outsource/">постоянное сопровождение</a>, повторная приёмка не
 					нужна: система уже изучена и описана. Руководство крупным изменением — <a href="/expert/">экспертный
 						проект</a>.</p>
-				<p class="landing-hero__action">
-					<a class="landing-cta" href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">Заказать
-						аудит</a>
-				</p>
 			</section>
 
 			<section class="landing-section">
 				<h2>Как это работает</h2>
-				<p><strong>Шаг 1. Заявка.</strong> Напишите, что происходит. Задам несколько уточняющих вопросов — нужно понять
-					объём. По итогам скажу, что подойдёт: диагностика, экспресс-чекап или аудит — и что в него войдёт. Иногда
-					выясняется, что ничего из этого не нужно, — так и скажу.</p>
-				<p><strong>Шаг 2. Работа.</strong> Смотрю инфраструктуру, интеграции, код, процессы, счета от подрядчиков. Отдаю
-					письменный отчёт с приоритетами, а после аудита — ещё и с дорожной картой на 30, 90 и 365 дней.</p>
-				<p><strong>Шаг 3. Вы решаете.</strong> Чините сами, своими силами, моими — или берёте постоянное обслуживание.
-					Это уже после отчёта, а не до него.</p>
+				<ol class="landing-steps">
+					<li><strong>Заявка.</strong> Напишите, что происходит. Задам несколько уточняющих вопросов — нужно понять
+						объём. По итогам скажу, что подойдёт: диагностика, экспресс-чекап или аудит — и что в него войдёт. Иногда
+						выясняется, что ничего из этого не нужно, — так и скажу.</li>
+					<li><strong>Работа.</strong> Смотрю инфраструктуру, интеграции, код, процессы, счета от подрядчиков. Отдаю
+						письменный отчёт с приоритетами, а после аудита — ещё и с дорожной картой на 30, 90 и 365 дней.</li>
+					<li><strong>Вы решаете.</strong> Чините сами, своими силами, моими — или берёте постоянное обслуживание.
+						Это уже после отчёта, а не до него.</li>
+				</ol>
 			</section>
 
 			<section class="landing-section" id="price">
-				<h2>Сколько стоит</h2>
+				<h2>Тарифы</h2>
 				<p>Цены открытые. Считаю, что торг вокруг непрозрачных смет — это способ продать дороже тому, кто хуже
 					разбирается.</p>
 				<p><strong>Диагностика</strong> одной конкретной проблемы — заказы не выгружаются, сервер под нагрузкой, сбой
-					повторяется — оплачивается по обычной ставке: 6 000 ₽/час, как правило 1–3 часа. Часто причина находится и
+					повторяется — оплачивается по обычной ставке: <strong>6 000 ₽/час</strong>, как правило 1–3 часа. Часто причина находится и
 					устраняется прямо в ходе разбора. Если нет — предлагаю решение и оцениваю его. Если задача начинает
 					разрастаться, останавливаюсь и согласую дальнейшие шаги.</p>
 				<p>Аудит — проверка шире одного вопроса. Чем выше уровень, тем больше выводов подтверждено данными:</p>
 				<div class="landing-package-grid">
 					<article class="landing-package">
-						<h3>Экспресс-чекап</h3>
-						<p class="landing-package__price">25 000 ₽</p>
+						<div class="landing-package__head">
+							<h3>Экспресс-чекап</h3>
+							<p class="landing-package__price">25 000 ₽</p>
+						</div>
 						<p class="landing-package__anchor">6 часов работы вместо 36 000 ₽ почасово</p>
 						<p>Проверка всего, до чего можно дотянуться: инфраструктура, интеграции, код и процессы. Найденные проблемы,
 							риски и приоритеты.</p>
 						<p class="landing-package__note">3–5 рабочих дней после получения доступов и материалов.</p>
 					</article>
 					<article class="landing-package">
-						<h3>Базовый аудит</h3>
-						<p class="landing-package__price">45 000 ₽</p>
+						<div class="landing-package__head">
+							<h3>Базовый аудит</h3>
+							<p class="landing-package__price">45 000 ₽</p>
+						</div>
 						<p class="landing-package__anchor">10–12 часов работы вместо 60 000–72 000 ₽ почасово</p>
 						<p>Всё из экспресс-чекапа, а также схема системы и зависимостей, варианты решения, бюджетные диапазоны и
 							дорожная карта на 30, 90 и 365 дней.</p>
 						<p class="landing-package__note">5–7 рабочих дней после получения доступов и материалов.</p>
 					</article>
 					<article class="landing-package">
-						<h3>Стандартный аудит</h3>
-						<p class="landing-package__price">95 000 ₽</p>
+						<div class="landing-package__head">
+							<h3>Стандартный аудит</h3>
+							<p class="landing-package__price">95 000 ₽</p>
+						</div>
 						<p class="landing-package__anchor">Около 2 недель наблюдений за живой системой</p>
 						<p>Всё из базового аудита, но выводы подкреплены данными. Подключаю дополнительный мониторинг, параллельно
 							провожу чекап, а затем проверяю выводы результатами наблюдений. Глубже погружаюсь в специфику вашего
@@ -170,8 +200,10 @@
 						<p class="landing-package__note">2–4 недели, из них 1–2 недели — сбор данных.</p>
 					</article>
 					<article class="landing-package">
-						<h3>Полный аудит</h3>
-						<p class="landing-package__price">150 000 ₽</p>
+						<div class="landing-package__head">
+							<h3>Полный аудит</h3>
+							<p class="landing-package__price">150 000 ₽</p>
+						</div>
 						<p class="landing-package__anchor">3–4 недели наблюдений и маркетинговая часть</p>
 						<p>Всё из стандартного аудита, с расширенным сбором данных и анализом всех доступных источников. Плюс
 							маркетинг: в зависимости от задачи — анализ конкурентов, «тайный покупатель», проверка всего пути клиента
@@ -182,10 +214,6 @@
 				</div>
 				<p>Проверка именно безопасности — <a href="/security/">на своей странице</a>. Постоянное обслуживание — <a
 						href="/outsource/">тоже отдельно</a>.</p>
-				<p class="landing-hero__action">
-					<a class="landing-cta" href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">Заказать
-						аудит</a>
-				</p>
 			</section>
 
 			<section class="landing-section">
@@ -210,31 +238,26 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>Кто я</h2>
-				<p><strong>Иван Попов.</strong> Программирую с 1996 года, в электронной коммерции — с 2008-го, когда запустил
-					свой первый интернет-магазин. Дальше были роли по обе стороны: менеджер, разработчик, руководитель проектов,
-					IT-директор, бизнес-аналитик.</p>
-				<p>С 2019 года — партнёр-интегратор RetailCRM и МойСклад.</p>
-				<p>Знаю, как выглядит бизнес изнутри, а не только из консоли. Поэтому разговариваю и с владельцем, и с
-					разработчиком, и перевожу между ними — обычно на этом стыке и теряются деньги.</p>
-				<p>Не привязан к вендору, платформе или фреймворку: мне нечего вам навязывать. Решение подбирается под задачу и
-					бюджет, а не под то, что я лучше всего умею продавать.</p>
-				<p class="landing-note">Если интересно, что я думаю про профессию, ИИ и всё остальное — <a href="/">это на моём
-						личном сайте</a>.</p>
-			</section>
-
-			<section class="landing-section">
 				<h2>Отзывы</h2>
-				<blockquote class="landing-quote">
-					<p>Спасибо за аудит. Я прочла и осталась очень довольна тем, как доходчиво и просто написано о сложных вещах.
-						Мы обращались до вас к нескольким компаниям — вы первый, кто взял и разжевал всё. Не мы вытягивали
-						информацию, а вы сами всё сказали.</p>
-					<footer><strong>Екатерина Шрайбер</strong> — «Город Мастеров»</footer>
-				</blockquote>
+				<div class="landing-testimonial">
+					<blockquote class="landing-quote">
+						<i class="icon-quote-left"></i>
+						<i class="icon-quote-right"></i>
+						<p>Иван, спасибо большое за аудит. Я прочла, осталась очень довольна тем, как доходчиво и просто написано о сложных для «обычного, смертного люда» вещах) Мы обращались до Вас к нескольким компаниям, людям... И Вы пока первый, кто взял и разжевал всё. Не мы вытягивали информацию и задавали вопросы, а Вы сами всё сказали. Это цепляет!</p>
+					</blockquote>
+					<div class="landing-testimonial__author">
+						<img class="landing-testimonial__avatar" src="/static/img/clients/gm-light.webp?v=54d55094"
+							alt="Екатерина Шрайбер" width="56" height="56" loading="lazy" decoding="async">
+						<div class="landing-testimonial__info">
+							<span>Екатерина Шрайбер</span>
+							<span>«Город Мастеров»</span>
+						</div>
+					</div>
+				</div>
 			</section>
 
 			<section class="landing-section landing-faq">
-				<h2>Вопросы, которые обычно задают</h2>
+				<h2>Вопросы</h2>
 				<h3>За что эти деньги?</h3>
 				<p>За выводы, на которые можно опереться при решении. Честнее сравнивать с ценой ошибки, чем с часом фрилансера:
 					плохо выбранная платформа — это три года обходных путей и миграция на миллионы. В моей практике часовая
@@ -254,43 +277,49 @@
 
 			<section class="landing-section">
 				<h2>С чего начать</h2>
-				<p>Сформулируйте главный вопрос. За 3–5 дней и 25 000 ₽ экспресс-чекап покажет, что происходит с вашим IT, где
-					выше риск сбоя и что исправлять первым. Если нужен ещё и план с бюджетом — базовый аудит. Если вопрос узкий и
-					конкретный — начнём с диагностики.</p>
-				<p>Отчёт ваш в любом случае. Даже если дальше мы не работаем — вы получаете понятную картину и план, а не
-					ощущение, что вам что-то продали.</p>
-				<p>Если не уверены, что вам нужен именно аудит, — напишите, что происходит. Скажу, с чего лучше начать. Бывает,
-					что задача решается проще и дешевле, чем вы думаете, и в таком случае я об этом скажу.</p>
-				<p class="landing-hero__action">
-					<a class="landing-cta" href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">Заказать
-						аудит</a>
-				</p>
-				<p class="landing-note">Или <a href="mailto:me@ivanpopov.pro?subject=%D0%90%D1%83%D0%B4%D0%B8%D1%82">напишите
-						письмо</a> с темой «Аудит».</p>
-			</section>
-			<section class="landing-section">
-				<h2>Смежные задачи</h2>
-				<nav class="landing-related" aria-label="Другие услуги">
-					<a href="/outsource/"><strong>IT-аутсорс</strong><span>Передать ежедневную эксплуатацию системы</span></a>
-					<a href="/expert/"><strong>Экспертный проект</strong><span>Провести крупное изменение или спасти
-							проект</span></a>
-					<a href="/security/"><strong>Безопасность</strong><span>Проверить доступы, серверы и бэкапы</span></a>
-					<a href="/ai/"><strong>AI</strong><span>Проверить и внедрить гипотезу автоматизации</span></a>
-					<a href="/ecommerce/"><strong>CRM и учёт</strong><span>Внедрить или перезапустить RetailCRM и
-							МойСклад</span></a>
-				</nav>
+				<div class="landing-author-card">
+					<img class="landing-author-card__photo" src="/static/img/about/ip-foto-mobile.webp?v=18b455cd"
+						alt="Иван Попов" width="112" height="112" loading="lazy" decoding="async">
+					<div class="landing-author-card__body">
+						<p><strong>Иван Попов</strong> — программирую с 1996 года, в e-commerce с 2008-го, партнёр-интегратор RetailCRM и МойСклад с 2019-го. Сформулируйте главный вопрос в Telegram или на почту — скажу, с чего лучше начать: с часовой диагностики, экспресс-чекапа или аудита.</p>
+						<div class="landing-social" aria-label="Ссылки для связи">
+							<a href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">
+								<img src="/static/img/social/tg.svg?v=d3b80a19" alt="" width="34" height="34" decoding="async">
+								<span>Telegram</span>
+							</a>
+							<a href="https://vk.com/ivanpopovpro" target="_blank" rel="noopener noreferrer">
+								<img src="/static/img/social/vk.svg?v=82b84296" alt="" width="34" height="34" decoding="async">
+								<span>VK</span>
+							</a>
+							<a href="mailto:me@ivanpopov.pro?subject=%D0%90%D1%83%D0%B4%D0%B8%D1%82" class="ip_mail">
+								<img src="/static/img/social/mail.svg?v=9cb2ec4f" alt="" width="34" height="34" decoding="async">
+								<span>me@ivanpopov.pro</span>
+							</a>
+						</div>
+					</div>
+				</div>
 			</section>
 		</main>
 		<footer class="landing-footer">
-			<nav aria-label="Услуги">
+			<div class="copyhuy">
+				<p><a href="https://copyhuy.net/" target="_blank" aria-label="Копихуй"><svg class="copyhuy__mark"
+							xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 468" width="1em" height="1em" aria-hidden="true"
+							focusable="false">
+							<path fill-rule="evenodd"
+								d="M235 10 A222 222 0 1 1 235 454 A222 222 0 1 1 235 10 Z M235 47 A185 185 0 1 0 235 417 A185 185 0 1 0 235 47 Z" />
+							<path d="M83.4 229 A124 124 0 0 0 324.4 277.3 L285.3 264.4 A83 83 0 0 1 124.6 229 Z" />
+							<path d="M151.3 264 A128 128 0 0 1 388.5 190.4 L351.7 211.9 A85 85 0 0 0 194.5 264 Z" />
+						</svg></a>ИП Попов Иван Анатольевич ИНН 250105290350</p>
+			</div>
+			<nav aria-label="Навигация">
+				<a href="/">Главная</a>
 				<a href="/audit/">Аудит</a>
-				<a href="/outsource/">IT-аутсорс</a>
-				<a href="/expert/">Экспертные проекты</a>
-				<a href="/security/">Безопасность</a>
 				<a href="/ai/">AI</a>
-				<a href="/ecommerce/">CRM и учёт</a>
+				<a href="/security/">Безопасность</a>
+				<a href="/ecommerce/">E-commerce</a>
+				<a href="/outsource/">Аутсорс</a>
+				<a href="/expert/">Проекты</a>
 			</nav>
-			<p><a href="/">Обо мне лично</a></p>
 		</footer>
 	</div>
 </body>

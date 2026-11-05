@@ -28,21 +28,51 @@
 	<meta name="twitter:description" content="Внешний руководитель для сложного IT-проекта: от решения до результата.">
 	<meta name="twitter:image" content="https://ivanpopov.pro/static/img/about/og-image-olive-good.jpg">
 	<meta name="twitter:image:alt" content="Иван Попов">
-	<link rel="stylesheet" href="/static/css/landing.min.css?v=bd6a2812">
+	<link rel="stylesheet" href="/static/css/landing.min.css?v=07a39be1">
 </head>
 
 <body>
 	<div class="landing-wrap">
 		<header class="landing-header">
-			<a href="/">
-				<img src="/static/img/assets/ip-dot.svg?v=c075da02" alt="" width="40" height="40" decoding="async">
+			<a class="landing-header__brand" href="/">
+				<img src="/static/img/assets/ip-dot.svg?v=c075da02" alt="" width="38" height="38" decoding="async">
 				<span>Ivan Popov. Pro.</span>
 			</a>
+			<nav class="landing-header__nav" aria-label="Услуги">
+				<a href="/audit/">Аудит</a>
+				<a href="/ai/">AI</a>
+				<a href="/security/">Безопасность</a>
+				<a href="/ecommerce/">E-commerce</a>
+				<a href="/outsource/">Аутсорс</a>
+				<a href="/expert/" aria-current="page">Проекты</a>
+			</nav>
 		</header>
 		<main>
+			<div class="landing-banner">
+				<img class="landing-banner__img" src="/static/img/service/expert.webp?v=0e564cf2" alt="" width="640"
+					height="320" fetchpriority="high">
+				<div class="landing-banner__overlay">
+					<div class="landing-banner__top">
+						<span class="landing-banner__badge">
+							<svg class="landing-banner__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+								aria-hidden="true">
+								<path
+									d="m6.75 18c-.192 0-.384-.073-.53-.22-.293-.293-.293-.768 0-1.061l2.719-2.719-2.72-2.72c-.293-.293-.293-.768 0-1.061s.768-.293 1.061 0l3.25 3.25c.293.293.293.768 0 1.061l-3.25 3.25c-.146.147-.338.22-.53.22z" />
+								<path
+									d="m17.25 18h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z" />
+								<path
+									d="m21.25 23h-18.5c-1.517 0-2.75-1.233-2.75-2.75v-16.5c0-1.517 1.233-2.75 2.75-2.75h18.5c1.517 0 2.75 1.233 2.75 2.75v16.5c0 1.517-1.233 2.75-2.75 2.75zm-18.5-20.5c-.689 0-1.25.561-1.25 1.25v16.5c0 .689.561 1.25 1.25 1.25h18.5c.689 0 1.25-.561 1.25-1.25v-16.5c0-.689-.561-1.25-1.25-1.25z" />
+								<path
+									d="m23.25 6h-22.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h22.5c.414 0 .75.336.75.75s-.336.75-.75.75z" />
+							</svg>
+							Техническое руководство · Архитектура и разработка
+						</span>
+					</div>
+					<h1 class="landing-banner__title">Технический руководитель на нужный срок</h1>
+				</div>
+			</div>
+
 			<section class="landing-section landing-hero">
-				<p class="landing-kicker">Техническое руководство</p>
-				<h1>Технический руководитель на нужный срок</h1>
 				<p class="landing-hero__lead">Помогаю принять дорогое техническое решение, выбрать исполнителей и довести проект
 					до работающего результата. Можно на одну сессию, на проект или в роли внешнего IT-директора — без найма в
 					штат.</p>
@@ -127,19 +157,6 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>Что остаётся у вас</h2>
-				<ul class="landing-list">
-					<li>Сформулированная бизнес-задача и критерии успеха</li>
-					<li>Архитектурное решение с альтернативами и ограничениями</li>
-					<li>Реалистичный план, бюджетные диапазоны и приоритеты</li>
-					<li>Управляемый список задач и прозрачный статус проекта</li>
-					<li>Документация, доступы и возможность сменить исполнителя</li>
-				</ul>
-				<p>Если я руковожу реализацией, отвечаю не за количество закрытых задач, а за то, чтобы система заработала в
-					согласованных границах. Неизбежные изменения обсуждаются до того, как превращаются в неожиданный счёт.</p>
-			</section>
-
-			<section class="landing-section">
 				<h2>Рабочий процесс</h2>
 				<ol class="landing-steps">
 					<li><strong>Разбор.</strong> Интервьюирую участников, читаю документацию и договоры, смотрю систему и отделяю
@@ -155,24 +172,29 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>Стоимость</h2>
+				<h2>Тарифы</h2>
 				<div class="landing-package-grid">
 					<article class="landing-package">
-						<h3>Разработка и консультации</h3>
-						<p class="landing-package__price">6 000 ₽/час</p>
+						<div class="landing-package__head">
+							<h3>Разработка и консультации</h3>
+							<p class="landing-package__price">6 000 ₽/час</p>
+						</div>
 						<p>Стратегические сессии (обычно 1–3 часа), анализ вариантов, архитектура, разработка и интеграции.</p>
 						<p class="landing-package__note">Когда объём можно определить заранее, фиксируем стоимость этапа.</p>
 					</article>
 					<article class="landing-package">
-						<h3>Спасение проекта</h3>
-						<p class="landing-package__price">9 000 ₽/час</p>
+						<div class="landing-package__head">
+							<h3>Спасение проекта</h3>
+							<p class="landing-package__price">9 000 ₽/час</p>
+						</div>
 						<p>Разбор чужого кода, инфраструктуры, истории решений и восстановление управляемости.</p>
-						<p class="landing-package__note">Минимум 20 часов. Чужая неопределённость требует отдельного исследования.
-						</p>
+						<p class="landing-package__note">Минимум 20 часов · Чужая неопределённость требует отдельного исследования</p>
 					</article>
 					<article class="landing-package">
-						<h3>Внешний IT-директор</h3>
-						<p class="landing-package__price">от 300 000 ₽/месяц</p>
+						<div class="landing-package__head">
+							<h3>Внешний IT-директор</h3>
+							<p class="landing-package__price">от 300 000 ₽/мес</p>
+						</div>
 						<p>Стратегия, архитектура, управление бюджетом, подрядчиками и сотрудниками со стороны IT.</p>
 						<p class="landing-package__note">Состав ответственности и присутствие фиксируются в договоре.</p>
 					</article>
@@ -183,18 +205,22 @@
 			</section>
 
 			<section class="landing-section">
-				<h2>Опыт, который работает на проект</h2>
-				<p>Программирую с 1996 года. Работал системным администратором, разработчиком, руководителем проектов,
-					IT-директором и бизнес-аналитиком. В электронной коммерции — с 2008 года; с 2019-го — партнёр-интегратор
-					RetailCRM и МойСклад.</p>
-				<p>По сарафану ко мне часто приходят после того, как другие отказались или не справились. Такие проекты
-					интересны, но я не романтизирую сложность: сначала проверяю, нельзя ли решить задачу проще.</p>
-				<blockquote class="landing-quote">
-					<p>Иван — специалист, который не просто выполняет задачи, а живёт проектом. Особенно хочется отметить редкое
-						сочетание креативного мышления и практичности: Иван генерирует множество нестандартных идей и, что важнее,
-						доводит их до эффективной реализации.</p>
-					<footer><strong>Александр Арсентьев</strong> — операционный директор ООО «ДТК-Фарм»</footer>
-				</blockquote>
+				<h2>Отзывы</h2>
+				<div class="landing-testimonial">
+					<blockquote class="landing-quote">
+						<i class="icon-quote-left"></i>
+						<i class="icon-quote-right"></i>
+						<p>Иван — специалист, который не просто выполняет задачи, а живёт проектом. Особенно хочется отметить редкое сочетание креативного мышления и практичности: Иван генерирует множество нестандартных идей и, что важнее, доводит их до эффективной реализации.</p>
+					</blockquote>
+					<div class="landing-testimonial__author">
+						<img class="landing-testimonial__avatar" src="/static/img/clients/dtk-pharm.webp?v=6f538b3a"
+							alt="Александр Арсентьев" width="56" height="56" loading="lazy" decoding="async">
+						<div class="landing-testimonial__info">
+							<span>Александр Арсентьев</span>
+							<span>операционный директор ООО «ДТК-Фарм»</span>
+						</div>
+					</div>
+				</div>
 			</section>
 
 			<section class="landing-section landing-faq">
@@ -219,38 +245,50 @@
 
 			<section class="landing-section">
 				<h2>С чего начать</h2>
-				<p>Опишите задачу, текущее состояние, желаемый результат и главный риск. Я скажу, достаточно ли стратегической
-					встречи, нужен ли аудит или проект уже можно оценивать и запускать.</p>
-				<p class="landing-hero__action">
-					<a class="landing-cta" href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">Обсудить
-						проект</a>
-				</p>
-				<p class="landing-note">Или <a
-						href="mailto:me@ivanpopov.pro?subject=%D0%AD%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D1%82%D0%BD%D1%8B%D0%B9%20IT-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82">напишите
-						письмо</a> с темой «Экспертный IT-проект».</p>
-			</section>
-
-			<section class="landing-section">
-				<h2>Смежные задачи</h2>
-				<nav class="landing-related" aria-label="Другие услуги">
-					<a href="/audit/"><strong>Аудит</strong><span>Получить независимый диагноз и дорожную карту</span></a>
-					<a href="/outsource/"><strong>IT-аутсорс</strong><span>Передать ежедневную эксплуатацию системы</span></a>
-					<a href="/security/"><strong>Безопасность</strong><span>Закрыть инфраструктурные риски</span></a>
-					<a href="/ai/"><strong>AI</strong><span>Спроектировать автоматизацию с LLM и агентами</span></a>
-					<a href="/ecommerce/"><strong>CRM и учёт</strong><span>Внедрить RetailCRM, МойСклад и интеграции</span></a>
-				</nav>
+				<div class="landing-author-card">
+					<img class="landing-author-card__photo" src="/static/img/about/ip-foto-mobile.webp?v=18b455cd"
+						alt="Иван Попов" width="112" height="112" loading="lazy" decoding="async">
+					<div class="landing-author-card__body">
+						<p><strong>Иван Попов</strong> — программирую с 1996 года, работал сисадмином, ведущим разработчиком, руководителем проектов, IT-директором и бизнес-аналитиком. Опишите задачу, текущее состояние и главный риск — скажу, достаточно ли стратегической сессии, нужен ли аудит или проект можно запускать.</p>
+						<div class="landing-social" aria-label="Ссылки для связи">
+							<a href="https://t.me/ivanpopovpro" target="_blank" rel="noopener noreferrer">
+								<img src="/static/img/social/tg.svg?v=d3b80a19" alt="" width="34" height="34" decoding="async">
+								<span>Telegram</span>
+							</a>
+							<a href="https://vk.com/ivanpopovpro" target="_blank" rel="noopener noreferrer">
+								<img src="/static/img/social/vk.svg?v=82b84296" alt="" width="34" height="34" decoding="async">
+								<span>VK</span>
+							</a>
+							<a href="mailto:me@ivanpopov.pro?subject=%D0%AD%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D1%82%D0%BD%D1%8B%D0%B9%20IT-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82"
+								class="ip_mail">
+								<img src="/static/img/social/mail.svg?v=9cb2ec4f" alt="" width="34" height="34" decoding="async">
+								<span>me@ivanpopov.pro</span>
+							</a>
+						</div>
+					</div>
+				</div>
 			</section>
 		</main>
 		<footer class="landing-footer">
-			<nav aria-label="Услуги">
+			<div class="copyhuy">
+				<p><a href="https://copyhuy.net/" target="_blank" aria-label="Копихуй"><svg class="copyhuy__mark"
+							xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 468" width="1em" height="1em" aria-hidden="true"
+							focusable="false">
+							<path fill-rule="evenodd"
+								d="M235 10 A222 222 0 1 1 235 454 A222 222 0 1 1 235 10 Z M235 47 A185 185 0 1 0 235 417 A185 185 0 1 0 235 47 Z" />
+							<path d="M83.4 229 A124 124 0 0 0 324.4 277.3 L285.3 264.4 A83 83 0 0 1 124.6 229 Z" />
+							<path d="M151.3 264 A128 128 0 0 1 388.5 190.4 L351.7 211.9 A85 85 0 0 0 194.5 264 Z" />
+						</svg></a>ИП Попов Иван Анатольевич ИНН 250105290350</p>
+			</div>
+			<nav aria-label="Навигация">
+				<a href="/">Главная</a>
 				<a href="/audit/">Аудит</a>
-				<a href="/outsource/">IT-аутсорс</a>
-				<a href="/expert/">Экспертные проекты</a>
-				<a href="/security/">Безопасность</a>
 				<a href="/ai/">AI</a>
-				<a href="/ecommerce/">CRM и учёт</a>
+				<a href="/security/">Безопасность</a>
+				<a href="/ecommerce/">E-commerce</a>
+				<a href="/outsource/">Аутсорс</a>
+				<a href="/expert/">Проекты</a>
 			</nav>
-			<p><a href="/">Обо мне лично</a></p>
 		</footer>
 	</div>
 </body>
