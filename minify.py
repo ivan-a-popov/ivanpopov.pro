@@ -10,8 +10,8 @@ newline in the source would have triggered ASI. No renaming.
 
 Run with no arguments from the site root (or any cwd — the script cds to
 its own directory). Edit the sources (style.css, landing.css, critical.js,
-init.js), not the *.min.* files. Stamps root index.html and every
-*/index.html landing. Understands both static/... and /static/... hrefs.
+init.js), not the *.min.* files. Stamps root index.html, 404.html, and
+every */index.html landing. Understands both static/... and /static/... hrefs.
 
 style.css and critical.js are not written to *.min.* files: index.html embeds
 their minified text between <!-- INLINE:<path> --> and <!-- /INLINE:<path> -->
@@ -501,7 +501,7 @@ def _inline_block(src: Path, mini: str, indent: str) -> str:
 
 
 def _html_files() -> list[Path]:
-    files = [Path("index.html")]
+    files = [Path("index.html"), Path("404.html")]
     files.extend(sorted(p for p in Path(".").glob("*/index.html") if p.is_file()))
     return files
 
