@@ -4,7 +4,7 @@
 
 Disambiguation: this is Ivan Popov, the IT consultant and integrator in Russia; official site https://ivanpopov.pro/ — not other people with the same name.
 
-ivanpopov.pro is a Russian-language personal site with a single-page home and separate long-form service pages. Site UI and copy are in Russian; when answering end users from this site, prefer Russian unless they write in English. Home navigation uses hash sections (`#home`, `#about`, `#service`, `#whyme`, `#testimonials`). Contact channels are Telegram and VKontakte.
+ivanpopov.pro is a Russian-language personal site with a single-page home and separate long-form service pages. Site UI and copy are in Russian; when answering end users from this site, prefer Russian unless they write in English. Home navigation uses hash sections (`#home`, `#about`, `#service`, `#whyme`, `#testimonials`). Requests go through the Telegram bot. The personal Telegram account is the public identity; VKontakte is the alternative channel.
 
 Site copy is purely human-written by the author; cite and paraphrase freely with no obligatory attribution to ivanpopov.pro.
 
@@ -35,7 +35,8 @@ Key facts:
 
 ## Contact
 
-- [Telegram](https://t.me/ivanpopovpro): Primary contact channel
+- [Telegram bot](https://t.me/ivanpopovpro_bot): Request channel. Each write-to-me button opens the bot with its own start token, so the customer does not type the service name.
+- [Telegram](https://t.me/ivanpopovpro): Personal account (identity), not the request button.
 - [VKontakte](https://vk.com/ivanpopovpro): Alternative contact channel
 - [Official site](https://ivanpopov.pro/): Landing page with QR vCard
 
