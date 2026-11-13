@@ -981,6 +981,7 @@ function ip_service_popup() {
 		modalBox.removeAttribute('role');
 		modalBox.removeAttribute('aria-modal');
 		modalBox.removeAttribute('aria-labelledby');
+		modalBox.removeAttribute('aria-label');
 		modalBox.setAttribute('aria-hidden', 'true');
 		setChromeInert(false);
 		setLightCursor(false);
@@ -1060,7 +1061,9 @@ function ip_service_popup() {
 				if (qr) {
 					infos.insertAdjacentHTML('afterbegin', '<div class="qr-popup"><div class="qr-popup__title"><h3>vCard</h3></div>' + closeHtml + '</div>');
 				} else if (price) {
-					infos.insertAdjacentHTML('afterbegin', '<div class="price-popup"><div class="price-popup__title"><h3>Прейскурант</h3></div>' + closeHtml + '</div>');
+					infos.insertAdjacentHTML('afterbegin', '<div class="price-popup">' + closeHtml + '</div>');
+					modalBox.removeAttribute('aria-labelledby');
+					modalBox.setAttribute('aria-label', 'Прейскурант');
 				} else if (partner) {
 					var logoEl = parent.querySelector('.partner-card__logo');
 					var popupLogo = parent.getAttribute('data-partner-popup-logo') || '';
@@ -1075,7 +1078,7 @@ function ip_service_popup() {
 					var title = titleEl ? titleEl.innerHTML : '';
 					infos.insertAdjacentHTML('afterbegin', '<div class="service-popup"><img class="service-popup__image" src="' + elImage + '" alt="" width="640" height="320" /><div class="service-popup__title"><h3>' + title + '</h3></div>' + closeHtml + '</div>');
 				}
-				var heading = infos.querySelector('h3');
+				var heading = price ? null : infos.querySelector('h3');
 				if (heading) {
 					heading.id = 'ip-modal-title';
 					modalBox.setAttribute('aria-labelledby', 'ip-modal-title');
@@ -1092,6 +1095,16 @@ function ip_service_popup() {
 		});
 	});
 	modalBox.addEventListener('click', function (e) {
+		var choose = e.target.closest('.price-popup__choose');
+		if (choose) {
+			e.preventDefault();
+			ip_contact_dock_set_open(true);
+			var channel = ip_one('.ip_contact_dock__actions a');
+			if (channel && ip_price_popup_open()) {
+				channel.focus();
+			}
+			return;
+		}
 		var closeLink = e.target.closest('.service-popup__close a');
 		if (closeLink) {
 			e.preventDefault();

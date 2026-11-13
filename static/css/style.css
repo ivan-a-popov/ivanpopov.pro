@@ -2192,6 +2192,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 }
 .ip_modalbox.ip_modalbox--price .box_inner{
 	width: max(var(--ip-pin-min-w, 0px), min(28.5rem, calc(100vw - 16px)));
+	overflow: visible;
 }
 .ip_modalbox.opened.ip_modalbox--qr .box_inner,
 .ip_modalbox.opened.ip_modalbox--price .box_inner{
@@ -2285,8 +2286,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	color: var(--on-accent);
 	border-color: var(--card-hover-bg);
 }
-.ip_modalbox.ip_modalbox--qr .qr-popup,
-.ip_modalbox.ip_modalbox--price .price-popup{
+.ip_modalbox.ip_modalbox--qr .qr-popup{
 	padding: 4px 56px 14px 0;
 	min-height: 52px;
 	box-sizing: border-box;
@@ -2294,17 +2294,49 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	align-items: center;
 }
 /* Centered on the title, which sits 5px above the header's middle (4px top vs 14px bottom padding). */
-.ip_modalbox.ip_modalbox--qr .qr-popup .service-popup__close,
-.ip_modalbox.ip_modalbox--price .price-popup .service-popup__close{
+.ip_modalbox.ip_modalbox--qr .qr-popup .service-popup__close{
 	top: calc(50% - 5px);
 	padding: 0 4px;
 	transform: translateY(-50%);
+}
+/* No title row: the close sits just above the card's top-right corner, on the overlay. */
+.ip_modalbox.ip_modalbox--price .price-popup{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: auto;
+	min-height: 0;
+	padding: 0;
+	border: none;
+	gap: 0;
+	z-index: 4;
+	pointer-events: none;
+}
+.ip_modalbox.ip_modalbox--price .price-popup .service-popup__close{
+	top: 0;
+	right: 0;
+	padding: 0;
+	transform: translateY(calc(-100% - 8px));
+	pointer-events: auto;
+}
+.ip_modalbox.ip_modalbox--price .price-popup .service-popup__close a{
+	color: #fff;
+	border-color: rgba(255,255,255,.85);
+	background: rgba(0,0,0,.28);
+}
+.ip_modalbox.ip_modalbox--price .price-popup .service-popup__close a:hover{
+	color: #fff;
+	border-color: #fff;
+	background: rgba(0,0,0,.5);
 }
 .ip_modalbox.ip_modalbox--qr .description_wrap,
 .ip_modalbox.ip_modalbox--price .description_wrap{
 	height: 100%;
 	min-height: 0;
 	padding: 14px 16px 16px;
+}
+.ip_modalbox.ip_modalbox--price .description_wrap{
+	overflow: visible;
 }
 .ip_modalbox.ip_modalbox--qr .service_popup_informations,
 .ip_modalbox.ip_modalbox--price .service_popup_informations{
@@ -2344,7 +2376,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 }
 .ip_modalbox.ip_modalbox--price .service_popup_informations .descriptions{
 	flex: 1 1 auto;
-	padding-top: 16px;
+	padding-top: 2px;
 	overscroll-behavior: contain;
 }
 .ip_modalbox.ip_modalbox--price .price-popup__section + .price-popup__section{
@@ -2385,9 +2417,9 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 }
 .ip_modalbox .price-popup__table th,
 .ip_modalbox .price-popup__table td{
-	padding: 11px 0 11px 10px;
+	padding: 14px 0 14px 12px;
 	text-align: right;
-	vertical-align: baseline;
+	vertical-align: top;
 	font-weight: inherit;
 	border-bottom: 1px solid var(--card-border);
 	white-space: nowrap;
@@ -2417,14 +2449,53 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	color: var(--text-muted);
 	font-size: 0.875rem;
 }
-.ip_modalbox .price-popup__table td:nth-child(3){
-	color: var(--text-main);
-	font-weight: 700;
+.ip_modalbox .price-popup__offer{
+	text-align: right;
 }
-.ip_modalbox .price-popup__table td:nth-child(4){
+.ip_modalbox .price-popup__offer .price-popup__amount{
+	display: block;
+	font-size: 1rem;
+}
+.ip_modalbox .price-popup__saving{
+	display: block;
+	margin-top: 2px;
 	color: var(--price-saving);
 	font-size: 0.8125rem;
 	font-weight: 650;
+	line-height: 1.3;
+	font-variant-numeric: tabular-nums;
+}
+.ip_modalbox .price-popup__sr{
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+.ip_modalbox .price-popup__choose{
+	display: block;
+	width: fit-content;
+	margin: 8px 0 0 auto;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--text-main);
+	font: inherit;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	line-height: 1.3;
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
+	cursor: pointer;
+}
+.ip_modalbox .price-popup__choose:hover{
+	text-decoration-color: transparent;
 }
 .ip_modalbox .price-popup__table tbody tr:last-child th,
 .ip_modalbox .price-popup__table tbody tr:last-child td{
