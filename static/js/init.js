@@ -1095,16 +1095,6 @@ function ip_service_popup() {
 		});
 	});
 	modalBox.addEventListener('click', function (e) {
-		var choose = e.target.closest('.price-popup__choose');
-		if (choose) {
-			e.preventDefault();
-			ip_contact_dock_set_open(true);
-			var channel = ip_one('.ip_contact_dock__actions a');
-			if (channel && ip_price_popup_open()) {
-				channel.focus();
-			}
-			return;
-		}
 		var closeLink = e.target.closest('.service-popup__close a');
 		if (closeLink) {
 			e.preventDefault();
