@@ -8,7 +8,7 @@ JS: tokenize (comments, strings, regex vs division), drop comments, emit
 tokens with spaces only when needed, and insert a semicolon where a
 newline in the source would have triggered ASI. No renaming.
 
-Run with no arguments from the site root (or any cwd — the script cds to
+Run with no arguments from the site root (or any cwd – the script cds to
 its own directory). Edit the sources (style.css, landing.css, critical.js,
 init.js), not the *.min.* files. Stamps root index.html, 404.html, and
 every */index.html landing. Understands both static/... and /static/... hrefs.

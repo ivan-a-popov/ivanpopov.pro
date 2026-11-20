@@ -8,7 +8,7 @@
 // A hard timeout guarantees the overlay never traps the user.
 //
 // The curtain plays only for humans landing on / or /#home. Deep links
-// (#testimonials, …) and prefers-reduced-motion skip it — same HTML, no
+// (#testimonials, …) and prefers-reduced-motion skip it – same HTML, no
 // theatrical wait. html starts with skip-preloader (fail-closed); this
 // script removes it when the curtain should play.
 (function(){

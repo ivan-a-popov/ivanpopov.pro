@@ -11,7 +11,7 @@
 	--text-main: #333;
 	/* headings, nav, strong copy */
 	--text-sub: #757089;
-	/* body copy — ≥4.5:1 on --bg-color (WCAG AA) */
+	/* body copy – ≥4.5:1 on --bg-color (WCAG AA) */
 	--text-muted: #666;
 	/* secondary controls */
 	--logo-color: #000;
@@ -51,7 +51,7 @@
 	/* Preloader timing, unitless milliseconds (CSS multiplies by 1ms).
 	   critical.js copies these as GROW_HALF_MS / BLINK_MS / GROW_FULL_MS /
 	   PEEL_MS; minify.py fails the build if they drift. Not read back via
-	   getComputedStyle — that flushed layout on DOMContentLoaded.
+	   getComputedStyle – that flushed layout on DOMContentLoaded.
 	   Sequence, kept in step with critical.js: half-grow → blink, then
 	   (once the page under the curtain is ready) full-grow → peel. */
 	--preloader-grow-half-ms: 500;
@@ -64,13 +64,13 @@
 	:root {
 		--bg-color: #131516;
 		--text-main: #a09c96;
-		/* headings/nav — darkreader #333 */
+		/* headings/nav – darkreader #333 */
 		--text-sub: #8a8276;
-		/* body + popup copy — ≥4.5:1 on --bg-color (WCAG AA) */
+		/* body + popup copy – ≥4.5:1 on --bg-color (WCAG AA) */
 		--text-muted: #868077;
-		/* secondary controls — darkreader #666 */
+		/* secondary controls – darkreader #666 */
 		--logo-color: #bab8b6;
-		/* wordmark — darkreader neutral text */
+		/* wordmark – darkreader neutral text */
 		--accent: #a09c96;
 		--price-saving: #ff766f;
 		--rule-color: #4d5356;
@@ -260,7 +260,7 @@ html.skip-preloader #preloader {
 	}
 }
 
-/* LAYOUT SHELL — wrapper variables, fixed header and footer */
+/* LAYOUT SHELL – wrapper variables, fixed header and footer */
 .ip_all_wrap {
 	position: relative;
 	width: 100%;
@@ -285,11 +285,11 @@ html.skip-preloader #preloader {
 	   hold the magnified active item (word + sub-label) plus a little air, and
 	   never drop below a 42px touch row. Override these knobs on .ip_all_wrap
 	   only: a descendant override would not reach --ip-bar-height, which
-	   .ip_mainpart and .ip_contact_dock also read. No em here — it would
+	   .ip_mainpart and .ip_contact_dock also read. No em here – it would
 	   resolve against each consumer's font-size. */
 	--ip-menu-font-size: clamp(.9375rem, .75rem + .35vw, 1.0625rem);
 	/* Sub-label is a rem knob (never em) so it stays a caption. The whole <a>
-	   scales — hover below active — so the sub grows with the lens. */
+	   scales – hover below active – so the sub grows with the lens. */
 	--ip-menu-sub-size: clamp(.52rem, 1.9vw, .68rem);
 	--ip-menu-active-scale: 1.5;
 	--ip-menu-hover-scale: 1.2;
@@ -471,7 +471,7 @@ html.skip-preloader #preloader {
 	transition: opacity .22s ease;
 }
 
-/* Magnify the whole link (main + sub) — lens sits on the active item. */
+/* Magnify the whole link (main + sub) – lens sits on the active item. */
 .ip_header .menu ul li.active a {
 	--ip-menu-scale: var(--ip-menu-active-scale);
 	z-index: 2;
@@ -523,7 +523,7 @@ html.skip-preloader #preloader {
 	text-align: center;
 }
 
-/* Filled mark from copyhuy.svg — 1em + currentColor keep it in step with footer type/theme. */
+/* Filled mark from copyhuy.svg – 1em + currentColor keep it in step with footer type/theme. */
 .ip_footer .copyhuy__mark {
 	display: inline-block;
 	width: 1em;
@@ -858,7 +858,7 @@ html.skip-preloader #preloader {
 }
 
 /* Deep-link first paint (data-ip-section is set in <head>, cleared by init.js).
-   Do not use :target — pushState does not retarget it, so the landing section
+   Do not use :target – pushState does not retarget it, so the landing section
    would stay "always visible" and never roll. */
 html[data-ip-section] #home.animated {
 	opacity: 0;
@@ -948,7 +948,7 @@ html,
 	object-position: center 55%;
 }
 .ip_home_copy{
-	/* Fluid gaps around the name / rule / headline — scale with viewport. */
+	/* Fluid gaps around the name / rule / headline – scale with viewport. */
 	--ip-home-name-gap: clamp(16px, calc(16px + 1.2vw), 30px);
 	--ip-home-rule-gap: clamp(16px, calc(18px + 1.2vw), 30px);
 	--ip-home-rule-width: clamp(40px, calc(25px + 2.5vw), 70px);
@@ -1040,7 +1040,7 @@ html,
 	height: 42px;
 	display: block;
 }
-/* QR, price and mail glyphs are dark fills on transparent — <img>, so they
+/* QR, price and mail glyphs are dark fills on transparent – <img>, so they
    can't inherit currentColor. Invert them in dark mode. */
 @media (prefers-color-scheme: dark){
 	.ip_home_social a.ip_qr_open img,
@@ -1050,7 +1050,7 @@ html,
 	}
 }
 
-/* Persistent contact dock — chrome, not in-flow. Hidden on #home (icons
+/* Persistent contact dock – chrome, not in-flow. Hidden on #home (icons
    already sit in the copy), except while the price popup covers those
    icons. Visible when another section is .active, and on deep-link first
    paint via html[data-ip-section]. Folded tap target is the envelope. Any
@@ -1501,7 +1501,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 .ip_teaser .wrapper{
 	margin-top: 0.2em;
 }
-/* TEASERS (about / whyme). Fold height is CSS only — no JS measuring:
+/* TEASERS (about / whyme). Fold height is CSS only – no JS measuring:
 
    .ip_fold          one-track grid: 0fr folded, 1fr once the teaser .is-open.
    .ip_fold__clip    its only child; min-height (--ip-peek) keeps that much
@@ -1622,7 +1622,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 .ip_all_wrap:not([data-magic-cursor="show"]) .ip_teaser{
 	cursor: pointer;
 }
-/* Chevron after the heading — accordion affordance without extra chrome.
+/* Chevron after the heading – accordion affordance without extra chrome.
    Heading padding above reserves the slot. */
 .ip_teaser .ip_title > :is(span, h2)::before{
 	content: "";
@@ -1726,7 +1726,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 		transform: none;
 	}
 }
-/* "Открыть описание" — hover/focus with a pointer, always visible on touch.
+/* "Открыть описание" – hover/focus with a pointer, always visible on touch.
    The overlay link stays the hit target. */
 .partner-card::after,
 .ip_service .service-card .service-card__summary::after{
@@ -1855,7 +1855,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 	}
 }
 
-/* TESTIMONIALS — stacked list on every viewport (same as the phone layout). */
+/* TESTIMONIALS – stacked list on every viewport (same as the phone layout). */
 .testimonials .list ul{
 	margin: 10px;
 	list-style-type: none;
@@ -2005,7 +2005,7 @@ html.ip-off-home .ip_contact_dock.is-concealed,
 .ip_service .service-card:hover .service-card__summary{
 	color: var(--card-hover-summary);
 }
-/* Data containers only — content is copied into the popup by JS. */
+/* Data containers only – content is copied into the popup by JS. */
 .ip_service .popup_service_image,
 .ip_service .service_hidden_details{
 	display: none;

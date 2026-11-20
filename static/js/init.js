@@ -450,11 +450,11 @@ function ip_keyboard_navigation() {
 }
 
 // -------------  CONTACT DOCK (off-home envelope)  ---------------
-// Hidden on #home, where the contact icons sit in the copy — except while
+// Hidden on #home, where the contact icons sit in the copy – except while
 // the price popup covers that row. Section change: the dock dims while the
 // page rolls (is-transit) and settles when the new section lands. The strip
 // opens 500ms after a popup closes or a subsection collapses back to closed
-// — not when one subsection replaces another, and not when the reader
+// – not when one subsection replaces another, and not when the reader
 // reaches the end of a section. Hover and a tap on the envelope open it the
 // same way. Nothing keeps it open: it holds while the pointer is on it or a
 // contact link has focus, otherwise it folds.
@@ -465,7 +465,7 @@ var ip_dock_hover = false;
 // Tab moved focus. A pointer tap also focuses a link, and that must not
 // hold the strip open after the finger is gone.
 var ip_dock_keynav = false;
-// Matches .animated { animation-duration: 1.2s } — fallback if animationend misses.
+// Matches .animated { animation-duration: 1.2s } – fallback if animationend misses.
 var IP_SECTION_ROLL_MS = 1200;
 // Dock fade-in when there is no roll (deep-link instant land).
 var IP_DOCK_FADE_MS = 280;
@@ -574,7 +574,7 @@ function ip_contact_dock_fold_if_idle() {
 		return;
 	}
 	// Keyboard focus on a contact link holds the strip. The envelope button
-	// stays focused after a tap, and a tapped link does too — neither holds.
+	// stays focused after a tap, and a tapped link does too – neither holds.
 	var actions = ip_one('.ip_contact_dock__actions', dock);
 	if (ip_dock_keynav && actions && actions.contains(document.activeElement)) {
 		return;

@@ -363,7 +363,7 @@ code {
 	white-space: nowrap;
 }
 
-/* Section headings with trailing horizontal rule — signature of index.html (.ip_title) */
+/* Section headings with trailing horizontal rule – signature of index.html (.ip_title) */
 .landing-section > h2 {
 	display: flex;
 	align-items: center;
@@ -429,7 +429,7 @@ code {
 	font-size: 0.95em;
 }
 
-/* Pricing Packages — styled with main site's tabular-nums & --price-saving */
+/* Pricing Packages – styled with main site's tabular-nums & --price-saving */
 .landing-package-grid {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -540,7 +540,7 @@ code {
 	margin-top: 0.75rem;
 }
 
-/* Related services cards — matches main site's .service-card hover invert */
+/* Related services cards – matches main site's .service-card hover invert */
 .landing-related {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -612,7 +612,7 @@ code {
 	border-bottom: 0;
 }
 
-/* Testimonials — exact speech-bubble + quote icons + avatar card from index.html */
+/* Testimonials – exact speech-bubble + quote icons + avatar card from index.html */
 .landing-testimonial {
 	position: relative;
 	padding-top: 14px;

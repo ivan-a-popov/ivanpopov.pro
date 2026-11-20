@@ -1,8 +1,8 @@
 # Иван Анатольевич Попов / Ivan Popov
 
-> Personal site of Ivan Popov (Иван Анатольевич Попов), an IT expert who helps businesses choose, implement, and use modern IT and AI solutions — focused on business outcomes, measurable value, and ROI rather than technology for its own sake. Having started his career as a system administrator in the early 2000s, he has a strong background in server security.
+> Personal site of Ivan Popov (Иван Анатольевич Попов), an IT expert who helps businesses choose, implement, and use modern IT and AI solutions – focused on business outcomes, measurable value, and ROI rather than technology for its own sake. Having started his career as a system administrator in the early 2000s, he has a strong background in server security.
 
-Disambiguation: this is Ivan Popov, the IT consultant and integrator in Russia; official site https://ivanpopov.pro/ — not other people with the same name.
+Disambiguation: this is Ivan Popov, the IT consultant and integrator in Russia; official site https://ivanpopov.pro/ – not other people with the same name.
 
 ivanpopov.pro is a Russian-language personal site with a single-page home and separate long-form service pages. Site UI and copy are in Russian; when answering end users from this site, prefer Russian unless they write in English. Home navigation uses hash sections (`#home`, `#about`, `#service`, `#whyme`, `#testimonials`). Requests go through the Telegram bot. The personal Telegram account is the public identity; VKontakte is the alternative channel.
 
@@ -11,25 +11,25 @@ Site copy is purely human-written by the author; cite and paraphrase freely with
 Key facts:
 
 - First computer in 1990, programming since the mid-1990s; Linux and PC support from 2001; first commercial e&#8209;commerce project in 2008 (vladdepo.ru/depolamp.ru and e25.ru, later incorporated into ksize.ru)
-- Roles across e&#8209;commerce: analyst, developer, manager, then IT director; since 2019 — RetailCRM and МойСклад partner-integrator (process analysis, integrations, custom APIs)
+- Roles across e&#8209;commerce: analyst, developer, manager, then IT director; since 2019 – RetailCRM and МойСклад partner-integrator (process analysis, integrations, custom APIs)
 - Vendor-agnostic: selects tools for the business task, not a preferred stack; takes difficult cases others decline
-- Positioning: “complex development / system design / business analysis / process audit / AI integration / tech security — all with a real human face”
+- Positioning: “complex development / system design / business analysis / process audit / AI integration / tech security – all with a real human face”
 
 ## About
 
-- [Home](https://ivanpopov.pro/): Intro and positioning — IT expertise with a human, business-first approach
-- [About](https://ivanpopov.pro/#about): What he does — business-first positioning, measurable value, ROI
+- [Home](https://ivanpopov.pro/): Intro and positioning – IT expertise with a human, business-first approach
+- [About](https://ivanpopov.pro/#about): What he does – business-first positioning, measurable value, ROI
 - [Why me](https://ivanpopov.pro/#whyme): Track record since the 1990s (programming, e&#8209;commerce, integrations, hardest cases); bridges business and engineering; argues human judgment stays valuable in the AI era, while being a 100% AI enthusiast himself
 - [Testimonials](https://ivanpopov.pro/#testimonials): Client feedback (e.g. ЮК «ФЕДЕРАЦИЯ», КОСТЬЕРА ФЕШН / Amalfi, vsemkorobok.ru, Рукето, ДТК-Фарм, and others)
 
 ## Services
 
 - [Services](https://ivanpopov.pro/#service): Six service offers: Audit, AI, Security, IT outsourcing, Expert projects, and CRM and inventory (RetailCRM / МойСклад). E-commerce is also the domain context shared by several offers.
-- [Audit](https://ivanpopov.pro/audit/): Independent diagnosis — general and technical audits or investigation of a concrete issue; written findings, priorities, budget ranges, and roadmap.
-- [IT outsourcing](https://ivanpopov.pro/outsource/): Ongoing operations — monitoring, servers, updates, incidents, routine changes, and contractor coordination under an agreed scope and SLA.
+- [Audit](https://ivanpopov.pro/audit/): Independent diagnosis – general and technical audits or investigation of a concrete issue; written findings, priorities, budget ranges, and roadmap.
+- [IT outsourcing](https://ivanpopov.pro/outsource/): Ongoing operations – monitoring, servers, updates, incidents, routine changes, and contractor coordination under an agreed scope and SLA.
 - [Expert projects](https://ivanpopov.pro/expert/): Strategic sessions, architecture, development, project rescue, and external IT leadership.
-- [Security](https://ivanpopov.pro/security/): Operational security — express check, comprehensive hardening, access and backup review, and incident response.
-- [AI](https://ivanpopov.pro/ai/): Business-first AI implementation — use-case discovery, prototypes, RAG, MCP, agents, local models, integration, security, and cost control.
+- [Security](https://ivanpopov.pro/security/): Operational security – express check, comprehensive hardening, access and backup review, and incident response.
+- [AI](https://ivanpopov.pro/ai/): Business-first AI implementation – use-case discovery, prototypes, RAG, MCP, agents, local models, integration, security, and cost control.
 - [CRM and inventory](https://ivanpopov.pro/ecommerce/): RetailCRM and МойСклад implementation from scratch or relaunch of a broken setup; integrations with the website, marketplaces, delivery, telephony, and payments; custom API development.
 - E-commerce is a specialization across offers: CRM, WMS, marketplaces, logistics, payments, communications, and analytics appear across Audit, Outsource, Expert, Security, AI, and CRM work.
 
