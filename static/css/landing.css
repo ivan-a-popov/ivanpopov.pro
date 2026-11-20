@@ -480,12 +480,34 @@ code {
 	margin-top: 0;
 }
 
-.landing-package .landing-package__anchor {
-	margin-top: 0.25rem;
+.landing-package > .landing-package__anchor {
+	margin-top: 0.2rem;
 	color: var(--price-saving);
 	font-size: 0.84em;
 	font-weight: 650;
-	font-variant-numeric: tabular-nums;
+	line-height: 1.35;
+}
+
+.landing-package__block > * + * {
+	margin-top: 0.4rem;
+}
+
+.landing-package__label {
+	margin: 0;
+	color: var(--text-muted);
+	font-size: 0.72rem;
+	font-weight: 650;
+	letter-spacing: 0.08em;
+	line-height: 1.3;
+	text-transform: uppercase;
+}
+
+.landing-package__block .landing-package__price {
+	font-size: 1.15em;
+}
+
+.landing-package__block .landing-list {
+	margin: 0;
 }
 
 .landing-package .landing-list {
