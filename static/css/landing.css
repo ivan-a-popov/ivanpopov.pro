@@ -280,6 +280,18 @@ code {
 	max-width: 40rem;
 }
 
+.landing-banner__subtitle {
+	display: block;
+	margin-top: 0.35em;
+	max-width: 38rem;
+	font-size: clamp(0.95rem, 0.82rem + 0.55vw, 1.2rem);
+	font-weight: 550;
+	line-height: 1.35;
+	letter-spacing: 0.005em;
+	color: rgba(255, 255, 255, 0.9);
+	text-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+}
+
 .landing-section {
 	margin: 2.75rem 0;
 }
@@ -818,7 +830,21 @@ code {
 .landing-footer nav {
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 	gap: 0.4rem 1rem;
+}
+
+.landing-footer__home {
+	display: inline-flex;
+	align-items: center;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.landing-footer__home img {
+	display: block;
+	width: 1.28em;
+	height: 1.28em;
 }
 
 .landing-footer .copyhuy {
